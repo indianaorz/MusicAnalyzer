@@ -1103,7 +1103,7 @@ document.addEventListener('DOMContentLoaded', function () {
         abcString += "X:1\n"; // Reference number
         abcString += "T:Selected Notes Snippet (Quantized)\n"; // Title indicates quantization
         abcString += `M:${num}/${den}\n`; // Meter
-        abcString += `L:1/${unitNoteLengthDenominator / 8}\n`; // Unit note length
+        abcString += `L:1/${unitNoteLengthDenominator}\n`; // Unit note length
         // Use current scale selection for K: field
         const rootNoteName = NOTE_NAMES[selectedRootNote];
         const scaleModeAbbr = (selectedScaleType.toLowerCase().includes('minor') || selectedScaleType.toLowerCase() === 'blues') ? 'min' : 'maj'; // Basic mode guess
