@@ -1,0 +1,234 @@
+/* --- General Styles --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0; /* Remove default margin */
+    background-color: #f4f4f8; 
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Stack header and main content */
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    color: #2c3e50; 
+    margin-top: 1em;
+    margin-bottom: 0.6em;
+}
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.4em; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;}
+
+a {
+    color: #3498db; 
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    background-color: #3498db; 
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+button:hover {
+    background-color: #2980b9; 
+}
+
+/* --- Header --- */
+.main-header {
+    background-color: #ffffff;
+    padding: 10px 25px;
+    border-bottom: 1px solid #dcdcdc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.main-header h1 {
+    margin: 0 0 5px 0;
+    font-size: 1.6em;
+}
+.header-info {
+    font-size: 0.9em;
+    color: #555;
+}
+.header-info span {
+    margin-right: 15px;
+}
+.header-info a {
+    margin-left: 15px;
+}
+
+
+/* --- Flash Messages --- */
+.flashes {
+    list-style-type: none;
+    padding: 12px 18px;
+    margin: 15px 25px; /* Add horizontal margin */
+    border-radius: 5px;
+    background-color: #f8d7da; 
+    color: #721c24; 
+    border: 1px solid #f5c6cb; 
+}
+.flashes li { margin-bottom: 5px; }
+.flashes.flashes-view { /* Specific style for view page flashes */
+     margin: 10px 0 15px 0; /* Adjust margin within header/content area */
+}
+
+
+/* --- Index Page Specific --- */
+.form-container, .file-list-container {
+    background: #ffffff;
+    padding: 25px;
+    margin: 20px 25px; /* Add horizontal margin */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    border: 1px solid #e0e0e0;
+}
+.file-list-container ul {
+    margin-top: 10px;
+}
+.file-list-container li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #eee;
+}
+.file-list-container li:last-child {
+    border-bottom: none;
+}
+.file-list-container a {
+    font-weight: 500;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="file"] {
+    display: block;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 20px); /* Adjust width */
+}
+
+/* --- Results Page Layout --- */
+.main-content-wrapper {
+    display: flex;
+    flex-grow: 1; /* Allow wrapper to fill remaining height */
+    overflow: hidden; /* Prevent body scrollbars if panels scroll */
+}
+
+/* --- Left Panel: Track List --- */
+.track-list-panel {
+    width: 300px; /* Fixed width for track list */
+    flex-shrink: 0; /* Prevent shrinking */
+    background-color: #f8f9fa; /* Light background */
+    border-right: 1px solid #dcdcdc;
+    padding: 15px;
+    overflow-y: auto; /* Allow vertical scrolling for tracks */
+    height: calc(100vh - 70px); /* Adjust based on header height */
+}
+.track-list-panel h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+}
+
+#track-list .track-item {
+    padding: 10px 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    border: 1px solid transparent; /* Placeholder for active border */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#track-list .track-item:hover {
+    background-color: #e9ecef;
+}
+#track-list .track-item.active {
+    background-color: #d1e7fd; /* Light blue for active track */
+    border: 1px solid #a6cff7;
+    font-weight: 500;
+}
+
+.track-info {
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden; /* Prevent long names breaking layout */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.track-number {
+    font-weight: bold;
+    color: #6c757d; /* Gray */
+    margin-right: 5px;
+    font-size: 0.9em;
+}
+.track-name {
+    color: #343a40;
+    margin-right: 5px;
+}
+.instrument-name {
+    font-size: 0.85em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.track-controls button {
+    background: none;
+    border: none;
+    color: #6c757d;
+    padding: 5px;
+    font-size: 1.1em;
+    line-height: 1; /* Prevent extra button height */
+}
+.track-controls button:hover {
+    color: #343a40;
+}
+.visibility-toggle .fa-eye-slash { /* Style for hidden state */
+    color: #adb5bd; /* Lighter gray when hidden */
+}
+
+
+/* --- Right Panel: Piano Roll --- */
+.piano-roll-panel {
+    flex-grow: 1; /* Take remaining width */
+    overflow: hidden; /* Hide overflow, container below will scroll */
+    display: flex; /* Needed for child full height */
+    flex-direction: column; /* Stack elements vertically */
+    padding: 0px; /* Add some padding around the canvas container */
+    height: calc(100vh - 70px); /* Adjust based on header height */
+}
+
+#canvas-container {
+    width: 100%; 
+    flex-grow: 1; /* Allow container to fill vertical space */
+    overflow: auto; /* Enable scrolling in BOTH directions */
+    border: 1px solid #d0d0d0; 
+    background-color: #fdfdfd; 
+    border-radius: 4px; 
+    margin: 15px;
+}
+
+#main-piano-roll-canvas {
+    display: block; /* Prevents potential extra space below canvas */
+    background-color: #ffffff; /* White background for the actual drawing area */
+    /* Width and height are set via attributes in JS */
+}

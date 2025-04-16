@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Roll - {{ filename }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <h1>Piano Roll: {{ filename }}</h1>
+        <div class="header-info">
+            {% if ticks_per_beat %}
+                <span>Ticks per Beat (PPQ): {{ ticks_per_beat }}</span>
+            {% endif %}
+            <a href="{{ url_for('index') }}">Back to Upload / File List</a>
+        </div>
+         {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes flashes-view">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </header>
+
+    <div class="main-content-wrapper">
+
+        <aside class="track-list-panel">
+            <h2>Tracks</h2>
+            {% if tracks_data %}
+                <ul id="track-list">
+                    {% for track in tracks_data %}
+                        <li class="track-item" data-track-index="{{ loop.index0 }}">
+                            <div class="track-info">
+                                <span class="track-number">Tr {{ track.track_index }}:</span>
+                                <span class="track-name">{{ track.name | default('Unnamed', true) }}</span>
+                                <span class="instrument-name">({{ track.instrument | default('Unknown', true) }})</span>
+                            </div>
+                            <div class="track-controls">
+                                <button class="visibility-toggle" title="Toggle Visibility">
+                                    <i class="fas fa-eye"></i> </button>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No note tracks found in this file.</p>
+            {% endif %}
+        </aside>
+
+        <main class="piano-roll-panel">
+            <div id="canvas-container" class="canvas-container">
+                 <canvas id="main-piano-roll-canvas">
+                     Your browser does not support the HTML canvas element.
+                 </canvas>
+             </div>
+        </main>
+
+    </div> <script>
+        const rawTracksData = JSON.parse({{ tracks_data_json | tojson | safe }});
+        const ticksPerBeat = {{ ticks_per_beat | default(480) }}; 
+    </script>
+    <script src="{{ url_for('static', filename='js/pianoroll.js') }}"></script>
+</body>
+</html>

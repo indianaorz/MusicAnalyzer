@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDI Piano Roll Viewer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>MIDI Piano Roll Viewer</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <h2>Upload New MIDI File</h2>
+        <form method="post" action="{{ url_for('upload_file') }}" enctype="multipart/form-data">
+            <label for="midi_file">Choose a .mid or .midi file:</label>
+            <input type="file" id="midi_file" name="midi_file" accept=".mid,.midi" required>
+            <button type="submit">Upload and View</button>
+        </form>
+    </div>
+
+    <div class="file-list-container">
+        <h2>Available Files</h2>
+        {% if uploaded_files %}
+            <ul>
+                {% for filename in uploaded_files %}
+                    <li>
+                        <a href="{{ url_for('view_file', filename=filename) }}">{{ filename }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No MIDI files found in the uploads directory.</p>
+            <p>Upload a file using the form above.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
