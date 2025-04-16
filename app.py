@@ -64,82 +64,142 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def parse_midi(filepath):
-    """Parses a MIDI file and extracts detailed track data including instrument."""
+    """
+    Parses a MIDI file and extracts detailed track data including instrument,
+    drum track flag, and time signature.
+    """
     try:
         mid = mido.MidiFile(filepath)
-        ticks_per_beat = mid.ticks_per_beat if mid.ticks_per_beat else 480 
+        ticks_per_beat = mid.ticks_per_beat if mid.ticks_per_beat else 480
         tracks_data = []
-        
+
+        # --- NEW: Time Signature Extraction ---
+        time_sig_numerator = 4  # Default
+        time_sig_denominator = 4 # Default
+        time_sig_found = False
+        # Often in track 0, but check all tracks just in case
+        for track in mid.tracks:
+            for msg in track:
+                if msg.is_meta and msg.type == 'time_signature':
+                    time_sig_numerator = msg.numerator
+                    time_sig_denominator = msg.denominator
+                    # We typically only care about the first time signature
+                    time_sig_found = True
+                    break # Stop checking messages in this track
+            if time_sig_found:
+                break # Stop checking other tracks
+        app.logger.info(f"Detected Time Signature: {time_sig_numerator}/{time_sig_denominator}")
+        # --- END NEW ---
+
+
         for i, track in enumerate(mid.tracks):
             current_time_ticks = 0
-            notes_on = {} 
+            notes_on = {}
             processed_notes = []
-            track_name = f"Track {i}" 
-            instrument_name = "Unknown" # Default instrument
-            program_number = None # Store the program number if found
+            track_name = f"Track {i}"
+            instrument_name = "Unknown"
+            program_number = None
+            is_drum_track = False
 
-            # Find the first program_change to determine instrument
-            # Also find track_name
+            # Pass 1: Get track name, first program change, and check for drum channel
+            temp_program_found = False
             for msg in track:
-                 if msg.type == 'program_change' and program_number is None: # Take the first one
+                if not msg.is_meta:
+                    if msg.channel == 9: # Channel 10 (0-indexed) is standard for drums
+                        is_drum_track = True
+
+                if msg.type == 'program_change' and not temp_program_found:
                     program_number = msg.program
                     instrument_name = get_instrument_name(program_number)
-                 elif msg.type == 'track_name':
+                    temp_program_found = True
+                elif msg.type == 'track_name':
                     track_name = msg.name
-                 # Optimization: Stop searching if both found early? Maybe not worth it.
-                 
-            # Reset time and process notes
+
+            if is_drum_track and program_number is None:
+                instrument_name = "Drums"
+
+            # Pass 2: Process notes
             current_time_ticks = 0
             for msg in track:
-                current_time_ticks += msg.time 
-
+                current_time_ticks += msg.time
                 if msg.type == 'note_on' and msg.velocity > 0:
-                    notes_on[msg.note] = {
-                        'start_tick': current_time_ticks,
-                        'velocity': msg.velocity
-                    }
+                    notes_on[msg.note] = { 'start_tick': current_time_ticks, 'velocity': msg.velocity }
                 elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
                     if msg.note in notes_on:
                         start_info = notes_on[msg.note]
                         duration_ticks = current_time_ticks - start_info['start_tick']
-                        if duration_ticks >= 0: 
+                        if duration_ticks >= 0: # Allow zero duration notes if needed
                              processed_notes.append({
-                                'pitch': msg.note, 
-                                'start_tick': start_info['start_tick'],
-                                'duration_ticks': duration_ticks,
-                                'velocity': start_info['velocity'] 
-                            })
+                                 'pitch': msg.note, 'start_tick': start_info['start_tick'],
+                                 'duration_ticks': duration_ticks, 'velocity': start_info['velocity']
+                             })
                         del notes_on[msg.note]
 
-            # Special handling for percussion track (Channel 10, often 9 in 0-based index)
-            # Mido doesn't directly expose channel per track easily without iterating messages again
-            # A common convention: if no program_change is found, and it's track 9/10, assume Drums.
-            # We'll refine this if needed, but for now, rely on program_change.
-            is_drum_track = any(msg.channel == 9 for msg in track if not msg.is_meta)
-            if is_drum_track and program_number is None:
-                 instrument_name = "Drums"
-
-
-            # Only add tracks that have notes
-            if processed_notes: 
+            if processed_notes:
                  tracks_data.append({
-                    'track_index': i, # Store original index
-                    'name': track_name,
-                    'instrument': instrument_name,
-                    'notes': processed_notes
-                })
+                     'track_index': i,
+                     'name': track_name,
+                     'instrument': instrument_name,
+                     'notes': processed_notes,
+                     'is_drum_track': is_drum_track
+                 })
 
-        return tracks_data, ticks_per_beat
+        # --- MODIFIED RETURN ---
+        return tracks_data, ticks_per_beat, time_sig_numerator, time_sig_denominator
 
     except mido.ParserError as e:
         app.logger.error(f"Mido ParserError for file {filepath}: {e}")
         flash(f"Error parsing MIDI file '{os.path.basename(filepath)}'. It might be corrupted or not a valid MIDI file.")
-        return None, None
+        # --- MODIFIED RETURN ---
+        return None, None, None, None
     except Exception as e:
         app.logger.error(f"Error processing MIDI file {filepath}: {e}", exc_info=True)
         flash("An unexpected error occurred while processing the MIDI file.")
-        return None, None
+        # --- MODIFIED RETURN ---
+        return None, None, None, None
 
+# --- Routes ---
+
+@app.route('/view/<path:filename>')
+def view_file(filename):
+    """Parses a specific MIDI file and renders the piano roll view."""
+    safe_filename = secure_filename(filename)
+    if safe_filename != filename:
+        app.logger.warning(f"Attempt to access non-secure filename: {filename}")
+        abort(404)
+
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], safe_filename)
+
+    if not os.path.exists(filepath) or not os.path.isfile(filepath):
+        app.logger.error(f"File not found at path: {filepath}")
+        abort(404)
+
+    app.logger.info(f"Processing view request for: {filepath}")
+    # --- MODIFIED CALL ---
+    tracks_data, ticks_per_beat, ts_num, ts_den = parse_midi(filepath)
+
+    # --- MODIFIED CHECK ---
+    if tracks_data is None: # This implies an error occurred during parsing
+        # parse_midi already flashed an error, redirect home
+        return redirect(url_for('index'))
+
+    if not tracks_data:
+        flash(f"The MIDI file '{safe_filename}' contains no playable note tracks.")
+        # Still render the page, but maybe show a message?
+        # Let's render it to show the message clearly.
+
+    tracks_data_json = json.dumps(tracks_data)
+
+    # --- PASS NEW DATA TO TEMPLATE ---
+    return render_template('results.html',
+                           filename=safe_filename,
+                           tracks_data=tracks_data,
+                           tracks_data_json=tracks_data_json,
+                           ticks_per_beat=ticks_per_beat,
+                           time_signature_numerator=ts_num, # New
+                           time_signature_denominator=ts_den) # New
+
+# ... (keep download_file and main block) ...
 # --- Routes ---
 @app.route('/', methods=['GET'])
 def index():
@@ -188,41 +248,6 @@ def upload_file():
     else:
         flash('Invalid file type. Please upload a .mid or .midi file.')
         return redirect(url_for('index'))
-
-@app.route('/view/<path:filename>')
-def view_file(filename):
-    """Parses a specific MIDI file and renders the piano roll view."""
-    # Ensure the filename is secure and points within the upload folder
-    safe_filename = secure_filename(filename)
-    if safe_filename != filename: # Check if filename had problematic chars
-         app.logger.warning(f"Attempt to access non-secure filename: {filename}")
-         abort(404) # Not found or forbidden
-
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], safe_filename)
-
-    if not os.path.exists(filepath) or not os.path.isfile(filepath):
-         app.logger.error(f"File not found at path: {filepath}")
-         abort(404) # Use abort for standard HTTP errors
-
-    app.logger.info(f"Processing view request for: {filepath}")
-    tracks_data, ticks_per_beat = parse_midi(filepath)
-
-    if tracks_data is None:
-        # parse_midi already flashed an error, redirect home
-        return redirect(url_for('index'))
-    
-    if not tracks_data:
-         flash(f"The MIDI file '{safe_filename}' contains no playable note tracks.")
-         # Still render the page but maybe show a message? Or redirect?
-         # Let's render it to show the message clearly.
-         
-    tracks_data_json = json.dumps(tracks_data) 
-
-    return render_template('results.html', 
-                            filename=safe_filename, 
-                            tracks_data=tracks_data, # Pass raw data for Jinja loops/info
-                            tracks_data_json=tracks_data_json, # Pass JSON string for JS
-                            ticks_per_beat=ticks_per_beat)
 
 # Optional: Route to serve uploaded files if needed directly (usually not required)
 @app.route('/uploads/<path:filename>')

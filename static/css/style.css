@@ -2,26 +2,39 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 1.6;
-    margin: 0; /* Remove default margin */
-    background-color: #f4f4f8; 
+    margin: 0;
+    /* Remove default margin */
+    background-color: #f4f4f8;
     color: #333;
     display: flex;
-    flex-direction: column; /* Stack header and main content */
+    flex-direction: column;
+    /* Stack header and main content */
     min-height: 100vh;
 }
 
-h1, h2, h3 {
-    color: #2c3e50; 
+h1,
+h2,
+h3 {
+    color: #2c3e50;
     margin-top: 1em;
     margin-bottom: 0.6em;
 }
-h1 { font-size: 1.8em; }
-h2 { font-size: 1.4em; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px;}
+
+h1 {
+    font-size: 1.8em;
+}
+
+h2 {
+    font-size: 1.4em;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+}
 
 a {
-    color: #3498db; 
+    color: #3498db;
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: underline;
 }
@@ -33,7 +46,7 @@ ul {
 }
 
 button {
-    background-color: #3498db; 
+    background-color: #3498db;
     color: white;
     padding: 8px 15px;
     border: none;
@@ -42,8 +55,9 @@ button {
     font-size: 0.9em;
     transition: background-color 0.2s ease;
 }
+
 button:hover {
-    background-color: #2980b9; 
+    background-color: #2980b9;
 }
 
 /* --- Header --- */
@@ -51,19 +65,23 @@ button:hover {
     background-color: #ffffff;
     padding: 10px 25px;
     border-bottom: 1px solid #dcdcdc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
 .main-header h1 {
     margin: 0 0 5px 0;
     font-size: 1.6em;
 }
+
 .header-info {
     font-size: 0.9em;
     color: #555;
 }
+
 .header-info span {
     margin-right: 15px;
 }
+
 .header-info a {
     margin-left: 15px;
 }
@@ -73,37 +91,50 @@ button:hover {
 .flashes {
     list-style-type: none;
     padding: 12px 18px;
-    margin: 15px 25px; /* Add horizontal margin */
+    margin: 15px 25px;
+    /* Add horizontal margin */
     border-radius: 5px;
-    background-color: #f8d7da; 
-    color: #721c24; 
-    border: 1px solid #f5c6cb; 
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
-.flashes li { margin-bottom: 5px; }
-.flashes.flashes-view { /* Specific style for view page flashes */
-     margin: 10px 0 15px 0; /* Adjust margin within header/content area */
+
+.flashes li {
+    margin-bottom: 5px;
+}
+
+.flashes.flashes-view {
+    /* Specific style for view page flashes */
+    margin: 10px 0 15px 0;
+    /* Adjust margin within header/content area */
 }
 
 
 /* --- Index Page Specific --- */
-.form-container, .file-list-container {
+.form-container,
+.file-list-container {
     background: #ffffff;
     padding: 25px;
-    margin: 20px 25px; /* Add horizontal margin */
+    margin: 20px 25px;
+    /* Add horizontal margin */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
     border: 1px solid #e0e0e0;
 }
+
 .file-list-container ul {
     margin-top: 10px;
 }
+
 .file-list-container li {
     padding: 8px 0;
     border-bottom: 1px dotted #eee;
 }
+
 .file-list-container li:last-child {
     border-bottom: none;
 }
+
 .file-list-container a {
     font-weight: 500;
 }
@@ -121,26 +152,32 @@ input[type="file"] {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: calc(100% - 20px); /* Adjust width */
+    width: calc(100% - 20px);
+    /* Adjust width */
 }
 
 /* --- Results Page Layout --- */
 .main-content-wrapper {
     display: flex;
-    flex-grow: 1; /* Allow wrapper to fill remaining height */
-    overflow: hidden; /* Prevent body scrollbars if panels scroll */
+    flex-grow: 1;
+    overflow: hidden;
+    /* Adjust height calculation based on your header's actual height */
+    height: calc(100vh - 70px);
 }
 
 /* --- Left Panel: Track List --- */
 .track-list-panel {
-    width: 300px; /* Fixed width for track list */
-    flex-shrink: 0; /* Prevent shrinking */
-    background-color: #f8f9fa; /* Light background */
+    width: 280px;
+    /* Slightly narrower maybe */
+    flex-shrink: 0;
+    background-color: #f8f9fa;
     border-right: 1px solid #dcdcdc;
     padding: 15px;
-    overflow-y: auto; /* Allow vertical scrolling for tracks */
-    height: calc(100vh - 70px); /* Adjust based on header height */
+    overflow-y: auto;
+    height: 100%;
+    /* Fill wrapper height */
 }
+
 .track-list-panel h2 {
     margin-top: 0;
     font-size: 1.2em;
@@ -154,16 +191,20 @@ input[type="file"] {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.15s ease;
-    border: 1px solid transparent; /* Placeholder for active border */
+    border: 1px solid transparent;
+    /* Placeholder for active border */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 #track-list .track-item:hover {
     background-color: #e9ecef;
 }
+
 #track-list .track-item.active {
-    background-color: #d1e7fd; /* Light blue for active track */
+    background-color: #d1e7fd;
+    /* Light blue for active track */
     border: 1px solid #a6cff7;
     font-weight: 500;
 }
@@ -171,20 +212,25 @@ input[type="file"] {
 .track-info {
     flex-grow: 1;
     margin-right: 10px;
-    overflow: hidden; /* Prevent long names breaking layout */
+    overflow: hidden;
+    /* Prevent long names breaking layout */
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
 .track-number {
     font-weight: bold;
-    color: #6c757d; /* Gray */
+    color: #6c757d;
+    /* Gray */
     margin-right: 5px;
     font-size: 0.9em;
 }
+
 .track-name {
     color: #343a40;
     margin-right: 5px;
 }
+
 .instrument-name {
     font-size: 0.85em;
     color: #6c757d;
@@ -197,38 +243,265 @@ input[type="file"] {
     color: #6c757d;
     padding: 5px;
     font-size: 1.1em;
-    line-height: 1; /* Prevent extra button height */
+    line-height: 1;
+    /* Prevent extra button height */
 }
+
 .track-controls button:hover {
     color: #343a40;
 }
-.visibility-toggle .fa-eye-slash { /* Style for hidden state */
-    color: #adb5bd; /* Lighter gray when hidden */
+
+.visibility-toggle .fa-eye-slash {
+    /* Style for hidden state */
+    color: #adb5bd;
+    /* Lighter gray when hidden */
+}
+
+/* Add style for drum icon */
+.track-icon {
+    margin-left: 3px;
+    margin-right: 5px;
+    color: #6c757d;
+    /* Gray icon */
+    font-size: 0.9em;
 }
 
 
 /* --- Right Panel: Piano Roll --- */
 .piano-roll-panel {
-    flex-grow: 1; /* Take remaining width */
-    overflow: hidden; /* Hide overflow, container below will scroll */
-    display: flex; /* Needed for child full height */
-    flex-direction: column; /* Stack elements vertically */
-    padding: 0px; /* Add some padding around the canvas container */
-    height: calc(100vh - 70px); /* Adjust based on header height */
+    flex-grow: 1;
+    /* Take remaining width */
+    overflow: hidden;
+    /* Hide overflow, container below will scroll */
+    display: flex;
+    /* Needed for child full height */
+    flex-direction: column;
+    /* Stack elements vertically */
+    padding: 0px;
+    /* Add some padding around the canvas container */
+    height: calc(100vh - 70px);
+    /* Adjust based on header height */
 }
 
 #canvas-container {
-    width: 100%; 
-    flex-grow: 1; /* Allow container to fill vertical space */
-    overflow: auto; /* Enable scrolling in BOTH directions */
-    border: 1px solid #d0d0d0; 
-    background-color: #fdfdfd; 
-    border-radius: 4px; 
+    width: 100%;
+    flex-grow: 1;
+    /* Allow container to fill vertical space */
+    overflow: auto;
+    /* Enable scrolling in BOTH directions */
+    border: 1px solid #d0d0d0;
+    background-color: #fdfdfd;
+    border-radius: 4px;
     margin: 15px;
 }
 
 #main-piano-roll-canvas {
-    display: block; /* Prevents potential extra space below canvas */
-    background-color: #ffffff; /* White background for the actual drawing area */
+    display: block;
+    /* Prevents potential extra space below canvas */
+    background-color: #ffffff;
+    /* White background for the actual drawing area */
     /* Width and height are set via attributes in JS */
+}
+
+.key-display-panel .piano-key.in-scale.white,
+.key-display-panel .drum-name.in-scale {
+    background-color: #d1e7fd; /* Light blue - same as active track */
+    color: #0a3660; /* Darker text for contrast */
+    font-weight: 500;
+}
+
+
+.key-display-panel .piano-key.out-of-scale.white,
+.key-display-panel .drum-name.out-of-scale {
+    background-color: #ffffff; /* Default white */
+    color: #495057; /* Default text */
+}
+
+
+.key-display-panel .piano-key.in-scale.black {
+    background-color: #4f77a0; /* Muted blue for black key */
+    color: #f0f0f0;
+    font-weight: 500;
+    /* Maybe add a subtle border? */
+    /* border-left: 1px solid #8ab4f8; */
+    /* border-right: 1px solid #8ab4f8; */
+}
+
+.key-display-panel .piano-key.out-of-scale.black {
+    background-color: #343a40; /* Default black */
+    color: #f8f9fa; /* Default text */
+}
+
+/* Ensure octave labels remain visible on highlighted C keys */
+.key-display-panel .piano-key.in-scale.white .octave-label {
+    color: #3d5a80;
+}
+
+.key-display-content {
+    /* A container inside the panel for positioning */
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* This top will be adjusted by JS based on offsetY */
+    width: 100%;
+    /* Height is determined by content */
+}
+
+.key-display-panel {
+    width: 80px;
+    /* Adjust width as needed */
+    flex-shrink: 0;
+    background-color: #f1f3f5;
+    /* Slightly different background */
+    border-right: 1px solid #dcdcdc;
+    position: relative;
+    /* Needed for positioning keys/names inside */
+    overflow: hidden;
+    /* IMPORTANT: Content scrolls via JS, not native scroll */
+    height: 100%;
+    /* Fill wrapper height */
+}
+
+.piano-key,
+.drum-name {
+    width: 100%;
+    position: absolute;
+    /* Positioned by JS */
+    left: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e0e0e0;
+    /* Separator lines */
+    font-size: 9px;
+    /* Small text */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    /* Padding for text */
+    display: flex;
+    align-items: center;
+    /* Center text vertically */
+}
+
+.piano-key.white {
+    background-color: #ffffff;
+    color: #333;
+    z-index: 1;
+}
+
+.piano-key.black {
+    background-color: #343a40;
+    color: #f1f3f5;
+    width: 65%;
+    /* Black keys are narrower */
+    border-bottom: none;
+    /* No bottom border needed usually */
+    border-left: 1px solid #555;
+    border-right: 1px solid #555;
+    z-index: 2;
+    /* Draw black keys on top */
+}
+
+.piano-key .octave-label {
+    font-weight: bold;
+    margin-left: auto;
+    /* Push octave label to the right */
+    padding-right: 3px;
+    color: #888;
+}
+
+.drum-name {
+    background-color: #e9ecef;
+    /* Light gray for drum names */
+    color: #495057;
+    text-align: left;
+    padding-left: 6px;
+}
+
+
+/* --- Right Panel: Piano Roll --- */
+.piano-roll-panel {
+    flex-grow: 1;
+    overflow: hidden;
+    /* Canvas container below will scroll */
+    display: flex;
+    /* Use flex for the container inside */
+    /* Removed padding and fixed height */
+    height: 100%;
+}
+
+#canvas-container {
+    width: 100%;
+    height: 100%;
+    /* Fill the piano-roll-panel */
+    overflow: auto;
+    /* Enable scrolling in BOTH directions */
+    border: none;
+    /* Border moved to parent or removed */
+    background-color: #fdfdfd;
+    position: relative;
+    /* If needed for overlays */
+    margin: 0;
+    /* Removed margin */
+}
+
+#main-piano-roll-canvas {
+    display: block;
+    background-color: #ffffff;
+    /* Width/height set by JS */
+}
+
+/* --- Header Controls Styling --- */
+.header-controls {
+    padding: 8px 25px; /* Match header padding */
+    background-color: #f8f9fa; /* Light background */
+    border-top: 1px solid #e0e0e0; /* Separator line */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    gap: 20px; /* Space between control groups */
+    font-size: 0.9em; /* Match other header info */
+}
+
+.header-controls .control-group {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between label and select */
+}
+
+.header-controls label {
+    /* Override general label styles if needed */
+    margin-bottom: 0; /* Remove bottom margin */
+    font-weight: normal; /* Normal weight */
+    color: #333; /* Standard text color */
+    display: inline-block; /* Allow flex alignment */
+}
+
+.header-controls select {
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em; /* Slightly smaller than base */
+    background-color: #fff;
+}
+
+.header-controls .header-info-static {
+    color: #555;
+    margin-right: auto; /* Push the static info left, and back link right */
+}
+
+.header-controls .back-link {
+   /* Style the back link if needed */
+   color: #3498db;
+   text-decoration: none;
+}
+.header-controls .back-link:hover {
+    text-decoration: underline;
+}
+
+/* Adjust main content wrapper height calculation if header height changed */
+.main-content-wrapper {
+   /* Example: if header total height is now 100px */
+   /* height: calc(100vh - 100px); */
+   /* Adjust based on your actual header height after styling */
+    height: calc(100vh - 105px); /* Approx: 70px original + ~35px controls */
 }
