@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Reference for the content wrapper inside key display
     let keyDisplayContentWrapper = null;
 
-      // --- NEW: Shading Pattern Shift Toggle ---
+    // --- NEW: Shading Pattern Shift Toggle ---
     // Set to true to shade measures 0, 2, 4...
     // Set to false to shade measures 1, 3, 5... (useful for pickup measures)
     let shadeEvenMeasures = true; // Default: shade the first measure (index 0)
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // If mouse leaves the window during interaction, handleMouseUp on window will catch it.
         // If mouse leaves canvas but stays in window during interaction, mouseMove continues.
     }
-    
+
     // --- NEW: KeyDown Handler for Copy ---
     function handleKeyDown(event) {
         // Check for Ctrl+C (or Cmd+C on Mac)
@@ -904,27 +904,31 @@ document.addEventListener('DOMContentLoaded', function () {
         // return currentScalePitchClasses.has(pitch % 12);
     }
 
-    
 
-
-      /**
+    /**
      * Greatest Common Divisor function.
      * @param {number} a
      * @param {number} b
      * @returns {number} The GCD of a and b.
      */
-      function gcd(a, b) {
+    function gcd(a, b) {
         return b === 0 ? a : gcd(b, a % b);
     }
 
-      /**
+    /**
      * Converts MIDI tick duration to ABC notation duration string relative to L:.
      * @param {number} ticks Duration in MIDI ticks.
      * @param {number} ticksPerUnitNoteLength MIDI ticks equivalent to the L: unit (e.g., Ticks for 1/8 note).
      * @returns {string} ABC duration string (e.g., "", "2", "3/2", "/2").
      */
-      function ticksToAbcDuration(ticks, ticksPerUnitNoteLength) {
-        if (ticks <= 0 || ticksPerUnitNoteLength <= 0) return ""; // Invalid duration or unit
+    function ticksToAbcDuration(ticks, ticksPerUnitNoteLength) {
+        // Ensure ticks are positive integer values after quantization
+        ticks = Math.max(0, Math.round(ticks));
+        ticksPerUnitNoteLength = Math.max(1, Math.round(ticksPerUnitNoteLength)); // Avoid division by zero
+
+        if (ticks === 0) return "0"; // Explicitly handle zero duration if needed, though quantization might prevent this. ABC doesn't really have zero duration.
+        if (ticksPerUnitNoteLength === 0) return ""; // Cannot determine duration
+
 
         // Calculate the ratio
         let numerator = ticks;
@@ -940,9 +944,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return numerator === 1 ? "" : String(numerator); // L, 2L, 3L etc.
         } else {
             if (numerator === 1) {
-                return "/" + String(denominator); // L/2, L/3 etc.
+                return "/" + String(denominator); // L/2, L/3 etc. (ABC standard like /2, /4)
             } else {
-                return String(numerator) + "/" + String(denominator); // 3L/2, 5L/4 etc.
+                // Handle cases like 3/2 explicitly if numerator > 1
+                return String(numerator) + "/" + String(denominator); // 3/2, 5/4 etc.
             }
         }
     }
@@ -997,13 +1002,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     * Gathers selected notes, sorts them, and generates an ABC string.
+     * Gathers selected notes, **quantizes them to 1/16th notes**, sorts them,
+     * and generates an ABC string starting from the beginning of the measure
+     * containing the first selected (quantized) note.
      * @returns {string} The generated ABC notation string or an empty string on failure.
      */
     function generateAbcFromSelection() {
         if (selectedNotes.size === 0) return "";
 
-        // 1. Gather and Sort Notes
+        // 1. Gather Original Notes
         let notesToConvert = [];
         selectedNotes.forEach(key => {
             try {
@@ -1011,12 +1018,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const track = rawTracksData[ref.trackIndex];
                 const note = track?.notes[ref.noteIndex];
                 if (note) {
-                    // Add relevant info, maybe trackIndex if needed later for voices
-                    notesToConvert.push({
+                    notesToConvert.push({ // Store original values for now
                         pitch: note.pitch,
                         startTick: note.start_tick,
                         durationTicks: note.duration_ticks,
-                        // velocity: note.velocity // Optional
                     });
                 }
             } catch (e) {
@@ -1026,113 +1031,188 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (notesToConvert.length === 0) return "";
 
-        // Sort primarily by start tick, secondarily by pitch (lowest first for potential chords)
-        notesToConvert.sort((a, b) => {
+        // 2. Quantization Step
+        const ticksPerBeatValue = window.ticksPerBeat || 480; // Ensure valid ticksPerBeat
+        const ticksPerSixteenth = ticksPerBeatValue / 4;
+        if (ticksPerSixteenth <= 0) {
+            console.error("Cannot quantize: Ticks per 16th note is invalid (check ticksPerBeat).");
+            return "";
+        }
+
+        const quantizedNotes = notesToConvert.map(note => {
+            const quantizedStartTick = Math.max(0, Math.round(note.startTick / ticksPerSixteenth) * ticksPerSixteenth);
+            // Ensure duration is at least one 16th note if original was positive, otherwise 0.
+            const quantizedDurationTicks = note.durationTicks > 0
+                ? Math.max(ticksPerSixteenth, Math.round(note.durationTicks / ticksPerSixteenth) * ticksPerSixteenth)
+                : 0;
+
+            // Only include notes that have a duration after quantization
+            if (quantizedDurationTicks > 0) {
+                return {
+                    pitch: note.pitch, // Keep original pitch
+                    startTick: quantizedStartTick, // Use quantized value
+                    durationTicks: quantizedDurationTicks // Use quantized value
+                };
+            } else {
+                return null; // Mark notes with zero duration to be filtered out
+            }
+        }).filter(note => note !== null); // Remove null entries (zero duration notes)
+
+
+        // 3. Sort the *quantized* notes
+        if (quantizedNotes.length === 0) {
+            console.log("No notes remaining after quantization (all had zero duration).");
+            return ""; // No valid notes left to convert
+        }
+        quantizedNotes.sort((a, b) => { // Sort the new array
             if (a.startTick !== b.startTick) {
                 return a.startTick - b.startTick;
             }
             return a.pitch - b.pitch; // Lower pitch first if simultaneous start
         });
 
-        // 2. Define ABC Parameters
-        const unitNoteLengthDenominator = 8; // L:1/8 (Eighth note)
-        const ticksPerUnitNoteLength = window.ticksPerBeat / (unitNoteLengthDenominator / 4); // Ticks per 1/8 note
-        const currentTicksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator; // Use global
 
-        // 3. Build ABC Header
+        // 4. Define ABC Parameters & Calculate Start Point
+        const unitNoteLengthDenominator = 16; // L:1/8 (Eighth note)
+        const ticksPerUnitNoteLength = ticksPerBeatValue * (4 / unitNoteLengthDenominator); // Ticks per L: unit
+
+        // Calculate Ticks Per Measure robustly
+        let currentTicksPerMeasure = 0;
+        const num = window.timeSignatureNumerator || 4;
+        const den = window.timeSignatureDenominator || 4;
+        if (den > 0 && num > 0) {
+            currentTicksPerMeasure = ticksPerBeatValue * (4 / den) * num;
+        } else {
+            console.warn("Invalid time signature, defaulting ticks per measure calculation.");
+            currentTicksPerMeasure = ticksPerBeatValue * 4; // Fallback
+        }
+        if (currentTicksPerMeasure <= 0) { // Another fallback
+            console.error("Calculated ticksPerMeasure is zero or negative. Defaulting.");
+            currentTicksPerMeasure = ticksPerBeatValue * 4;
+        }
+
+
+        // Determine Start Point using the *first quantized note*
+        const firstNote = quantizedNotes[0];
+        const firstNoteMeasureIndex = Math.floor(firstNote.startTick / currentTicksPerMeasure);
+        const measureStartTick = firstNoteMeasureIndex * currentTicksPerMeasure;
+        console.log(`First *quantized* note starts at tick ${firstNote.startTick}. Containing measure starts at tick ${measureStartTick}. Ticks/Measure: ${currentTicksPerMeasure}`); // Debug log
+
+        // 5. Build ABC Header
         let abcString = "";
         abcString += "X:1\n"; // Reference number
-        abcString += "T:Selected Notes Snippet\n"; // Title
-        abcString += `M:${window.timeSignatureNumerator}/${window.timeSignatureDenominator}\n`; // Meter
-        abcString += `L:1/${unitNoteLengthDenominator}\n`; // Unit note length
-        abcString += "K:Cmaj\n"; // Key signature (assuming Cmaj/Amin for now)
-        // abcString += "Q:1/4=120\n"; // Optional: Default Tempo
+        abcString += "T:Selected Notes Snippet (Quantized)\n"; // Title indicates quantization
+        abcString += `M:${num}/${den}\n`; // Meter
+        abcString += `L:1/${unitNoteLengthDenominator / 8}\n`; // Unit note length
+        // Use current scale selection for K: field
+        const rootNoteName = NOTE_NAMES[selectedRootNote];
+        const scaleModeAbbr = (selectedScaleType.toLowerCase().includes('minor') || selectedScaleType.toLowerCase() === 'blues') ? 'min' : 'maj'; // Basic mode guess
+        abcString += `K:${rootNoteName}${scaleModeAbbr}\n`; // Key signature
+        // abcString += "Q:1/4=120\n"; // Optional: Tempo
 
 
-        // 4. Build ABC Body (Notes, Rests, Bars)
-        let currentTimeTicks = notesToConvert[0].startTick; // Start time at the first note
-        let currentMeasureTicks = 0; // Ticks elapsed in the current measure
+        // 6. Build ABC Body (Using Quantized Notes)
+        let currentTimeTicks = measureStartTick; // Start time at the calculated measure start
+        let currentMeasureTicks = 0; // Start exactly at a measure boundary conceptually
+        let lineLengthCounter = 0; // Track characters for line wrapping
 
-        // --- Optional: Handle initial rest if the first note doesn't start at tick 0 ---
-        // This is tricky without song context. For a snippet, starting at the first note is often fine.
-        // if (currentTimeTicks > 0) {
-        //     const restDurationStr = ticksToAbcDuration(currentTimeTicks, ticksPerUnitNoteLength);
-        //     abcString += "z" + restDurationStr + " ";
-        //     currentMeasureTicks += currentTimeTicks;
-        //     // Check for bar line after initial rest
-        //     if (currentMeasureTicks >= currentTicksPerMeasure) {
-        //        abcString += "|\n"; // New line for clarity after bar
-        //        currentMeasureTicks %= currentTicksPerMeasure;
-        //     }
-        // }
-        // --- End Optional Initial Rest ---
-
-
-        for (let i = 0; i < notesToConvert.length; i++) {
-            const note = notesToConvert[i];
+        for (let i = 0; i < quantizedNotes.length; i++) {
+            // NOTE: Use the note from the quantizedNotes array
+            const note = quantizedNotes[i];
 
             // --- Add Rest if Gap Exists ---
+            // Use quantized note.startTick
             if (note.startTick > currentTimeTicks) {
                 const restTicks = note.startTick - currentTimeTicks;
+                // Duration calculation uses quantized ticks
                 const restDurationStr = ticksToAbcDuration(restTicks, ticksPerUnitNoteLength);
-                abcString += "z" + restDurationStr + " ";
-                currentTimeTicks += restTicks;
-                currentMeasureTicks += restTicks;
+                if (restDurationStr !== "0") { // Only add non-zero rests
+                    const restStr = "z" + restDurationStr + " ";
+                    abcString += restStr;
+                    lineLengthCounter += restStr.length;
+                    currentTimeTicks += restTicks;
+                    currentMeasureTicks += restTicks;
 
-                // Check for bar line after rest
-                while (currentMeasureTicks >= currentTicksPerMeasure) {
-                    abcString += "| ";
-                    currentMeasureTicks -= currentTicksPerMeasure;
-                     // Add newline periodically for readability?
-                     // if (abcString.split('\n').slice(-1)[0].length > 60) abcString += "\n";
+                    // Check for bar line(s) after rest
+                    while (currentMeasureTicks >= currentTicksPerMeasure) {
+                        const barStr = "| ";
+                        abcString += barStr;
+                        currentMeasureTicks -= currentTicksPerMeasure;
+                        if (lineLengthCounter > 60) { abcString += "\n"; lineLengthCounter = 0; }
+                        else { lineLengthCounter += barStr.length; }
+                    }
+                } else {
+                    // If rest duration is zero after quantization, log it maybe, but don't advance time
+                    console.log(`Skipping zero-duration rest at tick ${currentTimeTicks}`);
                 }
             }
 
             // --- Add Note ---
-            // Check for Chord (notes starting at the same tick)
+            // Check for Chord (notes starting at the same *quantized* tick)
             let chordNotes = [note];
             let lookahead = i + 1;
-            while (lookahead < notesToConvert.length && notesToConvert[lookahead].startTick === note.startTick) {
-                chordNotes.push(notesToConvert[lookahead]);
+            while (lookahead < quantizedNotes.length && quantizedNotes[lookahead].startTick === note.startTick) {
+                chordNotes.push(quantizedNotes[lookahead]);
                 lookahead++;
             }
 
+            // Duration calculation uses quantized note.durationTicks
             const noteDurationStr = ticksToAbcDuration(note.durationTicks, ticksPerUnitNoteLength);
+            let elementStr = "";
+
+            if (noteDurationStr === "0") {
+                console.warn(`Skipping note at tick ${note.startTick} due to zero duration after quantization.`);
+                // If it was part of a chord, we need to adjust 'i' correctly
+                if (chordNotes.length > 1) { i = lookahead - 1; }
+                continue; // Skip to next note if duration became zero
+            }
+
 
             if (chordNotes.length > 1) {
                 // Format as a chord
-                abcString += "[";
+                elementStr += "[";
                 chordNotes.forEach(chordNote => {
-                    abcString += midiPitchToAbcNote(chordNote.pitch);
+                    elementStr += midiPitchToAbcNote(chordNote.pitch);
                 });
-                abcString += "]" + noteDurationStr + " ";
-                i = lookahead - 1; // Skip the notes already added to the chord
+                // Use duration of the first note in the chord (should be same for all in quantized chord)
+                elementStr += "]" + noteDurationStr + " ";
+                i = lookahead - 1; // Skip notes added to the chord
             } else {
                 // Format as a single note
-                abcString += midiPitchToAbcNote(note.pitch) + noteDurationStr + " ";
+                elementStr += midiPitchToAbcNote(note.pitch) + noteDurationStr + " ";
             }
 
+            abcString += elementStr;
+            lineLengthCounter += elementStr.length;
+            // Advance time using the quantized duration
             currentTimeTicks = note.startTick + note.durationTicks;
-            currentMeasureTicks += note.durationTicks; // Add duration of the note/chord
+            currentMeasureTicks += note.durationTicks;
 
             // Check for bar line(s) after note/chord
-             while (currentMeasureTicks >= currentTicksPerMeasure) {
-                abcString += "| ";
+            while (currentMeasureTicks >= currentTicksPerMeasure) {
+                const barStr = "| ";
+                abcString += barStr;
                 currentMeasureTicks -= currentTicksPerMeasure;
-                 // Optional newline logic
-                 // if (abcString.split('\n').slice(-1)[0].length > 60) abcString += "\n";
+                if (lineLengthCounter > 60) { abcString += "\n"; lineLengthCounter = 0; }
+                else { lineLengthCounter += barStr.length; }
             }
         }
 
-        // Add final bar line if needed? Usually |] for end.
-        abcString = abcString.trimEnd(); // Remove trailing space
-        if (!abcString.endsWith("|")) { // Add simple bar if measure wasn't completed.
-           // abcString += " |"; // Or maybe nothing for a snippet
+        // Add final bar line
+        abcString = abcString.trimEnd();
+        if (!abcString.endsWith("|\n") && !abcString.endsWith("|")) {
+            // If the last element didn't perfectly end on a bar line, add one.
+            // This might happen if currentMeasureTicks > 0 but < currentTicksPerMeasure
+            // We generally want snippets to feel "complete". A final |] looks good.
         }
-        // abcString += "|]"; // Standard end bar?
+        abcString += " |]"; // Use double bar end for snippets
 
         return abcString;
     }
+
+    // Remember to include the `copySelectionToAbc` function as well,
+    // which calls this `generateAbcFromSelection` function.
+    // Its implementation doesn't need to change.
 
     /**
      * Copies the generated ABC string for selected notes to the clipboard.
@@ -1142,7 +1222,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (abcText) {
             try {
                 await navigator.clipboard.writeText(abcText);
-                console.log("Selected notes copied to clipboard in ABC format:\n", abcText);
+                console.log("Selected notes copied to clipboard in ABC format (Quantized):\n", abcText);
                 // Optional: Show a temporary success message to the user
                 // flashMessage("Notes copied to clipboard (ABC Format)"); // Need a flash message mechanism
             } catch (err) {
@@ -1151,7 +1231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // flashMessage("Error copying notes to clipboard.", "error");
             }
         } else {
-            console.log("Could not generate ABC format (no selection or error).");
+            console.log("Could not generate ABC format (no selection or error after quantization).");
             // flashMessage("No notes selected or error generating ABC.", "warning");
         }
     }

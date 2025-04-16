@@ -1,0 +1,207 @@
+/* analysis/static/css/style.css - DARK THEME V1.3 */
+
+/* --- General Dark Theme --- */
+body {
+    display: block; /* Changed from flex for simpler layout */
+    min-height: auto; /* Not needed if not flex */
+    background-color: #1e1e1e; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    color: #d4d4d4; /* Lighter headings */
+    margin-top: 1em;
+    margin-bottom: 0.6em;
+}
+
+a {
+    color: #6cb2f5; /* Lighter blue links */
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Header --- */
+.main-header {
+    background-color: #252526; /* Slightly lighter dark shade */
+    padding: 10px 25px;
+    border-bottom: 1px solid #3a3a3a; /* Darker border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjusted shadow for dark */
+}
+.main-header h1 {
+    color: #e8e8e8;
+    margin: 0 0 5px 0;
+    font-size: 1.6em;
+}
+.header-info {
+    font-size: 0.9em;
+    color: #aaa; /* Lighter gray info text */
+}
+
+/* --- Analysis Container --- */
+.analysis-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #2a2a2a; /* Dark container background */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4); /* Adjusted shadow */
+    border-radius: 8px;
+    border: 1px solid #444; /* Darker border */
+}
+
+.commentary {
+    margin-bottom: 1.5em;
+    line-height: 1.7;
+    color: #ccc; /* Lighter commentary text */
+}
+/* Allow line breaks from text */
+.commentary br {
+    content: "";
+    display: block;
+    margin-bottom: 0.5em; /* Adjust spacing for <br> */
+}
+
+
+/* --- ABC Render Block --- */
+.abc-render-block {
+    margin-bottom: 2em;
+    padding: 15px;
+    border: 1px solid #444; /* Darker border */
+    border-radius: 5px;
+    background-color: #333; /* Darker block background */
+    overflow: hidden;
+}
+
+.abc-title {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #e0e0e0; /* Light title */
+}
+
+/* --- Static Piano Roll Wrapper --- */
+.static-piano-roll-wrapper {
+    display: flex;
+    height: 350px; /* Adjust as needed */
+    border: 1px solid #555; /* Darker border */
+    margin-top: 10px;
+    overflow: hidden; /* Contains the key display and canvas */
+}
+
+
+/* --- Key Display Panel (Dark Theme) --- */
+.static-key-display {
+    width: 70px; /* Narrower for static view */
+    flex-shrink: 0;
+    background-color: #252526; /* Dark background for key panel */
+    border-right: 1px solid #444; /* Darker border */
+    position: relative; /* For positioning content */
+    overflow: hidden; /* Content is positioned absolutely */
+    height: 100%;
+}
+
+.key-display-content {
+    position: absolute;
+    left: 0;
+    top: 0; /* JS might adjust this if scrolling was added, but static view doesn't need it */
+    width: 100%;
+    height: 100%; /* Content matches panel height */
+    /* Height set by JS initially based on calculated range */
+}
+
+/* --- Base Key Styles (Dark Theme) --- */
+.key-display-panel .piano-key,
+.key-display-panel .drum-name {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #444; /* Darker separator */
+    font-size: 9px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    color: #e0e0e0; /* Default light text */
+}
+
+/* --- White Keys (Dark Theme) --- */
+.key-display-panel .piano-key.white {
+    background-color: #3a3a3a; /* Dark gray base for white keys */
+    color: #e0e0e0;
+    z-index: 1;
+}
+/* *FIXED* INCREASED SPECIFICITY for scale colors */
+.key-display-content .piano-key.white.in-scale.in-scale { /* High specificity */
+    background-color: #1c3a6d !important; /* Darker Blue BG */
+    color: #cde0ff !important; /* Light Blue Text */
+    font-weight: 500 !important;
+}
+.key-display-content .piano-key.white.out-of-scale.out-of-scale { /* High specificity */
+    background-color: #3a3a3a !important; /* Ensure default dark gray */
+    color: #e0e0e0 !important; /* Ensure default light text */
+    font-weight: normal !important;
+}
+
+/* --- Black Keys (Dark Theme) --- */
+.key-display-panel .piano-key.black {
+    background-color: #1a1a1a; /* Very dark gray/near black base */
+    color: #bdbdbd; /* Light gray text */
+    width: 65%;
+    border-bottom: none;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    z-index: 2;
+}
+/* *FIXED* INCREASED SPECIFICITY for scale colors */
+ .key-display-content .piano-key.black.in-scale.in-scale { /* High specificity */
+     background-color: #1a1a60 !important; /* Darker Blue-Black BG */
+     color: #d0d0ff !important; /* Lighter Blue/Violet Text */
+     font-weight: 500 !important;
+ }
+ .key-display-content .piano-key.black.out-of-scale.out-of-scale { /* High specificity */
+     background-color: #1a1a1a !important; /* Default dark */
+     color: #bdbdbd !important; /* Default light gray */
+     font-weight: normal !important;
+ }
+
+/* --- Drum Names (Dark Theme) --- */
+.key-display-panel .drum-name {
+    background-color: #2c2c2e; /* Slightly different dark gray */
+    color: #c0c0c0; /* Light gray text */
+    text-align: left;
+    padding-left: 6px;
+}
+/* Drums are always visually "in scale" for simplicity */
+.key-display-content .drum-name.in-scale,
+.key-display-content .drum-name.out-of-scale { /* Add specificity */
+    background-color: #2c2c2e !important;
+    color: #d0d0d0 !important;
+    font-weight: normal !important;
+}
+
+/* Hide the no-longer-used specific octave label span */
+.key-display-panel .piano-key .octave-label {
+   display: none;
+}
+
+
+/* --- Canvas Container (Static) --- */
+.static-canvas-container {
+    flex-grow: 1;
+    overflow: auto; /* Scroll if content exceeds */
+    position: relative;
+    background-color: #1e1e1e; /* Match body background */
+    height: 100%;
+}
+
+.static-piano-roll-canvas {
+    display: block;
+    /* Width/height set by JS */
+}
