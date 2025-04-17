@@ -21,9 +21,21 @@ function createStaticPianoRollRenderer(renderOptions) {
     const {
         canvas,
         keyDisplayPanel,
+        rawAbc: rawAbc,
         abcTune, // Parsed tune object from abcjs
         ticksPerBeat: initialTicksPerBeat = 480 // Use provided or default
     } = renderOptions;
+
+    // build a Map<voiceId, voiceName>
+    const voiceNameMap = []
+    if (rawAbc) {
+        const re = /^V:(\d+)\s+name="([^"]+)"/gm;
+        let m;
+        while ((m = re.exec(rawAbc))) {
+            // m[1] = "1", m[2] = "Distortion Guitar"
+            voiceNameMap.push(m[2]);
+        }
+    }
 
     // --- Essential Element Checks ---
     if (!canvas || !keyDisplayPanel) {
@@ -448,6 +460,21 @@ function createStaticPianoRollRenderer(renderOptions) {
 
         /* ─── 4. wrap‑up ───────────────────────────────────────────────── */
         contentWidthTicks = lastEndTick || ticksPerBeat * 4;
+
+        voiceSummaries = [...id2index.entries()]
+        .sort((a,b)=> a[1]-b[1])
+        .map(([voiceId, renderIdx]) => {
+          // LOOK HERE:
+          const rawName = voiceNameMap[renderIdx];
+          const pretty = rawName
+            || (abcTune.voices?.[renderIdx]?.name)
+            || (abcTune.metaText?.voices?.[renderIdx])
+            || `Voice ${renderIdx+1}`;
+          return { index: renderIdx, id: voiceId, name: pretty };
+        });
+      
+
+
         updateCurrentScaleNotes();
 
         console.log(`[SPR] Parsed ${notesToRender.length} notes, `
@@ -923,6 +950,9 @@ function createStaticPianoRollRenderer(renderOptions) {
     }
 
 
+    let voiceSummaries = [];   // [{index:0, id:"V1", name:"Voice 1"}]
+
+
     // --- Public Method ---
     function render() {
         setupStaticView();
@@ -930,6 +960,12 @@ function createStaticPianoRollRenderer(renderOptions) {
 
     // Return the render function
     return {
-        render: render
+        render,
+        /** change which voice is highlighted, then redraw */
+        setHighlightVoice(index) {
+            renderOptions.highlightVoiceIndex = index;
+            redrawStaticPianoRoll();
+        },
+        getVoices() { return voiceSummaries; }
     };
 }

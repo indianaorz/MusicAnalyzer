@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const analysisContainer = document.getElementById('analysis-content');
 
-    const DEFAULT_VOICE_COLORS = ['#6cb2f5','#ffb74d','#8e44ad','#2ecc71','#f1c40f'];
+    const DEFAULT_VOICE_COLORS = ['#6cb2f5', '#ffb74d', '#8e44ad', '#2ecc71', '#f1c40f'];
 
 
     if (!analysisContainer) {
@@ -77,11 +77,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function addVoiceSelector(blockWrapper, renderer){
+        const voices = renderer.getVoices();
+        if (voices.length < 2) return;        // nothing to choose
+    
+        const wrapper = document.createElement('div');
+        wrapper.className = 'voice-selector';
+    
+        const label = document.createElement('label');
+        label.textContent = 'Voice:';
+        wrapper.appendChild(label);
+    
+        const select = document.createElement('select');
+        voices.forEach(v=>{
+            const opt = document.createElement('option');
+            opt.value = v.index;
+            opt.textContent = v.name;
+            select.appendChild(opt);
+        });
+        select.addEventListener('change', ()=>{
+            renderer.setHighlightVoice(parseInt(select.value,10));
+        });
+        wrapper.appendChild(select);
+    
+        const pianoWrapper = blockWrapper.querySelector('.static-piano-roll-wrapper');
+        blockWrapper.insertBefore(wrapper, pianoWrapper);
+    }
+    
 
 
 
-
-    // --- Main Processing Function ---
     function processAndRenderAnalysis() {
         console.log("[Main.js] Checking ABCJS availability...");
         if (typeof ABCJS === 'undefined' || !ABCJS.synth || typeof ABCJS.synth.CreateSynth !== 'function') {
@@ -91,10 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log("[Main.js] ABCJS Synth seems available.");
 
-
         try {
             const textContent = analysisContent;
-            analysisContainer.innerHTML = ''; // Clear processing message
+            analysisContainer.innerHTML = ''; // clear "Processing…"
             const parts = textContent.split(/(<abc>[\s\S]*?<\/abc>)/g);
             let abcBlockIndex = 0;
 
@@ -104,161 +128,144 @@ document.addEventListener('DOMContentLoaded', () => {
                 const abcMatch = part.match(/<abc>([\s\S]*?)<\/abc>/);
 
                 if (abcMatch) {
-                    // --- Process ABC Block ---
+                    // ─── ABC Block ───────────────────────────────────────────
                     const abcString = abcMatch[1].trim();
                     abcBlockIndex++;
                     const blockId = `abc-block-${abcBlockIndex}`;
 
-                    // --- Create container elements (Same as before) ---
+                    // wrapper
                     const blockWrapper = document.createElement('div');
                     blockWrapper.className = 'abc-render-block';
                     blockWrapper.id = blockId;
 
-                    const controlsWrapper = document.createElement('div');
-                    controlsWrapper.className = 'abc-controls';
+                    // controls (play/pause + title)
+                    const controls = document.createElement('div');
+                    controls.className = 'abc-controls';
+                    const playBtn = document.createElement('button');
+                    playBtn.className = 'abc-play-button';
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playBtn.title = "Play";
+                    playBtn.dataset.blockId = blockId;
+                    playBtn.disabled = true;
+                    const title = document.createElement('div');
+                    title.className = 'abc-title';
+                    const tm = abcString.match(/^[ \t]*T:[ \t]*(.*)/m);
+                    title.textContent = tm ? tm[1] : `Example ${abcBlockIndex}`;
+                    controls.appendChild(playBtn);
+                    controls.appendChild(title);
+                    blockWrapper.appendChild(controls);
 
-                    const titleElement = document.createElement('div');
-                    titleElement.className = 'abc-title';
-                    const titleMatch = abcString.match(/^[ \t]*T:[ \t]*(.*)/m);
-                    titleElement.textContent = titleMatch ? titleMatch[1] : `Music Example ${abcBlockIndex}`;
-
-                    const playButton = document.createElement('button');
-                    playButton.className = 'abc-play-button';
-                    playButton.innerHTML = '<i class="fas fa-play"></i>';
-                    playButton.title = "Play";
-                    playButton.dataset.blockId = blockId;
-                    playButton.disabled = true; // Enable after init
-
-                    controlsWrapper.appendChild(playButton);
-                    controlsWrapper.appendChild(titleElement);
-                    blockWrapper.appendChild(controlsWrapper);
-
-                    const pianoRollWrapper = document.createElement('div');
-                    pianoRollWrapper.className = 'static-piano-roll-wrapper';
-
-                    const keyDisplay = document.createElement('aside');
-                    keyDisplay.className = 'static-key-display';
-                    keyDisplay.id = `${blockId}-key-display`;
-
+                    // piano‑roll skeleton
+                    const pianoWrapper = document.createElement('div');
+                    pianoWrapper.className = 'static-piano-roll-wrapper';
+                    const keyPanel = document.createElement('aside');
+                    keyPanel.className = 'static-key-display';
+                    keyPanel.id = `${blockId}-key-display`;
                     const canvasContainer = document.createElement('div');
                     canvasContainer.className = 'static-canvas-container';
-
                     const canvas = document.createElement('canvas');
                     canvas.className = 'static-piano-roll-canvas';
                     canvas.id = `${blockId}-canvas`;
-                    canvas.textContent = 'Your browser does not support the canvas element.';
-
                     const playhead = document.createElement('div');
-                    playhead.className = 'abc-playhead'; // CSS class for styling and animation target
+                    playhead.className = 'abc-playhead';
                     playhead.id = `${blockId}-playhead`;
-
                     canvasContainer.appendChild(canvas);
-                    canvasContainer.appendChild(playhead); // Add playhead here
-                    pianoRollWrapper.appendChild(keyDisplay);
-                    pianoRollWrapper.appendChild(canvasContainer);
-                    blockWrapper.appendChild(pianoRollWrapper);
+                    canvasContainer.appendChild(playhead);
+                    pianoWrapper.appendChild(keyPanel);
+                    pianoWrapper.appendChild(canvasContainer);
+                    blockWrapper.appendChild(pianoWrapper);
+
                     analysisContainer.appendChild(blockWrapper);
-                    // --- End element creation ---
 
-                    // --- ABCJS Visual Rendering & Audio Setup ---
-                    let abcTune = null;
-                    let visualObjArr = null;
-                    let parseError = null;
-                    const dummyDiv = document.createElement("div");
-                    dummyDiv.id = `visual-${blockId}`;
-                    dummyDiv.style.cssText = 'position:absolute; left:-9999px; top:-9999px; visibility:hidden;';
-
+                    // ─── renderAbc off‑screen to get tune object ─────────────
+                    let abcTune = null, voArr = null, setupErr = null;
+                    const dummy = document.createElement('div');
+                    dummy.style.cssText = 'position:absolute; left:-9999px; top:-9999px;';
                     try {
-                        document.body.appendChild(dummyDiv);
-                        visualObjArr = ABCJS.renderAbc(dummyDiv, abcString, { /* visual options */ });
-                        document.body.removeChild(dummyDiv);
+                        document.body.appendChild(dummy);
+                        voArr = ABCJS.renderAbc(dummy, abcString, {});
+                        document.body.removeChild(dummy);
 
-                        if (visualObjArr && visualObjArr.length > 0) {
-                            abcTune = visualObjArr[0];
+                        if (voArr && voArr.length) {
+                            abcTune = voArr[0];
 
-                            // --- Initialize Static Renderer (Same as before) ---
+                            // ─── static piano‑roll renderer ────────────────────
                             const renderer = createStaticPianoRollRenderer({
-                                canvas: canvas, keyDisplayPanel: keyDisplay, abcTune: abcTune,
+                                canvas,
+                                keyDisplayPanel: keyPanel,
+                                rawAbc: abcString,    // ADD THIS
+                                abcTune,
                                 highlightVoiceIndex: 0,
                                 voiceColors: DEFAULT_VOICE_COLORS
-
                             });
                             if (renderer) {
-                                setTimeout(() => renderer.render(), 50);
+                                setTimeout(() => {
+                                    renderer.render();
+                                    // inject the dropdown
+                                    addVoiceSelector(blockWrapper, renderer);
+                                }, 50);
                             } else {
-                                console.error(`[main.js] Failed static renderer init for ${blockId}`);
+                                console.error(`Renderer init failed for ${blockId}`);
                             }
 
-                            // --- Initialize ABCJS Synth (but don't prime yet) ---
-                            const synthEngine = new ABCJS.synth.CreateSynth();
-                            const synthOptions = {
+                            // ─── ABCJS synth ──────────────────────────────────
+                            const engine = new ABCJS.synth.CreateSynth();
+                            engine.init({
                                 visualObj: abcTune,
                                 options: {
-                                    // eventCallback is still needed by abcjs, but we don't use its timing data for playhead
-                                    eventCallback: (ev) => handleAudioEventCallback(ev, blockId),
+                                    eventCallback: ev => handleAudioEventCallback(ev, blockId),
                                     onEndedCallback: () => handleAudioFinishedCallback(blockId)
                                 }
-                            };
-
-                            synthEngine.init(synthOptions)
+                            })
                                 .then(() => {
-                                    console.log(`[main.js] Synth initialized (but not primed) for block ${blockId}`);
                                     blockAudioStates[blockId] = {
-                                        synthEngine: synthEngine,
+                                        synthEngine: engine,
                                         isPlaying: false,
                                         isPrimed: false,
-                                        totalMillis: 0 // Will be set after priming
+                                        totalMillis: 0
                                     };
-                                    playButton.disabled = false;
-                                    playButton.title = "Play (loads audio)";
+                                    playBtn.disabled = false;
+                                    playBtn.title = "Play (load audio)";
                                 })
-                                .catch((error) => {
-                                    console.error(`[main.js] Error initializing synth for block ${blockId}:`, error);
-                                    parseError = error;
-                                    playButton.disabled = true;
-                                    playButton.title = "Audio Init Error";
-                                    if (blockWrapper && blockWrapper.parentNode) {
-                                        blockWrapper.innerHTML += `<p style="color:red; font-size: 0.8em;">Audio Init Error: ${error?.message || error}</p>`;
-                                    }
-                                    delete blockAudioStates[blockId];
+                                .catch(err => {
+                                    console.error(`Synth init error ${blockId}:`, err);
+                                    playBtn.disabled = true;
+                                    playBtn.title = "Audio Error";
+                                    blockWrapper.innerHTML += `<p style="color:red; font-size:0.8em;">
+                                Audio Error: ${err.message || err}
+                            </p>`;
                                 });
 
                         } else {
-                            parseError = "renderAbc did not return a visual object array.";
-                            console.error(`[main.js] renderAbc failed for block ${abcBlockIndex}:`, visualObjArr);
+                            setupErr = "renderAbc returned no visualObj";
+                            console.error(`[Main.js] renderAbc empty for block ${abcBlockIndex}`);
                         }
-                    } catch (error) {
-                        parseError = error;
-                        console.error(`[main.js] Error during render/initial setup for block ${abcBlockIndex}:`, error);
-                        if (dummyDiv.parentNode === document.body) { document.body.removeChild(dummyDiv); }
-                        if (blockWrapper) {
-                            blockWrapper.innerHTML += `<p style="color:red;">Setup Error: ${error?.message || error}</p>`;
-                        }
+                    } catch (e) {
+                        setupErr = e;
+                        console.error(`[Main.js] Setup error for block ${abcBlockIndex}:`, e);
+                        if (dummy.parentNode) document.body.removeChild(dummy);
+                        blockWrapper.innerHTML += `<p style="color:red;">Setup Error: ${e.message}</p>`;
                     }
 
-                    // Final Error Check and Button Listener (Same as before)
-                    if (parseError) {
-                        console.error(`[main.js] Failed to fully process block ${abcBlockIndex} due to error:`, parseError);
-                        playButton.disabled = true;
-                        playButton.title = "Setup Error";
+                    if (setupErr) {
+                        playBtn.disabled = true;
+                        playBtn.title = "Setup Error";
                     }
-                    playButton.addEventListener('click', handlePlayButtonClick);
+                    playBtn.addEventListener('click', handlePlayButtonClick);
 
                 } else {
-                    // --- Found Commentary Text (Same as before) ---
-                    const commentaryElement = document.createElement('div');
-                    commentaryElement.className = 'commentary';
-                    commentaryElement.innerHTML = part.trim().replace(/\n/g, '<br>');
-                    analysisContainer.appendChild(commentaryElement);
+                    // commentary
+                    const comment = document.createElement('div');
+                    comment.className = 'commentary';
+                    comment.innerHTML = part.trim().replace(/\n/g, '<br>');
+                    analysisContainer.appendChild(comment);
                 }
-            }); // end parts.forEach
-
-        } catch (error) {
-            console.error('Error processing or rendering analysis content:', error);
-            analysisContainer.innerHTML = `<p style="color: red;">Error processing analysis: ${error.message}</p>`;
+            });
+        } catch (err) {
+            console.error("Processing error:", err);
+            analysisContainer.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
         }
-    } // --- End of processAndRenderAnalysis function ---
-
+    }
 
     /* ────────────────────────────────────────────────────────────────
        PLAY‑HEAD  ✓ rewind ✓ restart ✓ pause / resume
