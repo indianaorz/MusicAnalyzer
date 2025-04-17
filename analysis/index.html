@@ -6,17 +6,23 @@
     <title>Music Analysis Viewer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="static/css/analysis-viewer.css"> <script src="abcjs-basic-min.jsl"></script>
-</head>
+    <script src="abcjs-plugin-min.jsl"></script>
+    </head>
 <body>
     <header class="main-header">
         <h1>Music Analysis Viewer</h1>
          <div class="header-info">
-            <span>Displaying analysis from embedded data.</span> </div>
+             <span>Displaying analysis from embedded data.</span>
+             <span>Click <i class="fas fa-play"></i> to listen.</span>
+         </div>
     </header>
 
     <div class="analysis-container" id="analysis-content">
-        <p>Processing analysis...</p> </div>
+        <p>Processing analysis...</p>
+        </div>
 
-    <script src="static/js/analysis-data.js"></script> <script src="static/js/static-pianoroll.js"></script> <script src="static/js/main.js"></script> </body>
+    <script src="static/js/analysis-data.js"></script>
+    <script src="static/js/static-pianoroll.js"></script>
+    <script src="static/js/main.js" defer></script>
+</body>
 </html>

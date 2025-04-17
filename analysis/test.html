@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ABCJS Synth Test 2</title>
+    <script src="abcjs-plugin-min.js"></script>
+    </head>
+<body>
+    <h1>ABCJS Synth Test 2</h1>
+    <p>Attempting to render first, then check synth.</p>
+    <div id="dummy-render-output"></div>
+    <hr>
+    <script>
+        console.log("Minimal Test 2 - Before doing anything:", ABCJS);
+        // Try doing *something* with abcjs rendering first
+        try {
+            // Make sure the target div exists
+            var renderDiv = document.getElementById("dummy-render-output");
+            if (renderDiv) {
+                var visualObj = ABCJS.renderAbc("dummy-render-output", "X:1\nT:Test\nM:C\nL:1/8\nK:C\nCDEF GABc|", {});
+                console.log("Minimal Test 2 - Render attempted. Result:", visualObj);
+            } else {
+                 console.error("Minimal Test 2 - Dummy render div not found!");
+            }
+            console.log("Minimal Test 2 - Object structure AFTER renderAbc:", ABCJS); // Log again
+        } catch (e) {
+            console.error("Minimal Test 2 - Error during dummy render:", e);
+        }
+
+        // Now check synth again
+        if (ABCJS && ABCJS.synth && ABCJS.synth.CreateSynth) {
+            console.log("Minimal Test 2 - SUCCESS: ABCJS.synth.CreateSynth found!");
+            alert("SUCCESS: ABCJS Synth available AFTER render.");
+        } else {
+            // Check specifically what's missing
+             if (!ABCJS) console.error("Minimal Test 2 - FAILURE: ABCJS object is missing.");
+             else if (!ABCJS.synth) console.error("Minimal Test 2 - FAILURE: ABCJS.synth property is missing.");
+             else console.error("Minimal Test 2 - FAILURE: ABCJS.synth.CreateSynth function is missing.");
+            alert("FAILURE: ABCJS Synth still NOT available.");
+        }
+    </script>
+</body>
+</html>

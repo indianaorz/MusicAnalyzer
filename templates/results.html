@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piano Roll - {{ filename }}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
     <header class="main-header">
-         <div class="header-controls">
+        <div class="header-controls">
             <span class="control-group">
                 <label for="scale-root-select">Root:</label>
                 <select id="scale-root-select">
@@ -42,40 +46,43 @@
             <span class="header-info-static">
                 File: <strong>{{ filename }}</strong> | Ticks/Beat: {{ ticks_per_beat }}
             </span>
+            <input type="number" id="abcUnitNoteLength"
+                value="{{ unit_note_length_denominator | default(4) }}" min="1" max="16" step="1">
+
             <a href="{{ url_for('index') }}" class="back-link">Back to Upload</a>
-         </div>
-         </header>
+        </div>
+    </header>
 
     <div class="main-content-wrapper">
         <aside class="track-list-panel">
             <h2>Tracks</h2>
             {% if tracks_data %}
-                <ul id="track-list">
-                    {% for track in tracks_data %}
-                        <li class="track-item" data-track-index="{{ loop.index0 }}">
-                            <div class="track-info">
-                                <span class="track-number">Tr {{ track.track_index }}:</span>
-                                {% if track.is_drum_track %}
-                                    <i class="fas fa-drum track-icon" title="Drum Track"></i>
-                                {% endif %}
-                                <span class="track-name">{{ track.name | default('Unnamed', true) }}</span>
-                                <span class="instrument-name">({{ track.instrument | default('Unknown', true) }})</span>
-                            </div>
-                            <div class="track-controls">
-                                <button class="visibility-toggle" title="Toggle Visibility">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+            <ul id="track-list">
+                {% for track in tracks_data %}
+                <li class="track-item" data-track-index="{{ loop.index0 }}">
+                    <div class="track-info">
+                        <span class="track-number">Tr {{ track.track_index }}:</span>
+                        {% if track.is_drum_track %}
+                        <i class="fas fa-drum track-icon" title="Drum Track"></i>
+                        {% endif %}
+                        <span class="track-name">{{ track.name | default('Unnamed', true) }}</span>
+                        <span class="instrument-name">({{ track.instrument | default('Unknown', true) }})</span>
+                    </div>
+                    <div class="track-controls">
+                        <button class="visibility-toggle" title="Toggle Visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
             {% else %}
-                <p>No note tracks found in this file.</p>
+            <p>No note tracks found in this file.</p>
             {% endif %}
         </aside>
 
         <aside class="key-display-panel" id="key-display-panel">
-            </aside>
+        </aside>
 
         <main class="piano-roll-panel">
             <div id="canvas-container" class="canvas-container">
@@ -88,12 +95,14 @@
 
     <script>
         const rawTracksData = JSON.parse({{ tracks_data_json | tojson | safe }});
-        const ticksPerBeat = {{ ticks_per_beat | default(480) }};
+        const ticksPerBeat = {{ ticks_per_beat | default (480) }};
         // --- NEW: Pass Time Signature ---
-        const timeSignatureNumerator = {{ time_signature_numerator | default(4) }};
-        const timeSignatureDenominator = {{ time_signature_denominator | default(4) }};
+        const timeSignatureNumerator = {{ time_signature_numerator | default (4) }};
+        const timeSignatureDenominator = {{ time_signature_denominator | default (4) }};
+        const unitNoteLengthDenominator = {{ unit_note_length_denominator | default (4) }};
         // --- END NEW ---
     </script>
     <script src="{{ url_for('static', filename='js/pianoroll.js') }}"></script>
 </body>
+
 </html>

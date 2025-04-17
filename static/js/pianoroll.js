@@ -60,6 +60,15 @@ document.addEventListener('DOMContentLoaded', function () {
         window.timeSignatureDenominator = timeSignatureDenominator;
     }
 
+    //unitNoteLengthDenominator
+    if (typeof unitNoteLengthDenominator === 'undefined' || unitNoteLengthDenominator <= 0) {
+        console.warn("Unit Note Length Denominator not defined or invalid. Using default 4.");
+        window.unitNoteLengthDenominator = 4;
+    } else {
+        window.unitNoteLengthDenominator = unitNoteLengthDenominator;
+    }
+
+
     const ctx = canvas.getContext('2d', { alpha: false }); // alpha: false can improve performance if no transparency needed for background
     if (!ctx) {
         console.error("Could not get 2D rendering context for canvas.");
@@ -117,6 +126,155 @@ document.addEventListener('DOMContentLoaded', function () {
         79: 'Open Cuica', 80: 'Mute Triangle', 81: 'Open Triangle'
         // Add more if needed
     };
+
+    const GM_MELODY_MAP = {
+        0: "Acoustic Grand Piano",
+        1: "Bright Acoustic Piano",
+        2: "Electric Grand Piano",
+        3: "Honky-tonk Piano",
+        4: "Electric Piano 1",
+        5: "Electric Piano 2",
+        6: "Harpsichord",
+        7: "Clavinet",
+
+        8: "Celesta",
+        9: "Glockenspiel",
+        10: "Music Box",
+        11: "Vibraphone",
+        12: "Marimba",
+        13: "Xylophone",
+        14: "Tubular Bells",
+        15: "Dulcimer",
+
+        16: "Drawbar Organ",
+        17: "Percussive Organ",
+        18: "Rock Organ",
+        19: "Church Organ",
+        20: "Reed Organ",
+        21: "Accordion",
+        22: "Harmonica",
+        23: "Tango Accordion",
+
+        24: "Acoustic Guitar (nylon)",
+        25: "Acoustic Guitar (steel)",
+        26: "Electric Guitar (jazz)",
+        27: "Electric Guitar (clean)",
+        28: "Electric Guitar (muted)",
+        29: "Overdriven Guitar",
+        30: "Distortion Guitar",
+        31: "Guitar Harmonics",
+
+        32: "Acoustic Bass",
+        33: "Electric Bass (finger)",
+        34: "Electric Bass (pick)",
+        35: "Fretless Bass",
+        36: "Slap Bass 1",
+        37: "Slap Bass 2",
+        38: "Synth Bass 1",
+        39: "Synth Bass 2",
+
+        40: "Violin",
+        41: "Viola",
+        42: "Cello",
+        43: "Contrabass",
+        44: "Tremolo Strings",
+        45: "Pizzicato Strings",
+        46: "Orchestral Harp",
+        47: "Timpani",
+
+        48: "String Ensemble 1",
+        49: "String Ensemble 2",
+        50: "SynthStrings 1",
+        51: "SynthStrings 2",
+        52: "Choir Aahs",
+        53: "Voice Oohs",
+        54: "Synth Voice",
+        55: "Orchestra Hit",
+
+        56: "Trumpet",
+        57: "Trombone",
+        58: "Tuba",
+        59: "Muted Trumpet",
+        60: "French Horn",
+        61: "Brass Section",
+        62: "SynthBrass 1",
+        63: "SynthBrass 2",
+
+        64: "Soprano Sax",
+        65: "Alto Sax",
+        66: "Tenor Sax",
+        67: "Baritone Sax",
+        68: "Oboe",
+        69: "English Horn",
+        70: "Bassoon",
+        71: "Clarinet",
+
+        72: "Piccolo",
+        73: "Flute",
+        74: "Recorder",
+        75: "Pan Flute",
+        76: "Blown Bottle",
+        77: "Shakuhachi",
+        78: "Whistle",
+        79: "Ocarina",
+
+        80: "Lead 1 (square)",
+        81: "Lead 2 (sawtooth)",
+        82: "Lead 3 (calliope)",
+        83: "Lead 4 (chiff)",
+        84: "Lead 5 (charang)",
+        85: "Lead 6 (voice)",
+        86: "Lead 7 (fifths)",
+        87: "Lead 8 (bass + lead)",
+
+        88: "Pad 1 (new age)",
+        89: "Pad 2 (warm)",
+        90: "Pad 3 (polysynth)",
+        91: "Pad 4 (choir)",
+        92: "Pad 5 (bowed)",
+        93: "Pad 6 (metallic)",
+        94: "Pad 7 (halo)",
+        95: "Pad 8 (sweep)",
+
+        96: "FX 1 (rain)",
+        97: "FX 2 (soundtrack)",
+        98: "FX 3 (crystal)",
+        99: "FX 4 (atmosphere)",
+        100: "FX 5 (brightness)",
+        101: "FX 6 (goblins)",
+        102: "FX 7 (echoes)",
+        103: "FX 8 (sci-fi)",
+
+        104: "Sitar",
+        105: "Banjo",
+        106: "Shamisen",
+        107: "Koto",
+        108: "Kalimba",
+        109: "Bagpipe",
+        110: "Fiddle",
+        111: "Shanai",
+
+        112: "Tinkle Bell",
+        113: "Agogo",
+        114: "Steel Drums",
+        115: "Woodblock",
+        116: "Taiko Drum",
+        117: "Melodic Tom",
+        118: "Synth Drum",
+        119: "Reverse Cymbal",
+
+        120: "Guitar Fret Noise",
+        121: "Breath Noise",
+        122: "Seashore",
+        123: "Bird Tweet",
+        124: "Telephone Ring",
+        125: "Helicopter",
+        126: "Applause",
+        127: "Gunshot"
+    };
+
+
+
     // Define Scale Intervals (relative to root, 0 = root)
     const SCALE_INTERVALS = {
         'major': [0, 2, 4, 5, 7, 9, 11], // W-W-H-W-W-W-H
@@ -181,6 +339,58 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set to false to shade measures 1, 3, 5... (useful for pickup measures)
     let shadeEvenMeasures = true; // Default: shade the first measure (index 0)
     let ticksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator;
+
+    /**
+     * ------------------------------------------------------------------
+     * 1.  Which letters does the key-signature raise or lower?
+     * ------------------------------------------------------------------
+     * returns { sharps:Set<string>, flats:Set<string>, preferFlats:boolean }
+     */
+    function getKeyAccidentals(rootName, isMinor) {
+        // ----- helpers -------------------------------------------------
+        const NAME_TO_STEP = { C: 0, 'B#': 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4, Fb: 4, F: 5, 'E#': 5, 'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9, 'A#': 10, Bb: 10, B: 11, Cb: 11 };
+        const STEP_TO_MAJ = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+        const SHARP_ORDER = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
+        const FLAT_ORDER = ['B', 'E', 'A', 'D', 'G', 'C', 'F'];
+        const KEY_SIG = {                       // +n = n sharps, –n = n flats
+            C: 0, G: 1, D: 2, A: 3, E: 4, B: 5, 'F#': 6, 'C#': 7,
+            F: -1, 'Bb': -2, 'Eb': -3, 'Ab': -4, 'Db': -5, 'Gb': -6, 'Cb': -7
+        };
+
+        rootName = rootName.trim();
+        if (!(rootName in NAME_TO_STEP)) rootName = 'C';
+
+        // relative major for minor keys
+        let majStep = NAME_TO_STEP[rootName];
+        if (isMinor) majStep = (majStep + 3) % 12;
+        const majName = STEP_TO_MAJ[majStep];
+
+        const count = KEY_SIG[majName] ?? 0;
+        const sharps = new Set(), flats = new Set();
+        if (count > 0) SHARP_ORDER.slice(0, count).forEach(l => sharps.add(l));
+        if (count < 0) FLAT_ORDER.slice(0, -count).forEach(l => flats.add(l));
+
+        return { sharps, flats, preferFlats: count < 0 };
+    }
+
+    /**
+ * Lookup a track’s display name:
+ * - If drum track → “Drums”
+ * - Else if track.instrumentName set → use that
+ * - Else if track.program (0–127) → GM_MELODY_MAP[program]
+ * - Else fallback to rawTracksData[trackIndex].name or “TrackN”
+ */
+    function getTrackInstrumentName(track, index) {
+        if (track.is_drum_track) return 'Drums';
+        if (track.instrument) return track.instrument;
+        if (typeof track.program === 'number' && GM_MELODY_MAP[track.program]) {
+            return GM_MELODY_MAP[track.program];
+        }
+        if (track.name) return track.name;
+        return `Track${index + 1}`;
+    }
+
+
 
 
     // --- Coordinate Transformation ---
@@ -953,286 +1163,290 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Converts MIDI pitch to ABC note notation (pitch, accidental, octave).
-     * Assumes K:Cmaj (or Amin) for now - uses sharp for C#, F#, G#, D#, A# and natural for others.
-     * TODO: Adapt based on a selected Key Signature if implemented later.
-     * @param {number} pitch MIDI pitch (0-127).
-     * @returns {string} ABC note string (e.g., "^G,", "C", "_B''").
+     * ------------------------------------------------------------------
+     * 2.  ONE pitch  →  ONE ABC note string  (updates measureAccidentals)
+     * ------------------------------------------------------------------
+     * @param {number} pitch           MIDI 0-127
+     * @param {{sharps:Set,flats:Set,preferFlats:boolean}} keyAcc  from getKeyAccidentals
+     * @param {Object} measureAcc      mutable accidental state for this bar
+     *                                 e.g. { A:0, B:-1, ... }  (0 = natural)
      */
-    function midiPitchToAbcNote(pitch) {
-        if (pitch < 0 || pitch > 127) return "z"; // Treat invalid pitch as rest
+    function midiPitchToAbcNote(pitch, keyAcc, measureAcc) {
+        if (pitch < 0 || pitch > 127) return 'z';
 
-        const octave = Math.floor(pitch / 12) - 1; // MIDI C-1 (pitch 0) is octave -1
-        const noteIndex = pitch % 12;
+        const pc = pitch % 12;            // pitch-class 0-11
+        const oct = Math.floor(pitch / 12) - 1;
 
-        // --- Basic Note Name (Assume Sharps for C-based key initially) ---
-        // We might need a more robust key signature context later
-        let baseNote;
-        let accidental = "";
-        switch (noteIndex) {
-            case 0: baseNote = 'C'; break;
-            case 1: baseNote = 'C'; accidental = '^'; break; // C#
-            case 2: baseNote = 'D'; break;
-            case 3: baseNote = 'D'; accidental = '^'; break; // D#
-            case 4: baseNote = 'E'; break;
-            case 5: baseNote = 'F'; break;
-            case 6: baseNote = 'F'; accidental = '^'; break; // F#
-            case 7: baseNote = 'G'; break;
-            case 8: baseNote = 'G'; accidental = '^'; break; // G#
-            case 9: baseNote = 'A'; break;
-            case 10: baseNote = 'A'; accidental = '^'; break; // A#
-            case 11: baseNote = 'B'; break;
-            default: return "z"; // Should not happen
+        // ------- pick a LETTER & desired accidental value (-1,0,+1) ----
+        const sharpMap = [
+            ['C', 0], ['C', +1], ['D', 0], ['D', +1], ['E', 0], ['F', 0],
+            ['F', +1], ['G', 0], ['G', +1], ['A', 0], ['A', +1], ['B', 0]
+        ];
+        const flatMap = [
+            ['C', 0], ['D', -1], ['D', 0], ['E', -1], ['E', 0], ['F', 0],
+            ['G', -1], ['G', 0], ['A', -1], ['A', 0], ['B', -1], ['B', 0]
+        ];
+        const [letter, desiredAcc] = (keyAcc.preferFlats ? flatMap : sharpMap)[pc];
+
+        // ------- what does the key-signature do to this letter? --------
+        const keyAccVal = keyAcc.sharps.has(letter) ? +1 :
+            keyAcc.flats.has(letter) ? -1 : 0;
+
+        // ------- what’s the current accidental state IN THIS BAR? ------
+        const currentVal = (letter in measureAcc) ? measureAcc[letter] : keyAccVal;
+
+        // ------- decide which symbol (if any) we must print ------------
+        let accSym = '';
+        if (desiredAcc !== currentVal) {
+            if (desiredAcc === 0) accSym = '=';
+            else if (desiredAcc === +1) accSym = '^';
+            else if (desiredAcc === -1) accSym = '_';
         }
 
-        // --- Octave Markers ---
-        // ABC Octave Reference: Middle C (MIDI 60) starts the octave with no markers.
-        // MIDI 60 = C5 (using scientific pitch notation where C4 is middle C)
-        // ABC middle C is octave 4 in some contexts, octave 5 in others. Let's assume MIDI 60 = 'C'
-        let octaveMarker = "";
-        const middleCOctave = 4; // MIDI Octave for 'C' with no markers (MIDI 60-71)
-        if (octave < middleCOctave) {
-            octaveMarker = ",".repeat(middleCOctave - octave); // Add commas for lower octaves
-        } else if (octave > middleCOctave) {
-            octaveMarker = "'".repeat(octave - middleCOctave); // Add apostrophes for higher octaves
+        // store new state for the rest of the bar
+        measureAcc[letter] = desiredAcc;
+
+        // ------- octave / letter case / commas / apostrophes -----------
+        let abcLetter;
+        if (oct >= 5) {                                 // c, d, e …
+            abcLetter = letter.toLowerCase() + "'".repeat(oct - 5);
+        } else {                                        // C, D, E …
+            abcLetter = letter.toUpperCase() + ",".repeat(4 - oct);
         }
 
-        return accidental + baseNote + octaveMarker;
+        return accSym + abcLetter;
     }
 
 
+
     /**
-     * Gathers selected notes, **quantizes them to 1/16th notes**, sorts them,
-     * and generates an ABC string starting from the beginning of the measure
-     * containing the first selected (quantized) note.
-     * @returns {string} The generated ABC notation string or an empty string on failure.
+     * ------------------------------------------------------------------
+     * 3.  Build the ABC snippet from the current selection
+     *     – now with rock-solid accidentals for ANY key.
+     * ------------------------------------------------------------------
      */
     function generateAbcFromSelection() {
         if (selectedNotes.size === 0) return "";
 
-        // 1. Gather Original Notes
-        let notesToConvert = [];
-        selectedNotes.forEach(key => {
-            try {
-                const ref = JSON.parse(key);
-                const track = rawTracksData[ref.trackIndex];
-                const note = track?.notes[ref.noteIndex];
-                if (note) {
-                    notesToConvert.push({ // Store original values for now
-                        pitch: note.pitch,
-                        startTick: note.start_tick,
-                        durationTicks: note.duration_ticks,
-                    });
-                }
-            } catch (e) {
-                console.error("Error parsing selected note key:", key, e);
-            }
+        /* ---------- gather & quantise notes (UNCHANGED) --------------- */
+        const collected = [];
+        selectedNotes.forEach(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
+            const n = rawTracksData[trackIndex]?.notes[noteIndex];
+            if (n) collected.push({ ...n });
         });
+        if (!collected.length) return "";
 
-        if (notesToConvert.length === 0) return "";
+        const TPB = window.ticksPerBeat || 480;
+        const sixteenth = TPB / 4;
+        const q = n => Math.max(0, Math.round(n / sixteenth) * sixteenth);
+        const notes = collected.map(n => ({
+            pitch: n.pitch,
+            start: q(n.start_tick),
+            dur: n.duration_ticks > 0 ? Math.max(sixteenth,
+                Math.round(n.duration_ticks / sixteenth) * sixteenth) : 0
+        })).filter(n => n.dur > 0);
 
-        // 2. Quantization Step
-        const ticksPerBeatValue = window.ticksPerBeat || 480; // Ensure valid ticksPerBeat
-        const ticksPerSixteenth = ticksPerBeatValue / 4;
-        if (ticksPerSixteenth <= 0) {
-            console.error("Cannot quantize: Ticks per 16th note is invalid (check ticksPerBeat).");
-            return "";
-        }
+        if (!notes.length) return "";
 
-        const quantizedNotes = notesToConvert.map(note => {
-            const quantizedStartTick = Math.max(0, Math.round(note.startTick / ticksPerSixteenth) * ticksPerSixteenth);
-            // Ensure duration is at least one 16th note if original was positive, otherwise 0.
-            const quantizedDurationTicks = note.durationTicks > 0
-                ? Math.max(ticksPerSixteenth, Math.round(note.durationTicks / ticksPerSixteenth) * ticksPerSixteenth)
-                : 0;
+        notes.sort((a, b) => a.start !== b.start ? a.start - b.start : a.pitch - b.pitch);
 
-            // Only include notes that have a duration after quantization
-            if (quantizedDurationTicks > 0) {
-                return {
-                    pitch: note.pitch, // Keep original pitch
-                    startTick: quantizedStartTick, // Use quantized value
-                    durationTicks: quantizedDurationTicks // Use quantized value
-                };
-            } else {
-                return null; // Mark notes with zero duration to be filtered out
-            }
-        }).filter(note => note !== null); // Remove null entries (zero duration notes)
-
-
-        // 3. Sort the *quantized* notes
-        if (quantizedNotes.length === 0) {
-            console.log("No notes remaining after quantization (all had zero duration).");
-            return ""; // No valid notes left to convert
-        }
-        quantizedNotes.sort((a, b) => { // Sort the new array
-            if (a.startTick !== b.startTick) {
-                return a.startTick - b.startTick;
-            }
-            return a.pitch - b.pitch; // Lower pitch first if simultaneous start
-        });
-
-
-        // 4. Define ABC Parameters & Calculate Start Point
-        const unitNoteLengthDenominator = 16; // L:1/8 (Eighth note)
-        const ticksPerUnitNoteLength = ticksPerBeatValue * (4 / unitNoteLengthDenominator); // Ticks per L: unit
-
-        // Calculate Ticks Per Measure robustly
-        let currentTicksPerMeasure = 0;
+        /* ---------- header ------------------------------------------- */
+        const L = document.getElementById("abcUnitNoteLength").value || 8;
         const num = window.timeSignatureNumerator || 4;
         const den = window.timeSignatureDenominator || 4;
-        if (den > 0 && num > 0) {
-            currentTicksPerMeasure = ticksPerBeatValue * (4 / den) * num;
-        } else {
-            console.warn("Invalid time signature, defaulting ticks per measure calculation.");
-            currentTicksPerMeasure = ticksPerBeatValue * 4; // Fallback
-        }
-        if (currentTicksPerMeasure <= 0) { // Another fallback
-            console.error("Calculated ticksPerMeasure is zero or negative. Defaulting.");
-            currentTicksPerMeasure = ticksPerBeatValue * 4;
-        }
+        const ticksPerMeasure = TPB * (4 / den) * num;
+        const keyRoot = NOTE_NAMES[selectedRootNote];
+        const isMinor = selectedScaleType.toLowerCase().includes('min');
+        const keyName = keyRoot + (isMinor ? 'min' : 'maj');
+        let abc = `X:1\nT:Selected Notes Snippet\nM:${num}/${den}\nL:1/${L}\nK:${keyName}\n`;
 
+        /* ---------- body --------------------------------------------- */
+        const keyAcc = getKeyAccidentals(keyRoot, isMinor);
+        let measureAcc = {};                          // reset each bar
+        const durStr = t => ticksToAbcDuration(t, TPB * (4 / L));
 
-        // Determine Start Point using the *first quantized note*
-        const firstNote = quantizedNotes[0];
-        const firstNoteMeasureIndex = Math.floor(firstNote.startTick / currentTicksPerMeasure);
-        const measureStartTick = firstNoteMeasureIndex * currentTicksPerMeasure;
-        console.log(`First *quantized* note starts at tick ${firstNote.startTick}. Containing measure starts at tick ${measureStartTick}. Ticks/Measure: ${currentTicksPerMeasure}`); // Debug log
+        let now = Math.floor(notes[0].start / ticksPerMeasure) * ticksPerMeasure;
+        let inBar = 0, lineLen = 0;
 
-        // 5. Build ABC Header
-        let abcString = "";
-        abcString += "X:1\n"; // Reference number
-        abcString += "T:Selected Notes Snippet (Quantized)\n"; // Title indicates quantization
-        abcString += `M:${num}/${den}\n`; // Meter
-        abcString += `L:1/${unitNoteLengthDenominator}\n`; // Unit note length
-        // Use current scale selection for K: field
-        const rootNoteName = NOTE_NAMES[selectedRootNote];
-        const scaleModeAbbr = (selectedScaleType.toLowerCase().includes('minor') || selectedScaleType.toLowerCase() === 'blues') ? 'min' : 'maj'; // Basic mode guess
-        abcString += `K:${rootNoteName}${scaleModeAbbr}\n`; // Key signature
-        // abcString += "Q:1/4=120\n"; // Optional: Tempo
+        for (let i = 0; i < notes.length; i++) {
+            const n = notes[i];
 
-
-        // 6. Build ABC Body (Using Quantized Notes)
-        let currentTimeTicks = measureStartTick; // Start time at the calculated measure start
-        let currentMeasureTicks = 0; // Start exactly at a measure boundary conceptually
-        let lineLengthCounter = 0; // Track characters for line wrapping
-
-        for (let i = 0; i < quantizedNotes.length; i++) {
-            // NOTE: Use the note from the quantizedNotes array
-            const note = quantizedNotes[i];
-
-            // --- Add Rest if Gap Exists ---
-            // Use quantized note.startTick
-            if (note.startTick > currentTimeTicks) {
-                const restTicks = note.startTick - currentTimeTicks;
-                // Duration calculation uses quantized ticks
-                const restDurationStr = ticksToAbcDuration(restTicks, ticksPerUnitNoteLength);
-                if (restDurationStr !== "0") { // Only add non-zero rests
-                    const restStr = "z" + restDurationStr + " ";
-                    abcString += restStr;
-                    lineLengthCounter += restStr.length;
-                    currentTimeTicks += restTicks;
-                    currentMeasureTicks += restTicks;
-
-                    // Check for bar line(s) after rest
-                    while (currentMeasureTicks >= currentTicksPerMeasure) {
-                        const barStr = "| ";
-                        abcString += barStr;
-                        currentMeasureTicks -= currentTicksPerMeasure;
-                        if (lineLengthCounter > 60) { abcString += "\n"; lineLengthCounter = 0; }
-                        else { lineLengthCounter += barStr.length; }
-                    }
-                } else {
-                    // If rest duration is zero after quantization, log it maybe, but don't advance time
-                    console.log(`Skipping zero-duration rest at tick ${currentTimeTicks}`);
-                }
+            /* ----- rests if there’s a gap ----------------------------- */
+            if (n.start > now) {
+                const restDur = n.start - now;
+                const rest = 'z' + durStr(restDur) + ' ';
+                abc += rest; lineLen += rest.length;
+                now += restDur; inBar += restDur;
             }
 
-            // --- Add Note ---
-            // Check for Chord (notes starting at the same *quantized* tick)
-            let chordNotes = [note];
-            let lookahead = i + 1;
-            while (lookahead < quantizedNotes.length && quantizedNotes[lookahead].startTick === note.startTick) {
-                chordNotes.push(quantizedNotes[lookahead]);
-                lookahead++;
-            }
+            /* ----- collect any simultaneous notes (chord) ------------- */
+            const chord = [n];
+            while (i + 1 < notes.length && notes[i + 1].start === n.start) chord.push(notes[++i]);
 
-            // Duration calculation uses quantized note.durationTicks
-            const noteDurationStr = ticksToAbcDuration(note.durationTicks, ticksPerUnitNoteLength);
-            let elementStr = "";
-
-            if (noteDurationStr === "0") {
-                console.warn(`Skipping note at tick ${note.startTick} due to zero duration after quantization.`);
-                // If it was part of a chord, we need to adjust 'i' correctly
-                if (chordNotes.length > 1) { i = lookahead - 1; }
-                continue; // Skip to next note if duration became zero
-            }
-
-
-            if (chordNotes.length > 1) {
-                // Format as a chord
-                elementStr += "[";
-                chordNotes.forEach(chordNote => {
-                    elementStr += midiPitchToAbcNote(chordNote.pitch);
+            /* ----- render the note/chord ------------------------------ */
+            let elem = '';
+            if (chord.length > 1) {           // chord
+                elem += '[';
+                chord.forEach(c => {
+                    elem += midiPitchToAbcNote(c.pitch, keyAcc, measureAcc);
                 });
-                // Use duration of the first note in the chord (should be same for all in quantized chord)
-                elementStr += "]" + noteDurationStr + " ";
-                i = lookahead - 1; // Skip notes added to the chord
-            } else {
-                // Format as a single note
-                elementStr += midiPitchToAbcNote(note.pitch) + noteDurationStr + " ";
+                elem += ']' + durStr(n.dur) + ' ';
+            } else {                        // single note
+                elem += midiPitchToAbcNote(n.pitch, keyAcc, measureAcc) + durStr(n.dur) + ' ';
             }
+            abc += elem; lineLen += elem.length;
+            now += n.dur; inBar += n.dur;
 
-            abcString += elementStr;
-            lineLengthCounter += elementStr.length;
-            // Advance time using the quantized duration
-            currentTimeTicks = note.startTick + note.durationTicks;
-            currentMeasureTicks += note.durationTicks;
-
-            // Check for bar line(s) after note/chord
-            while (currentMeasureTicks >= currentTicksPerMeasure) {
-                const barStr = "| ";
-                abcString += barStr;
-                currentMeasureTicks -= currentTicksPerMeasure;
-                if (lineLengthCounter > 60) { abcString += "\n"; lineLengthCounter = 0; }
-                else { lineLengthCounter += barStr.length; }
+            /* ----- bar-lines & resetting accidental map --------------- */
+            while (inBar >= ticksPerMeasure) {
+                abc += '| ';
+                measureAcc = {};            // clear for new bar
+                inBar -= ticksPerMeasure;
+                lineLen += 2;
+                if (lineLen > 60) { abc += '\n'; lineLen = 0; }
             }
         }
 
-        // Add final bar line
-        abcString = abcString.trimEnd();
-        if (!abcString.endsWith("|\n") && !abcString.endsWith("|")) {
-            // If the last element didn't perfectly end on a bar line, add one.
-            // This might happen if currentMeasureTicks > 0 but < currentTicksPerMeasure
-            // We generally want snippets to feel "complete". A final |] looks good.
-        }
-        abcString += " |]"; // Use double bar end for snippets
-
-        return abcString;
+        abc = abc.trimEnd() + ' |]';
+        return abc;
     }
 
-    // Remember to include the `copySelectionToAbc` function as well,
-    // which calls this `generateAbcFromSelection` function.
-    // Its implementation doesn't need to change.
+
 
     /**
-     * Copies the generated ABC string for selected notes to the clipboard.
+     * Multi-voice ABC generator — NOW EMITS VALID VOICE TOKENS
+     *  • voice definitions go into the header
+     *  • each voice’s music starts with “[V:n] …”
+     */
+    function generateAbcFromSelectionMultiVoice() {
+        if (selectedNotes.size === 0) return "";
+      
+        const TPB = window.ticksPerBeat || 480;
+        const sixteenth = TPB / 4;
+        const q = v => Math.round(v / sixteenth) * sixteenth;
+      
+        // Group notes by track
+        const byTrack = new Map();
+        selectedNotes.forEach(k => {
+          const { trackIndex, noteIndex } = JSON.parse(k);
+          const raw = rawTracksData[trackIndex]?.notes[noteIndex];
+          if (!raw || raw.duration_ticks <= 0) return;
+          const start = q(raw.start_tick);
+          const dur   = Math.max(sixteenth, q(raw.duration_ticks));
+          if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
+          byTrack.get(trackIndex).push({ pitch: raw.pitch, start, dur });
+        });
+        if (!byTrack.size) return "";
+      
+        // Sort each track’s notes by start → pitch
+        for (const arr of byTrack.values()) {
+          arr.sort((a, b) =>
+            a.start !== b.start ? a.start - b.start : a.pitch - b.pitch
+          );
+        }
+      
+        // Header
+        const num = window.timeSignatureNumerator || 4;
+        const den = window.timeSignatureDenominator || 4;
+        const L   = document.getElementById("abcUnitNoteLength").value || 8;
+        const root = NOTE_NAMES[selectedRootNote];
+        const isMin = selectedScaleType.toLowerCase().includes("min");
+        const keyName = root + (isMin ? "min" : "maj");
+      
+        let abc = 
+          `X:1\n` +
+          `T:Multi-Track Snippet\n` +
+          `M:${num}/${den}\n` +
+          `L:1/${L}\n`;
+      
+        // Voice defs
+        const voiceIds = [];
+        let vno = 0;
+        for (const trackIdx of byTrack.keys()) {
+          vno++;
+          voiceIds.push(`V${vno}`);
+          const name = getTrackInstrumentName(rawTracksData[trackIdx], trackIdx);
+          abc += `V:${vno}  name="${name}"\n`;
+        }
+        abc += `%%score ${voiceIds.join(" ")}\n`;
+      
+        // Key line—**no extra newline after this**:
+        abc += `K:${keyName}\n`;
+      
+        // Body
+        const ticksPerBar = TPB * (4/den) * num;
+        const keyAcc = getKeyAccidentals(root, isMin);
+        const durStr = t => ticksToAbcDuration(t, TPB * (4/L));
+      
+        vno = 0;
+        for (const [trackIdx, notes] of byTrack.entries()) {
+          vno++;
+          let now = 0, inBar = 0;
+          let measureAcc = {};
+      
+          // Voice intro
+          abc += `[V:${vno}] `;
+      
+          for (let i = 0; i < notes.length; i++) {
+            const n = notes[i];
+      
+            // 1) Rests if gap
+            if (n.start > now) {
+              const restDur = n.start - now;
+              abc += `z${durStr(restDur)} `;
+              now += restDur;
+              inBar += restDur;
+            }
+      
+            // 2) Chord grouping
+            const chord = [n];
+            while (i+1 < notes.length && notes[i+1].start === n.start) {
+              chord.push(notes[++i]);
+            }
+      
+            // 3) Emit chord or single note
+            if (chord.length > 1) {
+              abc += "[" + chord.map(c =>
+                midiPitchToAbcNote(c.pitch, keyAcc, measureAcc)
+              ).join("") + "]" + durStr(n.dur) + " ";
+            } else {
+              abc += midiPitchToAbcNote(n.pitch, keyAcc, measureAcc)
+                  + durStr(n.dur) + " ";
+            }
+      
+            now += n.dur; inBar += n.dur;
+      
+            // 4) Bar‑lines
+            while (inBar >= ticksPerBar) {
+              abc += "| ";
+              measureAcc = {};
+              inBar -= ticksPerBar;
+            }
+          }
+      
+          abc = abc.trimEnd() + " |]\n";
+        }
+      
+        return abc.trim();
+      }
+      
+
+
+    /**
+     * Copy multi-voice ABC to the clipboard.
      */
     async function copySelectionToAbc() {
-        const abcText = generateAbcFromSelection();
-        if (abcText) {
-            try {
-                await navigator.clipboard.writeText(abcText);
-                console.log("Selected notes copied to clipboard in ABC format (Quantized):\n", abcText);
-                // Optional: Show a temporary success message to the user
-                // flashMessage("Notes copied to clipboard (ABC Format)"); // Need a flash message mechanism
-            } catch (err) {
-                console.error('Failed to copy notes to clipboard: ', err);
-                // Optional: Show an error message
-                // flashMessage("Error copying notes to clipboard.", "error");
-            }
-        } else {
-            console.log("Could not generate ABC format (no selection or error after quantization).");
-            // flashMessage("No notes selected or error generating ABC.", "warning");
+        const abcText = generateAbcFromSelectionMultiVoice();
+        if (!abcText) {
+            console.warn("Nothing selected or no valid selection for multi-voice ABC.");
+            return;
+        }
+        try {
+            await navigator.clipboard.writeText(abcText);
+            console.log("Copied multi-voice ABC:\n", abcText);
+        } catch (err) {
+            console.error("Failed to copy multi-voice ABC:", err);
         }
     }
 

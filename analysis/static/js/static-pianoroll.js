@@ -116,303 +116,346 @@ function createStaticPianoRollRenderer(renderOptions) {
     let effectiveNoteHeight = NOTE_BASE_HEIGHT;
     let totalRenderedPitchRange = PITCH_RANGE;
 
+
+    /**
+ * How does the key‑signature modify each letter?
+ * returns { sharps:Set<string>, flats:Set<string>, preferFlats:boolean }
+ */
+    function getKeyAccidentals(rootName, isMinor) {
+        const NAME2STEP = {
+            C: 0, 'B#': 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4, Fb: 4, F: 5, 'E#': 5,
+            'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9, 'A#': 10, Bb: 10, B: 11, Cb: 11
+        };
+        const STEP2MAJ = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+        const SHARPS = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
+        const FLATS = ['B', 'E', 'A', 'D', 'G', 'C', 'F'];
+        const SIG = {
+            C: 0, G: 1, D: 2, A: 3, E: 4, B: 5, 'F#': 6, 'C#': 7,
+            F: -1, 'Bb': -2, 'Eb': -3, 'Ab': -4, 'Db': -5, 'Gb': -6, 'Cb': -7
+        };
+
+        rootName = (rootName || '').trim();               // safety
+        if (!(rootName in NAME2STEP)) rootName = 'C';
+
+        let majStep = NAME2STEP[rootName];
+        if (isMinor) majStep = (majStep + 3) % 12;      // relative major
+        const majName = STEP2MAJ[majStep];
+        const count = SIG[majName] ?? 0;
+
+        const sharps = new Set(), flats = new Set();
+        if (count > 0) SHARPS.slice(0, count).forEach(l => sharps.add(l));
+        if (count < 0) FLATS.slice(0, -count).forEach(l => flats.add(l));
+
+        return { sharps, flats, preferFlats: count < 0 };
+    }
+
+    /**
+     * Convert one ABC note text (e.g. "^G,", "_B'", "=c") to a MIDI pitch,
+     * fully respecting the key‑signature **and** any accidentals earlier
+     * in the same bar.
+     *
+     * @param {string}  abcName    raw pitch text from abcjs (p.name)
+     * @param {Object}  keyAcc     {sharps, flats, preferFlats} from getKeyAccidentals
+     * @param {Object}  measureAcc mutable object holding bar‑local accidentals
+     * @returns {number} MIDI pitch 0‑127
+     */
+    function abcNameToMidiPitch(abcName, keyAcc, measureAcc) {
+        // ----- 1. read accidentals (^ ^^ _ __ =) ----------------------
+        let pos = 0, explicit = 0;
+        while (abcName[pos] === '^' || abcName[pos] === '_') {
+            explicit += (abcName[pos] === '^' ? +1 : -1);
+            pos++;
+        }
+        if (abcName[pos] === '=') { explicit = 0; pos++; }   // natural
+
+        // ----- 2. read the letter -------------------------------------
+        const letterMatch = abcName.slice(pos).match(/[A-Ga-g]/);
+        if (!letterMatch) return 60;                       // safety
+        const letter = letterMatch[0].toUpperCase();
+        const isLower = /[a-g]/.test(letterMatch[0]);
+        pos += 1;
+
+        // ----- 3. octave marks ( ' or , ) ------------------------------
+        let octShift = 0;
+        while (pos < abcName.length) {
+            if (abcName[pos] === "'") { octShift++; pos++; }
+            else if (abcName[pos] === ',') { octShift--; pos++; }
+            else break;
+        }
+
+        // ----- 4. decide the final accidental value for this letter ----
+        let accVal;
+        if (explicit !== 0 || abcName.includes('=')) {       // we saw ^,_,=…
+            accVal = explicit;
+            measureAcc[letter] = accVal;                   // remember for bar
+        } else if (letter in measureAcc) {                 // bar‑memory
+            accVal = measureAcc[letter];
+        } else {                                           // key‑signature
+            accVal = keyAcc.sharps.has(letter) ? +1 :
+                keyAcc.flats.has(letter) ? -1 : 0;
+        }
+
+        // ----- 5. base semitone of natural letter ---------------------
+        const naturals = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+        let pc = naturals[letter] + accVal;                // 0‑11
+        pc = (pc + 12) % 12;
+
+        // ----- 6. octave number ---------------------------------------
+        const baseMidi = isLower ? 72 : 60;                // C5 or C4
+        let midi = baseMidi + (naturals[letter] - naturals['C']) + accVal;
+        midi += octShift * 12;
+        return Math.max(0, Math.min(127, midi));
+    }
+
+
+
     // --- Parsing Helpers ---
     // In static-pianoroll.js
     // --- [LOGGING] --- Ensure parseKeySignature is defined here ---
+    // Ensure parseKeySignature is fully defined (copied if necessary from previous context)
     function parseKeySignature(keyInfo, meta = {}) {
         const titleForLog = meta?.T || 'Unknown Title';
         console.log(`[SPR LOG] parseKeySignature called. keyInfo:`, keyInfo, ` Meta Title: ${titleForLog}`);
-        // ... (rest of parseKeySignature implementation from previous steps) ...
-        // Ensure it sets selectedRootNote, selectedScaleType, isPercussion correctly
         isPercussion = false; // Reset percussion flag
+
         if (keyInfo && typeof keyInfo === 'object' && keyInfo.el_type === 'keySignature') {
             console.log('[SPR LOG] Processing keyInfo as keySignature object.');
             const noteName = (keyInfo.root || "").toUpperCase();
             const accidental = keyInfo.acc || "";
-            let mode = (keyInfo.mode || "").toLowerCase();
-            if (!noteName) { /* ... handle missing root ... */ selectedRootNote = 0; selectedScaleType = 'major'; }
-            else { /* ... handle valid root, accidental, mode ... */
+            let mode = (keyInfo.mode || "").toLowerCase().replace(/ /g, ''); // Normalize mode string
+
+            if (!noteName) {
+                console.log('[SPR LOG] Key root missing, defaulting to C Major.');
+                selectedRootNote = 0;
+                selectedScaleType = 'major';
+            } else {
                 let rootIndex = NOTE_NAMES.indexOf(noteName);
-                if (rootIndex === -1) { /* ... default ... */ }
-                else {
+                if (rootIndex === -1) {
+                    console.warn(`[SPR WARN] Unrecognized key root: ${noteName}. Defaulting to C Major.`);
+                    selectedRootNote = 0;
+                    selectedScaleType = 'major';
+                } else {
+                    // Adjust root index based on accidental
                     if (accidental === '#') rootIndex = (rootIndex + 1) % 12;
                     else if (accidental === 'b') rootIndex = (rootIndex + 11) % 12;
+                    // Handle explicit natural ('')
                     selectedRootNote = rootIndex;
-                    if (['m', 'min', 'aeo', 'dor', 'phr'].includes(mode)) selectedScaleType = 'minor';
-                    else selectedScaleType = 'major';
+
+                    // Determine scale type based on mode
+                    if (['m', 'min', 'minor', 'aeo', 'aeolian'].includes(mode)) selectedScaleType = 'minor';
+                    else if (['penta', 'pentatonicmajor', 'pentatonic'].includes(mode)) selectedScaleType = 'pentatonicMajor';
+                    else if (['pentatonicminor'].includes(mode)) selectedScaleType = 'pentatonicMinor';
+                    else if (['blues'].includes(mode)) selectedScaleType = 'blues';
+                    else if (['chrom', 'chromatic'].includes(mode)) selectedScaleType = 'chromatic';
+                    else if (['maj', 'major', 'ion', 'ionian', ''].includes(mode)) selectedScaleType = 'major'; // Default to major if mode empty or common major modes
+                    else {
+                        console.warn(`[SPR WARN] Unrecognized mode: "${mode}". Defaulting to major scale type.`);
+                        selectedScaleType = 'major';
+                    }
+                    // Additional modes (mix, dor, phr, lyd) could be added here if needed
                 }
             }
         } else if (typeof keyInfo === 'string' && keyInfo.trim().toLowerCase() === 'perc') {
-            console.log("[SPR LOG] Detected K:perc."); isPercussion = true; selectedScaleType = 'none'; selectedRootNote = 0;
+            console.log("[SPR LOG] Detected K:perc.");
+            isPercussion = true;
+            selectedScaleType = 'none'; // Use 'none' for scale highlighting logic
+            selectedRootNote = 0; // Default root doesn't matter much for percussion
         } else {
-            console.log('[SPR LOG] Defaulting key signature to C Major.');
-            selectedRootNote = 0; selectedScaleType = 'major';
+            console.log('[SPR LOG] No valid key info or K:perc found. Defaulting key signature to C Major.');
+            selectedRootNote = 0;
+            selectedScaleType = 'major';
         }
-        console.log(`[SPR LOG] parseKeySignature finished. root: ${selectedRootNote}, type: ${selectedScaleType}, isPercussion: ${isPercussion}`);
+        console.log(`[SPR LOG] parseKeySignature finished. root: <span class="math-inline">\{selectedRootNote\} \(</span>{NOTE_NAMES[selectedRootNote]}), type: ${selectedScaleType}, isPercussion: ${isPercussion}`);
     }
 
     /**
-   * Converts an ABC note name string (like "^G,", "_B'", "C") to a MIDI pitch.
-   * Assumes standard octave conventions (Middle C 'C' = MIDI 60).
-   * @param {string} abcName The ABC note name string.
-   * @returns {number} The calculated MIDI pitch, or a default (e.g., 60) if unparseable.
-   */
+       * Converts an ABC note name string (like "^G,", "_B'", "C") to a MIDI pitch. V1.7 DEBUG
+       * Assumes standard octave conventions (Middle C 'C' = MIDI 60, 'c' = MIDI 72).
+       * @param {string} abcName The ABC note name string.
+       * @returns {number} The calculated MIDI pitch, or a default (e.g., 60) if unparseable.
+       */
     function abcNoteToMidiPitch(abcName) {
-        if (!abcName || typeof abcName !== 'string') return 60; // Default to Middle C on error
+        // --- V1.7 Add Internal Debug Logging ---
+        const FN_NAME = "[abcNoteToMidiPitch V1.7 DEBUG]";
+        // console.log(`${FN_NAME} Input: "${abcName}"`); // Log every input if needed
+
+        if (!abcName || typeof abcName !== 'string') {
+            console.warn(`${FN_NAME} Invalid input: ${abcName}. Returning default 60.`);
+            return 60;
+        }
 
         let pitch = 0;
         let accidentalOffset = 0;
         let octaveShift = 0;
         let baseNote = '';
-
+        let baseNoteCase = 'upper'; // 'upper' for CDEFGAB, 'lower' for cdefgab
         let pos = 0;
 
-        // 1. Parse Accidental (optional)
-        if (abcName[pos] === '^') {
-            accidentalOffset = 1;
-            pos++;
-        } else if (abcName[pos] === '_') {
-            accidentalOffset = -1;
-            pos++;
-        } else if (abcName[pos] === '=') {
-            accidentalOffset = 0; // Explicit natural
-            pos++;
-        }
-        // If no symbol, accidentalOffset remains 0 (natural implied by key or default)
+        // 1. Parse Accidental (optional: ^, _, =)
+        if (abcName[pos] === '^') { accidentalOffset = 1; pos++; }
+        else if (abcName[pos] === '_') { accidentalOffset = -1; pos++; }
+        else if (abcName[pos] === '=') { accidentalOffset = 0; pos++; }
 
-        // 2. Parse Base Note (C, D, E, F, G, A, B)
-        if (pos < abcName.length && /[A-Ga-g]/.test(abcName[pos])) {
-            baseNote = abcName[pos].toUpperCase();
-            pos++;
-        } else {
-            console.warn(`[abcNoteToMidiPitch] Could not parse base note from: ${abcName}`);
-            return 60; // Error case
-        }
+        // 2. Parse Base Note (C-G or c-g)
+        if (pos < abcName.length) {
+            const char = abcName[pos];
+            if (/[A-G]/.test(char)) { baseNote = char; baseNoteCase = 'upper'; pos++; }
+            else if (/[a-g]/.test(char)) { baseNote = char.toUpperCase(); baseNoteCase = 'lower'; pos++; }
+            else { console.warn(`${FN_NAME} Could not parse base note from: ${abcName}`); return 60; }
+        } else { console.warn(`${FN_NAME} String too short after accidental: ${abcName}`); return 60; }
 
-        // 3. Parse Octave Markers (optional)
+        // 3. Parse Octave Markers (optional: ' ,)
         while (pos < abcName.length) {
-            if (abcName[pos] === "'") {
-                octaveShift++;
-                pos++;
-            } else if (abcName[pos] === ",") {
-                octaveShift--;
-                pos++;
-            } else {
-                // Assume end of relevant part if unexpected char found
-                break;
-            }
+            if (abcName[pos] === "'") { octaveShift++; pos++; }
+            else if (abcName[pos] === ",") { octaveShift--; pos++; }
+            else { break; }
         }
 
         // 4. Calculate Pitch
-        // Base MIDI pitches for middle octave (Octave 4 in MIDI terms, where C4=60)
-        const basePitches = { C: 60, D: 62, E: 64, F: 65, G: 67, A: 69, B: 71 };
+        const baseMidiOctave4 = { C: 60, D: 62, E: 64, F: 65, G: 67, A: 69, B: 71 }; // ABC 'C' octave
+        const baseMidiOctave5 = { C: 72, D: 74, E: 76, F: 77, G: 79, A: 81, B: 83 }; // ABC 'c' octave
 
-        if (!(baseNote in basePitches)) {
-            console.warn(`[abcNoteToMidiPitch] Invalid base note parsed: ${baseNote}`);
-            return 60; // Error case
-        }
+        if (!(baseNote in baseMidiOctave4)) { console.warn(`${FN_NAME} Invalid base note parsed: ${baseNote}`); return 60; }
 
-        pitch = basePitches[baseNote];
+        // Start with the correct base octave based on the parsed letter case
+        let initialPitch = (baseNoteCase === 'upper') ? baseMidiOctave4[baseNote] : baseMidiOctave5[baseNote];
+        pitch = initialPitch;
+
+        // Apply octave shifts relative to the base octave determined by case
+        pitch += octaveShift * 12;
+
+        // Apply accidental offset
         pitch += accidentalOffset;
-        pitch += octaveShift * 12; // Apply octave shifts
 
         // Clamp to MIDI range 0-127
         pitch = Math.max(0, Math.min(127, pitch));
 
-        // console.log(`[abcNoteToMidiPitch] Parsed ${abcName} -> Pitch: ${pitch}`); // Optional Debug
+        // --- Log internal steps specifically for lowercase notes that were problematic ---
+        if (baseNoteCase === 'lower' && ['C', 'G', 'F', 'D'].includes(baseNote)) {
+            console.log(`${FN_NAME} Details for "${abcName}": Base='${baseNote}', Case='${baseNoteCase}', InitialPitch=${initialPitch}, OctShift=${octaveShift}, AccOffset=${accidentalOffset} => Final Pitch: ${pitch}`);
+        }
+
         return pitch;
     }
 
-    // --- Main Data Processing Function (MODIFIED to use abcNoteToMidiPitch) ---
+
+
+    /**
+     * Parse abcjs visualObj → notesToRender[]
+     * • keeps an independent clock for every *voice id*
+     * • voice order may change between systems – we ignore the array index
+     * • assigns a stable renderIndex per voice so colours don’t shuffle
+     */
     function processAbcTune() {
-        console.log(`[SPR LOG] --- processAbcTune START ---`);
-        console.log(`[SPR LOG] Received abcTune object:`, abcTune);
+        console.log('[SPR] --- processAbcTune START ---');
 
-        const actualTuneData = abcTune.tune || abcTune;
-        console.log(`[SPR LOG] Using actualTuneData object for processing:`, actualTuneData);
-
-        if (!actualTuneData || typeof actualTuneData !== 'object' || !Array.isArray(actualTuneData.lines)) {
-            console.error("[SPR ERROR] StaticRenderer: Invalid abcTune data object structure (missing .lines?). Cannot process.", actualTuneData);
-            notesToRender = []; contentWidthTicks = (ticksPerBeat || 480) * 4; contentMinPitch = 60; contentMaxPitch = 72; isPercussion = false; selectedRootNote = 0; selectedScaleType = 'major'; ticksPerMeasure = (ticksPerBeat || 480) * 4; updateCurrentScaleNotes();
-            console.log(`[SPR LOG] --- processAbcTune END (Error) ---`);
-            return;
+        /* ─── 0. sanity ────────────────────────────────────────────────── */
+        const tune = abcTune.tune || abcTune;
+        if (!tune?.lines?.length) {
+            console.error('[SPR] Invalid tune object – no .lines[]'); return;
         }
 
-        const currentMeta = actualTuneData.metaText || {};
+        /* ─── 1. header info (key, meter, unit length) ─────────────────── */
+        const meta = tune.metaText || {};
+        const keyInfo = (typeof tune.getKeySignature === 'function')
+            ? tune.getKeySignature() : meta.K;
+        parseKeySignature(keyInfo, meta);
 
-        // --- Get Key Signature (sets isPercussion, selectedRootNote, selectedScaleType) ---
-        let keyInfo = undefined;
-        if (typeof actualTuneData.getKeySignature === 'function') {
-            try { keyInfo = actualTuneData.getKeySignature(); console.log('[SPR LOG] Called getKeySignature(). Result:', keyInfo); }
-            catch (e) { console.error('[SPR ERROR] Error calling getKeySignature():', e); }
-        } else { console.warn('[SPR WARN] actualTuneData has no getKeySignature method.'); keyInfo = currentMeta.K; } // Fallback
-        parseKeySignature(keyInfo, currentMeta); // Sets isPercussion flag globally
+        const meter = (typeof tune.getMeter === 'function')
+            ? tune.getMeter() : { beats: 4, value: 4 };
+        timeSignatureNumerator = meter.beats || 4;
+        timeSignatureDenominator = meter.value || 4;
 
-        // --- Get Meter ---
-        timeSignatureNumerator = 4; timeSignatureDenominator = 4; // Default
-        if (typeof actualTuneData.getMeter === 'function') {
-            try {
-                const meterInfo = actualTuneData.getMeter();
-                // ... (parsing logic for meterInfo - keep as before) ...
-                if (meterInfo && typeof meterInfo === 'object') {
-                    if (meterInfo.type === 'common_time') { timeSignatureNumerator = 4; timeSignatureDenominator = 4; }
-                    else if (meterInfo.type === 'cut_time') { timeSignatureNumerator = 2; timeSignatureDenominator = 2; }
-                    else if (meterInfo.type === 'specified' && meterInfo.value && meterInfo.value.length > 0) {
-                        const firstMeter = meterInfo.value[0];
-                        if (firstMeter && firstMeter.num && firstMeter.den) {
-                            timeSignatureNumerator = parseInt(firstMeter.num, 10); timeSignatureDenominator = parseInt(firstMeter.den, 10);
-                            if (isNaN(timeSignatureNumerator) || timeSignatureNumerator <= 0) timeSignatureNumerator = 4;
-                            if (isNaN(timeSignatureDenominator) || timeSignatureDenominator <= 0) timeSignatureDenominator = 4;
-                        } else { console.warn('[SPR WARN] getMeter() specified format unexpected:', meterInfo); }
-                    } else if (typeof meterInfo.num === 'number' && typeof meterInfo.den === 'number') {
-                        timeSignatureNumerator = meterInfo.num; timeSignatureDenominator = meterInfo.den;
-                        if (isNaN(timeSignatureNumerator) || timeSignatureNumerator <= 0) timeSignatureNumerator = 4;
-                        if (isNaN(timeSignatureDenominator) || timeSignatureDenominator <= 0) timeSignatureDenominator = 4;
-                    } else { console.warn('[SPR WARN] getMeter() returned unknown type/format:', meterInfo); }
-                } else { console.warn('[SPR WARN] getMeter() did not return valid object:', meterInfo); }
-
-            } catch (e) { console.error('[SPR ERROR] Error calling/processing getMeter():', e); }
-        } else { console.warn('[SPR WARN] actualTuneData has no getMeter method.'); }
-        console.log(`[SPR LOG] Determined Time Signature: ${timeSignatureNumerator}/${timeSignatureDenominator}`);
-
-        // --- Get Unit Note Length (L:) ---
-        let unitLength = 1 / 8; // Default L:1/8
-        // ... (logic for getting unitLength from getUnitLength() or metaText.L - keep as before) ...
-        if (typeof actualTuneData.getUnitLength === 'function') {
-            try {
-                unitLength = actualTuneData.getUnitLength();
-                if (typeof unitLength !== 'number' || unitLength <= 0) { unitLength = 1 / 8; }
-            } catch (e) { unitLength = 1 / 8; }
-        } else {
-            const lField = currentMeta.L;
-            if (lField) { /* ... parse L: from meta ... */ }
-            else { unitLength = 1 / 8; }
+        let unitLen = 1 / 8;
+        if (typeof tune.getUnitLength === 'function') {
+            try { unitLen = tune.getUnitLength() || unitLen; } catch { }
+        } else if (meta.L) {
+            const p = meta.L.split('/'); if (p.length === 2) unitLen = 1 / +p[1];
         }
-        console.log(`[SPR LOG] Determined Unit Length (L:): ${unitLength}`);
 
+        const ticksPerWhole = ticksPerBeat * 4;
+        const ticksPerUnit = ticksPerWhole * unitLen;
+        ticksPerMeasure = ticksPerBeat * (4 / timeSignatureDenominator) *
+            timeSignatureNumerator;
 
-        // --- Ticks Per Beat & Unit Length Calculation ---
-        console.log(`[SPR LOG] Using ticksPerBeat for calculations: ${ticksPerBeat}`);
-        const ticksPerWholeNote = ticksPerBeat * 4;
-        const ticksPerUnitLength = ticksPerWholeNote * unitLength;
-        console.log(`[SPR LOG] Ticks per Unit Length (L:) calculated: ${ticksPerUnitLength}`);
+        /* ─── 2. state  ────────────────────────────────────────────────── */
+        notesToRender.length = 0;
+        contentMinPitch = PITCH_MAX; contentMaxPitch = PITCH_MIN;
+        let lastEndTick = 0;
 
-        // --- Calculate ticksPerMeasure ---
-        let calculatedTicksPerMeasure = ticksPerBeat * 4; // Default
-        if (timeSignatureNumerator > 0 && timeSignatureDenominator > 0 && ticksPerBeat > 0) {
-            calculatedTicksPerMeasure = Math.round(ticksPerBeat * (4 / timeSignatureDenominator) * timeSignatureNumerator);
-        }
-        if (calculatedTicksPerMeasure <= 0) { calculatedTicksPerMeasure = ticksPerBeat * 4; }
-        ticksPerMeasure = calculatedTicksPerMeasure;
-        console.log(`[SPR LOG] Final ticksPerMeasure calculated: ${ticksPerMeasure}`);
+        const clock = new Map();   // voiceId → currentTick
+        const id2index = new Map();   // voiceId → 0..N  (stable render index)
+        const keyAcc = getKeyAccidentals(
+            NOTE_NAMES[selectedRootNote],
+            selectedScaleType.includes('min'));
 
-        // --- Process Notes ---
-        notesToRender = [];
-        contentWidthTicks = 0;
-        contentMinPitch = PITCH_MAX; // Reset min/max calculation
-        contentMaxPitch = PITCH_MIN;
-        let currentTimeTicks = 0;
-        let lastNoteEndTime = 0;
-        console.log(`[SPR LOG] Starting note processing loop...`);
+        /* ─── 3. walk every system / staff / voice ─────────────────────── */
+        tune.lines.forEach(line => {
+            if (!line.staff) return;
+            line.staff.forEach((staff, staffIdx) => {
+                if (!staff.voices) return;
 
-        actualTuneData.lines.forEach((line, lineIndex) => {
-            if (!line.staff || !Array.isArray(line.staff)) return;
-            line.staff.forEach((staff, staffIndex) => {
-                if (!staff.voices || !Array.isArray(staff.voices)) return;
-                staff.voices.forEach((voice, voiceIndex) => {
-                    if (!Array.isArray(voice)) return;
-                    voice.forEach(elem => {
-                        let durationTicks = 0;
-                        let isNoteOrRest = false;
+                staff.voices.forEach((voiceElems, voiceIdx) => {
+                    if (!Array.isArray(voiceElems) || !voiceElems.length) return;
 
-                        if (elem.el_type === 'note' || elem.el_type === 'rest') {
-                            isNoteOrRest = true;
-                            const elementDurationFactor = elem.duration === undefined ? 1.0 : elem.duration;
-                            durationTicks = Math.round(elementDurationFactor * ticksPerUnitLength);
-                            if (durationTicks < 0) durationTicks = 0;
+                    /* ▶ identify this voice */
+                    const voiceId = (voiceElems[0].voice !== undefined)
+                        ? String(voiceElems[0].voice)
+                        : `s${staffIdx}v${voiceIdx}`;
+                    if (!id2index.has(voiceId))
+                        id2index.set(voiceId, id2index.size);   // assign new colour
+
+                    let t = clock.get(voiceId) || 0;
+                    let measureAcc = {};
+
+                    voiceElems.forEach(el => {
+                        const durTicks = Math.round(el.duration * ticksPerWhole);   // ✔ absolute
+                        const isRest = (el.el_type === 'rest') ||
+                            (el.el_type === 'note' && (!el.pitches?.length));
+                        const isNote = (el.el_type === 'note' && !isRest);
+
+                        if (el.el_type === 'bar') measureAcc = {}; // clear ♯/♭ cache
+
+                        if (isNote) {
+                            el.pitches.forEach(p => {
+                                const midi = p.name
+                                    ? abcNameToMidiPitch(p.name, keyAcc, measureAcc)
+                                    : p.pitch;
+                                if (midi >= PITCH_MIN && midi <= PITCH_MAX) {
+                                    notesToRender.push({
+                                        pitch: midi,
+                                        start_tick: t,
+                                        duration_ticks: durTicks,
+                                        velocity: el.velocity || 100,
+                                        voice: id2index.get(voiceId)
+                                    });
+                                    contentMinPitch = Math.min(contentMinPitch, midi);
+                                    contentMaxPitch = Math.max(contentMaxPitch, midi);
+                                }
+                            });
                         }
 
-                        if (elem.el_type === 'note') {
-                            if (elem.pitches && Array.isArray(elem.pitches)) {
-                                elem.pitches.forEach(pitchInfo => {
-                                    // *** MODIFICATION START ***
-                                    // Instead of trusting pitchInfo.pitch, calculate from pitchInfo.name
-                                    let midiPitch;
-                                    if (pitchInfo.name) {
-                                        midiPitch = abcNoteToMidiPitch(pitchInfo.name);
-                                        // Optional: Log comparison if pitchInfo.pitch exists
-                                        if (pitchInfo.pitch !== undefined && pitchInfo.pitch !== midiPitch) {
-                                            console.warn(`[processAbcTune] Pitch mismatch for ${pitchInfo.name}: abcjs returned ${pitchInfo.pitch}, calculated ${midiPitch}. Using calculated.`);
-                                        }
-                                    } else if (pitchInfo.pitch !== undefined) {
-                                        // Fallback if name is missing for some reason
-                                        console.warn(`[processAbcTune] Missing pitch name, falling back to abcjs pitch: ${pitchInfo.pitch}`);
-                                        midiPitch = pitchInfo.pitch;
-                                    } else {
-                                        console.error("[processAbcTune] Note element missing both name and pitch!", elem);
-                                        return; // Skip this invalid pitch entry
-                                    }
-                                    // *** MODIFICATION END ***
-
-
-                                    if (midiPitch >= PITCH_MIN && midiPitch <= PITCH_MAX) {
-                                        notesToRender.push({
-                                            pitch: midiPitch, // Use the potentially corrected pitch
-                                            start_tick: Math.round(currentTimeTicks),
-                                            duration_ticks: durationTicks,
-                                            velocity: 100 // Assign default velocity
-                                        });
-                                        // Update bounds using the potentially corrected pitch
-                                        contentMinPitch = Math.min(contentMinPitch, midiPitch);
-                                        contentMaxPitch = Math.max(contentMaxPitch, midiPitch);
-                                    } else {
-                                        console.warn(`[SPR WARN] Note pitch out of range: ${midiPitch}`, elem);
-                                    }
-                                });
-                            } else {
-                                console.warn(`[SPR WARN] Note element has no pitches array`, elem);
-                            }
+                        if (isRest || isNote) {
+                            t += durTicks;
+                            lastEndTick = Math.max(lastEndTick, t);
                         }
+                    });
 
-                        if (isNoteOrRest) {
-                            currentTimeTicks += durationTicks;
-                            lastNoteEndTime = Math.max(lastNoteEndTime, currentTimeTicks);
-                        }
-                    }); // End element loop
-                }); // End voice loop
-            }); // End staff loop
-        }); // End line loop
-        console.log(`[SPR LOG] Finished note processing loop.`);
+                    clock.set(voiceId, t);
+                });
+            });
+        });
 
-        contentWidthTicks = Math.round(lastNoteEndTime);
+        /* ─── 4. wrap‑up ───────────────────────────────────────────────── */
+        contentWidthTicks = lastEndTick || ticksPerBeat * 4;
+        updateCurrentScaleNotes();
 
-        if (notesToRender.length === 0) {
-            console.warn("[SPR WARN] No valid notes found to render after processing ABC.");
-            contentWidthTicks = ticksPerMeasure > 0 ? ticksPerMeasure * 2 : ticksPerBeat * 8;
-            // Set a more reasonable default pitch range if no notes found
-            contentMinPitch = 48; // C3
-            contentMaxPitch = 72; // C5
-        }
-        // Ensure pitch range is valid even if only one note exists
-        if (contentMinPitch > contentMaxPitch) {
-            contentMaxPitch = contentMinPitch;
-        }
-        // Add a minimum span if only one pitch was found
-        if (contentMinPitch === contentMaxPitch && notesToRender.length > 0) {
-            contentMinPitch = Math.max(PITCH_MIN, contentMinPitch - 6);
-            contentMaxPitch = Math.min(PITCH_MAX, contentMaxPitch + 6);
-        }
-
-
-        updateCurrentScaleNotes(); // Update scale highlighting data
-
-        console.log(`[SPR LOG] Processed Notes: ${notesToRender.length}, Final contentWidthTicks: ${contentWidthTicks}, Pitch Range: [${contentMinPitch}-${contentMaxPitch}]`);
-        if (contentWidthTicks <= 0) {
-            console.warn(`[SPR WARN] contentWidthTicks is ${contentWidthTicks}. Defaulting width.`);
-            contentWidthTicks = ticksPerMeasure > 0 ? ticksPerMeasure : ticksPerBeat * 4;
-        }
-        console.log(`[SPR LOG] --- processAbcTune END ---`);
+        console.log(`[SPR] Parsed ${notesToRender.length} notes, `
+            + `voices: ${id2index.size}, widthTicks: ${contentWidthTicks}`);
+        console.log('[SPR] --- processAbcTune END ---');
     }
+
+
 
 
     // --- Coordinate Transformation ---
@@ -570,71 +613,49 @@ function createStaticPianoRollRenderer(renderOptions) {
 
     function drawGrid(startTick, endTick, lowPitch, highPitch) {
         // --- Canvas Dimensions ---
-        // Use canvas logical dimensions (already scaled for DPR in redraw function)
         const viewWidth = canvas.width / (window.devicePixelRatio || 1);
         const viewHeight = canvas.height / (window.devicePixelRatio || 1);
 
-        // --- Time Signature and Resolution Access ---
-        // Access global state variables set during processAbcTune
-        // Provide robust defaults in case parsing failed or wasn't complete
-        const localTimeSigNum = typeof timeSignatureNumerator !== 'undefined' && timeSignatureNumerator > 0 ? timeSignatureNumerator : 4;
-        const localTimeSigDen = typeof timeSignatureDenominator !== 'undefined' && timeSignatureDenominator > 0 ? timeSignatureDenominator : 4;
-        let localTicksPerQuarter = typeof ticksPerBeat !== 'undefined' && ticksPerBeat > 0 ? ticksPerBeat : 480; // Ensure Ticks Per *Quarter* Note
+        // --- Use calculated state variables (time sig, ticks) ---
+        const localTimeSigNum = timeSignatureNumerator;
+        const localTimeSigDen = timeSignatureDenominator;
+        const localTicksPerQuarter = ticksPerBeat; // Already set, assumed to be Quarter Note ticks
+        const localTicksPerMeasure = ticksPerMeasure; // Already calculated
 
-        localTicksPerQuarter /= 8;
-        // --- Calculate Core Timing Units in Ticks ---
+        // --- Calculate ACTUAL Beat Ticks based on Time Sig Denominator ---
+        let ticksPerActualBeat = localTicksPerQuarter; // Default for /4, /2, /1 denominators
+        if (localTimeSigDen === 8) {
+            // For /8 time signatures (e.g., 6/8), the "beat" is often felt as a dotted quarter
+            ticksPerActualBeat = localTicksPerQuarter * 1.5; // 1.5 quarter notes = dotted quarter
+        } else if (localTimeSigDen === 2) {
+            // For /2 time signatures (e.g., 2/2), the beat is a half note
+            ticksPerActualBeat = localTicksPerQuarter * 2;
+        } // Add other denominators like /16 if needed
+        // Ensure valid value
+        if (ticksPerActualBeat <= 0) ticksPerActualBeat = localTicksPerQuarter;
 
-        // Ticks Per Measure (Robust Calculation)
-        let localTicksPerMeasure = 0;
-        if (localTimeSigDen > 0) {
-            // Formula: (Ticks per Quarter) * (Reference Note / Time Sig Denominator) * Time Sig Numerator
-            // Example 4/4: ticksPerQuarter * (4 / 4) * 4 = ticksPerQuarter * 4
-            // Example 6/8: ticksPerQuarter * (4 / 8) * 6 = ticksPerQuarter * 0.5 * 6 = ticksPerQuarter * 3
-            // Example 2/2: ticksPerQuarter * (4 / 2) * 2 = ticksPerQuarter * 2 * 2 = ticksPerQuarter * 4
-            localTicksPerMeasure = Math.round(localTicksPerQuarter * (4 / localTimeSigDen) * localTimeSigNum);
-        }
-        // Fallback if calculation failed
-        if (localTicksPerMeasure <= 0) {
-            console.warn(`[drawGrid] Invalid calculated ticksPerMeasure (${localTicksPerMeasure}). Defaulting.`);
-            localTicksPerMeasure = localTicksPerQuarter * 4;
-        }
+        // Ticks Per Subdivision (16th notes relative to a quarter note)
+        const ticksPerSixteenth = localTicksPerQuarter > 0 ? localTicksPerQuarter / 4 : 0;
 
-        // Ticks Per ACTUAL Beat (based on time signature denominator)
-        let ticksPerActualBeat = localTicksPerQuarter; // Default: quarter note beat (for /4, /1 time signatures)
-        if (localTimeSigDen === 8) { // e.g., 6/8, 9/8, 12/8
-            ticksPerActualBeat = localTicksPerQuarter * 1.5; // Dotted quarter note beat
-        } else if (localTimeSigDen === 2) { // e.g., 2/2, 3/2
-            ticksPerActualBeat = localTicksPerQuarter * 2; // Half note beat
-        }
-        // Ensure ticksPerActualBeat is valid
-        if (ticksPerActualBeat <= 0) {
-            console.warn(`[drawGrid] Invalid calculated ticksPerActualBeat (${ticksPerActualBeat}). Defaulting.`);
-            ticksPerActualBeat = localTicksPerQuarter;
-        }
-
-
-        // Ticks Per Subdivision (e.g., 16th notes relative to quarter note)
-        const ticksPerSixteenth = localTicksPerQuarter / 4;
-
-        // --- Get Scaled Pixel Widths for Visibility Checks ---
-        const scaledNoteRowHeight = effectiveNoteHeight; // Use pre-calculated scaled height
+        // --- Get Scaled Pixel Widths ---
+        const scaledNoteRowHeight = effectiveNoteHeight;
         const sixteenthPixelWidth = ticksPerSixteenth > 0 ? (ticksPerSixteenth * PIXELS_PER_TICK_BASE * scaleX) : 0;
         const beatPixelWidth = ticksPerActualBeat > 0 ? (ticksPerActualBeat * PIXELS_PER_TICK_BASE * scaleX) : 0;
         const measurePixelWidth = localTicksPerMeasure > 0 ? (localTicksPerMeasure * PIXELS_PER_TICK_BASE * scaleX) : 0;
 
-        // --- Minimum Pixel Spacing Thresholds to Draw Lines ---
-        const minSixteenthSpacing = 2.5; // Min pixels between 16th lines
-        const minBeatSpacing = 2.0;      // Min pixels between beat lines
-        const minMeasureSpacing = 0.5;   // Min pixels between measure lines (draw almost always)
+        // --- Minimum Pixel Spacing Thresholds ---
+        const minSixteenthSpacing = 2.5;
+        const minBeatSpacing = 2.0;
+        const minMeasureSpacing = 0.5;
 
-        // --- Visible Tick Range (adjust slightly for lines at edges) ---
-        const startTickDraw = startTick - ticksPerSixteenth; // Start slightly before view
-        const endTickDraw = endTick + ticksPerSixteenth;     // End slightly after view
+        // --- Visible Tick Range ---
+        const startTickDraw = startTick - (ticksPerSixteenth > 0 ? ticksPerSixteenth : 1); // Adjusted for safety
+        const endTickDraw = endTick + (ticksPerSixteenth > 0 ? ticksPerSixteenth : 1);
 
-        ctx.save(); // Save context state before drawing grid elements
+        ctx.save(); // Save context state
 
         // --- 1. Draw Row Backgrounds (Based on Scale) ---
-        // This part remains unchanged, using isNoteInScale and GRID_ROW_..._COLOR
+        // Uses GRID_ROW_IN_SCALE_COLOR / GRID_ROW_OUT_SCALE_COLOR
         for (let p = Math.floor(lowPitch); p <= Math.ceil(highPitch); p++) {
             if (p < PITCH_MIN || p > PITCH_MAX) continue;
             const rowY = midiPitchToCanvasY(p);
@@ -645,8 +666,8 @@ function createStaticPianoRollRenderer(renderOptions) {
             ctx.fillRect(0, rowY, viewWidth, rowHeight);
         }
 
-        // --- 2. Draw Alternating Measure Shading (On Top of Rows) ---
-        // This part remains unchanged, using localTicksPerMeasure and shadeEvenMeasures
+        // --- 2. Draw Alternating Measure Shading ---
+        // Uses DARK_MEASURE_SHADING_COLOR
         if (localTicksPerMeasure > 0) {
             const firstMeasureIndex = Math.max(0, Math.floor(startTickDraw / localTicksPerMeasure));
             const lastMeasureIndex = Math.ceil(endTickDraw / localTicksPerMeasure);
@@ -669,12 +690,11 @@ function createStaticPianoRollRenderer(renderOptions) {
             }
         }
 
-        // --- 3. Draw Horizontal Pitch Lines (Separators) ---
-        // This part remains unchanged
+        // --- 3. Draw Horizontal Pitch Lines ---
+        // Uses KEY_SEPARATOR_COLOR
         ctx.strokeStyle = KEY_SEPARATOR_COLOR;
-        ctx.lineWidth = 0.5; // Keep thin
+        ctx.lineWidth = 0.5;
         ctx.beginPath();
-        // Draw lines at the *bottom* of each pitch row for separation
         for (let p = Math.floor(lowPitch); p <= Math.ceil(highPitch) + 1; p++) {
             if (p < PITCH_MIN || p > PITCH_MAX + 1) continue;
             // Calculate Y position for the bottom edge of pitch p (top edge of p-1)
@@ -687,9 +707,10 @@ function createStaticPianoRollRenderer(renderOptions) {
         }
         ctx.stroke();
 
+
         // --- 4. Draw Vertical Time Lines ---
 
-        // Draw 16th note subdivisions (relative to quarter note) if spacing allows
+        // Draw 16th note subdivisions (relative to quarter note)
         if (ticksPerSixteenth > 0 && sixteenthPixelWidth >= minSixteenthSpacing) {
             ctx.strokeStyle = GRID_LINE_COLOR; // Lightest grid lines (#404040)
             ctx.lineWidth = 0.25;
@@ -698,74 +719,111 @@ function createStaticPianoRollRenderer(renderOptions) {
             const endSixteenth = Math.ceil(endTickDraw / ticksPerSixteenth);
             for (let s = startSixteenth; s <= endSixteenth; s++) {
                 const tick = s * ticksPerSixteenth;
-                // Avoid drawing over thicker beat/measure lines if they will be drawn later
-                // Check against ACTUAL beat and measure ticks
-                const isActualBeat = (ticksPerActualBeat > 0 && Math.abs(tick % ticksPerActualBeat) < 0.01); // Use tolerance for float math
+                // Avoid drawing over thicker lines if they will be drawn
+                const isActualBeat = (ticksPerActualBeat > 0 && Math.abs(tick % ticksPerActualBeat) < 0.01);
                 const isMeasure = (localTicksPerMeasure > 0 && Math.abs(tick % localTicksPerMeasure) < 0.01);
                 if ((isActualBeat && beatPixelWidth >= minBeatSpacing) || (isMeasure && measurePixelWidth >= minMeasureSpacing)) continue;
 
                 const x = midiTickToCanvasX(tick);
-                if (x >= -1 && x <= viewWidth + 1) { // Check bounds
-                    const xCoord = Math.round(x) + 0.5; // Pixel align
-                    ctx.moveTo(xCoord, 0);
-                    ctx.lineTo(xCoord, viewHeight);
+                if (x >= -1 && x <= viewWidth + 1) {
+                    const xCoord = Math.round(x) + 0.5;
+                    ctx.moveTo(xCoord, 0); ctx.lineTo(xCoord, viewHeight);
                 }
             }
             ctx.stroke();
         }
 
-        // Draw ACTUAL Beat Lines if spacing allows
+        // Draw ACTUAL Beat Lines
         if (ticksPerActualBeat > 0 && beatPixelWidth >= minBeatSpacing) {
             ctx.strokeStyle = BEAT_LINE_COLOR; // Medium grid lines (#555)
             ctx.lineWidth = 0.5;
             ctx.beginPath();
-            // Calculate start/end based on the actual beat ticks
             const startActualBeat = Math.max(0, Math.floor(startTickDraw / ticksPerActualBeat));
             const endActualBeat = Math.ceil(endTickDraw / ticksPerActualBeat);
             for (let beat = startActualBeat; beat <= endActualBeat; beat++) {
                 const tick = beat * ticksPerActualBeat;
-                // Avoid drawing over thicker measure lines if they will be drawn later
-                const isMeasure = (localTicksPerMeasure > 0 && Math.abs(tick % localTicksPerMeasure) < 0.01); // Tolerance
+                // Avoid drawing over measure lines
+                const isMeasure = (localTicksPerMeasure > 0 && Math.abs(tick % localTicksPerMeasure) < 0.01);
                 if (isMeasure && measurePixelWidth >= minMeasureSpacing) continue;
 
                 const x = midiTickToCanvasX(tick);
-                if (x >= -1 && x <= viewWidth + 1) { // Check bounds
-                    const xCoord = Math.round(x) + 0.5; // Pixel align
-                    ctx.moveTo(xCoord, 0);
-                    ctx.lineTo(xCoord, viewHeight);
+                if (x >= -1 && x <= viewWidth + 1) {
+                    const xCoord = Math.round(x) + 0.5;
+                    ctx.moveTo(xCoord, 0); ctx.lineTo(xCoord, viewHeight);
                 }
             }
             ctx.stroke();
         }
 
-        // Draw Measure Lines if spacing allows
+        // Draw Measure Lines
         if (localTicksPerMeasure > 0 && measurePixelWidth >= minMeasureSpacing) {
             ctx.strokeStyle = MEASURE_LINE_COLOR; // Darkest grid lines (#777)
-            ctx.lineWidth = 1.0; // Keep measures thickest
+            ctx.lineWidth = 1.0;
             ctx.beginPath();
             const firstMeasure = Math.max(0, Math.floor(startTickDraw / localTicksPerMeasure));
-            // Draw line at the END of the last visible measure too
             const lastMeasureLineIndex = Math.ceil(endTickDraw / localTicksPerMeasure);
             for (let measure = firstMeasure; measure <= lastMeasureLineIndex; measure++) {
                 const tick = measure * localTicksPerMeasure;
                 const x = midiTickToCanvasX(tick);
-                if (x >= -1 && x <= viewWidth + 1) { // Check bounds
-                    const xCoord = Math.round(x) + 0.5; // Pixel align
-                    ctx.moveTo(xCoord, 0);
-                    ctx.lineTo(xCoord, viewHeight);
+                if (x >= -1 && x <= viewWidth + 1) {
+                    const xCoord = Math.round(x) + 0.5;
+                    ctx.moveTo(xCoord, 0); ctx.lineTo(xCoord, viewHeight);
                 }
             }
             ctx.stroke();
         }
 
-        ctx.restore(); // Restore context state after drawing grid
+        ctx.restore(); // Restore context state
     }
 
     // Make sure the rest of static-pianoroll.js remains the same
 
+    // Replace drawAllNotes with this drop‑in:
     function drawAllNotes(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
-        drawNotesForSnippet(notesToRender, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible);
+        // Draw every voice’s notes:
+        notesToRender.forEach(note => {
+            const { pitch, start_tick, duration_ticks, voice } = note;
+            const noteEndTick = start_tick + duration_ticks;
+            if (noteEndTick < startTickVisible || start_tick > endTickVisible ||
+                pitch < lowPitchVisible || pitch > highPitchVisible) {
+                return;
+            }
+            drawNoteWithHighlight(note, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible);
+        });
     }
+
+    // Replace drawNotesForSnippet (or implement drawNoteWithHighlight) with this:
+    function drawNoteWithHighlight(note, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
+        const { pitch, start_tick, duration_ticks, velocity, voice } = note;
+        const isInScale = isNoteInScale(pitch);
+        const x = midiTickToCanvasX(start_tick);
+        const y = midiPitchToCanvasY(pitch);
+        const w = Math.max(1, duration_ticks * PIXELS_PER_TICK_BASE * scaleX);
+
+        // Determine color: highlight only the chosen voice, grey out others
+        const highlightVoice = renderOptions.highlightVoiceIndex; // pass this into your renderer
+        let fillColor;
+        if (highlightVoice == null || voice === highlightVoice) {
+            fillColor = isInScale ? NOTE_IN_SCALE_COLOR : NOTE_OUT_SCALE_COLOR;
+        } else {
+            fillColor = '#888888'; // grey for non‑highlighted tracks
+        }
+
+        // Alpha by velocity if highlighted, otherwise fixed
+        const alpha = (highlightVoice == null || voice === highlightVoice)
+            ? Math.max(0.3, Math.min(1, (velocity / 127)))
+            : 0.6;
+
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = fillColor;
+        const drawY = y + NOTE_VERTICAL_GAP / 2;
+        const drawH = Math.max(1, (NOTE_BASE_HEIGHT - NOTE_VERTICAL_GAP));
+        ctx.fillRect(x, drawY, w, drawH);
+
+        ctx.globalAlpha = 1;
+    }
+
+
 
     function drawNotesForSnippet(notes, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
         const noteDrawHeight = Math.max(1, effectiveNoteHeight - NOTE_VERTICAL_GAP);
