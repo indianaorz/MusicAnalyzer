@@ -127,6 +127,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add more if needed
     };
 
+    
+    const DRUM_PITCH_TO_ABC = {
+        35: 'B,,,',  36: 'C,,',  37: '^C,,', 38: 'D,,', 39: '^D,,', 40: 'E,,',
+        41: 'F,,',  42: '^F,,', 43: 'G,,',  44: '^G,,', 45: 'A,,',  46: '^A,,',
+        47: 'B,,',  48: 'C,',   49: '^C,',  50: 'D,',  51: '^D,',  52: 'E,',
+        53: 'F,',   54: '^F,',  55: 'G,',   56: '^G,', 57: 'A,',  58: '^A,',
+        59: 'B,',   60: 'C',    61: '^C',   62: 'D',   63: '^D',  64: 'E',
+        65: 'F',    66: '^F',   67: 'G',    68: '^G',  69: 'A',   70: '^A',
+        71: 'B',    72: 'c',    73: '^c',   74: 'd',   75: '^d',  76: 'e',
+        77: 'f',    78: '^f',   79: 'g',    80: '^g',  81: 'a'
+      };
+      
+
+
     const GM_MELODY_MAP = {
         0: "Acoustic Grand Piano",
         1: "Bright Acoustic Piano",
@@ -291,6 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 
+
     // Add near other state variables
     let selectedRootNote = 0; // MIDI Pitch Class (0=C, 1=C#, ...)
     let selectedScaleType = 'major'; // e.g., 'major', 'minor', etc.
@@ -373,6 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return { sharps, flats, preferFlats: count < 0 };
     }
 
+
     /**
  * Lookup a track’s display name:
  * - If drum track → “Drums”
@@ -388,6 +404,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (track.name) return track.name;
         return `Track${index + 1}`;
+    }
+
+    function isDrumTrack(trackIndex) {
+        return !!rawTracksData[trackIndex]?.is_drum_track;   // truthy ⇒ drum track
     }
 
 
@@ -1163,21 +1183,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * ------------------------------------------------------------------
-     * 2.  ONE pitch  →  ONE ABC note string  (updates measureAccidentals)
-     * ------------------------------------------------------------------
-     * @param {number} pitch           MIDI 0-127
-     * @param {{sharps:Set,flats:Set,preferFlats:boolean}} keyAcc  from getKeyAccidentals
-     * @param {Object} measureAcc      mutable accidental state for this bar
-     *                                 e.g. { A:0, B:-1, ... }  (0 = natural)
+     * Convert one MIDI pitch → ABC text.
+     * When `isPercussion === true`, we respect ABC percussion rules:
+     *   • always use octave 4 (middle register)
+     *   • choose the drum letter from DRUM_PITCH_TO_ABC
+     *   • never output accidentals – accidentals are illegal in K:perc
      */
-    function midiPitchToAbcNote(pitch, keyAcc, measureAcc) {
-        if (pitch < 0 || pitch > 127) return 'z';
+    function midiPitchToAbcNote(pitch, keyAcc, measureAcc, isPercussion = false) {
+        if (isPercussion) {
+            const letter = DRUM_PITCH_TO_ABC[pitch] || 'z';   // default BD
+            return letter;           // upper‑case, no accidentals, octave 4
+        }
 
-        const pc = pitch % 12;            // pitch-class 0-11
-        const oct = Math.floor(pitch / 12) - 1;
-
-        // ------- pick a LETTER & desired accidental value (-1,0,+1) ----
+        /* ---------- normal melodic handling (unchanged) ---------- */
         const sharpMap = [
             ['C', 0], ['C', +1], ['D', 0], ['D', +1], ['E', 0], ['F', 0],
             ['F', +1], ['G', 0], ['G', +1], ['A', 0], ['A', +1], ['B', 0]
@@ -1186,36 +1204,25 @@ document.addEventListener('DOMContentLoaded', function () {
             ['C', 0], ['D', -1], ['D', 0], ['E', -1], ['E', 0], ['F', 0],
             ['G', -1], ['G', 0], ['A', -1], ['A', 0], ['B', -1], ['B', 0]
         ];
+        const pc = pitch % 12;
+        const oct = Math.floor(pitch / 12) - 1;
         const [letter, desiredAcc] = (keyAcc.preferFlats ? flatMap : sharpMap)[pc];
-
-        // ------- what does the key-signature do to this letter? --------
-        const keyAccVal = keyAcc.sharps.has(letter) ? +1 :
+        const keyAccVal = keyAcc.sharps.has(letter) ? 1 :
             keyAcc.flats.has(letter) ? -1 : 0;
-
-        // ------- what’s the current accidental state IN THIS BAR? ------
         const currentVal = (letter in measureAcc) ? measureAcc[letter] : keyAccVal;
-
-        // ------- decide which symbol (if any) we must print ------------
         let accSym = '';
         if (desiredAcc !== currentVal) {
-            if (desiredAcc === 0) accSym = '=';
-            else if (desiredAcc === +1) accSym = '^';
-            else if (desiredAcc === -1) accSym = '_';
+            accSym = desiredAcc === 0 ? '=' : desiredAcc > 0 ? '^' : '_';
         }
-
-        // store new state for the rest of the bar
         measureAcc[letter] = desiredAcc;
 
-        // ------- octave / letter case / commas / apostrophes -----------
         let abcLetter;
-        if (oct >= 5) {                                 // c, d, e …
-            abcLetter = letter.toLowerCase() + "'".repeat(oct - 5);
-        } else {                                        // C, D, E …
-            abcLetter = letter.toUpperCase() + ",".repeat(4 - oct);
-        }
+        if (oct >= 5) abcLetter = letter.toLowerCase() + "'".repeat(oct - 5);
+        else abcLetter = letter.toUpperCase() + ",".repeat(4 - oct);
 
         return accSym + abcLetter;
     }
+
 
 
 
@@ -1314,130 +1321,100 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    /**
-     * Multi-voice ABC generator — NOW EMITS VALID VOICE TOKENS
-     *  • voice definitions go into the header
-     *  • each voice’s music starts with “[V:n] …”
-     */
-    function generateAbcFromSelectionMultiVoice() {
+    function generateAbcFromSelectionMultiVoice(){
         if (selectedNotes.size === 0) return "";
-      
+    
         const TPB = window.ticksPerBeat || 480;
         const sixteenth = TPB / 4;
         const q = v => Math.round(v / sixteenth) * sixteenth;
-      
-        // Group notes by track
+    
+        // — group notes by track —
         const byTrack = new Map();
-        selectedNotes.forEach(k => {
-          const { trackIndex, noteIndex } = JSON.parse(k);
-          const raw = rawTracksData[trackIndex]?.notes[noteIndex];
-          if (!raw || raw.duration_ticks <= 0) return;
-          const start = q(raw.start_tick);
-          const dur   = Math.max(sixteenth, q(raw.duration_ticks));
-          if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
-          byTrack.get(trackIndex).push({ pitch: raw.pitch, start, dur });
+        selectedNotes.forEach(k=>{
+            const {trackIndex,noteIndex}=JSON.parse(k);
+            const raw = rawTracksData[trackIndex]?.notes[noteIndex];
+            if(!raw||raw.duration_ticks<=0) return;
+            const start=q(raw.start_tick);
+            const dur  =Math.max(sixteenth,q(raw.duration_ticks));
+            if(!byTrack.has(trackIndex)) byTrack.set(trackIndex,[]);
+            byTrack.get(trackIndex).push({...raw,start,dur});
         });
-        if (!byTrack.size) return "";
-      
-        // Sort each track’s notes by start → pitch
-        for (const arr of byTrack.values()) {
-          arr.sort((a, b) =>
-            a.start !== b.start ? a.start - b.start : a.pitch - b.pitch
-          );
-        }
-      
-        // Header
-        const num = window.timeSignatureNumerator || 4;
-        const den = window.timeSignatureDenominator || 4;
+        if(!byTrack.size) return "";
+    
+        // — header —
+        const num = window.timeSignatureNumerator||4;
+        const den = window.timeSignatureDenominator||4;
         const L   = document.getElementById("abcUnitNoteLength").value || 8;
-        const root = NOTE_NAMES[selectedRootNote];
-        const isMin = selectedScaleType.toLowerCase().includes("min");
-        const keyName = root + (isMin ? "min" : "maj");
-      
-        let abc = 
-          `X:1\n` +
-          `T:Multi-Track Snippet\n` +
-          `M:${num}/${den}\n` +
-          `L:1/${L}\n`;
-      
-        // Voice defs
-        const voiceIds = [];
-        let vno = 0;
-        for (const trackIdx of byTrack.keys()) {
-          vno++;
-          voiceIds.push(`V${vno}`);
-          const name = getTrackInstrumentName(rawTracksData[trackIdx], trackIdx);
-          abc += `V:${vno}  name="${name}"\n`;
-        }
-        abc += `%%score ${voiceIds.join(" ")}\n`;
-      
-        // Key line—**no extra newline after this**:
-        abc += `K:${keyName}\n`;
-      
-        // Body
-        const ticksPerBar = TPB * (4/den) * num;
-        const keyAcc = getKeyAccidentals(root, isMin);
-        const durStr = t => ticksToAbcDuration(t, TPB * (4/L));
-      
-        vno = 0;
-        for (const [trackIdx, notes] of byTrack.entries()) {
-          vno++;
-          let now = 0, inBar = 0;
-          let measureAcc = {};
-      
-          // Voice intro
-          abc += `[V:${vno}] `;
-      
-          for (let i = 0; i < notes.length; i++) {
-            const n = notes[i];
-      
-            // 1) Rests if gap
-            if (n.start > now) {
-              const restDur = n.start - now;
-              abc += `z${durStr(restDur)} `;
-              now += restDur;
-              inBar += restDur;
-            }
-      
-            // 2) Chord grouping
-            const chord = [n];
-            while (i+1 < notes.length && notes[i+1].start === n.start) {
-              chord.push(notes[++i]);
-            }
-      
-            // 3) Emit chord or single note
-            if (chord.length > 1) {
-              abc += "[" + chord.map(c =>
-                midiPitchToAbcNote(c.pitch, keyAcc, measureAcc)
-              ).join("") + "]" + durStr(n.dur) + " ";
-            } else {
-              abc += midiPitchToAbcNote(n.pitch, keyAcc, measureAcc)
-                  + durStr(n.dur) + " ";
-            }
-      
-            now += n.dur; inBar += n.dur;
-      
-            // 4) Bar‑lines
-            while (inBar >= ticksPerBar) {
-              abc += "| ";
-              measureAcc = {};
-              inBar -= ticksPerBar;
-            }
-          }
-      
-          abc = abc.trimEnd() + " |]\n";
-        }
-      
+        const root= NOTE_NAMES[selectedRootNote];
+        const isMin = selectedScaleType.toLowerCase().includes('min');
+        const keyName = root + (isMin?'min':'maj');
+    
+        let abc=`X:1\nT:Multi-Track Snippet\nM:${num}/${den}\nL:1/${L}\n`;
+    
+        // voice definitions
+        let vno=0;
+        const ticksPerBar = TPB*(4/den)*num;
+        const voiceIds=[];
+        byTrack.forEach((_,trackIdx)=>{
+            vno++; voiceIds.push(`V${vno}`);
+            const tr = rawTracksData[trackIdx];
+            const nm = getTrackInstrumentName(tr,trackIdx);
+            const extra = isDrumTrack(trackIdx) ? ' perc=yes' : '';
+            abc += `V:${vno}  name="${nm}"${extra}\n`;
+        });
+        abc += `%%score ${voiceIds.join(' ')}\nK:${keyName}\n`;
+    
+        // body per voice
+        vno=0;
+        byTrack.forEach((notes,trackIdx)=>{
+            vno++;
+            notes.sort((a,b)=>a.start!==b.start ? a.start-b.start : a.pitch-b.pitch);
+            let now=0,inBar=0, measureAcc={};
+            const keyAcc=getKeyAccidentals(root,isMin);
+            const durStr = t => ticksToAbcDuration(t,TPB*(4/L));
+            const perc = isDrumTrack(trackIdx);
+    
+            abc += `[V:${vno}] `;
+            notes.forEach((n,i)=>{
+                if(n.start>now){
+                    const rest=n.start-now;
+                    abc += `z${durStr(rest)} `;
+                    now+=rest; inBar+=rest;
+                }
+                // gather chord
+                const chord=[n];
+                while(i+1<notes.length && notes[i+1].start===n.start) chord.push(notes[++i]);
+    
+                if(chord.length>1){
+                    abc+='[';
+                    chord.forEach(c=>{
+                        abc += midiPitchToAbcNote(c.pitch,keyAcc,measureAcc,perc);
+                    });
+                    abc+=`]${durStr(n.dur)} `;
+                }else{
+                    abc += midiPitchToAbcNote(n.pitch,keyAcc,measureAcc,perc)+durStr(n.dur)+' ';
+                }
+                now+=n.dur; inBar+=n.dur;
+                while(inBar>=ticksPerBar){
+                    abc+='| '; measureAcc={}; inBar-=ticksPerBar;
+                }
+            });
+            abc = abc.trimEnd() + ' |]\n';
+        });
+    
         return abc.trim();
-      }
-      
+    }
+    
+
 
 
     /**
      * Copy multi-voice ABC to the clipboard.
      */
     async function copySelectionToAbc() {
-        const abcText = generateAbcFromSelectionMultiVoice();
+        let abcText = generateAbcFromSelectionMultiVoice();
+        //wrap with <abc></abc>
+        abcText = `<abc>\n${abcText}\n</abc>`;
         if (!abcText) {
             console.warn("Nothing selected or no valid selection for multi-voice ABC.");
             return;

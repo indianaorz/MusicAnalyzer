@@ -210,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             // ─── ABCJS synth ──────────────────────────────────
                             const engine = new ABCJS.synth.CreateSynth();
+                            
                             engine.init({
                                 visualObj: abcTune,
                                 options: {

@@ -2,17 +2,26 @@
 
 const analysisContent = `
 <abc>
-X:1
-T:Multi-Track Snippet
-M:4/4
-L:1/16
-V:1  name="Distortion Guitar"
-V:2  name="Synth Strings 1"
-%%score V1 V2
-K:Cmin
-[V:1] z20 e3 | z B2 =B2 z2 c17 | z5 e3 | z B2 =B2 z2 c2 | z2 c2 e2 g2 f2 e2 d2 B2 | |
-[V:2] z16 [ceg]31 | | z [ceg]31 | | |
+
 </abc>
+
+The first track I'm looking at for analysis is going to be the Introduction Stage to Megaman X. 
+Figured might as well start at the beginning. 
+
+Okay so I definintely don't recommend listening to it on the site in this format. I'm just making sure to include the ABC format here (though I don't think what is above is correct) so this data can possibly be used for AI training / inference. 
+
+The idea with that being: this analysis in rawtext ABC format which is a pretty condensed format which is very readable in text form (for a language model at least), so hopefully this analysis document could in some way be used to train an AI to be able to analyze music in a similar way.
+
+It would be neat if this could allow interactive generation of music with LLMs in a very compositional way where the human user can decide the motifs and phrases and the LLM could provide good drum loops or bass lines or chord progressions that go along with that. Not sure if any of that is possible, but I'm doing these analysis anyway, might as well do it in a way that could potentially be useful for building future AI based tools as well.
+
+
+Okay so lets get into the analysis.
+
+
+So 
+
+
+
 
 
 `;

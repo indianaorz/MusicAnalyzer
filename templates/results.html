@@ -47,7 +47,7 @@
                 File: <strong>{{ filename }}</strong> | Ticks/Beat: {{ ticks_per_beat }}
             </span>
             <input type="number" id="abcUnitNoteLength"
-                value="{{ unit_note_length_denominator | default(4) }}" min="1" max="16" step="1">
+                value="{{ unit_note_length_denominator | default(16) }}" min="1" max="16" step="1">
 
             <a href="{{ url_for('index') }}" class="back-link">Back to Upload</a>
         </div>
