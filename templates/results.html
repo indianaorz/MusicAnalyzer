@@ -100,6 +100,8 @@
         const timeSignatureNumerator = {{ time_signature_numerator | default (4) }};
         const timeSignatureDenominator = {{ time_signature_denominator | default (4) }};
         const unitNoteLengthDenominator = {{ unit_note_length_denominator | default (4) }};
+        const currentMidiFilename = {{ filename | tojson | safe }};
+
         // --- END NEW ---
     </script>
     <script src="{{ url_for('static', filename='js/pianoroll.js') }}"></script>

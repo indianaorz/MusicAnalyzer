@@ -127,18 +127,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add more if needed
     };
 
-    
+
     const DRUM_PITCH_TO_ABC = {
-        35: 'B,,,',  36: 'C,,',  37: '^C,,', 38: 'D,,', 39: '^D,,', 40: 'E,,',
-        41: 'F,,',  42: '^F,,', 43: 'G,,',  44: '^G,,', 45: 'A,,',  46: '^A,,',
-        47: 'B,,',  48: 'C,',   49: '^C,',  50: 'D,',  51: '^D,',  52: 'E,',
-        53: 'F,',   54: '^F,',  55: 'G,',   56: '^G,', 57: 'A,',  58: '^A,',
-        59: 'B,',   60: 'C',    61: '^C',   62: 'D',   63: '^D',  64: 'E',
-        65: 'F',    66: '^F',   67: 'G',    68: '^G',  69: 'A',   70: '^A',
-        71: 'B',    72: 'c',    73: '^c',   74: 'd',   75: '^d',  76: 'e',
-        77: 'f',    78: '^f',   79: 'g',    80: '^g',  81: 'a'
-      };
-      
+        35: 'B,,,', 36: 'C,,', 37: '^C,,', 38: 'D,,', 39: '^D,,', 40: 'E,,',
+        41: 'F,,', 42: '^F,,', 43: 'G,,', 44: '^G,,', 45: 'A,,', 46: '^A,,',
+        47: 'B,,', 48: 'C,', 49: '^C,', 50: 'D,', 51: '^D,', 52: 'E,',
+        53: 'F,', 54: '^F,', 55: 'G,', 56: '^G,', 57: 'A,', 58: '^A,',
+        59: 'B,', 60: 'C', 61: '^C', 62: 'D', 63: '^D', 64: 'E',
+        65: 'F', 66: '^F', 67: 'G', 68: '^G', 69: 'A', 70: '^A',
+        71: 'B', 72: 'c', 73: '^c', 74: 'd', 75: '^d', 76: 'e',
+        77: 'f', 78: '^f', 79: 'g', 80: '^g', 81: 'a'
+    };
+
 
 
     const GM_MELODY_MAP = {
@@ -1321,112 +1321,218 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    function generateAbcFromSelectionMultiVoice(){
+    function generateAbcFromSelectionMultiVoice() {
         if (selectedNotes.size === 0) return "";
-    
+
         const TPB = window.ticksPerBeat || 480;
         const sixteenth = TPB / 4;
         const q = v => Math.round(v / sixteenth) * sixteenth;
-    
+
         // — group notes by track —
         const byTrack = new Map();
-        selectedNotes.forEach(k=>{
-            const {trackIndex,noteIndex}=JSON.parse(k);
+        selectedNotes.forEach(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
             const raw = rawTracksData[trackIndex]?.notes[noteIndex];
-            if(!raw||raw.duration_ticks<=0) return;
-            const start=q(raw.start_tick);
-            const dur  =Math.max(sixteenth,q(raw.duration_ticks));
-            if(!byTrack.has(trackIndex)) byTrack.set(trackIndex,[]);
-            byTrack.get(trackIndex).push({...raw,start,dur});
+            if (!raw || raw.duration_ticks <= 0) return;
+            const start = q(raw.start_tick);
+            const dur = Math.max(sixteenth, q(raw.duration_ticks));
+            if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
+            byTrack.get(trackIndex).push({ ...raw, start, dur });
         });
-        if(!byTrack.size) return "";
-    
+        if (!byTrack.size) return "";
+
         // — header —
-        const num = window.timeSignatureNumerator||4;
-        const den = window.timeSignatureDenominator||4;
-        const L   = document.getElementById("abcUnitNoteLength").value || 8;
-        const root= NOTE_NAMES[selectedRootNote];
+        const num = window.timeSignatureNumerator || 4;
+        const den = window.timeSignatureDenominator || 4;
+        const L = document.getElementById("abcUnitNoteLength").value || 8;
+        const root = NOTE_NAMES[selectedRootNote];
         const isMin = selectedScaleType.toLowerCase().includes('min');
-        const keyName = root + (isMin?'min':'maj');
-    
-        let abc=`X:1\nT:Multi-Track Snippet\nM:${num}/${den}\nL:1/${L}\n`;
-    
+        const keyName = root + (isMin ? 'min' : 'maj');
+
+        let abc = `X:1\nT:Multi-Track Snippet\nM:${num}/${den}\nL:1/${L}\n`;
+
         // voice definitions
-        let vno=0;
-        const ticksPerBar = TPB*(4/den)*num;
-        const voiceIds=[];
-        byTrack.forEach((_,trackIdx)=>{
+        let vno = 0;
+        const ticksPerBar = TPB * (4 / den) * num;
+        const voiceIds = [];
+        byTrack.forEach((_, trackIdx) => {
             vno++; voiceIds.push(`V${vno}`);
             const tr = rawTracksData[trackIdx];
-            const nm = getTrackInstrumentName(tr,trackIdx);
+            const nm = getTrackInstrumentName(tr, trackIdx);
             const extra = isDrumTrack(trackIdx) ? ' perc=yes' : '';
             abc += `V:${vno}  name="${nm}"${extra}\n`;
         });
         abc += `%%score ${voiceIds.join(' ')}\nK:${keyName}\n`;
-    
+
         // body per voice
-        vno=0;
-        byTrack.forEach((notes,trackIdx)=>{
+        vno = 0;
+        byTrack.forEach((notes, trackIdx) => {
             vno++;
-            notes.sort((a,b)=>a.start!==b.start ? a.start-b.start : a.pitch-b.pitch);
-            let now=0,inBar=0, measureAcc={};
-            const keyAcc=getKeyAccidentals(root,isMin);
-            const durStr = t => ticksToAbcDuration(t,TPB*(4/L));
+            notes.sort((a, b) => a.start !== b.start ? a.start - b.start : a.pitch - b.pitch);
+            let now = 0, inBar = 0, measureAcc = {};
+            const keyAcc = getKeyAccidentals(root, isMin);
+            const durStr = t => ticksToAbcDuration(t, TPB * (4 / L));
             const perc = isDrumTrack(trackIdx);
-    
+
             abc += `[V:${vno}] `;
-            notes.forEach((n,i)=>{
-                if(n.start>now){
-                    const rest=n.start-now;
+            notes.forEach((n, i) => {
+                if (n.start > now) {
+                    const rest = n.start - now;
                     abc += `z${durStr(rest)} `;
-                    now+=rest; inBar+=rest;
+                    now += rest; inBar += rest;
                 }
                 // gather chord
-                const chord=[n];
-                while(i+1<notes.length && notes[i+1].start===n.start) chord.push(notes[++i]);
-    
-                if(chord.length>1){
-                    abc+='[';
-                    chord.forEach(c=>{
-                        abc += midiPitchToAbcNote(c.pitch,keyAcc,measureAcc,perc);
+                const chord = [n];
+                while (i + 1 < notes.length && notes[i + 1].start === n.start) chord.push(notes[++i]);
+
+                if (chord.length > 1) {
+                    abc += '[';
+                    chord.forEach(c => {
+                        abc += midiPitchToAbcNote(c.pitch, keyAcc, measureAcc, perc);
                     });
-                    abc+=`]${durStr(n.dur)} `;
-                }else{
-                    abc += midiPitchToAbcNote(n.pitch,keyAcc,measureAcc,perc)+durStr(n.dur)+' ';
+                    abc += `]${durStr(n.dur)} `;
+                } else {
+                    abc += midiPitchToAbcNote(n.pitch, keyAcc, measureAcc, perc) + durStr(n.dur) + ' ';
                 }
-                now+=n.dur; inBar+=n.dur;
-                while(inBar>=ticksPerBar){
-                    abc+='| '; measureAcc={}; inBar-=ticksPerBar;
+                now += n.dur; inBar += n.dur;
+                while (inBar >= ticksPerBar) {
+                    abc += '| '; measureAcc = {}; inBar -= ticksPerBar;
                 }
             });
             abc = abc.trimEnd() + ' |]\n';
         });
-    
+
         return abc.trim();
     }
-    
+
 
 
 
     /**
      * Copy multi-voice ABC to the clipboard.
      */
+    /**
+     * Handles the copy action (e.g., Ctrl+C).
+     * Gathers selection data, calls the server API to convert it to ABC,
+     * and copies the result to the clipboard. V2 (API Call)
+     */
+    // Inside static/js/pianoroll.js
+
+    /**
+     * Handles the copy action (e.g., Ctrl+C).
+     * Gathers selection data (including selected track indices),
+     * calls the server API to convert it to ABC,
+     * and copies the result to the clipboard. V3 (API Call with Track Indices)
+     */
     async function copySelectionToAbc() {
-        let abcText = generateAbcFromSelectionMultiVoice();
-        //wrap with <abc></abc>
-        abcText = `<abc>\n${abcText}\n</abc>`;
-        if (!abcText) {
-            console.warn("Nothing selected or no valid selection for multi-voice ABC.");
+        if (selectedNotes.size === 0) {
+            console.warn("Copy attempted with no notes selected.");
             return;
         }
+
+        // --- 1. Gather Selection Data & Selected Track Indices ---
+        let minStartTick = Infinity;
+        let maxEndTick = 0;
+        let hasValidNotes = false;
+        const selectedTrackIndexSet = new Set(); // <--- **** NEW ****
+
+        selectedNotes.forEach(noteKey => {
+            try {
+                const { trackIndex, noteIndex } = JSON.parse(noteKey); // Make sure 'noteIndex' exists if used
+                const note = rawTracksData[trackIndex]?.notes[noteIndex]; // Use noteIndex here
+                if (note) {
+                    minStartTick = Math.min(minStartTick, note.start_tick);
+                    maxEndTick = Math.max(maxEndTick, note.start_tick + note.duration_ticks);
+                    selectedTrackIndexSet.add(trackIndex); // <--- **** ADD track index to set ****
+                    hasValidNotes = true;
+                }
+            } catch (e) {
+                console.error("Error parsing selected note key:", noteKey, e);
+            }
+        });
+
+        if (!hasValidNotes) {
+            console.warn("Selection contains no valid notes to copy.");
+            alert("Selection contains no valid notes to copy.");
+            return;
+        }
+
+        // Convert Set to Array for JSON payload
+        const selectedIndicesArray = Array.from(selectedTrackIndexSet); // <--- **** NEW ****
+        console.log("Selected Track Indices for API:", selectedIndicesArray); // Log indices being sent
+
+        console.log("[Frontend] Sending selected_track_indices:", selectedIndicesArray);
+
+        // --- 2. Prepare API Payload ---
+        const payload = {
+            original_filename: currentMidiFilename, // Assumes global var set in HTML
+            min_start_tick: minStartTick,
+            max_end_tick: maxEndTick,
+            ticks_per_beat: window.ticksPerBeat, // Assumes global var
+            selected_track_indices: selectedIndicesArray // <--- **** ADDED ****
+        };
+
+        console.log("[Frontend] Sending full payload:", JSON.stringify(payload));
+
+        console.log("Sending payload to /api/convert_selection_to_abc:", payload);
+
+        // --- 3. Visual Feedback (Start) ---
+        document.body.style.cursor = 'wait';
+
+        // --- 4. Call API ---
         try {
-            await navigator.clipboard.writeText(abcText);
-            console.log("Copied multi-voice ABC:\n", abcText);
-        } catch (err) {
-            console.error("Failed to copy multi-voice ABC:", err);
+            const response = await fetch('/api/convert_selection_to_abc', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+
+            // --- 5. Handle Response (Remains the same as before) ---
+            if (response.ok) {
+                // ... (handle success, copy to clipboard, show warnings) ...
+                const result = await response.json();
+                const abcString = result.abc_string;
+
+                if (result.warning) {
+                    console.warn("Server Warning:", result.warning);
+                    alert(`Warning: ${result.warning}`); // Show warning
+                }
+
+                if (typeof abcString === 'string' && abcString.length > 0) {
+                    const fullAbcText = `<abc>\n${abcString}\n</abc>`; // Wrap in tags for pasting
+                    await navigator.clipboard.writeText(fullAbcText);
+                    console.log("ABC snippet copied to clipboard.");
+                    alert("ABC copied to clipboard!");
+                } else if (typeof abcString === 'string') {
+                    console.log("Server returned empty ABC string.");
+                    alert("No ABC content generated for the selection.");
+                } else {
+                    console.error("Invalid ABC string received from server:", abcString);
+                    alert("Error: Invalid ABC data received from server.");
+                }
+            } else {
+                // ... (handle HTTP errors) ...
+                let errorMsg = `Server error: ${response.status} ${response.statusText}`;
+                try {
+                    const errorResult = await response.json();
+                    errorMsg = `Error ${response.status}: ${errorResult.error || 'Unknown server error'}`;
+                } catch (e) { /* Ignore JSON parsing error */ }
+                console.error("API Error:", errorMsg);
+                alert(errorMsg);
+            }
+
+        } catch (error) { // Handle network errors
+            console.error("Network or other error during fetch:", error);
+            alert("Network error or failed to contact server. Could not copy ABC.");
+        } finally {
+            // --- 6. Visual Feedback (End) ---
+            document.body.style.cursor = 'default';
         }
     }
 
+    // Make sure other parts of pianoroll.js (event listeners, drawing functions etc.) are correct
 
     // --- Drawing ---
     function redrawPianoRoll() {
