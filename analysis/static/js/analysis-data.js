@@ -184,15 +184,18 @@ So
 X:1
 T:Music21 Fragment
 C:Music21
+%%score 1 2
 L:1/16
 M:4/4
 I:linebreak $
 K:none
-%%MIDI channel 10
 V:1 treble nm="Staff" snm="Elec Gtr"
-%%MIDI program 30
+V:2 bass nm="Staff-3" snm="Brs"
 V:1
  z4 _e3 z _B2=B2 z2 c2- | c15 z |] %2
+V:2
+ [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %1
+ [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z |] %2
 
 </abc>
 
