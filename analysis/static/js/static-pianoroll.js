@@ -84,6 +84,9 @@ function createStaticPianoRollRenderer(renderOptions) {
     const KEY_TEXT_COLOR_JS = '#e0e0e0';      // Light text for keys
     const KEY_BLACK_TEXT_COLOR_JS = '#cccccc'; // Slightly dimmer light text for black keys
 
+    const NOTE_OUTLINE_COLOR = '#ffffff';
+    const NOTE_OUTLINE_WIDTH = 1.5;
+
 
 
     const SCALE_INTERVALS = {
@@ -512,8 +515,13 @@ function createStaticPianoRollRenderer(renderOptions) {
 
         totalRenderedPitchRange = (contentMaxPitch - contentMinPitch + 1) + (2 * PADDING_PITCHES);
         totalRenderedPitchRange = Math.max(1, totalRenderedPitchRange);
-        effectiveNoteHeight = canvasHeight / totalRenderedPitchRange;
+        // make each pitch‐row at least NOTE_BASE_HEIGHT tall:
+        const dynamicRowH = canvasHeight / totalRenderedPitchRange;
+        effectiveNoteHeight = Math.max(NOTE_BASE_HEIGHT, dynamicRowH);
+
+        // split that (now guaranteed ≥ NOTE_BASE_HEIGHT) across your voices:
         subRowHeight = effectiveNoteHeight / voiceCount;
+
 
 
 
@@ -816,44 +824,52 @@ function createStaticPianoRollRenderer(renderOptions) {
     // Replace drawNotesForSnippet (or implement drawNoteWithHighlight) with this:
     function drawNoteWithHighlight(note, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
         const { pitch, start_tick, duration_ticks, velocity, voice } = note;
-      
+
         // cull out‑of‑bounds
         const noteEnd = start_tick + duration_ticks;
         if (noteEnd < startTickVisible || start_tick > endTickVisible ||
-            pitch  < lowPitchVisible   || pitch       > highPitchVisible) {
-          return;
+            pitch < lowPitchVisible || pitch > highPitchVisible) {
+            return;
         }
-      
+
         // X & width as before
         const x = midiTickToCanvasX(start_tick);
         const w = Math.max(1, duration_ticks * PIXELS_PER_TICK_BASE * scaleX);
-      
+
         // full‑row top Y, then shift down by voice index
         const fullRowY = midiPitchToCanvasY(pitch);
-        const y = fullRowY + voice * subRowHeight + NOTE_VERTICAL_GAP/2;
-      
+        const y = fullRowY + voice * subRowHeight + NOTE_VERTICAL_GAP / 2;
+
         // each sub‑row’s height
         const h = Math.max(1, subRowHeight - NOTE_VERTICAL_GAP);
-      
+
         // colour/alpha logic unchanged
-        const inScale  = isNoteInScale(pitch);
-        const hlVoice  = renderOptions.highlightVoiceIndex;
+        const inScale = isNoteInScale(pitch);
+        const hlVoice = renderOptions.highlightVoiceIndex;
         const isHighlight = (hlVoice == null || voice === hlVoice);
-      
+
         const fillColor = isHighlight
-          ? (inScale ? NOTE_IN_SCALE_COLOR : NOTE_OUT_SCALE_COLOR)
-          : '#888';
-      
+            ? (inScale ? NOTE_IN_SCALE_COLOR : NOTE_OUT_SCALE_COLOR)
+            : '#888';
+
         const alpha = isHighlight
-          ? Math.max(0.3, Math.min(1, velocity / 127))
-          : 0.6;
-      
+            ? Math.max(0.3, Math.min(1, velocity / 127))
+            : 0.6;
+
         ctx.globalAlpha = alpha;
-        ctx.fillStyle   = fillColor;
+        ctx.fillStyle = fillColor;
         ctx.fillRect(x, y, w, h);
+
+
+        // outline
+        ctx.lineWidth = NOTE_OUTLINE_WIDTH;
+        ctx.strokeStyle = NOTE_OUTLINE_COLOR;
+        ctx.strokeRect(x, y, w, h);
+
+
         ctx.globalAlpha = 1;
-      }
-      
+    }
+
 
 
 
@@ -890,88 +906,88 @@ function createStaticPianoRollRenderer(renderOptions) {
 
     function drawKeyDisplay(lowPitchVisible, highPitchVisible) {
         if (!keyDisplayContentWrapper || !keyDisplayPanel) return;
-      
+
         // Clear out any previous keys
         keyDisplayContentWrapper.innerHTML = '';
         const fragment = document.createDocumentFragment();
-      
+
         // Figure out which pitches need to be drawn
         const renderPitchMin = Math.floor(lowPitchVisible);
         const renderPitchMax = Math.ceil(highPitchVisible);
-      
+
         for (let pitch = renderPitchMin; pitch <= renderPitchMax; pitch++) {
-          if (pitch < PITCH_MIN || pitch > PITCH_MAX) continue;
-      
-          const isInScale = isNoteInScale(pitch);
-      
-          // Compute vertical positioning
-          const pitchRelativeToBottom = pitch - (contentMinPitch - PADDING_PITCHES);
-          const totalHeightPx = totalRenderedPitchRange * effectiveNoteHeight;
-          const baseY = totalHeightPx - ((pitchRelativeToBottom + 1) * effectiveNoteHeight);
-          const keyHeight = Math.max(1, effectiveNoteHeight - NOTE_VERTICAL_GAP);
-          const offsetY   = (effectiveNoteHeight - keyHeight) / 2;
-          const topY      = baseY + offsetY;
-      
-          // Create the key element
-          const keyEl = document.createElement('div');
-          keyEl.style.position = 'absolute';
-          keyEl.style.top      = `${topY}px`;
-          keyEl.style.left     = '0';
-          keyEl.style.width    = '100%';
-          keyEl.style.height   = `${keyHeight}px`;
-          keyEl.style.lineHeight = `${keyHeight}px`;
-          keyEl.style.fontSize = `${Math.max(6, Math.min(10, keyHeight * 0.6))}px`;
-          keyEl.style.overflow   = 'hidden';
-          keyEl.style.whiteSpace = 'nowrap';
-          keyEl.style.boxSizing  = 'border-box';
-          keyEl.style.borderBottom = `1px solid ${KEY_SEPARATOR_COLOR}`;
-      
-          if (isPercussion) {
-            // Drum‑track mode: just show the drum name
-            keyEl.className = `drum-name ${isInScale ? 'in-scale' : 'out-of-scale'}`;
-            keyEl.style.paddingLeft = '6px';
-            const drumName = GM_DRUM_MAP[pitch] || `P ${pitch}`;
-            keyEl.textContent = drumName;
-      
-          } else {
-            // Piano‑key mode
-            const isBlack = false;// [1,3,6,8,10].includes(pitch % 12);
-            keyEl.className = `piano-key ${isBlack?'black':'white'} ${isInScale?'in-scale':'out-of-scale'}`;
-      
-            // Base label: Note name + octave
-            const noteName = NOTE_NAMES[pitch % 12];
-            const octave   = Math.floor(pitch/12) - 1;
-            keyEl.textContent = `${noteName}${octave}`;
-      
-            // ── If ANY percussion voice was in the ABC, append drum mapping in gray ──
-            if (renderOptions.rawAbc.includes('perc=yes')) {
-              const drumLabel = GM_DRUM_MAP[pitch];
-              if (drumLabel) {
-                const span = document.createElement('span');
-                span.textContent = `  (${drumLabel})`;
-                span.style.color = 'rgba(200,200,200,0.6)';
-                span.style.marginLeft = '4px';
-                keyEl.appendChild(span);
-              }
-            }
-      
-            // Padding & layering tweaks
-            if (isBlack) {
-              keyEl.style.paddingLeft = '15px';
-              keyEl.style.borderBottom = 'none';
-              keyEl.style.width = '65%';
-              keyEl.style.zIndex = '2';
+            if (pitch < PITCH_MIN || pitch > PITCH_MAX) continue;
+
+            const isInScale = isNoteInScale(pitch);
+
+            // Compute vertical positioning
+            const pitchRelativeToBottom = pitch - (contentMinPitch - PADDING_PITCHES);
+            const totalHeightPx = totalRenderedPitchRange * effectiveNoteHeight;
+            const baseY = totalHeightPx - ((pitchRelativeToBottom + 1) * effectiveNoteHeight);
+            const keyHeight = Math.max(1, effectiveNoteHeight - NOTE_VERTICAL_GAP);
+            const offsetY = (effectiveNoteHeight - keyHeight) / 2;
+            const topY = baseY + offsetY;
+
+            // Create the key element
+            const keyEl = document.createElement('div');
+            keyEl.style.position = 'absolute';
+            keyEl.style.top = `${topY}px`;
+            keyEl.style.left = '0';
+            keyEl.style.width = '100%';
+            keyEl.style.height = `${keyHeight}px`;
+            keyEl.style.lineHeight = `${keyHeight}px`;
+            keyEl.style.fontSize = `${Math.max(6, Math.min(10, keyHeight * 0.6))}px`;
+            keyEl.style.overflow = 'hidden';
+            keyEl.style.whiteSpace = 'nowrap';
+            keyEl.style.boxSizing = 'border-box';
+            keyEl.style.borderBottom = `1px solid ${KEY_SEPARATOR_COLOR}`;
+
+            if (isPercussion) {
+                // Drum‑track mode: just show the drum name
+                keyEl.className = `drum-name ${isInScale ? 'in-scale' : 'out-of-scale'}`;
+                keyEl.style.paddingLeft = '6px';
+                const drumName = GM_DRUM_MAP[pitch] || `P ${pitch}`;
+                keyEl.textContent = drumName;
+
             } else {
-              keyEl.style.paddingLeft = '5px';
+                // Piano‑key mode
+                const isBlack = false;// [1,3,6,8,10].includes(pitch % 12);
+                keyEl.className = `piano-key ${isBlack ? 'black' : 'white'} ${isInScale ? 'in-scale' : 'out-of-scale'}`;
+
+                // Base label: Note name + octave
+                const noteName = NOTE_NAMES[pitch % 12];
+                const octave = Math.floor(pitch / 12) - 1;
+                keyEl.textContent = `${noteName}${octave}`;
+
+                // ── If ANY percussion voice was in the ABC, append drum mapping in gray ──
+                if (renderOptions.rawAbc.includes('perc=yes')) {
+                    const drumLabel = GM_DRUM_MAP[pitch];
+                    if (drumLabel) {
+                        const span = document.createElement('span');
+                        span.textContent = `  (${drumLabel})`;
+                        span.style.color = 'rgba(200,200,200,0.6)';
+                        span.style.marginLeft = '4px';
+                        keyEl.appendChild(span);
+                    }
+                }
+
+                // Padding & layering tweaks
+                if (isBlack) {
+                    keyEl.style.paddingLeft = '15px';
+                    keyEl.style.borderBottom = 'none';
+                    keyEl.style.width = '65%';
+                    keyEl.style.zIndex = '2';
+                } else {
+                    keyEl.style.paddingLeft = '5px';
+                }
             }
-          }
-      
-          fragment.appendChild(keyEl);
+
+            fragment.appendChild(keyEl);
         }
-      
+
         keyDisplayContentWrapper.appendChild(fragment);
-      }
-      
+    }
+
 
 
     let voiceSummaries = [];   // [{index:0, id:"V1", name:"Voice 1"}]

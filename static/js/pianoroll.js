@@ -127,18 +127,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add more if needed
     };
 
-    
+
     const DRUM_PITCH_TO_ABC = {
-        35: 'B,,,',  36: 'C,,',  37: '^C,,', 38: 'D,,', 39: '^D,,', 40: 'E,,',
-        41: 'F,,',  42: '^F,,', 43: 'G,,',  44: '^G,,', 45: 'A,,',  46: '^A,,',
-        47: 'B,,',  48: 'C,',   49: '^C,',  50: 'D,',  51: '^D,',  52: 'E,',
-        53: 'F,',   54: '^F,',  55: 'G,',   56: '^G,', 57: 'A,',  58: '^A,',
-        59: 'B,',   60: 'C',    61: '^C',   62: 'D',   63: '^D',  64: 'E',
-        65: 'F',    66: '^F',   67: 'G',    68: '^G',  69: 'A',   70: '^A',
-        71: 'B',    72: 'c',    73: '^c',   74: 'd',   75: '^d',  76: 'e',
-        77: 'f',    78: '^f',   79: 'g',    80: '^g',  81: 'a'
-      };
-      
+        35: 'B,,,', 36: 'C,,', 37: '^C,,', 38: 'D,,', 39: '^D,,', 40: 'E,,',
+        41: 'F,,', 42: '^F,,', 43: 'G,,', 44: '^G,,', 45: 'A,,', 46: '^A,,',
+        47: 'B,,', 48: 'C,', 49: '^C,', 50: 'D,', 51: '^D,', 52: 'E,',
+        53: 'F,', 54: '^F,', 55: 'G,', 56: '^G,', 57: 'A,', 58: '^A,',
+        59: 'B,', 60: 'C', 61: '^C', 62: 'D', 63: '^D', 64: 'E',
+        65: 'F', 66: '^F', 67: 'G', 68: '^G', 69: 'A', 70: '^A',
+        71: 'B', 72: 'c', 73: '^c', 74: 'd', 75: '^d', 76: 'e',
+        77: 'f', 78: '^f', 79: 'g', 80: '^g', 81: 'a'
+    };
+
 
 
     const GM_MELODY_MAP = {
@@ -1325,11 +1325,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function generateAbcFromSelectionMultiVoice() {
         if (selectedNotes.size === 0) return "";
-    
+
         const TPB = window.ticksPerBeat || 480;
         const sixteenth = TPB / 4;
         const q = v => Math.round(v / sixteenth) * sixteenth;
-    
+
         // Group and quantize notes by track
         const byTrack = new Map();
         selectedNotes.forEach(k => {
@@ -1342,10 +1342,10 @@ document.addEventListener('DOMContentLoaded', function () {
             byTrack.get(trackIndex).push({ ...raw, start, dur });
         });
         if (!byTrack.size) return "";
-    
+
         // Get sorted unique track indices
         const selectedTrackIndices = [...new Set(Array.from(selectedNotes).map(k => JSON.parse(k).trackIndex))].sort((a, b) => a - b);
-    
+
         // Header setup
         const num = window.timeSignatureNumerator || 4;
         const den = window.timeSignatureDenominator || 4;
@@ -1354,48 +1354,48 @@ document.addEventListener('DOMContentLoaded', function () {
         const isMin = selectedScaleType.toLowerCase().includes('min');
         const keyName = root + (isMin ? 'min' : 'maj');
         const ticksPerBar = TPB * (4 / den) * num;
-    
+
         let abc = `X:1\nT:Multi-Track Snippet\nM:${num}/${den}\nL:1/${L}\nK:${keyName}\n`;
-    
+
         // Add %%score directive
         const voiceLabels = selectedTrackIndices.map((_, index) => `V${index + 1}`);
         abc += `%%score (${voiceLabels.join(' ')})\n`;
-    
+
         // Generate ABC for each voice
         selectedTrackIndices.forEach((trackIdx, index) => {
             const vno = index + 1;
             const notes = byTrack.get(trackIdx);
             if (!notes || notes.length === 0) return;
             notes.sort((a, b) => a.start !== b.start ? a.start - b.start : a.pitch - b.pitch);
-    
+
             const tr = rawTracksData[trackIdx];
             let nm = getTrackInstrumentName(tr, trackIdx);
             const snm = tr.short_name || nm;
             const clef = tr.clef || 'treble';
             const isDrum = isDrumTrack(trackIdx);
             const perc = isDrum ? ' perc=yes' : '';
-    
+
             // Adjust instrument name if needed
             nm = nm.replace("Synth ", 'Synth');
             //replace SynthBass with Synth Bass
             nm = nm.replace("SynthBass", 'Synth Bass');
             const program = isDrum ? null : (MELODY_NAME_TO_PROGRAM[nm] || 0);
-    
+
             // Voice definition
             abc += `V:${vno} name="${nm}" snm="${snm}" clef=${clef}${perc}\n`;
-    
+
             // Add %%MIDI program for non-drum tracks
             if (!isDrum) {
                 abc += `%%MIDI program ${program}\n`;
                 abc += `%%MIDI channel ${0}\n`;
             }
-            else{
+            else {
                 abc += `%%MIDI channel ${10}\n`; // Use track index for drums
             }
-    
+
             // Inline voice identifier
             abc += `[V:${vno}] `;
-    
+
             // Notation generation
             let now = 0;
             let inBar = 0;
@@ -1403,7 +1403,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const keyAcc = getKeyAccidentals(root, isMin);
             const durStr = t => ticksToAbcDuration(t, TPB * (4 / L));
             const isPercussion = isDrum;
-    
+
             let i = 0;
             while (i < notes.length) {
                 const n = notes[i];
@@ -1438,12 +1438,63 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             abc = abc.trimEnd() + ' |]\n';
         });
-    
+        
+       // after you finish building `abc` and before you return it:
+        const unitsPerBar = /* same as you used when building */ (num * L) / den;
+        abc = trimCommonBarRests(abc, unitsPerBar);
+        return abc.trim();
+
         return abc.trim();
     }
-    
 
 
+/**
+ * Trim one bar’s worth of rest from the start of *every* voice,
+ * as long as *all* voices still have at least one full‑bar rest.
+ *
+ * @param {string} abcText     – the raw multi‑voice ABC
+ * @param {number} unitsPerBar – how many “z‑units” make up one bar
+ * @returns {string}           – the adjusted ABC
+ */
+function trimCommonBarRests(abcText, unitsPerBar) {
+    const lines     = abcText.split('\n');
+    const voiceRe   = /^(\[V:\d+\]\s*)z(\d+)(\s*)(.*)$/;
+    // collect the line‑indices that begin with "[V:x] zN"
+    const voiceIdxs = lines
+      .map((l, i) => voiceRe.test(l) ? i : -1)
+      .filter(i => i >= 0);
+  
+    // keep stripping as long as *every* voice‑line has N >= unitsPerBar
+    let keepGoing = true;
+    while (keepGoing) {
+      const rests = voiceIdxs.map(i => {
+        const m = lines[i].match(voiceRe);
+        return m ? parseInt(m[2], 10) : 0;
+      });
+      // if any voice has less than a full‑bar rest, stop
+      if (rests.some(r => r < unitsPerBar)) break;
+  
+      // subtract one bar from each
+      voiceIdxs.forEach(i => {
+        const m    = lines[i].match(voiceRe);
+        const pre  = m[1];               // "[V:x] "
+        const cur  = parseInt(m[2], 10); // current rest count
+        const sp   = m[3];               // whitespace after number
+        const tail = m[4];               // the rest of the line
+  
+        const leftover = cur - unitsPerBar;
+        if (leftover > 0) {
+          lines[i] = `${pre}z${leftover}${sp}${tail}`;
+        } else {
+          // no rest left → drop the "zN" entirely
+          lines[i] = `${pre}${tail}`;
+        }
+      });
+    }
+  
+    return lines.join('\n');
+  }
+  
 
     /**
      * Copy multi-voice ABC to the clipboard.
