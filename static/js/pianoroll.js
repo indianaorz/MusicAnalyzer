@@ -1376,7 +1376,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const perc = isDrum ? ' perc=yes' : '';
     
             // Adjust instrument name if needed
-            nm = nm.replace(/Synth\s*String/i, 'SynthString');
+            nm = nm.replace("Synth ", 'Synth');
+            //replace SynthBass with Synth Bass
+            nm = nm.replace("SynthBass", 'Synth Bass');
             const program = isDrum ? null : (MELODY_NAME_TO_PROGRAM[nm] || 0);
     
             // Voice definition
@@ -1385,6 +1387,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add %%MIDI program for non-drum tracks
             if (!isDrum) {
                 abc += `%%MIDI program ${program}\n`;
+                abc += `%%MIDI channel ${0}\n`;
+            }
+            else{
+                abc += `%%MIDI channel ${10}\n`; // Use track index for drums
             }
     
             // Inline voice identifier
