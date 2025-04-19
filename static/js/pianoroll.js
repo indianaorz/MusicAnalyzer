@@ -1451,6 +1451,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function copySelectionToAbc() {
         let abcText = generateAbcFromSelectionMultiVoice();
         //wrap with <abc></abc>
+        abcText = `<abc>\n${abcText}\n</abc>`; // Wrap in <abc> tags for multi-voice
         if (!abcText) {
             console.warn("Nothing selected or no valid selection for multi-voice ABC.");
             return;

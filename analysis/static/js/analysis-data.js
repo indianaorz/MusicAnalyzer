@@ -3,172 +3,43 @@
 const analysisContent = `
 <abc>
 X:1
-T:Music21 Fragment
-C:Music21
-%%score ( 1 2 ) ( 3 4 ) 5 6 7
-L:1/8
+T:Multi-Track Snippet
 M:4/4
-I:linebreak $
-K:none
-V:1 treble 
-V:2 treble 
-L:1/4
-V:3 treble 
 L:1/16
-V:4 treble 
-V:5 bass 
-V:6 bass 
-L:1/16
-V:7 treble 
-L:1/16
-V:1
- z8 | z2 _e3/2 z/ _B=B z c- | c15/2 z/ | z2 _e3/2 z/ _B=B z c | z c _eg f_e d_B | %5
- z ^g3/2 z/ =g f_e z d | _e z2 c2- c/ z/ d_e | fd3/2 z/ _e3/2 z/ d3/2 z/ _B | G15/2 z/ | %9
- z2 _e3/2 z/ _B=B z c- | c15/2 z/ | z2 _e3/2 z/ _B=B z c | z c _ec f^f =fc | %13
- z ^g3/2 z/ =g fc'3/2 z/ _b | ^g z2 f2- f/ z/ d_e | fd3/2 z/ _e3/2 z/ f3/2 z/ g | g15/2 z/ | %17
- z2 f3/2 z/ ^gc'3/2 z/ _e' | d'_b g d2- d/ z/ d_e | d c7/2 z/ c d_e | f/_e/ d4- d2- d/ z/ | %21
- z2 cd _ec/ z [_ef]/_e- | ed cF G_B Gd | f2- f/ z/ _e3/2 z/ f _ef | g15/2 z/ | z2 c2- c/ z/ d _ec | %26
- z ^G _eg fd _ec | z ^g f^g _e'd' c'^g | _e'd' [c'_e'][^gf'] [fg'][df'] [_B_e'][Gd'] | %29
- z c7/2 z/ d _eg | z f2- f/ z/ _ed f z | G3/2 z/ _Bd3/2 z/ f2- f/ z/ | g15/2 z/ | %33
- z2 _e3/2 z/ _B=B z c- | c15/2 z/ | z2 _e3/2 z/ _B=B z c | z c _eg f_e d_B | %37
- z ^g3/2 z/ =g f_e z d | _e z2 c2- c/ z/ d_e | fd3/2 z/ _e3/2 z/ d3/2 z/ _B | G15/2 z/ | %41
- z2 _e3/2 z/ _B=B z c- | c15/2 z/ | z2 _e3/2 z/ _B=B z c | z c _ec f^f =fc | %45
- z ^g3/2 z/ =g fc'3/2 z/ _b | ^g z2 f2- f/ z/ d_e | fd3/2 z/ _e3/2 z/ f3/2 z/ g | g15/2 z/ | %49
- z2 f3/2 z/ ^gc'3/2 z/ _e' | d'_b g d2- d/ z/ d_e | d c7/2 z/ c d_e | f/_e/ d4- d2- d/ z/ | %53
- z2 cd _ec/ z [_ef]/_e- | ed cF G_B Gd | f2- f/ z/ _e3/2 z/ f _ef | g15/2 z/ | z2 c2- c/ z/ d _ec | %58
- z ^G _eg fd _ec | z ^g f^g _e'd' c'^g | _e'd' [c'_e'][^gf'] [fg'][df'] [_B_e'][Gd'] | %61
- z c7/2 z/ d _eg | z f2- f/ z/ _ed f z | G3/2 z/ _Bd3/2 z/ f2- f/ z/ | g15/2 z/ | z15/2 |] %66
-V:2
- z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | %19
- z4 | z4 | (3z4 f z | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | %37
- z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | (3z4 f z | z4 | %55
- z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z4 | z15/4 |] %66
-V:3
- z16 | z4 z _e3 z _B2=B2 z2 c- | c16 | z4 z _e3 z _B2=B2 z2 c- | c z2 c2 _e2g2 f2_e2 d2_B- | %5
- B z2 ^g3 z =g2 f2_e2 z2 d- | d_e2 z4 c4- c z d2_e- | ef2d3 z _e3 z d3 z _B- | B G15 | %9
- z4 z _e3 z _B2=B2 z2 c- | c16 | z4 z _e3 z _B2=B2 z2 c- | c z2 c2 _e2c2 f2^f2 =f2c- | %13
- c z2 ^g3 z =g2 f2c'3 z _b- | b^g2 z4 f4- f z d2_e- | ef2d3 z _e3 z f3 z g- | g g15 | %17
- z4 z f3 z ^g2c'3 z _e'- | e'd'2_b2 g2 d4- d z d2_e- | ed2 c7 z c2 d2_e- | ef_e d8- d4- d | %21
- z4 z c2d2 _e2c z2 [_ef]_e- | e3d2 c2F2 G2_B2 G2d- | d f4- f z _e3 z f2 _e2f- | f g15 | %25
- z4 z c4- c z d2 _e2c- | c z2 ^G2 _e2g2 f2d2 _e2c- | c z2 ^g2 f2^g2 _e'2d'2 c'2^g- | %28
- g_e'2d'2 [c'_e']2[^gf']2 [fg']2[df']2 [_B_e']2[Gd']- | [Gd'] z2 c7 z d2 _e2g- | %30
- g z2 f4- f z _e2d2 f2 z | z G3 z _B2d3 z f4- f | z g15 | z4 z _e3 z _B2=B2 z2 c- | c16 | %35
- z4 z _e3 z _B2=B2 z2 c- | c z2 c2 _e2g2 f2_e2 d2_B- | B z2 ^g3 z =g2 f2_e2 z2 d- | %38
- d_e2 z4 c4- c z d2_e- | ef2d3 z _e3 z d3 z _B- | B G15 | z4 z _e3 z _B2=B2 z2 c- | c16 | %43
- z4 z _e3 z _B2=B2 z2 c- | c z2 c2 _e2c2 f2^f2 =f2c- | c z2 ^g3 z =g2 f2c'3 z _b- | %46
- b^g2 z4 f4- f z d2_e- | ef2d3 z _e3 z f3 z g- | g g15 | z4 z f3 z ^g2c'3 z _e'- | %50
- e'd'2_b2 g2 d4- d z d2_e- | ed2 c7 z c2 d2_e- | ef_e d8- d4- d | z4 z c2d2 _e2c z2 [_ef]_e- | %54
- e3d2 c2F2 G2_B2 G2d- | d f4- f z _e3 z f2 _e2f- | f g15 | z4 z c4- c z d2 _e2c- | %58
- c z2 ^G2 _e2g2 f2d2 _e2c- | c z2 ^g2 f2^g2 _e'2d'2 c'2^g- | %60
- g_e'2d'2 [c'_e']2[^gf']2 [fg']2[df']2 [_B_e']2[Gd']- | [Gd'] z2 c7 z d2 _e2g- | %62
- g z2 f4- f z _e2d2 f2 z | z G3 z _B2d3 z f4- f | z g15 | z15 |] %66
-V:4
- z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | %19
- z8 | z8 | z4 z3/2 f z3/2 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | %36
- z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | %53
- z4 z3/2 f z3/2 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z8 | z15/2 |] %66
-V:5
- C,,>C, z G,,/_E,,/ ^F,,_B,,, B,,,=B,,, | C,,C,, C,,C,, C,,C,, C,,C,, | %2
- C,,C,, C,,C,, C,,G,, C,,C,, | C,,C,, C,,C,, C,,C,, C,,C,, | C,,C,, C,,C,, C,,G,, C,,C,, | %5
- ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | ^G,,,G,,, G,,,^G,, ^G,,,G,,, ^G,,^G,,, | %7
- D,,D,, D,,D,, D,,D,, D,,D,, | _B,,,B,,, B,,,B,,, B,,,B,,, B,,,B,,, | C,,C,, C,,C,, C,,C,, C,,C,, | %10
- C,,C,, C,,C,, C,,G,, C,,C,, | C,,C,, C,,C,, C,,C,, C,,C,, | C,,C,, C,,C,, C,,G,, C,,C,, | %13
- ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | ^G,,,G,,, G,,,^G,, ^G,,,G,,, ^G,,^G,,, | %15
- D,,D,, D,,D,, D,,D,, D,,D,, | _B,,,B,,, B,,,B,,, B,,,B,,, B,,,B,,, | %17
- ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | =G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | %19
- F,,,F,,, F,,,F,,, F,,,F,,, F,,,F,,, | G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | %21
- ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | C,,C,, C,,C,, C,,C,, C,,C,, | F,,F,, F,,F,, F,,F,, F,,F,, | %24
- G,,3/2 z/ D,,G,,3/2 z/ D,, G,,D,, | C,,C,, C,,C,, C,,D,, _E,,C,, | F,,D,, _E,,G,, F,,D,, _E,,C,, | %27
- F,,,F,,, F,,,F,,, F,,,F,,, F,,,F,,, | D,,C,, _B,,,G,,, F,,_E,, D,,G,,, | %29
- C,,C,, C,,C,, C,,D,, _E,,C,, | F,,C,, _E,,F,, _E,,C,, G,,C,, | F,,F,, F,,F,, F,,C,, _E,,C,, | %32
- F,,_E,, D,, C,,4- C,,/ z/ | C,,C,, C,,C,, C,,C,, C,,C,, | C,,C,, C,,C,, C,,G,, C,,C,, | %35
- C,,C,, C,,C,, C,,C,, C,,C,, | C,,C,, C,,C,, C,,G,, C,,C,, | ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | %38
- ^G,,,G,,, G,,,^G,, ^G,,,G,,, ^G,,^G,,, | D,,D,, D,,D,, D,,D,, D,,D,, | %40
- _B,,,B,,, B,,,B,,, B,,,B,,, B,,,B,,, | C,,C,, C,,C,, C,,C,, C,,C,, | C,,C,, C,,C,, C,,G,, C,,C,, | %43
- C,,C,, C,,C,, C,,C,, C,,C,, | C,,C,, C,,C,, C,,G,, C,,C,, | ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | %46
- ^G,,,G,,, G,,,^G,, ^G,,,G,,, ^G,,^G,,, | D,,D,, D,,D,, D,,D,, D,,D,, | %48
- _B,,,B,,, B,,,B,,, B,,,B,,, B,,,B,,, | ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | %50
- =G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | F,,,F,,, F,,,F,,, F,,,F,,, F,,,F,,, | %52
- G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | ^G,,,G,,, G,,,G,,, G,,,G,,, G,,,G,,, | %54
- C,,C,, C,,C,, C,,C,, C,,C,, | F,,F,, F,,F,, F,,F,, F,,F,, | G,,3/2 z/ D,,G,,3/2 z/ D,, G,,D,, | %57
- C,,C,, C,,C,, C,,D,, _E,,C,, | F,,D,, _E,,G,, F,,D,, _E,,C,, | %59
- F,,,F,,, F,,,F,,, F,,,F,,, F,,,F,,, | D,,C,, _B,,,G,,, F,,_E,, D,,G,,, | %61
- C,,C,, C,,C,, C,,D,, _E,,C,, | F,,C,, _E,,F,, _E,,C,, G,,C,, | F,,F,, F,,F,, F,,C,, _E,,C,, | %64
- F,,_E,, D,, C,,4- C,,/ z/ | x15/2 |] %66
-V:6
- z8 z2 [G,,D,]3 z [G,,D,]2 | [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %2
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %3
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %4
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %5
- [^G,,C,]3 z [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 | %6
- [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 [C,_E,]3 z | %7
- [_B,,D,]3 z [D,=G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 | %8
- [D,G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 [D,G,]3 z | %9
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %10
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %11
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %12
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %13
- [^G,,C,]3 z [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 | %14
- [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 [C,_E,]3 z | %15
- [_B,,D,]3 z [D,=G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 | %16
- [D,G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 [D,G,]3 z | [_E,^G,]15 z | [D,=G,]15 z | [C,F,]15 z | %20
- [D,G,]15 z | [F,^G,]15 z | [=G,C]15 z | [_B,_E]15 z | [G,D]15 z | %25
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %26
- [_E,^G,]3 z [^G,,C,]2[_E,^G,]3 z [^G,,C,]2 [_E,^G,]3 z | %27
- [^G,,C,]3 z [C,F,]3 z [^G,,C,]2[C,F,]3 z [^G,,C,]2 | %28
- [C,_E,]3 z [=G,,C,]2[B,,D,]3 z [G,,C,]2 [B,,D,]3 z | %29
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %30
- [_E,^G,]3 z [^G,,C,]2[_E,^G,]3 z [^G,,C,]2 [_E,^G,]3 z | %31
- [D,F,]2[D,F,]2 [D,F,]2[D,F,]2 [D,F,]2[_E,=G,]2 [F,^G,]2[_E,=G,]2 | %32
- [D,F,]2[C,_E,]2 [_B,,D,]2 [G,,C,]8- [G,,C,] z | %33
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %34
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %35
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %36
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %37
- [^G,,C,]3 z [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 | %38
- [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 [C,_E,]3 z | %39
- [_B,,D,]3 z [D,=G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 | %40
- [D,G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 [D,G,]3 z | %41
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %42
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %43
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %44
- [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z | %45
- [^G,,C,]3 z [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 | %46
- [C,_E,]3 z [^G,,C,]2[C,_E,]3 z [^G,,C,]2 [C,_E,]3 z | %47
- [_B,,D,]3 z [D,=G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 | %48
- [D,G,]3 z [_B,,D,]2[D,G,]3 z [_B,,D,]2 [D,G,]3 z | [_E,^G,]15 z | [D,=G,]15 z | [C,F,]15 z | %52
- [D,G,]15 z | [F,^G,]15 z | [=G,C]15 z | [_B,_E]15 z | [G,D]15 z | %57
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %58
- [_E,^G,]3 z [^G,,C,]2[_E,^G,]3 z [^G,,C,]2 [_E,^G,]3 z | %59
- [^G,,C,]3 z [C,F,]3 z [^G,,C,]2[C,F,]3 z [^G,,C,]2 | %60
- [C,_E,]3 z [=G,,C,]2[B,,D,]3 z [G,,C,]2 [B,,D,]3 z | %61
- [G,,C,]3 z [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 | %62
- [_E,^G,]3 z [^G,,C,]2[_E,^G,]3 z [^G,,C,]2 [_E,^G,]3 z | %63
- [D,F,]2[D,F,]2 [D,F,]2[D,F,]2 [D,F,]2[_E,=G,]2 [F,^G,]2[_E,=G,]2 | %64
- [D,F,]2[C,_E,]2 [_B,,D,]2 [G,,C,]8- [G,,C,] z | x15 |] %66
-V:7
- z16 | [c_eg]16- | x15 [ceg]- | [ceg]14 z [c_eg]- | [ceg]15- x | x14 [ceg]2- | %6
- [ceg]8- [ceg]4- [ceg] z [c_e^g]2- | [ceg]14- x2 | x8 x4 x [ceg]3- | [ceg]12 z [_Bdg]3- | %10
- [Bdg]8- [Bdg]4- [Bdg]- x3 | x12 [Bdg]4- | [Bdg]8- [Bdg]3 z [c_eg]4- | [ceg]12- x4 | %14
- x8 x3 [ceg]4- [ceg]- | [ceg]8- [ceg]2 z [c_eg]4- [ceg]- | [ceg]8- [ceg]3- x4 x | x8 x2 [ceg]6- | %18
- [ceg]8- [ceg] z [c_e^g]6- | [ceg]8- [ceg]2- x6 | x8 x [ceg]7- | [ceg]8 z [_Bdg]7- | %22
- [Bdg]8- [Bdg]- x7 | x8 [Bdg]8- | [Bdg]7 z [c_e^g]8- | [ceg]7 z [_Bdg]8- | [Bdg]7 z [^Gcf]8- | %27
- [Gcf]7 z [_Bdg]8- | [Bdg]7 z [cf^g]8- | [cfg]7 z [c_eg]8- | [ceg]7 z [_B_ef]8- | %31
- [Bef]7 z [Bdg]8- | [Bdg]7 z [c_eg]8- | [ceg]7 z [c_e^g]8- | [ceg]7 z [cdf]8- | %35
- [cdf]7 z [c_e^g]4- [ceg] z [Bd=g]2- | [Bdg]7 z [c_eg]8- | [ceg]7 z [c_e^g]8- | [ceg]7 z [_Bdf]8- | %39
- [Bdf]7 z [_Bdf]4- [Bdf] z [c_eg]2- | [ceg]7 z [c_eg]8- | [ceg]8- x8 | x7 [ceg]8- [ceg]- | %43
- [ceg]6 z [c_eg]8- [ceg]- | [ceg]7- x8 x | x6 [ceg]8- [ceg]2- | [ceg]4- [ceg] z [c_e^g]8- [ceg]2- | %47
- [ceg]6- x8 x2 | x4 x [ceg]8- [ceg]3- | [ceg]4 z [_Bdg]8- [Bdg]3- | [Bdg]4- [Bdg]- x8 x3 | %51
- x4 [Bdg]12- | [Bdg]3 z [c_eg]12- | [ceg]4- x12 | x3 [ceg]8- [ceg]4- [ceg]- | %55
- [ceg]2 z [c_eg]8- [ceg]4- [ceg]- | [ceg]3- x8 x4 x | x2 [ceg]14- | [ceg] z [c_e^g]14- | %59
- [ceg]2- x14 | x [ceg]15 | z [_Bdg]15- | [Bdg]- x15 | [Bdg]15 z | [c_e^g]15 z | [_Bdg]15 |] %66
-
+K:Cmaj
+%%score (V1 V2 V3 V4 V5 V6 V7)
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z20 ^d3 | z ^A2 B2 z2 c17 | z5 ^d3 | z ^A2 B2 z2 c2 | z2 c2 ^d2 g2 f2 d2 =d2 ^A2 | z2 ^g3 z =g2 f2 ^d2 z2 =d2 | ^d2 z4 c5 z =d2 ^d2 | f2 d3 z ^d3 z =d3 z ^A2 | G15 z5 ^d3 | z ^A2 B2 z2 c17 | z5 ^d3 | z ^A2 B2 z2 c2 | z2 c2 ^d2 c2 f2 ^f2 =f2 c2 | z2 ^g3 z =g2 f2 c'3 z ^a2 | ^g2 z4 f5 z d2 ^d2 | f2 d3 z ^d3 z f3 z g2 | g15 z5 f3 | z ^g2 c'3 z ^d'2 | d'2 ^a2 g2 d5 z d2 ^d2 | d2 c7 z c2 d2 ^d2 | f ^d =d13 z5 c2 | d2 ^d2 c f2 d [df]4 | d2 c2 F2 G2 ^A2 G2 d2 | f5 z ^d3 z f2 d2 f2 | g15 z5 c5 | z d2 ^d2 c2 | z2 ^G2 ^d2 =g2 f2 =d2 ^d2 c2 | z2 ^g2 f2 g2 ^d'2 =d'2 c'2 g2 | ^d'2 =d'2 [c'^d']2 [^gf']2 [f=g']2 [=df']2 [^A^d']2 [G=d']2 | z2 c7 z d2 ^d2 g2 | z2 f5 z ^d2 =d2 f2 z2 G3 | z ^A2 d3 z f5 z g15 | |]
+V:2 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:2] z21 ^d3 | z ^A2 B2 z2 c17 | | z5 ^d3 z ^A2 B2 z2 c2 | z2 c2 ^d2 g2 f2 d2 =d2 ^A2 | z2 ^g3 z =g2 f2 ^d2 z2 =d2 | ^d2 z4 c5 z =d2 ^d2 | f2 d3 z ^d3 z =d3 z ^A2 | G15 | z5 ^d3 z ^A2 B2 z2 c17 | | z5 ^d3 z ^A2 B2 z2 c2 | z2 c2 ^d2 c2 f2 ^f2 =f2 c2 | z2 ^g3 z =g2 f2 c'3 z ^a2 | ^g2 z4 f5 z d2 ^d2 | f2 d3 z ^d3 z f3 z g2 | g15 | z5 f3 z ^g2 c'3 z ^d'2 | d'2 ^a2 g2 d5 z d2 ^d2 | d2 c7 z c2 d2 ^d2 | f ^d =d13 | z5 c2 d2 ^d2 c f2 d [df]4 | d2 c2 F2 G2 ^A2 G2 d2 | f5 z ^d3 z f2 d2 f2 | g15 | z5 c5 z d2 ^d2 c2 | z2 ^G2 ^d2 =g2 f2 =d2 ^d2 c2 | z2 ^g2 f2 g2 ^d'2 =d'2 c'2 g2 | ^d'2 =d'2 [c'^d']2 [^gf']2 [f=g']2 [=df']2 [^A^d']2 [G=d']2 | z2 c7 z d2 ^d2 g2 | z2 f5 z ^d2 =d2 f2 z2 G3 | z ^A2 d3 z f5 | z g15 | |]
+V:3 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:3] C,,3 C, z2 G,, ^D,, ^F,,2 ^A,,,2 A,,,2 B,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | ^G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | ^G,,,2 G,,,2 G,,,2 G,,2 G,,,2 G,,,2 G,,2 G,,,2 | D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 | ^A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | ^G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | ^G,,,2 G,,,2 G,,,2 G,,2 G,,,2 G,,,2 G,,2 G,,,2 | D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 | ^A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | ^G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | ^G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 D,,2 ^D,,2 C,,2 | F,,2 D,,2 ^D,,2 G,,2 F,,2 =D,,2 ^D,,2 C,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | D,,2 C,,2 ^A,,,2 G,,,2 F,,2 ^D,,2 =D,,2 G,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 D,,2 ^D,,2 C,,2 | F,,2 C,,2 ^D,,2 F,,2 D,,2 C,,2 G,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 C,,2 ^D,,2 C,,2 | F,,2 ^D,,2 =D,,2 C,,9 |]
+V:4 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:4] z10 [G,,D,]3 z [G,,D,]2 | [G,,C,]3 z [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 | [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]3 | z [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 | [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 [D,G,]3 z [^G,,C,]3 | z [C,^D,]3 z [^G,,C,]2 [C,D,]3 z [G,,C,]2 | [C,^D,]3 z [^G,,C,]2 [C,D,]3 z [G,,C,]2 [C,D,]3 z [^A,,=D,]3 | z [D,G,]3 z [^A,,D,]2 [D,G,]3 z [A,,D,]2 | [D,G,]3 z [^A,,D,]2 [D,G,]3 z [A,,D,]2 [D,G,]3 z [G,,C,]3 | z [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 | [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]3 | z [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 | [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 [D,G,]3 z [^G,,C,]3 | z [C,^D,]3 z [^G,,C,]2 [C,D,]3 z [G,,C,]2 | [C,^D,]3 z [^G,,C,]2 [C,D,]3 z [G,,C,]2 [C,D,]3 z [^A,,=D,]3 | z [D,G,]3 z [^A,,D,]2 [D,G,]3 z [A,,D,]2 | [D,G,]3 z [^A,,D,]2 [D,G,]3 z [A,,D,]2 [D,G,]3 z [^D,^G,]15 | z [D,G,]15 | z [C,F,]15 | z [D,G,]15 | z [F,^G,]15 | z [G,C]15 | z [^A,^D]15 | z [G,D]15 | z [G,,C,]3 | z [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 | [^D,^G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]3 | z [C,F,]3 z [^G,,C,]2 [C,F,]3 z [G,,C,]2 | [C,^D,]3 z [G,,C,]2 [B,,=D,]3 z [G,,C,]2 [B,,D,]3 z [G,,C,]3 | z [^D,G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 | [^D,^G,]3 z [G,,C,]2 [D,G,]3 z [G,,C,]2 [D,G,]3 z [=D,F,]2 | [D,F,]2 [D,F,]2 [D,F,]2 [D,F,]2 [^D,G,]2 [F,^G,]2 [D,=G,]2 | [D,F,]2 [C,^D,]2 [^A,,=D,]2 [G,,C,]9 |]
+V:5 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:5] z16 [c^dg]31 | | z [c^dg]31 | | z [c^d^g]31 | | z [^Adg]31 | | z [c^dg]31 | | z [c^dg]31 | | z [c^d^g]31 | | z [^Adg]31 | | z [c^d^g]15 | z [^Adg]15 | z [^Gcf]15 | z [^Adg]15 | z [cf^g]15 | z [c^dg]15 | z [^A^df]15 | z [Bdg]15 | z [c^dg]15 | z [c^d^g]15 | z [cdf]15 | z [c^d^g]5 | z [Bdg]9 z [c^dg]15 | z [c^d^g]15 | z [^Adf]15 | z [^Adf]5 | z [c^dg]9 |]
+V:6 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:6] B,,,3 z E,,3 E,, E,,2 B,,,3 z E,,2 | B,,,3 z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,2 E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,2 E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]
+V:7 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:7] [^A,,^C,E,]3 z ^A,,3 ^F,, [^A,,E,]2 ^A,,3 z ^A,,2 | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, [^A,,^C,] ^A,, | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, [^A,,^C,] ^A,, | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | |]
 </abc>
 
 The first track I'm looking at for analysis is going to be the Introduction Stage to Megaman X. 
 Figured might as well start at the beginning. 
 
-Okay so I definintely don't recommend listening to it on the site in this format. I'm just making sure to include the ABC format here (though I don't think what is above is correct) so this data can possibly be used for AI training / inference. 
+Okay so I definintely don't recommend listening to it on the site in this format. I'm just making sure to include the ABC format here so this data can possibly be used for AI training / inference. 
 
 The idea with that being: this analysis in rawtext ABC format which is a pretty condensed format which is very readable in text form (for a language model at least), so hopefully this analysis document could in some way be used to train an AI to be able to analyze music in a similar way.
 
@@ -198,6 +69,10 @@ V:2
  [_E,G,]3 z [G,,C,]2[_E,G,]3 z [G,,C,]2 [_E,G,]3 z |] %2
 
 </abc>
+
+
+
+
 
 
 
