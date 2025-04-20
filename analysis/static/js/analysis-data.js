@@ -1484,4 +1484,33 @@ V:4 name="Drums" snm="Drums" clef=treble perc=yes
 </abc>
 
 
+Okay the final section is the most crazy chaotic section and honestly I have absolutely no idea what it's doing so lets dive in.
+
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2 V3 V4 V5)
+V:4 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:4] B,,,2 | | | | | | | | | | | | | | | | | | | | | | | | | E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]
+V:5 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:5] [^F,,^C,]2 | | | | | | | | | | | | | | | | | | | | | | | | | [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | |]
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z4 c5 | | | | | | | | | | | | | | | | | | | | | | | | | z d2 e2 c2 | z2 A2 e2 g2 f2 d2 e2 c2 | z2 a2 f2 a2 e'2 d'2 c'2 a2 | e'2 d'2 [c'e']2 [af']2 [fg']2 [df']2 [Be']2 [Gd']2 | z2 c7 z d2 e2 g2 | z2 f5 z e2 d2 f2 z2 G3 | z B2 d3 z f5 z g15 | |]
+V:2 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:2] C,,2 | | | | | | | | | | | | | | | | | | | | | | | | | C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 D,,2 E,,2 G,,2 F,,2 D,,2 E,,2 C,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | D,,2 C,,2 B,,,2 G,,,2 F,,2 E,,2 D,,2 G,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 C,,2 E,,2 F,,2 E,,2 C,,2 G,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 C,,2 E,,2 C,,2 | F,,2 E,,2 D,,2 C,,9 |]
+V:3 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:3] [ceg]15 | | | | | | | | | | | | | | | | | | | | | | | | | z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 z [ceg]15 | z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]
+</abc>
 `;
