@@ -1206,4 +1206,282 @@ V:5 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
 I feel like listening to it again here I can really feel how the drum fills work together with the harmonic arrangement to drive the song forward. It does create this little cozy space with the Cms and then gradually introduce both haromic and rhytmic tension.
 
 
+On to the next section, I guess if the previous section was the main theme, I'd call this the "Build Up"
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2 V3 V4 V5 V6 V7)
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z20 f3 | | | | | | | | | | | | | | | | | z a2 c'3 z e'2 | d'2 b2 g2 d5 z d2 e2 | d2 c7 z c2 d2 e2 | f e d13 z5 c2 | d2 e2 c f2 e [ef]4 | d2 c2 F2 G2 B2 G2 d2 | f5 z e3 z f2 e2 f2 | g15 |]
+V:2 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:2] z1 g15 | | | | | | | | | | | | | | | | | z5 f3 z a2 c'3 z e'2 | d'2 b2 g2 d5 z d2 e2 | d2 c7 z c2 d2 e2 | f e d13 | z5 c2 d2 e2 c f2 e [ef]4 | d2 c2 F2 G2 B2 G2 d2 | f5 z e3 z f2 e2 f2 | g15 | |]
+V:3 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:3] z14 B,,,2 | | | | | | | | | | | | | | | | | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | |]
+V:4 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:4] z16 [E,A,]15 | | | | | | | | | | | | | | | | | z [D,G,]15 | z [C,F,]15 | z [D,G,]15 | z [F,A,]15 | z [G,C]15 | z [B,E]15 | z [G,D]15 | |]
+V:5 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:5] z16 [cea]15 | | | | | | | | | | | | | | | | | z [Bdg]15 | z [Acf]15 | z [Bdg]15 | z [cfa]15 | z [ceg]15 | z [Bef]15 | z [=Bdg]15 | |]
+V:6 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:6] z15 C,, | | | | | | | | | | | | | | | | | B,,,3 z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]
+V:7 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:7] z15 ^A,, | | | | | | | | | | | | | | | | | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | |]
+</abc>
+
+This section I feel like is building up even more. It also feels like a different groove than the first section which We can see with the drum part.
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:1] B,,,3 | | | | | | | | | | | | | | | | | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]
+V:2 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:2] [^F,,^C,]2 | | | | | | | | | | | | | | | | | ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | |]
+</abc>
+
+This pattern for the drums is repeated 2x over 8 bars so for brevity I only provided the first 4 bars. My analysis for the main section took like 4 hours so I need to be a little more brief going forward since I don't have that much time hahaha.
+
+
+Looking at these drums it's much closer the the "boots and cats" rhythm. We alternate Kick-Snare every beat and have a drum fill at the end. The thing that I feel like gives this drum pattern its character is the alternating between the closed and open hihat. The open Hit Hat is hit on the syncopated beats (which we know at this time gives the melody energy so I'll stop mentioning that as well for brevity). 
+
+Lets take a look at the bass:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:1] A,,,2 | | | | | | | | | | | | | | | | | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | |]
+</abc>
+
+Much more simple than the previous section, we lose the jumping up and down and the bass is just a basic root note progression. 
+
+We go from:
+
+| Ab | G | F | G | Ab | C | F | G |
+
+The first 4 bars feel like they could loop, going down from Ab then back up to Ab by the 5th measure. Though the 5-8 ascends to the G. The bass pattern is really simple repeated 16th notes, but the rhythm breaks up on the 8th bar on the G chord where it bounces down to the 5th of G (D). We get this Long-Short, Long-Short, Short-Short pattern which nicely breaks up the rhythm and gives us a little bit of syncopation but by the end accelerates back to its 16th pace.
+
+Now lets look at the strings to see how they add to the harmony:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:1] [cea]15 | | | | | | | | | | | | | | | | | z [Bdg]15 | z [Acf]15 | z [Bdg]15 | z [cfa]15 | z [ceg]15 | z [Bef]15 | z [=Bdg]15 | |]
+</abc>
+
+Remember before where each chord took up 2 bars? Now they're taking up 1 bar. So while the drums and bass are getting rhymically simpler, the changing of the harmony is speeding up almost like it's charging up.
+
+The progression here is:
+
+| Ab/C | Gm/Bb | Fm/Ab | Gm/Bb | Fm/C | Cm | Bbsus4 | G/B |
+
+
+If we ignore the inversions, the progression looks like:
+
+| Ab | Gm | Fm | Gm | Fm | Cm | Bbsus4 | G |
+| VI | v | iv | v | iv | i | VIIsus4 | V |
+
+I'd break this into 2 sections:
+
+| VI | v | iv | v | 
+
+| iv | i | VIIsus4 | V |
+
+We're really building up the tension here. The first section leading to the Gm (v) chord, and then the second section leading to the G (V) chord with max tension. The Sus4 before the V is also a great addition to the tension. 
+
+Each subsection climbs in tension, with the second half resolving (briefly) into a pre-cadential struggle (B♭sus4 → G).
+
+Looking at the inversions as part of it, we can see the bottom note moves similarly to the bass, but for the 5-8 bars the chords actually descend while the bass ascends, creating interest.
+
+Lets listen to both together:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:1] A,,,2 | | | | | | | | | | | | | | | | | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | |]
+V:2 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:2] [cea]15 | | | | | | | | | | | | | | | | | z [Bdg]15 | z [Acf]15 | z [Bdg]15 | z [cfa]15 | z [ceg]15 | z [Bef]15 | z [=Bdg]15 | |]
+</abc>
+
+Actually interestingly enough, listening to both together, the strings feel like they're almost always going down, and end down, and the bass is trying to build up. 
+
+The Brass during this section breaks from its rhythm and adds mostly to the harmony here:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:1] [E,A,]15 | | | | | | | | | | | | | | | | | z [D,G,]15 | z [C,F,]15 | z [D,G,]15 | z [F,A,]15 | z [G,C]15 | z [B,E]15 | z [G,D]15 | |]
+</abc>
+
+This looks like it more closely mirrors the bass's ascent/descent oppsosed to the strings. The First 4 bars are all 4th intervals. Though lets take a look at what they're outlining:
+
+Ab / Eb (4th) | G / D (4th) | F / C (4th) | G / D (4th) |
+
+So outlining a 4th structure here. Then for the next section we start with a third which mixes things up, then returning to the 4ths and resolving on a 5th interval. The bars 5-8 really feel like the brass's voice opens up as we get to the final bar.
+
+Ab / F (3rd) | C / G (4th) | Eb / Bb (4th) | D / G (5th) |
+
+I feel like the interval jumping here creates some variation and facilitates the tension building. 4ths are very stable and open, a minor 3rd is tense and a 5th is a very stable power chord (but the chord it's outlining as we noted in the harmony is the V chord, so it's a very tense ending to the section).
+
+Putting together with to the bass and the string what kind of harmony do we get?
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2 V3)
+V:1 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:1] A,,,2 | | | | | | | | | | | | | | | | | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | |]
+V:2 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:2] [E,A,]15 | | | | | | | | | | | | | | | | | z [D,G,]15 | z [C,F,]15 | z [D,G,]15 | z [F,A,]15 | z [G,C]15 | z [B,E]15 | z [G,D]15 | |]
+V:3 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:3] [cea]15 | | | | | | | | | | | | | | | | | z [Bdg]15 | z [Acf]15 | z [Bdg]15 | z [cfa]15 | z [ceg]15 | z [Bef]15 | z [=Bdg]15 | |]
+</abc>
+
+Should also note here, that each of these are within their own octave space, so the bass forms the foundtation around C1-C3, the brass takes between C3 - C5, and the strings take C5 - C6. This fills our frequency spectrum nicely and gives us a full sound.
+
+All 3 of these instruments are basically the same harmonic structure, but with slightly varying voicings.
+
+Now lets look at the most complicated part, the main melody:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z4 f3 | | | | | | | | | | | | | | | | | z a2 c'3 z e'2 | d'2 b2 g2 d5 z d2 e2 | d2 c7 z c2 d2 e2 | f e d13 z5 c2 | d2 e2 c f2 e [ef]4 | d2 c2 F2 G2 B2 G2 d2 | f5 z e3 z f2 e2 f2 | g15 |]
+</abc>
+
+One important thing to note again is the insane amount of syncopation. You would have seen this the whole time, but I decided to update the piano roll viewer to draw the syncopated / offbeat notes in a lighter color so it's easier to distinguish them. I'm noting here that "onbeat" notes are ones that on on the downbeat (1, 2, 3, 4) and "offbeat" notes are ones that are on the upbeats (the "and" of each beat).
+
+Not really sure how much I can say about this section. We know the chord progression:
+
+| Ab | Gm | Fm | Gm | Fm | Cm | Bbsus4 | G |
+
+Though the notes we're playing are:
+
+| F Ab C Eb | D Bb G | D C Eb | F Eb D | C D Eb F | F Eb D C G Bb | F Eb | G | 
+
+The notes of the chords are:
+
+| Ab C Eb | G Bb D | F Ab C | G Bb D | F Ab C | C Eb G | Bb Eb F | G B D |
+
+So comparing the two, the non-chord notes are:
+
+| F | - | D Eb | F Eb | D Eb | F D Bb | - | - |
+
+
+So most of the measures do embellish here on non-chord tones, consider the melody is driving us here and leading us forward, it really creates harmonic interest this way. 
+
+
+or in scale degrees:
+
+| 4 | - | 2 3 | 4 3 | 2 3 | 4 2 7 | - | - |
+
+One thing I'm trying to see here is the frequency of notes played within the scale, which notes really create that "Megaman X Sound" especially when we're breaking away from the chord tones. For this I'm seeing mostly:
+
+4, 3, 2, 7
+
+I would just think about this when trying to write my own melody to determine which non-chord tones could be safest to hit for passing tones. I don't notice any repeated rhythm here, there is a few good embellishings where the melody jumps back and forth between two notes quickly. 
+
+Perhaps we could break down the first and second halves and see there's a slight parallel with how they function? 
+
+1-4: | rise | fall | linger | hold
+5-8: | rise | fall | linger | hold
+
+So that's a bit of repitition there, though there's a whole lot of rhythmic and harmonic variation layered on top of that.
+
+Wish I could offer more insight here, but that's basically all I have for this.
+
+
+Lets listen to the whole thing:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2 V3 V4)
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z4 f3 | | | | | | | | | | | | | | | | | z a2 c'3 z e'2 | d'2 b2 g2 d5 z d2 e2 | d2 c7 z c2 d2 e2 | f e d13 z5 c2 | d2 e2 c f2 e [ef]4 | d2 c2 F2 G2 B2 G2 d2 | f5 z e3 z f2 e2 f2 | g15 |]
+V:2 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:2] A,,,2 | | | | | | | | | | | | | | | | | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | |]
+V:3 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:3] [cea]15 | | | | | | | | | | | | | | | | | z [Bdg]15 | z [Acf]15 | z [Bdg]15 | z [cfa]15 | z [ceg]15 | z [Bef]15 | z [=Bdg]15 | |]
+V:4 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:4] [^F,,^C,]2 | | | | | | | | | | | | | | | | | ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | |]
+</abc>
+
+
 `;

@@ -74,8 +74,8 @@ function createStaticPianoRollRenderer(renderOptions) {
     const BEAT_LINE_COLOR = '#555';        // Medium grid lines (beats)
     const MEASURE_LINE_COLOR = '#777';       // Darkest grid lines (measures)
     const BACKGROUND_COLOR = '#1e1e1e';     // Dark background
-    const MEASURE_SHADING_COLOR = 'rgba(255, 255, 255, 0.04)'; // Light overlay
-    const DARK_MEASURE_SHADING_COLOR = 'rgba(0, 0, 0, 0.04)'; // Dark overlay for even measures
+    const MEASURE_SHADING_COLOR = 'rgba(255, 255, 255, 0.1)'; // Light overlay
+    const DARK_MEASURE_SHADING_COLOR = 'rgba(0, 0, 0, 0.1)'; // Dark overlay for even measures
 
     // Key Colors (Mainly CSS, but references useful)
     const KEY_WHITE_COLOR_JS = '#3a3a3a'; // Reference for JS logic if needed
@@ -368,8 +368,9 @@ function createStaticPianoRollRenderer(renderOptions) {
 
         const meter = (typeof tune.getMeter === 'function')
             ? tune.getMeter() : { beats: 4, value: 4 };
-        timeSignatureNumerator = meter.beats || 4;
-        timeSignatureDenominator = meter.value || 4;
+            // force numeric, fall back to 4 if invalid
+            timeSignatureNumerator   = Number(meter.beats)   || 4;
+            timeSignatureDenominator = Number(meter.value)   || 4;
 
         let unitLen = 1 / 8;
         if (typeof tune.getUnitLength === 'function') {
@@ -700,21 +701,24 @@ function createStaticPianoRollRenderer(renderOptions) {
         if (localTicksPerMeasure > 0) {
             const firstMeasureIndex = Math.max(0, Math.floor(startTickDraw / localTicksPerMeasure));
             const lastMeasureIndex = Math.ceil(endTickDraw / localTicksPerMeasure);
-            // Use the correct dark theme shading color reference
-            ctx.fillStyle = DARK_MEASURE_SHADING_COLOR; // Defined elsewhere in the constants
+
             for (let m = firstMeasureIndex; m < lastMeasureIndex; m++) {
-                const shouldShade = (m % 2 === (shadeEvenMeasures ? 0 : 1));
-                if (shouldShade) {
-                    const measureStartTick = m * localTicksPerMeasure;
-                    const measureEndTick = (m + 1) * localTicksPerMeasure;
-                    const measureStartX = midiTickToCanvasX(measureStartTick);
-                    const measureEndX = midiTickToCanvasX(measureEndTick);
-                    if (measureEndX < 0 || measureStartX > viewWidth) continue; // Horizontal cull
-                    const drawX = Math.max(0, measureStartX);
-                    const drawWidth = Math.min(viewWidth, measureEndX) - drawX;
-                    if (drawWidth > 0) {
-                        ctx.fillRect(drawX, 0, drawWidth, viewHeight);
-                    }
+                const measureStartTick = m * localTicksPerMeasure;
+                const measureEndTick = (m + 1) * localTicksPerMeasure;
+                const startX = midiTickToCanvasX(measureStartTick);
+                const endX = midiTickToCanvasX(measureEndTick);
+                if (endX < 0 || startX > viewWidth) continue; // Horizontal cull
+
+                // alternate between light and dark shade each measure
+                const isEven = (m % 2 === 0);
+                ctx.fillStyle = isEven
+                    ? DARK_MEASURE_SHADING_COLOR
+                    : MEASURE_SHADING_COLOR;
+
+                const drawX = Math.max(0, startX);
+                const drawWidth = Math.min(viewWidth, endX) - drawX;
+                if (drawWidth > 0) {
+                    ctx.fillRect(drawX, 0, drawWidth, viewHeight);
                 }
             }
         }
@@ -821,6 +825,12 @@ function createStaticPianoRollRenderer(renderOptions) {
         });
     }
 
+    const NOTE_IN_SCALE_ON_BEAT = '#558'; // slightly darker blue
+    const NOTE_IN_SCALE_OFF_BEAT = '#85c3f7'; // slightly lighter blue
+    const NOTE_OUT_SCALE_ON_BEAT = '#d18c00'; // slightly darker orange
+    const NOTE_OUT_SCALE_OFF_BEAT = '#ffbc66'; // slightly lighter orange
+
+
     // Replace drawNotesForSnippet (or implement drawNoteWithHighlight) with this:
     function drawNoteWithHighlight(note, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
         const { pitch, start_tick, duration_ticks, velocity, voice } = note;
@@ -848,10 +858,18 @@ function createStaticPianoRollRenderer(renderOptions) {
         const hlVoice = renderOptions.highlightVoiceIndex;
         const isHighlight = (hlVoice == null || voice === hlVoice);
 
-        const fillColor = isHighlight
-            ? (inScale ? NOTE_IN_SCALE_COLOR : NOTE_OUT_SCALE_COLOR)
-            : '#888';
+        const onBeat = (start_tick % ticksPerBeat * timeSignatureNumerator) === 0;
 
+        // pick base color based on scale & beat alignment
+        let baseColor;
+        if (inScale) {
+            baseColor = onBeat ? NOTE_IN_SCALE_ON_BEAT : NOTE_IN_SCALE_OFF_BEAT;
+        } else {
+            baseColor = onBeat ? NOTE_OUT_SCALE_ON_BEAT : NOTE_OUT_SCALE_OFF_BEAT;
+        }
+
+        // apply highlight dimming if needed
+        const fillColor = isHighlight ? baseColor : '#888';
         const alpha = isHighlight
             ? Math.max(0.3, Math.min(1, velocity / 127))
             : 0.6;
@@ -860,12 +878,10 @@ function createStaticPianoRollRenderer(renderOptions) {
         ctx.fillStyle = fillColor;
         ctx.fillRect(x, y, w, h);
 
-
-        // outline
+        // outline (unchanged)
         ctx.lineWidth = NOTE_OUTLINE_WIDTH;
         ctx.strokeStyle = NOTE_OUTLINE_COLOR;
         ctx.strokeRect(x, y, w, h);
-
 
         ctx.globalAlpha = 1;
     }
