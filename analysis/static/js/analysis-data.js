@@ -1513,4 +1513,317 @@ V:3 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
 %%MIDI channel 0
 [V:3] [ceg]15 | | | | | | | | | | | | | | | | | | | | | | | | | z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 z [ceg]15 | z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]
 </abc>
+
+
+Lets start with the drums:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:1] B,,,2 | | | | | | | | | | | | | | | | | | | | | | | | | E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]
+V:2 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:2] [^F,,^C,]2 | | | | | | | | | | | | | | | | | | | | | | | | | [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | |]
+</abc>
+
+The whole section is 8 bars, but it repeats 2x so this is the pattern.
+
+Actually, looking at it, it's a single loop 4x with a drum fill. So the whole thing is 16x.
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:1] B,,,2 | | | | | | | | | | | | | | | | | | | | | | | | | E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | |]
+V:2 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:2] [^F,,^C,]2 | | | | | | | | | | | | | | | | | | | | | | | | | [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | |]
+</abc>
+
+A good mix of on and offbeats. The closed hat playing on all beats but 3, the open hat on the offbeats and on 3.
+
+The kick plays on the first 2 beats, and the snare plays on the "and" of 1 and doubles on 3.
+
+Basically what i think i'm seeing is it's going double time with the kick on each beat and the snare on that "and" beat. And then on the third beat we throw that all off, and the fourth beat we quicken things up even more with the kick and snare on the second half of the beat.
+
+The whole things creates this very chaotic energy.
+
+Now lets check out the bass.
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:1] C,,2 | | | | | | | | | | | | | | | | | | | | | | | | | C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 D,,2 E,,2 G,,2 F,,2 D,,2 E,,2 C,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | D,,2 C,,2 B,,,2 G,,,2 F,,2 E,,2 D,,2 G,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 C,,2 E,,2 F,,2 E,,2 C,,2 G,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 C,,2 E,,2 C,,2 | F,,2 E,,2 D,,2 C,,9 |]
+</abc>
+
+The bass really goes wild here. it's still all 16th notes, but it's crusing all over the scale.
+
+Looking at it closer, every other measure it goes wild. So you can break it into sets of 2. First measure establishes the root (and starts to go a little wild), the second is arpeggios all over the place (within the key).
+
+Measures 1 and 5 look to be the same pattern.
+
+While it may not look like it, measures 2 and 6 are actually basically the same as well, just the harmony is different. You can see it follow the same shape.
+
+Measure 2: Starts at f, goes down d, goes up Eb, goes up G, goes down F,  goes down D, goes up D, goes down C
+Measure 3: Starts at f, goes down c, goes up Eb, goes up F, goes down Eb, goes down C, goes up G, goes down C
+
+so while they're harmonically different, and the intervals are slightly different, they are a repition in a way with a variation.
+
+And it ends with a descending line towards C, then holding a syncopated C note to end the song.
+
+The root notes look like C | F | C | F (an octave higher)| 
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:1] [ceg]15 | | | | | | | | | | | | | | | | | | | | | | | | | z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 z [ceg]15 | z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]
+</abc>
+
+Now the strings. It actually mixes things up here. We can see some offbeat chords here for the first time. The chords we're looking at for the strings here are:
+
+Cm | Ab / C | cdf (not sure name) | Ab/C G | Cm | Ab/C | Bb | Bb Cm |
+
+I like the rhythmic surprise here on measures 4 and 8, playing a surprise chord on the offbeat, especially on bar 4 where it jumps to the V. 
+
+The other interesting thing is that cdf chord, which is not a typical chord. Given it's 3 notes very close together it creates this clustered tension which springs us towards the jumpy bit in bar 4. 
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:1] [G,,C,]3 | | | | | | | | | | | | | | | | | | | | | | | | | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]3 | z [C,F,]3 z [A,,C,]2 [C,F,]3 z [A,,C,]2 | [C,E,]3 z [G,,C,]2 [=B,,D,]3 z [G,,C,]2 [B,,D,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [D,F,]2 | [D,F,]2 [D,F,]2 [D,F,]2 [D,F,]2 [E,G,]2 [F,A,]2 [E,G,]2 | [D,F,]2 [C,E,]2 [B,,D,]2 [G,,C,]9 |]
+</abc>
+
+Looking at the brass this is a very interesting variation on the original brass pattern. Lets take a look at the original to remind ourselves:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:1] [G,,C,]3 | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 [E,G,]3 |]
+</abc>
+
+So basically where the original hung on for 2 measures, this variation keeps the ryhthm from the original but changes the chords to create a new harmonic structure to align with the strings for this section. This should be really obvious looking at the orange blues notes since they line up directly with the strings.
+
+
+lets take a listen of both the strings and brass together:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:1] [G,,C,]3 | | | | | | | | | | | | | | | | | | | | | | | | | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]3 | z [C,F,]3 z [A,,C,]2 [C,F,]3 z [A,,C,]2 | [C,E,]3 z [G,,C,]2 [=B,,D,]3 z [G,,C,]2 [B,,D,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [D,F,]2 | [D,F,]2 [D,F,]2 [D,F,]2 [D,F,]2 [E,G,]2 [F,A,]2 [E,G,]2 | [D,F,]2 [C,E,]2 [B,,D,]2 [G,,C,]9 |]
+V:2 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:2] [ceg]15 | | | | | | | | | | | | | | | | | | | | | | | | | z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 z [ceg]15 | z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]
+</abc>
+
+Then on the final bar, the brass and the bass descend together to bring us back home:
+
+The chords we have from the strings again is:
+| Cm | Ab | cdf | Ab G | Cm | Ab | Bb | Bb Cm |
+
+And the brass looks like its playing:
+| Cm | Ab | Fm/C | Ab G | Cm | Ab | Bb (no Bb) | descent to C | 
+
+So the brass basically exactly matches the harmony and just provides its little "honking" rhymic color. The only thing it adds extra is the Fm/C which works with that tense cluster.
+
+
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:1] C,,2 | | | | | | | | | | | | | | | | | | | | | | | | | | | | | C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 C,,2 E,,2 F,,2 E,,2 C,,2 G,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 C,,2 E,,2 C,,2 | F,,2 E,,2 D,,2 C,,9 |]
+V:2 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:2] [G,,C,]3 | | | | | | | | | | | | | | | | | | | | | | | | | | | | | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [D,F,]2 | [D,F,]2 [D,F,]2 [D,F,]2 [D,F,]2 [E,G,]2 [F,A,]2 [E,G,]2 | [D,F,]2 [C,E,]2 [B,,D,]2 [G,,C,]9 |]
+</abc>
+
+
+Now for the final melodic section:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1)
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z4 c5 | | | | | | | | | | | | | | | | | | | | | | | | | z d2 e2 c2 | z2 A2 e2 g2 f2 d2 e2 c2 | z2 a2 f2 a2 e'2 d'2 c'2 a2 | e'2 d'2 [c'e']2 [af']2 [fg']2 [df']2 [Be']2 [Gd']2 | z2 c7 z d2 e2 g2 | z2 f5 z e2 d2 f2 z2 G3 | z B2 d3 z f5 z g15 | |]
+</abc>
+
+We can see that the melody once again does a theme with variation here. We can see how basically bars 1 and 5 are the same, the only difference is in bar 1 we're diving down on the last note and on bar 5 we're rising up.
+
+Lets take a look at it with the strings so we can see the harmony in the theme:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2)
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z4 c5 | | | | | | | | | | | | | | | | | | | | | | | | | z d2 e2 c2 | z2 A2 e2 g2 f2 d2 e2 c2 | z2 a2 f2 a2 e'2 d'2 c'2 a2 | e'2 d'2 [c'e']2 [af']2 [fg']2 [df']2 [Be']2 [Gd']2 | z2 c7 z d2 e2 g2 | z2 f5 z e2 d2 f2 z2 G3 | z B2 d3 z f5 z g15 | |]
+V:2 name="SynthStrings 1 (c)" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:2] [ceg]15 | | | | | | | | | | | | | | | | | | | | | | | | | z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 z [ceg]15 | z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]
+</abc>
+
+I updated the code here to hopefully make it easier to see which melody notes are passing tones (non-chord) and which ones are notes on the chord.
+
+Anything that's highlighted yellow is a non-chord tone, which means it's not in sync with our established harmony and actually adding complexity to the song.
+
+We can see that actually probably about half of the notes in the melody are non-chord tones, creating a lot of discord. 
+
+I'm counting 24 chord tones and 21 non-chord tones, so it's almost 50/50.
+
+I would say that bar 4 is the climax of the section and probably the whole song, we can see the melody branch off at its peak waterfalling down from Eb6 down to G4, about 2 whole octaves. The first half of this works towards the build up, then on the second half variation it's releasing and working ourselves back home. The melody here actually ends on a powerful G instead of a C, which I think leads directly towards a loop and gives the feeling that we still have more rockin to do.
+
+Lets take a final listen to the whole song again. Even if everything was a little bit overwheling here, hopefully you can pick out the different sections and variations we've been discussing here:
+
+<abc>
+X:1
+T:Multi-Track Snippet
+M:4/4
+L:1/16
+K:Cmin
+%%score (V1 V2 V3 V4 V5 V6 V7)
+V:6 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:6] B,,,3 z E,,3 E,, E,,2 B,,,3 z E,,2 | B,,,3 z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,2 E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,3 z B,,,2 E,,3 z B,,,3 | z E,,3 z B,,,2 B,,,2 E,,2 B,,,2 | B,,,3 z E,,2 B,,,2 E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,3 z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z B,,,3 z E,,3 z B,,,3 | z E,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]
+V:7 name="Drums" snm="Drums" clef=treble perc=yes
+%%MIDI channel 10
+[V:7] [^A,,^C,E,]3 z ^A,,3 ^F,, [^A,,E,]2 ^A,,3 z ^A,,2 | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, [^A,,^C,] ^A,, | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, [^A,,^C,] ^A,, | [^A,,^C,] ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, ^A,, [^A,,G,] ^A,, ^A,, ^A,, | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | [^F,,^C,]2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 ^F,,2 ^F,,2 [^A,,G,]2 ^F,,2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | |]
+V:1 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:1] z20 e3 | z B2 =B2 z2 c17 | z5 e3 | z B2 =B2 z2 c2 | z2 c2 e2 g2 f2 e2 d2 B2 | z2 a3 z g2 f2 e2 z2 d2 | e2 z4 c5 z d2 e2 | f2 d3 z e3 z d3 z B2 | G15 z5 e3 | z B2 =B2 z2 c17 | z5 e3 | z B2 =B2 z2 c2 | z2 c2 e2 c2 f2 _g2 f2 c2 | z2 a3 z g2 f2 c'3 z b2 | a2 z4 f5 z d2 e2 | f2 d3 z e3 z f3 z g2 | g15 z5 f3 | z a2 c'3 z e'2 | d'2 b2 g2 d5 z d2 e2 | d2 c7 z c2 d2 e2 | f e d13 z5 c2 | d2 e2 c f2 e [ef]4 | d2 c2 F2 G2 B2 G2 d2 | f5 z e3 z f2 e2 f2 | g15 z5 c5 | z d2 e2 c2 | z2 A2 e2 g2 f2 d2 e2 c2 | z2 a2 f2 a2 e'2 d'2 c'2 a2 | e'2 d'2 [c'e']2 [af']2 [fg']2 [df']2 [Be']2 [Gd']2 | z2 c7 z d2 e2 g2 | z2 f5 z e2 d2 f2 z2 G3 | z B2 d3 z f5 z g15 | |]
+V:2 name="Distortion Guitar" snm="Distortion Guitar" clef=treble
+%%MIDI program 30
+%%MIDI channel 0
+[V:2] z21 e3 | z B2 =B2 z2 c17 | | z5 e3 z B2 =B2 z2 c2 | z2 c2 e2 g2 f2 e2 d2 B2 | z2 a3 z g2 f2 e2 z2 d2 | e2 z4 c5 z d2 e2 | f2 d3 z e3 z d3 z B2 | G15 | z5 e3 z B2 =B2 z2 c17 | | z5 e3 z B2 =B2 z2 c2 | z2 c2 e2 c2 f2 _g2 f2 c2 | z2 a3 z g2 f2 c'3 z b2 | a2 z4 f5 z d2 e2 | f2 d3 z e3 z f3 z g2 | g15 | z5 f3 z a2 c'3 z e'2 | d'2 b2 g2 d5 z d2 e2 | d2 c7 z c2 d2 e2 | f e d13 | z5 c2 d2 e2 c f2 e [ef]4 | d2 c2 F2 G2 B2 G2 d2 | f5 z e3 z f2 e2 f2 | g15 | z5 c5 z d2 e2 c2 | z2 A2 e2 g2 f2 d2 e2 c2 | z2 a2 f2 a2 e'2 d'2 c'2 a2 | e'2 d'2 [c'e']2 [af']2 [fg']2 [df']2 [Be']2 [Gd']2 | z2 c7 z d2 e2 g2 | z2 f5 z e2 d2 f2 z2 G3 | z B2 d3 z f5 | z g15 | |]
+V:3 name="Synth Bass 1" snm="Synth Bass 1" clef=treble
+%%MIDI program 38
+%%MIDI channel 0
+[V:3] C,,3 C, z2 G,, E,, _G,,2 B,,,2 B,,,2 =B,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | A,,,2 A,,,2 A,,,2 A,,2 A,,,2 A,,,2 A,,2 A,,,2 | D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 | B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 G,,2 C,,2 C,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | A,,,2 A,,,2 A,,,2 A,,2 A,,,2 A,,,2 A,,2 A,,,2 | D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 | B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 G,,,2 | A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 A,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 F,,2 | G,,3 z D,,2 G,,3 z D,,2 G,,2 D,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 D,,2 E,,2 G,,2 F,,2 D,,2 E,,2 C,,2 | F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | D,,2 C,,2 B,,,2 G,,,2 F,,2 E,,2 D,,2 G,,,2 | C,,2 C,,2 C,,2 C,,2 C,,2 D,,2 E,,2 C,,2 | F,,2 C,,2 E,,2 F,,2 E,,2 C,,2 G,,2 C,,2 | F,,2 F,,2 F,,2 F,,2 F,,2 C,,2 E,,2 C,,2 | F,,2 E,,2 D,,2 C,,9 |]
+V:4 name="SynthBrass 2" snm="Synth Brass 2" clef=treble
+%%MIDI program 63
+%%MIDI channel 0
+[V:4] z10 [G,,D,]3 z [G,,D,]2 | [G,,C,]3 z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 [E,G,]3 z [A,,C,]3 | z [C,E,]3 z [A,,C,]2 [C,E,]3 z [A,,C,]2 | [C,E,]3 z [A,,C,]2 [C,E,]3 z [A,,C,]2 [C,E,]3 z [B,,D,]3 | z [D,G,]3 z [B,,D,]2 [D,G,]3 z [B,,D,]2 | [D,G,]3 z [B,,D,]2 [D,G,]3 z [B,,D,]2 [D,G,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 [E,G,]3 z [A,,C,]3 | z [C,E,]3 z [A,,C,]2 [C,E,]3 z [A,,C,]2 | [C,E,]3 z [A,,C,]2 [C,E,]3 z [A,,C,]2 [C,E,]3 z [B,,D,]3 | z [D,G,]3 z [B,,D,]2 [D,G,]3 z [B,,D,]2 | [D,G,]3 z [B,,D,]2 [D,G,]3 z [B,,D,]2 [D,G,]3 z [E,A,]15 | z [D,G,]15 | z [C,F,]15 | z [D,G,]15 | z [F,A,]15 | z [G,C]15 | z [B,E]15 | z [G,D]15 | z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]3 | z [C,F,]3 z [A,,C,]2 [C,F,]3 z [A,,C,]2 | [C,E,]3 z [G,,C,]2 [=B,,D,]3 z [G,,C,]2 [B,,D,]3 z [G,,C,]3 | z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 z [D,F,]2 | [D,F,]2 [D,F,]2 [D,F,]2 [D,F,]2 [E,G,]2 [F,A,]2 [E,G,]2 | [D,F,]2 [C,E,]2 [B,,D,]2 [G,,C,]9 |]
+V:5 name="SynthStrings 1" snm="Synth Strings 1" clef=treble
+%%MIDI program 50
+%%MIDI channel 0
+[V:5] z16 [ceg]31 | | z [ceg]31 | | z [cea]31 | | z [Bdg]31 | | z [ceg]31 | | z [ceg]31 | | z [cea]31 | | z [Bdg]31 | | z [cea]15 | z [Bdg]15 | z [Acf]15 | z [Bdg]15 | z [cfa]15 | z [ceg]15 | z [Bef]15 | z [=Bdg]15 | z [ceg]15 | z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 z [ceg]15 | z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]
+</abc>
+
+Lastly let me break down the "raw assets" required to create something in this style:
+
+
+Instruments:
+- Drums
+- Synth Bass (Rhythm)
+- Synth Strings (Harmony)
+- Synth Brass (Harmony + Rhythmn)
+- Distortion Guitar (Lead)
+
+1. Intro - 1 bar
+ - Drums - 1 bar
+ - Bass - 1 bar
+ - Brass - 1 bar
+ - Strings - 1 bar
+2. Main Theme - 16 bars
+ - Drums - 2 bars (main groove)
+ - Drums - 1 bar (fill)
+ - Bass - 3 patterns
+ - Strings - chords
+ - Brass - 1 pattern
+ - Brass - chords
+ - Lead - Theme A (8 bars)
+ - Lead - Theme A Variation (8 bars)
+3. Build Up - 8 bars
+ - Drums - 1 bar
+ - Bass - 2 patterns
+ - Strings - 8 chords
+ - Brass - 8 chords
+ - Lead - Theme B (4 bars)
+ - Lead - Theme B Variation (4 bars)
+4. Break Down - 8 bars
+ - Drums - 1 bar
+ - Bass - 4 patterns
+ - Strings - 2 patterns
+ - Strings - 10 chords
+ - Brass - 10 chords
+ - Brass 1 pattern
+ - Brass (reuse original pattern)
+ - Lead - Theme C (4 bars)
+ - Lead - Theme C Variation (4 bars)
+
+It's about 28 distinctive concepts needed for build a song like this, that could either sound like a lot or a little, but at least it's broken down and manageable into smaller pieces.
+
+Going to work on other pieces as I see fit because I feel like this analysis is valuable for me. Going to need to figure out how much to write about since this did take WAY longer than i'd like. I mostly want to just note down my thoughts for the song and use the piano roll tools I'm building to make it easier to find insights.
+
+Hopefully as I get tired of explaining things, I will be able to implement visual features into the piano roll so I don't even need to explain it that much since it's all visualized. If I continue this, I'd definintely expect that part to get better over time.
+
+
+
+
 `;

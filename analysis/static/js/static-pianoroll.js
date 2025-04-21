@@ -368,9 +368,9 @@ function createStaticPianoRollRenderer(renderOptions) {
 
         const meter = (typeof tune.getMeter === 'function')
             ? tune.getMeter() : { beats: 4, value: 4 };
-            // force numeric, fall back to 4 if invalid
-            timeSignatureNumerator   = Number(meter.beats)   || 4;
-            timeSignatureDenominator = Number(meter.value)   || 4;
+        // force numeric, fall back to 4 if invalid
+        timeSignatureNumerator = Number(meter.beats) || 4;
+        timeSignatureDenominator = Number(meter.value) || 4;
 
         let unitLen = 1 / 8;
         if (typeof tune.getUnitLength === 'function') {
@@ -468,6 +468,30 @@ function createStaticPianoRollRenderer(renderOptions) {
         // ── NEW: capture how many voices we actually have
         voiceCount = voiceSummaries.length;
         console.log(`[SPR] voiceCount set to ${voiceCount}`);
+
+
+        // ——— build a set of chord‑voice indices ———
+        const chordVoiceIndices = voiceSummaries
+            .filter(v => v.name.includes('(c)'))
+            .map(v => v.index);
+
+        // ——— map each tick to the set of chord pitch‑classes sounding there ———
+        const chordNotesMap = {}; // tick → Set(pitchClass)
+        // instead of only mapping start_tick, map every tick in its duration
+        notesToRender
+            .filter(n => chordVoiceIndices.includes(n.voice))
+            .forEach(n => {
+                const pc = n.pitch % 12;
+                for (let t = n.start_tick; t < n.start_tick + n.duration_ticks; ++t) {
+                    if (!chordNotesMap[t]) chordNotesMap[t] = new Set();
+                    chordNotesMap[t].add(pc);
+                }
+            });
+
+
+        // make both of these available to your draw functions
+        renderOptions._chordVoiceIndices = chordVoiceIndices;
+        renderOptions._chordNotesMap = chordNotesMap;
 
 
         updateCurrentScaleNotes();
@@ -878,10 +902,24 @@ function createStaticPianoRollRenderer(renderOptions) {
         ctx.fillStyle = fillColor;
         ctx.fillRect(x, y, w, h);
 
-        // outline (unchanged)
+        // —— outline with chord‑tone check ——
         ctx.lineWidth = NOTE_OUTLINE_WIDTH;
-        ctx.strokeStyle = NOTE_OUTLINE_COLOR;
+
+        // default to white
+        let oColor = NOTE_OUTLINE_COLOR;
+
+        // if this isn’t a chord‑voice, and there is a chord at this tick…
+        // look up only the exact ticks where we actually recorded a chord:
+        const chordSet = renderOptions._chordNotesMap[start_tick];
+        // only if we have a chord at that tick do we ever turn yellow:
+        if (chordSet && chordSet.size > 0 && !chordSet.has(pitch % 12)) {
+            oColor = 'yellow';
+        }
+
+
+        ctx.strokeStyle = oColor;
         ctx.strokeRect(x, y, w, h);
+
 
         ctx.globalAlpha = 1;
     }
