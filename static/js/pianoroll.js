@@ -921,8 +921,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // snap down to start of its measure/bar
         playStartTick = Math.floor(firstNoteTick / ticksPerMeasure) * ticksPerMeasure;
         // span still ends at last note
-        playSpanTicks = Math.max(...ticks.map(t => t[1])) - firstNoteTick;
+        // playSpanTicks = Math.max(...ticks.map(t => t[1])) - firstNoteTick;
 
+        const lastNoteEnd = Math.max(...ticks.map(t => t[1]));
+        playSpanTicks = lastNoteEnd - playStartTick;
 
         // **start our RAF loop**
         requestAnimationFrame(updatePlayheadLoop);
@@ -2250,53 +2252,48 @@ document.addEventListener('DOMContentLoaded', function () {
      * @returns {string}           – the adjusted ABC
      */
     function trimCommonBarRests(abcText, unitsPerBar) {
-        // 1) make sure unitsPerBar is a positive integer
-        unitsPerBar = Math.round(unitsPerBar);
-        if (unitsPerBar < 1) return abcText;
+        // ensure unitsPerBar is a sane integer
+        unitsPerBar = Math.max(1, Math.round(unitsPerBar));
 
         const lines = abcText.split('\n');
-        const voiceRe = /^(\[V:\d+\]\s*)z(\d+)(\s*)(.*)$/;
+        const removed = new Array(lines.length).fill(0);
 
-        // find all the voice-lines once
-        const voiceIdxs = lines
-            .map((l, i) => voiceRe.test(l) ? i : -1)
-            .filter(i => i >= 0);
+        // regex to pull off “[V:1] ” prefix, optional “zNN ”, then the rest
+        const voiceRe = /^(\[V:\d+\]\s*)(?:z(\d+)\s*)?(.*)$/;
 
-        // 2) only keep looping while we actually strip something
-        let didStrip;
-        do {
-            didStrip = false;
+        // pass 1: strip as many full-bar rests out of the z-count as possible
+        lines.forEach((line, i) => {
+            const m = line.match(voiceRe);
+            if (!m) return;
 
-            for (const i of voiceIdxs) {
-                const m = lines[i].match(voiceRe);
-                if (!m) {
-                    // no longer a rest-line → stop attempting
-                    didStrip = false;
-                    break;
-                }
+            const header = m[1];          // e.g. "[V:1] "
+            const count = parseInt(m[2] || '0', 10);
+            const rest = m[3];          // e.g. "a6 | | | | g4 …"
 
-                const cur = parseInt(m[2], 10);
-                if (cur < unitsPerBar) {
-                    // this voice doesn't have a full-bar rest anymore → stop
-                    didStrip = false;
-                    break;
-                }
+            // how many full bars can we remove?
+            const strips = Math.floor(count / unitsPerBar);
+            const leftover = count - strips * unitsPerBar;
 
-                // subtract one bar
-                const leftover = cur - unitsPerBar;
-                if (leftover > 0) {
-                    lines[i] = `${m[1]}z${leftover}${m[3]}${m[4]}`;
-                } else {
-                    // exactly zero → drop the "zN"
-                    lines[i] = `${m[1]}${m[4]}`;
-                }
+            removed[i] = strips;
+            // rebuild the line with only the leftover rest
+            const zPart = leftover ? `z${leftover} ` : '';
+            lines[i] = header + zPart + rest;
+        });
 
-                didStrip = true;
+        // pass 2: for each voice-line, drop exactly that many "| " tokens
+        lines.forEach((line, i) => {
+            let str = line;
+            for (let j = 0; j < removed[i]; j++) {
+                // remove the first occurrence of the bar-marker only
+                str = str.replace('| ', '');
             }
-        } while (didStrip);
+            lines[i] = str;
+        });
 
         return lines.join('\n');
     }
+
+
 
 
 
