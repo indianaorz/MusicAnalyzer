@@ -244,6 +244,136 @@ document.addEventListener('DOMContentLoaded', function () {
         return { start, end, low, high };
     }
 
+    /*───────────────────  E X P O R T  E N G I N E  ───────────────────*/
+    function exportPattern(rootId) {
+        const barsz = tpMeasure();
+        const root = patterns.get(rootId);
+        if (!root) { alert('Pattern not found'); return; }
+
+        /* ————————————————— helpers ————————————————— */
+        const isDrum = ti => !!rawTracksData[ti]?.is_drum_track;
+
+        // put all drum tracks first, then the melodic ones, then numeric order
+        const orderTracks = itr =>
+            [...itr].sort((a, b) => (isDrum(a) ? 0 : 1) - (isDrum(b) ? 0 : 1) || a - b);
+
+        // return JSON note-keys whose **start** is inside pat’s rectangle
+        const noteKeysIn = pat => {
+            const out = [];
+            rawTracksData.forEach((trk, ti) =>
+                trk.notes.forEach((n, ni) => {
+                    if (noteInPattern(n, pat, ti))
+                        out.push(JSON.stringify({ trackIndex: ti, noteIndex: ni }));
+                }));
+            return out;
+        };
+
+        // build ABC from an *array of note-keys* – collapsing all drum tracks first
+        const abcForKeys = keys => {
+            if (!keys.length) return '';
+            const byTrack = new Map();
+            keys.forEach(k => {
+                const { trackIndex, noteIndex } = JSON.parse(k);
+                if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
+                byTrack.get(trackIndex).push({ trackIndex, noteIndex });
+            });
+
+            // ── merge every drum track into the first drum we find ──
+            const drums = [...byTrack.keys()].filter(isDrum);
+            if (drums.length > 1) {
+                const master = drums[0];
+                drums.slice(1).forEach(ti => {
+                    byTrack.get(master).push(...byTrack.get(ti));
+                    byTrack.delete(ti);
+                });
+            }
+
+            const order = orderTracks(byTrack.keys());
+
+            // cheat: use the trusted selection-based generator
+            const remember = new Set(selectedNotes);
+            selectedNotes = new Set(keys);
+            const abc = generateAbcFromSelectionMultiVoice(order);
+            selectedNotes = remember;
+            return abc;
+        };
+
+        // human-friendly bar range
+        const barRange = (s, e) =>
+            `bars ${Math.floor(s / barsz) + 1}–${Math.ceil(e / barsz)}`;
+
+        /* ————————————————— recursive printer ————————————————— */
+        let txt = '';
+
+        function dump(patId, indent = 0) {
+            const pat = patterns.get(patId);
+            const pad = '  '.repeat(indent);
+            const keys = noteKeysIn(pat);
+
+            if (pat.isRepetition) {
+                txt += `${pad}- **${pat.variantOfName}** repeats ${barRange(pat.range.start, pat.range.end)}\n`;
+                return;
+            }
+
+            // ▸ header line
+            txt += `${pad}- **${pat.name}** (${barRange(pat.range.start, pat.range.end)})\n`;
+
+            // ▸ full ABC
+            const fullAbc = abcForKeys(keys);
+            if (fullAbc) txt += `${pad}<abc>\n${fullAbc}\n</abc>\n`;
+
+            // ▸ per-instrument parts (only if >1 instrument)
+            const instList = pat.instruments || [];
+            if (instList.length > 1) {
+                // collect keys per track, merging drums → “Drums”
+                const drums = instList.filter(isDrum);
+                const melodic = instList.filter(ti => !isDrum(ti));
+
+                // melodic first
+                orderTracks(melodic).forEach(ti => {
+                    const k = keys.filter(k => JSON.parse(k).trackIndex === ti);
+                    const abc = abcForKeys(k);
+                    if (abc) {
+                        const nm = getTrackInstrumentName(rawTracksData[ti], ti);
+                        txt += `${pad}  • **${nm}**\n${pad}  <abc>\n${abc}\n${pad}  </abc>\n`;
+                    }
+                });
+
+                // then a single merged drum part
+                if (drums.length) {
+                    const k = keys.filter(k => drums.includes(JSON.parse(k).trackIndex));
+                    const abc = abcForKeys(k);
+                    if (abc) {
+                        txt += `${pad}  • **Drums**\n${pad}  <abc>\n${abc}\n${pad}  </abc>\n`;
+                    }
+                }
+            }
+
+            // ▸ variations tag
+            if (pat.isVariation) {
+                txt += `${pad}  _(variation of ${pat.variantOfName})_\n`;
+            }
+
+            // recurse children
+            pat.children.forEach(cid => dump(cid, indent + 1));
+        }
+
+        txt += `Now for the **${root.name}** section:\n\n`;
+        dump(rootId);
+
+        /* ————————————————— copy to clipboard ————————————————— */
+        navigator.clipboard.writeText(txt)
+            .then(() => alert('Export copied to clipboard!'))
+            .catch(err => { console.error(err); alert('Copy failed – see console'); });
+    }
+
+
+
+
+    /* ticks-per-measure helper */
+    const tpMeasure = () => window.ticksPerBeat * window.timeSignatureNumerator;
+
+
     /* ────────────────────────────────────────────────────────────────
      *   helper: select every note that belongs to `patterns.get(id)`
      * ────────────────────────────────────────────────────────────────*/
@@ -485,6 +615,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 info.style.color = '#666';
                 li.appendChild(info);
             }
+
+            /* ── NEW: EXPORT button ─────────────────────────────────── */
+            const xBtn = document.createElement('button');
+            xBtn.className = 'pattern-export';
+            xBtn.innerHTML = '<i class="fas fa-download"></i>';
+            xBtn.title = 'Export breakdown';
+            xBtn.onclick = e => { e.stopPropagation(); exportPattern(id); };
+            li.appendChild(xBtn);
 
 
             ul.appendChild(li);
