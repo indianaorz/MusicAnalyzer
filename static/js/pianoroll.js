@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const canvasContainer = document.getElementById('canvas-container'); // Used for sizing reference
     const keyDisplayPanel = document.getElementById('key-display-panel'); // Panel for keys/drums
 
+
     // --- Essential Element Checks ---
     if (!canvas || !trackListElement || !canvasContainer || !keyDisplayPanel) {
         console.error("Essential UI elements (canvas, track list, container, key panel) not found.");
@@ -179,6 +180,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let NOTE_OUT_SCALE_COLOR = '#eb8c34';
     let GRID_ROW_IN_SCALE_COLOR = '#fff';
     let GRID_ROW_OUT_SCALE_COLOR = '#fffbf0';
+    // Off-beat tint (fine to tweak later)
+    const OFFBEAT_LIGHTEN = -35;   // percentage → lighter
+    const OFFBEAT_DARKEN = 50;   // percentage → darker
+
 
     let copyMode = 'range';
     document.getElementById('copy-mode-select')
@@ -243,6 +248,142 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return { start, end, low, high };
     }
+
+    function beatPosition(tick) {
+        const tpBeat = window.ticksPerBeat;
+        const eighth = tpBeat / 2;
+        const sixteenth = tpBeat / 4;
+
+        // ① quantize to nearest 16th
+        const q = Math.round(tick / sixteenth) * sixteenth;
+
+        // ② now test
+        if (q % tpBeat === 0) return 0;  // down-beat (♩)
+        if (q % eighth === 0) return 1;  // off-beat 8th (&)
+        if (q % sixteenth === 0) return 2;  // 16th off-beat (ah-ee-&-ah)
+        return 3;                           // anything else (swing, etc.)
+    }
+
+
+
+    /**
+     * Return every time-shifted clone of `pat` inside `parentPat`.
+     * A “clone” = **same pitches, durations & instruments**, only
+     * the absolute start time differs.
+     *
+     * Each result is
+     *   { offset   : number              // ticks from master → clone
+     *     range    : {start,end,low,high}
+     *     noteKeys : string[]            // JSON keys of matching notes
+     *   }
+     */
+    /*───────────────────────────────────────────────────────────────
+     *  Return every time-shifted clone of `pat` inside `parentPat`,
+     *  but never allow the clone to overlap the master or another
+     *  already-accepted clone.
+     *───────────────────────────────────────────────────────────────*/
+    function findRepeatsOfPattern(pat, parentPat) {
+        // helper – get all notes that currently belong to pattern P
+        const getNotes = P => {
+            const list = [];
+            rawTracksData.forEach((trk, ti) => {
+                trk.notes.forEach((n, ni) => {
+                    if (noteInPattern(n, P, ti)) list.push({ trackIndex: ti, noteIndex: ni, n });
+                });
+            });
+            return list;
+        };
+
+        const master = getNotes(pat);
+        if (!master.length) return [];
+
+        /* —— fingerprint of the master’s rhythm/pitches ——————— */
+        const fp = new Map();                          // ti → [d0,d1,…]
+        master.forEach(o => {
+            if (!fp.has(o.trackIndex)) fp.set(o.trackIndex, []);
+            fp.get(o.trackIndex).push(o.n.start_tick);
+        });
+        fp.forEach(arr => arr.sort((a, b) => a - b));
+        const firstStart = Math.min(...master.map(o => o.n.start_tick));
+        fp.forEach(arr => {
+            const base = arr[0];
+            for (let i = 0; i < arr.length; i++) arr[i] -= base;
+        });
+
+        const parentNotes = getNotes(parentPat);
+        const candidates = parentNotes.filter(o =>
+            pat.instruments.includes(o.trackIndex) &&
+            o.n.pitch === master[0].n.pitch &&
+            o.n.duration_ticks === master[0].n.duration_ticks
+        );
+
+        const hits = [];
+        candidates.forEach(cand => {
+            const off = cand.n.start_tick - firstStart;
+            if (off === 0) return;                                     // same slice
+
+            const newRange = {
+                start: pat.range.start + off,
+                end: pat.range.end + off,
+                low: pat.range.low,
+                high: pat.range.high
+            };
+
+            /* ➊ skip if this slice touches the master */
+            if (spansOverlap(newRange.start, newRange.end,
+                pat.range.start, pat.range.end)) return;
+
+            /* ➋ skip if it overlaps any repeat we’ve already logged */
+            if (hits.some(h =>
+                spansOverlap(h.range.start, h.range.end,
+                    newRange.start, newRange.end))) return;
+
+            // —— verify every master note exists at +off ——   
+            let ok = true, keys = [];
+            fp.forEach((starts, ti) => {
+                const trk = rawTracksData[ti];
+                starts.forEach(d => {
+                    const tgtStart = firstStart + d + off;
+                    const mNote = master.find(o => o.trackIndex === ti &&
+                        o.n.start_tick === firstStart + d);
+                    const idx = trk.notes.findIndex(x =>
+                        x.start_tick === tgtStart &&
+                        x.duration_ticks === mNote.n.duration_ticks &&
+                        x.pitch === mNote.n.pitch
+                    );
+                    if (idx === -1) { ok = false; return; }
+                    keys.push(JSON.stringify({ trackIndex: ti, noteIndex: idx }));
+                });
+            });
+            if (!ok) return;
+
+            /* ➌ reject if EXTRA notes are present inside the slice ------------------ */
+            const extra = parentNotes.some(o =>
+                // only care about the same instruments we’re matching
+                pat.instruments.includes(o.trackIndex) &&
+                // note’s start must fall inside the candidate window
+                o.n.start_tick >= newRange.start &&
+                o.n.start_tick < newRange.end &&
+                // and it is *not* one of the cloned master notes we just recorded
+                !keys.includes(JSON.stringify({
+                    trackIndex: o.trackIndex,
+                    noteIndex: o.noteIndex
+                })));
+            if (extra) return;              // not an exact repetition – ignore
+
+            /* ➍ all good – record this hit ----------------------------------------- */
+            hits.push({ offset: off, range: newRange, noteKeys: keys });
+
+        });
+
+        return hits;
+    }
+
+
+
+
+
+
 
     /*───────────────────  E X P O R T  E N G I N E  ───────────────────*/
     function exportPattern(rootId) {
@@ -437,11 +578,13 @@ document.addEventListener('DOMContentLoaded', function () {
         pendingSave = setTimeout(saveSettings, 400);
     }
     function saveSettings() {
+        const harmonyFlags = trackStates.map(s => s.isHarmony);
         const body = JSON.stringify({
             root: selectedRootNote,
             scale: selectedScaleType,
             copyMode,
             snapMode,
+            harmony: harmonyFlags,        // ← new
             patterns: [...patterns.values()]
         });
         fetch(`/settings/${encodeURIComponent(SETTINGS_FILE)}`, {
@@ -450,6 +593,8 @@ document.addEventListener('DOMContentLoaded', function () {
             body
         }).catch(console.error);
     }
+    let repeatHighlights = [];
+    let variationHighlights = [];
 
 
     function addPattern(name) {
@@ -463,24 +608,129 @@ document.addEventListener('DOMContentLoaded', function () {
             instruments.add(trackIndex);
         });
 
+        // ➊ create the new “master” pattern
         const id = crypto.randomUUID();
-        patterns.set(id, {
+        const pat = {
             id,
             name,
             parentId: activePatternId,
             range: rect,
             mode: copyMode,
             children: [],
-            instruments: Array.from(instruments)      // ← store it here
-        });
-        patterns.get(activePatternId).children.push(id);
-        activePatternId = id;
-        selectedNotes.clear();
-        rebuildPatternTree();
-        redrawPianoRoll();
-        queueSave();
+            instruments: Array.from(instruments)
+        };
+        patterns.set(id, pat);
+        const parent = patterns.get(pat.parentId || ROOT_ID);
+        parent.children.push(id);
+
+        // clear any previous highlights
+        repeatHighlights = [];
+        variationHighlights = [];
+
+        // ➋ scan for exact repetitions
+        const reps = findRepeatsOfPattern(pat, parent);
+        repeatHighlights = reps.map(h => h.range);
+        if (repeatHighlights.length) {
+            redrawPianoRoll(); // show yellow
+            setTimeout(() => {
+                if (confirm(`Found ${repeatHighlights.length} exact repetition`
+                    + `${repeatHighlights.length > 1 ? 's' : ''} of “${name}”.\n`
+                    + `Convert highlighted section${repeatHighlights.length > 1 ? 's' : ''} to repetitions?`)) {
+                    reps.forEach(h => {
+                        const rid = crypto.randomUUID();
+                        patterns.set(rid, {
+                            id: rid,
+                            name: `${name}`,
+                            parentId: pat.parentId,
+                            range: h.range,
+                            mode: pat.mode,
+                            instruments: [...pat.instruments],
+                            isRepetition: true,
+                            variantOf: id,
+                            variantOfName: name
+                        });
+                        parent.children.push(rid);
+                    });
+                    repeatHighlights = [];
+                    rebuildPatternTree();
+                    queueSave();
+                    redrawPianoRoll();
+                } else {
+                    repeatHighlights = [];
+                    redrawPianoRoll();
+                }
+
+                // ➌ after handling repeats, move on to rhythmic variations
+                scanForRhythmicVariations();
+            }, 100);
+        }
+        else {
+            // no repeats → go straight to variations
+            scanForRhythmicVariations();
+        }
+
+        // ➍ helper to detect & prompt for rhythmic variations
+        function scanForRhythmicVariations() {
+            const vars = findRhythmicVariations(pat, parent);
+            variationHighlights = vars.map(h => h.range);
+            if (!variationHighlights.length) {
+                finalize();
+                return;
+            }
+
+            redrawPianoRoll(); // show orange
+            setTimeout(() => {
+                if (confirm(`Found ${variationHighlights.length} rhythmic variation`
+                    + `${variationHighlights.length > 1 ? 's' : ''} of “${name}”.\n`
+                    + `Convert highlighted section${variationHighlights.length > 1 ? 's' : ''} to variations?`)) {
+
+                    // how many primes already exist under this master?
+                    const existing = parent.children
+                        .filter(cid => patterns.get(cid).variantOf === id).length;
+
+                    vars.forEach((h, idx) => {
+                        const rid = crypto.randomUUID();
+                        const prime = "'".repeat(existing + idx + 1);
+                        patterns.set(rid, {
+                            id,
+                            id: rid,
+                            name: `${name}${prime}`,
+                            parentId: pat.parentId,
+                            range: h.range,
+                            mode: pat.mode,
+                            instruments: [...pat.instruments],
+                            isVariation: true,
+                            isRhythmicVariation: true,
+                            variantOf: id,
+                            variantOfName: name
+                        });
+                        parent.children.push(rid);
+                    });
+
+                    variationHighlights = [];
+                    rebuildPatternTree();
+                    queueSave();
+                    redrawPianoRoll();
+                } else {
+                    variationHighlights = [];
+                    redrawPianoRoll();
+                }
+                finalize();
+            }, 100);
+        }
+
+        // ➎ once all detections done: activate, clear selection, redraw, save
+        function finalize() {
+            activePatternId = id;
+            selectedNotes.clear();
+            rebuildPatternTree();
+            redrawPianoRoll();
+            queueSave();
+        }
     }
 
+
+    const primeSuffix = n => "'".repeat(n);
 
     function editPattern(id) {
         if (id === ROOT_ID) return;
@@ -564,72 +814,274 @@ document.addEventListener('DOMContentLoaded', function () {
             zoomToRect(r);
         }
     }
+
+    /**
+     * Return a stable string that represents the rhythm of a note-cluster.
+     * We ignore pitch, velocity, channel … only care about
+     *   – relative start-time (ticks offset from first note)
+     *   – relative duration
+     *   – which track the note lives on   (so drums vs bass don’t collide)
+     */
+    function buildRhythmFingerprint(notes, resolution = window.ticksPerBeat / 16) {
+        // helper to snap any tick to the nearest gridpoint
+        const q = t => Math.round(t / resolution) * resolution;
+
+        // ① find the true first start *after* quantizing
+        const firstStart = Math.min(...notes.map(o => q(o.n.start_tick)));
+
+        // ② build a map of [ trackIndex → [ "relStart|relDur", … ] ]
+        const map = new Map();
+        notes.forEach(o => {
+            const qs = q(o.n.start_tick);
+            const qd = q(o.n.duration_ticks);
+            const relS = qs - firstStart;
+            const entry = `${relS}|${qd}`;
+            if (!map.has(o.trackIndex)) map.set(o.trackIndex, []);
+            map.get(o.trackIndex).push(entry);
+        });
+
+        // ③ sort each track’s entries so order is stable…
+        map.forEach(list => list.sort());
+
+        // ④ flatten to a single string:  track,entry,entry, track,entry… 
+        return [...map.entries()]
+            .sort((a, b) => a[0] - b[0])             // ascending track order
+            .flatMap(([ti, list]) => [ti, ...list])
+            .join(',');
+    }
+
+    const spansOverlap = (s1, e1, s2, e2) => !(e1 <= s2 || e2 <= s1);
+
+    /**
+     * Return every slice inside `parentPat` that has an identical rhythm
+     * to `pat` (same tracks, same relative starts & durations) but with
+     * at least one different pitch.  Unlike the old version, it does **not**
+     * require the slice to start on a bar-line – it checks every grid-point
+     * between parent.start and parent.end – span.
+     *
+     * @param {Object} pat         – the “master” pattern
+     * @param {Object} parentPat   – the pattern whose children we’re scanning
+     * @param {number} [grid=ticksPerBeat/16]  – how fine to step (defaults = 16-th)
+     * @returns {Array<{range:{start,end,low,high}, noteKeys:string[]}>}
+     */
+    function findRhythmicVariations(pat, parentPat, grid) {
+        const TPB = window.ticksPerBeat || 480;
+        const step = grid ?? TPB / 16;                 // default 16-th-note grid
+        const span = pat.range.end - pat.range.start;
+        const searchStart = parentPat.range.start;
+        const searchEnd = parentPat.range.end - span;
+
+        // helper – grab every note that belongs to pattern P *right now*
+        const getNotes = P => {
+            const list = [];
+            rawTracksData.forEach((trk, ti) => {
+                trk.notes.forEach((n, ni) => {
+                    if (noteInPattern(n, P, ti)) list.push({ trackIndex: ti, noteIndex: ni, n });
+                });
+            });
+            return list;
+        };
+
+        const masterNotes = getNotes(pat);
+        if (!masterNotes.length) return [];
+
+        const fpRef = buildRhythmFingerprint(masterNotes);
+
+        // don’t create a variation where a child pattern already starts
+        const occupiedStarts = new Set(
+            parentPat.children
+                .map(cid => patterns.get(cid))
+                .filter(Boolean)
+                .map(p => p.range.start)
+        );
+
+        const hits = [];
+        for (let winStart = searchStart; winStart <= searchEnd; winStart += step) {
+
+            if (spansOverlap(winStart, winStart + span,
+                pat.range.start, pat.range.end)) continue; // skip the master itself
+            if (occupiedStarts.has(winStart)) continue; // skip existing child
+            if ((winStart - searchStart) % step) continue; // safety (non-integer fp)
+
+            // collect all notes that overlap [winStart, winStart+span)
+            const winNotes = [];
+            rawTracksData.forEach((trk, ti) => {
+                if (!pat.instruments.includes(ti)) return;             // instruments filter
+                trk.notes.forEach((n, ni) => {
+                    if (n.start_tick < winStart + span &&
+                        n.start_tick + n.duration_ticks > winStart) {
+                        winNotes.push({ trackIndex: ti, noteIndex: ni, n });
+                    }
+                });
+            });
+
+            if (!winNotes.length) continue;
+            if (buildRhythmFingerprint(winNotes) !== fpRef) continue; // rhythm differs
+
+
+            // *** NEW: require the earliest note to begin at the window start ***
+            const earliest = Math.min(...winNotes.map(o => o.n.start_tick));
+            if (earliest !== winStart) continue;                       // ← skip shifted copies
+
+            // identical rhythm – is **any** pitch different?
+            const rel = t => t - winStart;                             // helper
+            const baseRel = t => t - masterNotes[0].n.start_tick;      // helper
+            const hasPitchMismatch = winNotes.some(w => {
+                const match = masterNotes.find(m =>
+                    m.trackIndex === w.trackIndex &&
+                    baseRel(m.n.start_tick) === rel(w.n.start_tick)
+                );
+                return match && match.n.pitch !== w.n.pitch;
+            });
+            if (!hasPitchMismatch) continue;
+
+            // give the slice its *own* pitch bounds
+            const lo = Math.min(...winNotes.map(o => o.n.pitch));
+            const hi = Math.max(...winNotes.map(o => o.n.pitch));
+
+            var range = {
+                start: winStart,
+                end: winStart + span,
+                low: lo,
+                high: hi
+            };
+            // good – record this hit
+            hits.push({
+                range: range,
+                noteKeys: winNotes.map(w =>
+                    JSON.stringify({ trackIndex: w.trackIndex, noteIndex: w.noteIndex }))
+            });
+        }
+
+        return hits;
+    }
+
+
+    let selectionVariationHighlights = [];
+
+    /**
+ * Build a tiny “pattern” from whatever notes are currently selected,
+ * then scan the active pattern for identical rhythms.
+ */
+    function updateSelectionRhythmicCandidates() {
+        // if you have fewer than 2 notes, nothing to match
+        if (selectedNotes.size < 2) {
+            selectionVariationHighlights = [];
+            return;
+        }
+
+        // collect JSON keys → pitch / tick info
+        const sel = [...selectedNotes].map(k => JSON.parse(k));
+        const pitches = sel.map(({ trackIndex, noteIndex }) => rawTracksData[trackIndex].notes[noteIndex].pitch);
+        const starts = sel.map(({ trackIndex, noteIndex }) => rawTracksData[trackIndex].notes[noteIndex].start_tick);
+        const ends = sel.map(({ trackIndex, noteIndex }) =>
+            rawTracksData[trackIndex].notes[noteIndex].start_tick +
+            rawTracksData[trackIndex].notes[noteIndex].duration_ticks
+        );
+
+        // build the temp pattern
+        const tempPat = {
+            range: {
+                start: Math.min(...starts),
+                end: Math.max(...ends),
+                low: Math.min(...pitches),
+                high: Math.max(...pitches)
+            },
+            instruments: [...new Set(sel.map(n => n.trackIndex))]
+        };
+
+        // scan for rhythmic variations inside the active pattern
+        const parentPat = patterns.get(activePatternId);
+        const hits = findRhythmicVariations(tempPat, parentPat);
+        // store just the ranges for drawing
+        selectionVariationHighlights = hits.map(h => h.range);
+    }
+
+
+
+    /* persistent collapse state (id → bool) */
+    let collapsed = new Set();
+
     function rebuildPatternTree() {
         const ul = document.getElementById('pattern-tree');
         ul.innerHTML = '';
-        function addNode(id, depth) {
-            const p = patterns.get(id);
-            if (!Array.isArray(p.children)) p.children = [];
+
+        function makeRow(p, depth, isLast) {
             const li = document.createElement('li');
-            li.className = 'pattern-node' + (id === activePatternId ? ' active' : '');
-            li.style.paddingLeft = (depth * 14) + 'px';
+            li.className = 'pattern-node' +
+                (p.id === activePatternId ? ' active' : '') +
+                (isLast ? ' last-child' : '');
+            li.style.setProperty('--depth', depth);
 
-            // name clickable
+            /* ► / ▾ caret  */
+            const caret = document.createElement('span');
+            caret.className = 'caret';
+            caret.textContent = p.children?.length ? '▾' : '';
+            caret.onclick = e => {
+                e.stopPropagation();
+                if (!p.children?.length) return;
+                (collapsed.has(p.id) ? collapsed.delete(p.id)
+                    : collapsed.add(p.id));
+                rebuildPatternTree();
+            };
+            li.appendChild(caret);
+
+            /* pattern name  */
             const nameSpan = document.createElement('span');
+            nameSpan.className = 'node-name';
             nameSpan.textContent = p.name || '(unnamed)';
-            nameSpan.onclick = () => setActivePattern(id);
             li.appendChild(nameSpan);
+            li.onclick = () => setActivePattern(p.id);
 
-            // EDIT button
-            const editBtn = document.createElement('button');
-            editBtn.className = 'pattern-edit';
-            editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-            editBtn.title = 'Edit Pattern';
-            editBtn.onclick = e => { e.stopPropagation(); editPattern(id); };
-            li.appendChild(editBtn);
+            /* —— meta tag: “variation / repeat of …” + checkbox ——— */
+            if ((p.isVariation || p.isRepetition) && p.variantOfName) {
+                const meta = document.createElement('span');
+                meta.className = 'node-meta';
 
-            // DELETE button (disabled for root)
-            const delBtn = document.createElement('button');
-            delBtn.className = 'pattern-delete';
-            delBtn.innerHTML = '<i class="fas fa-trash"></i>';
-            delBtn.title = id === ROOT_ID ? 'Cannot delete root' : 'Delete Pattern';
-            delBtn.disabled = (id === ROOT_ID);
-            delBtn.onclick = e => { e.stopPropagation(); deletePattern(id); };
-            li.appendChild(delBtn);
+                if (p.isRepetition) meta.textContent = `repeat of ${p.variantOfName}`;
+                else {
+                    meta.textContent = `variation of ${p.variantOfName}`;
 
-            // If this is a variation, show subtext
-            if (p.isVariation && p.variantOfName) {
-                const varDiv = document.createElement('div');
-                varDiv.className = 'variation-of';
-                varDiv.textContent = `Variation of ${p.variantOfName}`;
-                varDiv.style.fontSize = '0.75em';
-                varDiv.style.color = '#666';
-                li.appendChild(varDiv);
-            }
-            // after you append the nameSpan…
-            if (p.isRepetition && p.variantOfName) {
-                const info = document.createElement('div');
-                info.className = 'pattern-subtext';
-                info.textContent = `↻ Repeat of ${p.variantOfName}`;
-                info.style.fontSize = '0.75em';
-                info.style.color = '#666';
-                li.appendChild(info);
+                    /* rhythmic-variation toggle */
+                    const lbl = document.createElement('label');
+                    const chk = document.createElement('input');
+                    chk.type = 'checkbox';
+                    chk.checked = !!p.isRhythmicVariation;
+                    chk.onchange = e => {
+                        e.stopPropagation();
+                        p.isRhythmicVariation = chk.checked;
+                        queueSave();
+                    };
+                    lbl.appendChild(chk);
+                    lbl.append('rhythmic');
+                    meta.appendChild(lbl);
+                }
+                li.appendChild(meta);
             }
 
-            /* ── NEW: EXPORT button ─────────────────────────────────── */
-            const xBtn = document.createElement('button');
-            xBtn.className = 'pattern-export';
-            xBtn.innerHTML = '<i class="fas fa-download"></i>';
-            xBtn.title = 'Export breakdown';
-            xBtn.onclick = e => { e.stopPropagation(); exportPattern(id); };
-            li.appendChild(xBtn);
+            /* —— right-aligned icon buttons ——— */
+            const btn = (title, icon, cb, dis = false) => {
+                const b = document.createElement('button');
+                b.title = title; b.disabled = dis; b.innerHTML = icon;
+                b.onclick = e => { e.stopPropagation(); cb(); };
+                li.appendChild(b);
+            };
+            btn('Export', '⤓', () => exportPattern(p.id));
+            btn('Edit', '✎', () => editPattern(p.id));
+            btn('Delete', '🗑', () => deletePattern(p.id), p.id === ROOT_ID);
 
-
-            ul.appendChild(li);
-            p.children.forEach(ch => addNode(ch, depth + 1));
+            /* append & recurse */
+            document.getElementById('pattern-tree').appendChild(li);
+            if (!collapsed.has(p.id)) {
+                p.children?.forEach((cid, i, arr) =>
+                    makeRow(patterns.get(cid), depth + 1, i === arr.length - 1));
+            }
         }
-        addNode(ROOT_ID, 0);
+
+
+        makeRow(patterns.get(ROOT_ID), 0, true);
     }
+
 
 
 
@@ -883,6 +1335,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- State Management ---
     let trackStates = []; // Holds visibility state per track { isVisible: boolean }
+    // add helper
+    function makeDefaultTrackState() {
+        return { isVisible: true, isHarmony: false };
+    }
+    let harmonyChordMap = {};     // tick → Set(pitchClass)
+
     let activeTrackIndex = -1; // Index in the rawTracksData array, -1 means none active
     let selectedNotes = new Set(); // Stores selected notes as JSON strings: '{"trackIndex": t, "noteIndex": n}'
 
@@ -919,6 +1377,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set to false to shade measures 1, 3, 5... (useful for pickup measures)
     let shadeEvenMeasures = true; // Default: shade the first measure (index 0)
     let ticksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator;
+
+
+    function rebuildHarmonyChordMap() {
+        harmonyChordMap = {};
+        rawTracksData.forEach((trk, ti) => {
+            if (!trackStates[ti].isHarmony) return;
+            trk.notes.forEach(n => {
+                const pc = n.pitch % 12;
+                for (let t = n.start_tick, end = n.start_tick + n.duration_ticks; t < end; ++t) {
+                    if (!harmonyChordMap[t]) harmonyChordMap[t] = new Set();
+                    harmonyChordMap[t].add(pc);
+                }
+            });
+        });
+    }
+
+
 
     /**
      * Smoothly pan & zoom so the given pattern rectangle fills the view.
@@ -1222,7 +1697,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         // Initialize track states (all visible by default)
-        trackStates = rawTracksData.map((_, index) => ({ isVisible: true }));
+        // trackStates = rawTracksData.map((_, index) => ({ isVisible: true }));
+        // Initialize track states (load visibility + harmony)
+        trackStates = rawTracksData.map((_, i) => {
+            const base = makeDefaultTrackState();
+            // if the server sent a harmony array, use it
+            if (Array.isArray(init.harmony) && typeof init.harmony[i] === 'boolean') {
+                base.isHarmony = init.harmony[i];
+            }
+            return base;
+        });
+
+        // NEW: sync up all of our UI with those loaded flags
+        rebuildHarmonyChordMap();
+        // update each track-list button class
+        trackStates.forEach((_, idx) => updateHarmonyToggleButton(idx));
 
         // Set first track as active by default if tracks exist
         if (rawTracksData.length > 0) {
@@ -1253,6 +1742,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 patterns.set(p.id, p);
             });
         }
+        // Collapse everything initially
+
+        // collapse every node on startup
+        collapsed = new Set(patterns.keys());
         rebuildPatternTree();          // paint the sidebar
         queueSave();                   // make sure root.range gets saved
 
@@ -1360,6 +1853,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Redraw everything to reflect the change
         redrawPianoRoll();
     }
+    function toggleTrackHarmony(index) {
+        if (index < 0 || index >= trackStates.length) return;
+        trackStates[index].isHarmony = !trackStates[index].isHarmony;
+        updateHarmonyToggleButton(index);
+        rebuildHarmonyChordMap();          // ← section 3
+        redrawPianoRoll();
+        queueSave();
+    }
+    function updateHarmonyToggleButton(index) {
+        const li = trackListElement.querySelector(`.track-item[data-track-index="${index}"]`);
+        li.classList.toggle('harmony', trackStates[index].isHarmony);
+    }
+
 
     function handleTrackListClick(event) {
         const trackItem = event.target.closest('.track-item');
@@ -1371,6 +1877,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if the visibility toggle icon or its parent button was clicked
         if (event.target.closest('.visibility-toggle')) {
             toggleTrackVisibility(trackIndex);
+        } else if (event.target.closest('.harmony-toggle')) {
+            toggleTrackHarmony(trackIndex);
         } else {
             // Otherwise, assume click on the item selects the track
             setActiveTrack(trackIndex);
@@ -1707,7 +2215,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             patterns.set(id, {
                 id,
-                name: `Repeat of ${parentEntry.name}`,
+                name: `${parentEntry.name}`,
                 parentId: parentEntry.id,
                 /* ---- REQUIRED so noteInPattern() can match notes ---- */
                 range: newRng,
@@ -1829,6 +2337,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function selectNotesInRect(rect, shiftKeyHeld) { // rect is in canvas coordinates
         if (!rect) return;
 
+        const parentPat = patterns.get(activePatternId);
 
         const rawStart = canvasXToMidiTick(rect.x1);
         const rawEnd = canvasXToMidiTick(rect.x2);
@@ -1851,8 +2360,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // if (!shiftKeyHeld) { selectedNotes.clear(); } // Redundant if mousedown clears
 
         trackStates.forEach((state, trackIndex) => {
-            if (!state.isVisible) return; // Only select notes in visible tracks
-            const track = rawTracksData[trackIndex];
+            if (!state.isVisible) return;
+
+            // *** NEW: only pick notes on instruments that belong to the parent pattern ***
+            if (activePatternId !== ROOT_ID
+                && !parentPat.instruments.includes(trackIndex)) {
+                return;
+            } const track = rawTracksData[trackIndex];
+
             if (!track || !track.notes) return;
 
             track.notes.forEach((note, noteIndex) => {
@@ -1888,6 +2403,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
         invalidateSynth();
+        updateSelectionRhythmicCandidates();
 
     }
 
@@ -2454,6 +2970,38 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // ────────────────────────────────────────────────────────────────
+    //   T E X T   L A Y E R   – font & info helpers
+    // ────────────────────────────────────────────────────────────────
+    const INFO_FONT = '12px Inter, sans-serif';
+    const BREADCRUMB_FONT = '14px Inter, sans-serif';
+    const LABEL_FILL = '#f8f9fa';
+    const LABEL_STROKE = '#000000aa';
+
+    /** Build “root / Part A / Lead A” breadcrumb path for a given pattern id */
+    function breadcrumbFor(id) {
+        const parts = [];
+        let p = patterns.get(id);
+        while (p) {
+            parts.push(p.name || '(unnamed)');
+            p = patterns.get(p.parentId);
+        }
+        return parts.reverse().join(' / ');
+    }
+
+    /** Human-readable relation to its master pattern */
+    function relationText(pat) {
+        if (pat.isRepetition) {
+            return `repeat of ${pat.variantOfName}`;
+        }
+        if (pat.isVariation) {
+            return pat.isRhythmicVariation
+                ? `rhythmic variation of ${pat.variantOfName}`
+                : `variation of ${pat.variantOfName}`;
+        }
+        return '';
+    }
+
 
     // --- Drawing ---
     function redrawPianoRoll() {
@@ -2481,6 +3029,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // 2. Draw Grid (Handles Row Backgrounds, Measure Shading, and Lines)
             drawGrid(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, viewWidth, viewHeight);
 
+            if (activePatternId !== ROOT_ID) {
+                drawDescendantBounds(patterns.get(activePatternId));
+            }
+
             // 3. Draw Notes
             drawAllNotes(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible);
 
@@ -2491,6 +3043,17 @@ document.addEventListener('DOMContentLoaded', function () {
             drawKeyDisplay(lowPitchVisible, highPitchVisible);
 
 
+            ctx.save();
+            ctx.font = BREADCRUMB_FONT;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = LABEL_STROKE;
+            ctx.fillStyle = LABEL_FILL;
+
+            const crumb = breadcrumbFor(activePatternId);
+            ctx.strokeText(crumb, 8, 6);
+            ctx.fillText(crumb, 8, 6);
             ctx.restore();
 
             if (playheadProgress != null) {
@@ -2507,6 +3070,115 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
     }
+
+
+    /*─────────────────────────────────────────────────────────────────────────────
+    C H I L D - P A T T E R N   O V E R L A Y   C O L O U R   E N G I N E
+    ─────────────────────────────────────────────────────────────────────────────*/
+    const _GOLDEN_RATIO = 0.61803398875;               // nice hue spread
+    const _familyHueCache = new Map();                 // familyId → hue 0-360
+
+    /** simple deterministic hash → 0-1 float  */
+    function _hash01(id) {
+        let h = 0;
+        for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+        return (h * _GOLDEN_RATIO) % 1;                // wrap  [0…1)
+    }
+
+    /** return an HSLA string for this pattern.  */
+    function colourForPattern(pat, alpha = 0.22, depth = 0) {
+        const familyId = pat.variantOf || pat.id;
+        if (!_familyHueCache.has(familyId)) {
+            _familyHueCache.set(familyId,
+                Math.round(_hash01(familyId) * 360));
+        }
+        const hue = _familyHueCache.get(familyId);
+        const sat = 68;
+        let light = 45 + depth * 6;          // +6 % L per level down
+        if (pat.isVariation) light += 10;      // extra lift for vars
+        return `hsla(${hue},${sat}%,${light}%,${alpha})`;
+    }
+
+
+    /*─────────────────────────────────────────────────────────────────────────────
+    D R A W   B O U N D S   O F   C H I L D   P A T T E R N S
+    ─────────────────────────────────────────────────────────────────────────────*/
+    function drawChildBounds(parentPat) {
+        if (!parentPat?.children?.length) return;
+
+        parentPat.children.forEach(cid => {
+            const ch = patterns.get(cid);
+            if (!ch) return;
+
+            // convert MIDI-space rectangle → canvas
+            const x1 = midiTickToCanvasX(ch.range.start);
+            const x2 = midiTickToCanvasX(ch.range.end);
+            const y1 = midiPitchToCanvasY(ch.range.high);
+            const y2 = midiPitchToCanvasY(ch.range.low);
+            const h = (y2 - y1) + NOTE_BASE_HEIGHT * scaleY;
+
+            ctx.save();
+            ctx.fillStyle = colourForPattern(ch);          // translucent fill
+            ctx.strokeStyle = colourForPattern(ch, 0.8);     // darker outline
+            ctx.lineWidth = 1.2;
+            ctx.fillRect(x1, y1, x2 - x1, h);
+            ctx.strokeRect(x1, y1, x2 - x1, h);
+            ctx.restore();
+        });
+    }
+
+    function drawDescendantBounds(pat, depth = 0) {
+        if (!pat?.children?.length) return;
+
+        pat.children.forEach(cid => {
+            const ch = patterns.get(cid);
+            if (!ch) return;
+
+            /* rectangle in canvas coords */
+            const x1 = midiTickToCanvasX(ch.range.start);
+            const x2 = midiTickToCanvasX(ch.range.end);
+            const y1 = midiPitchToCanvasY(ch.range.high);
+            const y2 = midiPitchToCanvasY(ch.range.low);
+            const h = (y2 - y1) + NOTE_BASE_HEIGHT * scaleY;
+            const midX = (x1 + x2) / 2;
+            const midY = y1 + h / 2;
+
+            /* draw box */
+            ctx.save();
+            ctx.fillStyle = colourForPattern(ch, 0.22, depth);
+            ctx.strokeStyle = colourForPattern(ch, 0.85, depth);
+            ctx.lineWidth = 1.2;
+            ctx.fillRect(x1, y1, x2 - x1, h);
+            ctx.strokeRect(x1, y1, x2 - x1, h);
+            ctx.restore();
+
+            /* draw centred label */
+            ctx.save();
+            ctx.font = INFO_FONT;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = LABEL_STROKE;
+            ctx.fillStyle = LABEL_FILL;
+
+            ctx.strokeText(ch.name, midX, y1 + h + 8);
+            ctx.fillText(ch.name, midX, y1 + h + 8);
+
+            const rel = relationText(ch);
+            if (rel) {
+                ctx.strokeText(rel, midX, y1 + h + 24);
+                ctx.fillText(rel, midX, y1 + h + 24);
+            }
+            ctx.restore();
+
+            /* recurse further down the tree */
+            drawDescendantBounds(ch, depth + 1);
+        });
+    }
+
+
+
+
 
     function drawGrid(startTick, endTick, lowPitch, highPitch, viewWidth, viewHeight) {
         // Ensure ticksPerMeasure is valid
@@ -2621,6 +3293,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 ctx.stroke();
             }
         }
+
+        // ——— repeat previews ———
+        ctx.save();
+        ctx.fillStyle = 'rgba(255,215,0,0.12)';   // soft gold overlay
+        repeatHighlights.forEach(r => {
+            const x1 = midiTickToCanvasX(r.start);
+            const x2 = midiTickToCanvasX(r.end);
+            const y1 = midiPitchToCanvasY(r.high);
+            const y2 = midiPitchToCanvasY(r.low);
+            ctx.fillRect(x1, y1, x2 - x1, y2 - y1 + NOTE_BASE_HEIGHT * scaleY);
+        });
+        ctx.restore();
+
+        // ——— variation previews ———
+        ctx.fillStyle = 'rgba(255,140,0,0.1)';
+        variationHighlights.forEach(r => {
+            const x1 = midiTickToCanvasX(r.start);
+            const x2 = midiTickToCanvasX(r.end);
+            const y1 = midiPitchToCanvasY(r.high);
+            const y2 = midiPitchToCanvasY(r.low);
+            ctx.fillRect(x1, y1, x2 - x1, y2 - y1 + NOTE_BASE_HEIGHT * scaleY);
+        });
+
+        // ─── draw “live” selection-based candidates ───
+        ctx.save();
+        ctx.fillStyle = 'rgba(255,165,0,0.2)';  // a clear orange
+        selectionVariationHighlights.forEach(r => {
+            const x1 = midiTickToCanvasX(r.start);
+            const x2 = midiTickToCanvasX(r.end);
+            const y1 = midiPitchToCanvasY(r.high);
+            const y2 = midiPitchToCanvasY(r.low);
+            ctx.fillRect(
+                x1,
+                y1,
+                x2 - x1,
+                (y2 - y1) + NOTE_BASE_HEIGHT * scaleY
+            );
+        });
+        ctx.restore();
+
+
     }
 
     function drawAllNotes(startTickVisible, endTickVisible,
@@ -2655,7 +3368,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const noteKey = JSON.stringify({ trackIndex, noteIndex });
-            const isSelected = selectedNotes.has(noteKey);
+            const isSelected = selectedNotes.has(noteKey) && !abcState.isPlaying;
             const isInScale = isNoteInScale(note.pitch); // Check scale membership
 
             if (pattern.id !== ROOT_ID && !noteInPattern(note, pattern, trackIndex)) return;
@@ -2677,6 +3390,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Ghost notes (inactive track): ALWAYS use the ghost color
                 fillStyle = GHOST_NOTE_FILL_COLOR; // <<< FIXED: Use dedicated ghost color
             }
+            // ---------------------------------------------------------
+            //  Off-beat tinting  (ONLY for the active track)
+            // ---------------------------------------------------------
+            if (isActive && !isSelected) {                 // don’t override selections
+                switch (beatPosition(note.start_tick)) {
+                    case 0:  // 8th-note off-beat
+                        fillStyle = adjustLightness(fillStyle, OFFBEAT_LIGHTEN);
+                        break;
+                }
+            }
+
             ctx.fillStyle = fillStyle;
 
             // --- Determine alpha ---
@@ -2699,13 +3423,33 @@ document.addEventListener('DOMContentLoaded', function () {
             const scaledGap = NOTE_VERTICAL_GAP * scaleY;
             const drawY = y + (scaledGap / 2);
             const drawHeight = Math.max(1, NOTE_BASE_HEIGHT * scaleY - scaledGap);
+
+
+
+
             ctx.fillRect(x, drawY, w, drawHeight);
+
+            const isHarmonyTrack = trackStates[trackIndex].isHarmony;
+            let outlineColor = SELECTED_NOTE_STROKE_COLOR;   // default (blue)
+
+            if (!isHarmonyTrack && !isDrumTrack(trackIndex)) {
+                const chordSet = harmonyChordMap[note.start_tick];
+                if (chordSet && chordSet.size && !chordSet.has(note.pitch % 12)) {
+                    outlineColor = '#ffd200';                // yellow for non-chord-tone
+                } else {
+                    outlineColor = '#ffffff';                // white chord-tone / no chord
+                }
+            } else {
+                outlineColor = '#ffffff';                    // harmony notes always white
+            }
+            ctx.strokeStyle = outlineColor;
+            ctx.lineWidth = 1.0; // Use 1 for sharp outline
+            ctx.globalAlpha = 1.0; // Ensure stroke is solid regardless of note alpha
+            ctx.strokeRect(x, drawY, w, drawHeight); // Draw stroke on the same rect
 
             // --- Draw outline ONLY for selected notes ---
             if (isSelected) {
                 ctx.strokeStyle = SELECTED_NOTE_STROKE_COLOR;
-                ctx.lineWidth = 1.0; // Use 1 for sharp outline
-                ctx.globalAlpha = 1.0; // Ensure stroke is solid regardless of note alpha
                 ctx.strokeRect(x, drawY, w, drawHeight); // Draw stroke on the same rect
             }
 

@@ -188,6 +188,11 @@ def view_file(filename):
         # Still render the page, but maybe show a message?
         # Let's render it to show the message clearly.
 
+    
+    # ─── NEW: sort drums first ───────────────────────────────
+    tracks_data.sort(key=lambda t: not t['is_drum_track'])
+    # ─────────────────────────────────────────────────────────
+
     tracks_data_json = json.dumps(tracks_data)
     settings_path = os.path.join(SET_DIR, filename + '.json')
     initial_settings = {}

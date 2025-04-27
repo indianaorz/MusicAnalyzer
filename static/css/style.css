@@ -706,46 +706,61 @@ input[type="file"] {
     background: #edf4ff;
 }
 
-.pattern-tree-panel{
-    width:220px; flex:none; overflow-y:auto;
-    border-right:1px solid var(--border-col, #ddd);
-    font-size:0.85rem;
-  }
-  .pattern-tree li{
-    list-style:none; margin:0; padding:3px 6px;
-    cursor:pointer; border-radius:4px;
-  }
-  .pattern-tree li.active{
-    background:#d1e7fd; border:1px solid #a6cff7;
-  }
-  .pattern-tree li:hover{ background:#edf4ff; }
-  body.dark-mode .pattern-tree li.active{
-    background:#2a4d6a; border-color:#4d7a9f;
-  }
-  
-  .pattern-node {
+.pattern-tree-panel {
+    width: 400px;
+    flex: none;
+    overflow-y: auto;
+    border-right: 1px solid var(--border-col, #ddd);
+    font-size: 0.85rem;
+}
+
+.pattern-tree li {
+    list-style: none;
+    margin: 0;
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pattern-tree li.active {
+    background: #d1e7fd;
+    border: 1px solid #a6cff7;
+}
+
+.pattern-tree li:hover {
+    background: #555;
+}
+
+body.dark-mode .pattern-tree li.active {
+    background: #2a4d6a;
+    border-color: #4d7a9f;
+}
+
+.pattern-node {
     position: relative;
-  }
-  
-  /* icon buttons inside the tree */
-  .pattern-node button {
+}
+
+/* icon buttons inside the tree */
+.pattern-node button {
     background: none;
     border: none;
     color: #666;
     margin-left: 6px;
     cursor: pointer;
     font-size: 0.9em;
-  }
-  .pattern-node button:disabled {
+}
+
+.pattern-node button:disabled {
     color: #ccc;
     cursor: default;
-  }
-  .pattern-node button:hover:not(:disabled) {
+}
+
+.pattern-node button:hover:not(:disabled) {
     color: #000;
-  }
-  
-  /* Save Pattern button */
-  #save-pattern-btn {
+}
+
+/* Save Pattern button */
+#save-pattern-btn {
     display: block;
     background-color: #28a745;
     color: white;
@@ -753,11 +768,150 @@ input[type="file"] {
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
-  }
-  #save-pattern-btn:hover {
-    background-color: #218838;
-  }
+}
 
+#save-pattern-btn:hover {
+    background-color: #218838;
+}
+
+.track-item .harmony-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888
+}
+
+.track-item.harmony .harmony-toggle {
+    color: #ffbf00
+}
+
+/* gold when active */
+
+
+/* ─── Pattern Tree ───────────────────────────────────────── */
+.pattern-tree-panel {
+    font: 14px/1.3 system-ui, sans-serif;
+  }
   
+  #pattern-tree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
   
+  .pattern-node {
+    position: relative;                /* needed for ║ lines */
+    display: flex;
+    align-items: center;
+    gap: .4rem;                        /* space between arrow & name */
+    height: 28px;                      /* fixed row height */
+    padding-right: 8px;                /* room for right-edge buttons */
+    user-select: none;
+    white-space: nowrap;
+  }
+  
+  .pattern-node.active   { background:#284;  color:#fff; }
+  
+  .pattern-node .node-name {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
+  
+  .pattern-node button {
+    flex: 0 0 22px;                    /* equal-width buttons */
+    height: 22px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #666;
+  }
+  .pattern-node button:hover   { color:#000; }
+  .pattern-node button:disabled{ opacity:.35; cursor:default; }
+  
+  .pattern-node .caret {
+    width: 32px;
+    height: 32px;
+    font-size: 2em;
+    margin-left: calc(var(--depth) * 12px);   /* indent */
+    transition: transform .15s ease;
+  }
+  .pattern-node.collapsed > .caret {
+    transform: rotate(-90deg);
+  }
+  
+  /* │││ vertical guides & ───── horizontal tees */
+  .pattern-node::before,
+  .pattern-node::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--depth) * 12px + 7px);    /* align with carets */
+  }
+  .pattern-node::before {                   /* vertical line */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #ccc;
+  }
+  .pattern-node::after {                    /* horizontal tee */
+    top: 50%;
+    width: 8px;
+    height: 1px;
+    background: #ccc;
+    transform: translateY(-.5px);
+  }
+  /* hide vertical for last child */
+  .pattern-node.last-child::before { height: 50%; }
+  
+
+  /* meta tag that shows “variation of …” or “repeat of …” */
+.node-meta {
+  font-size: 11px;
+  color: #666;
+  margin-left: 6px;          /* a sliver of space after the name   */
+  flex: 0 0 auto;            /* never grow – keeps buttons aligned */
+  white-space: nowrap;
+}
+
+.node-meta label { cursor:pointer; }
+.node-meta input[type="checkbox"]{
+  transform: scale(.9);      /* tiny checkbox to fit the row */
+  vertical-align: middle;
+  margin: 0 2px 0 4px;
+}
+
+
+/* ────────── Track-List: Instrument Section Fix ────────── */
+#track-list .track-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .track-info {
+    flex: 1 1 auto;      /* grow to take all space left of controls */
+    min-width: 0;        /* allow text-overflow to work */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .track-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;            /* spacing between buttons */
+    flex: 0 0 auto;      /* never grow/shrink */
+  }
+  
+  .track-controls button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+  }
   
