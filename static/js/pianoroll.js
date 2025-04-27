@@ -16,6 +16,76 @@
  * - rawTracksData: Array of track objects, including 'is_drum_track' flag and 'notes' array.
  * - ticksPerBeat: Number.
  */
+
+
+// ——— Color Conversion Helpers ———
+
+// Parse `#rrggbb` or `#rgb` into {r,g,b}
+function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) {
+        hex = hex.split('').map(x => x + x).join('');
+    }
+    const int = parseInt(hex, 16);
+    return {
+        r: (int >> 16) & 255,
+        g: (int >> 8) & 255,
+        b: int & 255
+    };
+}
+
+// Turn r,g,b (0–255) back into `#rrggbb`
+function rgbToHex({ r, g, b }) {
+    const to2 = v => v.toString(16).padStart(2, '0');
+    return `#${to2(r)}${to2(g)}${to2(b)}`;
+}
+
+// Convert RGB → HSL, adjust L, back to RGB
+function adjustLightness(hex, deltaPercent) {
+    let { r, g, b } = hexToRgb(hex);
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+    if (max === min) h = s = 0;
+    else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+            case r: h = ((g - b) / d + (g < b ? 6 : 0)); break;
+            case g: h = ((b - r) / d + 2); break;
+            case b: h = ((r - g) / d + 4); break;
+        }
+        h /= 6;
+    }
+    // shift lightness
+    l = Math.min(1, Math.max(0, l + deltaPercent / 100));
+    // h,s,l → r,g,b
+    let r2, g2, b2;
+    if (s === 0) r2 = g2 = b2 = l;
+    else {
+        const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r2 = hue2rgb(p, q, h + 1 / 3);
+        g2 = hue2rgb(p, q, h);
+        b2 = hue2rgb(p, q, h - 1 / 3);
+    }
+    return rgbToHex({
+        r: Math.round(r2 * 255),
+        g: Math.round(g2 * 255),
+        b: Math.round(b2 * 255)
+    });
+}
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // --- Global Variables & Configuration ---
     const canvas = document.getElementById('main-piano-roll-canvas');
@@ -85,30 +155,80 @@ document.addEventListener('DOMContentLoaded', function () {
     const NOTE_VERTICAL_GAP = 1; // Pixels gap between notes vertically
 
     // Colors & Opacity
-    const ACTIVE_NOTE_FILL_COLOR = 'crimson';
-    const GHOST_NOTE_FILL_COLOR = '#adb5bd';
-    const SELECTED_NOTE_FILL_COLOR = '#FFff00'; // yellow for selected
-    const SELECTED_NOTE_STROKE_COLOR = '#0056b3'; // Outline for selected notes
+    // ——— Your existing colours as lets ———
+    let ACTIVE_NOTE_FILL_COLOR = 'crimson';
+    let GHOST_NOTE_FILL_COLOR = '#adb5bd';
+    let SELECTED_NOTE_FILL_COLOR = '#FFff00';
+    let SELECTED_NOTE_STROKE_COLOR = '#0056b3';
     const GHOST_NOTE_ALPHA = 0.6;
-    const ACTIVE_VELOCITY_ALPHA_MIN = 0.3; // Slightly more transparent min
+    const ACTIVE_VELOCITY_ALPHA_MIN = 0.3;
     const ACTIVE_VELOCITY_ALPHA_MAX = 1.0;
-    const GRID_LINE_COLOR = '#e9ecef'; // Lighter grid
-    const BEAT_LINE_COLOR = '#dee2e6'; // Slightly darker beat
-    const MEASURE_LINE_COLOR = '#ced4da'; // Darker measure
-    const BACKGROUND_COLOR = '#ffffff';
-    const MEASURE_SHADING_COLOR = 'rgba(0, 0, 0, 0.04)'; // Example: Very light black
-    const SELECTION_RECT_FILL = 'rgba(0, 123, 255, 0.2)';
-    const SELECTION_RECT_STROKE = 'rgba(0, 123, 255, 0.6)';
-    const KEY_WHITE_COLOR = '#f8f9fa';
-    const KEY_BLACK_COLOR = '#343a40';
-    const KEY_SEPARATOR_COLOR = '#dee2e6';
-    const KEY_TEXT_COLOR = '#495057';
-    const KEY_BLACK_TEXT_COLOR = '#f8f9fa'; // Text on black keys
+    let GRID_LINE_COLOR = '#e9ecef';
+    let BEAT_LINE_COLOR = '#dee2e6';
+    let MEASURE_LINE_COLOR = '#ced4da';
+    let BACKGROUND_COLOR = '#ffffff';
+    let MEASURE_SHADING_COLOR = 'rgba(0,0,0,0.04)';
+    let SELECTION_RECT_FILL = 'rgba(0,123,255,0.2)';
+    let SELECTION_RECT_STROKE = 'rgba(0,123,255,0.6)';
+    let KEY_WHITE_COLOR = '#f8f9fa';
+    let KEY_BLACK_COLOR = '#343a40';
+    let KEY_SEPARATOR_COLOR = '#dee2e6';
+    let KEY_TEXT_COLOR = '#495057';
+    let KEY_BLACK_TEXT_COLOR = '#f8f9fa';
+    let NOTE_IN_SCALE_COLOR = '#3477eb';
+    let NOTE_OUT_SCALE_COLOR = '#eb8c34';
+    let GRID_ROW_IN_SCALE_COLOR = '#fff';
+    let GRID_ROW_OUT_SCALE_COLOR = '#fffbf0';
 
-    const NOTE_IN_SCALE_COLOR = '#3477eb'; // Blueish
-    const NOTE_OUT_SCALE_COLOR = '#eb8c34'; // Orangish
-    const GRID_ROW_IN_SCALE_COLOR = '#fff'; // Very light blue background
-    const GRID_ROW_OUT_SCALE_COLOR = '#fffbf0'; // Very light orange background
+    let copyMode = 'range';
+    document.getElementById('copy-mode-select')
+        .addEventListener('change', e => copyMode = e.target.value);
+
+
+    let snapMode = 'none';
+    document.getElementById('snap-mode-select')
+        .addEventListener('change', e => snapMode = e.target.value);
+
+    function snapTick(tick) {
+        if (snapMode === 'bar') return Math.round(tick / ticksPerMeasure) * ticksPerMeasure;
+        if (snapMode === 'division') return Math.round(tick / window.ticksPerBeat) * window.ticksPerBeat;
+        return tick;                  // none
+    }
+
+
+
+
+    // ——— Dark-Mode Colour Overrides ———
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        ACTIVE_NOTE_FILL_COLOR = '#ff8a65';              // salmon/orange
+        GHOST_NOTE_FILL_COLOR = '#616161';              // mid-grey
+        SELECTED_NOTE_FILL_COLOR = '#ffeb3b';              // bright yellow
+        SELECTED_NOTE_STROKE_COLOR = '#03a9f4';              // cyan-blue outline
+
+        GRID_LINE_COLOR = '#373737';              // dark grid
+        BEAT_LINE_COLOR = '#424242';
+        MEASURE_LINE_COLOR = '#616161';
+
+        BACKGROUND_COLOR = '#121212';              // almost-black
+        MEASURE_SHADING_COLOR = 'rgba(255,255,255,0.02)'; // very subtle highlight
+
+        SELECTION_RECT_FILL = 'rgba(3,169,244,0.3)';   // light-blue semi-opaque
+        SELECTION_RECT_STROKE = 'rgba(3,169,244,0.7)';
+
+        KEY_WHITE_COLOR = '#1e1e1e';              // dark “white” key
+        KEY_BLACK_COLOR = '#000000';              // black key
+        KEY_SEPARATOR_COLOR = '#333333';              // fine lines between keys
+        KEY_TEXT_COLOR = '#e0e0e0';              // off-white labels
+        KEY_BLACK_TEXT_COLOR = '#aaaaaa';              // grey text on black keys
+
+        NOTE_IN_SCALE_COLOR = '#4fc3f7';              // sky-blue for in-scale notes
+        NOTE_OUT_SCALE_COLOR = '#ffb74d';              // amber for out-of-scale notes
+
+        GRID_ROW_IN_SCALE_COLOR = '#263238';              // dark blue background
+        GRID_ROW_OUT_SCALE_COLOR = '#1e272c';              // darker slate
+    }
+
+
 
     // General MIDI Drum Map (Standard pitches for channel 10)
     const GM_DRUM_MAP = {
@@ -358,6 +478,100 @@ document.addEventListener('DOMContentLoaded', function () {
     let shadeEvenMeasures = true; // Default: shade the first measure (index 0)
     let ticksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator;
 
+
+
+
+    /* ────────────────────────────────────────────────────────────────
+     *           S  E  C  T  I  O  N    P  L  A  Y  B  A  C  K
+     *           (only depends on generateAbcFromSelection…)
+     * ──────────────────────────────────────────────────────────────── */
+    let abcState = { synth: null, visual: null, isPlaying: false, totalMs: 0 };
+    const playBtn = document.getElementById('play-selection');
+    const loopChk = document.getElementById('loop-selection');
+    const canvasBox = document.getElementById('canvas-container');
+    /* ───────────────  new globals  ─────────────── */
+    let playStartTick = 0;          // first note of current selection
+    let playSpanTicks = 0;          // length in ticks of the selection
+    let playheadProgress = null;    // null ⇢ not playing, else 0-1
+
+
+    if (playBtn) playBtn.addEventListener('click', handlePlayClick);
+
+    async function handlePlayClick() {
+        if (abcState.isPlaying) {        // —— pause ——
+            abcState.synth.pause();
+            playBtn.querySelector('i').classList.replace('fa-pause', 'fa-play');
+            abcState.isPlaying = false;
+            playhead.style.animationPlayState = 'paused';
+            return;
+        }
+        // —— first time (or after re-selection) build / prime synth ——
+        if (!abcState.synth) {
+            const abc = generateAbcFromSelectionMultiVoice();
+            if (!abc) { alert('Select one or more notes first.'); return; }
+
+            // off-screen render -> visualObj (needed by CreateSynth)
+            const tmp = document.createElement('div');
+            tmp.style.position = 'absolute'; tmp.style.left = '-9999px';
+            document.body.appendChild(tmp);
+            const visArr = ABCJS.renderAbc(tmp, abc, {});
+            document.body.removeChild(tmp);
+            if (!visArr.length) { alert('ABC render failed'); return; }
+
+            abcState.visual = visArr[0];
+            abcState.synth = new ABCJS.synth.CreateSynth();
+            await abcState.synth.init({
+                visualObj: abcState.visual,
+                options: {
+                    loop: loopChk?.checked,
+                    eventCallback: ev => {
+                        if (!ev.milliseconds) return;
+                        playheadProgress = ev.milliseconds / abcState.totalMs;   // 0-1
+                        redrawPianoRoll();
+                    },
+                    onEndedCallback: () => {
+                        // if (loopChk?.checked) return; // synth will restart itself
+                        playheadProgress = null;
+                        stopPlaybackUI();
+                    }
+                }
+            });
+            await abcState.synth.prime().then(r => abcState.totalMs = r.duration * 1000);
+        }
+
+        // —— (re)start ——
+        abcState.synth.seek(0);
+        abcState.synth.resume();
+        abcState.isPlaying = true;
+        playBtn.querySelector('i').classList.replace('fa-play', 'fa-pause');
+
+        // kick off CSS key-frame on the red line
+        const ticks = [...selectedNotes].map(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
+            const n = rawTracksData[trackIndex].notes[noteIndex];
+            return [n.start_tick, n.start_tick + n.duration_ticks];
+        });
+        playStartTick = Math.min(...ticks.map(t => t[0]));
+        playSpanTicks = Math.max(...ticks.map(t => t[1])) - playStartTick;
+
+
+
+    }
+
+    function stopPlaybackUI() {
+        abcState.isPlaying = false;
+        playBtn.querySelector('i').classList.replace('fa-pause', 'fa-play');
+    }
+    /*  🔸  invalidate previous synth when the selection changes  */
+    function invalidateSynth() {
+        if (abcState.synth) { abcState.synth.pause(); }
+        abcState = { synth: null, visual: null, isPlaying: false, totalMs: 0 };
+        stopPlaybackUI();
+    }
+
+
+
+
     /**
      * ------------------------------------------------------------------
      * 1.  Which letters does the key-signature raise or lower?
@@ -446,6 +660,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Initialization ---
     function initialize() {
+
+        // Inside initialize(), after getting other element references:
+        scaleRootSelect = document.getElementById('scale-root-select');
+        scaleTypeSelect = document.getElementById('scale-type-select');
+
+        // Object.assign({ root: 0, scale: 'major', copyMode: 'range', snapMode: 'none' }, initial_settings)
+        const init = JSON.parse(initial_settings);
+        scaleRootSelect.value = selectedRootNote = init.root;
+        scaleRootSelect.value = selectedRootNote = init.root;
+        scaleTypeSelect.value = selectedScaleType = init.scale;
+        document.getElementById('copy-mode-select').value = copyMode = init.copyMode;
+        document.getElementById('snap-mode-select').value = snapMode = init.snapMode;
+        updateCurrentScaleNotes();
+
+
+        // hook every UI change
+        scaleRootSelect.addEventListener('change', queueSave);
+        scaleTypeSelect.addEventListener('change', queueSave);
+        document.getElementById('copy-mode-select').addEventListener('change', queueSave);
+        document.getElementById('snap-mode-select').addEventListener('change', queueSave);
+
         // Create the content wrapper for key display panel
         keyDisplayContentWrapper = document.createElement('div');
         keyDisplayContentWrapper.className = 'key-display-content';
@@ -472,25 +707,34 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`Initializing with Ticks/Measure: ${ticksPerMeasure}, Shade Even Measures: ${shadeEvenMeasures}`);
 
 
-        // Inside initialize(), after getting other element references:
-        scaleRootSelect = document.getElementById('scale-root-select');
-        scaleTypeSelect = document.getElementById('scale-type-select');
-
-        if (!scaleRootSelect || !scaleTypeSelect) {
-            console.warn("Scale selection UI elements not found. Scale highlighting disabled.");
-            // Optionally disable the feature or provide feedback
-        } else {
-            // Set initial values from state (could be inferred later)
-            scaleRootSelect.value = selectedRootNote;
-            scaleTypeSelect.value = selectedScaleType;
-        }
-
-
         calculateContentDimensions(); // Calculate initial content width/height
         setupEventListeners();
         resizeCanvas(); // Initial resize includes redraw
         // Calculate initial scale notes
         updateCurrentScaleNotes();
+
+
+        const SETTINGS_FILE = currentMidiFilename + '.json';
+        let pendingSave;
+        function queueSave() {
+            clearTimeout(pendingSave);
+            pendingSave = setTimeout(saveSettings, 400);
+        }
+        function saveSettings() {
+            const body = JSON.stringify({
+                root: selectedRootNote,
+                scale: selectedScaleType,
+                copyMode,
+                snapMode
+            });
+            fetch(`/settings/${encodeURIComponent(SETTINGS_FILE)}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body
+            }).catch(console.error);
+        }
+
+
+
+
 
 
         console.log("Piano roll initialized.");
@@ -591,6 +835,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Recalculate the notes in the scale
         updateCurrentScaleNotes();
         console.log("Updated currentScaleNotes:", currentScaleNotes); // DEBUG LINE
+        queueSave();     // persist the new preference
 
         // Redraw everything to reflect the change
         redrawPianoRoll();
@@ -667,6 +912,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function handleMouseDown(event) {
         // Only process left (0) and middle (1) mouse buttons
         if (event.button !== 0 && event.button !== 1) return;
+
+        invalidateSynth();
+
 
         canvas.focus(); // Maybe useful for keyboard events later
 
@@ -807,7 +1055,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Example: Snap horizontal movement to nearest 16th note?
                         // const sixteenthNoteTicks = ticksPerBeat / 4;
                         // const snappedTick = Math.max(0, Math.round((orig.originalTick + noteMoveData.deltaTick) / sixteenthNoteTicks) * sixteenthNoteTicks);
-                        const newTick = Math.max(0, Math.round(orig.originalTick + noteMoveData.deltaTick)); // Simple rounding for now
+                        // const newTick = Math.max(0, Math.round(orig.originalTick + noteMoveData.deltaTick)); // Simple rounding for now
+                        const raw = orig.originalTick + noteMoveData.deltaTick;
+                        const newTick = Math.max(0, snapTick(raw));
+
                         const newPitch = Math.max(PITCH_MIN, Math.min(PITCH_MAX, orig.originalPitch + noteMoveData.deltaPitch)); // Clamp pitch
 
                         note.start_tick = newTick;
@@ -881,6 +1132,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- NEW: KeyDown Handler for Copy ---
     function handleKeyDown(event) {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            handlePlayClick();
+            return;
+        }
         // Check for Ctrl+C (or Cmd+C on Mac)
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             if (selectedNotes.size > 0) {
@@ -939,9 +1195,16 @@ document.addEventListener('DOMContentLoaded', function () {
     function selectNotesInRect(rect, shiftKeyHeld) { // rect is in canvas coordinates
         if (!rect) return;
 
-        // Convert selection rect from canvas coords to MIDI coords
-        const startTick = canvasXToMidiTick(rect.x1);
-        const endTick = canvasXToMidiTick(rect.x2);
+
+        const rawStart = canvasXToMidiTick(rect.x1);
+        const rawEnd = canvasXToMidiTick(rect.x2);
+        let startTick = snapTick(Math.min(rawStart, rawEnd));
+        let endTick = snapTick(Math.max(rawStart, rawEnd));
+
+
+        // // Convert selection rect from canvas coords to MIDI coords
+        // const startTick = canvasXToMidiTick(rect.x1);
+        // const endTick = canvasXToMidiTick(rect.x2);
         // Remember: Lower Y value corresponds to higher pitch
         const highPitch = canvasYToMidiPitch(rect.y1); // Pitch at the top edge of the rect
         const lowPitch = canvasYToMidiPitch(rect.y2);  // Pitch at the bottom edge of the rect
@@ -959,7 +1222,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Check if note intersects the rectangle in MIDI space
                 const noteEndTick = note.start_tick + note.duration_ticks;
                 // Check horizontal overlap: Note must start before rect ends AND end after rect starts.
-                const intersectsHorizontally = note.start_tick < endTick && noteEndTick > startTick;
+                // const intersectsHorizontally = note.start_tick < endTick && noteEndTick > startTick;
+                let intersectsHorizontally;
+                if (copyMode === 'range') {
+                    intersectsHorizontally = note.start_tick < endTick && noteEndTick > startTick;
+                } else {                           // 'start'
+                    intersectsHorizontally = note.start_tick >= startTick && note.start_tick <= endTick;
+                }
+
                 // Check vertical overlap: Note pitch must be within the rect's pitch range.
                 const intersectsVertically = note.pitch >= lowPitch && note.pitch <= highPitch;
 
@@ -980,6 +1250,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+        invalidateSynth();
+
     }
 
 
@@ -1000,6 +1272,19 @@ document.addEventListener('DOMContentLoaded', function () {
             updateTrackListHighlighting();
             redrawPianoRoll();
         }
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', () => {
+                // re-tint all the lets:
+                const dm = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (dm) {
+                    // same shading code as above…
+                    // you could DRY it into a function applyDarkTint()
+                } else {
+                    // reset to originals, or simply reload the page:
+                    window.location.reload();
+                }
+            });
+
     }
 
     function toggleTrackVisibility(index) {
@@ -1091,6 +1376,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (keyDisplayContentWrapper) {
             keyDisplayContentWrapper.style.transform = `translateY(${-offsetY}px)`;
         }
+
     }
 
 
@@ -1438,8 +1724,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             abc = abc.trimEnd() + ' |]\n';
         });
-        
-       // after you finish building `abc` and before you return it:
+
+        // after you finish building `abc` and before you return it:
         const unitsPerBar = /* same as you used when building */ (num * L) / den;
         abc = trimCommonBarRests(abc, unitsPerBar);
         return abc.trim();
@@ -1448,53 +1734,53 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-/**
- * Trim one bar’s worth of rest from the start of *every* voice,
- * as long as *all* voices still have at least one full‑bar rest.
- *
- * @param {string} abcText     – the raw multi‑voice ABC
- * @param {number} unitsPerBar – how many “z‑units” make up one bar
- * @returns {string}           – the adjusted ABC
- */
-function trimCommonBarRests(abcText, unitsPerBar) {
-    const lines     = abcText.split('\n');
-    const voiceRe   = /^(\[V:\d+\]\s*)z(\d+)(\s*)(.*)$/;
-    // collect the line‑indices that begin with "[V:x] zN"
-    const voiceIdxs = lines
-      .map((l, i) => voiceRe.test(l) ? i : -1)
-      .filter(i => i >= 0);
-  
-    // keep stripping as long as *every* voice‑line has N >= unitsPerBar
-    let keepGoing = true;
-    while (keepGoing) {
-      const rests = voiceIdxs.map(i => {
-        const m = lines[i].match(voiceRe);
-        return m ? parseInt(m[2], 10) : 0;
-      });
-      // if any voice has less than a full‑bar rest, stop
-      if (rests.some(r => r < unitsPerBar)) break;
-  
-      // subtract one bar from each
-      voiceIdxs.forEach(i => {
-        const m    = lines[i].match(voiceRe);
-        const pre  = m[1];               // "[V:x] "
-        const cur  = parseInt(m[2], 10); // current rest count
-        const sp   = m[3];               // whitespace after number
-        const tail = m[4];               // the rest of the line
-  
-        const leftover = cur - unitsPerBar;
-        if (leftover > 0) {
-          lines[i] = `${pre}z${leftover}${sp}${tail}`;
-        } else {
-          // no rest left → drop the "zN" entirely
-          lines[i] = `${pre}${tail}`;
+    /**
+     * Trim one bar’s worth of rest from the start of *every* voice,
+     * as long as *all* voices still have at least one full‑bar rest.
+     *
+     * @param {string} abcText     – the raw multi‑voice ABC
+     * @param {number} unitsPerBar – how many “z‑units” make up one bar
+     * @returns {string}           – the adjusted ABC
+     */
+    function trimCommonBarRests(abcText, unitsPerBar) {
+        const lines = abcText.split('\n');
+        const voiceRe = /^(\[V:\d+\]\s*)z(\d+)(\s*)(.*)$/;
+        // collect the line‑indices that begin with "[V:x] zN"
+        const voiceIdxs = lines
+            .map((l, i) => voiceRe.test(l) ? i : -1)
+            .filter(i => i >= 0);
+
+        // keep stripping as long as *every* voice‑line has N >= unitsPerBar
+        let keepGoing = true;
+        while (keepGoing) {
+            const rests = voiceIdxs.map(i => {
+                const m = lines[i].match(voiceRe);
+                return m ? parseInt(m[2], 10) : 0;
+            });
+            // if any voice has less than a full‑bar rest, stop
+            if (rests.some(r => r < unitsPerBar)) break;
+
+            // subtract one bar from each
+            voiceIdxs.forEach(i => {
+                const m = lines[i].match(voiceRe);
+                const pre = m[1];               // "[V:x] "
+                const cur = parseInt(m[2], 10); // current rest count
+                const sp = m[3];               // whitespace after number
+                const tail = m[4];               // the rest of the line
+
+                const leftover = cur - unitsPerBar;
+                if (leftover > 0) {
+                    lines[i] = `${pre}z${leftover}${sp}${tail}`;
+                } else {
+                    // no rest left → drop the "zN" entirely
+                    lines[i] = `${pre}${tail}`;
+                }
+            });
         }
-      });
+
+        return lines.join('\n');
     }
-  
-    return lines.join('\n');
-  }
-  
+
 
     /**
      * Copy multi-voice ABC to the clipboard.
@@ -1550,6 +1836,19 @@ function trimCommonBarRests(abcText, unitsPerBar) {
 
             // 5. Update Key Display
             drawKeyDisplay(lowPitchVisible, highPitchVisible);
+
+            if (playheadProgress != null) {
+                const x = midiTickToCanvasX(playStartTick + playSpanTicks * playheadProgress);
+                ctx.save();
+                ctx.strokeStyle = '#ff0033';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, viewHeight);
+                ctx.stroke();
+                ctx.restore();
+            }
+
 
             ctx.restore();
         });

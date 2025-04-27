@@ -189,6 +189,11 @@ def view_file(filename):
         # Let's render it to show the message clearly.
 
     tracks_data_json = json.dumps(tracks_data)
+    settings_path = os.path.join(SET_DIR, filename + '.json')
+    initial_settings = {}
+    if os.path.exists(settings_path):
+        with open(settings_path) as f:
+            initial_settings = json.load(f)
 
     # --- PASS NEW DATA TO TEMPLATE ---
     return render_template('results.html',
@@ -197,7 +202,8 @@ def view_file(filename):
                            tracks_data_json=tracks_data_json,
                            ticks_per_beat=ticks_per_beat,
                            time_signature_numerator=ts_num, # New
-                           time_signature_denominator=ts_den) # New
+                           time_signature_denominator=ts_den,
+                           initial_settings=json.dumps(initial_settings)) # New
 
 # ... (keep download_file and main block) ...
 # --- Routes ---
@@ -256,6 +262,25 @@ def download_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
     except FileNotFoundError:
         abort(404)
+
+
+
+SET_DIR = 'user_settings'
+os.makedirs(SET_DIR, exist_ok=True)
+
+@app.route('/settings/<path:fname>', methods=['GET', 'POST'])
+def user_settings(fname):
+    safe = secure_filename(fname)
+    path = os.path.join(SET_DIR, safe)
+    if request.method == 'POST':
+        with open(path, 'w') as f:
+            json.dump(request.get_json(force=True), f)
+        return '', 204
+    if os.path.exists(path):
+        return json.load(open(path)), 200
+    return {}, 200
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

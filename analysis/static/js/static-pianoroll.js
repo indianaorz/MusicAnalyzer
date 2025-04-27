@@ -212,6 +212,32 @@ function createStaticPianoRollRenderer(renderOptions) {
         return Math.max(0, Math.min(127, midi));
     }
 
+      // Add a "Download MIDI" button next to the canvas
+      function addDownloadButton() {
+        const btn = document.createElement('button');
+        btn.textContent = 'Download MIDI';
+        btn.style.margin = '8px 0';
+        btn.addEventListener('click', async () => {
+            try {
+                // Use abcjs synth to generate a MIDI Uint8Array from the parsed tune
+                const midiArray = ABCJS.synth.getMidiFile(abcTune);
+                const blob = new Blob([midiArray], { type: 'audio/midi' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'music.mid';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                console.error('Error generating MIDI:', err);
+            }
+        });
+        const controlPanel = canvas.parentElement || document.body;
+        controlPanel.appendChild(btn);
+    }
+
 
 
     // --- Parsing Helpers ---
@@ -558,6 +584,8 @@ function createStaticPianoRollRenderer(renderOptions) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         setupKeyDisplay();
+        addDownloadButton();  // Add MIDI download button after layout
+
 
         console.log(`StaticRenderer: Setup complete. Canvas=${canvasWidth}x${canvasHeight}, Ticks=${contentWidthTicks}, PitchRange=[${contentMinPitch}-${contentMaxPitch}], ScaleX=${scaleX.toFixed(3)}, PixelsPerPitch=${effectiveNoteHeight.toFixed(2)}`);
         redrawStaticPianoRoll();

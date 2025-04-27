@@ -46,8 +46,30 @@
             <span class="header-info-static">
                 File: <strong>{{ filename }}</strong> | Ticks/Beat: {{ ticks_per_beat }}
             </span>
-            <input type="number" id="abcUnitNoteLength"
-                value="{{ unit_note_length_denominator | default(16) }}" min="1" max="16" step="1">
+            <button id="play-selection" title="Play / Pause" class="abc-play-button">
+                <i class="fas fa-play"></i>
+            </button>
+            <label style="display:flex;align-items:center;gap:4px;">
+                <input type="checkbox" id="loop-selection" checked>
+                Loop
+            </label>
+            <label>Copy mode:
+                <select id="copy-mode-select">
+                    <option value="range">Overlapping notes</option>
+                    <option value="start">Start-time inside box</option>
+                </select>
+            </label>
+            <label>Snap:
+                <select id="snap-mode-select">
+                    <option value="none">None</option>
+                    <option value="bar">Bar</option>
+                    <option value="division">Division (beat)</option>
+                </select>
+            </label>
+
+
+            <input type="number" id="abcUnitNoteLength" value="{{ unit_note_length_denominator | default(16) }}" min="1"
+                max="16" step="1">
 
             <a href="{{ url_for('index') }}" class="back-link">Back to Upload</a>
         </div>
@@ -101,9 +123,36 @@
         const timeSignatureDenominator = {{ time_signature_denominator | default (4) }};
         const unitNoteLengthDenominator = {{ unit_note_length_denominator | default (4) }};
         const currentMidiFilename = {{ filename | tojson | safe }};
+        const initial_settings = {{ initial_settings | tojson | safe}};
 
         // --- END NEW ---
     </script>
+    <script>
+        // 1️⃣ Sync with OS preference + broadcast theme changes
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        function syncDark(e) {
+            document.body.classList.toggle('dark-mode', e.matches);
+            window.dispatchEvent(new Event('themechange'));
+        }
+        mq.addEventListener('change', syncDark);
+        syncDark(mq);
+
+        // 2️⃣ Optional “🌓” toggle button
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.createElement('button');
+            btn.id = 'dark-toggle';
+            btn.textContent = '🌓';
+            btn.style.marginLeft = 'auto';
+            document.querySelector('.header-controls').appendChild(btn);
+            btn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                window.dispatchEvent(new Event('themechange'));
+            });
+        });
+    </script>
+
+
+    <script src="{{ url_for('static', filename='js/abcjs-plugin-min.jsl') }}"></script>
     <script src="{{ url_for('static', filename='js/pianoroll.js') }}"></script>
 </body>
 
