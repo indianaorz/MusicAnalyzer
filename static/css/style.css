@@ -305,21 +305,26 @@ input[type="file"] {
 
 .key-display-panel .piano-key.in-scale.white,
 .key-display-panel .drum-name.in-scale {
-    background-color: #d1e7fd; /* Light blue - same as active track */
-    color: #0a3660; /* Darker text for contrast */
+    background-color: #d1e7fd;
+    /* Light blue - same as active track */
+    color: #0a3660;
+    /* Darker text for contrast */
     font-weight: 500;
 }
 
 
 .key-display-panel .piano-key.out-of-scale.white,
 .key-display-panel .drum-name.out-of-scale {
-    background-color: #ffffff; /* Default white */
-    color: #495057; /* Default text */
+    background-color: #ffffff;
+    /* Default white */
+    color: #495057;
+    /* Default text */
 }
 
 
 .key-display-panel .piano-key.in-scale.black {
-    background-color: #4f77a0; /* Muted blue for black key */
+    background-color: #4f77a0;
+    /* Muted blue for black key */
     color: #f0f0f0;
     font-weight: 500;
     /* Maybe add a subtle border? */
@@ -328,8 +333,10 @@ input[type="file"] {
 }
 
 .key-display-panel .piano-key.out-of-scale.black {
-    background-color: #343a40; /* Default black */
-    color: #f8f9fa; /* Default text */
+    background-color: #343a40;
+    /* Default black */
+    color: #f8f9fa;
+    /* Default text */
 }
 
 /* Ensure octave labels remain visible on highlighted C keys */
@@ -453,192 +460,304 @@ input[type="file"] {
 
 /* --- Header Controls Styling --- */
 .header-controls {
-    padding: 8px 25px; /* Match header padding */
-    background-color: #f8f9fa; /* Light background */
-    border-top: 1px solid #e0e0e0; /* Separator line */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center items vertically */
-    gap: 20px; /* Space between control groups */
-    font-size: 0.9em; /* Match other header info */
+    padding: 8px 25px;
+    /* Match header padding */
+    background-color: #f8f9fa;
+    /* Light background */
+    border-top: 1px solid #e0e0e0;
+    /* Separator line */
+    display: flex;
+    /* Use flexbox for alignment */
+    align-items: center;
+    /* Center items vertically */
+    gap: 20px;
+    /* Space between control groups */
+    font-size: 0.9em;
+    /* Match other header info */
 }
 
 .header-controls .control-group {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between label and select */
+    gap: 5px;
+    /* Space between label and select */
 }
 
 .header-controls label {
     /* Override general label styles if needed */
-    margin-bottom: 0; /* Remove bottom margin */
-    font-weight: normal; /* Normal weight */
-    color: #333; /* Standard text color */
-    display: inline-block; /* Allow flex alignment */
+    margin-bottom: 0;
+    /* Remove bottom margin */
+    font-weight: normal;
+    /* Normal weight */
+    color: #333;
+    /* Standard text color */
+    display: inline-block;
+    /* Allow flex alignment */
 }
 
 .header-controls select {
     padding: 3px 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 0.95em; /* Slightly smaller than base */
+    font-size: 0.95em;
+    /* Slightly smaller than base */
     background-color: #fff;
 }
 
 .header-controls .header-info-static {
     color: #555;
-    margin-right: auto; /* Push the static info left, and back link right */
+    margin-right: auto;
+    /* Push the static info left, and back link right */
 }
 
 .header-controls .back-link {
-   /* Style the back link if needed */
-   color: #3498db;
-   text-decoration: none;
+    /* Style the back link if needed */
+    color: #3498db;
+    text-decoration: none;
 }
+
 .header-controls .back-link:hover {
     text-decoration: underline;
 }
 
 /* Adjust main content wrapper height calculation if header height changed */
 .main-content-wrapper {
-   /* Example: if header total height is now 100px */
-   /* height: calc(100vh - 100px); */
-   /* Adjust based on your actual header height after styling */
-    height: calc(100vh - 105px); /* Approx: 70px original + ~35px controls */
+    /* Example: if header total height is now 100px */
+    /* height: calc(100vh - 100px); */
+    /* Adjust based on your actual header height after styling */
+    height: calc(100vh - 105px);
+    /* Approx: 70px original + ~35px controls */
 }
 
 
 /* --- Dark Mode Overrides --- */
 @media (prefers-color-scheme: dark) {
+
     /* Base page */
     body {
-      background-color: #121212;
-      color: #e0e0e0;
+        background-color: #121212;
+        color: #e0e0e0;
     }
+
     a {
-      color: #66aaff;
+        color: #66aaff;
     }
+
     a:hover {
-      color: #99cfff;
+        color: #99cfff;
     }
-  
+
     /* Header */
     .main-header {
-      background-color: #1f1f1f;
-      border-bottom-color: #333;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        background-color: #1f1f1f;
+        border-bottom-color: #333;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
     }
+
     .main-header h1,
     .header-info span {
-      color: #ddd;
+        color: #ddd;
     }
-  
+
     /* Header controls */
     .header-controls {
-      background-color: #181818;
-      border-top-color: #333;
+        background-color: #181818;
+        border-top-color: #333;
     }
+
     .header-controls label,
     .header-info-static {
-      color: #ccc;
+        color: #ccc;
     }
+
     .header-controls select {
-      background-color: #2c2c2c;
-      border: 1px solid #444;
-      color: #ddd;
+        background-color: #2c2c2c;
+        border: 1px solid #444;
+        color: #ddd;
     }
+
     button {
-      background-color: #2a6fdb;
+        background-color: #2a6fdb;
     }
+
     button:hover {
-      background-color: #1e4e8c;
+        background-color: #1e4e8c;
     }
-  
+
     /* Flash messages */
     .flashes {
-      background-color: #5a2020;
-      color: #f8d7da;
-      border-color: #722121;
+        background-color: #5a2020;
+        color: #f8d7da;
+        border-color: #722121;
     }
-  
+
     /* Index/Form containers */
     .form-container,
     .file-list-container {
-      background: #1e1e1e;
-      border-color: #333;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+        background: #1e1e1e;
+        border-color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     }
-  
+
     /* Track list panel */
     .track-list-panel {
-      background-color: #1e1e1e;
-      border-right-color: #333;
+        background-color: #1e1e1e;
+        border-right-color: #333;
     }
+
     #track-list .track-item {
-      border-color: transparent;
-      color: #ccc;
+        border-color: transparent;
+        color: #ccc;
     }
+
     #track-list .track-item:hover {
-      background-color: #2a2a2a;
+        background-color: #2a2a2a;
     }
+
     #track-list .track-item.active {
-      background-color: #003f5e;
-      border-color: #00509e;
-      color: #fff;
+        background-color: #003f5e;
+        border-color: #00509e;
+        color: #fff;
     }
+
     .track-controls button {
-      color: #aaa;
+        color: #aaa;
     }
+
     .track-controls button:hover {
-      color: #fff;
+        color: #fff;
     }
+
     .track-icon {
-      color: #aaa;
+        color: #aaa;
     }
-  
+
     /* Key display panel */
     .key-display-panel {
-      background-color: #1c1c1c;
-      border-right-color: #333;
+        background-color: #1c1c1c;
+        border-right-color: #333;
     }
+
     .piano-key.white.in-scale,
     .drum-name.in-scale {
-      background-color: #264653;
-      color: #a2d2ff;
+        background-color: #264653;
+        color: #a2d2ff;
     }
+
     .piano-key.white.out-of-scale,
     .drum-name.out-of-scale {
-      background-color: #2a2a2a;
-      color: #ccc;
+        background-color: #2a2a2a;
+        color: #ccc;
     }
+
     .piano-key.black.in-scale {
-      background-color: #34675c;
-      color: #e0e0e0;
+        background-color: #34675c;
+        color: #e0e0e0;
     }
+
     .piano-key.black.out-of-scale {
-      background-color: #111;
-      color: #888;
+        background-color: #111;
+        color: #888;
     }
+
     .octave-label {
-      color: #888;
+        color: #888;
     }
-  
+
     /* Piano roll panel & canvas */
     .piano-roll-panel {
-      background-color: #1e1e1e;
+        background-color: #1e1e1e;
     }
+
     #canvas-container {
-      background-color: #262626;
-      border: 1px solid #444;
+        background-color: #262626;
+        border: 1px solid #444;
     }
+
     #main-piano-roll-canvas {
-      background-color: #1a1a1a;
+        background-color: #1a1a1a;
     }
-  
+
     /* Grid & note colors (tweak as needed) */
     /* You can also override your JS-draw colors here if you convert them to CSS variables */
+}
+
+#selection-playhead {
+    pointer-events: none;
+}
+
+.pattern-tree {
+    font-size: .85em;
+    line-height: 1.4;
+}
+
+.pattern-node {
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pattern-node.active {
+    background: #d1e7fd;
+    border: 1px solid #a6cff7;
+}
+
+.pattern-node:hover {
+    background: #edf4ff;
+}
+
+.pattern-tree-panel{
+    width:220px; flex:none; overflow-y:auto;
+    border-right:1px solid var(--border-col, #ddd);
+    font-size:0.85rem;
+  }
+  .pattern-tree li{
+    list-style:none; margin:0; padding:3px 6px;
+    cursor:pointer; border-radius:4px;
+  }
+  .pattern-tree li.active{
+    background:#d1e7fd; border:1px solid #a6cff7;
+  }
+  .pattern-tree li:hover{ background:#edf4ff; }
+  body.dark-mode .pattern-tree li.active{
+    background:#2a4d6a; border-color:#4d7a9f;
+  }
+  
+  .pattern-node {
+    position: relative;
+  }
+  
+  /* icon buttons inside the tree */
+  .pattern-node button {
+    background: none;
+    border: none;
+    color: #666;
+    margin-left: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  .pattern-node button:disabled {
+    color: #ccc;
+    cursor: default;
+  }
+  .pattern-node button:hover:not(:disabled) {
+    color: #000;
+  }
+  
+  /* Save Pattern button */
+  #save-pattern-btn {
+    display: block;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #save-pattern-btn:hover {
+    background-color: #218838;
   }
 
-  #selection-playhead { pointer-events:none; }
-
+  
   
   

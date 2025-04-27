@@ -188,13 +188,317 @@ document.addEventListener('DOMContentLoaded', function () {
     let snapMode = 'none';
     document.getElementById('snap-mode-select')
         .addEventListener('change', e => snapMode = e.target.value);
+    let lastBoxRange = { start: null, end: null };
+
 
     function snapTick(tick) {
         if (snapMode === 'bar') return Math.round(tick / ticksPerMeasure) * ticksPerMeasure;
         if (snapMode === 'division') return Math.round(tick / window.ticksPerBeat) * window.ticksPerBeat;
         return tick;                  // none
     }
+    /*──────────────── PATTERN ENGINE ────────────────*/
+    const ROOT_ID = 'root';              // synthetic “whole song”
+    const patterns = new Map();           // id  ➜ Pattern object
+    let activePatternId = ROOT_ID;       // which node is showing
 
+    patterns.set(ROOT_ID, {
+        id: ROOT_ID,
+        name: 'Whole song',
+        parentId: null,
+        range: { start: 0, end: Infinity },  // we never clip the root
+        noteRefs: [],                        // gets filled on first redraw
+        children: []
+    });
+
+    let SETTINGS_FILE;//currentMidiFilename + '.json';
+    let pendingSave;
+
+    /*──────────────────────── selection utils ───────────────────────*/
+    function getSelectionRect(sel) {
+        // vertical bounds from the *selected* notes:
+        let low = PITCH_MAX, high = PITCH_MIN;
+        sel.forEach(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
+            const n = rawTracksData[trackIndex]?.notes[noteIndex];
+            if (!n) return;
+            low = Math.min(low, n.pitch);
+            high = Math.max(high, n.pitch);
+        });
+
+        // horizontal: if we just box-selected, use that exact tick range
+        let start = lastBoxRange.start;
+        let end = lastBoxRange.end;
+
+        // otherwise fall back to note-based bounds (min start, max end)
+        if (start == null || end == null) {
+            start = Infinity; end = 0;
+            sel.forEach(k => {
+                const { trackIndex, noteIndex } = JSON.parse(k);
+                const n = rawTracksData[trackIndex]?.notes[noteIndex];
+                if (!n) return;
+                start = Math.min(start, n.start_tick);
+                end = Math.max(end, n.start_tick + n.duration_ticks);
+            });
+        }
+
+        return { start, end, low, high };
+    }
+
+    /* ────────────────────────────────────────────────────────────────
+     *   helper: select every note that belongs to `patterns.get(id)`
+     * ────────────────────────────────────────────────────────────────*/
+    /* helper: grab every note in the active pattern (or whole song) */
+    function selectEntirePattern(id = activePatternId) {
+        selectedNotes.clear();
+        const pat = patterns.get(id);
+        rawTracksData.forEach((trk, ti) => {
+            if (!trackStates[ti].isVisible) return;
+            trk.notes.forEach((note, ni) => {
+                const key = JSON.stringify({ trackIndex: ti, noteIndex: ni });
+                if (id === ROOT_ID) {
+                    selectedNotes.add(key);
+                } else {
+                    // same logic your patterns use for inclusion
+                    if (noteInPattern(note, pat, ti)) {
+                        selectedNotes.add(key);
+                    }
+                }
+            });
+        });
+        redrawPianoRoll();
+        invalidateSynth();
+    }
+
+    function noteInPattern(note, pat, trackIndex) {
+        const hOK = pat.mode === 'range'
+            ? (note.start_tick < pat.range.end &&
+                note.start_tick + note.duration_ticks > pat.range.start)
+            : (note.start_tick >= pat.range.start &&
+                note.start_tick <= pat.range.end);
+        const vOK = note.pitch >= pat.range.low && note.pitch <= pat.range.high;
+        const inInst = !pat.instruments || pat.instruments.includes(trackIndex);
+
+        return hOK && vOK && inInst;
+    }
+
+
+    function getSelectionBounds(selSet) {
+        let min = Infinity, max = 0;
+        selSet.forEach(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
+            const n = rawTracksData[trackIndex]?.notes[noteIndex];
+            if (!n) return;
+            min = Math.min(min, n.start_tick);
+            max = Math.max(max, n.start_tick + n.duration_ticks);
+        });
+        return { start: min, end: max };
+    }
+
+    /* return an array of JSON-keys the pattern owns.
+       – current behaviour: **only the active pattern’s own notes**,
+         not its descendants (easy to change later).                */
+    function collectNotesRecursively(id) {
+        return patterns.get(id)?.noteRefs ?? [];
+    }
+
+
+    function queueSave() {
+        clearTimeout(pendingSave);
+        pendingSave = setTimeout(saveSettings, 400);
+    }
+    function saveSettings() {
+        const body = JSON.stringify({
+            root: selectedRootNote,
+            scale: selectedScaleType,
+            copyMode,
+            snapMode,
+            patterns: [...patterns.values()]
+        });
+        fetch(`/settings/${encodeURIComponent(SETTINGS_FILE)}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body
+        }).catch(console.error);
+    }
+
+
+    function addPattern(name) {
+        if (!selectedNotes.size) return;
+        const rect = getSelectionRect(selectedNotes);
+
+        // collect the unique track‐indices
+        const instruments = new Set();
+        selectedNotes.forEach(k => {
+            const { trackIndex } = JSON.parse(k);
+            instruments.add(trackIndex);
+        });
+
+        const id = crypto.randomUUID();
+        patterns.set(id, {
+            id,
+            name,
+            parentId: activePatternId,
+            range: rect,
+            mode: copyMode,
+            children: [],
+            instruments: Array.from(instruments)      // ← store it here
+        });
+        patterns.get(activePatternId).children.push(id);
+        activePatternId = id;
+        selectedNotes.clear();
+        rebuildPatternTree();
+        redrawPianoRoll();
+        queueSave();
+    }
+
+
+    function editPattern(id) {
+        if (id === ROOT_ID) return;
+        const pat = patterns.get(id);
+
+        // 1. load its mode & selection
+        copyMode = pat.mode;
+        document.getElementById('copy-mode-select').value = copyMode;
+
+        // 2. pre-select the notes in that rectangle
+        selectedNotes.clear();
+        rawTracksData.forEach((trk, ti) =>
+            trk.notes.forEach((note, ni) => {
+                if (noteInPattern(note, pat, ti)) {
+                    selectedNotes.add(JSON.stringify({ trackIndex: ti, noteIndex: ni }));
+                }
+            })
+        );
+        invalidateSynth();
+        redrawPianoRoll();
+
+        // 3. add a “Save Pattern” button if none exists
+        if (!document.getElementById('save-pattern-btn')) {
+            const saveBtn = document.createElement('button');
+            saveBtn.id = 'save-pattern-btn';
+            saveBtn.textContent = 'Save Pattern';
+            saveBtn.style.margin = '10px';
+            saveBtn.onclick = () => {
+                // grab new rect & mode, overwrite pattern
+                pat.range = getSelectionRect(selectedNotes);
+                pat.mode = copyMode;
+                selectedNotes.clear();
+                saveBtn.remove();
+                rebuildPatternTree();
+                redrawPianoRoll();
+                queueSave();
+            };
+            document.querySelector('.pattern-tree-panel').appendChild(saveBtn);
+        }
+    }
+    function deletePattern(id) {
+        if (id === ROOT_ID) return;
+        const pat = patterns.get(id);
+        if (!pat) return;
+        if (!confirm(`Delete pattern “${pat.name}” and ALL its children? This cannot be undone.`))
+            return;
+
+        // recursively delete subtree
+        function recurseDelete(pid) {
+            const node = patterns.get(pid);
+            if (!node) return;
+            node.children.forEach(childId => recurseDelete(childId));
+            patterns.delete(pid);
+        }
+        recurseDelete(id);
+
+        // remove from parent's children list
+        const parent = patterns.get(pat.parentId);
+        if (parent) {
+            parent.children = parent.children.filter(cid => cid !== id);
+        }
+
+        // set active to the parent (or root)
+        activePatternId = pat.parentId || ROOT_ID;
+        selectedNotes.clear();
+        rebuildPatternTree();
+        redrawPianoRoll();
+        queueSave();
+    }
+
+
+
+    function setActivePattern(id) {
+        activePatternId = id;
+        selectedNotes.clear();
+        rebuildPatternTree();   // ← add this so the tree UI updates
+        redrawPianoRoll();
+        // scroll-to-fit the newly-active pattern (skip the root)
+        if (id !== ROOT_ID) {
+            const r = patterns.get(id).range;
+            zoomToRect(r);
+        }
+    }
+    function rebuildPatternTree() {
+        const ul = document.getElementById('pattern-tree');
+        ul.innerHTML = '';
+        function addNode(id, depth) {
+            const p = patterns.get(id);
+            if (!Array.isArray(p.children)) p.children = [];
+            const li = document.createElement('li');
+            li.className = 'pattern-node' + (id === activePatternId ? ' active' : '');
+            li.style.paddingLeft = (depth * 14) + 'px';
+
+            // name clickable
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = p.name || '(unnamed)';
+            nameSpan.onclick = () => setActivePattern(id);
+            li.appendChild(nameSpan);
+
+            // EDIT button
+            const editBtn = document.createElement('button');
+            editBtn.className = 'pattern-edit';
+            editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+            editBtn.title = 'Edit Pattern';
+            editBtn.onclick = e => { e.stopPropagation(); editPattern(id); };
+            li.appendChild(editBtn);
+
+            // DELETE button (disabled for root)
+            const delBtn = document.createElement('button');
+            delBtn.className = 'pattern-delete';
+            delBtn.innerHTML = '<i class="fas fa-trash"></i>';
+            delBtn.title = id === ROOT_ID ? 'Cannot delete root' : 'Delete Pattern';
+            delBtn.disabled = (id === ROOT_ID);
+            delBtn.onclick = e => { e.stopPropagation(); deletePattern(id); };
+            li.appendChild(delBtn);
+
+            // If this is a variation, show subtext
+            if (p.isVariation && p.variantOfName) {
+                const varDiv = document.createElement('div');
+                varDiv.className = 'variation-of';
+                varDiv.textContent = `Variation of ${p.variantOfName}`;
+                varDiv.style.fontSize = '0.75em';
+                varDiv.style.color = '#666';
+                li.appendChild(varDiv);
+            }
+            // after you append the nameSpan…
+            if (p.isRepetition && p.variantOfName) {
+                const info = document.createElement('div');
+                info.className = 'pattern-subtext';
+                info.textContent = `↻ Repeat of ${p.variantOfName}`;
+                info.style.fontSize = '0.75em';
+                info.style.color = '#666';
+                li.appendChild(info);
+            }
+
+
+            ul.appendChild(li);
+            p.children.forEach(ch => addNode(ch, depth + 1));
+        }
+        addNode(ROOT_ID, 0);
+    }
+
+
+
+    document.getElementById('add-pattern-btn').addEventListener('click', () => {
+        const name = prompt('Name this pattern:');
+        if (name) addPattern(name.trim());
+    });
 
 
 
@@ -478,6 +782,58 @@ document.addEventListener('DOMContentLoaded', function () {
     let shadeEvenMeasures = true; // Default: shade the first measure (index 0)
     let ticksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator;
 
+    /**
+     * Smoothly pan & zoom so the given pattern rectangle fills the view.
+     * `rect` is {start,end,low,high} in MIDI units.
+     * Animation lasts 350 ms with an ease-out curve.
+     */
+    function zoomToRect(rect, ms = 350) {
+        // ▸ add a little padding in MIDI units:
+        const padTicks = window.ticksPerBeat * 2; // 2 beats
+        const padPitches = 2;                    // 2 semitone-rows
+
+        // clamp into valid range
+        const startTick = Math.max(0, rect.start - padTicks);
+        const endTick = rect.end + padTicks;
+        const lowPitch = Math.max(PITCH_MIN, rect.low - padPitches);
+        const highPitch = Math.min(PITCH_MAX, rect.high + padPitches);
+
+        const viewW = canvasContainer.clientWidth;
+        const viewH = canvasContainer.clientHeight;
+
+        // recompute targets using padded values
+        const targetScaleX = viewW / ((endTick - startTick) * PIXELS_PER_TICK_BASE);
+        const targetScaleY = viewH / ((highPitch - lowPitch + 1) * NOTE_BASE_HEIGHT);
+
+        const nextScaleX = Math.max(0.005, Math.min(100, targetScaleX));
+        const nextScaleY = Math.max(0.1, Math.min(20, targetScaleY));
+
+        const targetOffsetX = startTick * PIXELS_PER_TICK_BASE * nextScaleX;
+        const targetOffsetY = (PITCH_MAX - highPitch) * NOTE_BASE_HEIGHT * nextScaleY;
+
+        // ─── animate ──────────────────────────────────────────────────────
+        const start = performance.now();
+        const s0x = scaleX, s0y = scaleY;
+        const o0x = offsetX, o0y = offsetY;
+
+        const easeOut = t => 1 - Math.pow(1 - t, 3);   // cubic ease-out
+
+        (function step(tNow) {
+            let t = (tNow - start) / ms;
+            if (t >= 1) { t = 1; }           // clamp final frame
+
+            const k = easeOut(t);
+            scaleX = s0x + (nextScaleX - s0x) * k;
+            scaleY = s0y + (nextScaleY - s0y) * k;
+            offsetX = o0x + (targetOffsetX - o0x) * k;
+            offsetY = o0y + (targetOffsetY - o0y) * k;
+
+            clampOffsets();      // keep everything legal
+            redrawPianoRoll();   // show progress
+
+            if (t < 1) requestAnimationFrame(step);
+        })(start);
+    }
 
 
 
@@ -498,15 +854,22 @@ document.addEventListener('DOMContentLoaded', function () {
     if (playBtn) playBtn.addEventListener('click', handlePlayClick);
 
     async function handlePlayClick() {
+
+
         if (abcState.isPlaying) {        // —— pause ——
             abcState.synth.pause();
             playBtn.querySelector('i').classList.replace('fa-pause', 'fa-play');
             abcState.isPlaying = false;
-            playhead.style.animationPlayState = 'paused';
             return;
         }
         // —— first time (or after re-selection) build / prime synth ——
         if (!abcState.synth) {
+            /* auto-select the active pattern if nothing is selected */
+            if (selectedNotes.size === 0) {
+                selectEntirePattern();          // ⬅️ new
+                invalidateSynth();              // make sure an old synth is discarded
+                redrawPianoRoll();              // show the auto-selection
+            }
             const abc = generateAbcFromSelectionMultiVoice();
             if (!abc) { alert('Select one or more notes first.'); return; }
 
@@ -543,6 +906,8 @@ document.addEventListener('DOMContentLoaded', function () {
         abcState.synth.seek(0);
         abcState.synth.resume();
         abcState.isPlaying = true;
+        abcState._playStartWallTime = performance.now();
+
         playBtn.querySelector('i').classList.replace('fa-play', 'fa-pause');
 
         // kick off CSS key-frame on the red line
@@ -551,12 +916,36 @@ document.addEventListener('DOMContentLoaded', function () {
             const n = rawTracksData[trackIndex].notes[noteIndex];
             return [n.start_tick, n.start_tick + n.duration_ticks];
         });
-        playStartTick = Math.min(...ticks.map(t => t[0]));
-        playSpanTicks = Math.max(...ticks.map(t => t[1])) - playStartTick;
+        // compute the first note tick
+        const firstNoteTick = Math.min(...ticks.map(t => t[0]));
+        // snap down to start of its measure/bar
+        playStartTick = Math.floor(firstNoteTick / ticksPerMeasure) * ticksPerMeasure;
+        // span still ends at last note
+        playSpanTicks = Math.max(...ticks.map(t => t[1])) - firstNoteTick;
+
+
+        // **start our RAF loop**
+        requestAnimationFrame(updatePlayheadLoop);
 
 
 
     }
+
+    function updatePlayheadLoop() {
+        if (!abcState.isPlaying) return;           // stop when paused/ended
+
+        // how many ms since we hit “play”?
+        const elapsedMs = performance.now() - abcState._playStartWallTime;
+        // convert to a 0–1 fraction
+        playheadProgress = Math.min(1, elapsedMs / abcState.totalMs);
+
+        // redraw on every frame
+        redrawPianoRoll();
+
+        // queue the next frame
+        requestAnimationFrame(updatePlayheadLoop);
+    }
+
 
     function stopPlaybackUI() {
         abcState.isPlaying = false;
@@ -714,27 +1103,18 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCurrentScaleNotes();
 
 
-        const SETTINGS_FILE = currentMidiFilename + '.json';
-        let pendingSave;
-        function queueSave() {
-            clearTimeout(pendingSave);
-            pendingSave = setTimeout(saveSettings, 400);
-        }
-        function saveSettings() {
-            const body = JSON.stringify({
-                root: selectedRootNote,
-                scale: selectedScaleType,
-                copyMode,
-                snapMode
+        SETTINGS_FILE = currentMidiFilename + '.json';
+
+
+        /* -------- load any saved pattern definitions -------- */
+        if (init.patterns) {
+            init.patterns.forEach(p => {
+                if (!Array.isArray(p.children)) p.children = [];
+                patterns.set(p.id, p);
             });
-            fetch(`/settings/${encodeURIComponent(SETTINGS_FILE)}`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body
-            }).catch(console.error);
         }
-
-
-
-
+        rebuildPatternTree();          // paint the sidebar
+        queueSave();                   // make sure root.range gets saved
 
 
         console.log("Piano roll initialized.");
@@ -1137,6 +1517,109 @@ document.addEventListener('DOMContentLoaded', function () {
             handlePlayClick();
             return;
         }
+        if (!event.repeat && event.key.toLowerCase() === 'r') {
+            if (!selectedNotes.size) {
+                alert('Select the section you want to mark as a repeat.');
+                return;
+            }
+            const parentName = prompt('Repetition of which pattern? (enter exact name)');
+            if (!parentName) return;
+            const parentEntry = [...patterns.values()].find(p => p.name === parentName);
+            if (!parentEntry) {
+                alert(`Pattern “${parentName}” not found.`);
+                return;
+            }
+
+            // Gather both note-arrays and shift the “repeat” one back
+            const masterNotes = notesInsidePattern(parentEntry);
+            const repeatNotes = [...selectedNotes].map(k => JSON.parse(k));
+            // Compare: same length?
+            if (repeatNotes.length !== masterNotes.length) {
+                if (!confirm('These notes aren’t exactly the same—mark as variation instead?')) return;
+                // fallback: treat it as a variation
+                return handleKeyDown({ ...event, key: 'v' });
+            }
+            // Compute the time offset between the first note of each
+            const masterTicks = masterNotes.map(n => rawTracksData[n.trackIndex].notes[n.noteIndex].start_tick);
+            const repeatTicks = repeatNotes.map(n => rawTracksData[n.trackIndex].notes[n.noteIndex].start_tick);
+            const offset = repeatTicks[0] - masterTicks[0];
+            // Verify that every note lines up with the same offset
+            const allMatch = masterNotes.every((m, i) => {
+                const mNote = rawTracksData[m.trackIndex].notes[m.noteIndex];
+                const rNote = rawTracksData[repeatNotes[i].trackIndex].notes[repeatNotes[i].noteIndex];
+                return rNote.pitch === mNote.pitch
+                    && rNote.duration_ticks === mNote.duration_ticks
+                    && rNote.start_tick === mNote.start_tick + offset;
+            });
+            if (!allMatch) {
+                if (!confirm('Notes don’t align perfectly—is this really a repeat?')) return;
+            }
+
+            // Create a new “repeat” node under the master
+            const id = crypto.randomUUID();
+            // width, height and instruments copy straight from the master
+            const w = parentEntry.range.end - parentEntry.range.start;
+            const newRng = {
+                start: parentEntry.range.start + offset,
+                end: parentEntry.range.end + offset,   //  start+width works too
+                low: parentEntry.range.low,
+                high: parentEntry.range.high
+            };
+            patterns.set(id, {
+                id,
+                name: `Repeat of ${parentEntry.name}`,
+                parentId: parentEntry.id,
+                /* ---- REQUIRED so noteInPattern() can match notes ---- */
+                range: newRng,
+                mode: parentEntry.mode,      // 'start' or 'range'
+                instruments: [...parentEntry.instruments],
+                isRepetition: true,
+                variantOf: parentEntry.id,
+                repeats: 1,
+                // range etc. if you need it
+            });
+            patterns.get(parentEntry.id).children.push(id);
+            rebuildPatternTree();
+            queueSave();
+            return;
+        }
+        if (!event.repeat && event.key.toLowerCase() === 'p') {
+            if (selectedNotes.size) {
+                const nm = prompt('Name this pattern:');
+                if (nm) addPattern(nm.trim());
+            }
+            return;
+        }
+        if (!event.repeat && event.key.toLowerCase() === 'v') {
+            // Create a variation
+            const name = prompt('Name this variation:');
+            if (!name) return;
+
+            // Ask which pattern we’re varying
+            const parentName = prompt('Variation of which pattern?  (enter exact name)');
+            if (!parentName) return;
+            // Find the pattern id by name
+            const parentEntry = [...patterns.values()].find(p => p.name === parentName);
+            if (!parentEntry) {
+                alert(`Pattern “${parentName}” not found.`);
+                return;
+            }
+            // Temporarily set activePatternId to our chosen parent
+            const oldActive = activePatternId;
+            activePatternId = parentEntry.id;
+            // Use addPattern to build the new variation
+            addPattern(name.trim());
+            // Mark it as a variation
+            const newId = activePatternId;
+            patterns.get(newId).isVariation = true;
+            patterns.get(newId).variantOf = parentEntry.id;
+            patterns.get(newId).variantOfName = parentEntry.name;
+            // Restore old active pattern
+            activePatternId = oldActive;
+            rebuildPatternTree();
+            queueSave();
+            return;
+        }
         // Check for Ctrl+C (or Cmd+C on Mac)
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             if (selectedNotes.size > 0) {
@@ -1150,6 +1633,17 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add other keyboard shortcuts here if needed (e.g., delete, arrow keys)
     }
 
+    function notesInsidePattern(pat) {
+        const arr = [];
+        rawTracksData.forEach((trk, ti) => {
+            trk.notes.forEach((note, ni) => {
+                if (noteInPattern(note, pat, ti)) {
+                    arr.push({ trackIndex: ti, noteIndex: ni });
+                }
+            });
+        });
+        return arr;
+    }
 
     // --- Selection Logic ---
     function findNoteAtCanvasCoords(canvasX, canvasY) {
@@ -1200,6 +1694,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const rawEnd = canvasXToMidiTick(rect.x2);
         let startTick = snapTick(Math.min(rawStart, rawEnd));
         let endTick = snapTick(Math.max(rawStart, rawEnd));
+
+        lastBoxRange.start = startTick;
+        lastBoxRange.end = endTick;
 
 
         // // Convert selection rect from canvas coords to MIDI coords
@@ -1536,12 +2033,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const TPB = window.ticksPerBeat || 480;
         const sixteenth = TPB / 4;
         const q = n => Math.max(0, Math.round(n / sixteenth) * sixteenth);
-        const notes = collected.map(n => ({
-            pitch: n.pitch,
-            start: q(n.start_tick),
-            dur: n.duration_ticks > 0 ? Math.max(sixteenth,
-                Math.round(n.duration_ticks / sixteenth) * sixteenth) : 0
-        })).filter(n => n.dur > 0);
+        const notes = collected.map(n => {
+            // quantize then clamp to 0
+            const rawStart = q(n.start_tick);
+            return {
+                pitch: n.pitch,
+                start: Math.max(0, rawStart),
+                dur: n.duration_ticks > 0
+                    ? Math.max(sixteenth, Math.round(n.duration_ticks / sixteenth) * sixteenth)
+                    : 0
+            };
+        }).filter(n => n.dur > 0);
+
 
         if (!notes.length) return "";
 
@@ -1622,8 +2125,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const { trackIndex, noteIndex } = JSON.parse(k);
             const raw = rawTracksData[trackIndex]?.notes[noteIndex];
             if (!raw || raw.duration_ticks <= 0) return;
-            const start = q(raw.start_tick);
+
+            // quantize and clamp negative starts
+            const rawStart = q(raw.start_tick);
+            const start = Math.max(0, rawStart);
             const dur = Math.max(sixteenth, q(raw.duration_ticks));
+
             if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
             byTrack.get(trackIndex).push({ ...raw, start, dur });
         });
@@ -1743,43 +2250,54 @@ document.addEventListener('DOMContentLoaded', function () {
      * @returns {string}           – the adjusted ABC
      */
     function trimCommonBarRests(abcText, unitsPerBar) {
+        // 1) make sure unitsPerBar is a positive integer
+        unitsPerBar = Math.round(unitsPerBar);
+        if (unitsPerBar < 1) return abcText;
+
         const lines = abcText.split('\n');
         const voiceRe = /^(\[V:\d+\]\s*)z(\d+)(\s*)(.*)$/;
-        // collect the line‑indices that begin with "[V:x] zN"
+
+        // find all the voice-lines once
         const voiceIdxs = lines
             .map((l, i) => voiceRe.test(l) ? i : -1)
             .filter(i => i >= 0);
 
-        // keep stripping as long as *every* voice‑line has N >= unitsPerBar
-        let keepGoing = true;
-        while (keepGoing) {
-            const rests = voiceIdxs.map(i => {
-                const m = lines[i].match(voiceRe);
-                return m ? parseInt(m[2], 10) : 0;
-            });
-            // if any voice has less than a full‑bar rest, stop
-            if (rests.some(r => r < unitsPerBar)) break;
+        // 2) only keep looping while we actually strip something
+        let didStrip;
+        do {
+            didStrip = false;
 
-            // subtract one bar from each
-            voiceIdxs.forEach(i => {
+            for (const i of voiceIdxs) {
                 const m = lines[i].match(voiceRe);
-                const pre = m[1];               // "[V:x] "
-                const cur = parseInt(m[2], 10); // current rest count
-                const sp = m[3];               // whitespace after number
-                const tail = m[4];               // the rest of the line
+                if (!m) {
+                    // no longer a rest-line → stop attempting
+                    didStrip = false;
+                    break;
+                }
 
+                const cur = parseInt(m[2], 10);
+                if (cur < unitsPerBar) {
+                    // this voice doesn't have a full-bar rest anymore → stop
+                    didStrip = false;
+                    break;
+                }
+
+                // subtract one bar
                 const leftover = cur - unitsPerBar;
                 if (leftover > 0) {
-                    lines[i] = `${pre}z${leftover}${sp}${tail}`;
+                    lines[i] = `${m[1]}z${leftover}${m[3]}${m[4]}`;
                 } else {
-                    // no rest left → drop the "zN" entirely
-                    lines[i] = `${pre}${tail}`;
+                    // exactly zero → drop the "zN"
+                    lines[i] = `${m[1]}${m[4]}`;
                 }
-            });
-        }
+
+                didStrip = true;
+            }
+        } while (didStrip);
 
         return lines.join('\n');
     }
+
 
 
     /**
@@ -1837,6 +2355,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // 5. Update Key Display
             drawKeyDisplay(lowPitchVisible, highPitchVisible);
 
+
+            ctx.restore();
+
             if (playheadProgress != null) {
                 const x = midiTickToCanvasX(playStartTick + playSpanTicks * playheadProgress);
                 ctx.save();
@@ -1849,8 +2370,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 ctx.restore();
             }
 
-
-            ctx.restore();
         });
     }
 
@@ -1969,25 +2488,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function drawAllNotes(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
-        // Draw Ghosts (Inactive tracks, visible) first
-        trackStates.forEach((state, trackIndex) => {
-            if (state.isVisible && trackIndex !== activeTrackIndex) {
-                drawNotesForTrack(trackIndex, false, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible);
-            }
-        });
+    function drawAllNotes(startTickVisible, endTickVisible,
+        lowPitchVisible, highPitchVisible) {
+        const pat = patterns.get(activePatternId);
 
-        // Draw Active Track Notes last (on top) if visible
-        if (activeTrackIndex !== -1 && trackStates[activeTrackIndex]?.isVisible) {
-            drawNotesForTrack(activeTrackIndex, true, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible);
-        }
+        const drawTrack = (ti, isAct) => {
+            if (!trackStates[ti].isVisible) return;
+            drawNotesForTrack(ti, isAct, startTickVisible, endTickVisible,
+                lowPitchVisible, highPitchVisible, pat);
+        };
+
+        trackStates.forEach((_, ti) => { if (ti !== activeTrackIndex) drawTrack(ti, false); });
+        if (activeTrackIndex !== -1) drawTrack(activeTrackIndex, true);
     }
 
 
 
-    function drawNotesForTrack(trackIndex, isActive, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
+
+
+    function drawNotesForTrack(trackIndex, isActive, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, pattern) {
         const track = rawTracksData[trackIndex];
         if (!track || !track.notes) return;
+
 
         track.notes.forEach((note, noteIndex) => {
             // --- Culling ---
@@ -2000,6 +2522,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const noteKey = JSON.stringify({ trackIndex, noteIndex });
             const isSelected = selectedNotes.has(noteKey);
             const isInScale = isNoteInScale(note.pitch); // Check scale membership
+
+            if (pattern.id !== ROOT_ID && !noteInPattern(note, pattern, trackIndex)) return;
 
             // Calculate canvas coordinates and dimensions
             const x = midiTickToCanvasX(note.start_tick);

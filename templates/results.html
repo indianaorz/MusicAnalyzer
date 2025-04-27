@@ -49,10 +49,13 @@
             <button id="play-selection" title="Play / Pause" class="abc-play-button">
                 <i class="fas fa-play"></i>
             </button>
-            <label style="display:flex;align-items:center;gap:4px;">
+            <button id="add-pattern-btn" title="Add Pattern">
+                <i class="fas fa-plus"></i>
+            </button>
+            <!-- <label style="display:flex;align-items:center;gap:4px;">
                 <input type="checkbox" id="loop-selection" checked>
                 Loop
-            </label>
+            </label> -->
             <label>Copy mode:
                 <select id="copy-mode-select">
                     <option value="range">Overlapping notes</option>
@@ -102,6 +105,11 @@
             <p>No note tracks found in this file.</p>
             {% endif %}
         </aside>
+        <aside class="pattern-tree-panel">
+            <h2>Patterns</h2>
+            <ul id="pattern-tree" class="pattern-tree"></ul>
+          </aside>
+          
 
         <aside class="key-display-panel" id="key-display-panel">
         </aside>
