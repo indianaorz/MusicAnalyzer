@@ -292,12 +292,47 @@ document.addEventListener('DOMContentLoaded', function () {
             const n = pcToKeyName(pc, getKeyAccidentals(NOTE_NAMES[keyRootPc], isMinorKey).preferFlats);
             return { rootPc: pc, quality: 'root', ext: '', name: n, roman: n, bassPc: pc };
         }
+
         if (pcs.size === 2) {
-            const [a, b] = [...pcs].sort((x, y) => x - y);
-            const intv = (b - a + 12) % 12;
-            const lbl = ['P1', 'm2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7'][intv];
-            return { rootPc: a, quality: 'interval', ext: '', name: lbl, roman: lbl, bassPc: a };
+            const [rootPc, otherPc] = [...pcs].sort((x, y) => x - y);
+            const interval = (otherPc - rootPc + 12) % 12;
+
+            // decide sharps vs flats from the current key
+            const { preferFlats } = getKeyAccidentals(
+                NOTE_NAMES[keyRootPc],
+                isMinorKey
+            );
+            const rootName = pcToKeyName(rootPc, preferFlats);
+
+            // map semitone → suffix
+            const SUFFIX = {
+                0: "1",
+                1: "m2",
+                2: "M2",
+                3: "m3",
+                4: "M3",
+                5: "4",
+                6: "#4",  // or "TT"
+                7: "5",
+                8: "m6",
+                9: "M6",
+                10: "m7",
+                11: "M7"
+            };
+
+            const suf = SUFFIX[interval] || String(interval);
+
+            return {
+                rootPc,
+                quality: 'interval',
+                ext: '',
+                name: `${rootName}${suf}`,  // e.g. "G1", "Gm2", "GM2", "G5"
+                roman: `${rootName}${suf}`,
+                bassPc: rootPc
+            };
         }
+
+
 
         /* ---------- prep ---------- */
         const pcsArr = [...pcs].sort((a, b) => a - b);
@@ -446,7 +481,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // horizontal: if we just box-selected, use that exact tick range
         let start = lastBoxRange.start;
-        let end = lastBoxRange.end;
+        let end = lastBoxRange.end - 1;
 
         // otherwise fall back to note-based bounds (min start, max end)
         if (start == null || end == null) {
@@ -862,7 +897,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             instruments: [...pat.instruments],
                             isRepetition: true,
                             variantOf: id,
-                            variantOfName: name
+                            variantOfName: name,
+                            children: []
                         });
                         parent.children.push(rid);
                     });
@@ -917,7 +953,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             isVariation: true,
                             isRhythmicVariation: true,
                             variantOf: id,
-                            variantOfName: name
+                            variantOfName: name,
+                            children: []
                         });
                         parent.children.push(rid);
                     });
@@ -1240,6 +1277,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ul.innerHTML = '';
 
         function makeRow(p, depth, isLast) {
+            if (p === undefined) return; // skip if no pattern
             const li = document.createElement('li');
             li.className = 'pattern-node' +
                 (p.id === activePatternId ? ' active' : '') +
@@ -1330,6 +1368,8 @@ document.addEventListener('DOMContentLoaded', function () {
      *  Build a REPEAT pattern – *only* if the selection is exact
      *───────────────────────────────────────────────────────────────*/
     function makeRepeatOf(master) {
+
+        const baseId = variationBaseId || activePatternId;
         if (!selectionIsExactRepeatOf(master)) {
             alert(
                 `The notes you selected don’t perfectly match “${master.name}”.\n` +
@@ -1346,65 +1386,92 @@ document.addEventListener('DOMContentLoaded', function () {
         )];
 
         const id = crypto.randomUUID();
+
         patterns.set(id, {
             id,
             name: master.name,
-            parentId: master.parentId,
+            parentId: baseId,
             range: rect,
             mode: master.mode,
             instruments,
             isRepetition: true,
             variantOf: master.id,
-            variantOfName: master.name
+            variantOfName: master.name,
+            children: []
         });
-        patterns.get(master.parentId).children.push(id);
+        patterns.get(baseId).children.push(id);
 
+        variationBaseId = null;           // clear
         selectedNotes.clear();
         rebuildPatternTree();
         queueSave();
         redrawPianoRoll();
     }
 
+    let variationBaseId = null;
+
+
+    /**
+     * Build a new variation of `master` as a *child* of `master` itself,
+     * and give it the correct number of primes.
+     */
+
+    // updated makeVariationOf:
     function makeVariationOf(master) {
+        const baseId = variationBaseId || activePatternId;
         const rect = getSelectionRect(selectedNotes);
-        const instruments = [...new Set([...selectedNotes]
-            .map(k => JSON.parse(k).trackIndex))];
+        const instruments = [...new Set([...selectedNotes].map(k => JSON.parse(k).trackIndex))];
 
-        // ▼ this is the bit that decides how many primes (′) to add
-        const sibs = countExistingVariations(master);
+        // count all existing non-rhythmic variations of this master.id
+        const existing = Array.from(patterns.values())
+            .filter(p =>
+                p.isVariation &&
+                !p.isRhythmicVariation &&
+                p.variantOf === master.id
+            ).length;
+        const prime = "'".repeat(existing + 1);
 
-
-        const prime = "'".repeat(sibs + 1);     // <── variation number
         const id = crypto.randomUUID();
-        patterns.set(id, {
+        const newPat = {
             id,
-            name: master.name + prime,          // A, A′, A″ …
-            parentId: master.parentId,
+            name: master.name + prime,
+            parentId: baseId,               // use the selected “folder”
             range: rect,
             mode: master.mode,
             instruments,
             isVariation: true,
-            variantOf: master.id,
-            variantOfName: master.name
-        });
-        patterns.get(master.parentId).children.push(id);
+            variantOf: master.id,           // this connects it back to master
+            variantOfName: master.name,
+            children: [],
+        };
+
+        // insert under the base node, not under master
+        const parent = patterns.get(baseId);
+        parent.children.push(id);
+
+        patterns.set(id, newPat);
         rebuildPatternTree();
         queueSave();
         redrawPianoRoll();
+        variationBaseId = null;           // clear
     }
 
-    /* ---------------------------------------------------------------
- *  Return the number of *non-rhythmic* variations that already
- *  exist for `master` (siblings whose variantOf === master.id).
- * ------------------------------------------------------------- */
+    /**
+     * Return the number of *non-rhythmic* variations that already
+     * exist for `master` (anywhere in the tree whose variantOf === master.id).
+     */
     function countExistingVariations(master) {
-        const parent = patterns.get(master.parentId);
-        if (!parent) return 0;
-        return parent.children
-            .map(cid => patterns.get(cid))
-            .filter(p => p?.isVariation
-                && !p.isRhythmicVariation
-                && p.variantOf === master.id).length;
+        let count = 0;
+        for (const pat of patterns.values()) {
+            if (
+                pat.isVariation &&
+                !pat.isRhythmicVariation &&
+                pat.variantOf === master.id
+            ) {
+                count++;
+            }
+        }
+        return count;
     }
 
 
@@ -1732,46 +1799,75 @@ document.addEventListener('DOMContentLoaded', function () {
     let ticksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator;
 
 
-
-    /*───────────────────────────────────────────────────────────────
-     *  Does the CURRENT selection form a perfect quantized copy of `master`?
-     *  – quantizes starts & ends to the 16th-note grid (or adjust `step` as needed)
-     *───────────────────────────────────────────────────────────────*/
-    function selectionIsExactRepeatOf(master) {
+    /**
+     * Does the CURRENT selection form a perfect quantised copy of `master`?
+     * ─────────────────────────────────────────────────────────────────────
+     * • Ignores velocity / channel.
+     * • Quantises starts **and durations** to the 16-note grid (TPB/4 by default).
+     * • Compares (track, relStart, dur, pitch).
+     *
+     * If `debug:true` it logs a minimal diff report so you can see
+     *   – missing notes      (in master but not in selection)
+     *   – extra   notes      (in selection but not in master)
+     *   – pitch / length mismatches at the same slot.
+     */
+    function selectionIsExactRepeatOf(master, { debug = true } = {}) {
         if (!selectedNotes.size) return false;
 
-        // 1) grab the master’s notes & the selection
-        const masterKeys = notesInsidePattern(master);   // [{trackIndex,noteIndex},…]
-        const masterStart = master.range.start;
-        const selKeys = [...selectedNotes].map(k => JSON.parse(k));
-        const selStart = Math.min(...selKeys.map(k =>
-            rawTracksData[k.trackIndex].notes[k.noteIndex].start_tick));
+        const step = (window.ticksPerBeat || 480) / 4;   // 16th-note grid
+        const q = v => Math.round(v / step) * step;
 
-        // 2) quick length check
-        if (masterKeys.length !== selKeys.length) return false;
+        /* 1 — gather both note-lists (filter by master.instruments first) */
+        const masterKeys = notesInsidePattern(master)                // [{ti,ni},…]
+            .filter(({ trackIndex }) => !master.instruments ||
+                master.instruments.includes(trackIndex));
 
-        // 3) build a fingerprint string using your snapTick() quantizer
-        const toDesc = (ti, note, t0) => {
-            const relStart = snapTick(note.start_tick - t0);
-            const relEnd = snapTick(note.start_tick + note.duration_ticks - t0);
-            return `${ti}:${relStart}:${relEnd}:${note.pitch}`;
+        if (masterKeys.length === 0) return false;                    // nothing to match
+
+        const selKeys = [...selectedNotes]
+            .map(JSON.parse)
+            .filter(({ trackIndex }) => !master.instruments ||
+                master.instruments.includes(trackIndex));
+
+        /* quick cardinality check – no hope if counts differ */
+        if (masterKeys.length !== selKeys.length) {
+            if (debug) console.warn(
+                `≠ note count  ⟶ master:${masterKeys.length}  selection:${selKeys.length}`);
+            return false;
+        }
+
+        /* 2 — build canonical descriptor “track:start:dur:pitch” */
+        const desc = ({ trackIndex, noteIndex }, zero) => {
+            const n = rawTracksData[trackIndex].notes[noteIndex];
+            const relStart = q(n.start_tick - zero);
+            const dur = q(n.duration_ticks);                // ← use dur, not end!
+            return `${trackIndex}:${relStart}:${dur}:${n.pitch}`;
         };
 
-        // 4) master set
-        const masterSet = new Set(masterKeys.map(({ trackIndex, noteIndex }) => {
-            const note = rawTracksData[trackIndex].notes[noteIndex];
-            return toDesc(trackIndex, note, masterStart);
-        }));
+        const masterStart = Math.min(...masterKeys.map(({ trackIndex, noteIndex }) =>
+            rawTracksData[trackIndex].notes[noteIndex].start_tick));
 
-        // 5) make sure every selected note descriptor matches one in the master
-        for (let { trackIndex, noteIndex } of selKeys) {
-            const note = rawTracksData[trackIndex].notes[noteIndex];
-            if (!masterSet.has(toDesc(trackIndex, note, selStart))) {
+        const selStart = Math.min(...selKeys.map(({ trackIndex, noteIndex }) =>
+            rawTracksData[trackIndex].notes[noteIndex].start_tick));
+
+        const masterSet = new Set(masterKeys.map(k => desc(k, masterStart)));
+
+        /* 3 — walk the selection, spot the FIRST mismatch (cheapest exit) */
+        for (const key of selKeys) {
+            const d = desc(key, selStart);
+            if (!masterSet.has(d)) {
+                if (debug) {
+                    console.group('repeat-test diff');
+                    console.log('expected these descriptors:', masterSet);
+                    console.error('first offending descriptor:', d);
+                    console.groupEnd();
+                }
                 return false;
             }
         }
-        return true;
+        return true;   // perfect clone
     }
+
 
 
 
@@ -2667,6 +2763,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // —— 'R': mark selected notes as a repeat; next sidebar-click chooses the master pattern ——  
         if (!event.repeat && event.key.toLowerCase() === 'r') {
+            variationBaseId = activePatternId;      // remember what “folder” we’re in
             if (!selectedNotes.size) {
                 alert('Select the section you want to mark as a repeat.');
                 return;
@@ -2678,6 +2775,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // —— 'V': mark selected notes as a variation; next sidebar-click chooses the parent pattern ——  
         if (!event.repeat && event.key.toLowerCase() === 'v') {
+            variationBaseId = activePatternId;      // remember what “folder” we’re in
             if (!selectedNotes.size) {
                 alert('Select the section you want to mark as a variation.');
                 return;
@@ -2689,6 +2787,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // —— 'P': prompt for a new pattern name ——  
         if (!event.repeat && event.key.toLowerCase() === 'p') {
+            variationBaseId = activePatternId;      // remember what “folder” we’re in
             if (selectedNotes.size) {
                 const nm = prompt('Name this pattern:');
                 if (nm) addPattern(nm.trim());
@@ -2704,6 +2803,16 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 console.log('Ctrl+C pressed, but no notes selected.');
             }
+            return;
+        }
+
+        // ── Allow Esc to cancel repeat/variation mode ──
+        if (event.key === 'Escape') {
+            if (patternActionMode) {
+                patternActionMode = null;
+                hideOverlay();
+            }
+            variationBaseId = null;
             return;
         }
 
@@ -2772,7 +2881,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const rawStart = canvasXToMidiTick(rect.x1);
         const rawEnd = canvasXToMidiTick(rect.x2);
         let startTick = snapTick(Math.min(rawStart, rawEnd));
-        let endTick = snapTick(Math.max(rawStart, rawEnd));
+        let endTick = snapTick(Math.max(rawStart, rawEnd)) - 1;
 
         lastBoxRange.start = startTick;
         lastBoxRange.end = endTick;
@@ -3515,9 +3624,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-            if (activePatternId !== ROOT_ID) {
-                drawDescendantBounds(patterns.get(activePatternId));
-            }
+            // if (activePatternId !== ROOT_ID) {
+            drawDescendantBounds(patterns.get(activePatternId));
+            // }
 
             // 3. Draw Notes
             drawAllNotes(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible);
@@ -3564,26 +3673,277 @@ document.addEventListener('DOMContentLoaded', function () {
     const _GOLDEN_RATIO = 0.61803398875;               // nice hue spread
     const _familyHueCache = new Map();                 // familyId → hue 0-360
 
-    /** simple deterministic hash → 0-1 float  */
-    function _hash01(id) {
+    /*─────────────────────────────────────────────────────────────────────
+      C O L O U R   P I C K E R   v2
+    ─────────────────────────────────────────────────────────────────────*/
+
+    /*─── Colour engine: repetitions inherit *exactly* their source’s colour ───*/
+
+    // Cache for hue per family-root
+    const _hueCache = new Map();
+
+    /** 0–1 hash from string */
+    function _hash01(str) {
         let h = 0;
-        for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
-        return (h * _GOLDEN_RATIO) % 1;                // wrap  [0…1)
+        for (let i = 0; i < str.length; i++) {
+            h = (h * 31 + str.charCodeAt(i)) >>> 0;
+        }
+        return (h * 0.61803398875) % 1;
     }
 
-    /** return an HSLA string for this pattern.  */
-    function colourForPattern(pat, alpha = 0.22, depth = 0) {
-        const familyId = pat.variantOf || pat.id;
-        if (!_familyHueCache.has(familyId)) {
-            _familyHueCache.set(familyId,
-                Math.round(_hash01(familyId) * 360));
+    /** Find the ultimate ancestor that isn’t itself a variation/repeat */
+    function _familyRootId(pat) {
+        let cur = pat;
+        let breaks = 5;
+        while (cur.variantOf && breaks-- > 0) {
+            cur = patterns.get(cur.variantOf);
         }
-        const hue = _familyHueCache.get(familyId);
+        return cur.id;
+    }
+
+    /** Recursively compute lightness:
+     *  – if it’s a repetition → delegate to its source
+     *  – else start at 45%, +15% per variation-ancestor
+     */
+    function _computeLightness(pat) {
+        const BASE_L = 45;
+        // 1) repetitions: exact same as their master
+        if (pat.isRepetition) {
+            return _computeLightness(patterns.get(pat.variantOf));
+        }
+        // 2) variations & masters: accumulate +15% per variation in the chain
+        let light = BASE_L;
+        let cur = pat;
+        let max = 5;
+        while (cur.variantOf && max-- > 0) {
+            if (cur.isVariation) light += 15;
+            cur = patterns.get(cur.variantOf);
+        }
+        return light;
+    }
+
+    /**
+     * HSLA fill/stroke for any pattern:
+     *  • hue = family-root hash
+     *  • sat = 68%
+     *  • light = _computeLightness (so repeats match their master exactly,
+     *    variations get +15%, nested variations stack)
+     */
+    function colourForPattern(pat, alpha = 0.22) {
+        // 1) Hue
+        const rootId = _familyRootId(pat);
+        if (!_hueCache.has(rootId)) {
+            _hueCache.set(rootId, Math.round(_hash01(rootId) * 360));
+        }
+        const hue = _hueCache.get(rootId);
         const sat = 68;
-        let light = 45 + depth * 6;          // +6 % L per level down
-        if (pat.isVariation) light += 10;      // extra lift for vars
+
+        // 2) Lightness
+        const light = _computeLightness(pat);
+
         return `hsla(${hue},${sat}%,${light}%,${alpha})`;
     }
+
+
+    /**
+     * Walks the pattern-tree and returns:
+     *   [{
+     *        id,                 // uuid
+     *        function: 'MotifVariation',
+     *        input,              // <abc>…</abc>  (motif + context)
+     *        output              // [V:…] …       (variant only)
+     *    }, …]
+     */
+    function collectMotifVariationExamples() {
+
+        /** helper: ABC for an *entire* pattern rect */
+        const abcForPattern = pat => {
+            // temporarily select all its notes → reuse your existing generator
+            const remember = new Set(selectedNotes);
+            selectedNotes = new Set(notesInsidePattern(pat).map(
+                o => JSON.stringify(o)));
+            const abc = generateAbcFromSelectionMultiVoice();
+            selectedNotes = remember;
+            return `<abc>\n${abc}\n</abc>`;
+        };
+
+        /** helper: ABC **just** the note-cluster of this pattern (no header) */
+        const abcBody = pat => {
+            const full = abcForPattern(pat);
+            // strip everything before the first “[V:”  and after “|]”
+            return full.replace(/^[\s\S]*?\[V:/, '[V:').replace(/\|][\s\S]*$/, '|]');
+        };
+
+        const examples = [];
+
+        // ➊ for each “family” (= a node + all its non-repetition children) …
+        patterns.forEach(parent => {
+            if (parent.isRepetition) return;
+
+            const family = [parent, ...parent.children
+                .map(id => patterns.get(id))
+                .filter(ch => ch && ch.isVariation)];
+
+            if (family.length < 2) return;  // no siblings → nothing to learn from
+
+            // ➋ generate **every ordered pair**  (A → B, including master → var)
+            family.forEach(src => {
+                family.forEach(tgt => {
+                    if (src.id === tgt.id) return;
+                    examples.push({
+                        id: uuid(),
+                        function: 'MotifVariation',
+                        input: abcForPattern(src),
+                        output: abcForPattern(tgt)//abcBody(tgt)
+                    });
+                });
+            });
+        });
+
+        return examples;
+    }
+
+    // ——— src/frontend/pianoroll.js
+    // helper – returns a **group id**
+    function instGroup(ti) {
+        return isDrumTrack(ti) ? 'DRUMS' : ti;   // drums collapse to one
+    }
+
+    document.getElementById('save-motif-variation').onclick = async () => {
+        const examples = collectMotifVariationExamples();
+        if (!examples.length) { alert('No variations found 🤔'); return; }
+
+        try {
+            const r = await fetch('/dataset/motif_variation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    song_name: currentMidiFilename.replace(/\.[^.]+$/, ''),
+                    examples
+                })
+            });
+            if (!r.ok) throw new Error(await r.text());
+            alert(`Exported ${examples.length} examples ✅`);
+        } catch (e) {
+            console.error(e); alert('Export failed – see console');
+        }
+    };
+    const uuid = () => {
+        if (crypto && crypto.randomUUID) return crypto.randomUUID();
+        // fallback:
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+        });
+    };
+
+    // Helper: generate all non-empty subsets of an array
+    function allNonEmptySubsets(array) {
+        const subsets = [];
+        const n = array.length;
+        for (let mask = 1; mask < (1 << n); mask++) {
+            const subset = [];
+            for (let i = 0; i < n; i++) {
+                if (mask & (1 << i)) subset.push(array[i]);
+            }
+            subsets.push(subset);
+        }
+        return subsets;
+    }
+
+    // Helper: build context ABC from a time range and a set of track indices
+    function buildContextAbc(range, trackIndices) {
+        // trackIndices contains *original* indices, we may have duplicates of DRUMS
+        const groups = [...new Set(trackIndices.map(instGroup))];
+      
+        selectedNotes.clear();
+        rawTracksData.forEach((trk, ti) => {
+          if (!groups.includes(instGroup(ti))) return;
+          trk.notes.forEach((n, ni) => {
+            if (n.start_tick < range.end && n.start_tick + n.duration_ticks > range.start) {
+              selectedNotes.add(JSON.stringify({ trackIndex: ti, noteIndex: ni }));
+            }
+          });
+        });
+      
+        const abc = generateAbcFromSelectionMultiVoice().trim();
+        selectedNotes.clear();
+        return abc;
+      }
+      
+// Export-to-training button handler
+document.getElementById('export-to-training').onclick = async () => {
+    const examples = [];
+    const songName = currentMidiFilename.replace(/\.[^.]+$/, '');
+  
+    for (const pat of patterns.values()) {
+      if (pat.id === ROOT_ID) continue;
+  
+      // ✂️ NEW: skip any pattern that has children
+      if (Array.isArray(pat.children) && pat.children.length > 0) continue;
+  
+      // only patterns with exactly one instrument
+      const instGroups = [...new Set(pat.instruments.map(instGroup))];
+      if (instGroups.length !== 1) continue;           // needs exactly one group
+  
+      // 1) Build OUTPUT snippet for this single-instrument pattern
+      selectedNotes.clear();
+      for (const ref of notesInsidePattern(pat)) {
+        selectedNotes.add(JSON.stringify(ref));
+      }
+      const outputAbc = generateAbcFromSelectionMultiVoice().trim();
+      selectedNotes.clear();
+  
+      // 2) Find all other tracks active in the same time window
+      const contextTracks = new Set();
+      rawTracksData.forEach((trk, ti) => {
+        if (pat.instruments.includes(ti)) return;
+        if (trk.notes.some(n =>
+          n.start_tick < pat.range.end && n.start_tick + n.duration_ticks > pat.range.start
+        )) {
+          contextTracks.add(ti);
+        }
+      });
+      const others = Array.from(contextTracks);
+  
+      // 3) For every non-empty subset of context tracks
+      for (const subset of allNonEmptySubsets(others)) {
+        const inputAbc = buildContextAbc(pat.range, subset);
+        if (!inputAbc) continue;
+  
+        // get the target instrument name from the pattern's instrument index
+        const ti = pat.instruments[0];
+        const targetInstrument = getTrackInstrumentName(rawTracksData[ti], ti);
+  
+        examples.push({
+          id: crypto.randomUUID(),
+          function: 'InstrumentAddition',
+          input: `<abc>\n${inputAbc}\n</abc>`,
+          targetInstrument,
+          output: `<abc>\n${outputAbc}\n</abc>`
+        });
+      }
+    }
+  
+    // 4) POST the dataset to Flask
+    try {
+      const res = await fetch('/dataset/export_training', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ song_name: songName, examples })
+      });
+      if (!res.ok) throw new Error(await res.text());
+      alert(`Exported ${examples.length} examples!`);
+    } catch (err) {
+      console.error(err);
+      alert('Export failed – see console');
+    }
+  };
+  
+
+
+
+
 
 
     /*─────────────────────────────────────────────────────────────────────────────

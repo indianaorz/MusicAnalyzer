@@ -1,7 +1,9 @@
 import os
 import json
-from flask import (Flask, request, render_template, redirect, url_for, 
-                   flash, send_from_directory, abort) # Added send_from_directory, abort
+import re
+from flask import (Flask, request, render_template, redirect, url_for,
+                    flash, send_from_directory, abort, jsonify, send_file)
+import uuid
 from werkzeug.utils import secure_filename
 import mido # Make sure you have installed mido: pip install mido
 import logging # For better logging
@@ -23,6 +25,11 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 # Configure Logging
 logging.basicConfig(level=logging.INFO)
 app.logger.setLevel(logging.INFO)
+
+from pathlib import Path
+
+DATA_ROOT = Path('training_data').resolve()      # ① make it absolute
+
 
 # --- General MIDI Instrument Map (Program Change to Name) ---
 # (Based on GM Standard - you can customize this)
@@ -62,6 +69,10 @@ def allowed_file(filename):
     """Checks if the file extension is allowed."""
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+
 
 def parse_midi(filepath):
     """
@@ -210,6 +221,62 @@ def view_file(filename):
                            time_signature_denominator=ts_den,
                            initial_settings=json.dumps(initial_settings)) # New
 
+
+def slugify(s: str) -> str:
+    return re.sub('[^\w\- ]+', '', s).strip().replace(' ', '_')[:64]
+
+# app.py  – keep DATA_ROOT as before
+@app.post('/dataset/motif_variation')
+def save_batch():
+    data = request.get_json(force=True)
+    song   = re.sub(r'[^\w\- ]+', '', data.get('song_name','untitled')).strip() or 'untitled'
+    folder = DATA_ROOT / song / 'motif_variation'
+    folder.mkdir(parents=True, exist_ok=True)
+
+    for ex in data.get('examples', []):
+        # ensure a filename even if UI forgot the id
+        fid = ex.get('id') or uuid.uuid4().hex
+        (folder / f'{fid}.json').write_text(json.dumps(ex, indent=2))
+
+    return {'saved': len(data.get('examples', []))}
+
+
+@app.post('/dataset/motif_variation')
+def save_motif_variation():
+    data = request.get_json(force=True)
+    song   = slugify(data.get('song_name' , 'untitled'))
+    ex     = data.get('example')
+    if not song or not ex:
+        abort(400, 'song_name and example required')
+
+    # 1. folder layout  <root>/<song>/motif_variation/
+    folder = DATA_ROOT / song / 'motif_variation'
+    folder.mkdir(parents=True, exist_ok=True)
+
+    # 2. write the original
+    fname = folder / f'{ex["id"]}.json'
+    fname.write_text(json.dumps(ex, indent=2))
+
+    # 3. generate 11 transposed copies (-6 … +6 semitones, skip 0)
+    m = re.search(r'K:([A-G][b#]?)(maj|min)?', ex['input'])
+    if m:
+        key = m.group(1)
+        for semis in range(-6, 7):
+            if semis == 0: continue
+            t_in  = transpose_abc(ex['input'] , semis, key)
+            t_out = transpose_abc(ex['output'], semis, key)
+            if not t_in or not t_out: continue      # skip failures
+
+            tid = uuid.uuid4().hex
+            (folder / f'{tid}.json').write_text(json.dumps({
+                "id":       tid,
+                "function": ex['function'],
+                "input":    t_in,
+                "output":   t_out
+            }, indent=2))
+
+    return jsonify({'status':'ok'})
+
 # ... (keep download_file and main block) ...
 # --- Routes ---
 @app.route('/', methods=['GET'])
@@ -285,7 +352,97 @@ def user_settings(fname):
         return json.load(open(path)), 200
     return {}, 200
 
+@app.post('/dataset/export_training')
+def export_training():
+    data = request.get_json(force=True)
+    song = slugify(data.get('song_name', 'untitled'))
+    examples = data.get('examples', [])
+    folder = DATA_ROOT / song / 'instrument_addition'
+    folder.mkdir(parents=True, exist_ok=True)
+    for ex in examples:
+        fid = ex.get('id') or uuid.uuid4().hex
+        (folder / f'{fid}.json').write_text(json.dumps(ex, indent=2))
+    return jsonify({'saved': len(examples)})
 
+
+# ----------------------------------------------------------------------
+#  /data/index.json  →  flat list of every example we can find
+# ----------------------------------------------------------------------
+@app.get('/data/index.json')
+def data_index():
+    """
+    Scans training_data/<song>/*/*.json  (recursively) and returns:
+        [
+          {
+            "id": "nw02f2b8",                 # file stem
+            "song": "Cannon_in_D",            # parent song folder
+            "category": "motif_variation",    # sub-folder
+            "path": "Cannon_in_D/motif_variation/nw02f2b8.json",
+            "function": "add_third_above",    # if present in file
+            "title": "Cannon_in_D • add_third_above"
+          },
+          ...
+        ]
+    """
+    items = []
+    for json_path in DATA_ROOT.rglob('*.json'):
+        try:
+            payload = json.loads(json_path.read_text())
+        except Exception:
+            continue                            # skip broken files
+
+        song      = json_path.parts[-3]         # <song>
+        category  = json_path.parts[-2]         # motif_variation / …
+        fid       = json_path.stem
+        function  = payload.get('function', '')
+        title     = f"{song} • {function}" if function else f"{song}/{fid}"
+
+        items.append({
+            "id": fid,
+            "song": song,
+            "category": category,
+            "path": '/'.join(json_path.parts[-3:]),   # relative to DATA_ROOT
+            "function": function,
+            "title": title
+        })
+
+    # sort sensibly (alpha by song, then whatever)
+    items.sort(key=lambda x: (x['song'].lower(), x['title'].lower()))
+    return jsonify(items)
+
+
+# ----------------------------------------------------------------------
+#  Serve any individual example JSON (read-only)
+# ----------------------------------------------------------------------
+@app.get('/data/example/<path:subpath>')
+def data_example(subpath):
+    wanted = (DATA_ROOT / subpath).resolve()
+    print(f"Requested data example: {wanted}")
+
+    # ② reject only if the path escapes the dataset folder
+    try:
+        wanted.relative_to(DATA_ROOT)
+    except ValueError:
+        abort(404)
+
+    if not wanted.exists():
+        # forgiving fallback (unchanged) …
+        candidates = [p for p in DATA_ROOT.rglob(wanted.name)
+                      if p.is_file() and p.suffix == '.json']
+        if candidates:
+            wanted = candidates[0]
+        else:
+            abort(404)
+
+    return send_file(wanted, mimetype='application/json')
+
+
+# ----------------------------------------------------------------------
+#  Tiny HTML page that hosts the JS browser (see §2)
+# ----------------------------------------------------------------------
+@app.get('/browse')
+def browse():
+    return render_template('data_browser.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

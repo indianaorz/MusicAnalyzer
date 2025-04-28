@@ -212,32 +212,6 @@ function createStaticPianoRollRenderer(renderOptions) {
         return Math.max(0, Math.min(127, midi));
     }
 
-      // Add a "Download MIDI" button next to the canvas
-      function addDownloadButton() {
-        const btn = document.createElement('button');
-        btn.textContent = 'Download MIDI';
-        btn.style.margin = '8px 0';
-        btn.addEventListener('click', async () => {
-            try {
-                // Use abcjs synth to generate a MIDI Uint8Array from the parsed tune
-                const midiArray = ABCJS.synth.getMidiFile(abcTune);
-                const blob = new Blob([midiArray], { type: 'audio/midi' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'music.mid';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            } catch (err) {
-                console.error('Error generating MIDI:', err);
-            }
-        });
-        const controlPanel = canvas.parentElement || document.body;
-        controlPanel.appendChild(btn);
-    }
-
 
 
     // --- Parsing Helpers ---
@@ -571,7 +545,8 @@ function createStaticPianoRollRenderer(renderOptions) {
         effectiveNoteHeight = Math.max(NOTE_BASE_HEIGHT, dynamicRowH);
 
         // split that (now guaranteed ≥ NOTE_BASE_HEIGHT) across your voices:
-        subRowHeight = effectiveNoteHeight / voiceCount;
+        // subRowHeight = effectiveNoteHeight / voiceCount;
+        subRowHeight = effectiveNoteHeight;
 
 
 
@@ -584,8 +559,6 @@ function createStaticPianoRollRenderer(renderOptions) {
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
         setupKeyDisplay();
-        addDownloadButton();  // Add MIDI download button after layout
-
 
         console.log(`StaticRenderer: Setup complete. Canvas=${canvasWidth}x${canvasHeight}, Ticks=${contentWidthTicks}, PitchRange=[${contentMinPitch}-${contentMaxPitch}], ScaleX=${scaleX.toFixed(3)}, PixelsPerPitch=${effectiveNoteHeight.toFixed(2)}`);
         redrawStaticPianoRoll();
@@ -861,6 +834,8 @@ function createStaticPianoRollRenderer(renderOptions) {
         ctx.restore(); // Restore context state
     }
 
+    
+
     // Make sure the rest of static-pianoroll.js remains the same
 
     // Replace drawAllNotes with this drop‑in:
@@ -898,12 +873,17 @@ function createStaticPianoRollRenderer(renderOptions) {
         const x = midiTickToCanvasX(start_tick);
         const w = Math.max(1, duration_ticks * PIXELS_PER_TICK_BASE * scaleX);
 
-        // full‑row top Y, then shift down by voice index
-        const fullRowY = midiPitchToCanvasY(pitch);
-        const y = fullRowY + voice * subRowHeight + NOTE_VERTICAL_GAP / 2;
+        // ── old stacking logic ──
+        // const fullRowY = midiPitchToCanvasY(pitch);
+        // const y = fullRowY + voice * subRowHeight + NOTE_VERTICAL_GAP / 2;
+        // const h = Math.max(1, subRowHeight - NOTE_VERTICAL_GAP);
 
-        // each sub‑row’s height
-        const h = Math.max(1, subRowHeight - NOTE_VERTICAL_GAP);
+
+        // ── new full‑cell logic ──
+        const fullRowY = midiPitchToCanvasY(pitch);
+        const y = fullRowY + NOTE_VERTICAL_GAP / 2;
+        const h = Math.max(1, effectiveNoteHeight - NOTE_VERTICAL_GAP);
+
 
         // colour/alpha logic unchanged
         const inScale = isNoteInScale(pitch);

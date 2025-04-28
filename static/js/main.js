@@ -1,9 +1,63 @@
 // static/js/main.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const analysisContainer = document.getElementById('analysis-content');
+    
+   /* -------------------------------------------------------------
+      CONSTANTS — they have to be defined before any function
+      using them might execute
+   ------------------------------------------------------------- */
+   const DEFAULT_VOICE_COLORS = [
+     '#6cb2f5', '#ffb74d', '#8e44ad', '#2ecc71', '#f1c40f'
+   ];
 
-    const DEFAULT_VOICE_COLORS = ['#6cb2f5', '#ffb74d', '#8e44ad', '#2ecc71', '#f1c40f'];
+   const DOWNLOAD_BTN_HTML = '<i class="fas fa-file-download"></i>';
+   
+    // Store synth engines and states for each block
+    const blockAudioStates = {}; // { blockId: { synthEngine: ..., isPlaying: false, isPrimed: false, totalMillis: 0 } }
+
+    const analysisContainer = document.getElementById('analysis-content');
+      // make the renderer callable from the outside right away
+      window.processAndRenderAnalysis = processAndRenderAnalysis;
+    // 1) Parse the URL for ?id=
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+    if (!postId) {
+        analysisContainer.innerHTML = `<p style="color: red;">No analysis post specified. Please add ?id=postX to the URL.</p>`;
+        return;
+    }
+
+    // 2) Dynamically load the corresponding analysis-data script
+    const dataScript = document.createElement('script');
+    dataScript.src = `js/${postId}-analysis-data.js`;
+    dataScript.onload = () => {
+        if (typeof analysisContent !== 'string') {
+            analysisContainer.innerHTML = `<p style="color: red;">Loaded data file but <code>analysisContent</code> is missing or invalid.</p>`;
+            return;
+        }
+        // 3) Now that analysisContent is defined, run the normal renderer
+        processAndRenderAnalysis();
+    };
+    dataScript.onerror = () => {
+        console.error(`Failed to load analysis data for ID="${postId}"`);
+        analysisContainer.innerHTML = `<p style="color: red;">Could not load analysis data for "${postId}".</p>`;
+    };
+    document.body.appendChild(dataScript);
+
+
+    // At top of DOMContentLoaded callback:
+    const loading = document.getElementById('loading-indicator');
+    const container = document.getElementById('analysis-content');
+
+
+    // In dataScript.onload:
+    loading.style.display = 'none';
+    container.style.display = 'block';
+
+
+    // In dataScript.onerror:
+    loading.textContent = 'Failed to load analysis data.';
+
+
 
 
     if (!analysisContainer) {
@@ -11,8 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Store synth engines and states for each block
-    const blockAudioStates = {}; // { blockId: { synthEngine: ..., isPlaying: false, isPrimed: false, totalMillis: 0 } }
 
     // --- Define the functions needed for the synth callbacks ---
 
@@ -31,6 +83,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const progress = ev.milliseconds / state.totalMillis;
             const playheadX = progress * canvasWidth;
             playhead.style.left = `${Math.min(canvasWidth, Math.max(0, playheadX))}px`;
+        }
+    }
+
+    function handleDownloadClick(abcString, tuneTitle = 'tune') {
+        try {
+            // getMidiFile returns a <div>…<a …>Download…</a></div> string
+            const html = ABCJS.synth.getMidiFile(abcString, {
+                midiOutputType: 'link',
+                downloadLabel: `Download MIDI`,
+                fileName: `${tuneTitle}.mid`
+            });
+            // pull the anchor out of the returned html
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            const anchor = tmp.querySelector('a');
+            if (!anchor) throw new Error('midi link not generated');
+            // add & click invisibly, then clean up
+            anchor.style.display = 'none';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor.parentNode);
+        } catch (err) {
+            console.error('MIDI download failed:', err);
+            alert('Sorry—could not generate the MIDI file.');
         }
     }
 
@@ -77,33 +153,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function addVoiceSelector(blockWrapper, renderer){
+    function addVoiceSelector(blockWrapper, renderer) {
         const voices = renderer.getVoices();
         if (voices.length < 2) return;        // nothing to choose
-    
+
         const wrapper = document.createElement('div');
         wrapper.className = 'voice-selector';
-    
+
         const label = document.createElement('label');
         label.textContent = 'Voice:';
         wrapper.appendChild(label);
-    
+
         const select = document.createElement('select');
-        voices.forEach(v=>{
+        voices.forEach(v => {
             const opt = document.createElement('option');
             opt.value = v.index;
             opt.textContent = v.name;
             select.appendChild(opt);
         });
-        select.addEventListener('change', ()=>{
-            renderer.setHighlightVoice(parseInt(select.value,10));
+        select.addEventListener('change', () => {
+            renderer.setHighlightVoice(parseInt(select.value, 10));
         });
         wrapper.appendChild(select);
-    
+
         const pianoWrapper = blockWrapper.querySelector('.static-piano-roll-wrapper');
         blockWrapper.insertBefore(wrapper, pianoWrapper);
     }
-    
+
 
 
 
@@ -154,6 +230,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     controls.appendChild(playBtn);
                     controls.appendChild(title);
                     blockWrapper.appendChild(controls);
+
+                    // download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'abc-download-button';
+                    downloadBtn.innerHTML = DOWNLOAD_BTN_HTML;
+                    downloadBtn.title = 'Download MIDI';
+                    downloadBtn.dataset.blockId = blockId;
+                    controls.appendChild(downloadBtn);
+
 
                     // piano‑roll skeleton
                     const pianoWrapper = document.createElement('div');
@@ -210,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             // ─── ABCJS synth ──────────────────────────────────
                             const engine = new ABCJS.synth.CreateSynth();
-                            
+
                             engine.init({
                                 visualObj: abcTune,
                                 options: {
@@ -253,6 +338,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         playBtn.title = "Setup Error";
                     }
                     playBtn.addEventListener('click', handlePlayButtonClick);
+
+                    downloadBtn.addEventListener('click', () => {
+                        const abcTitle = title.textContent || `Example ${abcBlockIndex}`;
+                        handleDownloadClick(abcString, abcTitle.replace(/\s+/g, '_'));
+                      });
 
                 } else {
                     // commentary

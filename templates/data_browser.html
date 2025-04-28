@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dataset Browser</title>
+
+  <!-- minimal styling, no canvas here -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/data_browser.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+  <section id="sidebar">
+    <input id="filter" type="search" placeholder="Filter…" autocomplete="off">
+    <ul id="item-list"></ul>
+  </section>
+
+  <!-- the right-hand viewer re-uses your static-pianoroll -->
+  <main id="viewer">
+    <!-- loading placeholder that main.js will hide once it’s ready -->
+    <div id="loading-indicator" class="loading-indicator">Loading analysis…</div>
+  
+    <!-- main.js will swap this in and show it -->
+    <div id="analysis-content" style="display:none;"></div>
+  
+    <p class="placeholder">Select an example on the left ↖︎</p>
+  </main>
+  
+
+  <!-- existing render stack (unchanged) -->
+  <script src="{{ url_for('static', filename='js/abcjs-plugin-min.jsl') }}"></script>
+  <script src="{{ url_for('static', filename='js/gm-mapping.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/static-pianoroll.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  <!-- new controller -->
+  <script src="{{ url_for('static', filename='js/data_browser.js') }}"></script>
+</body>
+
+</html>
