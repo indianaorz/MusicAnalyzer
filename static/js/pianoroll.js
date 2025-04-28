@@ -997,7 +997,39 @@ document.addEventListener('DOMContentLoaded', function () {
         selectionVariationHighlights = hits.map(h => h.range);
     }
 
+    /* ────────────────────────────────────────────────────────────────
+     *  GLOBAL STATE  (add just after the other globals)
+     * ────────────────────────────────────────────────────────────────*/
+    let patternActionMode = null;   // null | 'repeat' | 'variation'
+    let overlayEl = null;           // the arrow-overlay DOM node
 
+    /* helper – show / hide the full-screen arrow message */
+    function showOverlay(msg) {
+        if (!overlayEl) {
+            overlayEl = document.createElement('div');
+            overlayEl.id = 'pattern-click-overlay';
+            Object.assign(overlayEl.style, {
+                position: 'absolute',
+                top: 0, left: 0, right: 0, bottom: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(0,0,0,.45)',
+                color: '#fff',
+                font: '700 34px/1.2 Inter, sans-serif',
+                textAlign: 'center',
+                zIndex: 5000,
+                pointerEvents: 'none'          // clicks fall through
+            });
+            canvasContainer.appendChild(overlayEl);
+        }
+        overlayEl.innerHTML = `⇢  ${msg}<br><small style="font:400 20px Inter">click a pattern in the sidebar</small>`;
+        overlayEl.style.opacity = 1;
+    }
+    function hideOverlay() {
+        if (overlayEl) overlayEl.style.opacity = 0;
+        patternActionMode = null;
+    }
 
     /* persistent collapse state (id → bool) */
     let collapsed = new Set();
@@ -1031,8 +1063,16 @@ document.addEventListener('DOMContentLoaded', function () {
             nameSpan.className = 'node-name';
             nameSpan.textContent = p.name || '(unnamed)';
             li.appendChild(nameSpan);
-            li.onclick = () => setActivePattern(p.id);
-
+            li.onclick = () => {
+                /* if we’re waiting for a repeat / variation target */
+                if (patternActionMode && p.id !== ROOT_ID) {
+                    if (patternActionMode === 'repeat') makeRepeatOf(p);
+                    else makeVariationOf(p);
+                    hideOverlay();
+                } else {
+                    setActivePattern(p.id);
+                }
+            };
             /* —— meta tag: “variation / repeat of …” + checkbox ——— */
             if ((p.isVariation || p.isRepetition) && p.variantOfName) {
                 const meta = document.createElement('span');
@@ -1081,6 +1121,102 @@ document.addEventListener('DOMContentLoaded', function () {
 
         makeRow(patterns.get(ROOT_ID), 0, true);
     }
+
+
+
+    /* ────────────────────────────────────────────────────────────────
+     *  NEW HELPERS  – build repeat / variation without any typing
+     * ────────────────────────────────────────────────────────────────*/
+    function makeRepeatOf(master) {
+        // build temp pattern from current selection
+        const rect = getSelectionRect(selectedNotes);
+        const instruments = [...new Set([...selectedNotes].map(k => JSON.parse(k).trackIndex))];
+
+        const id = crypto.randomUUID();
+        patterns.set(id, {
+            id,
+            name: master.name,
+            parentId: master.parentId,
+            range: rect,
+            mode: master.mode,
+            instruments,
+            isRepetition: true,
+            variantOf: master.id,
+            variantOfName: master.name
+        });
+        patterns.get(master.parentId).children.push(id);
+        rebuildPatternTree(); queueSave(); redrawPianoRoll();
+    }
+
+    function makeVariationOf(master) {
+        const rect = getSelectionRect(selectedNotes);
+        const instruments = [...new Set([...selectedNotes]
+            .map(k => JSON.parse(k).trackIndex))];
+
+        // ▼ this is the bit that decides how many primes (′) to add
+        const sibs = countExistingVariations(master);
+
+
+        const prime = "'".repeat(sibs + 1);     // <── variation number
+        const id = crypto.randomUUID();
+        patterns.set(id, {
+            id,
+            name: master.name + prime,          // A, A′, A″ …
+            parentId: master.parentId,
+            range: rect,
+            mode: master.mode,
+            instruments,
+            isVariation: true,
+            variantOf: master.id,
+            variantOfName: master.name
+        });
+        patterns.get(master.parentId).children.push(id);
+        rebuildPatternTree();
+        queueSave();
+        redrawPianoRoll();
+    }
+
+    /* ---------------------------------------------------------------
+ *  Return the number of *non-rhythmic* variations that already
+ *  exist for `master` (siblings whose variantOf === master.id).
+ * ------------------------------------------------------------- */
+    function countExistingVariations(master) {
+        const parent = patterns.get(master.parentId);
+        if (!parent) return 0;
+        return parent.children
+            .map(cid => patterns.get(cid))
+            .filter(p => p?.isVariation
+                && !p.isRhythmicVariation
+                && p.variantOf === master.id).length;
+    }
+
+
+    /**
+ * Find the *top-most* descendant pattern whose rectangle contains
+ * the given canvas coordinates. Returns the pattern object or null.
+ */
+    function patternAtCanvasXY(x, y, parent = patterns.get(activePatternId)) {
+        let hit = null;
+
+        parent.children?.forEach(cid => {
+            const ch = patterns.get(cid);
+            if (!ch) return;
+
+            const x1 = midiTickToCanvasX(ch.range.start);
+            const x2 = midiTickToCanvasX(ch.range.end);
+            const y1 = midiPitchToCanvasY(ch.range.high);
+            const y2 = midiPitchToCanvasY(ch.range.low) +
+                NOTE_BASE_HEIGHT * scaleY;            // bottom edge
+
+            if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
+                // recurse first so the deepest child wins
+                hit = patternAtCanvasXY(x, y, ch) || ch;
+            }
+        });
+        return hit;
+    }
+
+
 
 
 
@@ -1611,12 +1747,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
- * Lookup a track’s display name:
- * - If drum track → “Drums”
- * - Else if track.instrumentName set → use that
- * - Else if track.program (0–127) → GM_MELODY_MAP[program]
- * - Else fallback to rawTracksData[trackIndex].name or “TrackN”
- */
+    * Lookup a track’s display name:
+    * - If drum track → “Drums”
+    * - Else if track.instrumentName set → use that
+    * - Else if track.program (0–127) → GM_MELODY_MAP[program]
+    * - Else fallback to rawTracksData[trackIndex].name or “TrackN”
+    */
     function getTrackInstrumentName(track, index) {
         if (track.is_drum_track) return 'Drums';
         if (track.instrument) return track.instrument;
@@ -1960,7 +2096,27 @@ document.addEventListener('DOMContentLoaded', function () {
             canvas.style.cursor = 'grabbing';
         } else if (event.button === 0) { // Left mouse button
             const clickedNoteRef = findNoteAtCanvasCoords(startX, startY);
+            // const clickedNoteKey = clickedNoteRef ? JSON.stringify(clickedNoteRef) : null;
             const clickedNoteKey = clickedNoteRef ? JSON.stringify(clickedNoteRef) : null;
+
+            // ── NEW: click on pattern overlay to select that pattern ──
+            if (!clickedNoteRef) {
+                const patHit = patternAtCanvasXY(startX, startY);
+                if (patHit && patHit.id !== activePatternId) {
+                    setActivePattern(patHit.id);
+                    return;                                  // done – no selection rectangle
+                }
+            }
+            if (patternActionMode) {
+                const patHit = patternAtCanvasXY(startX, startY);
+                if (patHit && patHit.id !== ROOT_ID) {
+                    if (patternActionMode === 'repeat') makeRepeatOf(patHit);
+                    else makeVariationOf(patHit);
+                    hideOverlay();
+                    return;                              // stop normal box-select
+                }
+                return;
+            }
 
             if (clickedNoteRef && selectedNotes.has(clickedNoteKey)) {
                 // --- Start Moving Selected Notes ---
@@ -2149,6 +2305,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /** Return the parent’s name plus an appropriate number of primes ( ' )   */
+    function nextVariationName(parentPat) {
+        // count *existing* variations of this master
+        const existing = parentPat.children
+            .map(id => patterns.get(id))
+            .filter(p => p?.isVariation && p.variantOf === parentPat.id).length;
+
+        return parentPat.name + "'".repeat(existing + 1);
+    }
+
+
     function handleMouseLeaveCanvas(event) {
         // If mouse leaves canvas *while not interacting*, reset cursor
         if (!isPanning && !isSelecting && !isMovingNotes) {
@@ -2160,77 +2327,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- NEW: KeyDown Handler for Copy ---
     function handleKeyDown(event) {
+        // —— Space: play/pause ——  
         if (event.code === 'Space') {
             event.preventDefault();
             handlePlayClick();
             return;
         }
+
+        // —— 'R': mark selected notes as a repeat; next sidebar-click chooses the master pattern ——  
         if (!event.repeat && event.key.toLowerCase() === 'r') {
             if (!selectedNotes.size) {
                 alert('Select the section you want to mark as a repeat.');
                 return;
             }
-            const parentName = prompt('Repetition of which pattern? (enter exact name)');
-            if (!parentName) return;
-            const parentEntry = [...patterns.values()].find(p => p.name === parentName);
-            if (!parentEntry) {
-                alert(`Pattern “${parentName}” not found.`);
-                return;
-            }
-
-            // Gather both note-arrays and shift the “repeat” one back
-            const masterNotes = notesInsidePattern(parentEntry);
-            const repeatNotes = [...selectedNotes].map(k => JSON.parse(k));
-            // Compare: same length?
-            if (repeatNotes.length !== masterNotes.length) {
-                if (!confirm('These notes aren’t exactly the same—mark as variation instead?')) return;
-                // fallback: treat it as a variation
-                return handleKeyDown({ ...event, key: 'v' });
-            }
-            // Compute the time offset between the first note of each
-            const masterTicks = masterNotes.map(n => rawTracksData[n.trackIndex].notes[n.noteIndex].start_tick);
-            const repeatTicks = repeatNotes.map(n => rawTracksData[n.trackIndex].notes[n.noteIndex].start_tick);
-            const offset = repeatTicks[0] - masterTicks[0];
-            // Verify that every note lines up with the same offset
-            const allMatch = masterNotes.every((m, i) => {
-                const mNote = rawTracksData[m.trackIndex].notes[m.noteIndex];
-                const rNote = rawTracksData[repeatNotes[i].trackIndex].notes[repeatNotes[i].noteIndex];
-                return rNote.pitch === mNote.pitch
-                    && rNote.duration_ticks === mNote.duration_ticks
-                    && rNote.start_tick === mNote.start_tick + offset;
-            });
-            if (!allMatch) {
-                if (!confirm('Notes don’t align perfectly—is this really a repeat?')) return;
-            }
-
-            // Create a new “repeat” node under the master
-            const id = crypto.randomUUID();
-            // width, height and instruments copy straight from the master
-            const w = parentEntry.range.end - parentEntry.range.start;
-            const newRng = {
-                start: parentEntry.range.start + offset,
-                end: parentEntry.range.end + offset,   //  start+width works too
-                low: parentEntry.range.low,
-                high: parentEntry.range.high
-            };
-            patterns.set(id, {
-                id,
-                name: `${parentEntry.name}`,
-                parentId: parentEntry.id,
-                /* ---- REQUIRED so noteInPattern() can match notes ---- */
-                range: newRng,
-                mode: parentEntry.mode,      // 'start' or 'range'
-                instruments: [...parentEntry.instruments],
-                isRepetition: true,
-                variantOf: parentEntry.id,
-                repeats: 1,
-                // range etc. if you need it
-            });
-            patterns.get(parentEntry.id).children.push(id);
-            rebuildPatternTree();
-            queueSave();
+            patternActionMode = 'repeat';
+            showOverlay('choose the master pattern these notes repeat');
             return;
         }
+
+        // —— 'V': mark selected notes as a variation; next sidebar-click chooses the parent pattern ——  
+        if (!event.repeat && event.key.toLowerCase() === 'v') {
+            if (!selectedNotes.size) {
+                alert('Select the section you want to mark as a variation.');
+                return;
+            }
+            patternActionMode = 'variation';
+            showOverlay('choose the pattern these notes vary');
+            return;
+        }
+
+        // —— 'P': prompt for a new pattern name ——  
         if (!event.repeat && event.key.toLowerCase() === 'p') {
             if (selectedNotes.size) {
                 const nm = prompt('Name this pattern:');
@@ -2238,48 +2364,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             return;
         }
-        if (!event.repeat && event.key.toLowerCase() === 'v') {
-            // Create a variation
-            const name = prompt('Name this variation:');
-            if (!name) return;
 
-            // Ask which pattern we’re varying
-            const parentName = prompt('Variation of which pattern?  (enter exact name)');
-            if (!parentName) return;
-            // Find the pattern id by name
-            const parentEntry = [...patterns.values()].find(p => p.name === parentName);
-            if (!parentEntry) {
-                alert(`Pattern “${parentName}” not found.`);
-                return;
-            }
-            // Temporarily set activePatternId to our chosen parent
-            const oldActive = activePatternId;
-            activePatternId = parentEntry.id;
-            // Use addPattern to build the new variation
-            addPattern(name.trim());
-            // Mark it as a variation
-            const newId = activePatternId;
-            patterns.get(newId).isVariation = true;
-            patterns.get(newId).variantOf = parentEntry.id;
-            patterns.get(newId).variantOfName = parentEntry.name;
-            // Restore old active pattern
-            activePatternId = oldActive;
-            rebuildPatternTree();
-            queueSave();
-            return;
-        }
-        // Check for Ctrl+C (or Cmd+C on Mac)
+        // —— Ctrl+C (or Cmd+C): copy multi-voice ABC ——  
         if ((event.ctrlKey || event.metaKey) && event.key === 'c') {
             if (selectedNotes.size > 0) {
-                event.preventDefault(); // Prevent default browser copy action
+                event.preventDefault();
                 copySelectionToAbc();
             } else {
-                console.log("Ctrl+C pressed, but no notes selected.");
-                // Optionally provide feedback that nothing was selected
+                console.log('Ctrl+C pressed, but no notes selected.');
             }
+            return;
         }
-        // Add other keyboard shortcuts here if needed (e.g., delete, arrow keys)
+
+        // (Other shortcuts can go here…)
     }
+
 
     function notesInsidePattern(pat) {
         const arr = [];
