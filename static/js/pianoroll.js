@@ -184,6 +184,137 @@ document.addEventListener('DOMContentLoaded', function () {
     const OFFBEAT_LIGHTEN = -35;   // percentage → lighter
     const OFFBEAT_DARKEN = 50;   // percentage → darker
 
+    /*──────── Chord-detection globals ────────*/
+    const CHORD_NAME = 'name';
+    const CHORD_ROMAN = 'roman';
+    let chordDisplayMode = CHORD_NAME;      // default
+    let chordSegments = [];              // [{start,end,root,quality,name,roman}]
+
+    /*  pitch-class sets for common qualities — root = 0  */
+    const CHORD_QUALITY_TABLE = [
+        { quality: 'maj', pcs: [0, 4, 7] },
+        { quality: 'min', pcs: [0, 3, 7] },
+        { quality: 'aug', pcs: [0, 4, 8] },
+        { quality: 'dim', pcs: [0, 3, 6] },
+        { quality: 'sus4', pcs: [0, 5, 7] },
+        { quality: 'sus2', pcs: [0, 2, 7] }
+    ];
+    /* extensions layered on top of triads */
+    const EXTENSIONS = [
+        { ext: '6', pcs: [9] },   // add-6
+        { ext: '7', pcs: [10] },   // dom 7 / min 7 (detected later)
+        { ext: 'maj7', pcs: [11] },
+        { ext: '9', pcs: [2] }
+    ];
+
+    function pcToRoman(rootPc, keyRootPc, isMinor) {
+        const DEGREE = (rootPc - keyRootPc + 12) % 12;
+        const MAJOR = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+        const MINOR = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii°'];
+        const MAP = isMinor ? MINOR : MAJOR;
+        const DIATONIC_PCS = isMinor
+            ? [0, 2, 3, 5, 7, 8, 10]   // nat-minor scale
+            : [0, 2, 4, 5, 7, 9, 11];  // major scale
+        const idx = DIATONIC_PCS.indexOf(DEGREE);
+        if (idx === -1) return '?';
+        return MAP[idx];
+    }
+
+    /**
+     * Return {rootPc, quality, ext, name, roman, bassPc} or null if unknown,
+     * with correct inversion handling and Roman-numeral casing.
+     */
+    function classifyChord(pcs, keyRootPc, isMinorKey) {
+        if (pcs.size < 2) return null;  // need at least two notes
+
+        // Sort pitch classes ascending; the first is the bass
+        const pcsArr = [...pcs].sort((a, b) => a - b);
+        const bassPc = pcsArr[0];
+
+        let best = null; // fallback if no root-position found
+
+        for (const root of pcsArr) {
+            // transpose so root→0
+            const rel = n => (n - root + 12) % 12;
+            const relSet = new Set([...pcs].map(rel));
+
+            // 1) find a matching triad quality
+            let qualityObj = CHORD_QUALITY_TABLE.find(q =>
+                q.pcs.every(p => relSet.has(p))
+            );
+            if (!qualityObj) continue;
+
+            // 2) look for extensions
+            let ext = '';
+            for (const ex of EXTENSIONS) {
+                if (ex.pcs.every(p => relSet.has(p))) {
+                    if (ex.ext === '7') {
+                        if (qualityObj.quality === 'maj') {
+                            // maj7 chord
+                            qualityObj = { quality: 'maj', pcs: qualityObj.pcs };
+                            ext = 'maj7';
+                        } else {
+                            ext = '7';
+                        }
+                    } else {
+                        ext = ex.ext;
+                    }
+                    break;
+                }
+            }
+
+            // 3) assemble the chord name (with inversion slash if needed)
+            const rootName = NOTE_NAMES[root];
+            const QUAL_SUFFIX = { maj: '', min: 'm', dim: '°', aug: '+', sus2: 'sus2', sus4: 'sus4' };
+            const qualStr = QUAL_SUFFIX[qualityObj.quality] || '';
+            const invSlash = (bassPc === root) ? '' : '/' + NOTE_NAMES[bassPc];
+            const name = rootName + qualStr + ext + invSlash;
+
+            // 4) build Roman numeral, forcing case by chord quality
+            //    first get the degree symbol (e.g. "vi" or "VI" or "?")
+            let degree = pcToRoman(root, keyRootPc, isMinorKey);
+            // override case: majors→UPPER, minors→lower, diminished→UPPER+'°'
+            if (qualityObj.quality === 'maj') {
+                degree = degree.toUpperCase();
+            } else if (qualityObj.quality === 'min') {
+                degree = degree.toLowerCase();
+            } else if (qualityObj.quality === 'dim') {
+                degree = degree.toUpperCase(); // e.g. "VII" then add "°" below
+            }
+            // add quality symbol (° or +) and extension
+            const qualSymbol = qualityObj.quality === 'dim' ? '°'
+                : qualityObj.quality === 'aug' ? '+' : '';
+            // add inversion figure for simple triads
+            let figure = '';
+            if (bassPc !== root && pcs.size === 3 &&
+                (qualityObj.quality === 'maj' || qualityObj.quality === 'min')) {
+                // first inversion = 6, second inversion = 6/4
+                figure = (bassPc === (root + 4) % 12) ? '⁶' : '⁶₄';
+            }
+            const roman = degree + qualSymbol + ext + figure;
+
+            const candidate = {
+                rootPc: root,
+                quality: qualityObj.quality,
+                ext,
+                name,
+                roman,
+                bassPc
+            };
+
+            // keep the first match as a fallback
+            if (!best) best = candidate;
+            // if this match is root-position, return immediately
+            if (root === bassPc) return candidate;
+        }
+
+        // no root-position found → return our first acceptable match
+        return best;
+    }
+
+
+
+
 
     let copyMode = 'range';
     document.getElementById('copy-mode-select')
@@ -1527,7 +1658,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+
+        /* ───── build chordSegments ───── */
+        chordSegments.length = 0;
+        const ticks = Object.keys(harmonyChordMap).map(Number).sort((a, b) => a - b);
+        if (!ticks.length) return;
+
+        const keyRootPc = selectedRootNote;
+        const isMinorKey = selectedScaleType.toLowerCase().includes('min');
+
+        let segStart = ticks[0];
+        let prevSet = harmonyChordMap[segStart];
+        for (let i = 1; i < ticks.length; i++) {
+            const t = ticks[i];
+            const set = harmonyChordMap[t];
+            if (set.size !== prevSet.size || [...set].some(p => !prevSet.has(p))) {
+                // chord changed – close previous segment
+                const chord = classifyChord(prevSet, keyRootPc, isMinorKey);
+                if (chord) chordSegments.push({
+                    start: segStart,
+                    end: t,
+                    ...chord
+                });
+                segStart = t;
+                prevSet = set;
+            }
+        }
+        /* final segment */
+        const chord = classifyChord(prevSet, keyRootPc, isMinorKey);
+        if (chord) chordSegments.push({
+            start: segStart,
+            end: ticks[ticks.length - 1] + 1,
+            ...chord
+        });
     }
+
 
 
 
@@ -1884,6 +2049,14 @@ document.addEventListener('DOMContentLoaded', function () {
         collapsed = new Set(patterns.keys());
         rebuildPatternTree();          // paint the sidebar
         queueSave();                   // make sure root.range gets saved
+
+
+        document.getElementById('toggle-chord-display')
+            .addEventListener('click', () => {
+                chordDisplayMode = (chordDisplayMode === CHORD_NAME)
+                    ? CHORD_ROMAN : CHORD_NAME;
+                redrawPianoRoll();
+            });
 
 
         console.log("Piano roll initialized.");
@@ -3101,6 +3274,36 @@ document.addEventListener('DOMContentLoaded', function () {
         return '';
     }
 
+    function drawChordRibbon(startTick, endTick) {
+        if (!chordSegments.length) return;
+        const ribbonHeight = 20;              // px
+        ctx.save();
+        ctx.font = '13px Inter,sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.lineWidth = 1;
+
+        chordSegments.forEach(seg => {
+            if (seg.end < startTick || seg.start > endTick) return;
+            const x1 = midiTickToCanvasX(seg.start);
+            const x2 = midiTickToCanvasX(seg.end);
+            const y1 = 0;                      // top of canvas
+            const w = x2 - x1;
+            ctx.fillStyle = 'rgba(0,0,0,0.15)';
+            ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+            ctx.fillRect(x1, y1, w, ribbonHeight);
+            ctx.strokeRect(x1, y1, w, ribbonHeight);
+
+            const label = chordDisplayMode === CHORD_NAME ? seg.name : seg.roman;
+            ctx.fillStyle = '#fff';
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.strokeText(label, x1 + w / 2, y1 + ribbonHeight / 2);
+            ctx.fillText(label, x1 + w / 2, y1 + ribbonHeight / 2);
+        });
+        ctx.restore();
+    }
+
 
     // --- Drawing ---
     function redrawPianoRoll() {
@@ -3127,6 +3330,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 2. Draw Grid (Handles Row Backgrounds, Measure Shading, and Lines)
             drawGrid(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, viewWidth, viewHeight);
+
+
+            drawChordRibbon(startTickVisible, endTickVisible);
+
+
 
             if (activePatternId !== ROOT_ID) {
                 drawDescendantBounds(patterns.get(activePatternId));
