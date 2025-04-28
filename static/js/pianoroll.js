@@ -481,61 +481,69 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     * Return every time-shifted clone of `pat` inside `parentPat`.
-     * A “clone” = **same pitches, durations & instruments**, only
-     * the absolute start time differs.
+     * Return every time-shifted **exact** clone of `pat` that lives wholly
+     * inside `parentPat` (same pitches, same durations & instruments, only
+     * the absolute start time differs).
      *
-     * Each result is
+     * Each hit is
      *   { offset   : number              // ticks from master → clone
      *     range    : {start,end,low,high}
      *     noteKeys : string[]            // JSON keys of matching notes
      *   }
      */
-    /*───────────────────────────────────────────────────────────────
-     *  Return every time-shifted clone of `pat` inside `parentPat`,
-     *  but never allow the clone to overlap the master or another
-     *  already-accepted clone.
-     *───────────────────────────────────────────────────────────────*/
     function findRepeatsOfPattern(pat, parentPat) {
-        // helper – get all notes that currently belong to pattern P
+
+        /* helper – collect all notes that currently belong to pattern P */
         const getNotes = P => {
             const list = [];
             rawTracksData.forEach((trk, ti) => {
                 trk.notes.forEach((n, ni) => {
-                    if (noteInPattern(n, P, ti)) list.push({ trackIndex: ti, noteIndex: ni, n });
+                    if (noteInPattern(n, P, ti))
+                        list.push({ trackIndex: ti, noteIndex: ni, n });
                 });
             });
             return list;
         };
 
+        /* ─────────────────────────────────────────────────────────── */
         const master = getNotes(pat);
         if (!master.length) return [];
 
-        /* —— fingerprint of the master’s rhythm/pitches ——————— */
-        const fp = new Map();                          // ti → [d0,d1,…]
-        master.forEach(o => {
-            if (!fp.has(o.trackIndex)) fp.set(o.trackIndex, []);
-            fp.get(o.trackIndex).push(o.n.start_tick);
-        });
-        fp.forEach(arr => arr.sort((a, b) => a - b));
-        const firstStart = Math.min(...master.map(o => o.n.start_tick));
-        fp.forEach(arr => {
-            const base = arr[0];
-            for (let i = 0; i < arr.length; i++) arr[i] -= base;
-        });
+        /* —— ensure the *earliest* master note is anchor zero —— */
+        master.sort((a, b) => a.n.start_tick - b.n.start_tick);
+        const firstStart = master[0].n.start_tick;
 
+        /* build a fast lookup →  track ↦ [{relStart,dur,pitch}, …]  */
+        const fp = new Map();                        // ti → [{d,s,p}]
+        master.forEach(o => {
+            const rel = o.n.start_tick - firstStart;
+            if (!fp.has(o.trackIndex)) fp.set(o.trackIndex, []);
+            fp.get(o.trackIndex).push({
+                relStart: rel,
+                dur: o.n.duration_ticks,
+                pitch: o.n.pitch
+            });
+        });
+        fp.forEach(arr => arr.sort((a, b) => a.relStart - b.relStart));
+
+        /* ─────────────────────────────────────────────────────────── */
         const parentNotes = getNotes(parentPat);
+
+        /* anchor-candidates = notes with same pitch+dur as the master anchor */
+        const anchorPitch = master[0].n.pitch;
+        const anchorDur = master[0].n.duration_ticks;
         const candidates = parentNotes.filter(o =>
             pat.instruments.includes(o.trackIndex) &&
-            o.n.pitch === master[0].n.pitch &&
-            o.n.duration_ticks === master[0].n.duration_ticks
-        );
+            o.n.pitch === anchorPitch &&
+            o.n.duration_ticks === anchorDur);
 
         const hits = [];
+
         candidates.forEach(cand => {
             const off = cand.n.start_tick - firstStart;
-            if (off === 0) return;                                     // same slice
+            if (off === 0) return;                    // that’s the master itself
 
+            /* proposed rectangle for this clone */
             const newRange = {
                 start: pat.range.start + off,
                 end: pat.range.end + off,
@@ -543,55 +551,48 @@ document.addEventListener('DOMContentLoaded', function () {
                 high: pat.range.high
             };
 
-            /* ➊ skip if this slice touches the master */
+            /* ➊ reject if it touches the master slice */
             if (spansOverlap(newRange.start, newRange.end,
                 pat.range.start, pat.range.end)) return;
 
-            /* ➋ skip if it overlaps any repeat we’ve already logged */
-            if (hits.some(h =>
-                spansOverlap(h.range.start, h.range.end,
-                    newRange.start, newRange.end))) return;
+            /* ➋ reject if it overlaps any already-accepted clone */
+            if (hits.some(h => spansOverlap(h.range.start, h.range.end,
+                newRange.start, newRange.end))) return;
 
-            // —— verify every master note exists at +off ——   
-            let ok = true, keys = [];
-            fp.forEach((starts, ti) => {
+            /* ➌ verify every master note exists at +off (pitch **and** dur) */
+            let ok = true;
+            const keys = [];
+
+            fp.forEach((arr, ti) => {
                 const trk = rawTracksData[ti];
-                starts.forEach(d => {
-                    const tgtStart = firstStart + d + off;
-                    const mNote = master.find(o => o.trackIndex === ti &&
-                        o.n.start_tick === firstStart + d);
+                arr.forEach(spec => {
+                    const tgtStart = firstStart + spec.relStart + off;
                     const idx = trk.notes.findIndex(x =>
                         x.start_tick === tgtStart &&
-                        x.duration_ticks === mNote.n.duration_ticks &&
-                        x.pitch === mNote.n.pitch
-                    );
+                        x.duration_ticks === spec.dur &&          // <<< fixed!
+                        x.pitch === spec.pitch);
                     if (idx === -1) { ok = false; return; }
                     keys.push(JSON.stringify({ trackIndex: ti, noteIndex: idx }));
                 });
             });
             if (!ok) return;
 
-            /* ➌ reject if EXTRA notes are present inside the slice ------------------ */
+            /* ➍ reject if any *extra* note falls inside the candidate slice */
             const extra = parentNotes.some(o =>
-                // only care about the same instruments we’re matching
                 pat.instruments.includes(o.trackIndex) &&
-                // note’s start must fall inside the candidate window
                 o.n.start_tick >= newRange.start &&
                 o.n.start_tick < newRange.end &&
-                // and it is *not* one of the cloned master notes we just recorded
-                !keys.includes(JSON.stringify({
-                    trackIndex: o.trackIndex,
-                    noteIndex: o.noteIndex
-                })));
-            if (extra) return;              // not an exact repetition – ignore
+                !keys.includes(JSON.stringify({ trackIndex: o.trackIndex, noteIndex: o.noteIndex })));
+            if (extra) return;
 
-            /* ➍ all good – record this hit ----------------------------------------- */
+            /* ➎ good – record this hit */
             hits.push({ offset: off, range: newRange, noteKeys: keys });
-
         });
 
         return hits;
     }
+
+
 
 
 
@@ -1324,13 +1325,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    /* ────────────────────────────────────────────────────────────────
-     *  NEW HELPERS  – build repeat / variation without any typing
-     * ────────────────────────────────────────────────────────────────*/
+
+    /*───────────────────────────────────────────────────────────────
+     *  Build a REPEAT pattern – *only* if the selection is exact
+     *───────────────────────────────────────────────────────────────*/
     function makeRepeatOf(master) {
-        // build temp pattern from current selection
+        if (!selectionIsExactRepeatOf(master)) {
+            alert(
+                `The notes you selected don’t perfectly match “${master.name}”.\n` +
+                `Make sure you’ve box-selected **all** and **only** the notes of a true ` +
+                `repeat (same instruments, pitches, starts & lengths) before pressing R.`
+            );
+            return;   // abort – not an exact clone
+        }
+
+        /* rectangle & instruments come straight from the selection */
         const rect = getSelectionRect(selectedNotes);
-        const instruments = [...new Set([...selectedNotes].map(k => JSON.parse(k).trackIndex))];
+        const instruments = [...new Set(
+            [...selectedNotes].map(k => JSON.parse(k).trackIndex)
+        )];
 
         const id = crypto.randomUUID();
         patterns.set(id, {
@@ -1345,7 +1358,11 @@ document.addEventListener('DOMContentLoaded', function () {
             variantOfName: master.name
         });
         patterns.get(master.parentId).children.push(id);
-        rebuildPatternTree(); queueSave(); redrawPianoRoll();
+
+        selectedNotes.clear();
+        rebuildPatternTree();
+        queueSave();
+        redrawPianoRoll();
     }
 
     function makeVariationOf(master) {
@@ -1715,6 +1732,50 @@ document.addEventListener('DOMContentLoaded', function () {
     let ticksPerMeasure = window.ticksPerBeat * window.timeSignatureNumerator;
 
 
+
+    /*───────────────────────────────────────────────────────────────
+     *  Does the CURRENT selection form a perfect quantized copy of `master`?
+     *  – quantizes starts & ends to the 16th-note grid (or adjust `step` as needed)
+     *───────────────────────────────────────────────────────────────*/
+    function selectionIsExactRepeatOf(master) {
+        if (!selectedNotes.size) return false;
+
+        // 1) grab the master’s notes & the selection
+        const masterKeys = notesInsidePattern(master);   // [{trackIndex,noteIndex},…]
+        const masterStart = master.range.start;
+        const selKeys = [...selectedNotes].map(k => JSON.parse(k));
+        const selStart = Math.min(...selKeys.map(k =>
+            rawTracksData[k.trackIndex].notes[k.noteIndex].start_tick));
+
+        // 2) quick length check
+        if (masterKeys.length !== selKeys.length) return false;
+
+        // 3) build a fingerprint string using your snapTick() quantizer
+        const toDesc = (ti, note, t0) => {
+            const relStart = snapTick(note.start_tick - t0);
+            const relEnd = snapTick(note.start_tick + note.duration_ticks - t0);
+            return `${ti}:${relStart}:${relEnd}:${note.pitch}`;
+        };
+
+        // 4) master set
+        const masterSet = new Set(masterKeys.map(({ trackIndex, noteIndex }) => {
+            const note = rawTracksData[trackIndex].notes[noteIndex];
+            return toDesc(trackIndex, note, masterStart);
+        }));
+
+        // 5) make sure every selected note descriptor matches one in the master
+        for (let { trackIndex, noteIndex } of selKeys) {
+            const note = rawTracksData[trackIndex].notes[noteIndex];
+            if (!masterSet.has(toDesc(trackIndex, note, selStart))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
     function rebuildHarmonyChordMap() {
         // 1) Build a map tick → { pcs: Set<pitchClass>, bassPitch: number, bassPc: number }
         harmonyChordMap = {};
@@ -1731,32 +1792,32 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Track the absolute lowest pitch for this tick
                     if (entry.bassPitch === null || n.pitch < entry.bassPitch) {
                         entry.bassPitch = n.pitch;
-                        entry.bassPc    = pc;
+                        entry.bassPc = pc;
                     }
                 }
             });
         });
-    
+
         // 2) Build chordSegments from that map
         chordSegments.length = 0;
         const ticks = Object.keys(harmonyChordMap)
             .map(Number)
             .sort((a, b) => a - b);
         if (ticks.length === 0) return;
-    
+
         const keyRootPc = selectedRootNote;
         const isMinorKey = selectedScaleType.toLowerCase().includes('min');
-    
+
         // Initialize the first segment
-        let segStart   = ticks[0];
-        let prevEntry  = harmonyChordMap[segStart];
-        let prevSet    = prevEntry.pcs;
-    
+        let segStart = ticks[0];
+        let prevEntry = harmonyChordMap[segStart];
+        let prevSet = prevEntry.pcs;
+
         for (let i = 1; i < ticks.length; i++) {
-            const t     = ticks[i];
+            const t = ticks[i];
             const entry = harmonyChordMap[t];
-            const set   = entry.pcs;
-    
+            const set = entry.pcs;
+
             // Detect a change in chord (size or content)
             if (set.size !== prevSet.size || [...set].some(pc => !prevSet.has(pc))) {
                 // Close the previous segment
@@ -1764,29 +1825,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (chord) {
                     chordSegments.push({
                         start: segStart,
-                        end:   t,
+                        end: t,
                         ...chord
                     });
                 }
                 // Start a new segment here
-                segStart  = t;
+                segStart = t;
                 prevEntry = entry;
-                prevSet   = entry.pcs;
+                prevSet = entry.pcs;
             }
         }
-    
+
         // Final segment
         const finalEntry = harmonyChordMap[segStart];
         const finalChord = classifyChord(finalEntry.pcs, keyRootPc, isMinorKey, finalEntry.bassPc);
         if (finalChord) {
             chordSegments.push({
                 start: segStart,
-                end:   ticks[ticks.length - 1] + 1,
+                end: ticks[ticks.length - 1] + 1,
                 ...finalChord
             });
         }
     }
-    
+
 
 
 
@@ -2345,111 +2406,114 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.button !== 0 && event.button !== 1) return;
 
         invalidateSynth();
-
-
-        canvas.focus(); // Maybe useful for keyboard events later
+        canvas.focus();
 
         const rect = canvas.getBoundingClientRect();
-        const startX = event.clientX - rect.left; // Canvas Coordinates
-        const startY = event.clientY - rect.top;  // Canvas Coordinates
+        const startX = event.clientX - rect.left;
+        const startY = event.clientY - rect.top;
         const shiftKey = event.shiftKey;
 
-        if (event.button === 1) { // Middle mouse button for panning
+        if (event.button === 1) {
+            // Middle-mouse panning
             isPanning = true;
             dragStartX = startX;
             dragStartY = startY;
             dragStartOffsetX = offsetX;
             dragStartOffsetY = offsetY;
             canvas.style.cursor = 'grabbing';
-        } else if (event.button === 0) { // Left mouse button
-            const clickedNoteRef = findNoteAtCanvasCoords(startX, startY);
-            // const clickedNoteKey = clickedNoteRef ? JSON.stringify(clickedNoteRef) : null;
-            const clickedNoteKey = clickedNoteRef ? JSON.stringify(clickedNoteRef) : null;
+            return;
+        }
 
-            // ── NEW: click on pattern overlay to select that pattern ──
-            if (!clickedNoteRef) {
-                const patHit = patternAtCanvasXY(startX, startY);
-                if (patHit && patHit.id !== activePatternId) {
-                    setActivePattern(patHit.id);
-                    return;                                  // done – no selection rectangle
-                }
+        // At this point we know it's a left click
+        const clickedNoteRef = findNoteAtCanvasCoords(startX, startY);
+
+        // 1) If we're in repeat/variation mode, always consume the click here
+        if (patternActionMode) {
+            const patHit = patternAtCanvasXY(startX, startY);
+            if (patHit && patHit.id !== ROOT_ID) {
+                if (patternActionMode === 'repeat') makeRepeatOf(patHit);
+                else makeVariationOf(patHit);
+                hideOverlay();
             }
-            if (patternActionMode) {
-                const patHit = patternAtCanvasXY(startX, startY);
-                if (patHit && patHit.id !== ROOT_ID) {
-                    if (patternActionMode === 'repeat') makeRepeatOf(patHit);
-                    else makeVariationOf(patHit);
-                    hideOverlay();
-                    return;                              // stop normal box-select
-                }
+            return;
+        }
+
+        // 2) Normal mode: clicking empty canvas on a pattern zooms you there
+        if (!clickedNoteRef) {
+            const patHit = patternAtCanvasXY(startX, startY);
+            if (patHit && patHit.id !== activePatternId) {
+                setActivePattern(patHit.id);
                 return;
             }
-
-            if (clickedNoteRef && selectedNotes.has(clickedNoteKey)) {
-                // --- Start Moving Selected Notes ---
-                isMovingNotes = true;
-                // Store start position for delta calculation
-                noteMoveData.startCanvasX = startX;
-                noteMoveData.startCanvasY = startY;
-                noteMoveData.currentCanvasX = startX; // Initialize current position
-                noteMoveData.currentCanvasY = startY;
-                noteMoveData.deltaTick = 0; // Reset deltas for new move
-                noteMoveData.deltaPitch = 0;
-                noteMoveData.originalNotes = []; // Store original positions of all selected notes
-                selectedNotes.forEach(key => {
-                    const ref = JSON.parse(key);
-                    const note = rawTracksData[ref.trackIndex]?.notes[ref.noteIndex];
-                    if (note) {
-                        noteMoveData.originalNotes.push({
-                            trackIndex: ref.trackIndex, noteIndex: ref.noteIndex,
-                            originalTick: note.start_tick, originalPitch: note.pitch
-                        });
-                    }
-                });
-                canvas.style.cursor = 'move';
-
-            } else {
-                // --- Start Selection or Select+Move ---
-                if (!shiftKey) {
-                    selectedNotes.clear(); // Clear selection if Shift is not held
-                }
-
-                if (clickedNoteRef) {
-                    // Clicked on a note (that wasn't previously selected, or Shift is held)
-                    const noteKey = JSON.stringify(clickedNoteRef);
-                    if (shiftKey && selectedNotes.has(noteKey)) {
-                        selectedNotes.delete(noteKey); // Shift-click existing selection to deselect
-                    } else {
-                        selectedNotes.add(noteKey); // Select or Shift-add
-                    }
-
-                    // Immediately prepare for moving this potentially new selection
-                    isMovingNotes = true;
-                    noteMoveData.startCanvasX = startX;
-                    noteMoveData.startCanvasY = startY;
-                    noteMoveData.currentCanvasX = startX;
-                    noteMoveData.currentCanvasY = startY;
-                    noteMoveData.deltaTick = 0;
-                    noteMoveData.deltaPitch = 0;
-                    noteMoveData.originalNotes = []; // Recalculate move data for the *current* selection
-                    selectedNotes.forEach(key => {
-                        const ref = JSON.parse(key);
-                        const note = rawTracksData[ref.trackIndex]?.notes[ref.noteIndex];
-                        if (note) { noteMoveData.originalNotes.push({ trackIndex: ref.trackIndex, noteIndex: ref.noteIndex, originalTick: note.start_tick, originalPitch: note.pitch }); }
-                    });
-                    canvas.style.cursor = 'move';
-
-                } else {
-                    // Clicked on empty space -> start box selection
-                    isSelecting = true;
-                    selectionRect = { x1: startX, y1: startY, x2: startX, y2: startY };
-                    canvas.style.cursor = 'crosshair';
-                    isMovingNotes = false; // Ensure not in move mode
-                }
-                redrawPianoRoll(); // Update visual selection immediately
-            }
         }
+
+        // 3) Else if you clicked an already-selected note → start moving
+        if (clickedNoteRef && selectedNotes.has(JSON.stringify(clickedNoteRef))) {
+            isMovingNotes = true;
+            noteMoveData.startCanvasX = startX;
+            noteMoveData.startCanvasY = startY;
+            noteMoveData.currentCanvasX = startX;
+            noteMoveData.currentCanvasY = startY;
+            noteMoveData.deltaTick = 0;
+            noteMoveData.deltaPitch = 0;
+            noteMoveData.originalNotes = [];
+            selectedNotes.forEach(key => {
+                const ref = JSON.parse(key);
+                const n = rawTracksData[ref.trackIndex].notes[ref.noteIndex];
+                noteMoveData.originalNotes.push({
+                    trackIndex: ref.trackIndex,
+                    noteIndex: ref.noteIndex,
+                    originalTick: n.start_tick,
+                    originalPitch: n.pitch
+                });
+            });
+            canvas.style.cursor = 'move';
+            return;
+        }
+
+        // 4) Otherwise: selection or click-to-select
+        if (!shiftKey) selectedNotes.clear();
+
+        if (clickedNoteRef) {
+            // click on a new note: toggle or add to selection
+            const noteKey = JSON.stringify(clickedNoteRef);
+            if (shiftKey && selectedNotes.has(noteKey)) {
+                selectedNotes.delete(noteKey);
+            } else {
+                selectedNotes.add(noteKey);
+            }
+            // prepare to drag immediately
+            isMovingNotes = true;
+            noteMoveData.startCanvasX = startX;
+            noteMoveData.startCanvasY = startY;
+            noteMoveData.currentCanvasX = startX;
+            noteMoveData.currentCanvasY = startY;
+            noteMoveData.deltaTick = 0;
+            noteMoveData.deltaPitch = 0;
+            noteMoveData.originalNotes = [];
+            selectedNotes.forEach(key => {
+                const ref = JSON.parse(key);
+                const n = rawTracksData[ref.trackIndex].notes[ref.noteIndex];
+                noteMoveData.originalNotes.push({
+                    trackIndex: ref.trackIndex,
+                    noteIndex: ref.noteIndex,
+                    originalTick: n.start_tick,
+                    originalPitch: n.pitch
+                });
+            });
+            canvas.style.cursor = 'move';
+            redrawPianoRoll();
+            return;
+        }
+
+        // 5) Click on empty space → start box select
+        isSelecting = true;
+        selectionRect = { x1: startX, y1: startY, x2: startX, y2: startY };
+        isMovingNotes = false;
+        canvas.style.cursor = 'crosshair';
+        redrawPianoRoll();
     }
+
 
     function handleMouseMove(event) {
         // Throttle redraws during mouse move for performance
