@@ -207,6 +207,21 @@ document.addEventListener('DOMContentLoaded', function () {
         { ext: '9', pcs: [2] }
     ];
 
+    /* Return “Gb”, “F#” … according to preferFlats */
+    function pcToKeyName(pc, preferFlats) {
+        const SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F',
+            'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const FLAT = ['C', 'Db', 'D', 'Eb', 'E', 'F',
+            'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+        return preferFlats ? FLAT[pc] : SHARP[pc];
+    }
+
+    function pcToDegreeRoman(pc, keyRootPc, isMinor) {
+        return pcToRoman(pc, keyRootPc, isMinor); // returns I, ii, … or “?”
+    }
+
+
+
     function pcToRoman(rootPc, keyRootPc, isMinor) {
         const DEGREE = (rootPc - keyRootPc + 12) % 12;
         const MAJOR = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
@@ -219,100 +234,168 @@ document.addEventListener('DOMContentLoaded', function () {
         if (idx === -1) return '?';
         return MAP[idx];
     }
+    // Score weights for choosing between multiple triad roots
+    const QUALITY_SCORE = {
+        maj: 5,
+        min: 5,
+        dim: 4,
+        aug: 4,
+        sus4: 3,
+        sus2: 2,
+        root: 0,
+        interval: 0
+    };
 
     /**
-     * Return {rootPc, quality, ext, name, roman, bassPc} or null if unknown,
-     * with correct inversion handling and Roman-numeral casing.
+     * Smart chord classifier
+     * -------------------------------------------------------------
+     *  – chooses the *bass* as the root whenever that bass actually
+     *    forms a known chord-quality with the other notes  
+     *  – otherwise falls back to the best triad it can find
+     *  – slash-marks every inversion, including sus chords
+     *  – understands 6, 7, maj7 and 9 extensions
+     *  – returns an object
+     *        { rootPc, quality, ext, name, roman, bassPc }
+     *    or null if nothing sensible can be said
+     *
+     *  pcs            Set<int>    pitch-classes in the chord (0-11)
+     *  keyRootPc      int         tonic of the current key (for Roman)
+     *  isMinorKey     bool        true ⇢ treat the key as minor
+     *  bassPcOverride int|null    supply a bass if you already know it
      */
-    function classifyChord(pcs, keyRootPc, isMinorKey) {
-        if (pcs.size < 2) return null;  // need at least two notes
+    function classifyChord(
+        pcs,
+        keyRootPc = 0,
+        isMinorKey = false,
+        bassPcOverride = null
+    ) {
+        /* ---------- helper tables ---------- */
+        const TRIADS = [
+            { q: 'maj', pcs: [0, 4, 7] },
+            { q: 'min', pcs: [0, 3, 7] },
+            { q: 'dim', pcs: [0, 3, 6] },
+            { q: 'aug', pcs: [0, 4, 8] },
+            { q: 'sus4', pcs: [0, 5, 7] },
+            { q: 'sus2', pcs: [0, 2, 7] }
+        ];
+        const EXTS = [
+            { e: 'maj7', pcs: [11] },
+            { e: '7', pcs: [10] },
+            { e: '6', pcs: [9] },
+            { e: '9', pcs: [2] }
+        ];
+        const QUAL_SUFFIX = { maj: '', min: 'm', dim: '°', aug: '+', sus2: 'sus2', sus4: 'sus4' };
 
-        // Sort pitch classes ascending; the first is the bass
-        const pcsArr = [...pcs].sort((a, b) => a - b);
-        const bassPc = pcsArr[0];
-
-        let best = null; // fallback if no root-position found
-
-        for (const root of pcsArr) {
-            // transpose so root→0
-            const rel = n => (n - root + 12) % 12;
-            const relSet = new Set([...pcs].map(rel));
-
-            // 1) find a matching triad quality
-            let qualityObj = CHORD_QUALITY_TABLE.find(q =>
-                q.pcs.every(p => relSet.has(p))
-            );
-            if (!qualityObj) continue;
-
-            // 2) look for extensions
-            let ext = '';
-            for (const ex of EXTENSIONS) {
-                if (ex.pcs.every(p => relSet.has(p))) {
-                    if (ex.ext === '7') {
-                        if (qualityObj.quality === 'maj') {
-                            // maj7 chord
-                            qualityObj = { quality: 'maj', pcs: qualityObj.pcs };
-                            ext = 'maj7';
-                        } else {
-                            ext = '7';
-                        }
-                    } else {
-                        ext = ex.ext;
-                    }
-                    break;
-                }
-            }
-
-            // 3) assemble the chord name (with inversion slash if needed)
-            const rootName = NOTE_NAMES[root];
-            const QUAL_SUFFIX = { maj: '', min: 'm', dim: '°', aug: '+', sus2: 'sus2', sus4: 'sus4' };
-            const qualStr = QUAL_SUFFIX[qualityObj.quality] || '';
-            const invSlash = (bassPc === root) ? '' : '/' + NOTE_NAMES[bassPc];
-            const name = rootName + qualStr + ext + invSlash;
-
-            // 4) build Roman numeral, forcing case by chord quality
-            //    first get the degree symbol (e.g. "vi" or "VI" or "?")
-            let degree = pcToRoman(root, keyRootPc, isMinorKey);
-            // override case: majors→UPPER, minors→lower, diminished→UPPER+'°'
-            if (qualityObj.quality === 'maj') {
-                degree = degree.toUpperCase();
-            } else if (qualityObj.quality === 'min') {
-                degree = degree.toLowerCase();
-            } else if (qualityObj.quality === 'dim') {
-                degree = degree.toUpperCase(); // e.g. "VII" then add "°" below
-            }
-            // add quality symbol (° or +) and extension
-            const qualSymbol = qualityObj.quality === 'dim' ? '°'
-                : qualityObj.quality === 'aug' ? '+' : '';
-            // add inversion figure for simple triads
-            let figure = '';
-            if (bassPc !== root && pcs.size === 3 &&
-                (qualityObj.quality === 'maj' || qualityObj.quality === 'min')) {
-                // first inversion = 6, second inversion = 6/4
-                figure = (bassPc === (root + 4) % 12) ? '⁶' : '⁶₄';
-            }
-            const roman = degree + qualSymbol + ext + figure;
-
-            const candidate = {
-                rootPc: root,
-                quality: qualityObj.quality,
-                ext,
-                name,
-                roman,
-                bassPc
-            };
-
-            // keep the first match as a fallback
-            if (!best) best = candidate;
-            // if this match is root-position, return immediately
-            if (root === bassPc) return candidate;
+        /* ---------- fast exits for 1- & 2-note blobs ---------- */
+        if (pcs.size === 1) {
+            const pc = [...pcs][0];
+            const n = pcToKeyName(pc, getKeyAccidentals(NOTE_NAMES[keyRootPc], isMinorKey).preferFlats);
+            return { rootPc: pc, quality: 'root', ext: '', name: n, roman: n, bassPc: pc };
+        }
+        if (pcs.size === 2) {
+            const [a, b] = [...pcs].sort((x, y) => x - y);
+            const intv = (b - a + 12) % 12;
+            const lbl = ['P1', 'm2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7'][intv];
+            return { rootPc: a, quality: 'interval', ext: '', name: lbl, roman: lbl, bassPc: a };
         }
 
-        // no root-position found → return our first acceptable match
-        return best;
+        /* ---------- prep ---------- */
+        const pcsArr = [...pcs].sort((a, b) => a - b);
+        const bassPc = bassPcOverride ?? pcsArr[0];
+        const preferFlats = getKeyAccidentals(NOTE_NAMES[keyRootPc], isMinorKey).preferFlats;
+        const candidates = [bassPc, ...pcsArr.filter(pc => pc !== bassPc)];  // search bass first
+
+        let best = null, bestScore = -1;
+
+        for (const root of candidates) {
+            const rel = new Set([...pcs].map(p => (p - root + 12) % 12));
+
+            /* ── first: does this root form ANY recognised triad? ───────── */
+            for (const tri of TRIADS) {
+                if (!tri.pcs.every(p => rel.has(p))) continue;   // not this quality
+
+                /* ── grab first matching extension (if present) ─────────── */
+                let ext = '';
+                if (!tri.q.startsWith('sus')) {
+                    for (const ex of EXTS) { if (ex.pcs.every(p => rel.has(p))) { ext = ex.e; break; } }
+                }
+
+                /* ── build labels ───────────────────────────────────────── */
+                const rootName = pcToKeyName(root, preferFlats);
+                const bassName = pcToKeyName(bassPc, preferFlats);
+                const name = rootName + QUAL_SUFFIX[tri.q] + ext + (bassPc !== root ? '/' + bassName : '');
+
+                /* Roman-numeral (very simple) */
+                let deg = pcToRoman(root, keyRootPc, isMinorKey);
+                if (tri.q === 'maj') deg = deg.toUpperCase();
+                if (tri.q === 'min') deg = deg.toLowerCase();
+                if (tri.q === 'dim') deg += '°';
+                if (tri.q === 'aug') deg += '+';
+                const roman = deg + ext + (bassPc !== root ? (bassPc === (root + 4) % 12 ? '⁶' : '⁶₄') : '');
+
+                /* ── scoring ────────────────────────────────────────────── */
+                let score = 0;
+                if (root === bassPc) score += 8;   // prefer root in bass
+                if (tri.q === 'maj' || tri.q === 'min') score += 4;   // diatonic triads nicer
+                if (ext) score += 2;   // 7ths & 9ths win over bare
+                // prefer chords that lie inside the current key
+                const DEG = (root - keyRootPc + 12) % 12;
+                const DIAT = isMinorKey ? [0, 2, 3, 5, 7, 8, 10] : [0, 2, 4, 5, 7, 9, 11];
+                if (DIAT.includes(DEG)) score += 1;
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    best = { rootPc: root, quality: tri.q, ext, name, roman, bassPc };
+                }
+            }
+            if (best && best.rootPc === bassPc) break;   // good root already in bass – stop early
+        }
+        return best;   // may be null if nothing matched
     }
 
 
+
+
+
+    window.addEventListener('popstate', ev => {
+        if (ev.state?.patternId) {
+            setActivePattern(ev.state.patternId, true);
+        }
+    });
+
+
+
+    /* ─── 1.  History initialisation – call once in initialize() ─── */
+    function initPatternHistory() {
+        // Make sure the very first entry has a known pattern id
+        history.replaceState({ patternId: ROOT_ID }, '', location.href);
+
+        // Whenever the user hits Back / Forward…
+        window.addEventListener('popstate', ev => {
+            if (ev.state && ev.state.patternId) {
+                // avoid creating a *new* history entry while we replay one
+                setActivePattern(ev.state.patternId, /*fromPop=*/true);
+            }
+        });
+    }
+
+    /* ─── 2.  Small helper that pushes a new history entry ─── */
+    function pushPatternHistory(id) {
+        // Optional: keep the URL hash in sync – nice for sharing links / reloads
+        history.pushState({ patternId: id }, '', `#pat=${id}`);
+    }
+
+    /* ─── 3.  Add a flag to setActivePattern so we know the call origin ─── */
+    function setActivePattern(id, fromPop = false) {   // ← new param
+        activePatternId = id;
+        selectedNotes.clear();
+        rebuildPatternTree();
+        redrawPianoRoll();
+
+        if (id !== ROOT_ID) zoomToRect(patterns.get(id).range);
+
+        if (!fromPop) pushPatternHistory(id);
+    }
 
 
 
@@ -930,20 +1013,6 @@ document.addEventListener('DOMContentLoaded', function () {
         rebuildPatternTree();
         redrawPianoRoll();
         queueSave();
-    }
-
-
-
-    function setActivePattern(id) {
-        activePatternId = id;
-        selectedNotes.clear();
-        rebuildPatternTree();   // ← add this so the tree UI updates
-        redrawPianoRoll();
-        // scroll-to-fit the newly-active pattern (skip the root)
-        if (id !== ROOT_ID) {
-            const r = patterns.get(id).range;
-            zoomToRect(r);
-        }
     }
 
     /**
@@ -1647,52 +1716,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function rebuildHarmonyChordMap() {
+        // 1) Build a map tick → { pcs: Set<pitchClass>, bassPitch: number, bassPc: number }
         harmonyChordMap = {};
         rawTracksData.forEach((trk, ti) => {
             if (!trackStates[ti].isHarmony) return;
             trk.notes.forEach(n => {
                 const pc = n.pitch % 12;
                 for (let t = n.start_tick, end = n.start_tick + n.duration_ticks; t < end; ++t) {
-                    if (!harmonyChordMap[t]) harmonyChordMap[t] = new Set();
-                    harmonyChordMap[t].add(pc);
+                    if (!harmonyChordMap[t]) {
+                        harmonyChordMap[t] = { pcs: new Set(), bassPitch: null, bassPc: null };
+                    }
+                    const entry = harmonyChordMap[t];
+                    entry.pcs.add(pc);
+                    // Track the absolute lowest pitch for this tick
+                    if (entry.bassPitch === null || n.pitch < entry.bassPitch) {
+                        entry.bassPitch = n.pitch;
+                        entry.bassPc    = pc;
+                    }
                 }
             });
         });
-
-        /* ───── build chordSegments ───── */
+    
+        // 2) Build chordSegments from that map
         chordSegments.length = 0;
-        const ticks = Object.keys(harmonyChordMap).map(Number).sort((a, b) => a - b);
-        if (!ticks.length) return;
-
+        const ticks = Object.keys(harmonyChordMap)
+            .map(Number)
+            .sort((a, b) => a - b);
+        if (ticks.length === 0) return;
+    
         const keyRootPc = selectedRootNote;
         const isMinorKey = selectedScaleType.toLowerCase().includes('min');
-
-        let segStart = ticks[0];
-        let prevSet = harmonyChordMap[segStart];
+    
+        // Initialize the first segment
+        let segStart   = ticks[0];
+        let prevEntry  = harmonyChordMap[segStart];
+        let prevSet    = prevEntry.pcs;
+    
         for (let i = 1; i < ticks.length; i++) {
-            const t = ticks[i];
-            const set = harmonyChordMap[t];
-            if (set.size !== prevSet.size || [...set].some(p => !prevSet.has(p))) {
-                // chord changed – close previous segment
-                const chord = classifyChord(prevSet, keyRootPc, isMinorKey);
-                if (chord) chordSegments.push({
-                    start: segStart,
-                    end: t,
-                    ...chord
-                });
-                segStart = t;
-                prevSet = set;
+            const t     = ticks[i];
+            const entry = harmonyChordMap[t];
+            const set   = entry.pcs;
+    
+            // Detect a change in chord (size or content)
+            if (set.size !== prevSet.size || [...set].some(pc => !prevSet.has(pc))) {
+                // Close the previous segment
+                const chord = classifyChord(prevSet, keyRootPc, isMinorKey, prevEntry.bassPc);
+                if (chord) {
+                    chordSegments.push({
+                        start: segStart,
+                        end:   t,
+                        ...chord
+                    });
+                }
+                // Start a new segment here
+                segStart  = t;
+                prevEntry = entry;
+                prevSet   = entry.pcs;
             }
         }
-        /* final segment */
-        const chord = classifyChord(prevSet, keyRootPc, isMinorKey);
-        if (chord) chordSegments.push({
-            start: segStart,
-            end: ticks[ticks.length - 1] + 1,
-            ...chord
-        });
+    
+        // Final segment
+        const finalEntry = harmonyChordMap[segStart];
+        const finalChord = classifyChord(finalEntry.pcs, keyRootPc, isMinorKey, finalEntry.bassPc);
+        if (finalChord) {
+            chordSegments.push({
+                start: segStart,
+                end:   ticks[ticks.length - 1] + 1,
+                ...finalChord
+            });
+        }
     }
-
+    
 
 
 
@@ -3276,33 +3370,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function drawChordRibbon(startTick, endTick) {
         if (!chordSegments.length) return;
-        const ribbonHeight = 20;              // px
+
+        /* ➊— pick a font size that is 3× our old 13 px, but never wider
+           than the current chord cell. We try 39 px, then binary-shrink. */
+        const BASE_PX = 39;                 // 13 × 3
+        const ribbonH = BASE_PX + 4;       // small margin top+bottom
+
         ctx.save();
-        ctx.font = '13px Inter,sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
 
         chordSegments.forEach(seg => {
-            if (seg.end < startTick || seg.start > endTick) return;
             const x1 = midiTickToCanvasX(seg.start);
             const x2 = midiTickToCanvasX(seg.end);
-            const y1 = 0;                      // top of canvas
             const w = x2 - x1;
-            ctx.fillStyle = 'rgba(0,0,0,0.15)';
-            ctx.strokeStyle = 'rgba(0,0,0,0.25)';
-            ctx.fillRect(x1, y1, w, ribbonHeight);
-            ctx.strokeRect(x1, y1, w, ribbonHeight);
 
-            const label = chordDisplayMode === CHORD_NAME ? seg.name : seg.roman;
+            // pick style by seg.quality
+            let fill, stroke;
+            if (seg.quality === 'root') {
+                fill = 'rgba(0,128,0,0.15)';   // green tint
+                stroke = 'rgba(0,128,0,0.4)';
+            } else if (seg.quality === 'interval') {
+                fill = 'rgba(128,0,0,0.15)';   // red tint
+                stroke = 'rgba(128,0,0,0.4)';
+            } else {
+                fill = 'rgba(0,0,0,0.15)';     // default for triads
+                stroke = 'rgba(0,0,0,0.25)';
+            }
+
+            ctx.save();
+            ctx.fillStyle = fill;
+            ctx.strokeStyle = stroke;
+            ctx.lineWidth = 2;
+            ctx.fillRect(x1, 0, w, ribbonH);
+            ctx.strokeRect(x1, 0, w, ribbonH);
+
+            // draw the label
+            const label = (chordDisplayMode === CHORD_NAME) ? seg.name : seg.roman;
             ctx.fillStyle = '#fff';
             ctx.strokeStyle = '#000';
-            ctx.lineWidth = 2;
-            ctx.strokeText(label, x1 + w / 2, y1 + ribbonHeight / 2);
-            ctx.fillText(label, x1 + w / 2, y1 + ribbonHeight / 2);
+            ctx.globalAlpha = 1;
+            ctx.fillText(label, x1 + w / 2, ribbonH / 2);
+            ctx.restore();
         });
+
         ctx.restore();
     }
+
 
 
     // --- Drawing ---
@@ -3783,86 +3898,107 @@ document.addEventListener('DOMContentLoaded', function () {
     function drawKeyDisplay(lowPitchVisible, highPitchVisible) {
         if (!keyDisplayContentWrapper || !keyDisplayPanel) return;
 
-        const activeTrack = (activeTrackIndex !== -1) ? rawTracksData[activeTrackIndex] : null;
-        const isDrumMode = activeTrack?.is_drum_track ?? false;
+        // Determine if we're in drum-mode or piano-mode
+        const activeTrack = (activeTrackIndex !== -1)
+            ? rawTracksData[activeTrackIndex] : null;
+        const isDrumMode = !!activeTrack?.is_drum_track;
 
-        // Clear previous content efficiently
-        keyDisplayContentWrapper.innerHTML = ''; // Fast enough for moderate number of keys
+        // Clear out old rows
+        keyDisplayContentWrapper.innerHTML = '';
 
-        // Determine pitch range to render (slightly wider than visible for buffer during scroll)
-        const renderPitchMin = Math.max(PITCH_MIN, Math.floor(lowPitchVisible) - 5);
-        const renderPitchMax = Math.min(PITCH_MAX, Math.ceil(highPitchVisible) + 5);
+        // Figure out which pitches we need to render (a little buffer above/below)
+        const scaledRowH = NOTE_BASE_HEIGHT * scaleY;
+        const scaledGap = NOTE_VERTICAL_GAP * scaleY;
+        const firstPitch = Math.max(PITCH_MIN, Math.floor(lowPitchVisible) - 5);
+        const lastPitch = Math.min(PITCH_MAX, Math.ceil(highPitchVisible) + 5);
 
-        // Use a DocumentFragment for potentially better performance when adding many elements
-        const fragment = document.createDocumentFragment();
-        const scaledNoteRowHeight = NOTE_BASE_HEIGHT * scaleY;
-        const scaledGap = NOTE_VERTICAL_GAP * scaleY; // Scaled gap
+        // Precompute key-context for Roman vs Name
+        const isMinor = selectedScaleType.toLowerCase().includes('min');
+        const keyRootPc = selectedRootNote;
+        const useRoman = (chordDisplayMode === CHORD_ROMAN);
 
-        for (let pitch = renderPitchMin; pitch <= renderPitchMax; pitch++) {
-            const keyElement = document.createElement('div');
-            const isInScale = isNoteInScale(pitch); // Check scale membership
+        // Helper: get the letter-name for this PC in the current key
+        function pcName(pc) {
+            const SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+            const FLAT = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+            const { preferFlats } = getKeyAccidentals(NOTE_NAMES[keyRootPc], isMinor);
+            return (preferFlats ? FLAT : SHARP)[pc];
+        }
 
-            // Calculate Y position relative to the *start* of the content wrapper
-            const theoreticalTopY = (PITCH_MAX - pitch) * scaledNoteRowHeight;
-            // Adjust Y position and height to account for the visual gap between notes
-            const visualTopY = theoreticalTopY + (scaledGap / 2);
-            const keyHeight = Math.max(1, scaledNoteRowHeight - scaledGap);
-            const lineHeight = keyHeight; // Match line height to visible key height
+        // Loop through each pitch row
+        for (let pitch = firstPitch; pitch <= lastPitch; pitch++) {
+            const pc = pitch % 12;
+            const inScale = isNoteInScale(pitch);
+            const isBlack = [1, 3, 6, 8, 10].includes(pc);
 
-            // Basic element styling
-            keyElement.style.position = 'absolute';
-            keyElement.style.top = `${visualTopY}px`;
-            keyElement.style.left = '0';
-            keyElement.style.width = '100%'; // Take full width of the panel
-            keyElement.style.height = `${keyHeight}px`;
-            keyElement.style.lineHeight = `${lineHeight}px`;
-            keyElement.style.overflow = 'hidden';
-            keyElement.style.whiteSpace = 'nowrap';
-            keyElement.style.boxSizing = 'border-box';
-            keyElement.style.fontSize = `${Math.max(6, Math.min(12, keyHeight * 0.7))}px`;
-            // Apply border to the bottom (might be overridden by black key style)
-            keyElement.style.borderBottom = `1px solid ${KEY_SEPARATOR_COLOR}`;
+            // Compute vertical placement
+            const topY = (PITCH_MAX - pitch) * scaledRowH + (scaledGap / 2);
+            const rowH = Math.max(1, scaledRowH - scaledGap);
 
+            // Build the DIV
+            const row = document.createElement('div');
+            row.style.cssText = `
+            position: absolute;
+            left: 0;
+            top: ${topY}px;
+            height: ${rowH}px;
+            width: 100%;
+            line-height: ${rowH}px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            font-size: ${Math.max(6, Math.min(12, rowH * 0.7))}px;
+            border-bottom: 1px solid ${KEY_SEPARATOR_COLOR};
+            padding-left: ${isBlack ? 15 : 5}px;
+        `;
 
+            // Assign the same classes you used before
             if (isDrumMode) {
-                keyElement.className = `drum-name ${isInScale ? 'in-scale' : 'out-of-scale'}`; // Add scale class
-                // CSS will handle background/color based on .in-scale / .out-of-scale
-                keyElement.style.paddingLeft = '5px';
-                const drumName = GM_DRUM_MAP[pitch] || `Pitch ${pitch}`;
-                keyElement.textContent = drumName;
-                keyElement.title = `${pitch}: ${GM_DRUM_MAP[pitch] || 'Unknown'}`;
-            } else { // Piano Mode
-                const isBlackKey = [1, 3, 6, 8, 10].includes(pitch % 12);
-                // Add scale class alongside existing classes
-                keyElement.className = `piano-key ${isBlackKey ? 'black' : 'white'} ${isInScale ? 'in-scale' : 'out-of-scale'}`;
-                keyElement.title = `Note ${pitch} (${NOTE_NAMES[pitch % 12]}) - ${isInScale ? 'In Scale' : 'Out of Scale'}`;
+                row.className = `drum-name ${inScale ? 'in-scale' : 'out-of-scale'}`;
+            } else {
+                row.className = `piano-key ${isBlack ? 'black' : 'white'} `
+                    + `${inScale ? 'in-scale' : 'out-of-scale'}`;
+                if (isBlack) {
+                    row.style.width = '70%';
+                    row.style.zIndex = '1';
+                    row.style.borderBottom = 'none';
+                }
+            }
 
-                // CSS rules handle the background/color based on combined classes (.black.in-scale etc.)
-                if (isBlackKey) {
-                    keyElement.style.paddingLeft = '15px';
-                    keyElement.style.width = '70%';
-                    keyElement.style.zIndex = '1';
-                    keyElement.style.borderBottom = 'none'; // Black keys usually don't have bottom border
+            // Decide the text label
+            let label, title;
+            if (isDrumMode) {
+                label = GM_DRUM_MAP[pitch] || `Pitch ${pitch}`;
+                title = `${pitch}: ${label}`;
+            } else {
+                const name = pcName(pc);                        // e.g. "Eb"
+                const roman = pcToRoman(pc, keyRootPc, isMinor); // re-use your pcToRoman
+
+                if (useRoman) {
+                    label = roman;
+                    title = `Degree ${roman}`;
                 } else {
-                    keyElement.style.paddingLeft = '5px';
-                    // Add Octave Label for C notes
-                    if (pitch % 12 === 0) {
-                        const octaveNumber = Math.floor(pitch / 12) - 1; // C4 is MIDI 60, C-1 is MIDI 0
-                        const labelText = `C${octaveNumber}`;
-                        const labelSpan = document.createElement('span');
-                        labelSpan.className = 'octave-label';
-                        labelSpan.textContent = labelText;
-                        keyElement.appendChild(labelSpan);
-                        keyElement.title = `${labelText} (Note ${pitch}) - ${isInScale ? 'In Scale' : 'Out of Scale'}`;
+                    label = name;
+                    title = `${name} (${pitch})`;
+
+                    // If it's a C in name-mode, tack on octave
+                    if (pc === 0) {
+                        label += (Math.floor(pitch / 12) - 1);
                     }
                 }
             }
-            fragment.appendChild(keyElement);
+
+            row.textContent = label;
+            row.title = title;
+
+            keyDisplayContentWrapper.appendChild(row);
         }
-        keyDisplayContentWrapper.appendChild(fragment);
     }
+
 
     // --- Start the application ---
     initialize();
+    initPatternHistory();
+
 
 }); // End DOMContentLoaded
