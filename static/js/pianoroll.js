@@ -1303,6 +1303,32 @@ document.addEventListener('DOMContentLoaded', function () {
             nameSpan.textContent = p.name || '(unnamed)';
             li.appendChild(nameSpan);
             li.onclick = () => {
+                // ─── remapVariant mode ───
+                if (patternActionMode === 'remapVariant' && p.id !== ROOT_ID) {
+                    if (remapState.step === 0) {
+                        // first click: pick the variant to remap
+                        remapState.sourceId = p.id;
+                        remapState.step = 1;
+                        showOverlay('click source node');
+                        return;
+                    } else {
+                        // second click: pick the new source
+                        const srcPat = patterns.get(remapState.sourceId);
+                        srcPat.variantOf = p.id;
+                        srcPat.variantOfName = p.name;
+                        //set to as variant if it wasn't set
+                        srcPat.isVariation = true;
+                        // cleanup
+                        remapState.step = 0;
+                        patternActionMode = null;
+                        hideOverlay();
+                        rebuildPatternTree();
+                        queueSave();
+                        redrawPianoRoll();
+                        return;
+                    }
+                }
+
                 /* if we’re waiting for a repeat / variation target */
                 if (patternActionMode && p.id !== ROOT_ID) {
                     if (patternActionMode === 'repeat') makeRepeatOf(p);
@@ -1483,6 +1509,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let hit = null;
 
         parent.children?.forEach(cid => {
+            //don't allow selecting a pattern that we already selected in our repeat/variation override mode remapState.sourceId
+            if (remapState.step === 1 && remapState.sourceId === cid) return;
             const ch = patterns.get(cid);
             if (!ch) return;
 
@@ -1501,6 +1529,77 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    async function detectInternalRepetitions() {
+        const parentPat = patterns.get(activePatternId);
+        if (!parentPat || parentPat.id === ROOT_ID) {
+            alert('Select a non-root pattern first.');
+            return;
+        }
+
+        // wipe any previous previews
+        repeatHighlights = [];
+        variationHighlights = [];
+        redrawPianoRoll();
+
+        // ── gather every (source-pat, hit-inside-parent) pair ──
+        const candidates = [];
+        patterns.forEach(pat => {
+            if (pat.id === ROOT_ID || pat.id === parentPat.id) return;
+            findRepeatsOfPattern(pat, parentPat)
+                .forEach(hit => candidates.push({ src: pat, hit }));
+        });
+
+        if (!candidates.length) {
+            alert(`No repetitions of other patterns found inside “${parentPat.name}”.`);
+            return;
+        }
+
+        // ── walk the hits one-by-one ──
+        for (const { src, hit } of candidates) {
+            // highlight + zoom
+            repeatHighlights = [hit.range];   // yellow = clone
+            variationHighlights = [src.range];   // orange = source
+            const union = {
+                start: Math.min(parentPat.range.start, src.range.start),
+                end: Math.max(parentPat.range.end, src.range.end),
+                low: Math.min(parentPat.range.low, src.range.low),
+                high: Math.max(parentPat.range.high, src.range.high)
+            };
+            redrawPianoRoll();
+            zoomToRect(union, 300);
+
+            /* eslint-disable no-loop-func */
+            const ok = confirm(
+                `“${src.name}” appears to repeat inside “${parentPat.name}”.\n` +
+                `Convert the highlighted slice to a Repetition?`
+            );
+            /* eslint-enable no-loop-func */
+            if (!ok) continue;
+
+            // insert repetition under the active pattern
+            const id = crypto.randomUUID();
+            patterns.set(id, {
+                id,
+                name: src.name,
+                parentId: parentPat.id,
+                range: hit.range,
+                mode: src.mode,
+                instruments: [...src.instruments],
+                isRepetition: true,
+                variantOf: src.id,
+                variantOfName: src.name,
+                children: []
+            });
+            parentPat.children.push(id);
+            queueSave();
+        }
+
+        // clean-up UI
+        repeatHighlights = [];
+        variationHighlights = [];
+        rebuildPatternTree();
+        redrawPianoRoll();
+    }
 
 
 
@@ -2527,9 +2626,70 @@ document.addEventListener('DOMContentLoaded', function () {
         if (patternActionMode) {
             const patHit = patternAtCanvasXY(startX, startY);
             if (patHit && patHit.id !== ROOT_ID) {
-                if (patternActionMode === 'repeat') makeRepeatOf(patHit);
-                else makeVariationOf(patHit);
-                hideOverlay();
+                if (patternActionMode === 'repeat') {
+                    makeRepeatOf(patHit);
+                    hideOverlay();
+                }
+                else if (patternActionMode === 'variation') {
+                    makeVariationOf(patHit);
+                    hideOverlay();
+                }
+                else if (patternActionMode === 'remapVariant') {
+                    if (remapState.step === 0) {
+                        // first click: pick the variant to remap
+                        remapState.sourceId = patHit.id;
+                        remapState.step = 1;
+                        showOverlay('click source node');
+                    } else {
+                        // second click: pick the new source
+                        const srcPat = patterns.get(remapState.sourceId);
+                        srcPat.variantOf = patHit.id;
+                        srcPat.variantOfName = patHit.name;
+                        srcPat.isVariation = true;
+                        // cleanup & redraw/save
+                        remapState = { step: 0, sourceId: null };
+                        patternActionMode = null;
+                        hideOverlay();
+                        rebuildPatternTree();
+                        queueSave();
+                        redrawPianoRoll();
+                    }
+                } else if (patternActionMode === 'remapRepeat') {
+                    if (remapState.step === 0) {
+                        remapState.sourceId = patHit.id;
+                        remapState.step = 1;
+                        showOverlay('click new source pattern');
+                    } else {
+                        // second click: validate that the chosen patHit is actually the thing this rep repeats
+                        const srcId = remapState.sourceId;
+                        const src = patterns.get(srcId);
+                        const parent = patterns.get(src.parentId);
+                        // look for an exact repeat of patHit under its parent
+                        const hits = findRepeatsOfPattern(patHit, parent);
+                        const match = hits.find(h =>
+                            h.range.start === src.range.start &&
+                            h.range.end === src.range.end
+                        );
+                        if (!match) {
+                            alert(`“${src.name}” does not exactly repeat “${patHit.name}”.`);
+                            return;
+                        }
+                        // OK—remap it
+                        src.variantOf = patHit.id;
+                        src.variantOfName = patHit.name;
+                        src.isRepetition = true;
+                        src.isVariation = false;
+
+                        // cleanup & redraw/save
+                        remapState = { step: 0, sourceId: null };
+                        patternActionMode = null;
+                        hideOverlay();
+                        rebuildPatternTree();
+                        queueSave();
+                        redrawPianoRoll();
+                    }
+                }
+
             }
             return;
         }
@@ -2760,6 +2920,39 @@ document.addEventListener('DOMContentLoaded', function () {
             handlePlayClick();
             return;
         }
+        // —— Shift+C: create one instrument-pattern per instrument under each child pattern ——
+        if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'c') {
+            event.preventDefault();
+            createInstrumentPatternsForChildren();
+            return;
+        }
+        // —— Ctrl + Shift + R  :  auto-detect repetitions inside the active pattern ——
+        if ((event.ctrlKey || event.metaKey) && event.shiftKey &&
+            event.key.toLowerCase() === 'r') {
+            event.preventDefault();
+            detectInternalRepetitions();
+            return;
+        }
+
+
+        // ── Shift+R: remap an existing repetition’s source ──
+        if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'r') {
+            event.preventDefault();
+            remapState = { step: 0, sourceId: null };
+            patternActionMode = 'remapRepeat';
+            showOverlay('choose repetition node to remap source');
+            return;
+        }
+        // ── Shift+V: remap an existing variant’s source ──
+        if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'v') {
+            event.preventDefault();
+            remapState = { step: 0, sourceId: null };
+            patternActionMode = 'remapVariant';
+            showOverlay('choose variant node to remap source');
+            return;
+        }
+
+
 
         // —— 'R': mark selected notes as a repeat; next sidebar-click chooses the master pattern ——  
         if (!event.repeat && event.key.toLowerCase() === 'r') {
@@ -2817,6 +3010,94 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // (Other shortcuts can go here…)
+    }
+
+    // ─── Remap “variantOf” state ───
+    let remapState = { step: 0, sourceId: null };
+
+
+    function createInstrumentPatternsForChildren() {
+        const parentId = activePatternId;
+        const parentPat = patterns.get(parentId);
+        if (!parentPat) return;
+
+        // Map of “childId|groupKey” → newly created pattern id
+        const created = new Map();
+
+        // helper: group a trackIndex into 'DRUMS' or itself
+        const groupKey = ti => isDrumTrack(ti) ? 'DRUMS' : String(ti);
+
+        // helper: compute bounding rect of NOTES matching trackIndices within a pattern
+        const rangeFor = (pat, trackIndices) => {
+            let start = Infinity, end = 0, low = Infinity, high = 0;
+            rawTracksData.forEach((trk, ti) => {
+                if (!trackIndices.includes(ti)) return;
+                trk.notes.forEach(n => {
+                    if (noteInPattern(n, pat, ti)) {
+                        start = Math.min(start, n.start_tick);
+                        end = Math.max(end, n.start_tick + n.duration_ticks);
+                        low = Math.min(low, n.pitch);
+                        high = Math.max(high, n.pitch);
+                    }
+                });
+            });
+            return { start, end, low, high };
+        };
+
+        // --- First pass: create plain instrument patterns under each child ---
+        parentPat.children.forEach(childId => {
+            const child = patterns.get(childId);
+            if (!child) return;
+
+            // group its instruments
+            const groups = [...new Set(child.instruments.map(groupKey))];
+            groups.forEach(gk => {
+                // derive which raw track-indices belong to this group
+                const tis = child.instruments.filter(ti => groupKey(ti) === gk);
+                const rect = rangeFor(child, tis);
+                if (rect.start === Infinity) return;  // no notes for this instrument
+
+                const name = (gk === 'DRUMS')
+                    ? 'Drums'
+                    : getTrackInstrumentName(rawTracksData[+gk], +gk);
+
+                const id = crypto.randomUUID();
+                const pat = {
+                    id,
+                    name,
+                    parentId: childId,
+                    range: rect,
+                    mode: child.mode,
+                    instruments: tis,
+                    children: []
+                };
+                patterns.set(id, pat);
+                child.children.push(id);
+                created.set(`${childId}|${gk}`, id);
+            });
+        });
+
+        // --- Second pass: for any variant-children, mark their new sub-patterns as variants of the source ones ---
+        parentPat.children.forEach(childId => {
+            const child = patterns.get(childId);
+            if (!child || !child.variantOf) return;
+            const srcId = child.variantOf;
+            const groups = [...new Set(child.instruments.map(groupKey))];
+            groups.forEach(gk => {
+                const thisNewId = created.get(`${childId}|${gk}`);
+                const srcNewId = created.get(`${srcId}|${gk}`);
+                if (thisNewId && srcNewId) {
+                    const np = patterns.get(thisNewId);
+                    np.isVariation = true;
+                    np.variantOf = srcNewId;
+                    np.variantOfName = patterns.get(srcNewId).name;
+                }
+            });
+        });
+
+        rebuildPatternTree();
+        queueSave();
+        redrawPianoRoll();
     }
 
 
@@ -3746,55 +4027,61 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     * Walks the pattern-tree and returns:
-     *   [{
-     *        id,                 // uuid
-     *        function: 'MotifVariation',
-     *        input,              // <abc>…</abc>  (motif + context)
-     *        output              // [V:…] …       (variant only)
-     *    }, …]
-     */
+   * Walks the variantOf‐graph and returns:
+   *   [{
+   *        id,                   // uuid
+   *        function: 'MotifVariation',
+   *        input,                // <abc>…</abc>  (motif + context)
+   *        output                // <abc>…</abc>  (motif + context)
+   *    }, …]
+   */
     function collectMotifVariationExamples() {
-
-        /** helper: ABC for an *entire* pattern rect */
+        // helper: wrap a pattern's full selection in <abc>…</abc>
         const abcForPattern = pat => {
-            // temporarily select all its notes → reuse your existing generator
             const remember = new Set(selectedNotes);
-            selectedNotes = new Set(notesInsidePattern(pat).map(
-                o => JSON.stringify(o)));
-            const abc = generateAbcFromSelectionMultiVoice();
+            selectedNotes = new Set(
+                notesInsidePattern(pat).map(o => JSON.stringify(o))
+            );
+            const abcBody = generateAbcFromSelectionMultiVoice().trim();
             selectedNotes = remember;
-            return `<abc>\n${abc}\n</abc>`;
+            return `<abc>\n${abcBody}\n</abc>`;
         };
 
-        /** helper: ABC **just** the note-cluster of this pattern (no header) */
-        const abcBody = pat => {
-            const full = abcForPattern(pat);
-            // strip everything before the first “[V:”  and after “|]”
-            return full.replace(/^[\s\S]*?\[V:/, '[V:').replace(/\|][\s\S]*$/, '|]');
-        };
+        // 1) Group by root motif (walking variantOf, with cycle‐protection)
+        const familyMap = new Map();
+        patterns.forEach(pat => {
+            if (pat.isRepetition) return;
 
+            // walk up to find the root (guard against loops)
+            let root = pat;
+            const seen = new Set([root.id]);
+            while (root.variantOf) {
+                const parent = patterns.get(root.variantOf);
+                if (!parent || seen.has(parent.id)) {
+                    // no further parent or detected a cycle → stop here
+                    break;
+                }
+                seen.add(parent.id);
+                root = parent;
+            }
+
+            const rootId = root.id;
+            if (!familyMap.has(rootId)) familyMap.set(rootId, []);
+            familyMap.get(rootId).push(pat);
+        });
+
+        // 2) For each family with ≥2 members, emit every ordered pair
         const examples = [];
-
-        // ➊ for each “family” (= a node + all its non-repetition children) …
-        patterns.forEach(parent => {
-            if (parent.isRepetition) return;
-
-            const family = [parent, ...parent.children
-                .map(id => patterns.get(id))
-                .filter(ch => ch && ch.isVariation)];
-
-            if (family.length < 2) return;  // no siblings → nothing to learn from
-
-            // ➋ generate **every ordered pair**  (A → B, including master → var)
+        familyMap.forEach(family => {
+            if (family.length < 2) return;
             family.forEach(src => {
                 family.forEach(tgt => {
                     if (src.id === tgt.id) return;
                     examples.push({
-                        id: uuid(),
+                        id: crypto.randomUUID(),
                         function: 'MotifVariation',
                         input: abcForPattern(src),
-                        output: abcForPattern(tgt)//abcBody(tgt)
+                        output: abcForPattern(tgt)
                     });
                 });
             });
@@ -3802,6 +4089,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return examples;
     }
+
 
     // ——— src/frontend/pianoroll.js
     // helper – returns a **group id**
@@ -3855,91 +4143,91 @@ document.addEventListener('DOMContentLoaded', function () {
     function buildContextAbc(range, trackIndices) {
         // trackIndices contains *original* indices, we may have duplicates of DRUMS
         const groups = [...new Set(trackIndices.map(instGroup))];
-      
+
         selectedNotes.clear();
         rawTracksData.forEach((trk, ti) => {
-          if (!groups.includes(instGroup(ti))) return;
-          trk.notes.forEach((n, ni) => {
-            if (n.start_tick < range.end && n.start_tick + n.duration_ticks > range.start) {
-              selectedNotes.add(JSON.stringify({ trackIndex: ti, noteIndex: ni }));
-            }
-          });
+            if (!groups.includes(instGroup(ti))) return;
+            trk.notes.forEach((n, ni) => {
+                if (n.start_tick < range.end && n.start_tick + n.duration_ticks > range.start) {
+                    selectedNotes.add(JSON.stringify({ trackIndex: ti, noteIndex: ni }));
+                }
+            });
         });
-      
+
         const abc = generateAbcFromSelectionMultiVoice().trim();
         selectedNotes.clear();
         return abc;
-      }
-      
-// Export-to-training button handler
-document.getElementById('export-to-training').onclick = async () => {
-    const examples = [];
-    const songName = currentMidiFilename.replace(/\.[^.]+$/, '');
-  
-    for (const pat of patterns.values()) {
-      if (pat.id === ROOT_ID) continue;
-  
-      // ✂️ NEW: skip any pattern that has children
-      if (Array.isArray(pat.children) && pat.children.length > 0) continue;
-  
-      // only patterns with exactly one instrument
-      const instGroups = [...new Set(pat.instruments.map(instGroup))];
-      if (instGroups.length !== 1) continue;           // needs exactly one group
-  
-      // 1) Build OUTPUT snippet for this single-instrument pattern
-      selectedNotes.clear();
-      for (const ref of notesInsidePattern(pat)) {
-        selectedNotes.add(JSON.stringify(ref));
-      }
-      const outputAbc = generateAbcFromSelectionMultiVoice().trim();
-      selectedNotes.clear();
-  
-      // 2) Find all other tracks active in the same time window
-      const contextTracks = new Set();
-      rawTracksData.forEach((trk, ti) => {
-        if (pat.instruments.includes(ti)) return;
-        if (trk.notes.some(n =>
-          n.start_tick < pat.range.end && n.start_tick + n.duration_ticks > pat.range.start
-        )) {
-          contextTracks.add(ti);
+    }
+
+    // Export-to-training button handler
+    document.getElementById('export-to-training').onclick = async () => {
+        const examples = [];
+        const songName = currentMidiFilename.replace(/\.[^.]+$/, '');
+
+        for (const pat of patterns.values()) {
+            if (pat.id === ROOT_ID) continue;
+
+            // ✂️ NEW: skip any pattern that has children
+            if (Array.isArray(pat.children) && pat.children.length > 0) continue;
+
+            // only patterns with exactly one instrument
+            const instGroups = [...new Set(pat.instruments.map(instGroup))];
+            if (instGroups.length !== 1) continue;           // needs exactly one group
+
+            // 1) Build OUTPUT snippet for this single-instrument pattern
+            selectedNotes.clear();
+            for (const ref of notesInsidePattern(pat)) {
+                selectedNotes.add(JSON.stringify(ref));
+            }
+            const outputAbc = generateAbcFromSelectionMultiVoice().trim();
+            selectedNotes.clear();
+
+            // 2) Find all other tracks active in the same time window
+            const contextTracks = new Set();
+            rawTracksData.forEach((trk, ti) => {
+                if (pat.instruments.includes(ti)) return;
+                if (trk.notes.some(n =>
+                    n.start_tick < pat.range.end && n.start_tick + n.duration_ticks > pat.range.start
+                )) {
+                    contextTracks.add(ti);
+                }
+            });
+            const others = Array.from(contextTracks);
+
+            // 3) For every non-empty subset of context tracks
+            for (const subset of allNonEmptySubsets(others)) {
+                const inputAbc = buildContextAbc(pat.range, subset);
+                if (!inputAbc) continue;
+
+                // get the target instrument name from the pattern's instrument index
+                const ti = pat.instruments[0];
+                const targetInstrument = getTrackInstrumentName(rawTracksData[ti], ti);
+
+                examples.push({
+                    id: crypto.randomUUID(),
+                    function: 'InstrumentAddition',
+                    input: `<abc>\n${inputAbc}\n</abc>`,
+                    targetInstrument,
+                    output: `<abc>\n${outputAbc}\n</abc>`
+                });
+            }
         }
-      });
-      const others = Array.from(contextTracks);
-  
-      // 3) For every non-empty subset of context tracks
-      for (const subset of allNonEmptySubsets(others)) {
-        const inputAbc = buildContextAbc(pat.range, subset);
-        if (!inputAbc) continue;
-  
-        // get the target instrument name from the pattern's instrument index
-        const ti = pat.instruments[0];
-        const targetInstrument = getTrackInstrumentName(rawTracksData[ti], ti);
-  
-        examples.push({
-          id: crypto.randomUUID(),
-          function: 'InstrumentAddition',
-          input: `<abc>\n${inputAbc}\n</abc>`,
-          targetInstrument,
-          output: `<abc>\n${outputAbc}\n</abc>`
-        });
-      }
-    }
-  
-    // 4) POST the dataset to Flask
-    try {
-      const res = await fetch('/dataset/export_training', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ song_name: songName, examples })
-      });
-      if (!res.ok) throw new Error(await res.text());
-      alert(`Exported ${examples.length} examples!`);
-    } catch (err) {
-      console.error(err);
-      alert('Export failed – see console');
-    }
-  };
-  
+
+        // 4) POST the dataset to Flask
+        try {
+            const res = await fetch('/dataset/export_training', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ song_name: songName, examples })
+            });
+            if (!res.ok) throw new Error(await res.text());
+            alert(`Exported ${examples.length} examples!`);
+        } catch (err) {
+            console.error(err);
+            alert('Export failed – see console');
+        }
+    };
+
 
 
 

@@ -1,0 +1,6 @@
+{
+  "id": "0a21aea3-a864-4eb4-b608-bb415cc0d17f",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Distortion Guitar\" snm=\"Distortion Guitar\" clef=treble\n%%MIDI program 30\n%%MIDI channel 0\n[V:1] f2 d3 z e3 z d3 z B2 | G15 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Distortion Guitar\" snm=\"Distortion Guitar\" clef=treble\n%%MIDI program 30\n%%MIDI channel 0\n[V:1] f2 d3 z e3 z f3 z g2 | g15 |]\n</abc>"
+}

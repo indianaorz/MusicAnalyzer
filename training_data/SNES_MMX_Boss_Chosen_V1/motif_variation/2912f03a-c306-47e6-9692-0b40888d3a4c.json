@@ -1,0 +1,6 @@
+{
+  "id": "2912f03a-c306-47e6-9692-0b40888d3a4c",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Brass Section\" snm=\"Brass Section\" clef=treble\n%%MIDI program 61\n%%MIDI channel 0\n[V:1] F F z F E2 F9 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Brass Section\" snm=\"Brass Section\" clef=treble\n%%MIDI program 61\n%%MIDI channel 0\n[V:1] E E z E D2 E9 |]\n</abc>"
+}

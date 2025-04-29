@@ -1,0 +1,6 @@
+{
+  "id": "e7a48ee7-6c4d-481d-9566-a4f677988a19",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"SynthStrings 1\" snm=\"Synth Strings 1\" clef=treble\n%%MIDI program 50\n%%MIDI channel 0\n[V:1] [ceg]15 z [cea]15 | z [cdf]15 | z [cea]5 | z [=Bdg]9 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"SynthStrings 1\" snm=\"Synth Strings 1\" clef=treble\n%%MIDI program 50\n%%MIDI channel 0\n[V:1] [ceg]15 z [cea]15 | z [Bdf]15 | z [Bdf]5 | z [ceg]9 |]\n</abc>"
+}

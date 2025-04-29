@@ -1,0 +1,6 @@
+{
+  "id": "e245411a-7dde-4381-be3b-70ff1cd119b3",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1 V2)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] B,,,2 E,,2 B,,,3 z E,, E,, D,, D,, B,,, B,,, C,, C,, | |]\nV:2 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:2] [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 ^F,,2 [^A,,G,]2 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1 V2)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] B,,,2 E,,2 B,,,3 z E,,2 E,,3 z B,,, E,, | |]\nV:2 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:2] [^F,,^C,]2 [^A,,G,]2 ^F,,3 z [^A,,G,]2 [^A,,G,]2 [^F,,^C,]2 [^A,,G,]2 | |]\n</abc>"
+}

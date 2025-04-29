@@ -1,0 +1,6 @@
+{
+  "id": "a2f8e306-02c5-4250-afdc-eb6f68604c6f",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1 V2 V3)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] C,,8 z3 C,, z2 C,,2 | |]\nV:2 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:2] ^C,8 |]\nV:3 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:3] z10 D,,2 D,, D,,2 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1 V2 V3)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] C,,2 z6 C,,4 |]\nV:2 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:2] ^C,8 |]\nV:3 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:3] z8 D,,2 z D,,2 D,,2 |]\n</abc>"
+}

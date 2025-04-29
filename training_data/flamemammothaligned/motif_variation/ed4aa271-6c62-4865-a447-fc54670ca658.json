@@ -1,0 +1,6 @@
+{
+  "id": "ed4aa271-6c62-4865-a447-fc54670ca658",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1 V2)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] ^C,4 ^A,,4 ^A,,4 ^A,,4 | ^A,,4 ^A,,4 ^A,,4 ^A,,4 | ^C,4 ^A,,4 ^A,,4 ^A,,4 | ^C,3 ^C,3 ^C,2 |]\nV:2 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:2] C,,2 z2 D,,2 z2 C,,2 C,,2 D,,2 z2 C,,2 | z2 D,,2 z2 C,,2 C,,2 D,,2 z2 C,,2 | z2 D,,2 z2 C,,2 C,,2 D,,2 z2 C,,3 | C,,3 C,,2 z2 C,, z D,, z D,, D,, | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1 V2)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] ^C,4 ^A,,4 ^A,,4 ^A,,4 | ^A,,4 ^A,,4 ^A,,4 ^A,,4 | ^C,4 ^A,,4 ^A,,4 ^A,,4 | ^C,3 ^C,3 ^C,2 |]\nV:2 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:2] C,,2 z2 D,,2 z2 C,,2 C,,2 D,,2 z2 C,,2 | z2 D,,2 z2 C,,2 C,,2 D,,2 z2 C,,2 | z2 D,,2 z2 C,,2 C,,2 D,,2 z2 C,,3 | C,,3 C,,2 z2 C,, B,,, D,, z C,, |]\n</abc>"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "02960316-955a-4d9e-9f39-227606a82f33",
+  "function": "MotifVariation",
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] C,,2 z2 D,,2 z C,, z2 C,, B,,, D,, z C, B,, | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] C,,2 z2 D,,2 z C,, z2 C,, B,,, D,, z C,, |]\n</abc>"
+}
