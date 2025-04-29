@@ -1,0 +1,5 @@
+{
+  "id": "68f9ec8e-0056-4396-acf5-f794c91ebf23",
+  "function": "Generation",
+  "output": "X:1\nT:IntroductionStage / Part A / Bass A / Bass Motif 1 / Ending Pattern\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Synth Bass 1\" snm=\"Synth Bass 1\" clef=treble\n%%MIDI program 38\n%%MIDI channel 0\n[V:1] D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 D,,2 | B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 B,,,2 | |]"
+}

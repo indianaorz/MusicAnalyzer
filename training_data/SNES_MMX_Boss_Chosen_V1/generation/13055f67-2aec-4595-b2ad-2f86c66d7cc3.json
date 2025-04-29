@@ -1,0 +1,5 @@
+{
+  "id": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+  "function": "Generation",
+  "output": "X:1\nT:SNES_MMX_Boss_Chosen_V1 / Finale / Drums\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] [C,,^C,]4 ^C, [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] | [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] [^C,^C,] ^C, |]"
+}

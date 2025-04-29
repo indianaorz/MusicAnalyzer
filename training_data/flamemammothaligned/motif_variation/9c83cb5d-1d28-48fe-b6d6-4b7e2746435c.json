@@ -1,6 +1,0 @@
-{
-  "id": "9c83cb5d-1d28-48fe-b6d6-4b7e2746435c",
-  "function": "MotifVariation",
-  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Overdriven Guitar\" snm=\"Overdriven Guitar\" clef=treble\n%%MIDI program 29\n%%MIDI channel 0\n[V:1] d c B A B A G E F4 E2 =E2 | |]\n</abc>",
-  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Overdriven Guitar\" snm=\"Overdriven Guitar\" clef=treble\n%%MIDI program 29\n%%MIDI channel 0\n[V:1] A3 G3 F6 A G F E | |]\n</abc>"
-}

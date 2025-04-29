@@ -1,0 +1,5 @@
+{
+  "id": "5d62cb32-cbc5-4067-a934-8ca8dc7e61fc",
+  "function": "Generation",
+  "output": "X:1\nT:flamemammothaligned / Part B / Drums B / Motif 1\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] [C,,^C,]2 z2 [D,,^A,,]2 z C,, ^A,,4 C,, B,,, [D,,^A,,] z [C,,^A,,]2 | z2 [D,,^A,,]2 z C,, ^A,,4 C,, B,,, [D,,^A,,] C,, | [C,,^A,,]2 z2 [D,,^A,,]2 z C,, ^A,,4 C,, B,,, [D,,^A,,] C, | B,, [C,,^C,] C, C, B,, B,, [C,,^C,] z3 C, C, B,, B,, A,, A,, | |]"
+}

@@ -1,6 +1,0 @@
-{
-  "id": "b586f9b3-8be4-4779-912d-fe059b4dcd23",
-  "function": "MotifVariation",
-  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Electric Bass (pick)\" snm=\"Electric Bass (pick)\" clef=treble\n%%MIDI program 34\n%%MIDI channel 0\n[V:1] F,,,4 A,,,2 F,,,2 B,,,2 A,,,2 F,,,2 A,,,12 | |]\n</abc>",
-  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Distortion Guitar\" snm=\"Distortion Guitar\" clef=treble\n%%MIDI program 30\n%%MIDI channel 0\n[V:1] [C,F,]4 [E,A,]2 [C,F,]2 [F,B,]2 [E,A,]2 [C,F,]2 [B,,E,]18 | | |]\n</abc>"
-}

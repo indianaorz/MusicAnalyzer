@@ -1,0 +1,5 @@
+{
+  "id": "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d",
+  "function": "Generation",
+  "output": "X:1\nT:IntroductionStage / Part C / Drums C / Motif 1\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] [B,,,^F,,^C,]2 [E,,^A,,G,]2 [B,,,^F,,]3 z [E,,^A,,G,]2 [E,,^A,,G,]3 [^F,,^C,]2 [B,,,^A,,G,] | E,, [B,,,^F,,^C,]2 [E,,^A,,G,]2 [B,,,^F,,]3 [E,,^A,,G,]2 [E,,^A,,G,]3 [^F,,^C,]2 [B,,,^A,,G,] | E,, [B,,,^F,,^C,]2 [E,,^A,,G,]2 [B,,,^F,,]3 [E,,^A,,G,]2 [E,,^A,,G,]3 [^F,,^C,]2 [B,,,^A,,G,] | E,, [B,,,^F,,^C,]2 [E,,^A,,G,]2 [B,,,^F,,]3 [E,,^A,,G,] E,, [D,,^A,,G,] D,, [B,,,^F,,] B,,, [C,,^A,,G,] C,, | |]"
+}

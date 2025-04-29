@@ -1,0 +1,5 @@
+{
+  "id": "348bb596-0272-4e0c-b570-2163eefd267e",
+  "function": "Generation",
+  "output": "X:1\nT:armored_armadillo_adjusted / Part B / Pad 3 (polysynth) / Chord Progression\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] [F,A,C]15 z [A,CE]15 | |]"
+}

@@ -1,0 +1,5 @@
+{
+  "id": "31704b54-0a48-4efd-8621-9402df165c0f",
+  "function": "Generation",
+  "output": "X:1\nT:flamemammothaligned / Part C / Back Guitar C / Main\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Distortion Guitar\" snm=\"Distortion Guitar\" clef=treble\n%%MIDI program 30\n%%MIDI channel 0\n[V:1] [A,,D,]2 [A,,D,]2 [A,,D,]2 [A,,D,]2 [A,,D,]2 [A,,D,]2 [A,,D,]2 [A,,D,]2 | [B,,E,]2 [B,,E,]2 [B,,E,]2 [B,,E,]2 [B,,E,]2 [B,,E,]2 [B,,E,]2 [B,,E,]2 | |]"
+}

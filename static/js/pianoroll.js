@@ -1529,54 +1529,63 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    /*──────────────── CTRL+SHIFT+R – AUTO-FIND REPETITIONS (v2) ──────────*/
     async function detectInternalRepetitions() {
         const parentPat = patterns.get(activePatternId);
         if (!parentPat || parentPat.id === ROOT_ID) {
-            alert('Select a non-root pattern first.');
-            return;
+            alert('Select a non-root pattern first.'); return;
         }
 
-        // wipe any previous previews
-        repeatHighlights = [];
-        variationHighlights = [];
+        // clear any previous previews
+        repeatHighlights = variationHighlights = [];
         redrawPianoRoll();
 
-        // ── gather every (source-pat, hit-inside-parent) pair ──
+        /* ➊ gather candidates: every NON-repetition pattern ≠ current */
         const candidates = [];
         patterns.forEach(pat => {
             if (pat.id === ROOT_ID || pat.id === parentPat.id) return;
+            if (pat.isRepetition) return;                       // skip reps as sources
             findRepeatsOfPattern(pat, parentPat)
                 .forEach(hit => candidates.push({ src: pat, hit }));
         });
-
         if (!candidates.length) {
             alert(`No repetitions of other patterns found inside “${parentPat.name}”.`);
             return;
         }
 
-        // ── walk the hits one-by-one ──
+        /* ➋ walk hits in chronological order, skipping overlaps with
+              anything we accept during this pass                             */
+        candidates.sort((a, b) => a.hit.range.start - b.hit.range.start);
+        const taken = [];          // [{start,end}] of accepted clones
+
+        const overlaps = (a, b) => !(a.end <= b.start || b.end <= a.start);
+
         for (const { src, hit } of candidates) {
-            // highlight + zoom
-            repeatHighlights = [hit.range];   // yellow = clone
-            variationHighlights = [src.range];   // orange = source
+            // already occupied by a previously-accepted clone?
+            if (taken.some(r => overlaps(r, hit.range))) continue;
+
+            // preview colours & zoom
+            repeatHighlights = [hit.range];   // yellow  = proposed clone
+            variationHighlights = [src.range];   // orange  = source pattern
             const union = {
-                start: Math.min(parentPat.range.start, src.range.start),
-                end: Math.max(parentPat.range.end, src.range.end),
-                low: Math.min(parentPat.range.low, src.range.low),
-                high: Math.max(parentPat.range.high, src.range.high)
+                start: Math.min(src.range.start, hit.range.start),
+                end: Math.max(src.range.end, hit.range.end),
+                low: Math.min(src.range.low, hit.range.low),
+                high: Math.max(src.range.high, hit.range.high)
             };
             redrawPianoRoll();
             zoomToRect(union, 300);
 
-            /* eslint-disable no-loop-func */
+            /* give the browser one frame to paint before confirm() opens */
+            await new Promise(r => setTimeout(r, 500));
+
             const ok = confirm(
                 `“${src.name}” appears to repeat inside “${parentPat.name}”.\n` +
                 `Convert the highlighted slice to a Repetition?`
             );
-            /* eslint-enable no-loop-func */
             if (!ok) continue;
 
-            // insert repetition under the active pattern
+            // record the new repetition
             const id = crypto.randomUUID();
             patterns.set(id, {
                 id,
@@ -1591,15 +1600,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 children: []
             });
             parentPat.children.push(id);
+            taken.push(hit.range);            // mark space as occupied
             queueSave();
         }
 
-        // clean-up UI
-        repeatHighlights = [];
-        variationHighlights = [];
+        // cleanup UI
+        repeatHighlights = variationHighlights = [];
         rebuildPatternTree();
         redrawPianoRoll();
     }
+
 
 
 
@@ -2054,7 +2064,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function zoomToRect(rect, ms = 350) {
         // ▸ add a little padding in MIDI units:
         const padTicks = window.ticksPerBeat * 2; // 2 beats
-        const padPitches = 2;                    // 2 semitone-rows
+        const padPitches = 10;                    // 2 semitone-rows
 
         // clamp into valid range
         const startTick = Math.max(0, rect.start - padTicks);
@@ -3588,7 +3598,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    function generateAbcFromSelectionMultiVoice() {
+    function generateAbcFromSelectionMultiVoice(trackName = "Multi-Track Snippet") {
         if (selectedNotes.size === 0) return "";
 
         const TPB = window.ticksPerBeat || 480;
@@ -3624,7 +3634,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const keyName = root + (isMin ? 'min' : 'maj');
         const ticksPerBar = TPB * (4 / den) * num;
 
-        let abc = `X:1\nT:Multi-Track Snippet\nM:${num}/${den}\nL:1/${L}\nK:${keyName}\n`;
+        let abc = `X:1\nT:${trackName}\nM:${num}/${den}\nL:1/${L}\nK:${keyName}\n`;
 
         // Add %%score directive
         const voiceLabels = selectedTrackIndices.map((_, index) => `V${index + 1}`);
@@ -3805,6 +3815,10 @@ document.addEventListener('DOMContentLoaded', function () {
         while (p) {
             parts.push(p.name || '(unnamed)');
             p = patterns.get(p.parentId);
+        }
+        // Use the song name instead of "Whole Song"
+        if (parts[parts.length - 1] === 'Whole song') {
+            parts[parts.length - 1] = currentMidiFilename.replace(/\.[^.]+$/, ''); // Strips the file extension
         }
         return parts.reverse().join(' / ');
     }
@@ -4090,12 +4104,108 @@ document.addEventListener('DOMContentLoaded', function () {
         return examples;
     }
 
+    function collectGenerationExamples() {
+        const examples = [];
+        for (const pat of patterns.values()) {
+            // Skip if not a qualifying pattern
+            if (!isQualifyingPattern(pat)) continue;
+
+            // Get the descriptive title from the breadcrumb
+            const trackName = breadcrumbFor(pat.id);
+            let abc;
+
+            if (pat.instruments.length === 1 && !isDrumTrack(pat.instruments[0])) {
+                // Single non-drum track
+                selectedNotes.clear();
+                notesInsidePattern(pat).forEach(ref => selectedNotes.add(JSON.stringify(ref)));
+                abc = generateAbcFromSelectionMultiVoice(trackName);
+            } else if (pat.instruments.every(ti => isDrumTrack(ti))) {
+                // Drum pattern: merge all drum tracks into a virtual track
+                const drumNotes = [];
+                pat.instruments.forEach(ti => {
+                    const trackNotes = notesInsidePattern(pat).filter(ref => ref.trackIndex === ti);
+                    trackNotes.forEach(ref => {
+                        const note = rawTracksData[ti].notes[ref.noteIndex];
+                        drumNotes.push({ ...note });
+                    });
+                });
+                // Sort notes by start time for correct sequencing
+                drumNotes.sort((a, b) => a.start_tick - b.start_tick);
+
+                // Create a virtual track at a new index
+                const virtualTrackIndex = rawTracksData.length;
+                const virtualTrack = {
+                    notes: drumNotes,
+                    is_drum_track: true,
+                    name: 'Drums',
+                    instrument: 'Drums',
+                    program: null // No program number for drums
+                };
+                rawTracksData[virtualTrackIndex] = virtualTrack;
+
+                // Populate selectedNotes with the virtual track's notes
+                selectedNotes.clear();
+                drumNotes.forEach((note, idx) => {
+                    selectedNotes.add(JSON.stringify({ trackIndex: virtualTrackIndex, noteIndex: idx }));
+                });
+
+                // Generate ABC with the virtual track
+                abc = generateAbcFromSelectionMultiVoice(trackName);
+
+                // Clean up the virtual track
+                delete rawTracksData[virtualTrackIndex];
+            } else {
+                continue; // Shouldn’t happen with isQualifyingPattern
+            }
+
+            // Add to examples if ABC was generated
+            if (abc) {
+                examples.push({
+                    id: pat.id,
+                    function: 'Generation',
+                    output: `${abc}`
+                });
+            }
+        }
+        return examples;
+    }
+
+    // Helper function to identify qualifying patterns
+    function isQualifyingPattern(pat) {
+        if (pat.id === ROOT_ID || pat.children.length > 0) return false;
+        const isAllDrums = pat.instruments.length > 0 && pat.instruments.every(ti => isDrumTrack(ti));
+        const isSingleNonDrum = pat.instruments.length === 1 && !isDrumTrack(pat.instruments[0]);
+        return isAllDrums || isSingleNonDrum;
+    }
+
 
     // ——— src/frontend/pianoroll.js
     // helper – returns a **group id**
     function instGroup(ti) {
         return isDrumTrack(ti) ? 'DRUMS' : ti;   // drums collapse to one
     }
+    document.getElementById('save-generation').addEventListener('click', async () => {
+        const examples = collectGenerationExamples();
+        if (!examples.length) {
+            alert('No generation examples found.');
+            return;
+        }
+        try {
+            const response = await fetch('/dataset/generation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    song_name: currentMidiFilename.replace(/\.[^.]+$/, ''),
+                    examples
+                })
+            });
+            if (!response.ok) throw new Error(await response.text());
+            alert(`Exported ${examples.length} generation examples.`);
+        } catch (error) {
+            console.error(error);
+            alert('Export failed – see console');
+        }
+    });
 
     document.getElementById('save-motif-variation').onclick = async () => {
         const examples = collectMotifVariationExamples();

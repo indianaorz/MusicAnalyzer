@@ -1,6 +1,0 @@
-{
-  "id": "4b695e9d-24c4-4753-b783-e445fd389312",
-  "function": "MotifVariation",
-  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Synth Bass 1\" snm=\"Synth Bass 1\" clef=treble\n%%MIDI program 38\n%%MIDI channel 0\n[V:1] F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 F,,,2 | |]\n</abc>",
-  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Synth Bass 1\" snm=\"Synth Bass 1\" clef=treble\n%%MIDI program 38\n%%MIDI channel 0\n[V:1] C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 C,,2 | |]\n</abc>"
-}

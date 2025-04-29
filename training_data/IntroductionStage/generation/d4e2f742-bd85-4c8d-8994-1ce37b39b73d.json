@@ -1,0 +1,5 @@
+{
+  "id": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+  "function": "Generation",
+  "output": "X:1\nT:IntroductionStage / Part C / Lead C / Motif 1\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Distortion Guitar\" snm=\"Distortion Guitar\" clef=treble\n%%MIDI program 30\n%%MIDI channel 0\n[V:1] z4 c5 z d2 e2 c2 | |]"
+}

@@ -1,0 +1,5 @@
+{
+  "id": "3b90eb5f-1de4-4937-9c6b-47186341d5ef",
+  "function": "Generation",
+  "output": "X:1\nT:armored_armadillo_adjusted / Part D / Electric Bass (finger) / Pattern 1''\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"Electric Bass (finger)\" snm=\"Electric Bass (finger)\" clef=treble\n%%MIDI program 33\n%%MIDI channel 0\n[V:1] F,,2 F,, F,,2 F,, F,,2 F,,2 F,, F,,2 F,, G,,2 | A,,3 A,,,3 |]"
+}

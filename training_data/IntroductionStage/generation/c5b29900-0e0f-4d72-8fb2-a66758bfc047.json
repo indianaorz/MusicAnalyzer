@@ -1,0 +1,5 @@
+{
+  "id": "c5b29900-0e0f-4d72-8fb2-a66758bfc047",
+  "function": "Generation",
+  "output": "X:1\nT:IntroductionStage / Part C / Drums C / Motif 1 / Drum Loop C'\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] [B,,,^F,,^C,]2 [E,,^A,,G,]2 [B,,,^F,,]3 z [E,,^A,,G,] E,, [D,,^A,,G,] D,, [B,,,^F,,] B,,, [C,,^A,,G,] C,, | |]"
+}

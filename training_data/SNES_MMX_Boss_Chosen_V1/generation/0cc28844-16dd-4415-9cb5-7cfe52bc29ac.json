@@ -1,0 +1,5 @@
+{
+  "id": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+  "function": "Generation",
+  "output": "X:1\nT:SNES_MMX_Boss_Chosen_V1 / Intro' / Overdriven Guitar\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Overdriven Guitar\" snm=\"Overdriven Guitar\" clef=treble\n%%MIDI program 29\n%%MIDI channel 0\n[V:1] d d z d c2 d10 | |]"
+}

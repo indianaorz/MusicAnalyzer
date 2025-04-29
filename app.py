@@ -436,7 +436,17 @@ def data_example(subpath):
 
     return send_file(wanted, mimetype='application/json')
 
-
+@app.post('/dataset/generation')
+def save_generation():
+    data = request.get_json(force=True)
+    song = re.sub(r'[^\w\- ]+', '', data.get('song_name', 'untitled')).strip() or 'untitled'
+    folder = DATA_ROOT / song / 'generation'
+    folder.mkdir(parents=True, exist_ok=True)
+    for ex in data.get('examples', []):
+        fid = ex.get('id') or uuid.uuid4().hex
+        (folder / f'{fid}.json').write_text(json.dumps(ex, indent=2))
+    return {'saved': len(data.get('examples', []))}
+    
 # ----------------------------------------------------------------------
 #  Tiny HTML page that hosts the JS browser (see §2)
 # ----------------------------------------------------------------------

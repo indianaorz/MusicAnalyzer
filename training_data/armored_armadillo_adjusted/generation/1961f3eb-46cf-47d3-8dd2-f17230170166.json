@@ -1,0 +1,5 @@
+{
+  "id": "1961f3eb-46cf-47d3-8dd2-f17230170166",
+  "function": "Generation",
+  "output": "X:1\nT:armored_armadillo_adjusted / Part C / Synth Brass 1 / Lead''\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"SynthBrass 1\" snm=\"Synth Brass 1\" clef=treble\n%%MIDI program 62\n%%MIDI channel 0\n[V:1] z2 a2 g2 d2 e2 g2 e2 B2 | d2 c2 B2 e9 |]"
+}

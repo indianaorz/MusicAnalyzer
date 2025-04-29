@@ -1,0 +1,5 @@
+{
+  "id": "0b3db728-81cd-46c9-8697-9577c31b86a8",
+  "function": "Generation",
+  "output": "X:1\nT:flamemammothaligned / DropIn / Theme A'\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Electric Bass (pick)\" snm=\"Electric Bass (pick)\" clef=treble\n%%MIDI program 34\n%%MIDI channel 0\n[V:1] F,,,4 A,,,2 F,,,2 B,,,2 A,,,2 F,,,2 E,,,10 | |]"
+}

@@ -1,6 +1,0 @@
-{
-  "id": "563f6136-7287-4cb9-9d5f-106ac9753497",
-  "function": "MotifVariation",
-  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"SynthBrass 2\" snm=\"Synth Brass 2\" clef=treble\n%%MIDI program 63\n%%MIDI channel 0\n[V:1] [A,,C,]3 z [C,E,]3 z [A,,C,]2 [C,E,]3 z [A,,C,]2 | [C,E,]3 z [A,,C,]2 [C,E,]3 z [A,,C,]2 [C,E,]3 |]\n</abc>",
-  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"SynthBrass 2\" snm=\"Synth Brass 2\" clef=treble\n%%MIDI program 63\n%%MIDI channel 0\n[V:1] [G,,C,]3 z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 |]\n</abc>"
-}

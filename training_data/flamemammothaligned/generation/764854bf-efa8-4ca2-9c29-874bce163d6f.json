@@ -1,0 +1,5 @@
+{
+  "id": "764854bf-efa8-4ca2-9c29-874bce163d6f",
+  "function": "Generation",
+  "output": "X:1\nT:flamemammothaligned / Part C / Bass / Main\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Electric Bass (pick)\" snm=\"Electric Bass (pick)\" clef=treble\n%%MIDI program 34\n%%MIDI channel 0\n[V:1] D,,,2 D,,,2 D,,,2 D,,,2 D,,,2 D,,,2 D,,,2 D,,,2 | E,,,2 E,,,2 E,,,2 E,,,2 E,,,2 E,,,2 E,,,2 E,,,2 | |]"
+}

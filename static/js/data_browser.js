@@ -52,7 +52,7 @@ function loadExample(item, liElement) {
         .then(r => r.json())
         .then(payload => {
             // choose which ABC to show – change if you prefer 'output'
-            let abcSource = `Input:\n\n${payload.input} \n\n Output:\n\n${payload.output}\n\n`;
+            let abcSource = `Input:\n\n<abc>\n${payload.input}\n</abc> \n\n Output:\n\n<abc>\n${payload.output}\n</abc>\n\n`;
             if (!abcSource) {
                 // viewer.innerHTML = '<p class="placeholder" style="color:red">No ABC in JSON.</p>';
                 return;

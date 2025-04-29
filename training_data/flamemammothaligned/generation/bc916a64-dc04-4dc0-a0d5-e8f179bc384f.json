@@ -1,0 +1,5 @@
+{
+  "id": "bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+  "function": "Generation",
+  "output": "X:1\nT:flamemammothaligned / Part C / Percussion / Main / Kick Snare\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] C,,2 z2 D,,2 z2 C,,2 C,,2 D,,2 |]"
+}

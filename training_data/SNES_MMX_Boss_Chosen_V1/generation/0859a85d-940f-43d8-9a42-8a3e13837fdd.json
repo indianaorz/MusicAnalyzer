@@ -1,0 +1,5 @@
+{
+  "id": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+  "function": "Generation",
+  "output": "X:1\nT:SNES_MMX_Boss_Chosen_V1 / Finale / Brass Section\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Brass Section\" snm=\"Brass Section\" clef=treble\n%%MIDI program 61\n%%MIDI channel 0\n[V:1] D,16 | |]"
+}

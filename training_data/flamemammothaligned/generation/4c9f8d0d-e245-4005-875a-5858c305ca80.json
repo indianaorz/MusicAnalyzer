@@ -1,0 +1,5 @@
+{
+  "id": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+  "function": "Generation",
+  "output": "X:1\nT:flamemammothaligned / DropIn / Theme A''\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Distortion Guitar\" snm=\"Distortion Guitar\" clef=treble\n%%MIDI program 30\n%%MIDI channel 0\n[V:1] [C,F,]4 [E,A,]2 [C,F,]2 [F,B,]2 [E,A,]2 [C,F,]2 [E,A,]12 | |]"
+}

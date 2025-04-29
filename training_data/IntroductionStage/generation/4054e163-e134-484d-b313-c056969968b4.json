@@ -1,0 +1,5 @@
+{
+  "id": "4054e163-e134-484d-b313-c056969968b4",
+  "function": "Generation",
+  "output": "X:1\nT:IntroductionStage / Part B / Drums B / Motif 1 / KickSnare B\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] B,,,3 z E,,3 z B,,,3 z E,,3 |]"
+}
