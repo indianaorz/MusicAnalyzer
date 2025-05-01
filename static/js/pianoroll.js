@@ -4432,6 +4432,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     function collectEpicifyExamples(augmentTranspose = true) {
         const examples = [];
+        var id = 0;
     
         patterns.forEach(pat => {
             if (pat.id === ROOT_ID) return;
@@ -4524,7 +4525,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!inp) return;
     
                 examples.push({
-                    id:        `${safeName}_t${tSemis}_k${selectedRootNote}_${selectedScaleType}`,
+                    id:        `${safeName}_t${tSemis}_k${selectedRootNote}_${selectedScaleType}_${id++}`,
                     function:  "Epicify",
                     transpose: tSemis,
                     input:     inp,
