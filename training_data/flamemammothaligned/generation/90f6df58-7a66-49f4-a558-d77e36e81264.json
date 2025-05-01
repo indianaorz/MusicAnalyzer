@@ -1,5 +1,0 @@
-{
-  "id": "90f6df58-7a66-49f4-a558-d77e36e81264",
-  "function": "Generation",
-  "output": "X:1\nT:flamemammothaligned / Part A / String A / Descending Strings\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"String Ensemble 1\" snm=\"String Ensemble 1\" clef=treble\n%%MIDI program 48\n%%MIDI channel 0\n[V:1] z4 a6 g4 f18 | | z4 a6 g4 G18 | | |]"
-}

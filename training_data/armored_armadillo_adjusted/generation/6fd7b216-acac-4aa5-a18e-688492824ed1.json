@@ -1,5 +1,0 @@
-{
-  "id": "6fd7b216-acac-4aa5-a18e-688492824ed1",
-  "function": "Generation",
-  "output": "X:1\nT:armored_armadillo_adjusted / Part A / Drums / Lead In\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"Drums\" snm=\"Drums\" clef=treble perc=yes\n%%MIDI channel 10\n[V:1] z12 ^A,, [^A,,^A,,] [^A,,G,]2 | |]"
-}

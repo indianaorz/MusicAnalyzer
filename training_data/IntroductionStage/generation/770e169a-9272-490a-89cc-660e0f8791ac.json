@@ -1,5 +1,0 @@
-{
-  "id": "770e169a-9272-490a-89cc-660e0f8791ac",
-  "function": "Generation",
-  "output": "X:1\nT:IntroductionStage / Part C / Brass C / Motif 1'\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"SynthBrass 2\" snm=\"Synth Brass 2\" clef=treble\n%%MIDI program 63\n%%MIDI channel 0\n[V:1] [G,,C,]3 z [E,G,]3 z [G,,C,]2 [E,G,]3 z [G,,C,]2 | [E,A,]3 z [A,,C,]2 [E,A,]3 z [A,,C,]2 [E,A,]3 |]"
-}

@@ -1269,6 +1269,25 @@ document.addEventListener('DOMContentLoaded', function () {
         patternActionMode = null;
     }
 
+    // 2) The renaming handler that keeps all variantOfName in sync:
+    function handlePatternRename(id, newName) {
+        const pat = patterns.get(id);
+        if (!pat) return;
+        if (!newName) newName = '(unnamed)';
+        pat.name = newName;
+
+        // Update every child that refers back to this pattern:
+        patterns.forEach(p => {
+            if (p.variantOf === id) {
+                p.variantOfName = newName;
+            }
+        });
+
+        rebuildPatternTree();
+        queueSave();
+    }
+
+
     /* persistent collapse state (id → bool) */
     let collapsed = new Set();
 
@@ -1297,12 +1316,23 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             li.appendChild(caret);
 
-            /* pattern name  */
             const nameSpan = document.createElement('span');
             nameSpan.className = 'node-name';
             nameSpan.textContent = p.name || '(unnamed)';
             li.appendChild(nameSpan);
-            li.onclick = () => {
+
+            // cancel the browser context menu *and* run your rename
+            li.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                const newName = prompt("Rename pattern:", p.name);
+                if (newName != null) {
+                    handlePatternRename(p.id, newName.trim());
+                }
+            });
+
+
+            li.onclick = (e) => {
                 // ─── remapVariant mode ───
                 if (patternActionMode === 'remapVariant' && p.id !== ROOT_ID) {
                     if (remapState.step === 0) {
@@ -1343,9 +1373,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 const meta = document.createElement('span');
                 meta.className = 'node-meta';
 
-                if (p.isRepetition) meta.textContent = `repeat of ${p.variantOfName}`;
+                const master = patterns.get(p.variantOf);
+                const masterName = master ? master.name : '(unknown)';
+                meta.textContent = p.isRepetition
+                    ? `repeat of ${masterName}`
+                    : `variation of ${masterName}`;
+
+                if (p.isRepetition) { }// meta.textContent = `repeat of ${p.variantOfName}`;
                 else {
-                    meta.textContent = `variation of ${p.variantOfName}`;
 
                     /* rhythmic-variation toggle */
                     const lbl = document.createElement('label');
@@ -1397,12 +1432,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const baseId = variationBaseId || activePatternId;
         if (!selectionIsExactRepeatOf(master)) {
-            alert(
-                `The notes you selected don’t perfectly match “${master.name}”.\n` +
-                `Make sure you’ve box-selected **all** and **only** the notes of a true ` +
-                `repeat (same instruments, pitches, starts & lengths) before pressing R.`
+            const ok = confirm(
+                `Detected that the selected notes don’t perfectly match “${master.name}”.\n` +
+                `Are you sure you want to mark this as a repeat anyway?`
             );
-            return;   // abort – not an exact clone
+            if (!ok) return;
         }
 
         /* rectangle & instruments come straight from the selection */
@@ -3728,54 +3762,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
-     * Trim one bar’s worth of rest from the start of *every* voice,
-     * as long as *all* voices still have at least one full‑bar rest.
+     * Trim the same number of full-bar rests from the start of every voice,
+     * equal to the minimum across all voices.
      *
-     * @param {string} abcText     – the raw multi‑voice ABC
-     * @param {number} unitsPerBar – how many “z‑units” make up one bar
+     * @param {string} abcText     – the raw multi-voice ABC
+     * @param {number} unitsPerBar – how many “z-units” make up one bar
      * @returns {string}           – the adjusted ABC
      */
     function trimCommonBarRests(abcText, unitsPerBar) {
-        // ensure unitsPerBar is a sane integer
-        unitsPerBar = Math.max(1, Math.round(unitsPerBar));
-
         const lines = abcText.split('\n');
-        const removed = new Array(lines.length).fill(0);
-
-        // regex to pull off “[V:1] ” prefix, optional “zNN ”, then the rest
-        const voiceRe = /^(\[V:\d+\]\s*)(?:z(\d+)\s*)?(.*)$/;
-
-        // pass 1: strip as many full-bar rests out of the z-count as possible
-        lines.forEach((line, i) => {
-            const m = line.match(voiceRe);
-            if (!m) return;
-
-            const header = m[1];          // e.g. "[V:1] "
-            const count = parseInt(m[2] || '0', 10);
-            const rest = m[3];          // e.g. "a6 | | | | g4 …"
-
-            // how many full bars can we remove?
-            const strips = Math.floor(count / unitsPerBar);
-            const leftover = count - strips * unitsPerBar;
-
-            removed[i] = strips;
-            // rebuild the line with only the leftover rest
-            const zPart = leftover ? `z${leftover} ` : '';
-            lines[i] = header + zPart + rest;
+        // 1) Compute how many whole-bar rests each line has
+        const barCounts = lines.map(line => {
+            const m = line.match(/^(\[V:\d+\]\s*)(?:z(\d+)\s*)?(.*)$/);
+            if (!m) return Infinity;
+            const zCount = parseInt(m[2] || '0', 10);
+            return Math.floor(zCount / unitsPerBar);
         });
 
-        // pass 2: for each voice-line, drop exactly that many "| " tokens
-        lines.forEach((line, i) => {
-            let str = line;
-            for (let j = 0; j < removed[i]; j++) {
-                // remove the first occurrence of the bar-marker only
-                str = str.replace('| ', '');
+        // 2) Find the minimum number of bars to strip
+        const minBars = Math.min(...barCounts.filter(c => isFinite(c)));
+        if (minBars <= 0) return abcText;
+
+        // 3) Remove that many bars from every voice
+        return lines.map(line => {
+            const m = line.match(/^(\[V:\d+\]\s*)(?:z(\d+)\s*)?(.*)$/);
+            if (!m) return line;
+            const header = m[1];
+            const origZ = parseInt(m[2] || '0', 10);
+            let rest = m[3];
+
+            // subtract the stripped bars
+            const newZ = origZ - minBars * unitsPerBar;
+            const zPart = newZ > 0 ? `z${newZ} ` : '';
+
+            // remove exactly minBars instances of the bar-marker "| "
+            for (let i = 0; i < minBars; i++) {
+                rest = rest.replace('| ', '');
             }
-            lines[i] = str;
-        });
 
-        return lines.join('\n');
+            return header + zPart + rest;
+        }).join('\n');
     }
+
 
 
 

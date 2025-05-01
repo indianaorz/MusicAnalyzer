@@ -1,5 +1,0 @@
-{
-  "id": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
-  "function": "Generation",
-  "output": "X:1\nT:IntroductionStage / Part A / Strings A / Strings Motif 1\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"SynthStrings 1\" snm=\"Synth Strings 1\" clef=treble\n%%MIDI program 50\n%%MIDI channel 0\n[V:1] [ceg]31 | z [ceg]31 | | z [cea]31 | | z [Bdg]31 | | |]"
-}

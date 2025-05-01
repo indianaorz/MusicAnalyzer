@@ -1,5 +1,0 @@
-{
-  "id": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
-  "function": "Generation",
-  "output": "X:1\nT:SNES_MMX_Boss_Chosen_V1 / Intro' / Slap Bass 2\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Slap Bass 2\" snm=\"Slap Bass 2\" clef=treble\n%%MIDI program 37\n%%MIDI channel 0\n[V:1] B,,,9 B,,, B,, B,,, B,,, =A,,,3 | |]"
-}

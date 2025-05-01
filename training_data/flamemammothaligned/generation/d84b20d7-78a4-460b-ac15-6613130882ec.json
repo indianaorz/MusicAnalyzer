@@ -1,5 +1,0 @@
-{
-  "id": "d84b20d7-78a4-460b-ac15-6613130882ec",
-  "function": "Generation",
-  "output": "X:1\nT:flamemammothaligned / Part B / Lead B / Motif 2\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Overdriven Guitar\" snm=\"Overdriven Guitar\" clef=treble\n%%MIDI program 29\n%%MIDI channel 0\n[V:1] z2 E2 =E2 F2 A2 F2 _E2 =E2 | |]"
-}
