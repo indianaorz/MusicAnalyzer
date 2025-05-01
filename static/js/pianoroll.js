@@ -4430,59 +4430,50 @@ document.addEventListener('DOMContentLoaded', function () {
      *   • input   = blandified top-line, snapped to SCALE tones,
      *               keeping correct instrument metadata
      */
-    function collectEpicifyExamples() {
+    function collectEpicifyExamples(augmentTranspose = true) {
         const examples = [];
     
         patterns.forEach(pat => {
-            if (pat.id === ROOT_ID) return;           // skip synthetic root
-            const insts = pat.instruments;
-            if (!Array.isArray(insts)) return;
-    
-            // only mono-instrument patterns or all-drum patterns
+            if (pat.id === ROOT_ID) return;
+            const insts   = pat.instruments ?? [];
             const allDrum = insts.every(ti => rawTracksData[ti]?.is_drum_track);
             if (!(insts.length === 1 || allDrum)) return;
-
-            //skip repetitions
-            if (pat.isRepetition) return;
+            if (pat.isRepetition)            return;
     
-            /* ───────────── 1. OUTPUT ───────────── */
-            selectedNotes.clear();
-            notesInsidePattern(pat).forEach(ref =>
-                selectedNotes.add(JSON.stringify(ref))
-            );
-            const outBody = generateAbcFromSelectionMultiVoice().trim();
-            selectedNotes.clear();
-            if (!outBody) return;
-            const outputWrapped = `<abc>\n${outBody}\n</abc>`;
+            const safeName = pat.name.replace(/[^\w\-]/g, '_');
     
-            /* ───────────── 2. INPUT ───────────── */
-            const blandifyTemp = () => {
-                // collect every note in this pattern (with its trackIndex)
+            const selectPat = () => {
+                selectedNotes.clear();
+                notesInsidePattern(pat).forEach(ref =>
+                    selectedNotes.add(JSON.stringify(ref))
+                );
+            };
+    
+            // Build the blandified topline (uses whatever currentRoot+scale are)
+            const buildInputSnippet = () => {
                 const pool = [];
-                notesInsidePattern(pat).forEach(ref => {
-                    const { trackIndex, noteIndex } = ref;
-                    const n = rawTracksData[trackIndex]?.notes[noteIndex];
-                    if (n) pool.push({ ...n, _ti: trackIndex });
+                notesInsidePattern(pat).forEach(r => {
+                    const n = rawTracksData[r.trackIndex]?.notes[r.noteIndex];
+                    if (n) pool.push({ ...n });
                 });
-                if (!pool.length) return "";
+                if (!pool.length) return '';
     
-                // helpers
                 const TPB   = window.ticksPerBeat || 480;
-                const EIGHT = TPB;// / 2;
+                const EIGHT = TPB;
                 const first = Math.min(...pool.map(n => n.start_tick));
                 const q     = t => Math.round((t - first) / EIGHT) * EIGHT;
-                const pcs   = currentScalePitchClasses;
-                const snap  = pitch => {
-                    if (pcs.has(pitch % 12)) return pitch;
+    
+                const pcs  = currentScalePitchClasses; // matches current key
+                const snap = p => {
+                    if (pcs.has(p % 12)) return p;
                     for (let d = 1; d < 12; d++) {
-                        const down = pitch - d, up = pitch + d;
+                        const down = p - d, up = p + d;
                         if (down >= 0  && pcs.has(down % 12)) return down;
                         if (up   <=127 && pcs.has(up   % 12)) return up;
                     }
-                    return pitch;
+                    return p;
                 };
     
-                // build a single top-line
                 const byPos = new Map();
                 pool.forEach(n => {
                     const rel = q(n.start_tick);
@@ -4491,72 +4482,98 @@ document.addEventListener('DOMContentLoaded', function () {
                             pitch          : snap(n.pitch),
                             start_tick     : first + rel,
                             duration_ticks : EIGHT,
-                            velocity       : n.velocity,
-                            _ti            : n._ti
+                            velocity       : n.velocity
                         });
                     }
                 });
     
-                // choose metadata base
-                let base;
-                if (allDrum) {
-                    // unified drums metadata
-                    base = {
-                        name:          "Drums",
-                        is_drum_track: true,
-                        program:       null,
-                        instrument:    "Drums",
-                        clef:          "percussion"
-                    };
-                } else {
-                    // single-instrument: pick that one
-                    const primaryTi = insts[0];
-                    base = rawTracksData[primaryTi];
-                }
+                const meta = allDrum
+                    ? { name:"Drums", is_drum_track:true, instrument:"Drums", clef:"percussion" }
+                    : rawTracksData[insts[0]];
     
-                // create the virtual track
                 const vIdx = rawTracksData.length;
                 rawTracksData.push({
-                    name:          base.name       || "Topline",
-                    is_drum_track: !!base.is_drum_track,
-                    program:       base.program,
-                    instrument:    base.instrument,
-                    clef:          base.clef,
-                    notes:         Array.from(byPos.values()).map(n => ({
-                                         pitch:          n.pitch,
-                                         start_tick:     n.start_tick,
-                                         duration_ticks: n.duration_ticks,
-                                         velocity:       n.velocity
-                                     }))
+                    name:          meta.name    || "Topline",
+                    is_drum_track: !!meta.is_drum_track,
+                    program:       meta.program,
+                    instrument:    meta.instrument,
+                    clef:          meta.clef,
+                    notes:         Array.from(byPos.values())
                 });
     
-                // render ABC
                 selectedNotes.clear();
                 rawTracksData[vIdx].notes.forEach((_, ni) =>
                     selectedNotes.add(JSON.stringify({ trackIndex: vIdx, noteIndex: ni }))
                 );
-                const inBody = generateAbcFromSelectionMultiVoice().trim();
+                const body = generateAbcFromSelectionMultiVoice().trim();
     
-                // cleanup
                 rawTracksData.pop();
                 selectedNotes.clear();
     
-                return inBody ? `<abc>\n${inBody}\n</abc>` : "";
+                return body ? `<abc>\n${body}\n</abc>` : '';
             };
     
-            const inputWrapped = blandifyTemp();
-            if (!inputWrapped) return;
+            // Push one example for whatever the current key + notes are
+            const pushExample = (tSemis) => {
+                selectPat();
+                const out = generateAbcFromSelectionMultiVoice().trim();
+                selectedNotes.clear();
+                if (!out) return;
     
-            examples.push({
-                id:       pat.id,
-                function: "Epicify",
-                input:    inputWrapped,
-                output:   outputWrapped
-            });
+                const inp = buildInputSnippet();
+                if (!inp) return;
+    
+                examples.push({
+                    id:        `${safeName}_t${tSemis}_k${selectedRootNote}_${selectedScaleType}`,
+                    function:  "Epicify",
+                    transpose: tSemis,
+                    input:     inp,
+                    output:    `<abc>\n${out}\n</abc>`
+                });
+            };
+    
+            // — original (no transpose) —
+            updateCurrentScaleNotes();
+            pushExample(0);
+    
+            // — augmented transpositions (skip drums) —
+            if (augmentTranspose && !allDrum) {
+                const origRoot = selectedRootNote;
+                // capture refs + their original pitches
+                const refs  = notesInsidePattern(pat).map(r => JSON.parse(JSON.stringify(r)));
+                const saved = refs.map(r => rawTracksData[r.trackIndex].notes[r.noteIndex].pitch);
+    
+                try {
+                    for (let t = 1; t < 12; t++) {
+                        // 1) transpose the actual notes
+                        refs.forEach((r,i) => {
+                            rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = saved[i] + t;
+                        });
+    
+                        // 2) shift the key & refresh scale
+                        selectedRootNote = (origRoot + t) % 12;
+                        updateCurrentScaleNotes();
+    
+                        // 3) emit example
+                        pushExample(t);
+                    }
+                } finally {
+                    // ALWAYS restore
+                    refs.forEach((r,i) => {
+                        rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = saved[i];
+                    });
+                    selectedRootNote = origRoot;
+                    updateCurrentScaleNotes();
+                }
+            }
         });
     
         return examples;
     }
+    
+    
+    
+    
     
 
 
