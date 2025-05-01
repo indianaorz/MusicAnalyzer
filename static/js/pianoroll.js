@@ -424,7 +424,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function setActivePattern(id, fromPop = false) {   // ← new param
         activePatternId = id;
         selectedNotes.clear();
+
+        // ── ensure all parents of the new active pattern are expanded ──
+        let p = patterns.get(id);
+        while (p) {
+            collapsed.delete(p.id);
+            p = patterns.get(p.parentId);
+        }
         rebuildPatternTree();
+
         redrawPianoRoll();
 
         if (id !== ROOT_ID) zoomToRect(patterns.get(id).range);
@@ -2946,6 +2954,332 @@ document.addEventListener('DOMContentLoaded', function () {
         return parentPat.name + "'".repeat(existing + 1);
     }
 
+    /** Deduplicate true octave-duplicates:
+     *  for any group of notes with the same pitch-class,
+     *  keep the single “best” one (longest → loudest → lowest). */
+    function removeOctaveDoubles(notes) {
+        const best = new Map();  // pc → note
+        notes.forEach(n => {
+            const pc = n.pitch % 12;
+            if (!best.has(pc)) {
+                best.set(pc, n);
+                return;
+            }
+            const cur = best.get(pc);
+            if (n.duration_ticks > cur.duration_ticks) {
+                best.set(pc, n);
+            } else if (n.duration_ticks === cur.duration_ticks) {
+                if (n.velocity > cur.velocity) {
+                    best.set(pc, n);
+                } else if (n.velocity === cur.velocity && n.pitch < cur.pitch) {
+                    best.set(pc, n);
+                }
+            }
+        });
+        return Array.from(best.values());
+    }
+
+
+    /** Collapse chords: for each distinct start_tick keep **one** note –
+ *  the highest pitch.  */
+    function keepHighestPerOnset(notes) {
+        const best = new Map();               // start_tick → note
+        notes.forEach(n => {
+            const key = n.start_tick;         // exact MIDI onset
+            if (!best.has(key) || n.pitch > best.get(key).pitch) {
+                best.set(key, n);
+            }
+        });
+        return Array.from(best.values());
+    }
+
+    async function blandifyToplineSelectionAndCopy() {
+        if (selectedNotes.size === 0) return;
+
+        const TPB = window.ticksPerBeat || 480;
+        const EIGHTH = TPB / 2;
+
+        // 1. Gather original selection
+        const pool = [];
+        selectedNotes.forEach(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
+            const n = rawTracksData[trackIndex].notes[noteIndex];
+            pool.push({
+                trackIndex,
+                pitch: n.pitch,
+                start_tick: n.start_tick,
+                duration_ticks: n.duration_ticks,
+                velocity: n.velocity
+            });
+        });
+        if (!pool.length) return;
+
+        // helper: chord-tones at a given tick
+        const chordToneSet = tick => {
+            const seg = chordSegments.find(s => tick >= s.start && tick < s.end);
+            return seg ? new Set(seg.pcs) : currentScalePitchClasses;
+        };
+
+        const scaleToneSet = () => currentScalePitchClasses;
+
+
+        // 2. Keep only the highest note per exact onset
+        const topline = keepHighestPerOnset(pool);
+
+        // 3. Bucket by beat → quantise / octave-dedupe / snap
+        const bucket = new Map();  // beatIdx → [note…]
+        topline.forEach(n => {
+            const beat = Math.floor(n.start_tick / TPB);
+            if (!bucket.has(beat)) bucket.set(beat, []);
+            bucket.get(beat).push(Object.assign({}, n)); // clone
+        });
+
+        let blandified = [];
+        bucket.forEach((arr0, beatIdx) => {
+            const beatStart = beatIdx * TPB;
+
+            // a) quantise to beat / 8th
+            let arr = arr0.map(n => {
+                n.start_tick = beatStart;
+                n.duration_ticks = Math.max(EIGHTH,
+                    Math.round(n.duration_ticks / EIGHTH) * EIGHTH);
+                return n;
+            });
+
+            // b) remove octave-doubles
+            arr = removeOctaveDoubles(arr);
+
+            // c) snap non–chord-tones to nearest chord-tone
+            const pcs = chordToneSet(beatStart);
+            arr.forEach(n => {
+                if (!pcs.has(n.pitch % 12)) {
+                    const base = Math.round(n.pitch / 12) * 12;
+                    const candidates = [...pcs].flatMap(pc => [
+                        base + pc,
+                        base + pc + 12,
+                        base + pc - 12
+                    ]);
+                    n.pitch = candidates.reduce((best, cand) =>
+                        Math.abs(cand - n.pitch) < Math.abs(best - n.pitch)
+                            ? cand : best,
+                        n.pitch);
+                }
+                // snap any non-scale tone to nearest scale tone
+                if (!scaleToneSet().has(n.pitch % 12)) {
+                    const base = Math.round(n.pitch / 12) * 12;
+                    const candidates = [...scaleToneSet()].flatMap(pc => [
+                        base + pc,
+                        base + pc + 12,
+                        base + pc - 12
+                    ]);
+                    n.pitch = candidates.reduce((best, cand) =>
+                        Math.abs(cand - n.pitch) < Math.abs(best - n.pitch) ? cand : best,
+                        n.pitch
+                    );
+                }
+                blandified.push(n);
+            });
+        });
+
+        if (!blandified.length) { console.warn('Nothing after blandify'); return; }
+
+        // ── NEW STEP: collapse any simultaneities introduced above
+        blandified = keepHighestPerOnset(blandified);
+
+        // 4. Materialize virtual tracks for ABC helper
+        const virtualMap = new Map(); // origTrack → virtualIdx
+        blandified.forEach(n => {
+            if (!virtualMap.has(n.trackIndex)) {
+                const base = rawTracksData[n.trackIndex];
+                rawTracksData.push({
+                    name: base.name || 'Topline',
+                    is_drum_track: base.is_drum_track,
+                    program: base.program,
+                    instrument: base.instrument,
+                    clef: base.clef,
+                    notes: []
+                });
+                virtualMap.set(n.trackIndex, rawTracksData.length - 1);
+            }
+            const vti = virtualMap.get(n.trackIndex);
+            rawTracksData[vti].notes.push({
+                pitch: n.pitch,
+                start_tick: n.start_tick,
+                duration_ticks: n.duration_ticks,
+                velocity: n.velocity
+            });
+        });
+
+        // 5. Select those virtual notes & export
+        selectedNotes.clear();
+        virtualMap.forEach(vti => {
+            rawTracksData[vti].notes.forEach((_, ni) => {
+                selectedNotes.add(JSON.stringify({ trackIndex: vti, noteIndex: ni }));
+            });
+        });
+
+        const abcBody = generateAbcFromSelectionMultiVoice('Topline Blandified');
+        selectedNotes.clear();
+
+        // 6. Cleanup virtual tracks (descending indices)
+        Array.from(virtualMap.values())
+            .sort((a, b) => b - a)
+            .forEach(idx => rawTracksData.splice(idx, 1));
+
+        if (!abcBody) {
+            console.warn('No ABC generated');
+            return;
+        }
+        const wrapped = `<abc>\n${abcBody.trim()}\n</abc>`;
+        try {
+            await navigator.clipboard.writeText(wrapped);
+            console.log('Top-line blandified ABC copied:\n', wrapped);
+        } catch (e) {
+            console.error('Clipboard write failed', e);
+        }
+    }
+
+
+
+
+
+    /** Blandify & copy the current selection without losing intervals:
+     *  • quantise starts to beats, durations to 8ths
+     *  • remove octave-duplicates only
+     *  • snap every note to the nearest chord-tone
+     *  • preserve all remaining simultaneities
+     *  • copy as <abc>…</abc>
+     */
+    async function blandifySelectionAndCopy() {
+        if (selectedNotes.size === 0) return;
+
+        const TPB = window.ticksPerBeat || 480;
+        const EIGHTH = TPB / 2;
+
+        // — collect originals —
+        const originals = [];
+        selectedNotes.forEach(k => {
+            const { trackIndex, noteIndex } = JSON.parse(k);
+            const n = rawTracksData[trackIndex].notes[noteIndex];
+            originals.push({
+                trackIndex,
+                pitch: n.pitch,
+                start_tick: n.start_tick,
+                duration_ticks: n.duration_ticks,
+                velocity: n.velocity
+            });
+        });
+
+        // helper: chord tones at a given tick
+        const chordToneSet = tick => {
+            const seg = chordSegments.find(s => tick >= s.start && tick < s.end);
+            return seg ? new Set(seg.pcs) : currentScalePitchClasses;
+        };
+
+        // bucket by beat
+        const bucket = new Map();  // beatIdx → [note,…]
+        originals.forEach(n => {
+            const beat = Math.floor(n.start_tick / TPB);
+            if (!bucket.has(beat)) bucket.set(beat, []);
+            bucket.get(beat).push(Object.assign({}, n)); // clone
+        });
+
+        // process each beat
+        const blandified = [];
+        bucket.forEach((beatArr, beatIdx) => {
+            const beatStart = beatIdx * TPB;
+            let arr = beatArr.map(n => {
+                // quantise
+                n.start_tick = beatStart;
+                n.duration_ticks = Math.max(EIGHTH,
+                    Math.round(n.duration_ticks / EIGHTH) * EIGHTH);
+                return n;
+            });
+
+            // strip octave-duplicates only
+            arr = removeOctaveDoubles(arr);
+
+            // snap each note to chord-tone if needed
+            const pcs = chordToneSet(beatStart);
+            arr.forEach(n => {
+                if (!pcs.has(n.pitch % 12)) {
+                    // find nearest chord-tone
+                    const octBase = Math.round(n.pitch / 12) * 12;
+                    const candidates = Array.from(pcs).flatMap(pc => [
+                        octBase + pc,
+                        octBase + pc + 12,
+                        octBase + pc - 12
+                    ]);
+                    // pick closest
+                    n.pitch = candidates.reduce((best, cand) =>
+                        Math.abs(cand - n.pitch) < Math.abs(best - n.pitch) ? cand : best,
+                        n.pitch);
+                }
+                blandified.push(n);
+            });
+        });
+
+        if (!blandified.length) {
+            console.warn('Nothing left after blandify');
+            return;
+        }
+
+        // — build temporary tracks for the ABC helper —
+        const virtualMap = new Map(); // origTrack → virtualIndex
+        blandified.forEach(n => {
+            if (!virtualMap.has(n.trackIndex)) {
+                const base = rawTracksData[n.trackIndex];
+                const vt = {
+                    name: base.name || 'Blandified',
+                    is_drum_track: base.is_drum_track,
+                    program: base.program,
+                    instrument: base.instrument,
+                    clef: base.clef,
+                    notes: []
+                };
+                rawTracksData.push(vt);
+                virtualMap.set(n.trackIndex, rawTracksData.length - 1);
+            }
+            const vti = virtualMap.get(n.trackIndex);
+            rawTracksData[vti].notes.push({
+                pitch: n.pitch,
+                start_tick: n.start_tick,
+                duration_ticks: n.duration_ticks,
+                velocity: n.velocity
+            });
+        });
+
+        // — select the virtual notes —
+        selectedNotes.clear();
+        virtualMap.forEach((vti, origTi) => {
+            rawTracksData[vti].notes.forEach((_, ni) => {
+                selectedNotes.add(JSON.stringify({ trackIndex: vti, noteIndex: ni }));
+            });
+        });
+
+        // — generate & copy ABC —
+        const abcBody = generateAbcFromSelectionMultiVoice('Blandified Snippet');
+        selectedNotes.clear();
+
+        // — clean up virtual tracks (highest indices first) —
+        Array.from(virtualMap.values())
+            .sort((a, b) => b - a)
+            .forEach(idx => rawTracksData.splice(idx, 1));
+
+        if (!abcBody) {
+            console.warn('No ABC generated');
+            return;
+        }
+        const wrapped = `<abc>\n${abcBody.trim()}\n</abc>`;
+        try {
+            await navigator.clipboard.writeText(wrapped);
+            console.log('Blandified ABC copied:\n', wrapped);
+        } catch (e) {
+            console.error('Clipboard write failed', e);
+        }
+    }
+
+
 
     function handleMouseLeaveCanvas(event) {
         // If mouse leaves canvas *while not interacting*, reset cursor
@@ -2964,6 +3298,28 @@ document.addEventListener('DOMContentLoaded', function () {
             handlePlayClick();
             return;
         }
+
+        // —— Shift B: keep highest-note + blandify & copy ——
+        if ((event.shiftKey) && event.key.toLowerCase() === 'b') {
+            if (selectedNotes.size > 0) {
+                event.preventDefault();
+                blandifyToplineSelectionAndCopy();
+            }
+            return;
+        }
+
+
+        // —— Ctrl+B (or Cmd+B): blandify-and-copy ——  
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'b') {
+            if (selectedNotes.size > 0) {
+                event.preventDefault();
+                blandifySelectionAndCopy();
+            } else {
+                console.log('Ctrl+B pressed, but no notes selected.');
+            }
+            return;
+        }
+
         // —— Shift+C: create one instrument-pattern per instrument under each child pattern ——
         if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'c') {
             event.preventDefault();
@@ -3079,7 +3435,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 trk.notes.forEach(n => {
                     if (noteInPattern(n, pat, ti)) {
                         start = Math.min(start, n.start_tick);
-                        end = Math.max(end, n.start_tick + n.duration_ticks);
+                        end = Math.max(end, n.start_tick + n.duration_ticks) - 1;
                         low = Math.min(low, n.pitch);
                         high = Math.max(high, n.pitch);
                     }
@@ -4069,6 +4425,145 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     /**
+     * Build “Epicify” training pairs
+     *   • output  = original multi-voice slice
+     *   • input   = blandified top-line, snapped to SCALE tones,
+     *               keeping correct instrument metadata
+     */
+    function collectEpicifyExamples() {
+        const examples = [];
+    
+        patterns.forEach(pat => {
+            if (pat.id === ROOT_ID) return;           // skip synthetic root
+            const insts = pat.instruments;
+            if (!Array.isArray(insts)) return;
+    
+            // only mono-instrument patterns or all-drum patterns
+            const allDrum = insts.every(ti => rawTracksData[ti]?.is_drum_track);
+            if (!(insts.length === 1 || allDrum)) return;
+
+            //skip repetitions
+            if (pat.isRepetition) return;
+    
+            /* ───────────── 1. OUTPUT ───────────── */
+            selectedNotes.clear();
+            notesInsidePattern(pat).forEach(ref =>
+                selectedNotes.add(JSON.stringify(ref))
+            );
+            const outBody = generateAbcFromSelectionMultiVoice().trim();
+            selectedNotes.clear();
+            if (!outBody) return;
+            const outputWrapped = `<abc>\n${outBody}\n</abc>`;
+    
+            /* ───────────── 2. INPUT ───────────── */
+            const blandifyTemp = () => {
+                // collect every note in this pattern (with its trackIndex)
+                const pool = [];
+                notesInsidePattern(pat).forEach(ref => {
+                    const { trackIndex, noteIndex } = ref;
+                    const n = rawTracksData[trackIndex]?.notes[noteIndex];
+                    if (n) pool.push({ ...n, _ti: trackIndex });
+                });
+                if (!pool.length) return "";
+    
+                // helpers
+                const TPB   = window.ticksPerBeat || 480;
+                const EIGHT = TPB;// / 2;
+                const first = Math.min(...pool.map(n => n.start_tick));
+                const q     = t => Math.round((t - first) / EIGHT) * EIGHT;
+                const pcs   = currentScalePitchClasses;
+                const snap  = pitch => {
+                    if (pcs.has(pitch % 12)) return pitch;
+                    for (let d = 1; d < 12; d++) {
+                        const down = pitch - d, up = pitch + d;
+                        if (down >= 0  && pcs.has(down % 12)) return down;
+                        if (up   <=127 && pcs.has(up   % 12)) return up;
+                    }
+                    return pitch;
+                };
+    
+                // build a single top-line
+                const byPos = new Map();
+                pool.forEach(n => {
+                    const rel = q(n.start_tick);
+                    if (!byPos.has(rel) || n.pitch > byPos.get(rel).pitch) {
+                        byPos.set(rel, {
+                            pitch          : snap(n.pitch),
+                            start_tick     : first + rel,
+                            duration_ticks : EIGHT,
+                            velocity       : n.velocity,
+                            _ti            : n._ti
+                        });
+                    }
+                });
+    
+                // choose metadata base
+                let base;
+                if (allDrum) {
+                    // unified drums metadata
+                    base = {
+                        name:          "Drums",
+                        is_drum_track: true,
+                        program:       null,
+                        instrument:    "Drums",
+                        clef:          "percussion"
+                    };
+                } else {
+                    // single-instrument: pick that one
+                    const primaryTi = insts[0];
+                    base = rawTracksData[primaryTi];
+                }
+    
+                // create the virtual track
+                const vIdx = rawTracksData.length;
+                rawTracksData.push({
+                    name:          base.name       || "Topline",
+                    is_drum_track: !!base.is_drum_track,
+                    program:       base.program,
+                    instrument:    base.instrument,
+                    clef:          base.clef,
+                    notes:         Array.from(byPos.values()).map(n => ({
+                                         pitch:          n.pitch,
+                                         start_tick:     n.start_tick,
+                                         duration_ticks: n.duration_ticks,
+                                         velocity:       n.velocity
+                                     }))
+                });
+    
+                // render ABC
+                selectedNotes.clear();
+                rawTracksData[vIdx].notes.forEach((_, ni) =>
+                    selectedNotes.add(JSON.stringify({ trackIndex: vIdx, noteIndex: ni }))
+                );
+                const inBody = generateAbcFromSelectionMultiVoice().trim();
+    
+                // cleanup
+                rawTracksData.pop();
+                selectedNotes.clear();
+    
+                return inBody ? `<abc>\n${inBody}\n</abc>` : "";
+            };
+    
+            const inputWrapped = blandifyTemp();
+            if (!inputWrapped) return;
+    
+            examples.push({
+                id:       pat.id,
+                function: "Epicify",
+                input:    inputWrapped,
+                output:   outputWrapped
+            });
+        });
+    
+        return examples;
+    }
+    
+
+
+
+
+
+    /**
    * Walks the variantOf‐graph and returns:
    *   [{
    *        id,                   // uuid
@@ -4212,6 +4707,29 @@ document.addEventListener('DOMContentLoaded', function () {
     function instGroup(ti) {
         return isDrumTrack(ti) ? 'DRUMS' : ti;   // drums collapse to one
     }
+    document.getElementById("save-epicify").addEventListener("click", async () => {
+        const examples = collectEpicifyExamples();
+        if (!examples.length) {
+            alert("No eligible patterns found for Epicify export.");
+            return;
+        }
+
+        try {
+            const res = await fetch("/dataset/epicify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    song_name: currentMidiFilename.replace(/\.[^.]+$/, ""),
+                    examples
+                })
+            });
+            if (!res.ok) throw new Error(await res.text());
+            alert(`Exported ${examples.length} Epicify examples ✅`);
+        } catch (err) {
+            console.error(err);
+            alert("Export failed – see console");
+        }
+    });
     document.getElementById('save-generation').addEventListener('click', async () => {
         const examples = collectGenerationExamples();
         if (!examples.length) {

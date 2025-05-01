@@ -446,7 +446,22 @@ def save_generation():
         fid = ex.get('id') or uuid.uuid4().hex
         (folder / f'{fid}.json').write_text(json.dumps(ex, indent=2))
     return {'saved': len(data.get('examples', []))}
-    
+
+@app.post('/dataset/epicify')
+def save_epicify():
+    data = request.get_json(force=True)
+    song = slugify(data.get('song_name', 'untitled'))
+    examples = data.get('examples', [])
+    folder = DATA_ROOT / song / 'epicify'
+    folder.mkdir(parents=True, exist_ok=True)
+
+    for ex in examples:
+        fid = ex.get('id') or uuid.uuid4().hex
+        (folder / f'{fid}.json').write_text(json.dumps(ex, indent=2))
+
+    return jsonify({'saved': len(examples)})
+
+
 # ----------------------------------------------------------------------
 #  Tiny HTML page that hosts the JS browser (see §2)
 # ----------------------------------------------------------------------
