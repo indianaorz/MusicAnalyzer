@@ -4432,31 +4432,29 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     function collectEpicifyExamples(augmentTranspose = true) {
         const examples = [];
-        var id = 0;
     
         patterns.forEach(pat => {
             if (pat.id === ROOT_ID) return;
             const insts   = pat.instruments ?? [];
             const allDrum = insts.every(ti => rawTracksData[ti]?.is_drum_track);
             if (!(insts.length === 1 || allDrum)) return;
-            if (pat.isRepetition)            return;
+            if (pat.isRepetition) return;
     
             const safeName = pat.name.replace(/[^\w\-]/g, '_');
     
-            const selectPat = () => {
+            /* ----- freeze membership once so later range-checks can’t delete notes ---- */
+            const refs  = notesInsidePattern(pat);                 // [{trackIndex, noteIndex}, …]
+            if (!refs.length) return;
+    
+            /* utility ----------- */
+            const selectRefs = arr => {
                 selectedNotes.clear();
-                notesInsidePattern(pat).forEach(ref =>
-                    selectedNotes.add(JSON.stringify(ref))
-                );
+                arr.forEach(r => selectedNotes.add(JSON.stringify(r)));
             };
     
-            // Build the blandified topline (uses whatever currentRoot+scale are)
-            const buildInputSnippet = () => {
-                const pool = [];
-                notesInsidePattern(pat).forEach(r => {
-                    const n = rawTracksData[r.trackIndex]?.notes[r.noteIndex];
-                    if (n) pool.push({ ...n });
-                });
+            /* ------- blandified input (takes refs, uses current scale) --------------- */
+            const buildInputSnippet = (refsArr) => {
+                const pool = refsArr.map(r => ({ ...rawTracksData[r.trackIndex].notes[r.noteIndex] }));
                 if (!pool.length) return '';
     
                 const TPB   = window.ticksPerBeat || 480;
@@ -4464,7 +4462,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const first = Math.min(...pool.map(n => n.start_tick));
                 const q     = t => Math.round((t - first) / EIGHT) * EIGHT;
     
-                const pcs  = currentScalePitchClasses; // matches current key
+                const pcs  = currentScalePitchClasses;
                 const snap = p => {
                     if (pcs.has(p % 12)) return p;
                     for (let d = 1; d < 12; d++) {
@@ -4494,7 +4492,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
                 const vIdx = rawTracksData.length;
                 rawTracksData.push({
-                    name:          meta.name    || "Topline",
+                    name:          meta.name       || "Topline",
                     is_drum_track: !!meta.is_drum_track,
                     program:       meta.program,
                     instrument:    meta.instrument,
@@ -4502,10 +4500,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     notes:         Array.from(byPos.values())
                 });
     
-                selectedNotes.clear();
-                rawTracksData[vIdx].notes.forEach((_, ni) =>
-                    selectedNotes.add(JSON.stringify({ trackIndex: vIdx, noteIndex: ni }))
-                );
+                selectRefs( rawTracksData[vIdx].notes.map((_,ni)=>({trackIndex:vIdx,noteIndex:ni})) );
                 const body = generateAbcFromSelectionMultiVoice().trim();
     
                 rawTracksData.pop();
@@ -4514,52 +4509,63 @@ document.addEventListener('DOMContentLoaded', function () {
                 return body ? `<abc>\n${body}\n</abc>` : '';
             };
     
-            // Push one example for whatever the current key + notes are
-            const pushExample = (tSemis) => {
-                selectPat();
+            /* --------------- output / pushExample ----------------------------------- */
+            const pushExample = (tSemis, refsArr) => {
+                selectRefs(refsArr);
                 const out = generateAbcFromSelectionMultiVoice().trim();
                 selectedNotes.clear();
-                if (!out) return;
+                if (!out) {
+                    console.warn(`Epicify[${safeName} pc=${tSemis}]: no output ABC.`);
+                    return;
+                }
     
-                const inp = buildInputSnippet();
-                if (!inp) return;
+                const inp = buildInputSnippet(refsArr);
+                if (!inp) {
+                    console.warn(`Epicify[${safeName} pc=${tSemis}]: no input ABC.`);
+                    return;
+                }
+    
+                const id =
+                  `${safeName}_t${String(tSemis).padStart(2,'0')}_k${selectedRootNote}_${selectedScaleType}`;
     
                 examples.push({
-                    id:        `${safeName}_t${tSemis}_k${selectedRootNote}_${selectedScaleType}_${id++}`,
-                    function:  "Epicify",
+                    id,
+                    function : "Epicify",
                     transpose: tSemis,
-                    input:     inp,
-                    output:    `<abc>\n${out}\n</abc>`
+                    input    : inp,
+                    output   : `<abc>\n${out}\n</abc>`
                 });
             };
     
-            // — original (no transpose) —
+            /* --------------- ORIGINAL ------------------------------------------------ */
             updateCurrentScaleNotes();
-            pushExample(0);
+            pushExample(0, refs);
     
-            // — augmented transpositions (skip drums) —
+            /* --------------- TRANSPOSITIONS ----------------------------------------- */
             if (augmentTranspose && !allDrum) {
                 const origRoot = selectedRootNote;
-                // capture refs + their original pitches
-                const refs  = notesInsidePattern(pat).map(r => JSON.parse(JSON.stringify(r)));
-                const saved = refs.map(r => rawTracksData[r.trackIndex].notes[r.noteIndex].pitch);
+                const saved    = refs.map(r => rawTracksData[r.trackIndex].notes[r.noteIndex].pitch);
     
                 try {
                     for (let t = 1; t < 12; t++) {
-                        // 1) transpose the actual notes
+    
+                        /* 1) shift every note, wrapping if we hit ABC or MIDI limits */
                         refs.forEach((r,i) => {
-                            rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = saved[i] + t;
+                            let p = saved[i] + t;
+                            if (p > 127) p -= 12;
+                            if (p < 0)   p += 12;
+                            rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = p;
                         });
     
-                        // 2) shift the key & refresh scale
+                        /* 2) shift the key / scale */
                         selectedRootNote = (origRoot + t) % 12;
                         updateCurrentScaleNotes();
     
-                        // 3) emit example
-                        pushExample(t);
+                        /* 3) save example */
+                        pushExample(t, refs);
                     }
                 } finally {
-                    // ALWAYS restore
+                    /* restore */
                     refs.forEach((r,i) => {
                         rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = saved[i];
                     });
@@ -4571,6 +4577,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
         return examples;
     }
+    
+    
+    
+    
     
     
     
