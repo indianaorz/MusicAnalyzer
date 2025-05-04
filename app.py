@@ -84,103 +84,107 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+import os
+import mido
+from mido.midifiles.units import tempo2bpm
+from flask import flash, current_app
 
+# def get_instrument_name(program_number): ...
 
 
 def parse_midi(filepath):
     """
-    Parses a MIDI file and extracts detailed track data including instrument,
-    drum track flag, and time signature.
+    Return:
+        tracks_data, ticks_per_beat, ts_num, ts_den, bpm
+    or a series of Nones on failure.
     """
     try:
         mid = mido.MidiFile(filepath)
-        ticks_per_beat = mid.ticks_per_beat if mid.ticks_per_beat else 480
-        tracks_data = []
+    except (OSError, IOError, EOFError, ValueError) as e:
+        current_app.logger.error(f"Unable to read MIDI '{filepath}': {e}")
+        flash(f"Could not read MIDI file '{os.path.basename(filepath)}'. "
+              "It might be corrupted or not a valid MIDI file.")
+        return None, None, None, None, None
 
-        # --- NEW: Time Signature Extraction ---
-        time_sig_numerator = 4  # Default
-        time_sig_denominator = 4 # Default
-        time_sig_found = False
-        # Often in track 0, but check all tracks just in case
-        for track in mid.tracks:
-            for msg in track:
-                if msg.is_meta and msg.type == 'time_signature':
-                    time_sig_numerator = msg.numerator
-                    time_sig_denominator = msg.denominator
-                    # We typically only care about the first time signature
-                    time_sig_found = True
-                    break # Stop checking messages in this track
-            if time_sig_found:
-                break # Stop checking other tracks
-        app.logger.info(f"Detected Time Signature: {time_sig_numerator}/{time_sig_denominator}")
-        # --- END NEW ---
+    ticks_per_beat = mid.ticks_per_beat or 480
 
+    # ── Time‑signature (first one found) ────────────────────────────────
+    ts_num, ts_den = 4, 4
+    for tr in mid.tracks:
+        for msg in tr:
+            if msg.is_meta and msg.type == "time_signature":
+                ts_num, ts_den = msg.numerator, msg.denominator
+                break
+        else:
+            continue
+        break
+    current_app.logger.info(f"Time signature: {ts_num}/{ts_den}")
 
-        for i, track in enumerate(mid.tracks):
-            current_time_ticks = 0
-            notes_on = {}
-            processed_notes = []
-            track_name = f"Track {i}"
-            instrument_name = "Unknown"
-            program_number = None
-            is_drum_track = False
+    # ── Tempo (µs per quarter → BPM) ───────────────────────────────────
+    bpm = 120
+    for tr in mid.tracks:
+        for msg in tr:
+            if msg.is_meta and msg.type == "set_tempo":
+                bpm = int(tempo2bpm(msg.tempo))
+                break
+        else:
+            continue
+        break
+    current_app.logger.info(f"Tempo: {bpm} BPM")
 
-            # Pass 1: Get track name, first program change, and check for drum channel
-            temp_program_found = False
-            for msg in track:
-                if not msg.is_meta:
-                    if msg.channel == 9: # Channel 10 (0-indexed) is standard for drums
-                        is_drum_track = True
+    # ── Track & note extraction ────────────────────────────────────────
+    tracks_data = []
+    for i, track in enumerate(mid.tracks):
+        is_drum      = False
+        program_no   = None
+        instrument   = "Unknown"
+        track_name   = f"Track {i}"
 
-                if msg.type == 'program_change' and not temp_program_found:
-                    program_number = msg.program
-                    instrument_name = get_instrument_name(program_number)
-                    temp_program_found = True
-                elif msg.type == 'track_name':
-                    track_name = msg.name
+        # pass 1 – meta info
+        for msg in track:
+            if not msg.is_meta and msg.channel == 9:
+                is_drum = True
+            if msg.type == "program_change" and program_no is None:
+                program_no = msg.program
+                instrument = get_instrument_name(program_no)
+            elif msg.type == "track_name":
+                track_name = msg.name
 
-            if is_drum_track and program_number is None:
-                instrument_name = "Drums"
+        if is_drum and program_no is None:
+            instrument = "Drums"
 
-            # Pass 2: Process notes
-            current_time_ticks = 0
-            for msg in track:
-                current_time_ticks += msg.time
-                if msg.type == 'note_on' and msg.velocity > 0:
-                    notes_on[msg.note] = { 'start_tick': current_time_ticks, 'velocity': msg.velocity }
-                elif msg.type == 'note_off' or (msg.type == 'note_on' and msg.velocity == 0):
-                    if msg.note in notes_on:
-                        start_info = notes_on[msg.note]
-                        duration_ticks = current_time_ticks - start_info['start_tick']
-                        if duration_ticks >= 0: # Allow zero duration notes if needed
-                             processed_notes.append({
-                                 'pitch': msg.note, 'start_tick': start_info['start_tick'],
-                                 'duration_ticks': duration_ticks, 'velocity': start_info['velocity']
-                             })
-                        del notes_on[msg.note]
+        # pass 2 – notes
+        cur_tick = 0
+        notes_on = {}
+        notes    = []
 
-            if processed_notes:
-                 tracks_data.append({
-                     'track_index': i,
-                     'name': track_name,
-                     'instrument': instrument_name,
-                     'notes': processed_notes,
-                     'is_drum_track': is_drum_track
-                 })
+        for msg in track:
+            cur_tick += msg.time
+            if msg.type == "note_on" and msg.velocity > 0:
+                notes_on[msg.note] = {"start_tick": cur_tick,
+                                      "velocity":   msg.velocity}
+            elif msg.type in ("note_off", "note_on") and msg.velocity == 0:
+                start = notes_on.pop(msg.note, None)
+                if start:
+                    dur = cur_tick - start["start_tick"]
+                    if dur >= 0:
+                        notes.append({
+                            "pitch":          msg.note,
+                            "start_tick":     start["start_tick"],
+                            "duration_ticks": dur,
+                            "velocity":       start["velocity"],
+                        })
 
-        # --- MODIFIED RETURN ---
-        return tracks_data, ticks_per_beat, time_sig_numerator, time_sig_denominator
+        if notes:
+            tracks_data.append({
+                "track_index":   i,
+                "name":          track_name,
+                "instrument":    instrument,
+                "notes":         notes,
+                "is_drum_track": is_drum,
+            })
 
-    except mido.ParserError as e:
-        app.logger.error(f"Mido ParserError for file {filepath}: {e}")
-        flash(f"Error parsing MIDI file '{os.path.basename(filepath)}'. It might be corrupted or not a valid MIDI file.")
-        # --- MODIFIED RETURN ---
-        return None, None, None, None
-    except Exception as e:
-        app.logger.error(f"Error processing MIDI file {filepath}: {e}", exc_info=True)
-        flash("An unexpected error occurred while processing the MIDI file.")
-        # --- MODIFIED RETURN ---
-        return None, None, None, None
+    return tracks_data, ticks_per_beat, ts_num, ts_den, bpm
 
 # --- Routes ---
 
@@ -202,7 +206,7 @@ def view_file(filename):
     song_title = Path(safe_filename).stem
 
     # --- MODIFIED CALL ---
-    tracks_data, ticks_per_beat, ts_num, ts_den = parse_midi(filepath)
+    tracks_data, ticks_per_beat, ts_num, ts_den,bpm = parse_midi(filepath)
 
     # --- MODIFIED CHECK ---
     if tracks_data is None: # This implies an error occurred during parsing
@@ -225,6 +229,9 @@ def view_file(filename):
     if os.path.exists(settings_path):
         with open(settings_path) as f:
             initial_settings = json.load(f)
+
+    # ensure BPM is in the saved settings
+    initial_settings['bpm'] = bpm
 
     # --- PASS NEW DATA TO TEMPLATE ---
     return render_template('results.html',
@@ -578,28 +585,27 @@ def render_abc():
     Returns 200 JSON { rendered: true, output: "/abs/path/to/file.wav" }
     on success, or a 4xx/5xx error with a message on failure.
     """
-    # Parse and validate input
     data = request.get_json(force=True) or {}
     abc = data.get("abc", "").strip()
     ofname = Path(data.get("outfile", "output.wav")).name
     if not abc:
         abort(400, "No ABC passed")
 
-    # Create temporary ABC file
+    print(data)
+
+    # Write ABC to temp file
     with tempfile.NamedTemporaryFile(delete=False, suffix='.abc') as tmp_abc:
         tmp_abc.write(abc.encode('utf-8'))
         tmp_abc_path = tmp_abc.name
 
-    # Create temporary MIDI file path
+    # Generate temp MIDI path
     tmp_mid_path = tempfile.mktemp(suffix='.mid')
 
-    # Convert ABC to MIDI using abc2midi
+    # Convert ABC to MIDI
     try:
         result = subprocess.run(
             ['abc2midi', tmp_abc_path, '-o', tmp_mid_path],
-            check=True,
-            capture_output=True,
-            text=True
+            check=True, capture_output=True, text=True
         )
         if result.stderr:
             current_app.logger.info(f"abc2midi stderr: {result.stderr}")
@@ -614,18 +620,28 @@ def render_abc():
     out_wav = (RENDER_ROOT / ofname).resolve()
     out_wav.parent.mkdir(parents=True, exist_ok=True)
 
-    # Render MIDI to WAV
+    # Render MIDI to WAV and normalize
     try:
         midi_to_wav(tmp_mid_path, str(out_wav))
+        # Normalize using FFmpeg loudnorm
+        tmp_norm = out_wav.with_suffix('.normalized.wav')
+        ffmpeg_cmd = [
+            'ffmpeg', '-y', '-i', str(out_wav),
+            '-af', 'loudnorm', '-ar', '44100', str(tmp_norm)
+        ]
+        result = subprocess.run(ffmpeg_cmd, check=True, capture_output=True, text=True)
+        if result.stderr:
+            current_app.logger.info(f"ffmpeg stderr: {result.stderr}")
+        # Replace original with normalized
+        os.replace(tmp_norm, str(out_wav))
     except subprocess.CalledProcessError as e:
         os.unlink(tmp_mid_path)
-        current_app.logger.error(f"FluidSynth failed: {e.stderr}")
-        abort(500, f"Rendering to WAV failed: {e.stderr}")
+        current_app.logger.error(f"FFmpeg normalization failed: {e.stderr}")
+        abort(500, f"WAV processing failed: {e.stderr}")
     finally:
         os.unlink(tmp_mid_path)
 
     return jsonify({"rendered": True, "output": str(out_wav)})
-
 
 # ------------------------------------------------------------------
 # helpers.py  (or inline in app.py if you prefer)

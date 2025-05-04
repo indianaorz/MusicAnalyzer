@@ -2380,6 +2380,8 @@ document.addEventListener('DOMContentLoaded', function () {
         scaleRootSelect.value = selectedRootNote = init.root;
         scaleTypeSelect.value = selectedScaleType = init.scale;
 
+        window.currentBpm = init.bpm || 120;   // default if missing
+
         // now the title:
         const titleInput = document.getElementById('song-title');
         if (init.title) {
@@ -2465,6 +2467,25 @@ document.addEventListener('DOMContentLoaded', function () {
         // collapse every node on startup
         collapsed = new Set(patterns.keys());
         rebuildPatternTree();          // paint the sidebar
+
+
+        // Ensure the root pattern knows about every instrument
+        const rootPat = patterns.get(ROOT_ID);
+        if (!Array.isArray(rootPat.instruments) || rootPat.instruments.length === 0) {
+            // give it every track index in the file
+            rootPat.instruments = rawTracksData.map((_, idx) => idx);
+        }
+        // ensure root covers the entire song
+        const songEndTick = contentWidthTicks;  // set by calculateContentDimensions()
+        rootPat.range.start = 0;
+        rootPat.range.end = songEndTick;
+        rootPat.range.low = PITCH_MIN;
+        rootPat.range.high = PITCH_MAX;
+
+
+
+
+
         queueSave();                   // make sure root.range gets saved
 
 
@@ -3448,7 +3469,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     function makeAbc(notes, ttl) {
         const L = 16, num = 4, den = 4, barT = num / den * 4 * TPB;
-        const head = `X:1\nT:${ttl}\nM:${num}/${den}\nL:1/${L}\nK:Cmaj\n[V:1] `;
+        const currentBpm = window.currentBpm || 120;
+
+        const head = `X:1\nT:${ttl}\nM:${num}/${den}\nQ:${currentBpm}\nL:1/${L}\nK:Cmaj\n[V:1] `;
         let abc = '', t = 0, inBar = 0;
         notes.forEach(n => {
             if (n.start_tick > t) {
@@ -3513,7 +3536,8 @@ document.addEventListener('DOMContentLoaded', function () {
         /* 1) collect refs – strict start‑inside test */
         const refs = [];
         rawTracksData.forEach((trk, ti) => {
-            if (pat.instruments && !pat.instruments.includes(ti)) return;
+            //and not root
+            if (pat.instruments && !pat.instruments.includes(ti) && !pat.root) return;
             trk.notes.forEach((n, ni) => {
                 if (n.start_tick >= pat.range.start && n.start_tick < pat.range.end) {
                     refs.push({ trackIndex: ti, noteIndex: ni });
@@ -3577,67 +3601,62 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Shift + L
+        // Shift + L: render ABC for root and its first two levels of patterns
         if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'l') {
-            var ev = event;
-            ev.preventDefault();
+            event.preventDefault();
 
-            // flatten your Map → an Array of Pattern objects
-            let allPatterns = Array.from(patterns.values());
+            // 1) Gather all non-repetition patterns
+            const allPatterns = Array.from(patterns.values()).filter(p => !p.isRepetition);
 
-            //remove patterns which are repeats
-            allPatterns = allPatterns.filter(p => !p.isRepeat);
-
-
+            // 2) Find the root pattern (parentId === null)
             const root = allPatterns.find(p => p.parentId === null);
             if (!root) {
                 console.warn('No root pattern found – nothing to render.');
                 return;
             }
 
-            // 2) first‑level children
-            const firstLevelIds = root.children || [];
+            // 3) Collect first‐ and second‐level descendant IDs
+            const firstLevel = root.children || [];
+            const secondLevel = firstLevel.flatMap(id => patterns.get(id)?.children || []);
+            const allowed = new Set([root.id, ...firstLevel, ...secondLevel]);
 
-            // 3) grandchildren
-            const secondLevelIds = firstLevelIds
-                .flatMap(id => (patterns.get(id)?.children || []));
-
-            // 4) make a Set of allowed IDs
-            const allowed = new Set([
-                root.id,
-                ...firstLevelIds,
-                ...secondLevelIds
-            ]);
-
-
-            // helper: breadcrumb “/” → “-”
-            const dashPath = id => breadcrumbFor(id).replace(/\s*\/\s*/g, '-');
-
-
-            // build one job **per pattern** only
+            // 4) Build jobs including instrument counts
             const jobs = allPatterns
-                .filter(p => allowed.has(p.id) && !p.isRepeat)
-                .map(p => ({
-                    outfile: `${dashPath(p.id)}.wav`,
-                    abc: abcForPatternNoAbc(p)          // reuse helper from collectMotif…
-                }));
-
-            try {
-                //loop
-                for (const job of jobs) {
-                    const res = await fetch('/render_abc', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(job)    // send one at a time or loop
+                .filter(p => allowed.has(p.id))
+                .map(p => {
+                    const counts = {};
+                    if (!p.instruments || p.instruments.length === 0) {
+                        console.warn(`Pattern ${p.id} has no instruments defined, skipping.`);
+                        return null; // Skip patterns without instruments
+                    }
+                    p.instruments.forEach(ti => {
+                        const name = isDrumTrack(ti)
+                            ? 'percussion'
+                            : getTrackInstrumentName(rawTracksData[ti], ti);
+                        counts[name] = (counts[name] || 0) + 1;
                     });
-                }
-                // if (!res.ok) throw new Error(await res.text());
-                // alert(`Queued ${jobs.length} pattern renders – check the “renders/” folder!`);
-            } catch (err) {
-                console.error('Render‑queue failed:', err);
-                // alert('⚠️ Couldn’t queue the renders – see console.');
+                    const instrList = Object.entries(counts)
+                        .map(([n, c]) => c > 1 ? `${n} ${c}` : n)
+                        .join(', ');
+
+                    const dashPath = id => breadcrumbFor(id).replace(/\s*\/\s*/g, '-');
+                    const filename = `${dashPath(p.id)}, [${instrList}].wav`;
+                    return {
+                        outfile: filename,
+                        abc: abcForPatternNoAbc(p)
+                    };
+                });
+
+            // 5) Send each job to the server
+            for (const job of jobs) {
+                await fetch('/render_abc', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(job)
+                });
             }
         }
+
 
         // Shift + G  (ignore repeats)
         if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'g') {
@@ -4328,31 +4347,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function generateAbcFromSelectionMultiVoice(trackName = "Multi-Track Snippet") {
         if (selectedNotes.size === 0) return "";
-
+    
         const TPB = window.ticksPerBeat || 480;
         const sixteenth = TPB / 4;
         const q = v => Math.round(v / sixteenth) * sixteenth;
-
+    
         // Group and quantize notes by track
         const byTrack = new Map();
         selectedNotes.forEach(k => {
             const { trackIndex, noteIndex } = JSON.parse(k);
             const raw = rawTracksData[trackIndex]?.notes[noteIndex];
             if (!raw || raw.duration_ticks <= 0) return;
-
-            // quantize and clamp negative starts
+    
+            // Quantize and clamp negative starts
             const rawStart = q(raw.start_tick);
             const start = Math.max(0, rawStart);
             const dur = Math.max(sixteenth, q(raw.duration_ticks));
-
+    
             if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
             byTrack.get(trackIndex).push({ ...raw, start, dur });
         });
         if (!byTrack.size) return "";
-
-        // Get sorted unique track indices
-        const selectedTrackIndices = [...new Set(Array.from(selectedNotes).map(k => JSON.parse(k).trackIndex))].sort((a, b) => a - b);
-
+    
+        // Get unique track indices
+        const allTracks = [...new Set(
+            Array.from(selectedNotes).map(k => JSON.parse(k).trackIndex)
+        )];
+    
+        // Split into drums vs. non-drums
+        const drumTracks = allTracks.filter(ti => isDrumTrack(ti)).sort((a, b) => a - b);
+        const nonDrumTracks = allTracks.filter(ti => !isDrumTrack(ti)).sort((a, b) => a - b);
+    
+        // Final ordering: all drums first, then the rest
+        const selectedTrackIndices = [...drumTracks, ...nonDrumTracks];
+    
         // Header setup
         const num = window.timeSignatureNumerator || 4;
         const den = window.timeSignatureDenominator || 4;
@@ -4361,48 +4389,54 @@ document.addEventListener('DOMContentLoaded', function () {
         const isMin = selectedScaleType.toLowerCase().includes('min');
         const keyName = root + (isMin ? 'min' : 'maj');
         const ticksPerBar = TPB * (4 / den) * num;
-
-        let abc = `X:1\nT:${trackName}\nM:${num}/${den}\nL:1/${L}\nK:${keyName}\n`;
-
+        const currentBpm = window.currentBpm || 120;
+    
+        let abc = `X:1\nT:${trackName}\nM:${num}/${den}\nQ:${currentBpm}\nL:1/${L}\nK:${keyName}\n`;
+    
         // Add %%score directive
         const voiceLabels = selectedTrackIndices.map((_, index) => `V${index + 1}`);
         abc += `%%score (${voiceLabels.join(' ')})\n`;
-
+    
+        // Initialize channel counter for non-drum tracks
+        let channelCounter = 1;
+    
         // Generate ABC for each voice
-        selectedTrackIndices.forEach((trackIdx, index) => {
-            const vno = index + 1;
+        selectedTrackIndices.forEach((trackIdx, adjustedIndex) => {
+            // Use adjustedIndex for voice numbering to match %%score directive
+            const vno = adjustedIndex + 1;
             const notes = byTrack.get(trackIdx);
             if (!notes || notes.length === 0) return;
             notes.sort((a, b) => a.start !== b.start ? a.start - b.start : a.pitch - b.pitch);
-
+    
             const tr = rawTracksData[trackIdx];
             let nm = getTrackInstrumentName(tr, trackIdx);
             const snm = tr.short_name || nm;
             const clef = tr.clef || 'treble';
             const isDrum = isDrumTrack(trackIdx);
             const perc = isDrum ? ' perc=yes' : '';
-
+    
             // Adjust instrument name if needed
             nm = nm.replace("Synth ", 'Synth');
-            //replace SynthBass with Synth Bass
             nm = nm.replace("SynthBass", 'Synth Bass');
             const program = isDrum ? null : (MELODY_NAME_TO_PROGRAM[nm] || 0);
-
+    
             // Voice definition
             abc += `V:${vno} name="${nm}" snm="${snm}" clef=${clef}${perc}\n`;
-
-            // Add %%MIDI program for non-drum tracks
-            if (!isDrum) {
+    
+            // Assign MIDI channel
+            if (isDrum) {
+                abc += `%%MIDI channel 10\n`; // Drums always on channel 10
+            } else {
                 abc += `%%MIDI program ${program}\n`;
-                abc += `%%MIDI channel ${0}\n`;
+                abc += `%%MIDI channel ${channelCounter}\n`;
+                channelCounter++; // Increment for the next non-drum track
+                if (channelCounter === 10) channelCounter++; // Skip channel 10
+                if (channelCounter > 16) channelCounter = 1; // Wrap around if necessary
             }
-            else {
-                abc += `%%MIDI channel ${10}\n`; // Use track index for drums
-            }
-
+    
             // Inline voice identifier
             abc += `[V:${vno}] `;
-
+    
             // Notation generation
             let now = 0;
             let inBar = 0;
@@ -4410,7 +4444,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const keyAcc = getKeyAccidentals(root, isMin);
             const durStr = t => ticksToAbcDuration(t, TPB * (4 / L));
             const isPercussion = isDrum;
-
+    
             let i = 0;
             while (i < notes.length) {
                 const n = notes[i];
@@ -4445,12 +4479,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             abc = abc.trimEnd() + ' |]\n';
         });
-
-        // after you finish building `abc` and before you return it:
-        const unitsPerBar = /* same as you used when building */ (num * L) / den;
+    
+        // Trim common bar rests
+        const unitsPerBar = (num * L) / den;
         abc = trimCommonBarRests(abc, unitsPerBar);
-        return abc.trim();
-
         return abc.trim();
     }
 
