@@ -43,6 +43,17 @@
                     <option value="none">None</option>
                 </select>
             </span>
+            <!-- NEW: Editable song title -->
+            <span class="control-group">
+                <label for="song-title">Title:</label>
+                <input
+                  type="text"
+                  id="song-title"
+                  value="{{ initial_settings.title 
+                             or filename.rsplit('.',1)[0] }}"
+                />
+              </span>
+              
             <span class="header-info-static">
                 File: <strong>{{ filename }}</strong> | Ticks/Beat: {{ ticks_per_beat }}
             </span>

@@ -837,12 +837,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     function saveSettings() {
         const harmonyFlags = trackStates.map(s => s.isHarmony);
+        const title = document.getElementById('song-title').value.trim();
         const body = JSON.stringify({
+            title,                            // ← newly persisted
             root: selectedRootNote,
             scale: selectedScaleType,
             copyMode,
             snapMode,
-            harmony: harmonyFlags,        // ← new
+            harmony: harmonyFlags,
             patterns: [...patterns.values()]
         });
         fetch(`/settings/${encodeURIComponent(SETTINGS_FILE)}`, {
@@ -2377,6 +2379,19 @@ document.addEventListener('DOMContentLoaded', function () {
         scaleRootSelect.value = selectedRootNote = init.root;
         scaleRootSelect.value = selectedRootNote = init.root;
         scaleTypeSelect.value = selectedScaleType = init.scale;
+
+        // now the title:
+        const titleInput = document.getElementById('song-title');
+        if (init.title) {
+            titleInput.value = init.title;
+        } else {
+            // keep the default (filename) as-is
+        }
+
+        // Optionally also update the page’s <title> tag:
+        document.title = titleInput.value + ' - Piano Roll';
+
+
         document.getElementById('copy-mode-select').value = copyMode = init.copyMode;
         document.getElementById('snap-mode-select').value = snapMode = init.snapMode;
         updateCurrentScaleNotes();
@@ -3279,6 +3294,248 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /* --- simple helpers ------------------------------------------------ */
+    const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+    const TPB = window.ticksPerBeat || 480;
+    const BAR = ticksPerMeasure;
+    const DIV = TPB / 4;                         // 16-note grid
+    const CMAJ = [0, 2, 4, 5, 7, 9, 11];             // seed palette
+    /* current key helpers (fall back to Cmaj if globals absent) */
+    const KEY_PC = (typeof selectedRootNote === 'number') ? selectedRootNote : 0;
+    const SCALE_PCS = (typeof currentScalePitchClasses === 'object' && currentScalePitchClasses.size)
+        ? [...currentScalePitchClasses] : CMAJ;
+    const BLUES_OFFSETS = [-3, -1, 2];           // ♭3  ♭5 (-1)  ♭7 (+2)
+
+    /*– seed builder –––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    function blandSeeds() {
+        const spans = [1, 1, 2, 2, 4, 4, 8, 8].map(b => b * BAR);
+        return spans.map((span, i) => {
+            const notes = [];
+            for (let t = 0; t < span; t += DIV * 4) {                // eighth grid
+                if (Math.random() < .3) continue;             // insert rest slot
+                const pc = rand(CMAJ);
+                notes.push({ pitch: 60 + pc, start_tick: t, duration_ticks: DIV * 4, velocity: 100 });
+            }
+            return { id: `seed${i}`, span, notes };
+        });
+    }
+
+    /*– scale-aware safe-snapping –––––––––––––––––––––––––––––––––––––––––*/
+    const IN_SCALE = pc => SCALE_PCS.includes((pc + 12) % 12);
+    const SNAP = p => {
+        if (IN_SCALE(p)) return p;
+        for (let d = 1; d < 6; d++) { if (IN_SCALE(p + d)) return p + d; if (IN_SCALE(p - d)) return p - d; }
+        return p;            // should not happen
+    };
+    function keepInKey(arr) { arr.forEach(n => n.pitch = SNAP(n.pitch)); }
+
+    /*– gadgets –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    function syncopate(l) { l.notes.forEach((n, i) => { if (i % 2) n.start_tick = Math.max(0, n.start_tick - TPB / 2); }); }
+
+    function anticipation(l) {
+        const add = [];
+        l.notes.forEach(n => {
+            const lead = { ...n, start_tick: Math.max(0, n.start_tick - DIV), duration_ticks: DIV, velocity: 70 };
+            add.push(lead);
+        });
+        l.notes.push(...add);
+    }
+
+    function neighbour(l) {
+        l.notes.forEach(n => {
+            const dir = Math.random() < .5 ? -1 : +1;
+            const neo = {
+                ...n, start_tick: n.start_tick + n.duration_ticks / 2,
+                pitch: SNAP(n.pitch + dir), duration_ticks: n.duration_ticks / 2
+            };
+            n.duration_ticks /= 2; l.notes.push(neo);
+        });
+    }
+
+    function intervals(l) {
+        l.notes.forEach(n => {
+            const offs = rand([3, 4, 5, 7, 9]);                 // diatonic 3rd/4th/6th
+            const h = { ...n, pitch: SNAP(n.pitch + offs), velocity: n.velocity - 15 };
+            l.notes.push(h);
+        });
+    }
+
+    function pitchShift(l) {
+        const d = rand([1, 2, 3, -1, -2, -3]);
+        l.notes.forEach(n => n.pitch = SNAP(n.pitch + d));
+    }
+
+    /*  Arpeggio v2  – random direction & repeated pattern  */
+    function arpeggio(line) {
+        const { span } = line;                               // total length in ticks
+        if (!span) return;
+
+        /* pick a 3-note pattern in *either* direction */
+        const UP = [0, 4, 7];         // root-3rd-5th
+        const DOWN = [0, -4, -7];          // root-♭3rd-♭5th (mirror)
+        const PAT = Math.random() < .5 ? UP : DOWN;
+        const patLen = PAT.length;
+
+        /* make a shallow copy – we’ll iterate over the *original*
+           notes only, then push repeats into `line.notes`         */
+        const originals = [...line.notes];
+
+        originals.forEach(n => {
+            /* how many extra steps fit inside the remaining span?   */
+            const space = span - n.start_tick;
+            const steps = Math.floor(space / DIV);                 // DIV = 16-th grid
+
+            for (let i = 1; i < steps; i++) {
+                const idx = i % patLen;               // loop through pattern
+                const off = PAT[idx];
+                const newNote = {
+                    ...n,
+                    pitch: SNAP(n.pitch + off),           // stay in key
+                    start_tick: n.start_tick + i * DIV,
+                    duration_ticks: Math.max(DIV, n.duration_ticks / 2),
+                    velocity: n.velocity - 12           // slightly lighter
+                };
+                line.notes.push(newNote);
+            }
+            /* root note becomes a short “kick-off” too */
+            n.duration_ticks = Math.max(DIV, n.duration_ticks / 2);
+        });
+    }
+
+
+    function bluesNote(l) {
+        l.notes.forEach(n => {
+            if (Math.random() < 0.15) {                    // sparse 15 %
+                const off = rand(BLUES_OFFSETS);
+                n.pitch = SNAP(n.pitch + off);               // no wrap
+            }
+        });
+    }
+
+    const GADGETS = [
+        { name: 'sync', fn: syncopate },
+        { name: 'ant', fn: anticipation },
+        { name: 'neib', fn: neighbour },
+        { name: 'intv', fn: intervals },
+        { name: 'shift', fn: pitchShift },
+        { name: 'arp', fn: arpeggio },
+        { name: 'blue', fn: bluesNote }
+    ];
+
+    /*– clip & tidy –––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    function normalise(line, span) {
+        /* remove notes beyond span, shorten tails */
+        line.notes = line.notes.filter(n => n.start_tick < span);
+        line.notes.forEach(n => {
+            if (n.start_tick + n.duration_ticks > span)
+                n.duration_ticks = Math.max(DIV, n.duration_ticks - (n.start_tick + n.duration_ticks - span));
+        });
+        keepInKey(line.notes);
+        line.notes.sort((a, b) => a.start_tick - b.start_tick || a.pitch - b.pitch);
+    }
+
+    /*– ABC encoder –––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    const pcMap = ['C', '^C', 'D', '^D', 'E', 'F', '^F', 'G', '^G', 'A', '^A', 'B'];
+    function basicAbc(p) {
+        const pc = pcMap[(p + 120) % 12], oct = Math.floor(p / 12) - 1;
+        return (oct >= 5 ? pc.toLowerCase() + "'".repeat(oct - 5) : pc.toUpperCase() + ",".repeat(4 - oct));
+    }
+    function noteAbc(p) {
+        return (typeof midiPitchToAbcNote === 'function')
+            ? midiPitchToAbcNote(p, { sharps: new Set(), flats: new Set(), preferFlats: false }, {})
+            : basicAbc(p);
+    }
+    function makeAbc(notes, ttl) {
+        const L = 16, num = 4, den = 4, barT = num / den * 4 * TPB;
+        const head = `X:1\nT:${ttl}\nM:${num}/${den}\nL:1/${L}\nK:Cmaj\n[V:1] `;
+        let abc = '', t = 0, inBar = 0;
+        notes.forEach(n => {
+            if (n.start_tick > t) {
+                const rest = n.start_tick - t; abc += `z${rest / DIV} `; t += rest; inBar += rest;
+            }
+            abc += `${noteAbc(n.pitch)}${n.duration_ticks / DIV} `; t += n.duration_ticks; inBar += n.duration_ticks;
+            while (inBar >= barT) { abc += '| '; inBar -= barT; }
+        });
+        return head + abc.trim() + ' |]';
+    }
+
+    /*– dataset builder –––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    function dataset() {
+        const out = [];
+        blandSeeds().forEach(seed => {
+            const base = [...seed.notes.map(o => ({ ...o }))];
+            const bland = makeAbc(base, 'Bland');
+            /* combos */
+            const combos = [];
+            GADGETS.forEach(g => { for (let i = 0; i < 2; i++) combos.push([g]); });     // singles
+            for (let i = 0; i < 3; i++) combos.push([rand(GADGETS), rand(GADGETS)]);  // double
+            for (let i = 0; i < 2; i++) combos.push([rand(GADGETS), rand(GADGETS), rand(GADGETS)]);
+            combos.forEach(stk => {
+                const line = { notes: base.map(o => ({ ...o })) };
+                stk.forEach(g => g.fn(line));
+                normalise(line, seed.span);
+                const epic = makeAbc(line.notes, 'Epic');
+                out.push({
+                    id: uuid(),
+                    function: 'Epicify',
+                    transpose: 0,
+                    input: `<abc>\n${bland}\n</abc>`,
+                    output: `<abc>\n${epic}\n</abc>`
+                });
+            });
+        });
+        return out;
+    }
+
+    /*– exporter –––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+    async function runSyntheticEpicifyExport() {
+        const examples = dataset();
+        try {
+            const r = await fetch('/dataset/epicify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ song_name: `synthetic_${Date.now()}`, examples })
+            });
+            if (!r.ok) throw new Error(await r.text());
+            alert(`Shift-G exported ${examples.length} examples ✅`);
+        } catch (e) { console.error(e); alert('Export failed – see console'); }
+    }
+
+
+    /**
+ * Return *raw* ABC for one pattern.
+* – includes only notes whose **start_tick** lies inside pat.range  
+ * – respects pat.instruments (so drum‑only patterns stay drum‑only)  
+ * – leaves the global `selectedNotes` exactly as it was on entry
+ */
+    function abcForPatternNoAbc(pat) {
+        /* 1) collect refs – strict start‑inside test */
+        const refs = [];
+        rawTracksData.forEach((trk, ti) => {
+            if (pat.instruments && !pat.instruments.includes(ti)) return;
+            trk.notes.forEach((n, ni) => {
+                if (n.start_tick >= pat.range.start && n.start_tick < pat.range.end) {
+                    refs.push({ trackIndex: ti, noteIndex: ni });
+                }
+            });
+        });
+        if (!refs.length) return '';            // nothing to export
+
+        /* 2) temporarily swap the global selection */
+        const prevSel = selectedNotes;
+        selectedNotes = new Set(refs.map(r => JSON.stringify(r)));
+
+        /* 3) build the snippet – breadcrumb makes a nice title */
+        const abcRaw = generateAbcFromSelectionMultiVoice(
+            breadcrumbFor(pat.id)          // title
+        ).trim();
+
+        /* 4) restore state and hand back the text */
+        selectedNotes = prevSel;
+        return abcRaw;
+    }
+
 
 
     function handleMouseLeaveCanvas(event) {
@@ -3290,8 +3547,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // If mouse leaves canvas but stays in window during interaction, mouseMove continues.
     }
 
+    //when we blur song title queue save
+    document.getElementById('song-title').addEventListener('blur', () => {
+        queueSave();
+    });
+
     // --- NEW: KeyDown Handler for Copy ---
-    function handleKeyDown(event) {
+    async function handleKeyDown(event) {
+
+        //if we're in the song title input, ignore all key events
+        if (document.activeElement === document.getElementById('song-title')) {
+            return;
+        }
+
+
         // —— Space: play/pause ——  
         if (event.code === 'Space') {
             event.preventDefault();
@@ -3305,6 +3574,75 @@ document.addEventListener('DOMContentLoaded', function () {
                 event.preventDefault();
                 blandifyToplineSelectionAndCopy();
             }
+            return;
+        }
+
+        // Shift + L
+        if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'l') {
+            var ev = event;
+            ev.preventDefault();
+
+            // flatten your Map → an Array of Pattern objects
+            let allPatterns = Array.from(patterns.values());
+
+            //remove patterns which are repeats
+            allPatterns = allPatterns.filter(p => !p.isRepeat);
+
+
+            const root = allPatterns.find(p => p.parentId === null);
+            if (!root) {
+                console.warn('No root pattern found – nothing to render.');
+                return;
+            }
+
+            // 2) first‑level children
+            const firstLevelIds = root.children || [];
+
+            // 3) grandchildren
+            const secondLevelIds = firstLevelIds
+                .flatMap(id => (patterns.get(id)?.children || []));
+
+            // 4) make a Set of allowed IDs
+            const allowed = new Set([
+                root.id,
+                ...firstLevelIds,
+                ...secondLevelIds
+            ]);
+
+
+            // helper: breadcrumb “/” → “-”
+            const dashPath = id => breadcrumbFor(id).replace(/\s*\/\s*/g, '-');
+
+
+            // build one job **per pattern** only
+            const jobs = allPatterns
+                .filter(p => allowed.has(p.id) && !p.isRepeat)
+                .map(p => ({
+                    outfile: `${dashPath(p.id)}.wav`,
+                    abc: abcForPatternNoAbc(p)          // reuse helper from collectMotif…
+                }));
+
+            try {
+                //loop
+                for (const job of jobs) {
+                    const res = await fetch('/render_abc', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(job)    // send one at a time or loop
+                    });
+                }
+                // if (!res.ok) throw new Error(await res.text());
+                // alert(`Queued ${jobs.length} pattern renders – check the “renders/” folder!`);
+            } catch (err) {
+                console.error('Render‑queue failed:', err);
+                // alert('⚠️ Couldn’t queue the renders – see console.');
+            }
+        }
+
+        // Shift + G  (ignore repeats)
+        if (!event.repeat && event.shiftKey && event.key.toLowerCase() === 'g') {
+            event.preventDefault();
+            runSyntheticEpicifyExport();
             return;
         }
 
@@ -4200,12 +4538,19 @@ document.addEventListener('DOMContentLoaded', function () {
             parts.push(p.name || '(unnamed)');
             p = patterns.get(p.parentId);
         }
-        // Use the song name instead of "Whole Song"
+
+        // if the last element is the default “Whole song” placeholder…
         if (parts[parts.length - 1] === 'Whole song') {
-            parts[parts.length - 1] = currentMidiFilename.replace(/\.[^.]+$/, ''); // Strips the file extension
+            // read the user’s edited title instead of stripping the filename
+            const titleInput = document.getElementById('song-title');
+            parts[parts.length - 1] = titleInput
+                ? titleInput.value.trim() || titleInput.defaultValue
+                : titleInput.defaultValue;
         }
+
         return parts.reverse().join(' / ');
     }
+
 
     /** Human-readable relation to its master pattern */
     function relationText(pat) {
@@ -4432,83 +4777,83 @@ document.addEventListener('DOMContentLoaded', function () {
      */
     function collectEpicifyExamples(augmentTranspose = true) {
         const examples = [];
-    
+
         patterns.forEach(pat => {
             if (pat.id === ROOT_ID) return;
-            const insts   = pat.instruments ?? [];
+            const insts = pat.instruments ?? [];
             const allDrum = insts.every(ti => rawTracksData[ti]?.is_drum_track);
             if (!(insts.length === 1 || allDrum)) return;
             if (pat.isRepetition) return;
-    
+
             const safeName = pat.name.replace(/[^\w\-]/g, '_');
-    
+
             /* ----- freeze membership once so later range-checks can’t delete notes ---- */
-            const refs  = notesInsidePattern(pat);                 // [{trackIndex, noteIndex}, …]
+            const refs = notesInsidePattern(pat);                 // [{trackIndex, noteIndex}, …]
             if (!refs.length) return;
-    
+
             /* utility ----------- */
             const selectRefs = arr => {
                 selectedNotes.clear();
                 arr.forEach(r => selectedNotes.add(JSON.stringify(r)));
             };
-    
+
             /* ------- blandified input (takes refs, uses current scale) --------------- */
             const buildInputSnippet = (refsArr) => {
                 const pool = refsArr.map(r => ({ ...rawTracksData[r.trackIndex].notes[r.noteIndex] }));
                 if (!pool.length) return '';
-    
-                const TPB   = window.ticksPerBeat || 480;
+
+                const TPB = window.ticksPerBeat || 480;
                 const EIGHT = TPB;
                 const first = Math.min(...pool.map(n => n.start_tick));
-                const q     = t => Math.round((t - first) / EIGHT) * EIGHT;
-    
-                const pcs  = currentScalePitchClasses;
+                const q = t => Math.round((t - first) / EIGHT) * EIGHT;
+
+                const pcs = currentScalePitchClasses;
                 const snap = p => {
                     if (pcs.has(p % 12)) return p;
                     for (let d = 1; d < 12; d++) {
                         const down = p - d, up = p + d;
-                        if (down >= 0  && pcs.has(down % 12)) return down;
-                        if (up   <=127 && pcs.has(up   % 12)) return up;
+                        if (down >= 0 && pcs.has(down % 12)) return down;
+                        if (up <= 127 && pcs.has(up % 12)) return up;
                     }
                     return p;
                 };
-    
+
                 const byPos = new Map();
                 pool.forEach(n => {
                     const rel = q(n.start_tick);
                     if (!byPos.has(rel) || n.pitch > byPos.get(rel).pitch) {
                         byPos.set(rel, {
-                            pitch          : snap(n.pitch),
-                            start_tick     : first + rel,
-                            duration_ticks : EIGHT,
-                            velocity       : n.velocity
+                            pitch: snap(n.pitch),
+                            start_tick: first + rel,
+                            duration_ticks: EIGHT,
+                            velocity: n.velocity
                         });
                     }
                 });
-    
+
                 const meta = allDrum
-                    ? { name:"Drums", is_drum_track:true, instrument:"Drums", clef:"percussion" }
+                    ? { name: "Drums", is_drum_track: true, instrument: "Drums", clef: "percussion" }
                     : rawTracksData[insts[0]];
-    
+
                 const vIdx = rawTracksData.length;
                 rawTracksData.push({
-                    name:          meta.name       || "Topline",
+                    name: meta.name || "Topline",
                     is_drum_track: !!meta.is_drum_track,
-                    program:       meta.program,
-                    instrument:    meta.instrument,
-                    clef:          meta.clef,
-                    notes:         Array.from(byPos.values())
+                    program: meta.program,
+                    instrument: meta.instrument,
+                    clef: meta.clef,
+                    notes: Array.from(byPos.values())
                 });
-    
-                selectRefs( rawTracksData[vIdx].notes.map((_,ni)=>({trackIndex:vIdx,noteIndex:ni})) );
+
+                selectRefs(rawTracksData[vIdx].notes.map((_, ni) => ({ trackIndex: vIdx, noteIndex: ni })));
                 const body = generateAbcFromSelectionMultiVoice().trim();
-    
+
                 rawTracksData.pop();
                 selectedNotes.clear();
-    
+
                 return body ? `<abc>\n${body}\n</abc>` : '';
             };
-    
+
             /* --------------- output / pushExample ----------------------------------- */
             const pushExample = (tSemis, refsArr) => {
                 selectRefs(refsArr);
@@ -4518,55 +4863,55 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.warn(`Epicify[${safeName} pc=${tSemis}]: no output ABC.`);
                     return;
                 }
-    
+
                 const inp = buildInputSnippet(refsArr);
                 if (!inp) {
                     console.warn(`Epicify[${safeName} pc=${tSemis}]: no input ABC.`);
                     return;
                 }
-    
+
                 const id =
-                  `${safeName}_t${String(tSemis).padStart(2,'0')}_k${selectedRootNote}_${selectedScaleType}`;
-    
+                    `${safeName}_t${String(tSemis).padStart(2, '0')}_k${selectedRootNote}_${selectedScaleType}`;
+
                 examples.push({
                     id,
-                    function : "Epicify",
+                    function: "Epicify",
                     transpose: tSemis,
-                    input    : inp,
-                    output   : `<abc>\n${out}\n</abc>`
+                    input: inp,
+                    output: `<abc>\n${out}\n</abc>`
                 });
             };
-    
+
             /* --------------- ORIGINAL ------------------------------------------------ */
             updateCurrentScaleNotes();
             pushExample(0, refs);
-    
+
             /* --------------- TRANSPOSITIONS ----------------------------------------- */
             if (augmentTranspose && !allDrum) {
                 const origRoot = selectedRootNote;
-                const saved    = refs.map(r => rawTracksData[r.trackIndex].notes[r.noteIndex].pitch);
-    
+                const saved = refs.map(r => rawTracksData[r.trackIndex].notes[r.noteIndex].pitch);
+
                 try {
                     for (let t = 1; t < 12; t++) {
-    
+
                         /* 1) shift every note, wrapping if we hit ABC or MIDI limits */
-                        refs.forEach((r,i) => {
+                        refs.forEach((r, i) => {
                             let p = saved[i] + t;
                             if (p > 127) p -= 12;
-                            if (p < 0)   p += 12;
+                            if (p < 0) p += 12;
                             rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = p;
                         });
-    
+
                         /* 2) shift the key / scale */
                         selectedRootNote = (origRoot + t) % 12;
                         updateCurrentScaleNotes();
-    
+
                         /* 3) save example */
                         pushExample(t, refs);
                     }
                 } finally {
                     /* restore */
-                    refs.forEach((r,i) => {
+                    refs.forEach((r, i) => {
                         rawTracksData[r.trackIndex].notes[r.noteIndex].pitch = saved[i];
                     });
                     selectedRootNote = origRoot;
@@ -4574,22 +4919,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
-    
+
         return examples;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 
 
 
+
+
+
+
+
+
+
+
+
+    const abcForPattern = pat => {
+        const remember = new Set(selectedNotes);
+        selectedNotes = new Set(
+            notesInsidePattern(pat).map(o => JSON.stringify(o))
+        );
+        const abcBody = generateAbcFromSelectionMultiVoice().trim();
+        selectedNotes = remember;
+        return `<abc>\n${abcBody}\n</abc>`;
+    };
 
     /**
    * Walks the variantOf‐graph and returns:
@@ -4602,15 +4956,7 @@ document.addEventListener('DOMContentLoaded', function () {
    */
     function collectMotifVariationExamples() {
         // helper: wrap a pattern's full selection in <abc>…</abc>
-        const abcForPattern = pat => {
-            const remember = new Set(selectedNotes);
-            selectedNotes = new Set(
-                notesInsidePattern(pat).map(o => JSON.stringify(o))
-            );
-            const abcBody = generateAbcFromSelectionMultiVoice().trim();
-            selectedNotes = remember;
-            return `<abc>\n${abcBody}\n</abc>`;
-        };
+
 
         // 1) Group by root motif (walking variantOf, with cycle‐protection)
         const familyMap = new Map();
