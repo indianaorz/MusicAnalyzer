@@ -1,0 +1,7 @@
+{
+  "id": "Resolve_t01_k5_minor",
+  "function": "Epicify",
+  "transpose": 1,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z6 e4 z4 f4 | B4 z8 c4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z6 e5 z f3 z B12 | z2 c16 | |]\n</abc>"
+}

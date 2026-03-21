@@ -1,0 +1,7 @@
+{
+  "id": "Pad_3__polysynth__t07_k11_minor",
+  "function": "Epicify",
+  "transpose": 7,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Bmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z4 d'4 c'4 d'4 | e'4 e'4 c'4 d'4 | c'4 z4 a4 z12 a4 | c'4 | c'4 d'4 b4 d'4 | c'4 z4 a4 c'4 | z4 d'4 c'4 d'4 | e'4 e'4 c'4 d'4 | f'4 z4 f'4 e'4 | c'4 c'4 b4 a4 | c'4 d'4 b4 d'4 | c'4 z4 a4 c'4 | c'4 z4 b4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Bmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z4 [fd']4 [ec']4 [fd']2 [ge']4 | [ge']2 [fd']2 [ec']4 [ec']2 [fd']4 | [ec']5 z [ca]16 | z2 [ca]2 [db]2 [ec']4 | [ec']2 [fd']4 [db]4 [db]2 [fd']4 | [ec']5 z [ca]4 [db]2 [ec']4 | z4 [fd']4 [ec']4 [fd']2 [ge']4 | [ge']2 [fd']2 [ec']4 [ec']2 [fd']4 | [af']6 z2 [af']2 [ge']4 [ec']5 | z [ec']4 [db]4 [ca]4 | [ec']2 [fd']4 [db]4 [db]2 [fd']4 | [ec']5 z [ca]4 [db]2 [ec']4 | [ec']5 z [db]16 | |]\n</abc>"
+}

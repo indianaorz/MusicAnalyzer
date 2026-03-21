@@ -1,0 +1,7 @@
+{
+  "id": "Groove____t00_k4_minor",
+  "function": "Epicify",
+  "transpose": 0,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Emin\n%%score (V1)\nV:1 name=\"Synth Bass 1\" snm=\"Synth Bass 1\" clef=treble\n%%MIDI program 38\n%%MIDI channel 0\n[V:1] A,,,4 A,,,4 A,,,4 A,,,4 | A,,,4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Emin\n%%score (V1)\nV:1 name=\"Synth Bass 1\" snm=\"Synth Bass 1\" clef=treble\n%%MIDI program 38\n%%MIDI channel 0\n[V:1] A,,,2 A,,,2 A,,,2 A,,, A,,, z A,,,2 A,,, A,,,2 A,,, A,,, | |]\n</abc>"
+}

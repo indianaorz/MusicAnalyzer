@@ -1,0 +1,7 @@
+{
+  "id": "Synth_Strings_2_t05_k9_minor",
+  "function": "Epicify",
+  "transpose": 5,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"SynthStrings 2\" snm=\"Synth Strings 2\" clef=treble\n%%MIDI program 51\n%%MIDI channel 0\n[V:1] A4 z28 G4 | | z28 F4 | | z12 G4 | z12 A4 | z28 G4 | | z28 F4 | | z12 G4 | z12 A4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"SynthStrings 2\" snm=\"Synth Strings 2\" clef=treble\n%%MIDI program 51\n%%MIDI channel 0\n[V:1] [CEA]32 | | [B,DG]32 | | [A,CF]16 | [B,DG]16 | [CEA]32 | | [B,DG]32 | | [A,CF]16 | [B,DG]16 | [CEA]24 | |]\n</abc>"
+}

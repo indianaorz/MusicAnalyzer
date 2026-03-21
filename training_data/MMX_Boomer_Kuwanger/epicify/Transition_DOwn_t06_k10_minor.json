@@ -1,0 +1,7 @@
+{
+  "id": "Transition_DOwn_t06_k10_minor",
+  "function": "Epicify",
+  "transpose": 6,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:A#min\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] f'4 z4 f'4 e'4 | c'4 c'4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:A#min\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] [af']6 z2 [af']2 [ge']4 [ec']5 | z [ec']4 |]\n</abc>"
+}

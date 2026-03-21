@@ -46,14 +46,10 @@
             <!-- NEW: Editable song title -->
             <span class="control-group">
                 <label for="song-title">Title:</label>
-                <input
-                  type="text"
-                  id="song-title"
-                  value="{{ initial_settings.title 
-                             or filename.rsplit('.',1)[0] }}"
-                />
-              </span>
-              
+                <input type="text" id="song-title" value="{{ initial_settings.title 
+                             or filename.rsplit('.',1)[0] }}" />
+            </span>
+
             <span class="header-info-static">
                 File: <strong>{{ filename }}</strong> | Ticks/Beat: {{ ticks_per_beat }}
             </span>
@@ -63,6 +59,16 @@
             <button id="add-pattern-btn" title="Add Pattern">
                 <i class="fas fa-plus"></i>
             </button>
+
+            <button id="create-simplification-btn" title="Create Simplification from active pattern or selection (S)">
+                <i class="fas fa-bezier-curve"></i> Simplify
+            </button>
+            <select id="simplify-verb-select">
+                <option value="" disabled selected>— simplification type —</option>
+            </select>
+            <input id="simplify-params-input" placeholder='e.g. {"direction":1,"interval":2}' style="width:200px" />
+            <button id="create-simplification-btn">Apply Simplify</button>
+
 
             <button id="toggle-chord-display" title="Show chord names / roman numerals">
                 N&nbsp;↔︎&nbsp;♭
@@ -83,6 +89,7 @@
                     <option value="none">None</option>
                     <option value="bar">Bar</option>
                     <option value="division">Division (beat)</option>
+                    <option value="halfDivison">Half Division</option>
                 </select>
             </label>
 

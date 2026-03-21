@@ -1,0 +1,7 @@
+{
+  "id": "Atmospheric_Arps_Ostinato_t09_k1_minor",
+  "function": "Epicify",
+  "transpose": 9,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:C#min\n%%score (V1)\nV:1 name=\"Lead 2 (sawtooth)\" snm=\"Lead 2 (sawtooth)\" clef=treble\n%%MIDI program 81\n%%MIDI channel 0\n[V:1] c''4 b'4 c''4 b'4 | b'4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:C#min\n%%score (V1)\nV:1 name=\"Lead 2 (sawtooth)\" snm=\"Lead 2 (sawtooth)\" clef=treble\n%%MIDI program 81\n%%MIDI channel 0\n[V:1] c'' b' g' b' a' g' z a' z c'' g' b' a' a' g' b' | |]\n</abc>"
+}

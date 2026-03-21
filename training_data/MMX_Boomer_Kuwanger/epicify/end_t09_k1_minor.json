@@ -1,0 +1,7 @@
+{
+  "id": "end_t09_k1_minor",
+  "function": "Epicify",
+  "transpose": 9,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:C#min\n%%score (V1)\nV:1 name=\"SynthStrings 2\" snm=\"Synth Strings 2\" clef=treble\n%%MIDI program 51\n%%MIDI channel 0\n[V:1] c4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:C#min\n%%score (V1)\nV:1 name=\"SynthStrings 2\" snm=\"Synth Strings 2\" clef=treble\n%%MIDI program 51\n%%MIDI channel 0\n[V:1] [EGc]24 | |]\n</abc>"
+}

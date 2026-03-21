@@ -1,0 +1,7 @@
+{
+  "id": "Energy_Pop__t02_k6_minor",
+  "function": "Epicify",
+  "transpose": 2,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:F#min\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z8 f4 e4 | g4 a4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:F#min\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z8 [Af]4 [Ge]4 | [Bg]2 [ca]4 |]\n</abc>"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "422a8215-eade-44f4-ae2a-8a1f995d97ec",
+  "function": "Epicify",
+  "transpose": 0,
+  "input": "<abc>\nX:1\nT:Bland\nM:4/4\nL:1/16\nK:Cmaj\n[V:1] B4 D4 E4 z4 E4 | E4 C4 B4 | F4 G4 z4 D4 | z4 E4 F4 z4 C4 | C4 F4 A4 | G4 z4 B4 D4 | C4 z4 C4 F4 | D4 E4 z4 B4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Epic\nM:4/4\nL:1/16\nK:Cmaj\n[V:1] B4 D4 E4 z2 E4 | z2 E4 C4 B4 | F4 G4 z2 D4 z6 E4 | F4 z4 C4 | C4 F4 A4 | G4 z2 B4 z2 D4 | C4 z4 C4 F4 | D4 E4 z4 B4 | |]\n</abc>"
+}

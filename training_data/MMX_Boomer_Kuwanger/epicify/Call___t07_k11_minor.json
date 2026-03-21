@@ -1,0 +1,7 @@
+{
+  "id": "Call___t07_k11_minor",
+  "function": "Epicify",
+  "transpose": 7,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Bmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] e'4 z4 e'4 z8 e'4 | b4 e'4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Bmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] e'5 z e'10 | z2 e'3 z b3 z b2 e'3 |]\n</abc>"
+}

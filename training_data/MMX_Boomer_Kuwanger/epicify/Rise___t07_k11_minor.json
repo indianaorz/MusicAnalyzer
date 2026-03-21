@@ -1,0 +1,7 @@
+{
+  "id": "Rise___t07_k11_minor",
+  "function": "Epicify",
+  "transpose": 7,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Bmin\n%%score (V1)\nV:1 name=\"String Ensemble 1\" snm=\"String Ensemble 1\" clef=treble\n%%MIDI program 48\n%%MIDI channel 0\n[V:1] z9 a4 e'4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Bmin\n%%score (V1)\nV:1 name=\"String Ensemble 1\" snm=\"String Ensemble 1\" clef=treble\n%%MIDI program 48\n%%MIDI channel 0\n[V:1] z9 f ^a c' e'4 | |]\n</abc>"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "Motif__t05_k9_minor",
+  "function": "Epicify",
+  "transpose": 5,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"Orchestra Hit\" snm=\"Orchestra Hit\" clef=treble\n%%MIDI program 55\n%%MIDI channel 0\n[V:1] a4 z8 a4 | c'4 b4 g4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Amin\n%%score (V1)\nV:1 name=\"Orchestra Hit\" snm=\"Orchestra Hit\" clef=treble\n%%MIDI program 55\n%%MIDI channel 0\n[V:1] [Aa]2 z8 [Aa]2 z2 [cc']2 | z2 [Bb]2 z2 [Gg]2 |]\n</abc>"
+}

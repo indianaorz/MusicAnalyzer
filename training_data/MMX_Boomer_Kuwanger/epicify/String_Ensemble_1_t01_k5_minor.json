@@ -1,0 +1,7 @@
+{
+  "id": "String_Ensemble_1_t01_k5_minor",
+  "function": "Epicify",
+  "transpose": 1,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"String Ensemble 1\" snm=\"String Ensemble 1\" clef=treble\n%%MIDI program 48\n%%MIDI channel 0\n[V:1] z9 d4 b4 | z8 e4 b4 | z8 e4 b4 | z8 f4 a4 | z8 c4 f4 | b4 d'4 f'4 b'4 | e'4 c'4 e4 B4 | G4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Fmin\n%%score (V1)\nV:1 name=\"String Ensemble 1\" snm=\"String Ensemble 1\" clef=treble\n%%MIDI program 48\n%%MIDI channel 0\n[V:1] z9 B d f b4 | z9 B e g b4 | z9 c =e g b4 | z9 c f g a4 | z9 B c d f B d f | b d f b d' f b d' f' b d' f' b' f' d' b | =e' =d' e' g c' e g c e G c E G A B G | |]\n</abc>"
+}

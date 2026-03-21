@@ -1,0 +1,7 @@
+{
+  "id": "Progression__t10_k2_minor",
+  "function": "Epicify",
+  "transpose": 10,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Dmin\n%%score (V1)\nV:1 name=\"SynthStrings 2\" snm=\"Synth Strings 2\" clef=treble\n%%MIDI program 51\n%%MIDI channel 0\n[V:1] d4 z4 d4 z4 d4 | z4 d4 z4 e4 | z4 e4 z4 c4 | c4 c4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Dmin\n%%score (V1)\nV:1 name=\"SynthStrings 2\" snm=\"Synth Strings 2\" clef=treble\n%%MIDI program 51\n%%MIDI channel 0\n[V:1] [GBd]5 z [GBd]9 z [GBd]5 | z [GBd]9 z [A_de]5 | z [A_de]9 z [EAd]3 | [EA_d]3 [EAd]2 [EAd]4 |]\n</abc>"
+}

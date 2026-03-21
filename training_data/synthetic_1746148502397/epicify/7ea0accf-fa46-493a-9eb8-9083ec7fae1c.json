@@ -1,0 +1,7 @@
+{
+  "id": "7ea0accf-fa46-493a-9eb8-9083ec7fae1c",
+  "function": "Epicify",
+  "transpose": 0,
+  "input": "<abc>\nX:1\nT:Bland\nM:4/4\nL:1/16\nK:Cmaj\n[V:1] z4 F4 A4 F4 | A4 C4 z4 C4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Epic\nM:4/4\nL:1/16\nK:Cmaj\n[V:1] z3 F1 A1 F4 A4 A1 d1 A4 | d4 F1 c1 F4 A4 | A1 d1 A4 g4 C1 F1 C4 | E4 C1 E1 C4 E4 |]\n</abc>"
+}

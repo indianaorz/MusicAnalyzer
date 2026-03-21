@@ -1,0 +1,7 @@
+{
+  "id": "Answer_t08_k0_minor",
+  "function": "Epicify",
+  "transpose": 8,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] b4 z4 b4 a4 | c'4 d'4 e'4 e'4 | c'4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] =b5 z =b4 g2 =a2 b2 | c'4 d'2 e'4 c'2 e'2 c'2 | |]\n</abc>"
+}

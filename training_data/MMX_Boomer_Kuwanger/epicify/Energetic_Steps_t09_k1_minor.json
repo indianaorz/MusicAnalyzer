@@ -1,0 +1,7 @@
+{
+  "id": "Energetic_Steps_t09_k1_minor",
+  "function": "Epicify",
+  "transpose": 9,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:C#min\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z8 b4 d'4 | d'4 e'4 |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:C#min\n%%score (V1)\nV:1 name=\"Pad 3 (polysynth)\" snm=\"Pad 3 (polysynth)\" clef=treble\n%%MIDI program 90\n%%MIDI channel 0\n[V:1] z8 [db]2 [ec']2 [fd']4 | [fd']2 [ge']4 |]\n</abc>"
+}

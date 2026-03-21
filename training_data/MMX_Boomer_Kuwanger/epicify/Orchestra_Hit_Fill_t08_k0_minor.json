@@ -1,0 +1,7 @@
+{
+  "id": "Orchestra_Hit_Fill_t08_k0_minor",
+  "function": "Epicify",
+  "transpose": 8,
+  "input": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Orchestra Hit\" snm=\"Orchestra Hit\" clef=treble\n%%MIDI program 55\n%%MIDI channel 0\n[V:1] z8 g4 g4 | |]\n</abc>",
+  "output": "<abc>\nX:1\nT:Multi-Track Snippet\nM:4/4\nL:1/16\nK:Cmin\n%%score (V1)\nV:1 name=\"Orchestra Hit\" snm=\"Orchestra Hit\" clef=treble\n%%MIDI program 55\n%%MIDI channel 0\n[V:1] z8 [Gg]2 [Gg]2 [Gg] [Gg] |]\n</abc>"
+}

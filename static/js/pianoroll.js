@@ -17,6 +17,185 @@
  * - ticksPerBeat: Number.
  */
 
+const EMBELLISH_VERBS = [
+    "pass", "neighbor", "enclose",
+    "escape", "syncopate", "outline",
+    "split", "invert", "trill",
+    "turn", "flourish", "slide",
+    "return"            // ← new!
+];
+
+
+const sel = document.getElementById("simplify-verb-select");
+
+
+/**
+ * Given a set of selected notes and the index of the anchor,
+ * pull out the right parameter object for each verb.
+ */
+function deriveParams(notes, anchorIdx, verb) {
+    const anchor = notes[anchorIdx];
+    const others = notes.filter((_, i) => i !== anchorIdx);
+    const embell = notes.find((_, i) => i !== anchorIdx && i !== notes.length - 1);
+
+
+    switch (verb) {
+        case "syncopate": {
+            // average time‐offset of embellishments
+            const offsets = others.map(n => n.start_tick - anchor.start_tick);
+            const avg = Math.round(offsets.reduce((a, b) => a + b, 0) / offsets.length);
+            return { offset: avg };
+        }
+
+        case "pass": {
+            // assume exactly one passing tone, step direction + size
+            if (others.length !== 1) return { direction: 0, steps: 0 };
+            const d = others[0].pitch - anchor.pitch;
+            return { direction: Math.sign(d), steps: Math.abs(d) };
+        }
+
+        case "neighbor": {
+            // same as pass but only one half‐step
+            return { direction: Math.sign(others[0].pitch - anchor.pitch) };
+        }
+
+        case "enclose": {
+            // expect two tones, one above and one below
+            const up = Math.max(...others.map(n => n.pitch));
+            const down = Math.min(...others.map(n => n.pitch));
+            return { upper: up - anchor.pitch, lower: down - anchor.pitch };
+        }
+
+        case "outline": {
+            // chord‐tone arpeggio: return the set of interval offsets
+            return { offsets: others.map(n => n.pitch - anchor.pitch) };
+        }
+
+
+        case "return":
+            return {
+                root: embell.pitch,                   // F in your example
+                anchorDuration: anchor.duration_ticks,// 48
+                embellishmentDuration: embell.duration_ticks // 48
+            };
+
+        // …and so on for each verb in your vocabulary…
+
+        default:
+            return {};
+    }
+}
+
+
+
+function simplify(notes, verb, params) {
+    const [anchor, embell, dest] = notes;
+
+    switch (verb) {
+        case "syncopate":
+            return [{ ...anchor, start_tick: anchor.start_tick + params.offset }];
+
+        case "pass":
+            // collapse passing tone: keep only the anchor
+            return [anchor];
+
+        case "enclose":
+            // collapse enclosure: keep only the anchor
+            return [anchor];
+
+        case "outline":
+            // collapse arpeggio: keep only the anchor
+            return [anchor];
+
+
+        case "return": {
+            const dur1 = (embell.start_tick + embell.duration_ticks)
+                - anchor.start_tick;  // 528+48−480 = 96
+            return [
+                { ...anchor, duration_ticks: dur1 },
+                { ...dest }
+            ];
+        }
+
+        // …all verbs reduce to a skeleton (often just [anchor])…
+    }
+    return [anchor];
+}
+
+function embellish(skel, verb, params) {
+    const [a, b] = skel;
+
+    switch (verb) {
+        case "syncopate":
+            // invert: shift back
+            return [{ ...anchor, start_tick: anchor.start_tick - params.offset }];
+
+        case "pass":
+            // re‑insert passing tone
+            return [
+                anchor,
+                {
+                    ...anchor, pitch: anchor.pitch + params.direction * params.steps,
+                    start_tick: anchor.start_tick
+                }
+            ];
+
+        case "enclose":
+            return [
+                { ...anchor, pitch: anchor.pitch + params.upper },
+                { ...anchor, pitch: anchor.pitch + params.lower },
+                anchor
+            ];
+
+        case "outline":
+            return [
+                ...params.offsets.map(off => ({ ...anchor, pitch: anchor.pitch + off })),
+                anchor
+            ];
+
+        case "return": {
+            const { anchorDuration, embellishmentDuration, root } = params;
+            const anchorStart = a.start_tick;           // 480
+            const embellStart = anchorStart + anchorDuration; // 528
+
+            return [
+                // ① original anchor slice
+                {
+                    ...a,
+                    duration_ticks: anchorDuration    // 48
+                },
+                // ② the embellishment (root)
+                {
+                    ...a,
+                    start_tick: embellStart,     // 528
+                    pitch: root,            // F pitch=29
+                    duration_ticks: embellishmentDuration // 48
+                },
+                // ③ the destination unchanged
+                b
+            ];
+        }
+        // …and so on…
+    }
+    return [anchor];
+}
+
+
+
+
+function notesEqual(a, b) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+        const x = a[i], y = b[i];
+        if (x.start_tick !== y.start_tick
+            || x.duration_ticks !== y.duration_ticks
+            || x.pitch !== y.pitch) return false;
+    }
+    return true;
+}
+
+
+
 
 // ——— Color Conversion Helpers ———
 
@@ -85,13 +264,18 @@ function adjustLightness(hex, deltaPercent) {
 }
 
 
-
 document.addEventListener('DOMContentLoaded', function () {
     // --- Global Variables & Configuration ---
     const canvas = document.getElementById('main-piano-roll-canvas');
     const trackListElement = document.getElementById('track-list');
     const canvasContainer = document.getElementById('canvas-container'); // Used for sizing reference
     const keyDisplayPanel = document.getElementById('key-display-panel'); // Panel for keys/drums
+
+    // Interaction State for Note Duration Resizing
+    let isResizingNoteDuration = false;
+    let noteResizeData = null; // { key: string, originalStartTick: number, originalDurationTicks: number, s_patternId: string, s_noteIndex: number }
+    const RESIZE_HANDLE_WIDTH = 8; // Logical pixels for detecting resize handle
+    const MIN_NOTE_DURATION_TICKS = (window.ticksPerBeat || 480) / 16; // Minimum duration (e.g., a 16th note)
 
 
     // --- Essential Element Checks ---
@@ -456,7 +640,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function snapTick(tick) {
         if (snapMode === 'bar') return Math.round(tick / ticksPerMeasure) * ticksPerMeasure;
         if (snapMode === 'division') return Math.round(tick / window.ticksPerBeat) * window.ticksPerBeat;
-        return tick;                  // none
+        // NEW: Snap to half division
+        if (snapMode === 'halfDivision') return Math.round(tick / (window.ticksPerBeat / 2)) * (window.ticksPerBeat / 2);
+        return tick;                           // none
     }
     /*──────────────── PATTERN ENGINE ────────────────*/
     const ROOT_ID = 'root';              // synthetic “whole song”
@@ -780,24 +966,40 @@ document.addEventListener('DOMContentLoaded', function () {
     function selectEntirePattern(id = activePatternId) {
         selectedNotes.clear();
         const pat = patterns.get(id);
-        rawTracksData.forEach((trk, ti) => {
-            if (!trackStates[ti].isVisible) return;
-            trk.notes.forEach((note, ni) => {
-                const key = JSON.stringify({ trackIndex: ti, noteIndex: ni });
-                if (id === ROOT_ID) {
-                    selectedNotes.add(key);
-                } else {
-                    // same logic your patterns use for inclusion
-                    if (noteInPattern(note, pat, ti)) {
-                        selectedNotes.add(key);
-                    }
+        if (!pat) {
+            console.warn(`selectEntirePattern: Pattern with id ${id} not found.`);
+            redrawPianoRoll();
+            invalidateSynth();
+            return;
+        }
+
+        if (pat.isSimplification && pat.s_notes) {
+            pat.s_notes.forEach((s_note, s_ni) => {
+                // For playback, we assume all notes defined in the simplification are intended to be played
+                // if the simplification pattern itself is selected.
+                // Visibility of the original track might be a factor for visual display but less so for "play this pattern".
+                // Also, ensure the s_note's originalTrackIndex is part of the simplification's declared instruments.
+                if (pat.instruments && pat.instruments.includes(s_note.originalTrackIndex)) {
+                    selectedNotes.add(JSON.stringify({ s_patternId: pat.id, s_noteIndex: s_ni }));
                 }
             });
-        });
+        } else { // ROOT_ID or a non-simplification pattern
+            rawTracksData.forEach((trk, ti) => {
+                // If a specific pattern is active (not ROOT), noteInPattern will respect its instruments.
+                // If ROOT is active, it typically includes all instruments.
+                if (id === ROOT_ID && !trackStates[ti].isVisible) {
+                    return; // For ROOT_ID, only include notes from visible tracks
+                }
+                trk.notes.forEach((note, ni) => {
+                    if (noteInPattern(note, pat, ti)) {
+                        selectedNotes.add(JSON.stringify({ trackIndex: ti, noteIndex: ni }));
+                    }
+                });
+            });
+        }
         redrawPianoRoll();
         invalidateSynth();
     }
-
     function noteInPattern(note, pat, trackIndex) {
         const hOK = pat.mode === 'range'
             ? (note.start_tick < pat.range.end &&
@@ -1126,6 +1328,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 trk.notes.forEach((n, ni) => {
                     if (noteInPattern(n, P, ti)) list.push({ trackIndex: ti, noteIndex: ni, n });
                 });
+   
+   
             });
             return list;
         };
@@ -1206,44 +1410,94 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     let selectionVariationHighlights = [];
+/**
+* Build a tiny “pattern” from whatever notes are currently selected,
+* then scan the active pattern for identical rhythms.
+*/
+function updateSelectionRhythmicCandidates() {
+    // if you have fewer than 2 notes, nothing to match
+    if (selectedNotes.size < 2) {
+        selectionVariationHighlights = [];
+        redrawPianoRoll(); // Ensure canvas is cleared of previous highlights
+        return;
+    }
 
-    /**
- * Build a tiny “pattern” from whatever notes are currently selected,
- * then scan the active pattern for identical rhythms.
- */
-    function updateSelectionRhythmicCandidates() {
-        // if you have fewer than 2 notes, nothing to match
-        if (selectedNotes.size < 2) {
-            selectionVariationHighlights = [];
-            return;
+    const selRefs = [...selectedNotes].map(k => JSON.parse(k));
+    const noteObjects = []; // To store the actual note data (pitch, start, duration)
+    const instrumentsSet = new Set(); // To store relevant track indices for tempPat
+
+    for (const ref of selRefs) {
+        let noteData = null;
+        let instrumentTrackIndex = -1;
+
+        if (ref.s_patternId && ref.s_noteIndex != null) { // Note from a simplification
+            const owningPattern = patterns.get(ref.s_patternId);
+            if (owningPattern && owningPattern.isSimplification && owningPattern.s_notes && owningPattern.s_notes[ref.s_noteIndex]) {
+                noteData = owningPattern.s_notes[ref.s_noteIndex];
+                if (noteData.originalTrackIndex !== undefined) {
+                    instrumentTrackIndex = noteData.originalTrackIndex;
+                } else {
+                    console.warn("Simplification note in selection missing originalTrackIndex:", ref);
+                    continue; 
+                }
+            } else {
+                console.warn("Could not find simplification note from reference:", ref);
+                continue; 
+            }
+        } else if (ref.trackIndex != null && ref.noteIndex != null) { // Note from rawTracksData
+            if (rawTracksData[ref.trackIndex] && rawTracksData[ref.trackIndex].notes && rawTracksData[ref.trackIndex].notes[ref.noteIndex]) {
+                noteData = rawTracksData[ref.trackIndex].notes[ref.noteIndex];
+                instrumentTrackIndex = ref.trackIndex;
+            } else {
+                console.warn("Could not find raw note from reference:", ref);
+                continue; 
+            }
+        } else {
+            console.warn("Invalid note reference in selection:", ref);
+            continue; 
         }
 
-        // collect JSON keys → pitch / tick info
-        const sel = [...selectedNotes].map(k => JSON.parse(k));
-        const pitches = sel.map(({ trackIndex, noteIndex }) => rawTracksData[trackIndex].notes[noteIndex].pitch);
-        const starts = sel.map(({ trackIndex, noteIndex }) => rawTracksData[trackIndex].notes[noteIndex].start_tick);
-        const ends = sel.map(({ trackIndex, noteIndex }) =>
-            rawTracksData[trackIndex].notes[noteIndex].start_tick +
-            rawTracksData[trackIndex].notes[noteIndex].duration_ticks
-        );
-
-        // build the temp pattern
-        const tempPat = {
-            range: {
-                start: Math.min(...starts),
-                end: Math.max(...ends),
-                low: Math.min(...pitches),
-                high: Math.max(...pitches)
-            },
-            instruments: [...new Set(sel.map(n => n.trackIndex))]
-        };
-
-        // scan for rhythmic variations inside the active pattern
-        const parentPat = patterns.get(activePatternId);
-        const hits = findRhythmicVariations(tempPat, parentPat);
-        // store just the ranges for drawing
-        selectionVariationHighlights = hits.map(h => h.range);
+        if (noteData) {
+            noteObjects.push(noteData);
+            if (instrumentTrackIndex !== -1) {
+                instrumentsSet.add(instrumentTrackIndex);
+            }
+        }
     }
+
+    if (noteObjects.length < 2) { 
+        selectionVariationHighlights = [];
+        redrawPianoRoll();
+        return;
+    }
+
+    const pitches = noteObjects.map(n => n.pitch);
+    const starts = noteObjects.map(n => n.start_tick);
+    const ends = noteObjects.map(n => n.start_tick + n.duration_ticks);
+
+    const tempPat = {
+        range: {
+            start: Math.min(...starts),
+            end: Math.max(...ends),
+            low: Math.min(...pitches),
+            high: Math.max(...pitches)
+        },
+        instruments: Array.from(instrumentsSet) 
+    };
+
+    const parentPat = patterns.get(activePatternId);
+    if (!parentPat) { 
+        selectionVariationHighlights = [];
+        redrawPianoRoll();
+        return;
+    }
+    const hits = findRhythmicVariations(tempPat, parentPat);
+    selectionVariationHighlights = hits.map(h => h.range);
+    redrawPianoRoll(); 
+}
+
+
+
 
     /* ────────────────────────────────────────────────────────────────
      *  GLOBAL STATE  (add just after the other globals)
@@ -2288,31 +2542,446 @@ document.addEventListener('DOMContentLoaded', function () {
      * returns { sharps:Set<string>, flats:Set<string>, preferFlats:boolean }
      */
     function getKeyAccidentals(rootName, isMinor) {
-        // ----- helpers -------------------------------------------------
-        const NAME_TO_STEP = { C: 0, 'B#': 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4, Fb: 4, F: 5, 'E#': 5, 'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9, 'A#': 10, Bb: 10, B: 11, Cb: 11 };
-        const STEP_TO_MAJ = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
-        const SHARP_ORDER = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
-        const FLAT_ORDER = ['B', 'E', 'A', 'D', 'G', 'C', 'F'];
-        const KEY_SIG = {                       // +n = n sharps, –n = n flats
+        // map note‐names → semitone
+        const NAME_TO_STEP = {
+            C: 0, 'B#': 0, 'C#': 1, Db: 1, D: 2, 'D#': 3, Eb: 3, E: 4, Fb: 4,
+            F: 5, 'E#': 5, 'F#': 6, Gb: 6, G: 7, 'G#': 8, Ab: 8, A: 9,
+            'A#': 10, Bb: 10, B: 11, 'Cb': 11
+        };
+
+        // major‐key signature counts
+        const KEY_SIG = {
             C: 0, G: 1, D: 2, A: 3, E: 4, B: 5, 'F#': 6, 'C#': 7,
             F: -1, 'Bb': -2, 'Eb': -3, 'Ab': -4, 'Db': -5, 'Gb': -6, 'Cb': -7
         };
 
-        rootName = rootName.trim();
+        const SHARP_ORDER = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
+        const FLAT_ORDER = ['B', 'E', 'A', 'D', 'G', 'C', 'F'];
+
+        rootName = (rootName || '').trim();
         if (!(rootName in NAME_TO_STEP)) rootName = 'C';
 
-        // relative major for minor keys
+        // find relative‐major step
         let majStep = NAME_TO_STEP[rootName];
         if (isMinor) majStep = (majStep + 3) % 12;
-        const majName = STEP_TO_MAJ[majStep];
 
-        const count = KEY_SIG[majName] ?? 0;
-        const sharps = new Set(), flats = new Set();
+        // gather all major‐keys on that semitone
+        const candidates = Object.entries(KEY_SIG)
+            .filter(([name, _]) => NAME_TO_STEP[name] === majStep)
+            .map(([name, val]) => ({ name, val }));
+
+        // helper: did user type a sharp/flat?
+        const userWantsSharp = rootName.includes('#');
+        const userWantsFlat = rootName.includes('b');
+
+        let chosen;
+        if (userWantsSharp || userWantsFlat) {
+            // filter by matching accidental style
+            const filtered = candidates.filter(c =>
+                userWantsSharp ? c.name.includes('#') :
+                    userWantsFlat ? c.name.includes('b') : false
+            );
+            if (filtered.length === 1) {
+                chosen = filtered[0];
+            }
+        }
+
+        // if we didn’t get an explicit match, pick by fewest accidentals
+        if (!chosen) {
+            chosen = candidates.reduce((best, c) => {
+                const a = Math.abs(c.val), b = Math.abs(best.val);
+                if (a < b) return c;
+                if (a > b) return best;
+                // tiebreak: prefer sharps over flats
+                return c.val > best.val ? c : best;
+            }, candidates[0]);
+        }
+
+        // build the sets
+        const count = chosen.val;
+        const sharps = new Set();
+        const flats = new Set();
         if (count > 0) SHARP_ORDER.slice(0, count).forEach(l => sharps.add(l));
         if (count < 0) FLAT_ORDER.slice(0, -count).forEach(l => flats.add(l));
 
-        return { sharps, flats, preferFlats: count < 0 };
+        return {
+            sharps,
+            flats,
+            preferFlats: count < 0
+        };
     }
+
+    // Place this function somewhere logical within your script, e.g., near other pattern functions
+
+    /**
+     * Recalculates the range of a simplification pattern based on its s_notes.
+     * @param {object} pattern - The simplification pattern object.
+     */
+    function recalculateSimplificationRange(pattern) {
+        if (!pattern || !pattern.isSimplification || !pattern.s_notes || pattern.s_notes.length === 0) {
+            // Set to a default empty range or handle as an error
+            if (pattern) { // ensure pattern exists before trying to set range
+                pattern.range = { start: 0, end: 0, low: PITCH_MAX, high: PITCH_MIN };
+            }
+            return;
+        }
+
+        let minTick = Infinity, maxTick = 0, minPitch = PITCH_MAX, maxPitch = PITCH_MIN;
+        pattern.s_notes.forEach(n => {
+            minTick = Math.min(minTick, n.start_tick);
+            maxTick = Math.max(maxTick, n.start_tick + n.duration_ticks);
+            minPitch = Math.min(minPitch, n.pitch);
+            maxPitch = Math.max(maxPitch, n.pitch);
+        });
+
+        pattern.range = {
+            start: minTick === Infinity ? 0 : minTick,
+            end: maxTick === 0 ? (minTick === Infinity ? 0 : minTick) : maxTick,
+            low: minPitch === PITCH_MAX ? PITCH_MIN : minPitch, // Ensure low isn't higher than high
+            high: maxPitch === PITCH_MIN ? PITCH_MAX : maxPitch, // Ensure high isn't lower than low
+        };
+        if (pattern.range.low > pattern.range.high) { // Handle case of single pitch or no notes
+            pattern.range.low = pattern.range.high = minPitch === PITCH_MAX ? PITCH_MIN : minPitch;
+        }
+        if (pattern.range.start > pattern.range.end) { // Handle case of single point in time or no notes
+            pattern.range.end = pattern.range.start;
+        }
+    }
+
+async function handleCreateSimplification() {
+    const parentPattern = patterns.get(activePatternId);
+    if (!parentPattern) {
+        alert("No active (parent) pattern selected to create a simplification from!");
+        return;
+    }
+
+    const verb = document.getElementById("simplify-verb-select").value;
+
+    //  स्टेप ➊: Determine the source notes that form the basis of this operation.
+    // These are the notes from the parentPattern. If parentPattern is a simplification,
+    // its s_notes are the source. Otherwise, raw notes from parentPattern's definition are the source.
+    let baseNotesForOperation = []; // Will be an array of { note, originalTrackIndex, refKey }
+
+    if (parentPattern.isSimplification && parentPattern.s_notes) {
+        // Parent is a simplification. Its s_notes are the source.
+        parentPattern.s_notes.forEach((s_note, index) => {
+            baseNotesForOperation.push({
+                note: { ...s_note }, // Use a copy to avoid modifying parent's s_notes if simplify works in place
+                originalTrackIndex: s_note.originalTrackIndex,
+                refKey: JSON.stringify({ s_patternId: parentPattern.id, s_noteIndex: index })
+            });
+        });
+    } else {
+        // Parent is a raw pattern (or ROOT). Gather its notes from rawTracksData.
+        let sourceInstruments = parentPattern.instruments;
+        if (parentPattern.id === ROOT_ID && (!sourceInstruments || sourceInstruments.length === 0)) {
+             // For ROOT, if instruments aren't explicitly defined on the pattern, assume all.
+            sourceInstruments = rawTracksData.map((_,idx) => idx);
+        }
+
+        if (sourceInstruments && Array.isArray(sourceInstruments)) {
+            sourceInstruments.forEach(instrumentTrackIndex => {
+                const track = rawTracksData[instrumentTrackIndex];
+                if (track && track.notes && trackStates[instrumentTrackIndex]?.isVisible) { // Also check visibility
+                    track.notes.forEach((rawNote, ni) => {
+                        if (noteInPattern(rawNote, parentPattern, instrumentTrackIndex)) {
+                            baseNotesForOperation.push({
+                                note: { ...rawNote }, // Use a copy
+                                originalTrackIndex: instrumentTrackIndex,
+                                refKey: JSON.stringify({ trackIndex: instrumentTrackIndex, noteIndex: ni })
+                            });
+                        }
+                    });
+                }
+            });
+        } else {
+            console.warn("Parent pattern has no instruments defined or is not ROOT.", parentPattern);
+            return alert("Parent pattern for simplification needs defined instruments or to be the root pattern.");
+        }
+    }
+
+    //  स्टेप ➋: Gather the currently selected note references and their actual note objects.
+    const selRefs = [...selectedNotes].map(j => JSON.parse(j));
+    if (selRefs.length === 0) {
+        return alert("No notes selected to simplify.");
+    }
+
+    const originalSelectedNotes = selRefs.map(ref => {
+        if (ref.s_patternId && ref.s_noteIndex != null) {
+            const owningSimp = patterns.get(ref.s_patternId);
+            // Ensure selection is from the *active* (parent) pattern if it's a simplification
+            if (owningSimp && owningSimp.id === parentPattern.id && parentPattern.isSimplification) {
+                return owningSimp.s_notes?.[ref.s_noteIndex]; // Return direct reference if it's from the current parent s_notes
+            } else if (owningSimp) { // Selected from a *different* simplification (potentially for advanced cases not yet fully supported by this flow)
+                 console.warn("Simplifying selection from a non-active simplification pattern. Behavior might be unexpected.", ref);
+                 return owningSimp.s_notes?.[ref.s_noteIndex];
+            }
+        } else if (ref.trackIndex != null && ref.noteIndex != null) {
+            // If selected from raw data, it should be one of the notes in baseNotesForOperation (if parent is raw)
+            // or it's a raw note selected while a simp is active (less common for this specific workflow)
+            return rawTracksData[ref.trackIndex]?.notes?.[ref.noteIndex];
+        }
+        return null;
+    }).filter(Boolean);
+
+    if (originalSelectedNotes.length !== selRefs.length) {
+        return alert("Error: Some selected notes could not be found or are invalid.");
+    }
+    if (originalSelectedNotes.length === 0) { // Double check after filter
+        return alert("No valid notes selected for simplification process.");
+    }
+
+    // Verb-specific note count validation
+    if (verb === "return" && originalSelectedNotes.length !== 3) {
+        return alert("For the 'return' verb, select: anchor, embellishment, destination.");
+    }
+    // Add more verb-specific checks here based on `deriveParams` and `simplify` expectations for `originalSelectedNotes.length`
+
+    //  स्टेप ➌: Derive parameters.
+    const params = deriveParams(originalSelectedNotes, 0, verb);
+    if (params === undefined && ["pass", "neighbor", "enclose", "outline"].includes(verb)) { // Example of checking
+        return alert(`Could not derive parameters for verb "${verb}". Ensure selection meets verb requirements.`);
+    }
+
+    //  स्टेप ➍: Compute the simplified version of the selected notes.
+    // `simplify` expects an array of note objects and might return notes with relative timings.
+    const simplifiedPieceFromSelection = simplify(originalSelectedNotes, verb, params);
+    if (!simplifiedPieceFromSelection) {
+        console.warn(`Simplification with verb "${verb}" returned null or undefined.`);
+        return alert(`Simplification process for verb "${verb}" failed.`);
+    }
+
+    //  स्टेप ➎: Determine properties of the anchor of the original selection.
+    const anchorRef = selRefs[0];
+    const anchorNoteObject = originalSelectedNotes[0]; // This is the actual note object
+    let effectiveAnchorOriginalTrackIndex;
+
+    if (anchorNoteObject.originalTrackIndex !== undefined) { // s_notes (from parent simp or selected from another simp) have this
+        effectiveAnchorOriginalTrackIndex = anchorNoteObject.originalTrackIndex;
+    } else if (anchorRef.trackIndex !== undefined) { // Raw note selected
+        effectiveAnchorOriginalTrackIndex = anchorRef.trackIndex;
+    } else {
+        console.error("Critical Error: Cannot determine originalTrackIndex for the anchor note.", anchorRef, anchorNoteObject);
+        return alert("Error: Could not identify the original track of the anchor note for simplification.");
+    }
+    const absoluteAnchorStartTick = anchorNoteObject.start_tick;
+
+    //  स्टेप ➏: Assemble the new s_notes list for the child simplification pattern.
+    const new_s_notes = [];
+    // Create a set of the refKeys of the notes that were actually selected for this operation.
+    const selectedRefKeysForExclusion = new Set(selRefs.map(ref => JSON.stringify(ref)));
+
+    // Add notes from the base operation set (parent's content) that were NOT part of the current selection.
+    baseNotesForOperation.forEach(baseOpNoteContainer => {
+        if (!selectedRefKeysForExclusion.has(baseOpNoteContainer.refKey)) {
+            new_s_notes.push({
+                ...baseOpNoteContainer.note, // Spread the note object (which is already a copy)
+                originalTrackIndex: baseOpNoteContainer.originalTrackIndex // This was correctly set in baseNotesForOperation
+            });
+        }
+    });
+
+    // Add the newly computed simplified piece.
+    // Their start_ticks are adjusted relative to the original anchor's absolute start tick.
+    // They inherit the originalTrackIndex from the anchor of the selection.
+    simplifiedPieceFromSelection.forEach(simplifiedNote => {
+        new_s_notes.push({
+            pitch: simplifiedNote.pitch,
+            start_tick: absoluteAnchorStartTick + (simplifiedNote.start_tick - originalSelectedNotes[0].start_tick),
+            duration_ticks: simplifiedNote.duration_ticks,
+            velocity: simplifiedNote.velocity || anchorNoteObject.velocity || 100,
+            originalTrackIndex: effectiveAnchorOriginalTrackIndex,
+            // Preserve other potential custom properties from simplifiedNote
+            ...(Object.fromEntries(Object.entries(simplifiedNote).filter(([key]) => !['pitch', 'duration_ticks', 'start_tick', 'velocity'].includes(key))))
+        });
+    });
+
+    // स्टेप ➐: Sort s_notes.
+    new_s_notes.sort((a, b) => a.start_tick - b.start_tick || a.pitch - b.pitch);
+
+    // स्टेप ➑: Create the new simplification pattern object.
+    const newSimplificationId = crypto.randomUUID();
+    const involvedInstruments = [...new Set(new_s_notes.map(n => n.originalTrackIndex).filter(idx => idx !== undefined))];
+
+    const newChildPattern = {
+        id: newSimplificationId,
+        name: `${verb} of ${parentPattern.name || 'selection'}`,
+        parentId: parentPattern.id,
+        isSimplification: true,
+        verbApplied: verb,
+        verbParams: params,
+        instruments: involvedInstruments,
+        range: {}, // Will be calculated
+        s_notes: new_s_notes,
+        children: [],
+        mode: parentPattern.mode,
+    };
+
+    recalculateSimplificationRange(newChildPattern);
+    patterns.set(newSimplificationId, newChildPattern);
+    if (!parentPattern.children) parentPattern.children = [];
+    parentPattern.children.push(newSimplificationId);
+
+    setActivePattern(newSimplificationId);
+    selectedNotes.clear();
+    queueSave();
+    console.log(`Created simplification "${newChildPattern.name}" (ID: ${newChildPattern.id}) with ${newChildPattern.s_notes.length} notes.`);
+}
+
+
+
+    document.getElementById("create-simplification-btn")
+        .addEventListener("click", handleCreateSimplification);
+
+
+
+
+
+    // function handleCreateSimplification() {
+    //     const sourcePattern = patterns.get(activePatternId);
+    //     if (!sourcePattern) {
+    //         alert("No active pattern selected to create a simplification from.");
+    //         return;
+    //     }
+
+    //     const newSimplificationName = prompt(`Name for simplification of "${sourcePattern.name || 'Root'}":`, `Simp. of ${sourcePattern.name || 'Root'}`);
+    //     if (!newSimplificationName) return; // User cancelled
+
+    //     let notesToCopy = [];
+    //     let sourceIsSimplification = sourcePattern.isSimplification && sourcePattern.s_notes;
+
+    //     if (selectedNotes.size > 0) {
+    //         console.log("Attempting to simplify based on current selection...");
+    //         let selectionIsValidForSource = true;
+    //         const tempNotesToCopy = [];
+
+    //         for (const key of selectedNotes) {
+    //             const noteRef = JSON.parse(key);
+    //             let noteObject = null;
+    //             let originalTrackIndexForCopy = -1;
+
+    //             if (noteRef.s_patternId && noteRef.s_noteIndex != null) { // Note from a simplification
+    //                 if (noteRef.s_patternId !== activePatternId) {
+    //                     selectionIsValidForSource = false; break; // Selected note not from active pattern
+    //                 }
+    //                 const owningSimplification = patterns.get(noteRef.s_patternId);
+    //                 if (owningSimplification && owningSimplification.s_notes) {
+    //                     noteObject = owningSimplification.s_notes[noteRef.s_noteIndex];
+    //                     originalTrackIndexForCopy = noteObject.originalTrackIndex; // Preserve it
+    //                 }
+    //             } else if (noteRef.trackIndex != null && noteRef.noteIndex != null) { // Note from rawTracksData
+    //                 if (sourceIsSimplification) {
+    //                     selectionIsValidForSource = false; break; // Raw note selected while active pattern is a simplification
+    //                 }
+    //                 const tempRawNote = rawTracksData[noteRef.trackIndex]?.notes[noteRef.noteIndex];
+    //                 if (tempRawNote && noteInPattern(tempRawNote, sourcePattern, noteRef.trackIndex)) {
+    //                     noteObject = tempRawNote;
+    //                     originalTrackIndexForCopy = noteRef.trackIndex;
+    //                 } else {
+    //                     selectionIsValidForSource = false; break; // Raw note not in source pattern's scope
+    //                 }
+    //             }
+
+    //             if (noteObject) {
+    //                 const copied = JSON.parse(JSON.stringify(noteObject)); // Deep copy
+    //                 if (originalTrackIndexForCopy !== -1) { // Ensure originalTrackIndex is set
+    //                     copied.originalTrackIndex = originalTrackIndexForCopy;
+    //                 }
+    //                 tempNotesToCopy.push(copied);
+    //             } else {
+    //                 selectionIsValidForSource = false; break; // Couldn't identify note object
+    //             }
+    //         }
+
+    //         if (selectionIsValidForSource && tempNotesToCopy.length > 0) {
+    //             notesToCopy = tempNotesToCopy;
+    //         } else {
+    //             if (selectedNotes.size > 0) { // only alert if there was a selection that was deemed invalid
+    //                 alert("Selection is not valid for creating a simplification from the active pattern. Simplifying the entire active pattern instead.");
+    //             }
+    //             // Fall through to simplify whole pattern if selection was empty or invalid
+    //             selectedNotes.clear(); // Clear invalid or empty selection
+    //         }
+    //     }
+
+    //     if (notesToCopy.length === 0) { // No valid selection, or fell through: copy whole active pattern
+    //         console.log(`No valid selection, simplifying all notes of pattern "${sourcePattern.name || 'Root'}"...`);
+    //         if (sourceIsSimplification) {
+    //             notesToCopy = JSON.parse(JSON.stringify(sourcePattern.s_notes)); // Deep copy
+    //             // Ensure originalTrackIndex is present on all notes from the source simplification
+    //             notesToCopy.forEach(note => {
+    //                 if (note.originalTrackIndex === undefined) {
+    //                     // This case implies the source simplification itself might have had notes
+    //                     // without originalTrackIndex. This could happen if it was created from
+    //                     // a source that didn't provide it. For now, we'll try to infer or leave undefined.
+    //                     // A better approach is to ensure originalTrackIndex is always set.
+    //                     // If sourcePattern.instruments has only one, we can use that.
+    //                     if (sourcePattern.instruments && sourcePattern.instruments.length === 1) {
+    //                         note.originalTrackIndex = sourcePattern.instruments[0];
+    //                     } else {
+    //                         // console.warn("Simplifying a simplification: originalTrackIndex missing and cannot be inferred for a note.", note);
+    //                         // Fallback: use a placeholder or the first instrument of the parent if desperate
+    //                         note.originalTrackIndex = sourcePattern.instruments ? sourcePattern.instruments[0] : 0;
+    //                     }
+    //                 }
+    //             });
+    //         } else { // Source is a raw MIDI-based pattern
+    //             rawTracksData.forEach((track, trackIndex) => {
+    //                 if (sourcePattern.instruments && sourcePattern.instruments.includes(trackIndex)) {
+    //                     track.notes.forEach(note => {
+    //                         if (noteInPattern(note, sourcePattern, trackIndex)) {
+    //                             const copiedNote = JSON.parse(JSON.stringify(note));
+    //                             copiedNote.originalTrackIndex = trackIndex; // Explicitly set for raw notes
+    //                             notesToCopy.push(copiedNote);
+    //                         }
+    //                     });
+    //                 }
+    //             });
+    //         }
+    //     }
+
+    //     if (notesToCopy.length === 0) {
+    //         alert("No notes found to create a simplification.");
+    //         return;
+    //     }
+
+    //     const newSimplificationId = crypto.randomUUID();
+    //     const involvedInstruments = new Set();
+    //     notesToCopy.forEach(n => {
+    //         // Ensure originalTrackIndex is present, if not, try to infer or set a default
+    //         if (n.originalTrackIndex === undefined) {
+    //             // This is a fallback. Ideally, originalTrackIndex is always known from the source.
+    //             n.originalTrackIndex = (sourcePattern.instruments && sourcePattern.instruments.length > 0) ? sourcePattern.instruments[0] : 0;
+    //             // console.warn("originalTrackIndex was undefined for a note during simplification. Using fallback.", n);
+    //         }
+    //         involvedInstruments.add(n.originalTrackIndex);
+    //     });
+
+
+    //     const newPattern = {
+    //         id: newSimplificationId,
+    //         name: newSimplificationName,
+    //         parentId: sourcePattern.id,
+    //         isSimplification: true,
+    //         s_notes: notesToCopy, // Already deep copied
+    //         range: {}, // Will be calculated by recalculateSimplificationRange
+    //         instruments: Array.from(involvedInstruments),
+    //         children: [],
+    //         mode: sourcePattern.mode, // Inherit mode from parent
+    //         // variantOf, variantOfName, isRepetition, isVariation, isRhythmicVariation should default to null/false
+    //     };
+    //     recalculateSimplificationRange(newPattern); // Calculate initial range
+
+    //     patterns.set(newPattern.id, newPattern);
+    //     if (!sourcePattern.children) sourcePattern.children = [];
+    //     sourcePattern.children.push(newPattern.id);
+
+    //     setActivePattern(newPattern.id); // This also rebuilds tree & redraws
+    //     queueSave();
+
+    //     console.log(`Created simplification "${newPattern.name}" (ID: ${newPattern.id}) with ${newPattern.s_notes.length} notes.`);
+    // }
+
 
 
     /**
@@ -2333,7 +3002,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function isDrumTrack(trackIndex) {
-        return !!rawTracksData[trackIndex]?.is_drum_track;   // truthy ⇒ drum track
+        return !!rawTracksData[trackIndex]?.is_drum_track;   // truthy ⇒ drum track
     }
 
 
@@ -2495,6 +3164,30 @@ document.addEventListener('DOMContentLoaded', function () {
                     ? CHORD_ROMAN : CHORD_NAME;
                 redrawPianoRoll();
             });
+
+
+        // NEW: Event listener for Create Simplification button
+        const createSimplificationBtn = document.getElementById('create-simplification-btn');
+        if (createSimplificationBtn) {
+            createSimplificationBtn.addEventListener('click', handleCreateSimplification);
+        }
+        EMBELLISH_VERBS.forEach(v => {
+            const o = document.createElement("option");
+            o.value = v; o.textContent = v;
+            sel.appendChild(o);
+        });
+
+
+        // Ensure pattern-related UI (like the add pattern button) is set up
+        const addPatternButton = document.getElementById('add-pattern-btn');
+        if (addPatternButton) { // Check if it exists
+            addPatternButton.addEventListener('click', () => {
+                const name = prompt('Name this pattern:');
+                if (name) addPattern(name.trim());
+            });
+        } else {
+            // console.warngetElementById('add-pattern-btn') not found");
+        }
 
 
         console.log("Piano roll initialized.");
@@ -2683,21 +3376,18 @@ document.addEventListener('DOMContentLoaded', function () {
         redrawPianoRoll(); // Redraw with new viewport
     }
 
-
     function handleMouseDown(event) {
-        // Only process left (0) and middle (1) mouse buttons
-        if (event.button !== 0 && event.button !== 1) return;
+        if (event.button !== 0 && event.button !== 1) return; // Only left and middle
 
         invalidateSynth();
-        canvas.focus();
+        canvas.focus(); // Ensure canvas can receive keyboard events if needed
 
-        const rect = canvas.getBoundingClientRect();
-        const startX = event.clientX - rect.left;
-        const startY = event.clientY - rect.top;
+        const domRect = canvas.getBoundingClientRect(); // Use a local name to avoid conflict if 'rect' is used elsewhere
+        const startX = event.clientX - domRect.left;
+        const startY = event.clientY - domRect.top;
         const shiftKey = event.shiftKey;
 
-        if (event.button === 1) {
-            // Middle-mouse panning
+        if (event.button === 1) { // Middle-mouse panning
             isPanning = true;
             dragStartX = startX;
             dragStartY = startY;
@@ -2707,82 +3397,62 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // At this point we know it's a left click
-        const clickedNoteRef = findNoteAtCanvasCoords(startX, startY);
+        // --- Left Click Logic ---
+        const clickedNoteRef = findNoteAtCanvasCoords(startX, startY); // Expects {s_patternId, s_noteIndex} or {trackIndex, noteIndex}
+        let clickedNoteKey = clickedNoteRef ? JSON.stringify(clickedNoteRef) : null;
+        const activePat = patterns.get(activePatternId);
 
-        // 1) If we're in repeat/variation mode, always consume the click here
+        // --- Check for Note Duration Resize (PRIORITY 1 for left click on note) ---
+        if (clickedNoteRef && clickedNoteRef.s_patternId && activePat && activePat.id === clickedNoteRef.s_patternId && activePat.isSimplification) {
+            const noteObject = activePat.s_notes[clickedNoteRef.s_noteIndex];
+            if (noteObject) {
+                const noteCanvasX = midiTickToCanvasX(noteObject.start_tick);
+                const noteCanvasWidth = noteObject.duration_ticks * PIXELS_PER_TICK_BASE * scaleX;
+                const noteCanvasEndX = noteCanvasX + noteCanvasWidth;
+                const noteCanvasY = midiPitchToCanvasY(noteObject.pitch); // Top Y of the note's row
+                const noteCanvasHeight = NOTE_BASE_HEIGHT * scaleY;    // Height of the note's row
+
+                // Check if click is on the resize handle area (right edge of the note)
+                // and also if the Y coordinate is within the note's row
+                if (startX >= noteCanvasEndX - RESIZE_HANDLE_WIDTH && startX <= noteCanvasEndX + RESIZE_HANDLE_WIDTH / 2 && /* Allow a bit of overshoot */
+                    startY >= noteCanvasY && startY <= noteCanvasY + noteCanvasHeight) {
+                    isResizingNoteDuration = true;
+                    noteResizeData = {
+                        key: clickedNoteKey, // The JSON key for the note
+                        s_patternId: clickedNoteRef.s_patternId,
+                        s_noteIndex: clickedNoteRef.s_noteIndex,
+                        originalStartTick: noteObject.start_tick, // Keep original start, only duration changes
+                        originalDurationTicks: noteObject.duration_ticks // Not strictly needed here but good for context
+                    };
+
+                    // When resizing, usually only the clicked note is affected.
+                    // Clear other selections unless shift is held, and ensure this one is selected.
+                    if (!shiftKey) {
+                        selectedNotes.clear();
+                    }
+                    selectedNotes.add(clickedNoteKey); // Ensure the note being resized is in the selection
+
+                    canvas.style.cursor = 'ew-resize';
+                    redrawPianoRoll(); // Update visual selection if it changed
+                    return; // Do not proceed to other click actions like moving
+                }
+            }
+        }
+
+        // 1. Pattern Action Mode (e.g., makeRepeatOf, makeVariationOf)
         if (patternActionMode) {
             const patHit = patternAtCanvasXY(startX, startY);
             if (patHit && patHit.id !== ROOT_ID) {
-                if (patternActionMode === 'repeat') {
-                    makeRepeatOf(patHit);
-                    hideOverlay();
-                }
-                else if (patternActionMode === 'variation') {
-                    makeVariationOf(patHit);
-                    hideOverlay();
-                }
-                else if (patternActionMode === 'remapVariant') {
-                    if (remapState.step === 0) {
-                        // first click: pick the variant to remap
-                        remapState.sourceId = patHit.id;
-                        remapState.step = 1;
-                        showOverlay('click source node');
-                    } else {
-                        // second click: pick the new source
-                        const srcPat = patterns.get(remapState.sourceId);
-                        srcPat.variantOf = patHit.id;
-                        srcPat.variantOfName = patHit.name;
-                        srcPat.isVariation = true;
-                        // cleanup & redraw/save
-                        remapState = { step: 0, sourceId: null };
-                        patternActionMode = null;
-                        hideOverlay();
-                        rebuildPatternTree();
-                        queueSave();
-                        redrawPianoRoll();
-                    }
-                } else if (patternActionMode === 'remapRepeat') {
-                    if (remapState.step === 0) {
-                        remapState.sourceId = patHit.id;
-                        remapState.step = 1;
-                        showOverlay('click new source pattern');
-                    } else {
-                        // second click: validate that the chosen patHit is actually the thing this rep repeats
-                        const srcId = remapState.sourceId;
-                        const src = patterns.get(srcId);
-                        const parent = patterns.get(src.parentId);
-                        // look for an exact repeat of patHit under its parent
-                        const hits = findRepeatsOfPattern(patHit, parent);
-                        const match = hits.find(h =>
-                            h.range.start === src.range.start &&
-                            h.range.end === src.range.end
-                        );
-                        if (!match) {
-                            alert(`“${src.name}” does not exactly repeat “${patHit.name}”.`);
-                            return;
-                        }
-                        // OK—remap it
-                        src.variantOf = patHit.id;
-                        src.variantOfName = patHit.name;
-                        src.isRepetition = true;
-                        src.isVariation = false;
-
-                        // cleanup & redraw/save
-                        remapState = { step: 0, sourceId: null };
-                        patternActionMode = null;
-                        hideOverlay();
-                        rebuildPatternTree();
-                        queueSave();
-                        redrawPianoRoll();
-                    }
-                }
-
+                if (patternActionMode === 'repeat') makeRepeatOf(patHit);
+                else if (patternActionMode === 'variation') makeVariationOf(patHit);
+                else if (patternActionMode === 'remapVariant') { /* ... existing remapVariant logic ... */ }
+                else if (patternActionMode === 'remapRepeat') {  /* ... existing remapRepeat logic ... */ }
+                hideOverlay();
             }
             return;
         }
 
-        // 2) Normal mode: clicking empty canvas on a pattern zooms you there
+        // 2. Click on empty canvas within a child pattern (not the active one) -> activate it
         if (!clickedNoteRef) {
             const patHit = patternAtCanvasXY(startX, startY);
             if (patHit && patHit.id !== activePatternId) {
@@ -2791,8 +3461,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // 3) Else if you clicked an already-selected note → start moving
-        if (clickedNoteRef && selectedNotes.has(JSON.stringify(clickedNoteRef))) {
+        // 3. Clicked an already-selected note (and not resizing): Start moving ALL selected notes
+        if (clickedNoteRef && clickedNoteKey && selectedNotes.has(clickedNoteKey)) {
             isMovingNotes = true;
             noteMoveData.startCanvasX = startX;
             noteMoveData.startCanvasY = startY;
@@ -2801,32 +3471,43 @@ document.addEventListener('DOMContentLoaded', function () {
             noteMoveData.deltaTick = 0;
             noteMoveData.deltaPitch = 0;
             noteMoveData.originalNotes = [];
+
             selectedNotes.forEach(key => {
                 const ref = JSON.parse(key);
-                const n = rawTracksData[ref.trackIndex].notes[ref.noteIndex];
-                noteMoveData.originalNotes.push({
-                    trackIndex: ref.trackIndex,
-                    noteIndex: ref.noteIndex,
-                    originalTick: n.start_tick,
-                    originalPitch: n.pitch
-                });
+                let noteObject = null;
+                if (ref.s_patternId && ref.s_noteIndex != null) {
+                    const owningPattern = patterns.get(ref.s_patternId);
+                    noteObject = owningPattern?.s_notes[ref.s_noteIndex];
+                } else if (ref.trackIndex != null && ref.noteIndex != null) {
+                    noteObject = rawTracksData[ref.trackIndex]?.notes[ref.noteIndex];
+                }
+
+                if (noteObject) {
+                    noteMoveData.originalNotes.push({
+                        key: key,
+                        originalTick: noteObject.start_tick,
+                        originalPitch: noteObject.pitch,
+                        originalDuration: noteObject.duration_ticks // Keep original duration
+                    });
+                }
             });
             canvas.style.cursor = 'move';
             return;
         }
 
-        // 4) Otherwise: selection or click-to-select
-        if (!shiftKey) selectedNotes.clear();
+        // 4. Clicked a new note (not previously selected, not resizing) OR box select starts
+        if (!shiftKey) {
+            selectedNotes.clear();
+        }
 
-        if (clickedNoteRef) {
-            // click on a new note: toggle or add to selection
-            const noteKey = JSON.stringify(clickedNoteRef);
-            if (shiftKey && selectedNotes.has(noteKey)) {
-                selectedNotes.delete(noteKey);
+        if (clickedNoteRef && clickedNoteKey) { // A note was clicked (and not for resizing duration)
+            if (shiftKey && selectedNotes.has(clickedNoteKey)) {
+                selectedNotes.delete(clickedNoteKey);
             } else {
-                selectedNotes.add(noteKey);
+                selectedNotes.add(clickedNoteKey);
             }
-            // prepare to drag immediately
+
+            // Immediately prepare to move the current selection (even if it's just one note)
             isMovingNotes = true;
             noteMoveData.startCanvasX = startX;
             noteMoveData.startCanvasY = startY;
@@ -2837,45 +3518,53 @@ document.addEventListener('DOMContentLoaded', function () {
             noteMoveData.originalNotes = [];
             selectedNotes.forEach(key => {
                 const ref = JSON.parse(key);
-                const n = rawTracksData[ref.trackIndex].notes[ref.noteIndex];
-                noteMoveData.originalNotes.push({
-                    trackIndex: ref.trackIndex,
-                    noteIndex: ref.noteIndex,
-                    originalTick: n.start_tick,
-                    originalPitch: n.pitch
-                });
+                let noteObject = null;
+                if (ref.s_patternId && ref.s_noteIndex != null) {
+                    const owningPattern = patterns.get(ref.s_patternId);
+                    noteObject = owningPattern?.s_notes[ref.s_noteIndex];
+                } else if (ref.trackIndex != null && ref.noteIndex != null) {
+                    noteObject = rawTracksData[ref.trackIndex]?.notes[ref.noteIndex];
+                }
+                if (noteObject) {
+                    noteMoveData.originalNotes.push({
+                        key: key,
+                        originalTick: noteObject.start_tick,
+                        originalPitch: noteObject.pitch,
+                        originalDuration: noteObject.duration_ticks
+                    });
+                }
             });
             canvas.style.cursor = 'move';
             redrawPianoRoll();
+            updateSelectionRhythmicCandidates();
             return;
         }
 
-        // 5) Click on empty space → start box select
-        isSelecting = true;
-        selectionRect = { x1: startX, y1: startY, x2: startX, y2: startY };
-        isMovingNotes = false;
-        canvas.style.cursor = 'crosshair';
-        redrawPianoRoll();
+        // 5. Click on empty space (not a pattern action, not resizing, not moving an existing selection) -> start box select
+        if (!clickedNoteRef) {
+            isSelecting = true;
+            selectionRect = { x1: startX, y1: startY, x2: startX, y2: startY };
+            isMovingNotes = false; // Ensure not moving notes when starting a box select
+            canvas.style.cursor = 'crosshair';
+            // No redraw needed here, mouseMove will draw the rect if it moves
+        }
     }
 
-
     function handleMouseMove(event) {
-        // Throttle redraws during mouse move for performance
         const now = performance.now();
-        if (now - lastMouseMoveTime < 16) { // Roughly 60fps limit
-            //return; // Skip if too soon - This might feel laggy, remove if needed
+        if ((isMovingNotes || isResizingNoteDuration) && now - lastMouseMoveTime < 16) { // Throttle updates to ~60fps
+            // return; // Uncomment for aggressive throttling if performance is an issue
         }
         lastMouseMoveTime = now;
 
-        // Calculate mouse position relative to canvas, but only if needed
         let mouseX = 0;
         let mouseY = 0;
-        let rect = null; // Cache rect
+        let domRect = null; // Use local variable name
 
-        if (isPanning || isSelecting || isMovingNotes || !document.hidden) { // Only calc if interacting or window visible
-            rect = canvas.getBoundingClientRect();
-            mouseX = event.clientX - rect.left;
-            mouseY = event.clientY - rect.top;
+        if (isPanning || isSelecting || isMovingNotes || isResizingNoteDuration || !document.hidden) {
+            domRect = canvas.getBoundingClientRect();
+            mouseX = event.clientX - domRect.left;
+            mouseY = event.clientY - domRect.top;
         }
 
         if (isPanning) {
@@ -2884,53 +3573,100 @@ document.addEventListener('DOMContentLoaded', function () {
             offsetX = dragStartOffsetX - dx;
             offsetY = dragStartOffsetY - dy;
             clampOffsets();
-            redrawPianoRoll(); // Redraw needed for panning
+            redrawPianoRoll();
         } else if (isSelecting) {
-            selectionRect.x2 = mouseX;
-            selectionRect.y2 = mouseY;
-            redrawPianoRoll(); // Redraw to show selection rect extending
-        } else if (isMovingNotes && selectedNotes.size > 0) {
+            if (selectionRect) { // Ensure selectionRect is not null
+                selectionRect.x2 = mouseX;
+                selectionRect.y2 = mouseY;
+                redrawPianoRoll();
+            }
+        } else if (isResizingNoteDuration && noteResizeData) {
+            const owningPattern = patterns.get(noteResizeData.s_patternId);
+            if (owningPattern && owningPattern.isSimplification && owningPattern.s_notes) {
+                const noteToModify = owningPattern.s_notes[noteResizeData.s_noteIndex];
+                if (noteToModify) {
+                    const currentTick = canvasXToMidiTick(mouseX);
+                    const snappedEndTick = snapTick(currentTick); // Snap the proposed new end tick
+
+                    // Duration is based on the note's actual start_tick, not originalStartTick from resize data,
+                    // in case the note could also be moved (though current logic separates move and resize).
+                    let newDurationTicks = snappedEndTick - noteToModify.start_tick;
+
+                    if (newDurationTicks < MIN_NOTE_DURATION_TICKS) {
+                        newDurationTicks = MIN_NOTE_DURATION_TICKS;
+                    }
+                    noteToModify.duration_ticks = newDurationTicks;
+                    recalculateSimplificationRange(owningPattern); // Update pattern's bounding box
+                    redrawPianoRoll();
+                }
+            }
+        } else if (isMovingNotes && noteMoveData.originalNotes && noteMoveData.originalNotes.length > 0) {
             noteMoveData.currentCanvasX = mouseX;
             noteMoveData.currentCanvasY = mouseY;
 
             const deltaCanvasX = noteMoveData.currentCanvasX - noteMoveData.startCanvasX;
             const deltaCanvasY = noteMoveData.currentCanvasY - noteMoveData.startCanvasY;
 
-            // Convert canvas delta to MIDI delta (using canvas scale)
             const currentDeltaTick = deltaCanvasX / (PIXELS_PER_TICK_BASE * scaleX);
-            // Vertical delta needs negation; round to nearest pitch step
-            const currentDeltaPitch = -Math.round(deltaCanvasY / (NOTE_BASE_HEIGHT * scaleY));
+            const currentDeltaPitch = -Math.round(deltaCanvasY / (NOTE_BASE_HEIGHT * scaleY)); // Y is inverted
 
-            // Only update and redraw if the effective MIDI delta has changed
             if (currentDeltaTick !== noteMoveData.deltaTick || currentDeltaPitch !== noteMoveData.deltaPitch) {
                 noteMoveData.deltaTick = currentDeltaTick;
                 noteMoveData.deltaPitch = currentDeltaPitch;
 
-                // Apply delta to all selected notes in the actual data model
-                noteMoveData.originalNotes.forEach(orig => {
-                    const note = rawTracksData[orig.trackIndex]?.notes[orig.noteIndex];
-                    if (note) {
-                        // Calculate new values (add snapping logic here if desired)
-                        // Example: Snap horizontal movement to nearest 16th note?
-                        // const sixteenthNoteTicks = ticksPerBeat / 4;
-                        // const snappedTick = Math.max(0, Math.round((orig.originalTick + noteMoveData.deltaTick) / sixteenthNoteTicks) * sixteenthNoteTicks);
-                        // const newTick = Math.max(0, Math.round(orig.originalTick + noteMoveData.deltaTick)); // Simple rounding for now
-                        const raw = orig.originalTick + noteMoveData.deltaTick;
-                        const newTick = Math.max(0, snapTick(raw));
+                const affectedSimplificationPatterns = new Set();
+                noteMoveData.originalNotes.forEach(selectedNoteInfo => {
+                    const ref = JSON.parse(selectedNoteInfo.key);
+                    let noteToModify = null;
 
-                        const newPitch = Math.max(PITCH_MIN, Math.min(PITCH_MAX, orig.originalPitch + noteMoveData.deltaPitch)); // Clamp pitch
+                    if (ref.s_patternId && ref.s_noteIndex != null) {
+                        const owningPattern = patterns.get(ref.s_patternId);
+                        if (owningPattern && owningPattern.isSimplification && owningPattern.s_notes) {
+                            noteToModify = owningPattern.s_notes[ref.s_noteIndex];
+                            affectedSimplificationPatterns.add(owningPattern);
+                        }
+                    } else if (ref.trackIndex != null && ref.noteIndex != null) {
+                        noteToModify = rawTracksData[ref.trackIndex]?.notes[ref.noteIndex];
+                    }
 
-                        note.start_tick = newTick;
-                        note.pitch = newPitch;
+                    if (noteToModify) {
+                        const rawNewTick = selectedNoteInfo.originalTick + noteMoveData.deltaTick;
+                        noteToModify.start_tick = Math.max(0, snapTick(rawNewTick));
+                        noteToModify.pitch = Math.max(PITCH_MIN, Math.min(PITCH_MAX, selectedNoteInfo.originalPitch + noteMoveData.deltaPitch));
+                        // Duration remains unchanged during a move operation unless snapping logic changes it.
+                        // selectedNoteInfo.originalDuration is available if needed here.
                     }
                 });
-                redrawPianoRoll(); // Redraw to show notes moving
+                affectedSimplificationPatterns.forEach(p => recalculateSimplificationRange(p));
+                redrawPianoRoll();
             }
-        } else if (rect) { // Not dragging, update cursor based on hover
+        } else if (domRect) { // Not dragging, update cursor based on hover
+            const activePat = patterns.get(activePatternId);
+            let overResizableEdge = false;
             const hoverNoteRef = findNoteAtCanvasCoords(mouseX, mouseY);
-            if (hoverNoteRef) {
+
+            if (hoverNoteRef && hoverNoteRef.s_patternId && activePat && activePat.id === hoverNoteRef.s_patternId && activePat.isSimplification) {
+                const noteObject = activePat.s_notes[hoverNoteRef.s_noteIndex];
+                if (noteObject) {
+                    const noteCanvasX = midiTickToCanvasX(noteObject.start_tick);
+                    const noteCanvasWidth = noteObject.duration_ticks * PIXELS_PER_TICK_BASE * scaleX;
+                    const noteCanvasEndX = noteCanvasX + noteCanvasWidth;
+                    const noteCanvasY = midiPitchToCanvasY(noteObject.pitch);
+                    const noteCanvasHeight = NOTE_BASE_HEIGHT * scaleY;
+
+                    if (mouseX >= noteCanvasEndX - RESIZE_HANDLE_WIDTH && mouseX <= noteCanvasEndX + RESIZE_HANDLE_WIDTH / 2 &&
+                        mouseY >= noteCanvasY && mouseY <= noteCanvasY + noteCanvasHeight
+                    ) {
+                        overResizableEdge = true;
+                    }
+                }
+            }
+
+            if (overResizableEdge) {
+                canvas.style.cursor = 'ew-resize';
+            } else if (hoverNoteRef) {
                 const key = JSON.stringify(hoverNoteRef);
-                canvas.style.cursor = selectedNotes.has(key) ? 'move' : 'pointer'; // Show move if hovering selected, pointer otherwise
+                canvas.style.cursor = selectedNotes.has(key) ? 'move' : 'pointer';
             } else {
                 canvas.style.cursor = 'default';
             }
@@ -2938,44 +3674,64 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleMouseUp(event) {
-        // This listener is on window, check button if needed
-        if (event.button === 1 && isPanning) { // Middle mouse button release
+        if (event.button === 1 && isPanning) { // Middle mouse button release for panning
             isPanning = false;
-            canvas.style.cursor = 'default'; // Reset cursor (check hover state?)
+            // Cursor will be updated by handleMouseMove if mouse is still over canvas, or by handleMouseLeaveCanvas
+            // For safety, you could explicitly call handleMouseMove here to update cursor if needed:
+            // handleMouseMove(event); // This would re-evaluate cursor based on hover
+            canvas.style.cursor = 'default'; // Or set to default and let mouseMove correct it
         } else if (event.button === 0) { // Left mouse button release
-            if (isSelecting) {
+            if (isResizingNoteDuration) {
+                isResizingNoteDuration = false;
+                if (noteResizeData && noteResizeData.s_patternId) {
+                    const owningPattern = patterns.get(noteResizeData.s_patternId);
+                    if (owningPattern) {
+                        // Final recalculation after snap might have occurred on mouse move
+                        recalculateSimplificationRange(owningPattern);
+                    }
+                    queueSave(); // Persist changes
+                }
+                noteResizeData = null; // Clear resize data
+                // Update cursor based on where the mouse is now
+                const domRect = canvas.getBoundingClientRect();
+                const mouseX = event.clientX - domRect.left;
+                const mouseY = event.clientY - domRect.top;
+                handleMouseMove(event); // Force cursor update based on current mouse position
+                redrawPianoRoll(); // Final redraw
+            } else if (isSelecting) {
                 isSelecting = false;
-                // Finalize selection based on rect coordinates (already in canvas space)
-                const finalRect = {
-                    x1: Math.min(selectionRect.x1, selectionRect.x2),
-                    y1: Math.min(selectionRect.y1, selectionRect.y2),
-                    x2: Math.max(selectionRect.x1, selectionRect.x2),
-                    y2: Math.max(selectionRect.y1, selectionRect.y2)
-                };
-                selectNotesInRect(finalRect, event.shiftKey); // Pass shiftKey state
-                selectionRect = null; // Clear rect
-                canvas.style.cursor = 'default'; // Reset cursor (check hover state?)
-                redrawPianoRoll(); // Update visuals
+                if (selectionRect) { // Check if selectionRect is defined
+                    const finalRect = {
+                        x1: Math.min(selectionRect.x1, selectionRect.x2),
+                        y1: Math.min(selectionRect.y1, selectionRect.y2),
+                        x2: Math.max(selectionRect.x1, selectionRect.x2),
+                        y2: Math.max(selectionRect.y1, selectionRect.y2)
+                    };
+                    selectNotesInRect(finalRect, event.shiftKey);
+                }
+                selectionRect = null;
+                canvas.style.cursor = 'default';
+                redrawPianoRoll();
             } else if (isMovingNotes) {
                 isMovingNotes = false;
-                // Data was already modified during move.
-                // Optional: Final snap? Recalculate bounds? Trigger save state for undo?
-                calculateContentDimensions(); // Recalculate content width in case notes moved far right
-                noteMoveData.originalNotes = []; // Clear move data
-
-                // Reset cursor based on current hover state
-                const rect = canvas.getBoundingClientRect();
-                const mouseX = event.clientX - rect.left;
-                const mouseY = event.clientY - rect.top;
-                const hoverNoteRef = findNoteAtCanvasCoords(mouseX, mouseY);
-                if (hoverNoteRef) {
-                    const key = JSON.stringify(hoverNoteRef);
-                    canvas.style.cursor = selectedNotes.has(key) ? 'move' : 'pointer';
-                } else {
-                    canvas.style.cursor = 'default';
+                let simplificationsWereModified = false;
+                if (noteMoveData.originalNotes) {
+                    noteMoveData.originalNotes.forEach(selectedNoteInfo => {
+                        const ref = JSON.parse(selectedNoteInfo.key);
+                        if (ref.s_patternId) {
+                            simplificationsWereModified = true;
+                            const owningPattern = patterns.get(ref.s_patternId);
+                            if (owningPattern) recalculateSimplificationRange(owningPattern);
+                        }
+                    });
                 }
-                // No final redraw needed here usually as mouseMove handles it, unless snapping logic runs on mouseUp
-                // redrawPianoRoll();
+                if (simplificationsWereModified) {
+                    queueSave();
+                }
+                noteMoveData.originalNotes = []; // Clear original notes data
+                // Update cursor based on where the mouse is now
+                handleMouseMove(event); // Force cursor update
+                redrawPianoRoll(); // Final redraw if anything changed due to snapping on move
             }
         }
     }
@@ -3471,7 +4227,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const L = 16, num = 4, den = 4, barT = num / den * 4 * TPB;
         const currentBpm = window.currentBpm || 120;
 
-        const head = `X:1\nT:${ttl}\nM:${num}/${den}\nQ:${currentBpm}\nL:1/${L}\nK:Cmaj\n[V:1] `;
+        // const head = `X:1\nT:${ttl}\nM:${num}/${den}\nQ:${currentBpm}\nL:1/${L}\nK:Cmaj\n[V:1] `;
         let abc = '', t = 0, inBar = 0;
         notes.forEach(n => {
             if (n.start_tick > t) {
@@ -3530,7 +4286,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * Return *raw* ABC for one pattern.
 * – includes only notes whose **start_tick** lies inside pat.range  
  * – respects pat.instruments (so drum‑only patterns stay drum‑only)  
- * – leaves the global `selectedNotes` exactly as it was on entry
+ * – leaves the global `selectedNotes` exactly as it was on entry
  */
     function abcForPatternNoAbc(pat) {
         /* 1) collect refs – strict start‑inside test */
@@ -3656,6 +4412,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         }
+
+        if ((event.key === 'Delete' || event.key === 'Backspace') && selectedNotes.size > 0) {
+            const activePat = patterns.get(activePatternId);
+            if (activePat && activePat.isSimplification && activePat.s_notes) {
+                const indicesToDelete = [];
+                selectedNotes.forEach(keyStr => {
+                    try {
+                        const ref = JSON.parse(keyStr);
+                        if (ref.s_patternId === activePat.id && typeof ref.s_noteIndex === 'number') {
+                            indicesToDelete.push(ref.s_noteIndex);
+                        }
+                    } catch (e) {
+                        console.error("Error parsing selected note key for deletion:", keyStr, e);
+                    }
+                });
+
+                if (indicesToDelete.length > 0) {
+                    event.preventDefault(); // Prevent browser back navigation on Backspace
+                    indicesToDelete.sort((a, b) => b - a); // Sort high to low for safe splicing
+                    indicesToDelete.forEach(s_idx => {
+                        if (s_idx >= 0 && s_idx < activePat.s_notes.length) {
+                            activePat.s_notes.splice(s_idx, 1);
+                        } else {
+                            console.warn("Attempted to delete out-of-bounds s_noteIndex:", s_idx);
+                        }
+                    });
+                    selectedNotes.clear(); // Clear selection after deleting
+                    recalculateSimplificationRange(activePat);
+                    redrawPianoRoll();
+                    queueSave();
+                    invalidateSynth(); // Invalidate synth as data changed
+                }
+                return; // Handled deletion for simplification
+            }
+            // Add logic here if you want to delete raw MIDI notes when a non-simplification pattern is active.
+            // For now, this only handles simplification note deletion.
+        }
+
 
 
         // Shift + G  (ignore repeats)
@@ -3872,116 +4666,183 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Selection Logic ---
     function findNoteAtCanvasCoords(canvasX, canvasY) {
-        // Determine the pitch corresponding to the Y coordinate
         const targetPitch = canvasYToMidiPitch(canvasY);
+        const activePat = patterns.get(activePatternId);
 
-        // Iterate through VISIBLE tracks first
+        // Priority 1: Check notes within the active simplification pattern
+        if (activePat && activePat.isSimplification && activePat.s_notes) {
+            // Iterate backwards for Z-order (last drawn = topmost visually)
+            for (let s_idx = activePat.s_notes.length - 1; s_idx >= 0; s_idx--) {
+                const note = activePat.s_notes[s_idx];
+                const originalTrackIdx = note.originalTrackIndex; // Get the original track this note belonged to
+
+                // Only consider if the original track is visible
+                // if (originalTrackIdx === undefined || !trackStates[originalTrackIdx] || !trackStates[originalTrackIdx].isVisible) {
+                //     continue;
+                // }
+
+                if (note.pitch !== targetPitch) continue;
+
+                const noteX = midiTickToCanvasX(note.start_tick);
+                const noteY = midiPitchToCanvasY(note.pitch);
+                const noteW = note.duration_ticks * PIXELS_PER_TICK_BASE * scaleX;
+                const noteH = NOTE_BASE_HEIGHT * scaleY;
+
+                if (canvasX >= noteX && canvasX < noteX + Math.max(1, noteW) &&
+                    canvasY >= noteY && canvasY < noteY + noteH) {
+                    return { s_patternId: activePat.id, s_noteIndex: s_idx }; // Distinguishable key
+                }
+            }
+        }
+
+        // Priority 2: Check notes from rawTracksData (for active non-simplification pattern or ghost notes)
+        // Iterate through VISIBLE tracks
         for (let ti = 0; ti < trackStates.length; ti++) {
             if (!trackStates[ti].isVisible) continue;
+
+            // If active pattern is a simplification, we've already checked its notes. Don't check raw data for its instruments.
+            if (activePat && activePat.isSimplification && activePat.instruments && activePat.instruments.includes(ti)) {
+                continue;
+            }
 
             const track = rawTracksData[ti];
             if (!track || !track.notes) continue;
 
-            // Iterate backwards through notes in the track for correct Z-order (topmost first)
+            // Only check notes if this track is the activeTrack OR if we are generally checking all visible notes
+            // The activeTrackIndex check ensures that if we clicked on an active non-simplification track, its notes get priority.
+            let relevantToCurrentView = (ti === activeTrackIndex) || // is it the globally active track?
+                (!(activePat && activePat.isSimplification)); // or are we not in a simplification view?
+
+            if (!relevantToCurrentView && activePat && activePat.id !== ROOT_ID) {
+                // If checking a specific pattern (not root, not simplification) make sure this trackIndex is part of it
+                if (!activePat.instruments || !activePat.instruments.includes(ti)) continue;
+            }
+
+
             for (let ni = track.notes.length - 1; ni >= 0; ni--) {
                 const note = track.notes[ni];
-
-                // Quick pitch check first - reduces calculations
                 if (note.pitch !== targetPitch) continue;
 
-                // Calculate note bounds in canvas coordinates using current viewport
-                const noteX = midiTickToCanvasX(note.start_tick);
-                const noteY = midiPitchToCanvasY(note.pitch); // Top Y of the note row
-                const noteW = note.duration_ticks * PIXELS_PER_TICK_BASE * scaleX;
-                const noteH = NOTE_BASE_HEIGHT * scaleY; // Full height of the row for clicking
+                // If an active pattern is set (and it's not ROOT and not a simplification),
+                // only consider notes that fall within that pattern's definition for clicking.
+                if (activePat && activePat.id !== ROOT_ID && !activePat.isSimplification) {
+                    if (!noteInPattern(note, activePat, ti)) {
+                        continue;
+                    }
+                }
 
-                // Check for collision (consider rounding/edge cases)
-                // Use Math.max(1, noteW) to ensure very short notes are clickable
+
+                const noteX = midiTickToCanvasX(note.start_tick);
+                const noteY = midiPitchToCanvasY(note.pitch);
+                const noteW = note.duration_ticks * PIXELS_PER_TICK_BASE * scaleX;
+                const noteH = NOTE_BASE_HEIGHT * scaleY;
+
                 if (canvasX >= noteX && canvasX < noteX + Math.max(1, noteW) &&
-                    canvasY >= noteY && canvasY < noteY + noteH) // Check within the full row height
-                {
-                    // Found a note! Return its reference. Active track notes checked first if z-order matters more.
-                    // If priority should be given to active track notes:
-                    // Consider two loops: one for active track, one for others.
-                    // For now, simple Z-order (last drawn = topmost) is handled by iterating track notes backwards.
+                    canvasY >= noteY && canvasY < noteY + noteH) {
                     return { trackIndex: ti, noteIndex: ni };
                 }
             }
         }
-        return null; // No note found at these coordinates
+        return null;
     }
 
     function selectNotesInRect(rect, shiftKeyHeld) { // rect is in canvas coordinates
         if (!rect) return;
 
-        const parentPat = patterns.get(activePatternId);
+        const startTickCanvas = Math.min(rect.x1, rect.x2);
+        const endTickCanvas = Math.max(rect.x1, rect.x2);
+        const highPitchCanvas = Math.min(rect.y1, rect.y2); // Lower Y value is higher pitch
+        const lowPitchCanvas = Math.max(rect.y1, rect.y2);
 
-        const rawStart = canvasXToMidiTick(rect.x1);
-        const rawEnd = canvasXToMidiTick(rect.x2);
-        let startTick = snapTick(Math.min(rawStart, rawEnd));
-        let endTick = snapTick(Math.max(rawStart, rawEnd)) - 1;
+        const selStartTick = canvasXToMidiTick(startTickCanvas);
+        const selEndTick = canvasXToMidiTick(endTickCanvas);
+        const selHighPitch = canvasYToMidiPitch(highPitchCanvas);
+        const selLowPitch = canvasYToMidiPitch(lowPitchCanvas);
 
-        lastBoxRange.start = startTick;
-        lastBoxRange.end = endTick;
+        // For box select, typically we want to snap the *selection box range* if snapMode is on
+        // The `lastBoxRange` is used by `getSelectionRect` for `addPattern`
+        lastBoxRange.start = snapTick(selStartTick);
+        lastBoxRange.end = snapTick(selEndTick);
 
 
-        // // Convert selection rect from canvas coords to MIDI coords
-        // const startTick = canvasXToMidiTick(rect.x1);
-        // const endTick = canvasXToMidiTick(rect.x2);
-        // Remember: Lower Y value corresponds to higher pitch
-        const highPitch = canvasYToMidiPitch(rect.y1); // Pitch at the top edge of the rect
-        const lowPitch = canvasYToMidiPitch(rect.y2);  // Pitch at the bottom edge of the rect
+        if (!shiftKeyHeld) {
+            selectedNotes.clear();
+        }
 
-        // If not holding shift, clear previous selection before selecting new notes
-        // (Already handled in mousedown, but double check here if needed)
-        // if (!shiftKeyHeld) { selectedNotes.clear(); } // Redundant if mousedown clears
+        const activePat = patterns.get(activePatternId);
 
-        trackStates.forEach((state, trackIndex) => {
-            if (!state.isVisible) return;
+        if (activePat && activePat.isSimplification && activePat.s_notes) {
+            // Selecting within an active simplification
+            activePat.s_notes.forEach((note, s_noteIdx) => {
+                const originalTrackIdx = note.originalTrackIndex;
+                // if (originalTrackIdx === undefined || !trackStates[originalTrackIdx] || !trackStates[originalTrackIdx].isVisible) {
+                //     return; // Skip if original track is not visible
+                // }
 
-            // *** NEW: only pick notes on instruments that belong to the parent pattern ***
-            if (activePatternId !== ROOT_ID
-                && !parentPat.instruments.includes(trackIndex)) {
-                return;
-            } const track = rawTracksData[trackIndex];
-
-            if (!track || !track.notes) return;
-
-            track.notes.forEach((note, noteIndex) => {
-                // Check if note intersects the rectangle in MIDI space
-                const noteEndTick = note.start_tick + note.duration_ticks;
-                // Check horizontal overlap: Note must start before rect ends AND end after rect starts.
-                // const intersectsHorizontally = note.start_tick < endTick && noteEndTick > startTick;
+                const noteEnd = note.start_tick + note.duration_ticks;
                 let intersectsHorizontally;
                 if (copyMode === 'range') {
-                    intersectsHorizontally = note.start_tick < endTick && noteEndTick > startTick;
-                } else {                           // 'start'
-                    intersectsHorizontally = note.start_tick >= startTick && note.start_tick <= endTick;
+                    intersectsHorizontally = note.start_tick < selEndTick && noteEnd > selStartTick;
+                } else { // 'start'
+                    intersectsHorizontally = note.start_tick >= selStartTick && note.start_tick <= selEndTick;
                 }
-
-                // Check vertical overlap: Note pitch must be within the rect's pitch range.
-                const intersectsVertically = note.pitch >= lowPitch && note.pitch <= highPitch;
+                const intersectsVertically = note.pitch >= selLowPitch && note.pitch <= selHighPitch;
 
                 if (intersectsHorizontally && intersectsVertically) {
-                    const noteKey = JSON.stringify({ trackIndex, noteIndex });
-                    // Selection logic based on shift key:
-                    if (shiftKeyHeld) {
-                        // Toggle selection for this note
-                        if (selectedNotes.has(noteKey)) {
-                            // selectedNotes.delete(noteKey); // Standard shift-add doesn't deselect in box
-                        } else {
-                            selectedNotes.add(noteKey);
-                        }
+                    const noteKey = JSON.stringify({ s_patternId: activePat.id, s_noteIndex: s_noteIdx });
+                    if (shiftKeyHeld && selectedNotes.has(noteKey)) {
+                        // selectedNotes.delete(noteKey); // Box select usually doesn't deselect with shift
                     } else {
-                        // Regular box select (no shift): always add to selection
                         selectedNotes.add(noteKey);
                     }
                 }
             });
-        });
-        invalidateSynth();
-        updateSelectionRhythmicCandidates();
+        } else {
+            // Selecting from rawTracksData (either ROOT is active, or a non-simplification pattern is active)
+            trackStates.forEach((state, trackIndex) => {
+                if (!state.isVisible) return;
 
+                // If a specific non-simplification pattern is active, only consider its instruments
+                if (activePat && activePat.id !== ROOT_ID && !activePat.isSimplification) {
+                    if (!activePat.instruments || !activePat.instruments.includes(trackIndex)) {
+                        return;
+                    }
+                }
+
+                const track = rawTracksData[trackIndex];
+                if (!track || !track.notes) return;
+
+                track.notes.forEach((note, noteIndex) => {
+                    // If a specific non-simplification pattern is active, further filter by noteInPattern
+                    if (activePat && activePat.id !== ROOT_ID && !activePat.isSimplification) {
+                        if (!noteInPattern(note, activePat, trackIndex)) {
+                            return;
+                        }
+                    }
+
+                    const noteEnd = note.start_tick + note.duration_ticks;
+                    let intersectsHorizontally;
+                    if (copyMode === 'range') {
+                        intersectsHorizontally = note.start_tick < selEndTick && noteEnd > selStartTick;
+                    } else { // 'start'
+                        intersectsHorizontally = note.start_tick >= selStartTick && note.start_tick <= selEndTick;
+                    }
+                    const intersectsVertically = note.pitch >= selLowPitch && note.pitch <= selHighPitch;
+
+                    if (intersectsHorizontally && intersectsVertically) {
+                        const noteKey = JSON.stringify({ trackIndex, noteIndex });
+                        if (shiftKeyHeld && selectedNotes.has(noteKey)) {
+                            // selectedNotes.delete(noteKey);
+                        } else {
+                            selectedNotes.add(noteKey);
+                        }
+                    }
+                });
+            });
+        }
+        invalidateSynth();
+        updateSelectionRhythmicCandidates(); // If you use this
+        // redrawPianoRoll(); // This will be called by mouseUp generally
     }
 
 
@@ -4211,7 +5072,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function midiPitchToAbcNote(pitch, keyAcc, measureAcc, isPercussion = false) {
         if (isPercussion) {
             const letter = DRUM_PITCH_TO_ABC[pitch] || 'z';   // default BD
-            return letter;           // upper‑case, no accidentals, octave 4
+            return letter;           // upper‑case, no accidentals, octave 4
         }
 
         /* ---------- normal melodic handling (unchanged) ---------- */
@@ -4347,82 +5208,107 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function generateAbcFromSelectionMultiVoice(trackName = "Multi-Track Snippet") {
         if (selectedNotes.size === 0) return "";
-    
+
         const TPB = window.ticksPerBeat || 480;
-        const sixteenth = TPB / 4;
+        const sixteenth = TPB / 4; // Smallest unit for quantization
         const q = v => Math.round(v / sixteenth) * sixteenth;
-    
-        // Group and quantize notes by track
-        const byTrack = new Map();
+
+        // Group and quantize notes by their effective track index
+        const byTrack = new Map(); // Map<effectiveTrackIndex, Array<ProcessedNoteData>>
         selectedNotes.forEach(k => {
-            const { trackIndex, noteIndex } = JSON.parse(k);
-            const raw = rawTracksData[trackIndex]?.notes[noteIndex];
-            if (!raw || raw.duration_ticks <= 0) return;
-    
-            // Quantize and clamp negative starts
-            const rawStart = q(raw.start_tick);
-            const start = Math.max(0, rawStart);
-            const dur = Math.max(sixteenth, q(raw.duration_ticks));
-    
-            if (!byTrack.has(trackIndex)) byTrack.set(trackIndex, []);
-            byTrack.get(trackIndex).push({ ...raw, start, dur });
+            const ref = JSON.parse(k);
+            let noteToProcess = null;
+            let effectiveTrackIndex = -1;
+
+            if (ref.s_patternId && typeof ref.s_noteIndex === 'number') { // Note from a simplification
+                const owningPattern = patterns.get(ref.s_patternId);
+                if (owningPattern && owningPattern.isSimplification && owningPattern.s_notes) {
+                    const s_note = owningPattern.s_notes[ref.s_noteIndex];
+                    if (s_note) {
+                        noteToProcess = s_note;
+                        effectiveTrackIndex = s_note.originalTrackIndex; // Use original track for grouping
+                    }
+                }
+            } else if (typeof ref.trackIndex === 'number' && typeof ref.noteIndex === 'number') { // Note from rawTracksData
+                const rawNote = rawTracksData[ref.trackIndex]?.notes[ref.noteIndex];
+                if (rawNote) {
+                    noteToProcess = rawNote;
+                    effectiveTrackIndex = ref.trackIndex;
+                }
+            }
+
+            if (noteToProcess && noteToProcess.duration_ticks > 0 && effectiveTrackIndex !== -1) {
+                const start = Math.max(0, q(noteToProcess.start_tick));
+                const dur = Math.max(sixteenth, q(noteToProcess.duration_ticks));
+                const processedNoteData = {
+                    pitch: noteToProcess.pitch,
+                    velocity: noteToProcess.velocity,
+                    start,
+                    dur
+                };
+
+                if (!byTrack.has(effectiveTrackIndex)) byTrack.set(effectiveTrackIndex, []);
+                byTrack.get(effectiveTrackIndex).push(processedNoteData);
+            }
         });
+
         if (!byTrack.size) return "";
-    
-        // Get unique track indices
-        const allTracks = [...new Set(
-            Array.from(selectedNotes).map(k => JSON.parse(k).trackIndex)
-        )];
-    
-        // Split into drums vs. non-drums
-        const drumTracks = allTracks.filter(ti => isDrumTrack(ti)).sort((a, b) => a - b);
-        const nonDrumTracks = allTracks.filter(ti => !isDrumTrack(ti)).sort((a, b) => a - b);
-    
-        // Final ordering: all drums first, then the rest
-        const selectedTrackIndices = [...drumTracks, ...nonDrumTracks];
-    
+
+        // Get unique effective track indices from the map's keys
+        const allEffectiveTrackIndices = Array.from(byTrack.keys());
+
+        // Split into drums vs. non-drums based on the original track data
+        const drumTracks = allEffectiveTrackIndices.filter(ti => isDrumTrack(ti)).sort((a, b) => a - b);
+        const nonDrumTracks = allEffectiveTrackIndices.filter(ti => !isDrumTrack(ti)).sort((a, b) => a - b);
+
+        // Final ordering for voices: all drums first, then the rest
+        const voiceTrackIndices = [...drumTracks, ...nonDrumTracks];
+
         // Header setup
         const num = window.timeSignatureNumerator || 4;
         const den = window.timeSignatureDenominator || 4;
-        const L = document.getElementById("abcUnitNoteLength").value || 16;
+        const L = document.getElementById("abcUnitNoteLength").value || 16; // Default L:1/16
         const root = NOTE_NAMES[selectedRootNote] || 'C';
         const isMin = selectedScaleType.toLowerCase().includes('min');
         const keyName = root + (isMin ? 'min' : 'maj');
         const ticksPerBar = TPB * (4 / den) * num;
         const currentBpm = window.currentBpm || 120;
-    
-        let abc = `X:1\nT:${trackName}\nM:${num}/${den}\nQ:${currentBpm}\nL:1/${L}\nK:${keyName}\n`;
-    
-        // Add %%score directive
-        const voiceLabels = selectedTrackIndices.map((_, index) => `V${index + 1}`);
-        abc += `%%score (${voiceLabels.join(' ')})\n`;
-    
+
+        let abc = `X:1\nT:${trackName}\nM:${num}/${den}\nQ:${currentBpm}\nL:1/${L}\nK:${keyName}\n%%MIDI tempo ${currentBpm}\n`;
+
+        // Add %%score directive using a simple V1, V2, ... for the number of voices we'll actually generate
+        const voiceLabels = voiceTrackIndices.map((_, index) => `V${index + 1}`);
+        if (voiceLabels.length > 0) {
+            abc += `%%score (${voiceLabels.join(' ')})\n`;
+        }
+
+
         // Initialize channel counter for non-drum tracks
         let channelCounter = 1;
-    
+
         // Generate ABC for each voice
-        selectedTrackIndices.forEach((trackIdx, adjustedIndex) => {
-            // Use adjustedIndex for voice numbering to match %%score directive
-            const vno = adjustedIndex + 1;
-            const notes = byTrack.get(trackIdx);
-            if (!notes || notes.length === 0) return;
+        voiceTrackIndices.forEach((originalTrackIdx, voiceIndex) => {
+            const vno = voiceIndex + 1; // Voice number for ABC (V:1, V:2, etc.)
+            const notes = byTrack.get(originalTrackIdx);
+            if (!notes || notes.length === 0) return; // Should not happen if originalTrackIdx came from byTrack.keys()
             notes.sort((a, b) => a.start !== b.start ? a.start - b.start : a.pitch - b.pitch);
-    
-            const tr = rawTracksData[trackIdx];
-            let nm = getTrackInstrumentName(tr, trackIdx);
-            const snm = tr.short_name || nm;
-            const clef = tr.clef || 'treble';
-            const isDrum = isDrumTrack(trackIdx);
+
+            const tr = rawTracksData[originalTrackIdx]; // Get metadata from the original track
+            let nm = getTrackInstrumentName(tr, originalTrackIdx);
+            const snm = tr.short_name || nm.substring(0, 3); // Abbreviated name
+            const clef = tr.clef || (isDrumTrack(originalTrackIdx) ? 'perc' : 'treble');
+            const isDrum = isDrumTrack(originalTrackIdx);
             const perc = isDrum ? ' perc=yes' : '';
-    
-            // Adjust instrument name if needed
+
+            // Adjust instrument name if needed (example)
             nm = nm.replace("Synth ", 'Synth');
             nm = nm.replace("SynthBass", 'Synth Bass');
-            const program = isDrum ? null : (MELODY_NAME_TO_PROGRAM[nm] || 0);
-    
+            const program = isDrum ? null : (MELODY_NAME_TO_PROGRAM[nm] != null ? MELODY_NAME_TO_PROGRAM[nm] : (tr.program != null ? tr.program : 0));
+
+
             // Voice definition
             abc += `V:${vno} name="${nm}" snm="${snm}" clef=${clef}${perc}\n`;
-    
+
             // Assign MIDI channel
             if (isDrum) {
                 abc += `%%MIDI channel 10\n`; // Drums always on channel 10
@@ -4433,18 +5319,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (channelCounter === 10) channelCounter++; // Skip channel 10
                 if (channelCounter > 16) channelCounter = 1; // Wrap around if necessary
             }
-    
+
             // Inline voice identifier
             abc += `[V:${vno}] `;
-    
+
             // Notation generation
-            let now = 0;
-            let inBar = 0;
+            let now = 0; // Start time for this voice, relative to the earliest note in the selection for this voice
+            if (notes.length > 0) { // Adjust 'now' to the start of the first note of this specific voice
+                now = Math.floor(notes[0].start / ticksPerBar) * ticksPerBar; // Start at the beginning of the measure of the first note
+            }
+            let inBar = now % ticksPerBar; // Ticks already accumulated in the current bar due to starting offset
+
             let measureAcc = {};
             const keyAcc = getKeyAccidentals(root, isMin);
-            const durStr = t => ticksToAbcDuration(t, TPB * (4 / L));
+            const durStr = t => ticksToAbcDuration(t, TPB * (4 / L)); // L is unit note length (e.g. 1/8, 1/16)
             const isPercussion = isDrum;
-    
+
             let i = 0;
             while (i < notes.length) {
                 const n = notes[i];
@@ -4454,12 +5344,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     now += rest;
                     inBar += rest;
                 }
+                // Collect simultaneous notes (chord)
                 const chord = [n];
                 i++;
                 while (i < notes.length && notes[i].start === n.start) {
                     chord.push(notes[i]);
                     i++;
                 }
+                // Render note/chord
                 if (chord.length > 1) {
                     abc += '[';
                     chord.forEach(c => {
@@ -4471,6 +5363,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 now += n.dur;
                 inBar += n.dur;
+
+                // Bar lines and accidental reset
                 while (inBar >= ticksPerBar) {
                     abc += '| ';
                     measureAcc = {};
@@ -4479,10 +5373,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             abc = abc.trimEnd() + ' |]\n';
         });
-    
-        // Trim common bar rests
-        const unitsPerBar = (num * L) / den;
+
+        // Trim common bar rests from the start of all voices
+        const L_value = parseInt(L, 10); // L is the denominator of the unit note length, e.g. for L:1/8, L_value is 8
+        const ticksPerLUnit = (TPB * 4) / L_value;
+        const unitsPerBar = ticksPerBar / ticksPerLUnit; // This is how many L-units fit in a bar
         abc = trimCommonBarRests(abc, unitsPerBar);
+
         return abc.trim();
     }
 
@@ -5532,126 +6429,186 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    function drawAllNotes(startTickVisible, endTickVisible,
-        lowPitchVisible, highPitchVisible) {
-        const pat = patterns.get(activePatternId);
+    function drawAllNotes(startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible) {
+        const activePat = patterns.get(activePatternId); // Get the currently active pattern
 
-        const drawTrack = (ti, isAct) => {
-            if (!trackStates[ti].isVisible) return;
-            drawNotesForTrack(ti, isAct, startTickVisible, endTickVisible,
-                lowPitchVisible, highPitchVisible, pat);
-        };
+        const tracksToIterate = activePat && activePat.isSimplification && activePat.instruments
+            ? activePat.instruments // For active simplification, iterate its contributing original instruments
+            : rawTracksData.map((_, i) => i); // Otherwise, iterate all raw tracks
 
-        trackStates.forEach((_, ti) => { if (ti !== activeTrackIndex) drawTrack(ti, false); });
-        if (activeTrackIndex !== -1) drawTrack(activeTrackIndex, true);
-    }
+        // Draw inactive tracks first
+        tracksToIterate.forEach(originalTrackIdx => {
+            const currentTrackObject = rawTracksData[originalTrackIdx]; // for is_drum_track check
+            const isCurrentTrackRepresentedInActiveSimp = activePat && activePat.isSimplification && activePat.instruments.includes(originalTrackIdx);
 
-
-
-
-
-    function drawNotesForTrack(trackIndex, isActive, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, pattern) {
-        const track = rawTracksData[trackIndex];
-        if (!track || !track.notes) return;
-
-
-        track.notes.forEach((note, noteIndex) => {
-            // --- Culling ---
-            const noteEndTick = note.start_tick + note.duration_ticks;
-            if (noteEndTick < startTickVisible || note.start_tick > endTickVisible ||
-                note.pitch < lowPitchVisible || note.pitch > highPitchVisible) {
-                return; // Skip drawing notes completely outside the viewport MIDI range
-            }
-
-            const noteKey = JSON.stringify({ trackIndex, noteIndex });
-            const isSelected = selectedNotes.has(noteKey) && !abcState.isPlaying;
-            const isInScale = isNoteInScale(note.pitch); // Check scale membership
-
-            if (pattern.id !== ROOT_ID && !noteInPattern(note, pattern, trackIndex)) return;
-
-            // Calculate canvas coordinates and dimensions
-            const x = midiTickToCanvasX(note.start_tick);
-            const y = midiPitchToCanvasY(note.pitch); // Top edge of the note's row
-            const w = Math.max(1, note.duration_ticks * PIXELS_PER_TICK_BASE * scaleX); // Min width 1px
-
-            // --- Determine fill style based on Scale, Selection, and Active State ---
-            let fillStyle;
-            if (isSelected) {
-                // Selected notes always use the selection color
-                fillStyle = SELECTED_NOTE_FILL_COLOR;
-            } else if (isActive) {
-                // Active track notes: Use scale colors
-                fillStyle = isInScale ? NOTE_IN_SCALE_COLOR : NOTE_OUT_SCALE_COLOR;
-            } else {
-                // Ghost notes (inactive track): ALWAYS use the ghost color
-                fillStyle = GHOST_NOTE_FILL_COLOR; // <<< FIXED: Use dedicated ghost color
-            }
-            // ---------------------------------------------------------
-            //  Off-beat tinting  (ONLY for the active track)
-            // ---------------------------------------------------------
-            if (isActive && !isSelected) {                 // don’t override selections
-                switch (beatPosition(note.start_tick)) {
-                    case 0:  // 8th-note off-beat
-                        fillStyle = adjustLightness(fillStyle, OFFBEAT_LIGHTEN);
-                        break;
-                }
-            }
-
-            ctx.fillStyle = fillStyle;
-
-            // --- Determine alpha ---
-            let alpha = 1.0;
-            if (!isSelected) { // Non-selected notes
-                if (isActive) { // Active track - use velocity
-                    alpha = ACTIVE_VELOCITY_ALPHA_MIN +
-                        (note.velocity / 127) * (ACTIVE_VELOCITY_ALPHA_MAX - ACTIVE_VELOCITY_ALPHA_MIN);
-                    alpha = Math.max(0.1, Math.min(1.0, alpha)); // Clamp alpha
-                } else { // Ghost note
-                    alpha = GHOST_NOTE_ALPHA; // Alpha is correctly set for ghosts
-                }
-            }
-            // Selected notes currently drawn solid (alpha = 1.0)
-
-            ctx.globalAlpha = alpha;
-
-            // Draw the note rectangle (apply vertical gap by adjusting Y and height)
-            // Calculate draw height considering scaled gap
-            const scaledGap = NOTE_VERTICAL_GAP * scaleY;
-            const drawY = y + (scaledGap / 2);
-            const drawHeight = Math.max(1, NOTE_BASE_HEIGHT * scaleY - scaledGap);
-
-
-
-
-            ctx.fillRect(x, drawY, w, drawHeight);
-
-            const isHarmonyTrack = trackStates[trackIndex].isHarmony;
-            let outlineColor = SELECTED_NOTE_STROKE_COLOR;   // default (blue)
-
-            if (!isHarmonyTrack && !isDrumTrack(trackIndex)) {
-                const chordSet = harmonyChordMap[note.start_tick];
-                if (chordSet && chordSet.size && !chordSet.has(note.pitch % 12)) {
-                    outlineColor = '#ffd200';                // yellow for non-chord-tone
+            if (activePat && activePat.isSimplification) {
+                // If active pattern is a simplification, all its notes are "active".
+                // We draw them if originalTrackIdx is one of its instruments.
+                // Ghosting for simplifications would mean drawing notes from its parent pattern.
+                if (isCurrentTrackRepresentedInActiveSimp) {
+                    if (trackStates[originalTrackIdx].isVisible) {
+                        // Pass activePat, drawNotesForTrack will filter s_notes by originalTrackIdx
+                        drawNotesForTrack(originalTrackIdx, true, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, activePat);
+                    }
                 } else {
-                    outlineColor = '#ffffff';                // white chord-tone / no chord
+                    // This originalTrackIdx is NOT part of the active simplification.
+                    // If we want to show other raw tracks as ghosts:
+                    // drawNotesForTrack(originalTrackIdx, false, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, patterns.get(ROOT_ID));
                 }
-            } else {
-                outlineColor = '#ffffff';                    // harmony notes always white
+            } else { // Active pattern is NOT a simplification (or it's ROOT)
+                if (originalTrackIdx !== activeTrackIndex) {
+                    if (trackStates[originalTrackIdx].isVisible) {
+                        drawNotesForTrack(originalTrackIdx, false, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, activePat); // or ROOT_ID if ghosting all others
+                    }
+                }
             }
-            ctx.strokeStyle = outlineColor;
-            ctx.lineWidth = 1.0; // Use 1 for sharp outline
-            ctx.globalAlpha = 1.0; // Ensure stroke is solid regardless of note alpha
-            ctx.strokeRect(x, drawY, w, drawHeight); // Draw stroke on the same rect
-
-            // --- Draw outline ONLY for selected notes ---
-            if (isSelected) {
-                ctx.strokeStyle = SELECTED_NOTE_STROKE_COLOR;
-                ctx.strokeRect(x, drawY, w, drawHeight); // Draw stroke on the same rect
-            }
-
-            ctx.globalAlpha = 1.0; // Reset global alpha after drawing note
         });
+
+        // Then draw the active track (if it's not a simplification already handled, or if it's a raw track)
+        if (activeTrackIndex !== -1 && !(activePat && activePat.isSimplification)) {
+            if (trackStates[activeTrackIndex].isVisible) {
+                drawNotesForTrack(activeTrackIndex, true, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, activePat);
+            }
+        }
     }
+
+
+
+function drawNotesForTrack(trackIndex, isActiveTrack, startTickVisible, endTickVisible, lowPitchVisible, highPitchVisible, patternContext) {
+    const originalTrackIndexArg = trackIndex; // The raw track index this drawing call pertains to
+
+    let notesToIterate;
+    let isDrawingActiveSimplification = false;
+    let activeSimplificationPatternId = null; // Store the ID of the active simplification if applicable
+
+    // Determine the source of notes (active simplification's s_notes or rawTracksData)
+    if (patternContext && patternContext.isSimplification && patternContext.s_notes && patternContext.id === activePatternId) {
+        isDrawingActiveSimplification = true;
+        activeSimplificationPatternId = patternContext.id;
+        // Filter s_notes to only those whose originalTrackIndex matches the current drawing context (originalTrackIndexArg)
+        // and ensure that original track is visible.
+        notesToIterate = patternContext.s_notes.filter(s_note =>
+            s_note.originalTrackIndex === originalTrackIndexArg &&
+            trackStates[s_note.originalTrackIndex]?.isVisible
+        );
+    } else {
+        isDrawingActiveSimplification = false;
+        const rawTrack = rawTracksData[originalTrackIndexArg];
+        // Ensure the raw track itself is visible
+        if (!rawTrack || !rawTrack.notes || !trackStates[originalTrackIndexArg]?.isVisible) {
+            return;
+        }
+        notesToIterate = rawTrack.notes;
+    }
+
+    if (!notesToIterate || notesToIterate.length === 0) {
+        return;
+    }
+
+    notesToIterate.forEach((noteObject) => {
+        const noteEndTick = noteObject.start_tick + noteObject.duration_ticks;
+        if (noteEndTick < startTickVisible || noteObject.start_tick > endTickVisible ||
+            noteObject.pitch < lowPitchVisible || noteObject.pitch > highPitchVisible) {
+            return; // Cull notes outside viewport
+        }
+
+        let noteKeyString;
+        let styleContextTrackIndex; // The track index used for styling (drum, harmony checks)
+
+        if (isDrawingActiveSimplification) {
+            // For s_notes, the key must refer to its index within its owning simplification's s_notes array.
+            const s_note_original_index = patternContext.s_notes.indexOf(noteObject);
+            if (s_note_original_index === -1) {
+                console.warn("Render: Simplification note not found in its source s_notes array.", noteObject);
+                return;
+            }
+            noteKeyString = JSON.stringify({ s_patternId: activeSimplificationPatternId, s_noteIndex: s_note_original_index });
+            styleContextTrackIndex = noteObject.originalTrackIndex; // Use the s_note's stored original track index
+        } else {
+            // For raw notes, the key refers to its index within its raw track's notes array.
+            const raw_note_original_index = rawTracksData[originalTrackIndexArg].notes.indexOf(noteObject);
+            if (raw_note_original_index === -1) {
+                 console.warn("Render: Raw note not found in its source track's notes array.", noteObject);
+                 return;
+            }
+            noteKeyString = JSON.stringify({ trackIndex: originalTrackIndexArg, noteIndex: raw_note_original_index });
+            styleContextTrackIndex = originalTrackIndexArg; // Use the current raw track index
+        }
+
+        // If drawing within a specific non-ROOT, non-simplification pattern, ensure the raw note is part of it.
+        if (!isDrawingActiveSimplification && patternContext.id !== ROOT_ID && !patternContext.isSimplification) {
+            if (!noteInPattern(noteObject, patternContext, originalTrackIndexArg)) {
+                return;
+            }
+        }
+
+        const isSelected = selectedNotes.has(noteKeyString) && !abcState.isPlaying; // Check selection status AFTER forming correct key
+        const isInScale = isNoteInScale(noteObject.pitch);
+
+        const x = midiTickToCanvasX(noteObject.start_tick);
+        const y = midiPitchToCanvasY(noteObject.pitch);
+        const w = Math.max(1, noteObject.duration_ticks * PIXELS_PER_TICK_BASE * scaleX);
+        const scaledGap = NOTE_VERTICAL_GAP * scaleY;
+        const drawY = y + (scaledGap / 2);
+        const drawHeight = Math.max(1, NOTE_BASE_HEIGHT * scaleY - scaledGap);
+
+        let fillStyle;
+        // isActiveTrack (function parameter) determines if these notes are part of the "active" visual layer
+        // (e.g., not ghost notes).
+        if (isSelected) {
+            fillStyle = SELECTED_NOTE_FILL_COLOR;
+        } else if (isActiveTrack) {
+            fillStyle = isInScale ? NOTE_IN_SCALE_COLOR : NOTE_OUT_SCALE_COLOR;
+        } else { // Ghost notes
+            fillStyle = GHOST_NOTE_FILL_COLOR;
+        }
+
+        // Off-beat tinting for active, non-selected notes
+        if (isActiveTrack && !isSelected) {
+            // beatPosition: 0=downbeat, 1=8th off-beat, 2=16th off-beat
+            if (beatPosition(noteObject.start_tick) === 1) { // Apply to 8th note off-beats
+                fillStyle = adjustLightness(fillStyle, OFFBEAT_LIGHTEN);
+            }
+        }
+        ctx.fillStyle = fillStyle;
+
+        let alpha = 1.0;
+        if (!isSelected) {
+            if (isActiveTrack) { // Velocity-based alpha for active notes
+                alpha = ACTIVE_VELOCITY_ALPHA_MIN +
+                    (noteObject.velocity / 127) * (ACTIVE_VELOCITY_ALPHA_MAX - ACTIVE_VELOCITY_ALPHA_MIN);
+                alpha = Math.max(0.1, Math.min(1.0, alpha));
+            } else { // Fixed alpha for ghost notes
+                alpha = GHOST_NOTE_ALPHA;
+            }
+        }
+        ctx.globalAlpha = alpha;
+        ctx.fillRect(x, drawY, w, drawHeight);
+        ctx.globalAlpha = 1.0; // Reset alpha for strokes
+
+        // Outline logic
+        let outlineColor = null;
+        if (isSelected) {
+            outlineColor = SELECTED_NOTE_STROKE_COLOR;
+        } else if (isActiveTrack && styleContextTrackIndex !== undefined && // Ensure track index for styling is valid
+                   !trackStates[styleContextTrackIndex]?.isHarmony &&
+                   !isDrumTrack(styleContextTrackIndex)) {
+            const chordPcsAtNoteStart = harmonyChordMap[noteObject.start_tick]?.pcs;
+            if (chordPcsAtNoteStart && chordPcsAtNoteStart.size > 0 && !chordPcsAtNoteStart.has(noteObject.pitch % 12)) {
+                outlineColor = '#ffd200'; // Yellow for non-chord-tone
+            }
+        }
+
+        if (outlineColor) {
+            ctx.strokeStyle = outlineColor;
+            ctx.lineWidth = 1.0;
+            ctx.strokeRect(x, drawY, w, drawHeight);
+        }
+    });
+}
+
+
+
     function drawSelectionRectangle() {
         if (!selectionRect) return;
         // Coords are already relative to canvas logical pixels
