@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from collections import Counter
 from flask import (Flask, request, render_template, redirect, url_for,
                     flash, send_from_directory, abort, jsonify, send_file)
 import uuid
@@ -42,6 +43,7 @@ app.logger.setLevel(logging.INFO)
 from pathlib import Path
 
 DATA_ROOT = Path('training_data').resolve()      # ① make it absolute
+ROADMAP_PATH = Path('roadmap.json').resolve()
 
 
 # --- General MIDI Instrument Map (Program Change to Name) ---
@@ -248,6 +250,235 @@ def view_file(filename):
 def slugify(s: str) -> str:
     return re.sub('[^\w\- ]+', '', s).strip().replace(' ', '_')[:64]
 
+
+def _load_json_file(path: Path, default):
+    try:
+        return json.loads(path.read_text(encoding='utf-8'))
+    except Exception:
+        return default
+
+
+def _list_uploaded_files() -> list[str]:
+    try:
+        return sorted([f for f in os.listdir(app.config['UPLOAD_FOLDER']) if allowed_file(f)])
+    except FileNotFoundError:
+        app.logger.warning(f"Upload folder '{app.config['UPLOAD_FOLDER']}' not found.")
+    except Exception as exc:
+        app.logger.error(f"Error listing files in upload folder: {exc}")
+        flash("Could not list uploaded files.")
+    return []
+
+
+def _load_roadmap() -> dict:
+    roadmap = _load_json_file(ROADMAP_PATH, {})
+    return roadmap if isinstance(roadmap, dict) else {}
+
+
+def _collect_song_folders() -> dict[str, dict[str, object]]:
+    song_folders: dict[str, dict[str, object]] = {}
+    if not DATA_ROOT.exists():
+        return song_folders
+
+    for song_dir in DATA_ROOT.iterdir():
+        if not song_dir.is_dir():
+            continue
+        counts = Counter()
+        example_count = 0
+        for json_path in song_dir.rglob('*.json'):
+            example_count += 1
+            counts[json_path.parent.name] += 1
+        key = slugify(song_dir.name).lower()
+        song_folders[key] = {
+            'name': song_dir.name,
+            'example_count': example_count,
+            'category_counts': dict(sorted(counts.items())),
+        }
+    return song_folders
+
+
+def _load_settings_map() -> dict[str, dict[str, object]]:
+    settings_map: dict[str, dict[str, object]] = {}
+    set_dir = Path(SET_DIR)
+    if not set_dir.exists():
+        return settings_map
+
+    for settings_file in set_dir.glob('*.json'):
+        payload = _load_json_file(settings_file, {})
+        if not isinstance(payload, dict):
+            payload = {}
+        stem = settings_file.stem
+        if stem.lower().endswith('.mid'):
+            stem = stem[:-4]
+        elif stem.lower().endswith('.midi'):
+            stem = stem[:-5]
+        settings_map[slugify(stem).lower()] = payload
+    return settings_map
+
+
+def _count_renders(uploaded_files: list[str]) -> tuple[dict[str, int], list[dict[str, object]]]:
+    render_counts = {slugify(Path(name).stem).lower(): 0 for name in uploaded_files}
+    recent_renders: list[dict[str, object]] = []
+    if not RENDER_ROOT.exists():
+        return render_counts, recent_renders
+
+    for wav_path in sorted(RENDER_ROOT.glob('*.wav'), key=lambda p: p.stat().st_mtime, reverse=True):
+        lowered = wav_path.stem.lower()
+        for upload_name in uploaded_files:
+            song_key = slugify(Path(upload_name).stem).lower()
+            raw_stem = Path(upload_name).stem.lower()
+            if lowered.startswith(raw_stem) or song_key in lowered:
+                render_counts[song_key] = render_counts.get(song_key, 0) + 1
+                break
+        if len(recent_renders) < 8:
+            recent_renders.append({
+                'name': wav_path.name,
+                'modified_at': int(wav_path.stat().st_mtime),
+                'size_kb': max(1, round(wav_path.stat().st_size / 1024)),
+            })
+    return render_counts, recent_renders
+
+
+def _flatten_tasks(roadmap: dict) -> list[dict]:
+    tasks: list[dict] = []
+    for milestone in roadmap.get('milestones', []):
+        for epic in milestone.get('epics', []):
+            for task in epic.get('tasks', []):
+                tasks.append(task)
+    return tasks
+
+
+def _compute_roadmap_summary(roadmap: dict) -> dict:
+    milestone_cards = []
+    now_items = []
+    next_items = []
+    later_items = []
+
+    for milestone in roadmap.get('milestones', []):
+        tasks = [task for epic in milestone.get('epics', []) for task in epic.get('tasks', [])]
+        total = len(tasks)
+        done = sum(1 for task in tasks if task.get('status') == 'done')
+        in_progress = sum(1 for task in tasks if task.get('status') == 'in_progress')
+        percent = round((done / total) * 100) if total else 0
+        epic_cards = []
+        for epic in milestone.get('epics', []):
+            epic_tasks = epic.get('tasks', [])
+            epic_total = len(epic_tasks)
+            epic_done = sum(1 for task in epic_tasks if task.get('status') == 'done')
+            epic_percent = round((epic_done / epic_total) * 100) if epic_total else 0
+            epic_cards.append({
+                'id': epic.get('id'),
+                'name': epic.get('name'),
+                'status': epic.get('status', 'planned'),
+                'percent': epic_percent,
+                'done': epic_done,
+                'total': epic_total,
+                'tasks': [
+                    {
+                        'id': task.get('id'),
+                        'name': task.get('name'),
+                        'status': task.get('status', 'planned'),
+                        'depends_on': task.get('depends_on', []),
+                    }
+                    for task in epic_tasks
+                ],
+            })
+        card = {
+            'id': milestone.get('id'),
+            'name': milestone.get('name'),
+            'status': milestone.get('status', 'planned'),
+            'priority': milestone.get('priority', 'medium'),
+            'goal': milestone.get('goal', ''),
+            'percent': percent,
+            'done': done,
+            'total': total,
+            'in_progress': in_progress,
+            'epics': epic_cards,
+        }
+        milestone_cards.append(card)
+
+        priority = card['priority']
+        status = card['status']
+        if status == 'in_progress' or priority == 'critical':
+            now_items.append(card)
+        elif priority == 'high':
+            next_items.append(card)
+        else:
+            later_items.append(card)
+
+    total_tasks = _flatten_tasks(roadmap)
+    complete_tasks = sum(1 for task in total_tasks if task.get('status') == 'done')
+
+    return {
+        'milestones': milestone_cards,
+        'completion_percent': round((complete_tasks / len(total_tasks)) * 100) if total_tasks else 0,
+        'total_tasks': len(total_tasks),
+        'complete_tasks': complete_tasks,
+        'now': now_items,
+        'next': next_items,
+        'later': later_items,
+    }
+
+
+def build_dashboard_data() -> dict:
+    uploaded_files = _list_uploaded_files()
+    roadmap = _load_roadmap()
+    settings_map = _load_settings_map()
+    song_folders = _collect_song_folders()
+    render_counts, recent_renders = _count_renders(uploaded_files)
+
+    upload_keys = {slugify(Path(name).stem).lower() for name in uploaded_files}
+    songs = []
+    for filename in uploaded_files:
+        song_stem = Path(filename).stem
+        song_key = slugify(song_stem).lower()
+        settings = settings_map.get(song_key, {})
+        dataset = song_folders.get(song_key, {'name': song_stem, 'example_count': 0, 'category_counts': {}})
+        songs.append({
+            'filename': filename,
+            'name': settings.get('title') or dataset.get('name') or song_stem,
+            'stem': song_stem,
+            'key': song_key,
+            'bpm': settings.get('bpm'),
+            'has_settings': bool(settings),
+            'example_count': dataset.get('example_count', 0),
+            'category_counts': dataset.get('category_counts', {}),
+            'render_count': render_counts.get(song_key, 0),
+            'view_url': url_for('view_file', filename=filename),
+        })
+
+    songs.sort(key=lambda item: item['name'].lower())
+
+    orphan_training = sorted(
+        data['name'] for key, data in song_folders.items() if key not in upload_keys
+    )
+    orphan_settings = sorted(key for key in settings_map if key not in upload_keys)
+
+    category_counts = Counter()
+    total_examples = 0
+    for song_data in song_folders.values():
+        total_examples += int(song_data.get('example_count', 0))
+        category_counts.update(song_data.get('category_counts', {}))
+
+    roadmap_summary = _compute_roadmap_summary(roadmap)
+
+    return {
+        'roadmap': roadmap,
+        'roadmap_summary': roadmap_summary,
+        'songs': songs,
+        'summary_cards': {
+            'uploaded_song_count': len(uploaded_files),
+            'songs_with_settings': sum(1 for song in songs if song['has_settings']),
+            'training_example_count': total_examples,
+            'render_count': sum(render_counts.values()),
+        },
+        'category_counts': dict(sorted(category_counts.items())),
+        'recent_renders': recent_renders,
+        'risks': roadmap.get('project', {}).get('current_state', {}).get('risks', []),
+        'orphan_training': orphan_training,
+        'orphan_settings': orphan_settings,
+        'uploaded_files': uploaded_files,
+    }
+
 # app.py  – keep DATA_ROOT as before
 @app.post('/dataset/motif_variation')
 def save_batch():
@@ -304,19 +535,20 @@ def save_motif_variation():
 # --- Routes ---
 @app.route('/', methods=['GET'])
 def index():
+    """Displays the project dashboard when the app loads."""
+    dashboard = build_dashboard_data()
+    return render_template('dashboard.html', **dashboard)
+
+
+@app.route('/library', methods=['GET'])
+def library():
     """Displays the upload form and lists existing MIDI files."""
-    uploaded_files = []
-    try:
-        filenames = os.listdir(app.config['UPLOAD_FOLDER'])
-        # Filter for allowed extensions and sort alphabetically
-        uploaded_files = sorted([f for f in filenames if allowed_file(f)]) 
-    except FileNotFoundError:
-        app.logger.warning(f"Upload folder '{app.config['UPLOAD_FOLDER']}' not found.")
-    except Exception as e:
-        app.logger.error(f"Error listing files in upload folder: {e}")
-        flash("Could not list uploaded files.")
-        
-    return render_template('index.html', uploaded_files=uploaded_files)
+    return render_template('index.html', uploaded_files=_list_uploaded_files())
+
+
+@app.get('/api/dashboard-data')
+def dashboard_data():
+    return jsonify(build_dashboard_data())
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

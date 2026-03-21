@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "project": {
+    "id": "music-analyzer-daw",
+    "name": "MusicAnalyzerDAW",
+    "vision": "Structure-aware song builder for deconstructing existing songs into reusable pattern graphs and creating new songs by editing or generating canonical blocks.",
+    "audience": {
+      "primary": "internal_solo_tool",
+      "secondary": [
+        "research_dataset_tool"
+      ]
+    },
+    "status": "alpha",
+    "current_state": {
+      "summary": "Working prototype with MIDI upload, piano-roll analysis/editing, pattern tree logic, dataset export, dataset browsing, and local ABC/WAV rendering.",
+      "strengths": [
+        "MIDI upload and per-song analysis flow works",
+        "Rich client-side pattern editing logic already exists",
+        "Training/example export pipeline already exists",
+        "Local rendering pipeline already exists"
+      ],
+      "risks": [
+        "monolithic_backend",
+        "monolithic_editor_frontend",
+        "no_dependency_manifest",
+        "no_test_harness",
+        "flat_file_schema_drift",
+        "synchronous_rendering"
+      ]
+    }
+  },
+  "milestones": [
+    {
+      "id": "m1",
+      "name": "Foundation Stabilization",
+      "status": "in_progress",
+      "priority": "critical",
+      "target_window": "short_term",
+      "goal": "Make the current prototype safe to evolve by reducing architectural risk and formalizing the current data contracts.",
+      "epics": [
+        {
+          "id": "m1e1",
+          "name": "Backend modularization",
+          "status": "in_progress",
+          "tasks": [
+            {
+              "id": "m1e1t1",
+              "name": "Split route concerns out of app.py",
+              "status": "in_progress",
+              "depends_on": [],
+              "verification": [
+                "Root, upload, view, dataset, settings, and render flows still work"
+              ]
+            },
+            {
+              "id": "m1e1t2",
+              "name": "Introduce shared services for MIDI parsing and render orchestration",
+              "status": "planned",
+              "depends_on": [
+                "m1e1t1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m1e2",
+          "name": "Frontend modularization",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m1e2t1",
+              "name": "Split piano-roll state, rendering, pattern graph, and playback concerns",
+              "status": "planned",
+              "depends_on": []
+            },
+            {
+              "id": "m1e2t2",
+              "name": "Preserve current behavior during refactor",
+              "status": "planned",
+              "depends_on": [
+                "m1e2t1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m1e3",
+          "name": "Data contract formalization",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m1e3t1",
+              "name": "Add versioned schemas for user settings and training examples",
+              "status": "planned",
+              "depends_on": []
+            },
+            {
+              "id": "m1e3t2",
+              "name": "Standardize relationship metadata across exported examples",
+              "status": "planned",
+              "depends_on": [
+                "m1e3t1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "name": "Structure Graph Core",
+      "status": "planned",
+      "priority": "critical",
+      "target_window": "short_term",
+      "goal": "Introduce a true song structure graph so canonical patterns and derived blocks become first-class editable entities.",
+      "epics": [
+        {
+          "id": "m2e1",
+          "name": "Structure graph model",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m2e1t1",
+              "name": "Define song, section, canonical_pattern, repeat, variation, simplification, embellishment, generated_block",
+              "status": "planned",
+              "depends_on": [
+                "m1"
+              ]
+            },
+            {
+              "id": "m2e1t2",
+              "name": "Persist graph metadata in per-song state",
+              "status": "planned",
+              "depends_on": [
+                "m2e1t1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m2e2",
+          "name": "Propagation semantics",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m2e2t1",
+              "name": "Define stale marking and selective regeneration workflow",
+              "status": "planned",
+              "depends_on": [
+                "m2e1t1"
+              ]
+            },
+            {
+              "id": "m2e2t2",
+              "name": "Define manual override preservation rules",
+              "status": "planned",
+              "depends_on": [
+                "m2e2t1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "name": "Authoring Workflow Upgrade",
+      "status": "planned",
+      "priority": "high",
+      "target_window": "medium_term",
+      "goal": "Make the tool practical for building songs, not just analyzing them.",
+      "epics": [
+        {
+          "id": "m3e1",
+          "name": "Parent-child editing workflow",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m3e1t1",
+              "name": "Edit canonical block and preview impacted children",
+              "status": "planned",
+              "depends_on": [
+                "m2"
+              ]
+            },
+            {
+              "id": "m3e1t2",
+              "name": "Selectively regenerate or preserve children",
+              "status": "planned",
+              "depends_on": [
+                "m3e1t1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m3e2",
+          "name": "Core UX improvements",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m3e2t1",
+              "name": "Add undo and redo",
+              "status": "planned",
+              "depends_on": [
+                "m1"
+              ]
+            },
+            {
+              "id": "m3e2t2",
+              "name": "Add stale badges, lineage indicators, and save state clarity",
+              "status": "planned",
+              "depends_on": [
+                "m2"
+              ]
+            },
+            {
+              "id": "m3e2t3",
+              "name": "Add pattern diff and review UI",
+              "status": "planned",
+              "depends_on": [
+                "m2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "name": "Automatic Pattern Discovery",
+      "status": "planned",
+      "priority": "high",
+      "target_window": "medium_term",
+      "goal": "Reduce manual decomposition effort by proposing song structure and pattern relationships automatically.",
+      "epics": [
+        {
+          "id": "m4e1",
+          "name": "Algorithmic detection",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m4e1t1",
+              "name": "Expand repeat and rhythmic fingerprint detection",
+              "status": "planned",
+              "depends_on": [
+                "m2"
+              ]
+            },
+            {
+              "id": "m4e1t2",
+              "name": "Add transposition-aware and segmentation-aware candidate discovery",
+              "status": "planned",
+              "depends_on": [
+                "m4e1t1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m4e2",
+          "name": "Review-assisted deconstruction",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m4e2t1",
+              "name": "Present candidate sections and pattern relationships for approval",
+              "status": "planned",
+              "depends_on": [
+                "m4e1"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "m5",
+      "name": "Assisted Generation",
+      "status": "planned",
+      "priority": "high",
+      "target_window": "long_term",
+      "goal": "Support creation of new songs from structure templates and generated blocks.",
+      "epics": [
+        {
+          "id": "m5e1",
+          "name": "Deterministic generation engine",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m5e1t1",
+              "name": "Add pluggable transform interface",
+              "status": "planned",
+              "depends_on": [
+                "m3"
+              ]
+            },
+            {
+              "id": "m5e1t2",
+              "name": "Generate block variants constrained by scale, harmony, and instrumentation",
+              "status": "planned",
+              "depends_on": [
+                "m5e1t1"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m5e2",
+          "name": "AI-assisted generation",
+          "status": "planned",
+          "tasks": [
+            {
+              "id": "m5e2t1",
+              "name": "Add retrieval-assisted generation from approved corpus",
+              "status": "planned",
+              "depends_on": [
+                "m1",
+                "m4"
+              ]
+            },
+            {
+              "id": "m5e2t2",
+              "name": "Add LLM or model-assisted block proposal workflow",
+              "status": "planned",
+              "depends_on": [
+                "m5e2t1"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

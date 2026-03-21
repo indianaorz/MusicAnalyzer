@@ -12,6 +12,10 @@
 </head>
 
 <body>
+  <section style="position:fixed;top:12px;right:16px;z-index:20;display:flex;gap:10px;">
+    <a href="{{ url_for('index') }}">Dashboard</a>
+    <a href="{{ url_for('library') }}">Library</a>
+  </section>
   <section id="sidebar">
     <input id="filter" type="search" placeholder="Filter…" autocomplete="off">
     <ul id="item-list"></ul>

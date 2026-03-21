@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="form-container">
+        <a href="{{ url_for('index') }}">Open Dashboard</a>
+    </div>
     <h1>MIDI Piano Roll Viewer</h1>
 
     {% with messages = get_flashed_messages() %}

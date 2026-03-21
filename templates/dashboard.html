@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicAnalyzerDAW Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+    <header class="dashboard-hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Project Tracking</p>
+            <h1>{{ roadmap.project.name if roadmap.project else 'MusicAnalyzerDAW' }}</h1>
+            <p class="hero-summary">{{ roadmap.project.vision if roadmap.project else 'Track roadmap progress, active songs, dataset growth, and rendering output from one startup view.' }}</p>
+            <div class="hero-actions">
+                <a class="hero-button primary" href="#upload-panel">Upload MIDI</a>
+                <a class="hero-button secondary" href="{{ url_for('browse') }}">Browse Dataset</a>
+                <a class="hero-button secondary" href="{{ url_for('library') }}">Classic Library</a>
+            </div>
+        </div>
+        <div class="hero-sidekick">
+            <div class="sidekick-card accent">
+                <span class="sidekick-label">Roadmap Completion</span>
+                <strong>{{ roadmap_summary.completion_percent }}%</strong>
+                <span>{{ roadmap_summary.complete_tasks }} / {{ roadmap_summary.total_tasks }} tasks complete</span>
+            </div>
+            <div class="sidekick-card">
+                <span class="sidekick-label">Current Focus</span>
+                <strong>{{ roadmap_summary.now[0].name if roadmap_summary.now else 'No milestone queued' }}</strong>
+                <span>{{ roadmap_summary.now[0].goal if roadmap_summary.now else 'Add milestones in roadmap.json to drive this panel.' }}</span>
+            </div>
+        </div>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <main class="dashboard-shell">
+        <section class="summary-grid">
+            <article class="summary-card">
+                <span class="summary-label">Uploaded Songs</span>
+                <strong>{{ summary_cards.uploaded_song_count }}</strong>
+                <span>Files available for editor launch</span>
+            </article>
+            <article class="summary-card">
+                <span class="summary-label">Songs With Settings</span>
+                <strong>{{ summary_cards.songs_with_settings }}</strong>
+                <span>Saved state already tracked</span>
+            </article>
+            <article class="summary-card">
+                <span class="summary-label">Training Examples</span>
+                <strong>{{ summary_cards.training_example_count }}</strong>
+                <span>JSON examples under training_data</span>
+            </article>
+            <article class="summary-card">
+                <span class="summary-label">Rendered WAVs</span>
+                <strong>{{ summary_cards.render_count }}</strong>
+                <span>Preview and export artifacts</span>
+            </article>
+        </section>
+
+        <section class="dashboard-grid">
+            <section class="panel roadmap-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Roadmap</p>
+                        <h2>Now / Next / Later</h2>
+                    </div>
+                    <a href="{{ url_for('dashboard_data') }}" class="subtle-link">JSON feed</a>
+                </div>
+                <div class="roadmap-columns">
+                    <div class="roadmap-column">
+                        <h3>Now</h3>
+                        {% for item in roadmap_summary.now %}
+                        <article class="milestone-card priority-{{ item.priority }}">
+                            <div class="milestone-topline">
+                                <span class="status-chip status-{{ item.status }}">{{ item.status.replace('_', ' ') }}</span>
+                                <span>{{ item.percent }}%</span>
+                            </div>
+                            <h4>{{ item.name }}</h4>
+                            <p>{{ item.goal }}</p>
+                            <div class="progress-bar"><span style="width: {{ item.percent }}%"></span></div>
+                            <small>{{ item.done }} / {{ item.total }} tasks complete</small>
+                            {% if item.epics %}
+                            <div class="epic-list">
+                                {% for epic in item.epics %}
+                                <details class="epic-disclosure">
+                                    <summary>
+                                        <div class="epic-summary-copy">
+                                            <strong>{{ epic.name }}</strong>
+                                            <span>{{ epic.done }} / {{ epic.total }} tasks</span>
+                                        </div>
+                                        <div class="epic-summary-meta">
+                                            <span class="status-chip status-{{ epic.status }}">{{ epic.status.replace('_', ' ') }}</span>
+                                            <span>{{ epic.percent }}%</span>
+                                        </div>
+                                    </summary>
+                                    <ul class="task-list">
+                                        {% for task in epic.tasks %}
+                                        <li class="task-row">
+                                            <div>
+                                                <strong>{{ task.name }}</strong>
+                                                {% if task.depends_on %}
+                                                <small>Depends on: {{ task.depends_on | join(', ') }}</small>
+                                                {% endif %}
+                                            </div>
+                                            <span class="status-chip status-{{ task.status }}">{{ task.status.replace('_', ' ') }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </details>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </article>
+                        {% else %}
+                        <p class="empty-state">No in-progress or critical milestone yet.</p>
+                        {% endfor %}
+                    </div>
+                    <div class="roadmap-column">
+                        <h3>Next</h3>
+                        {% for item in roadmap_summary.next %}
+                        <article class="milestone-card priority-{{ item.priority }}">
+                            <div class="milestone-topline">
+                                <span class="status-chip status-{{ item.status }}">{{ item.status.replace('_', ' ') }}</span>
+                                <span>{{ item.percent }}%</span>
+                            </div>
+                            <h4>{{ item.name }}</h4>
+                            <p>{{ item.goal }}</p>
+                            <div class="progress-bar"><span style="width: {{ item.percent }}%"></span></div>
+                            <small>{{ item.done }} / {{ item.total }} tasks complete</small>
+                            {% if item.epics %}
+                            <div class="epic-list">
+                                {% for epic in item.epics %}
+                                <details class="epic-disclosure">
+                                    <summary>
+                                        <div class="epic-summary-copy">
+                                            <strong>{{ epic.name }}</strong>
+                                            <span>{{ epic.done }} / {{ epic.total }} tasks</span>
+                                        </div>
+                                        <div class="epic-summary-meta">
+                                            <span class="status-chip status-{{ epic.status }}">{{ epic.status.replace('_', ' ') }}</span>
+                                            <span>{{ epic.percent }}%</span>
+                                        </div>
+                                    </summary>
+                                    <ul class="task-list">
+                                        {% for task in epic.tasks %}
+                                        <li class="task-row">
+                                            <div>
+                                                <strong>{{ task.name }}</strong>
+                                                {% if task.depends_on %}
+                                                <small>Depends on: {{ task.depends_on | join(', ') }}</small>
+                                                {% endif %}
+                                            </div>
+                                            <span class="status-chip status-{{ task.status }}">{{ task.status.replace('_', ' ') }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </details>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </article>
+                        {% else %}
+                        <p class="empty-state">No high-priority upcoming milestone yet.</p>
+                        {% endfor %}
+                    </div>
+                    <div class="roadmap-column">
+                        <h3>Later</h3>
+                        {% for item in roadmap_summary.later %}
+                        <article class="milestone-card priority-{{ item.priority }}">
+                            <div class="milestone-topline">
+                                <span class="status-chip status-{{ item.status }}">{{ item.status.replace('_', ' ') }}</span>
+                                <span>{{ item.percent }}%</span>
+                            </div>
+                            <h4>{{ item.name }}</h4>
+                            <p>{{ item.goal }}</p>
+                            <div class="progress-bar"><span style="width: {{ item.percent }}%"></span></div>
+                            <small>{{ item.done }} / {{ item.total }} tasks complete</small>
+                            {% if item.epics %}
+                            <div class="epic-list">
+                                {% for epic in item.epics %}
+                                <details class="epic-disclosure">
+                                    <summary>
+                                        <div class="epic-summary-copy">
+                                            <strong>{{ epic.name }}</strong>
+                                            <span>{{ epic.done }} / {{ epic.total }} tasks</span>
+                                        </div>
+                                        <div class="epic-summary-meta">
+                                            <span class="status-chip status-{{ epic.status }}">{{ epic.status.replace('_', ' ') }}</span>
+                                            <span>{{ epic.percent }}%</span>
+                                        </div>
+                                    </summary>
+                                    <ul class="task-list">
+                                        {% for task in epic.tasks %}
+                                        <li class="task-row">
+                                            <div>
+                                                <strong>{{ task.name }}</strong>
+                                                {% if task.depends_on %}
+                                                <small>Depends on: {{ task.depends_on | join(', ') }}</small>
+                                                {% endif %}
+                                            </div>
+                                            <span class="status-chip status-{{ task.status }}">{{ task.status.replace('_', ' ') }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </details>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </article>
+                        {% else %}
+                        <p class="empty-state">No later-stage milestone yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel songs-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Projects</p>
+                        <h2>Song Workspace</h2>
+                    </div>
+                    <input id="song-filter" type="search" placeholder="Filter songs...">
+                </div>
+                <div class="song-grid" id="song-grid">
+                    {% for song in songs %}
+                    <article class="song-card" data-song-name="{{ song.name|lower }} {{ song.filename|lower }}">
+                        <div class="song-head">
+                            <div>
+                                <h3>{{ song.name }}</h3>
+                                <p>{{ song.filename }}</p>
+                            </div>
+                            <span class="status-pill {{ 'ready' if song.has_settings else 'new' }}">{{ 'tracked' if song.has_settings else 'new' }}</span>
+                        </div>
+                        <dl class="song-stats">
+                            <div>
+                                <dt>BPM</dt>
+                                <dd>{{ song.bpm if song.bpm else '—' }}</dd>
+                            </div>
+                            <div>
+                                <dt>Examples</dt>
+                                <dd>{{ song.example_count }}</dd>
+                            </div>
+                            <div>
+                                <dt>Renders</dt>
+                                <dd>{{ song.render_count }}</dd>
+                            </div>
+                        </dl>
+                        <div class="category-badges">
+                            {% for category, count in song.category_counts.items() %}
+                            <span>{{ category }}: {{ count }}</span>
+                            {% else %}
+                            <span>No dataset exports yet</span>
+                            {% endfor %}
+                        </div>
+                        <div class="song-actions">
+                            <a class="hero-button small primary" href="{{ song.view_url }}">Open Editor</a>
+                            <a class="hero-button small secondary" href="{{ url_for('download_file', filename=song.filename) }}">Download MIDI</a>
+                        </div>
+                    </article>
+                    {% else %}
+                    <p class="empty-state">No uploaded MIDI files yet. Use the upload panel below to create the first trackable project.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="panel" id="upload-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Quick Action</p>
+                        <h2>Upload MIDI</h2>
+                    </div>
+                </div>
+                <form method="post" action="{{ url_for('upload_file') }}" enctype="multipart/form-data" class="upload-form">
+                    <label for="midi_file">Choose a .mid or .midi file</label>
+                    <input type="file" id="midi_file" name="midi_file" accept=".mid,.midi" required>
+                    <button type="submit" class="hero-button primary">Upload And Open</button>
+                </form>
+                <div class="helper-actions">
+                    <a href="{{ url_for('library') }}">Open classic upload list</a>
+                    <a href="{{ url_for('browse') }}">Open dataset browser</a>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Dataset Health</p>
+                        <h2>Coverage Snapshot</h2>
+                    </div>
+                </div>
+                <div class="category-badges tall">
+                    {% for category, count in category_counts.items() %}
+                    <span>{{ category }}: {{ count }}</span>
+                    {% else %}
+                    <span>No training examples indexed yet</span>
+                    {% endfor %}
+                </div>
+                <div class="warning-list">
+                    <div>
+                        <h3>Training Folders Without Upload</h3>
+                        {% if orphan_training %}
+                        <ul>
+                            {% for item in orphan_training %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="empty-state">All tracked training folders map to uploaded songs.</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h3>Settings Without Upload</h3>
+                        {% if orphan_settings %}
+                        <ul>
+                            {% for item in orphan_settings %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="empty-state">No orphaned settings keys detected.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Rendering</p>
+                        <h2>Recent WAV Output</h2>
+                    </div>
+                </div>
+                <div class="render-list">
+                    {% for render in recent_renders %}
+                    <article class="render-row">
+                        <div>
+                            <strong>{{ render.name }}</strong>
+                            <p>{{ render.size_kb }} KB</p>
+                        </div>
+                        <time data-timestamp="{{ render.modified_at }}">Updated recently</time>
+                    </article>
+                    {% else %}
+                    <p class="empty-state">No rendered WAV files found yet.</p>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="panel risks-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Platform Risks</p>
+                        <h2>Known Constraints</h2>
+                    </div>
+                </div>
+                <div class="risk-grid">
+                    {% for risk in risks %}
+                    <span class="risk-pill">{{ risk.replace('_', ' ') }}</span>
+                    {% else %}
+                    <p class="empty-state">No risks listed in roadmap.json.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script>
+        window.dashboardData = {{ {
+            'roadmapSummary': roadmap_summary,
+            'songs': songs,
+            'categoryCounts': category_counts,
+            'summaryCards': summary_cards
+        } | tojson | safe }};
+    </script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+
+</html>
