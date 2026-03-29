@@ -13,6 +13,7 @@ from typing import List, Dict, Any
 import os, json, re, uuid, tempfile, subprocess
 from pathlib import Path
 import miditoolkit
+from heuristic_audit import build_heuristic_audit_snapshot, build_heuristic_audit_source_detail
 
 RENDER_ROOT   = Path('renders').resolve()
 SOUNDFONT_SF2 = Path('assets/FluidR3_GM.sf2')   # adjust to taste
@@ -42,8 +43,9 @@ app.logger.setLevel(logging.INFO)
 
 from pathlib import Path
 
-DATA_ROOT = Path('training_data').resolve()      # ① make it absolute
+DATA_ROOT = Path('training_data').resolve()      # â‘  make it absolute
 ROADMAP_PATH = Path('roadmap.json').resolve()
+HEURISTIC_AUDIT_PATH = Path('heuristic_generation_source_audit.json').resolve()
 
 
 # --- General MIDI Instrument Map (Program Change to Name) ---
@@ -110,7 +112,7 @@ def parse_midi(filepath):
 
     ticks_per_beat = mid.ticks_per_beat or 480
 
-    # ── Time‑signature (first one found) ────────────────────────────────
+    # â”€â”€ Timeâ€‘signature (first one found) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     ts_num, ts_den = 4, 4
     for tr in mid.tracks:
         for msg in tr:
@@ -122,7 +124,7 @@ def parse_midi(filepath):
         break
     current_app.logger.info(f"Time signature: {ts_num}/{ts_den}")
 
-    # ── Tempo (µs per quarter → BPM) ───────────────────────────────────
+    # â”€â”€ Tempo (Âµs per quarter â†’ BPM) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     bpm = 120
     for tr in mid.tracks:
         for msg in tr:
@@ -132,17 +134,17 @@ def parse_midi(filepath):
         else:
             continue
         break
-    current_app.logger.info(f"Tempo: {bpm} BPM")
+    current_app.logger.info(f"Tempo: {bpm}â€¯BPM")
 
-    # ── Track & note extraction ────────────────────────────────────────
+    # â”€â”€ Track & note extraction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     tracks_data = []
     for i, track in enumerate(mid.tracks):
         is_drum      = False
         program_no   = None
         instrument   = "Unknown"
-        track_name   = f"Track {i}"
+        track_name   = f"TrackÂ {i}"
 
-        # pass 1 – meta info
+        # pass 1 â€“ meta info
         for msg in track:
             if not msg.is_meta and msg.channel == 9:
                 is_drum = True
@@ -155,7 +157,7 @@ def parse_midi(filepath):
         if is_drum and program_no is None:
             instrument = "Drums"
 
-        # pass 2 – notes
+        # pass 2 â€“ notes
         cur_tick = 0
         notes_on = {}
         notes    = []
@@ -221,9 +223,9 @@ def view_file(filename):
         # Let's render it to show the message clearly.
 
     
-    # ─── NEW: sort drums first ───────────────────────────────
+    # â”€â”€â”€ NEW: sort drums first â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     tracks_data.sort(key=lambda t: not t['is_drum_track'])
-    # ─────────────────────────────────────────────────────────
+    # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     tracks_data_json = json.dumps(tracks_data)
     settings_path = os.path.join(SET_DIR, filename + '.json')
@@ -479,7 +481,7 @@ def build_dashboard_data() -> dict:
         'uploaded_files': uploaded_files,
     }
 
-# app.py  – keep DATA_ROOT as before
+# app.py  â€“ keep DATA_ROOT as before
 @app.post('/dataset/motif_variation')
 def save_batch():
     data = request.get_json(force=True)
@@ -511,7 +513,7 @@ def save_motif_variation():
     fname = folder / f'{ex["id"]}.json'
     fname.write_text(json.dumps(ex, indent=2))
 
-    # 3. generate 11 transposed copies (-6 … +6 semitones, skip 0)
+    # 3. generate 11 transposed copies (-6 â€¦ +6 semitones, skip 0)
     m = re.search(r'K:([A-G][b#]?)(maj|min)?', ex['input'])
     if m:
         key = m.group(1)
@@ -549,6 +551,24 @@ def library():
 @app.get('/api/dashboard-data')
 def dashboard_data():
     return jsonify(build_dashboard_data())
+@app.get('/heuristics/audit')
+def heuristic_audit_page():
+    return render_template('heuristic_audit.html')
+@app.get('/api/heuristic-audit')
+def heuristic_audit_data():
+    snapshot = build_heuristic_audit_snapshot(Path(SET_DIR), DATA_ROOT, HEURISTIC_AUDIT_PATH)
+    return jsonify(snapshot)
+@app.get('/api/heuristic-audit/source')
+def heuristic_audit_source():
+    kind = request.args.get('kind', '').strip()
+    rel_path = request.args.get('path', '').strip()
+    if kind not in ('settings', 'dataset') or not rel_path:
+        abort(400)
+    try:
+        detail = build_heuristic_audit_source_detail(kind, rel_path, Path(SET_DIR), DATA_ROOT)
+    except (FileNotFoundError, ValueError):
+        abort(404)
+    return jsonify(detail)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -621,7 +641,7 @@ def export_training():
 
 
 # ----------------------------------------------------------------------
-#  /data/index.json  →  flat list of every example we can find
+#  /data/index.json  â†’  flat list of every example we can find
 # ----------------------------------------------------------------------
 @app.get('/data/index.json')
 def data_index():
@@ -634,7 +654,7 @@ def data_index():
             "category": "motif_variation",    # sub-folder
             "path": "Cannon_in_D/motif_variation/nw02f2b8.json",
             "function": "add_third_above",    # if present in file
-            "title": "Cannon_in_D • add_third_above"
+            "title": "Cannon_in_D â€¢ add_third_above"
           },
           ...
         ]
@@ -647,10 +667,10 @@ def data_index():
             continue                            # skip broken files
 
         song      = json_path.parts[-3]         # <song>
-        category  = json_path.parts[-2]         # motif_variation / …
+        category  = json_path.parts[-2]         # motif_variation / â€¦
         fid       = json_path.stem
         function  = payload.get('function', '')
-        title     = f"{song} • {function}" if function else f"{song}/{fid}"
+        title     = f"{song} â€¢ {function}" if function else f"{song}/{fid}"
 
         items.append({
             "id": fid,
@@ -674,14 +694,14 @@ def data_example(subpath):
     wanted = (DATA_ROOT / subpath).resolve()
     print(f"Requested data example: {wanted}")
 
-    # ② reject only if the path escapes the dataset folder
+    # â‘¡ reject only if the path escapes the dataset folder
     try:
         wanted.relative_to(DATA_ROOT)
     except ValueError:
         abort(404)
 
     if not wanted.exists():
-        # forgiving fallback (unchanged) …
+        # forgiving fallback (unchanged) â€¦
         candidates = [p for p in DATA_ROOT.rglob(wanted.name)
                       if p.is_file() and p.suffix == '.json']
         if candidates:
@@ -773,7 +793,7 @@ from music21 import converter
 def strip_duplicate_time_signatures(score):
     """
     Remove duplicate TimeSignature objects so music21.write('midi')
-    doesn’t trip over the same TS in multiple places.
+    doesnâ€™t trip over the same TS in multiple places.
     """
     for part in getattr(score, 'parts', []):
         seen_offsets = set()
@@ -787,7 +807,7 @@ def strip_duplicate_time_signatures(score):
                 seen_offsets.add(offset)
 
 
-# app.py  ─────────────────────────────────────────────────────────────
+# app.py  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 
@@ -890,7 +910,7 @@ def _resolve_keep_set(
     Accept *either* UI indices (after sort) **or** original Mido indices.
     Falls back to 'use instrument index directly' when the first lookup fails.
     """
-    # map original‑>miditoolkit
+    # map originalâ€‘>miditoolkit
     idx_map: dict[int,int] = {}
     seq = 0
     for orig_idx, trk in enumerate(mo.tracks):
@@ -900,11 +920,11 @@ def _resolve_keep_set(
 
     keep_instr: set[int] = set()
     for k in (keep_tracks or []):
-        if k in idx_map:                        # original index → OK
+        if k in idx_map:                        # original index â†’ OK
             keep_instr.add(idx_map[k])
         elif 0 <= k < len(mt.instruments):      # maybe already instrument idx
             keep_instr.add(k)
-    if not keep_tracks:                      # empty → keep everything
+    if not keep_tracks:                      # empty â†’ keep everything
         return set(range(len(mt.instruments)))
     return {k for k in keep_tracks
               if 0 <= k < len(mt.instruments)}
@@ -919,7 +939,7 @@ def _slice_midi(src_midi: Path,
     mt = miditoolkit.MidiFile(src_midi)
     mo = mido.MidiFile(src_midi)
 
-    # --- NEW: expand “end” when 0/null --------------------------------
+    # --- NEW: expand â€œendâ€ when 0/null --------------------------------
     if end_tick == 0:
         end_tick = _song_max_tick(mt)
 
@@ -949,7 +969,7 @@ def _slice_midi(src_midi: Path,
 
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.mid')
     out.dump(tmp.name)
-    tmp.close()                                 # Windows ‑ important!
+    tmp.close()                                 # Windows â€‘ important!
     return Path(tmp.name)
 
 
@@ -965,7 +985,7 @@ def midi_to_wav(midi_path: Path, wav_path: Path):
     subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # ----------------------------------------------------------------------
-#  helpers (same as before)  ───────────────────────────────────────────
+#  helpers (same as before)  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 #  _song_max_tick, _resolve_keep_set, _slice_midi, _midi_to_wav
 #  --------------------------------------------------------------------
 
@@ -973,12 +993,12 @@ def midi_to_wav(midi_path: Path, wav_path: Path):
 def render_wav():
     """
     Either:
-      { "song_id": "file.mid" }                    → whole song
+      { "song_id": "file.mid" }                    â†’ whole song
     or:
       {
         "song_id"     : "file.mid",
         "ticksPerBeat": 480,
-        "jobs": [ {file,range,instruments}, … ]
+        "jobs": [ {file,range,instruments}, â€¦ ]
       }
     """
     data      = request.get_json(force=True)
@@ -994,7 +1014,7 @@ def render_wav():
     jobs = data.get('jobs')           # might be None
 
     # ------------------------------------------------------------------
-    # Simple‑case fallback: render one file for the whole song
+    # Simpleâ€‘case fallback: render one file for the whole song
     # ------------------------------------------------------------------
     if not jobs:
         out_wav = RENDER_ROOT / f"{Path(song_id).stem}.wav"
@@ -1014,7 +1034,7 @@ def render_wav():
             # ---- unpack & sanitise ------------------------------------------------
             rng   = job.get('range') or {}
             start = int(rng.get('start', 0) or 0)
-            end   = int(rng.get('end',   0) or 0)      # 0/None  → slice helper expands
+            end   = int(rng.get('end',   0) or 0)      # 0/None  â†’ slice helper expands
             keep  = job.get('instruments', [])
             # fname = secure_filename(job.get('file', f'{uuid.uuid4()}.wav'))
             name = job.get('file').replace("'", " Variation")  # replace ' with ' ariation
@@ -1028,11 +1048,11 @@ def render_wav():
             try:
                 _midi_to_wav(tmp_mid, out_wav)
                 rendered += 1
-                app.logger.info(f'✅ rendered {out_wav}')
+                app.logger.info(f'âœ… rendered {out_wav}')
             finally:
                 tmp_mid.unlink(missing_ok=True)
         except Exception as exc:
-            app.logger.error(f"Render failed for {job.get('file')} – {exc}", exc_info=True)
+            app.logger.error(f"Render failed for {job.get('file')} â€“ {exc}", exc_info=True)
 
     return jsonify({'rendered': rendered})
 
@@ -1047,7 +1067,7 @@ def _midi_to_wav(midi_path: Path, wav_path: Path) -> None:
         '-r', '44100'
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-# # ────────────────────────────────────────────────────────────────────────
+# # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 # @app.post('/render_wav')
@@ -1080,7 +1100,7 @@ def _midi_to_wav(midi_path: Path, wav_path: Path) -> None:
 #             end   = int(rng.get('end'  , 0) or 0)
 #             keep  = job.get('instruments')          # may be None / []
 
-#             if end <= start:                # bad / missing end → skip
+#             if end <= start:                # bad / missing end â†’ skip
 #                 app.logger.warning(f"Skipped job with invalid range: {job}")
 #                 continue
 
@@ -1093,7 +1113,7 @@ def _midi_to_wav(midi_path: Path, wav_path: Path) -> None:
 #             try:
 #                 _midi_to_wav(tmp_mid, wav_out)
 #                 rendered += 1
-#                 app.logger.info(f'✅ rendered {wav_out}')
+#                 app.logger.info(f'âœ… rendered {wav_out}')
 #             finally:
 #                 # give FluidSynth a moment on Windows
 #                 import time, atexit, shutil
@@ -1106,14 +1126,14 @@ def _midi_to_wav(midi_path: Path, wav_path: Path) -> None:
 #                 else:
 #                     atexit.register(lambda p=tmp_mid: p.unlink(missing_ok=True))
 #         except Exception as exc:
-#             app.logger.error(f"Render failed for {job.get('file')} – {exc}", exc_info=True)
+#             app.logger.error(f"Render failed for {job.get('file')} â€“ {exc}", exc_info=True)
 
 #     return jsonify({'rendered': rendered})
 
 
 
 # ----------------------------------------------------------------------
-#  Tiny HTML page that hosts the JS browser (see §2)
+#  Tiny HTML page that hosts the JS browser (see Â§2)
 # ----------------------------------------------------------------------
 @app.get('/browse')
 def browse():
