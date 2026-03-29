@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heuristic Structure Export</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v4">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v5">
 </head>
 
 <body>
@@ -142,6 +142,19 @@
                         </article>
                     </div>
                     <div class="structure-grid secondary-grid">
+                        <article class="detail-card structure-map-card">
+                            <div class="panel-head compact">
+                                <div>
+                                    <h3>Structure Map</h3>
+                                    <p class="muted" id="structure-map-meta">No whole-song structure map loaded.</p>
+                                </div>
+                            </div>
+                            <div id="structure-map" class="structure-map">
+                                <p class="empty-state">Select an exported song to view its grouped structure.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="structure-grid secondary-grid">
                         <article class="detail-card pattern-browser">
                             <div class="panel-head compact">
                                 <div>
@@ -203,7 +216,7 @@
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v4"></script>
+    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v5"></script>
 </body>
 
 </html>

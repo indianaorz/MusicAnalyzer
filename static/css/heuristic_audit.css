@@ -588,6 +588,66 @@ h1 {
     gap: 10px;
 }
 
+.structure-map {
+    display: grid;
+    gap: 12px;
+}
+
+.map-group {
+    display: grid;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(154, 176, 170, 0.12);
+}
+
+.map-group-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: start;
+}
+
+.map-node {
+    display: grid;
+    gap: 8px;
+    margin-left: calc(var(--map-depth, 0) * 18px);
+}
+
+.map-node-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: start;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(154, 176, 170, 0.12);
+}
+
+.map-node-row.active {
+    border-color: rgba(214, 108, 63, 0.5);
+    background: rgba(214, 108, 63, 0.1);
+}
+
+.map-node-main,
+.map-node-meta,
+.map-children {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.map-node-main {
+    flex: 1 1 260px;
+}
+
+.map-node-meta {
+    justify-content: flex-end;
+}
+
 .collection-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(154, 176, 170, 0.12);
@@ -708,5 +768,15 @@ pre {
     .controls input,
     .controls select {
         width: 100%;
+    }
+
+    .map-group-head,
+    .map-node-row,
+    .relationship-row {
+        flex-direction: column;
+    }
+
+    .map-node {
+        margin-left: 0;
     }
 }

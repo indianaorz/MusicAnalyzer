@@ -22,6 +22,8 @@ const patternOverview = document.getElementById('pattern-overview');
 const patternLineage = document.getElementById('pattern-lineage');
 const patternConnections = document.getElementById('pattern-connections');
 const patternWarnings = document.getElementById('pattern-warnings');
+const structureMapMeta = document.getElementById('structure-map-meta');
+const structureMap = document.getElementById('structure-map');
 const collectionBrowserMeta = document.getElementById('collection-browser-meta');
 const collectionDetail = document.getElementById('collection-detail');
 const relationshipBrowserMeta = document.getElementById('relationship-browser-meta');
@@ -87,6 +89,7 @@ function selectPattern(patternId, options = {}) {
     }
 
     state.selectedPatternId = patternId;
+    renderStructureMap(state.currentGraph);
     renderPatternList(state.currentGraph, state.selectedExport || {});
     renderPatternInspector(state.currentGraph);
     renderCollectionDetail(state.selectedExport || {}, state.currentGraph);
@@ -442,6 +445,96 @@ function renderPatternWarnings(pattern, graph) {
     warnings.forEach(warning => appendBadge(patternWarnings, warning, 'badge-warn'));
 }
 
+function countSubtreePatterns(patternId, graph) {
+    if (!graph.byId.has(patternId)) {
+        return 0;
+    }
+
+    let count = 1;
+    const children = graph.childrenById.get(patternId) || [];
+    children.forEach(childId => {
+        count += countSubtreePatterns(childId, graph);
+    });
+    return count;
+}
+
+function buildMapNode(patternId, graph, depth = 0) {
+    const pattern = graph.byId.get(patternId);
+    const wrapper = document.createElement('article');
+    wrapper.className = 'map-node';
+    wrapper.style.setProperty('--map-depth', String(depth));
+
+    const row = document.createElement('div');
+    row.className = 'map-node-row';
+    if (patternId === state.selectedPatternId) {
+        row.classList.add('active');
+    }
+
+    const main = document.createElement('div');
+    main.className = 'map-node-main';
+    main.appendChild(createJumpButton(`${pattern.name || pattern.id} (${pattern.id})`, pattern.id, { compact: true }));
+
+    const meta = document.createElement('div');
+    meta.className = 'map-node-meta';
+    appendBadge(meta, formatRange(pattern.range));
+    (pattern.relationTags || []).forEach(tag => appendBadge(meta, tag));
+
+    row.appendChild(main);
+    row.appendChild(meta);
+    wrapper.appendChild(row);
+
+    const children = graph.childrenById.get(patternId) || [];
+    if (children.length) {
+        const childList = document.createElement('div');
+        childList.className = 'map-children';
+        children.forEach(childId => {
+            childList.appendChild(buildMapNode(childId, graph, depth + 1));
+        });
+        wrapper.appendChild(childList);
+    }
+
+    return wrapper;
+}
+
+function renderStructureMap(graph) {
+    clearNode(structureMap);
+
+    if (!graph || !graph.patterns.length) {
+        structureMapMeta.textContent = 'No whole-song structure map loaded.';
+        structureMap.appendChild(createEmptyState('Select an exported song to view its grouped structure.'));
+        return;
+    }
+
+    structureMapMeta.textContent = `${graph.roots.length} root groups and ${graph.patterns.length} total exported patterns.`;
+
+    graph.roots.forEach(root => {
+        const section = document.createElement('section');
+        section.className = 'map-group';
+
+        const header = document.createElement('div');
+        header.className = 'map-group-head';
+
+        const titleWrap = document.createElement('div');
+        const title = document.createElement('h4');
+        title.textContent = root.name || root.id;
+        const subtitle = document.createElement('p');
+        subtitle.className = 'collection-meta';
+        subtitle.textContent = `${countSubtreePatterns(root.id, graph)} patterns in this group`;
+        titleWrap.appendChild(title);
+        titleWrap.appendChild(subtitle);
+
+        const actions = document.createElement('div');
+        actions.className = 'jump-row';
+        actions.appendChild(createJumpButton(`Jump to ${root.id}`, root.id, { compact: true }));
+
+        header.appendChild(titleWrap);
+        header.appendChild(actions);
+        section.appendChild(header);
+        section.appendChild(buildMapNode(root.id, graph, 0));
+        structureMap.appendChild(section);
+    });
+}
+
 function renderPatternInspector(graph) {
     if (!graph || !state.selectedPatternId || !graph.byId.has(state.selectedPatternId)) {
         renderPropertyGrid([
@@ -742,6 +835,9 @@ function renderEmptyDetail(message) {
     structureTag.textContent = 'No structure selected';
     structureMeta.textContent = 'This panel reflects the dedicated heuristic export once a song is selected.';
     clearNode(structureSummary);
+    clearNode(structureMap);
+    structureMap.appendChild(createEmptyState('Select an exported song to view its grouped structure.'));
+    structureMapMeta.textContent = 'No whole-song structure map loaded.';
     clearNode(patternList);
     patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
     renderPatternInspector(null);
@@ -808,6 +904,9 @@ async function loadDetail(item) {
         structureMeta.textContent = 'The dedicated export could not be loaded.';
         state.currentGraph = null;
         clearNode(structureSummary);
+        clearNode(structureMap);
+        structureMap.appendChild(createEmptyState('Failed to load whole-song structure.'));
+        structureMapMeta.textContent = 'No whole-song structure map loaded.';
         clearNode(patternList);
         patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
         renderPatternInspector(null);

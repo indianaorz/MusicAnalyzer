@@ -6,6 +6,8 @@ This roadmap is governed by [NORTH_STAR.md](c:/Users/leeor/FFCO/MusicAnalyzerDAW
 
 The target is not an Epicify-style example browser. The target is a structure-aware corpus where songs are represented as graphs of patterns, child patterns, collections, repetitions, and variations, and where normalization preserves that authored structure rather than flattening it away.
 
+At the whole-song level, the target is a recursive structural plan: a `whole song` node should be decomposable into ordered child structure, and each child should be interpretable as new material, repetition, variation, canonical reuse, or another container that must be decomposed further.
+
 ## NIMBLE Anchor
 
 ### North Star
@@ -30,6 +32,7 @@ Corrective model:
 - treat `training_data/` exports as secondary evidence and derived artifacts
 - build the normalized schema around patterns, child patterns, collections, and lineage
 - only use ABC/example viewing as a validation aid, not as the core data model
+- treat browser improvements as validation infrastructure, not as proof that the generation contract is complete
 
 ### Build
 
@@ -60,6 +63,13 @@ Build a normalization and analysis pipeline that converts the existing manually 
 3. identifying reusable sub-patterns and transformation heuristics,
 4. supporting future generation of complete songs from structure graphs made of nodes, sub-nodes, and variations.
 
+More specifically, the future generator should be able to start from a `whole song` node and repeatedly answer:
+
+- what are the ordered children of this node
+- which child is a canonical instantiation
+- which child is a repetition or variation of something earlier
+- which child is a container that needs another decomposition pass
+
 ## Current Baseline In Repo
 
 The repo already has useful starting points:
@@ -85,6 +95,8 @@ The current exports are useful examples, but they are not yet normalized enough 
 
 - canonical patterns,
 - pattern collections and hierarchy,
+- pattern-instance lineage,
+- ordered containment and decomposition flow,
 - variation lineage,
 - repeat lineage,
 - transformation metadata,
@@ -98,6 +110,8 @@ Important clarification:
 - a parent pattern may contain child patterns
 - a collection may contain multiple related patterns
 - variation analysis is a relationship layered on top of structure, not a replacement for structure
+- a canonical pattern is not the same thing as an in-song pattern occurrence
+- whole-song generation will depend on pattern instances and recursive decomposition, not just pattern labels
 
 Without that layer, it is hard to answer questions like:
 
@@ -115,7 +129,7 @@ A batch exporter that scans all existing labeled source material and emits a nor
 
 ### 2. Normalized Dataset Contract
 
-A versioned schema for songs, collections, patterns, nodes, lineage, and variation relationships.
+A versioned schema for songs, collections, patterns, pattern instances, nodes, lineage, and variation relationships.
 
 ### 3. Library Page
 
@@ -255,16 +269,31 @@ For percussion-heavy or tonally ambiguous patterns:
   - a labeled group of related patterns, sections, or node families
 - `pattern`
   - canonical musical unit with stable identity
+- `pattern_instance`
+  - occurrence of a pattern inside a song or container with ordered position and local context
 - `sub_pattern`
   - a child musical unit nested inside a larger pattern
 - `pattern_variant`
   - derived version of a canonical pattern
-- `pattern_instance`
-  - occurrence of a pattern inside a song graph
 - `relationship`
   - repeat, variation, simplification, embellishment, split_from, merged_from, generated_from
 - `source_ref`
   - pointer back to original file, song, export category, pattern id, and notes region
+
+### Whole-song decomposition requirements
+
+The normalized contract must support recursive generation-oriented decomposition:
+
+- a container pattern or song must expose ordered child instances
+- each child instance must indicate whether it is:
+  - canonical reuse
+  - repetition
+  - variation
+  - simplification
+  - newly introduced material
+  - another container to recurse into
+- decomposition order must be explicit, not inferred from display order
+- instance-level provenance must remain traceable to source labels
 
 ### Recommended normalized fields
 
@@ -310,6 +339,23 @@ For percussion-heavy or tonally ambiguous patterns:
 - self-similarity and repetition markers
 
 ## Roadmap
+
+## Current Alignment Check
+
+What is aligned now:
+
+- the project has a dedicated heuristic export
+- raw structure is inspectable without depending on Epicify-style examples
+- songs can be browsed as pattern graphs with collections and relationships
+
+What is not yet sufficient for the North Star:
+
+- the normalized schema is not yet locked
+- canonical patterns and pattern instances are not yet formalized separately
+- ordered whole-song decomposition is not yet explicit in the export contract
+- generator-facing heuristic functions cannot be trusted until those pieces exist
+
+This means the current browser work should be treated as a validation surface, not as the final generation-ready representation.
 
 ## Phase 1: Audit Existing Labels And Exports
 
@@ -388,29 +434,36 @@ Create a versioned contract that supports browsing, analysis, and future generat
 
 - define JSON schema for normalized entities
 - define stable ID strategy for songs, collections, patterns, and relationships
+- define explicit `pattern_instance` semantics and instance IDs
 - define lineage rules for repeat vs variation vs simplification
 - define canonical naming and label normalization rules
 - define how graph nodes and sub-nodes are represented
 - define how collections differ from individual patterns
+- define ordered decomposition rules for container patterns and whole-song nodes
+- define how a child instance signals canonical reuse vs repetition vs variation vs new material
 
 ### Outputs
 
 - schema document
 - example normalized records
 - normalization rules document
+- one worked example of recursive song decomposition
 
 ### Exit criteria
 
 - same source material always normalizes to the same IDs
 - schema can represent parent-child pattern graphs and variation chains
+- schema can represent a whole song as an ordered recursive plan
 
 ### Checkpoint
 
 - approve one worked example by hand:
   - one canonical pattern
+  - one pattern instance
   - one variation
   - one collection
   - one relationship edge
+  - one whole-song container broken into ordered child instances
 
 ### UI validation
 
@@ -431,6 +484,8 @@ Run through all already-labeled files and generate normalized outputs in one rep
 - add a batch exporter service
 - scan current labeled files and training examples
 - normalize names, lineage, and source references
+- emit canonical patterns separately from pattern instances
+- emit ordered child-instance decomposition for container nodes
 - emit normalized records to a dedicated output tree
 - generate index files for fast browsing
 - log skipped, broken, or ambiguous records
@@ -440,6 +495,7 @@ Run through all already-labeled files and generate normalized outputs in one rep
 - `training_data/_normalized/songs/...`
 - `training_data/_normalized/patterns/...`
 - `training_data/_normalized/collections/...`
+- `training_data/_normalized/pattern_instances/...`
 - `training_data/_normalized/relationships/...`
 - `training_data/_normalized/index.json`
 
@@ -453,6 +509,7 @@ Run through all already-labeled files and generate normalized outputs in one rep
 
 - exporter can run across the full existing corpus without manual intervention
 - normalized output is deterministic for unchanged source data
+- every exported song can be traversed as a recursive ordered structure
 
 ### Checkpoint
 
@@ -464,6 +521,7 @@ Run through all already-labeled files and generate normalized outputs in one rep
 - compare counts at each stage:
   - source patterns found
   - normalized patterns created
+  - pattern instances created
   - relationships created
   - warnings and skipped records
 
@@ -488,6 +546,7 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
 - extend the current browser or add a parallel normalized browser page
 - add filters for song, collection, canonical pattern, relationship type, instrument, key, and tags
 - add a detail pane for source pattern, normalized pattern, and linked variants
+- add a whole-song decomposition view for ordered child instances
 - show lineage graph or breadcrumb chain
 - support side-by-side comparison of canonical vs variation
 - support jumping from collection to member patterns and back
@@ -495,10 +554,12 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
 ### Key UX views
 
 - all canonical patterns
+- all pattern instances for a selected song
 - all collections
 - all variants of selected canonical pattern
 - all relationships for selected node
 - source-to-normalized provenance view
+- recursive song-plan view
 
 ### Outputs
 
@@ -511,6 +572,7 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
 
 - every normalized record is browsable from the UI
 - a user can move from canonical pattern to every known variation in one flow
+- a user can read a whole song as a recursive plan from top to bottom
 
 ### Checkpoint
 
@@ -524,6 +586,7 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
 
 - the page must make these visible at a glance:
   - canonical pattern identity
+  - instance identity and ordered position
   - local key and transposition
   - relationship type
   - collection membership
@@ -603,6 +666,9 @@ Turn repeated analysis patterns into reusable generation heuristics.
 
 ### Example heuristic families
 
+- decompose container into ordered child instances
+- choose next section based on prior structural context
+- instantiate canonical pattern in local context
 - transpose pattern up or down while preserving rhythm
 - preserve contour while swapping interval content
 - intensify by increasing density near phrase ending
@@ -616,6 +682,7 @@ Turn repeated analysis patterns into reusable generation heuristics.
 - heuristic catalog
 - confidence score per heuristic
 - traceability from heuristic back to source examples
+- explicit mapping from heuristic families to normalized entities and relationship types
 
 ### Exit criteria
 
@@ -654,8 +721,9 @@ This keeps the generation layer grounded in inspectable musical evidence.
 The first shippable version of this feature should do only the following:
 
 - batch-export all current labeled data into a normalized structure
-- show canonical patterns, child patterns, variants, and collections in a browser
+- show canonical patterns, child patterns, instances, variants, and collections in a browser
 - show provenance from normalized item back to source file
+- show whole-song decomposition as ordered child instances
 - show a basic transform summary for canonical-to-variation edges
 
 Anything beyond that should be treated as phase-two work:
@@ -762,4 +830,11 @@ This is the safest place to begin because it gives us a verified understanding o
 
 ## Immediate Next Step
 
-Start with a schema-and-audit pass, not UI work. The exporter and browser will stay unstable until the normalized contract for pattern identity, lineage, and source provenance is locked first.
+Start with a schema pass focused on generation-ready decomposition. The exporter and browser will stay unstable until the normalized contract for pattern identity, pattern instances, ordered decomposition, lineage, and source provenance is locked first.
+
+That immediate next step should answer:
+
+- what distinguishes a canonical pattern from a pattern instance
+- how a `whole song` node exposes ordered children
+- how a child instance is typed as new, repeated, varied, simplified, or recursive
+- which currently labeled relationships are already strong enough to support first-pass heuristic functions
