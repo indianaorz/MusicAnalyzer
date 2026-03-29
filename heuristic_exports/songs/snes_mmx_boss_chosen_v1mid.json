@@ -1,0 +1,1986 @@
+{
+  "exportVersion": 1,
+  "songId": "snes_mmx_boss_chosen_v1mid",
+  "title": "SNES_MMX_Boss_Chosen_V1.mid",
+  "source": {
+    "type": "user_settings",
+    "path": "SNES_MMX_Boss_Chosen_V1.mid.json"
+  },
+  "globalContext": {
+    "root": 0,
+    "scale": "minor",
+    "copyMode": "start",
+    "snapMode": "bar",
+    "harmony": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "bpm": null
+  },
+  "patterns": [
+    {
+      "id": "root",
+      "name": "Whole song",
+      "normalizedName": "whole song",
+      "parentId": null,
+      "children": [
+        "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      ],
+      "depth": 0,
+      "range": {
+        "start": 0,
+        "end": null
+      },
+      "instruments": [],
+      "instrumentCount": 0,
+      "mode": null,
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "root"
+      },
+      "raw": {
+        "id": "root",
+        "name": "Whole song",
+        "parentId": null,
+        "range": {
+          "start": 0,
+          "end": null
+        },
+        "noteRefs": [],
+        "children": [
+          "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+          "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+          "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+          "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+        ]
+      }
+    },
+    {
+      "id": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "name": "Finale",
+      "normalizedName": "finale",
+      "parentId": "root",
+      "children": [
+        "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+        "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+        "c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "4e9b1d32-f469-4131-a862-27445623c936",
+        "4cb45cba-8218-4934-8a6b-add88a8ce909",
+        "22839f98-485b-42fa-9c13-0413574dfb12"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 5760,
+        "end": 9598,
+        "low": 30,
+        "high": 79
+      },
+      "instruments": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "instrumentCount": 7,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      },
+      "raw": {
+        "id": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "name": "Finale",
+        "parentId": "root",
+        "range": {
+          "start": 5760,
+          "end": 9598,
+          "low": 30,
+          "high": 79
+        },
+        "mode": "start",
+        "children": [
+          "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+          "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+          "c7420e5d-2637-419c-9207-8f4cdc44d497",
+          "4e9b1d32-f469-4131-a862-27445623c936",
+          "4cb45cba-8218-4934-8a6b-add88a8ce909",
+          "22839f98-485b-42fa-9c13-0413574dfb12"
+        ],
+        "instruments": [
+          0,
+          1,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "id": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "name": "Intro",
+      "normalizedName": "intro",
+      "parentId": "root",
+      "children": [
+        "42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "51dc36a4-c352-4741-b30d-5cae30522abc"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 0,
+        "end": 1918,
+        "low": 35,
+        "high": 72
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "instrumentCount": 8,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d"
+      },
+      "raw": {
+        "id": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "name": "Intro",
+        "parentId": "root",
+        "range": {
+          "start": 0,
+          "end": 1918,
+          "low": 35,
+          "high": 72
+        },
+        "mode": "start",
+        "children": [
+          "42435239-a2ca-4887-861d-2ae7a449fd3e",
+          "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+          "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+          "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+          "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+          "51dc36a4-c352-4741-b30d-5cae30522abc"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "id": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "name": "Intro'",
+      "normalizedName": "intro",
+      "parentId": "root",
+      "children": [
+        "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+        "f4221ded-7cf2-4440-8caa-114c044a1302",
+        "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+        "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+        "a4185cdd-426d-44ef-a701-b64427391e85",
+        "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 1920,
+        "end": 3838,
+        "low": 33,
+        "high": 74
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "instrumentCount": 8,
+      "mode": "start",
+      "variantOf": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "variantOfName": "Intro",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c"
+      },
+      "raw": {
+        "id": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "name": "Intro'",
+        "parentId": "root",
+        "range": {
+          "start": 1920,
+          "end": 3838,
+          "low": 33,
+          "high": 74
+        },
+        "mode": "start",
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "isVariation": true,
+        "variantOf": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "variantOfName": "Intro",
+        "children": [
+          "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+          "f4221ded-7cf2-4440-8caa-114c044a1302",
+          "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+          "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+          "a4185cdd-426d-44ef-a701-b64427391e85",
+          "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+        ]
+      }
+    },
+    {
+      "id": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "name": "Step Transition",
+      "normalizedName": "step transition",
+      "parentId": "root",
+      "children": [
+        "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+        "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+        "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "2a423d23-5185-4ce4-a906-3d265df96697",
+        "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 3840,
+        "end": 5758,
+        "low": 30,
+        "high": 78
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "instrumentCount": 8,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4"
+      },
+      "raw": {
+        "id": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "name": "Step Transition",
+        "parentId": "root",
+        "range": {
+          "start": 3840,
+          "end": 5758,
+          "low": 30,
+          "high": 78
+        },
+        "mode": "start",
+        "children": [
+          "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+          "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+          "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+          "2a423d23-5185-4ce4-a906-3d265df96697",
+          "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+          "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "id": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5760,
+        "end": 7680,
+        "low": 50,
+        "high": 50
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "0859a85d-940f-43d8-9a42-8a3e13837fdd"
+      },
+      "raw": {
+        "id": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+        "name": "Brass Section",
+        "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "range": {
+          "start": 5760,
+          "end": 7680,
+          "low": 50,
+          "high": 50
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3840,
+        "end": 5276,
+        "low": 75,
+        "high": 78
+      },
+      "instruments": [
+        7
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "variantOfName": "Overdriven Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      },
+      "raw": {
+        "id": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+        "name": "Brass Section",
+        "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "range": {
+          "start": 3840,
+          "end": 5276,
+          "low": 75,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          7
+        ],
+        "children": [],
+        "variantOf": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "variantOfName": "Overdriven Guitar",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "22839f98-485b-42fa-9c13-0413574dfb12",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5760,
+        "end": 8036,
+        "low": 75,
+        "high": 79
+      },
+      "instruments": [
+        7
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "variantOfName": "Overdriven Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "22839f98-485b-42fa-9c13-0413574dfb12"
+      },
+      "raw": {
+        "id": "22839f98-485b-42fa-9c13-0413574dfb12",
+        "name": "Brass Section",
+        "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "range": {
+          "start": 5760,
+          "end": 8036,
+          "low": 75,
+          "high": 79
+        },
+        "mode": "start",
+        "instruments": [
+          7
+        ],
+        "children": [],
+        "variantOf": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "variantOfName": "Overdriven Guitar",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3840,
+        "end": 5276,
+        "low": 66,
+        "high": 69
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "variantOfName": "Brass Section",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "4aee72b0-6342-4667-9ac7-802aaf5b964c"
+      },
+      "raw": {
+        "id": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "name": "Brass Section",
+        "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "range": {
+          "start": 3840,
+          "end": 5276,
+          "low": 66,
+          "high": 69
+        },
+        "mode": "start",
+        "instruments": [
+          6
+        ],
+        "children": [],
+        "variantOf": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+        "variantOfName": "Brass Section",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "4cb45cba-8218-4934-8a6b-add88a8ce909",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5760,
+        "end": 8036,
+        "low": 67,
+        "high": 71
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "22839f98-485b-42fa-9c13-0413574dfb12",
+      "variantOfName": "Brass Section",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "4cb45cba-8218-4934-8a6b-add88a8ce909"
+      },
+      "raw": {
+        "id": "4cb45cba-8218-4934-8a6b-add88a8ce909",
+        "name": "Brass Section",
+        "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "range": {
+          "start": 5760,
+          "end": 8036,
+          "low": 67,
+          "high": 71
+        },
+        "mode": "start",
+        "instruments": [
+          6
+        ],
+        "children": [],
+        "variantOf": "22839f98-485b-42fa-9c13-0413574dfb12",
+        "variantOfName": "Brass Section",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "51dc36a4-c352-4741-b30d-5cae30522abc",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 58,
+        "high": 60
+      },
+      "instruments": [
+        7
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "variantOfName": "Overdriven Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "51dc36a4-c352-4741-b30d-5cae30522abc"
+      },
+      "raw": {
+        "id": "51dc36a4-c352-4741-b30d-5cae30522abc",
+        "name": "Brass Section",
+        "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "range": {
+          "start": 0,
+          "end": 1920,
+          "low": 58,
+          "high": 60
+        },
+        "mode": "start",
+        "instruments": [
+          7
+        ],
+        "children": [],
+        "variantOf": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "variantOfName": "Overdriven Guitar",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 54,
+        "high": 55
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "775ab9a9-2952-4333-965e-c2d75ff26fd7"
+      },
+      "raw": {
+        "id": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "name": "Brass Section",
+        "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "range": {
+          "start": 0,
+          "end": 1920,
+          "low": 54,
+          "high": 55
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1800,
+        "low": 62,
+        "high": 63
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "variantOfName": "Overdriven Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d"
+      },
+      "raw": {
+        "id": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "name": "Brass Section",
+        "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "range": {
+          "start": 0,
+          "end": 1800,
+          "low": 62,
+          "high": 63
+        },
+        "mode": "start",
+        "instruments": [
+          6
+        ],
+        "children": [],
+        "variantOf": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "variantOfName": "Overdriven Guitar",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "a4185cdd-426d-44ef-a701-b64427391e85",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1920,
+        "end": 3720,
+        "low": 63,
+        "high": 65
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "variantOfName": "Brass Section",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "a4185cdd-426d-44ef-a701-b64427391e85"
+      },
+      "raw": {
+        "id": "a4185cdd-426d-44ef-a701-b64427391e85",
+        "name": "Brass Section",
+        "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "range": {
+          "start": 1920,
+          "end": 3720,
+          "low": 63,
+          "high": 65
+        },
+        "mode": "start",
+        "instruments": [
+          6
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "variantOfName": "Brass Section"
+      }
+    },
+    {
+      "id": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 60,
+        "high": 62
+      },
+      "instruments": [
+        7
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "51dc36a4-c352-4741-b30d-5cae30522abc",
+      "variantOfName": "Brass Section",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      },
+      "raw": {
+        "id": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
+        "name": "Brass Section",
+        "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "range": {
+          "start": 1920,
+          "end": 3840,
+          "low": 60,
+          "high": 62
+        },
+        "mode": "start",
+        "instruments": [
+          7
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "51dc36a4-c352-4741-b30d-5cae30522abc",
+        "variantOfName": "Brass Section"
+      }
+    },
+    {
+      "id": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3840,
+        "end": 5280,
+        "low": 51,
+        "high": 54
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "variantOfName": "Brass Section",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "e92d218b-2b0d-4219-b8e9-892ec931f88d"
+      },
+      "raw": {
+        "id": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+        "name": "Brass Section",
+        "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "range": {
+          "start": 3840,
+          "end": 5280,
+          "low": 51,
+          "high": 54
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": [],
+        "variantOf": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "variantOfName": "Brass Section",
+        "isVariation": true
+      }
+    },
+    {
+      "id": "f4221ded-7cf2-4440-8caa-114c044a1302",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 52,
+        "high": 53
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "variantOfName": "Brass Section",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "f4221ded-7cf2-4440-8caa-114c044a1302"
+      },
+      "raw": {
+        "id": "f4221ded-7cf2-4440-8caa-114c044a1302",
+        "name": "Brass Section",
+        "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "range": {
+          "start": 1920,
+          "end": 3840,
+          "low": 52,
+          "high": 53
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "variantOfName": "Brass Section"
+      }
+    },
+    {
+      "id": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5760,
+        "end": 8636,
+        "low": 36,
+        "high": 49
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "13055f67-2aec-4595-b2ad-2f86c66d7cc3"
+      },
+      "raw": {
+        "id": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+        "name": "Drums",
+        "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "range": {
+          "start": 5760,
+          "end": 8636,
+          "low": 36,
+          "high": 49
+        },
+        "mode": "start",
+        "instruments": [
+          0,
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1916,
+        "low": 36,
+        "high": 49
+      },
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "instrumentCount": 3,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "42435239-a2ca-4887-861d-2ae7a449fd3e"
+      },
+      "raw": {
+        "id": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "name": "Drums",
+        "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "range": {
+          "start": 0,
+          "end": 1916,
+          "low": 36,
+          "high": 49
+        },
+        "mode": "start",
+        "instruments": [
+          0,
+          1,
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3840,
+        "end": 5876,
+        "low": 36,
+        "high": 49
+      },
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "instrumentCount": 3,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41"
+      },
+      "raw": {
+        "id": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+        "name": "Drums",
+        "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "range": {
+          "start": 3840,
+          "end": 5876,
+          "low": 36,
+          "high": 49
+        },
+        "mode": "start",
+        "instruments": [
+          0,
+          1,
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1920,
+        "end": 3716,
+        "low": 36,
+        "high": 49
+      },
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "instrumentCount": 3,
+      "mode": "start",
+      "variantOf": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "variantOfName": "Drums",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "d7c7b23b-9e03-46da-b450-abb320bf25ac"
+      },
+      "raw": {
+        "id": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+        "name": "Drums",
+        "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "range": {
+          "start": 1920,
+          "end": 3716,
+          "low": 36,
+          "high": 49
+        },
+        "mode": "start",
+        "instruments": [
+          0,
+          1,
+          2
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "variantOfName": "Drums"
+      }
+    },
+    {
+      "id": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 72,
+        "high": 74
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "variantOfName": "Overdriven Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac"
+      },
+      "raw": {
+        "id": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+        "name": "Overdriven Guitar",
+        "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "range": {
+          "start": 1920,
+          "end": 3840,
+          "low": 72,
+          "high": 74
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "variantOfName": "Overdriven Guitar"
+      }
+    },
+    {
+      "id": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3840,
+        "end": 5276,
+        "low": 75,
+        "high": 78
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd"
+      },
+      "raw": {
+        "id": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "name": "Overdriven Guitar",
+        "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "range": {
+          "start": 3840,
+          "end": 5276,
+          "low": 75,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 70,
+        "high": 72
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d"
+      },
+      "raw": {
+        "id": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "name": "Overdriven Guitar",
+        "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "range": {
+          "start": 0,
+          "end": 1920,
+          "low": 70,
+          "high": 72
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5760,
+        "end": 7920,
+        "low": 75,
+        "high": 79
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "c7420e5d-2637-419c-9207-8f4cdc44d497"
+      },
+      "raw": {
+        "id": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "name": "Overdriven Guitar",
+        "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "range": {
+          "start": 5760,
+          "end": 7920,
+          "low": 75,
+          "high": 79
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "name": "Slap Bass 2",
+      "normalizedName": "slap bass 2",
+      "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 35,
+        "high": 36
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71"
+      },
+      "raw": {
+        "id": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "name": "Slap Bass 2",
+        "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "range": {
+          "start": 0,
+          "end": 1920,
+          "low": 35,
+          "high": 36
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "2a423d23-5185-4ce4-a906-3d265df96697",
+      "name": "Slap Bass 2",
+      "normalizedName": "slap bass 2",
+      "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3840,
+        "end": 5280,
+        "low": 30,
+        "high": 45
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "2a423d23-5185-4ce4-a906-3d265df96697"
+      },
+      "raw": {
+        "id": "2a423d23-5185-4ce4-a906-3d265df96697",
+        "name": "Slap Bass 2",
+        "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "range": {
+          "start": 3840,
+          "end": 5280,
+          "low": 30,
+          "high": 45
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "4e9b1d32-f469-4131-a862-27445623c936",
+      "name": "Slap Bass 2",
+      "normalizedName": "slap bass 2",
+      "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5760,
+        "end": 8400,
+        "low": 30,
+        "high": 31
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "4e9b1d32-f469-4131-a862-27445623c936"
+      },
+      "raw": {
+        "id": "4e9b1d32-f469-4131-a862-27445623c936",
+        "name": "Slap Bass 2",
+        "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "range": {
+          "start": 5760,
+          "end": 8400,
+          "low": 30,
+          "high": 31
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+      "name": "Slap Bass 2",
+      "normalizedName": "slap bass 2",
+      "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 33,
+        "high": 46
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "variantOfName": "Slap Bass 2",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f"
+      },
+      "raw": {
+        "id": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+        "name": "Slap Bass 2",
+        "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "range": {
+          "start": 1920,
+          "end": 3840,
+          "low": 33,
+          "high": 46
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "variantOfName": "Slap Bass 2"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "6d236dea-bd5c-40ed-8fec-ef43df68357d"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "5113c05a-2092-4703-b9ad-1ffb690cfdd4"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+    },
+    {
+      "type": "parent_child",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "42435239-a2ca-4887-861d-2ae7a449fd3e"
+    },
+    {
+      "type": "parent_child",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "775ab9a9-2952-4333-965e-c2d75ff26fd7"
+    },
+    {
+      "type": "parent_child",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d"
+    },
+    {
+      "type": "parent_child",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71"
+    },
+    {
+      "type": "parent_child",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d"
+    },
+    {
+      "type": "parent_child",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "51dc36a4-c352-4741-b30d-5cae30522abc"
+    },
+    {
+      "type": "parent_child",
+      "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "to": "d7c7b23b-9e03-46da-b450-abb320bf25ac"
+    },
+    {
+      "type": "parent_child",
+      "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "to": "f4221ded-7cf2-4440-8caa-114c044a1302"
+    },
+    {
+      "type": "parent_child",
+      "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "to": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac"
+    },
+    {
+      "type": "parent_child",
+      "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "to": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f"
+    },
+    {
+      "type": "parent_child",
+      "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "to": "a4185cdd-426d-44ef-a701-b64427391e85"
+    },
+    {
+      "type": "parent_child",
+      "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "to": "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+    },
+    {
+      "type": "variation",
+      "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "to": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "label": "Intro"
+    },
+    {
+      "type": "parent_child",
+      "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "to": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41"
+    },
+    {
+      "type": "parent_child",
+      "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "to": "e92d218b-2b0d-4219-b8e9-892ec931f88d"
+    },
+    {
+      "type": "parent_child",
+      "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "to": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd"
+    },
+    {
+      "type": "parent_child",
+      "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "to": "2a423d23-5185-4ce4-a906-3d265df96697"
+    },
+    {
+      "type": "parent_child",
+      "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "to": "4aee72b0-6342-4667-9ac7-802aaf5b964c"
+    },
+    {
+      "type": "parent_child",
+      "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "to": "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+    },
+    {
+      "type": "parent_child",
+      "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "to": "13055f67-2aec-4595-b2ad-2f86c66d7cc3"
+    },
+    {
+      "type": "parent_child",
+      "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "to": "0859a85d-940f-43d8-9a42-8a3e13837fdd"
+    },
+    {
+      "type": "parent_child",
+      "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "to": "c7420e5d-2637-419c-9207-8f4cdc44d497"
+    },
+    {
+      "type": "parent_child",
+      "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "to": "4e9b1d32-f469-4131-a862-27445623c936"
+    },
+    {
+      "type": "parent_child",
+      "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "to": "4cb45cba-8218-4934-8a6b-add88a8ce909"
+    },
+    {
+      "type": "parent_child",
+      "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "to": "22839f98-485b-42fa-9c13-0413574dfb12"
+    },
+    {
+      "type": "variation",
+      "from": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "to": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "label": "Overdriven Guitar"
+    },
+    {
+      "type": "variation",
+      "from": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "to": "51dc36a4-c352-4741-b30d-5cae30522abc",
+      "label": "Overdriven Guitar"
+    },
+    {
+      "type": "variation",
+      "from": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "to": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+      "label": "Drums"
+    },
+    {
+      "type": "variation",
+      "from": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "to": "f4221ded-7cf2-4440-8caa-114c044a1302",
+      "label": "Brass Section"
+    },
+    {
+      "type": "variation",
+      "from": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "to": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+      "label": "Overdriven Guitar"
+    },
+    {
+      "type": "variation",
+      "from": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "to": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+      "label": "Slap Bass 2"
+    },
+    {
+      "type": "variation",
+      "from": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "to": "a4185cdd-426d-44ef-a701-b64427391e85",
+      "label": "Brass Section"
+    },
+    {
+      "type": "variation",
+      "from": "51dc36a4-c352-4741-b30d-5cae30522abc",
+      "to": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
+      "label": "Brass Section"
+    },
+    {
+      "type": "variation",
+      "from": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "to": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+      "label": "Brass Section"
+    },
+    {
+      "type": "variation",
+      "from": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "to": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "label": "Brass Section"
+    },
+    {
+      "type": "variation",
+      "from": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "to": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "label": "Overdriven Guitar"
+    },
+    {
+      "type": "variation",
+      "from": "22839f98-485b-42fa-9c13-0413574dfb12",
+      "to": "4cb45cba-8218-4934-8a6b-add88a8ce909",
+      "label": "Brass Section"
+    },
+    {
+      "type": "variation",
+      "from": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "to": "22839f98-485b-42fa-9c13-0413574dfb12",
+      "label": "Overdriven Guitar"
+    }
+  ],
+  "collectionCandidates": [
+    {
+      "id": "collection:root",
+      "name": "Whole song",
+      "sourcePatternId": "root",
+      "parentPatternId": null,
+      "memberPatternIds": [
+        "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      ],
+      "collectionType": "root_collection"
+    },
+    {
+      "id": "collection:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "name": "Intro",
+      "sourcePatternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "51dc36a4-c352-4741-b30d-5cae30522abc"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "name": "Intro'",
+      "sourcePatternId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+        "f4221ded-7cf2-4440-8caa-114c044a1302",
+        "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+        "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+        "a4185cdd-426d-44ef-a701-b64427391e85",
+        "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "name": "Step Transition",
+      "sourcePatternId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+        "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+        "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "2a423d23-5185-4ce4-a906-3d265df96697",
+        "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "name": "Finale",
+      "sourcePatternId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+        "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+        "c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "4e9b1d32-f469-4131-a862-27445623c936",
+        "4cb45cba-8218-4934-8a6b-add88a8ce909",
+        "22839f98-485b-42fa-9c13-0413574dfb12"
+      ],
+      "collectionType": "top_level_section"
+    }
+  ],
+  "summary": {
+    "patternCount": 29,
+    "relationshipCount": 42,
+    "collectionCount": 5,
+    "rootPatternCount": 1,
+    "leafPatternCount": 24,
+    "relationshipTypeCounts": {
+      "variation": 14
+    },
+    "collectionTypeCounts": {
+      "top_level_section": 4,
+      "root_collection": 1
+    },
+    "labelVariantGroups": [
+      {
+        "normalized": "intro",
+        "variants": [
+          "Intro",
+          "Intro'"
+        ],
+        "variantCount": 2
+      }
+    ],
+    "issueCount": 0
+  },
+  "issues": []
+}

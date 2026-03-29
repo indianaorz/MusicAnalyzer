@@ -1,73 +1,172 @@
 const state = {
     snapshot: null,
     items: [],
-    selectedKey: null,
+    selectedPath: null,
     selectedPatternId: null,
 };
 
 const sourceList = document.getElementById('source-list');
 const sourceFilter = document.getElementById('source-filter');
-const kindFilter = document.getElementById('kind-filter');
 const snapshotMeta = document.getElementById('snapshot-meta');
 const detailTitle = document.getElementById('detail-title');
 const detailTag = document.getElementById('detail-tag');
 const detailMeta = document.getElementById('detail-meta');
-const detailSummary = document.getElementById('detail-summary');
-const detailRaw = document.getElementById('detail-raw');
-const viewerMeta = document.getElementById('viewer-meta');
-const viewerTag = document.getElementById('viewer-tag');
-const viewerPlaceholder = document.getElementById('viewer-placeholder');
-const loadingIndicator = document.getElementById('loading-indicator');
-const analysisContentNode = document.getElementById('analysis-content');
 const structureTag = document.getElementById('structure-tag');
 const structureMeta = document.getElementById('structure-meta');
 const structureSummary = document.getElementById('structure-summary');
-const patternDetail = document.getElementById('pattern-detail');
-const patternList = document.getElementById('pattern-list');
 const patternBrowserMeta = document.getElementById('pattern-browser-meta');
+const patternList = document.getElementById('pattern-list');
+const patternDetail = document.getElementById('pattern-detail');
+const collectionBrowserMeta = document.getElementById('collection-browser-meta');
+const collectionDetail = document.getElementById('collection-detail');
+const detailSummary = document.getElementById('detail-summary');
+const detailRaw = document.getElementById('detail-raw');
+const refreshButton = document.getElementById('refresh-export');
+
+function formatCount(value) {
+    return Number.isFinite(Number(value)) ? Number(value).toLocaleString() : '0';
+}
 
 function formatRange(range) {
     if (!range || typeof range !== 'object') {
-        return 'No range';
+        return 'no range';
     }
-    const start = range.start ?? '?';
-    const end = range.end ?? '?';
-    const low = range.low ?? '?';
-    const high = range.high ?? '?';
-    return `ticks ${start}..${end}, pitches ${low}..${high}`;
+
+    const parts = [];
+    if (range.start !== undefined || range.end !== undefined) {
+        parts.push(`ticks ${range.start ?? '?'}..${range.end ?? '?'}`);
+    }
+    if (range.low !== undefined || range.high !== undefined) {
+        parts.push(`pitches ${range.low ?? '?'}..${range.high ?? '?'}`);
+    }
+    return parts.length ? parts.join(', ') : 'range present';
 }
 
-function buildPatternGraph(rawPayload) {
-    const patterns = Array.isArray(rawPayload?.patterns) ? rawPayload.patterns.filter(pattern => pattern && typeof pattern === 'object') : [];
-    const byId = new Map(patterns.map(pattern => [pattern.id, pattern]));
+function clearNode(node, fallbackText = '') {
+    node.innerHTML = '';
+    if (fallbackText) {
+        node.textContent = fallbackText;
+    }
+}
+
+function renderCountList(elementId, counts, fallbackText) {
+    const element = document.getElementById(elementId);
+    clearNode(element);
+
+    const entries = Object.entries(counts || {});
+    if (!entries.length) {
+        const empty = document.createElement('li');
+        empty.className = 'empty-state';
+        empty.textContent = fallbackText;
+        element.appendChild(empty);
+        return;
+    }
+
+    entries.forEach(([label, count]) => {
+        const item = document.createElement('li');
+        const labelNode = document.createElement('span');
+        labelNode.textContent = label;
+        const countNode = document.createElement('span');
+        countNode.textContent = formatCount(count);
+        item.appendChild(labelNode);
+        item.appendChild(countNode);
+        element.appendChild(item);
+    });
+}
+
+function renderLabelVariants(groups) {
+    const container = document.getElementById('label-variants');
+    clearNode(container);
+
+    if (!Array.isArray(groups) || !groups.length) {
+        const empty = document.createElement('p');
+        empty.className = 'empty-state';
+        empty.textContent = 'No label variants detected in the current export.';
+        container.appendChild(empty);
+        return;
+    }
+
+    groups.forEach(group => {
+        const article = document.createElement('article');
+        article.className = 'pill';
+
+        const title = document.createElement('strong');
+        title.textContent = group.normalized || 'unlabeled';
+        article.appendChild(title);
+
+        const variants = document.createElement('span');
+        variants.textContent = Array.isArray(group.variants) ? group.variants.join(', ') : '';
+        article.appendChild(variants);
+
+        container.appendChild(article);
+    });
+}
+
+function renderIssues(issues) {
+    const issueList = document.getElementById('issue-list');
+    clearNode(issueList);
+
+    if (!Array.isArray(issues) || !issues.length) {
+        const empty = document.createElement('li');
+        empty.className = 'empty-state';
+        empty.textContent = 'No export warnings were produced.';
+        issueList.appendChild(empty);
+        return;
+    }
+
+    issues.forEach(issue => {
+        const item = document.createElement('li');
+        const left = document.createElement('span');
+        left.textContent = `${issue.kind || 'issue'}: ${issue.path || 'unknown path'}`;
+        const right = document.createElement('span');
+        right.textContent = issue.message || '';
+        item.appendChild(left);
+        item.appendChild(right);
+        issueList.appendChild(item);
+    });
+}
+
+function buildPatternGraph(exportPayload) {
+    const patterns = Array.isArray(exportPayload?.patterns)
+        ? exportPayload.patterns.filter(pattern => pattern && typeof pattern === 'object')
+        : [];
+
+    const byId = new Map();
     const childrenById = new Map();
 
     patterns.forEach(pattern => {
+        byId.set(pattern.id, pattern);
         childrenById.set(pattern.id, []);
     });
 
     patterns.forEach(pattern => {
-        if (pattern.parentId && childrenById.has(pattern.parentId)) {
-            childrenById.get(pattern.parentId).push(pattern.id);
+        const parentId = pattern.parentId;
+        if (typeof parentId === 'string' && childrenById.has(parentId)) {
+            childrenById.get(parentId).push(pattern.id);
         }
     });
 
-    const roots = patterns.filter(pattern => !pattern.parentId || !byId.has(pattern.parentId));
+    const roots = patterns
+        .filter(pattern => !pattern.parentId || !byId.has(pattern.parentId))
+        .sort((left, right) => (left.name || left.id).localeCompare(right.name || right.id));
+
     const flattened = [];
     const seen = new Set();
 
     function walk(patternId, depth) {
-        if (seen.has(patternId) || !byId.has(patternId)) {
+        if (!byId.has(patternId) || seen.has(patternId)) {
             return;
         }
         seen.add(patternId);
         const pattern = byId.get(patternId);
         flattened.push({ patternId, depth, pattern });
-        const children = (childrenById.get(patternId) || []).slice().sort((a, b) => {
-            const pa = byId.get(a)?.name || '';
-            const pb = byId.get(b)?.name || '';
-            return pa.localeCompare(pb);
+
+        const children = (childrenById.get(patternId) || []).slice().sort((leftId, rightId) => {
+            const leftName = byId.get(leftId)?.name || leftId;
+            const rightName = byId.get(rightId)?.name || rightId;
+            return leftName.localeCompare(rightName);
         });
+
         children.forEach(childId => walk(childId, depth + 1));
     }
 
@@ -81,385 +180,385 @@ function buildPatternGraph(rawPayload) {
     return { patterns, byId, childrenById, roots, flattened };
 }
 
-function relationTagsForPattern(pattern) {
-    const tags = [];
-    if (pattern.isVariation) tags.push('variation');
-    if (pattern.isRhythmicVariation) tags.push('rhythmic variation');
-    if (pattern.isRepetition) tags.push('repetition');
-    if (Array.isArray(pattern.children) && pattern.children.length) tags.push('has children');
-    if (!tags.length) tags.push('canonical / untyped');
-    return tags;
-}
+function buildLineage(pattern, graph) {
+    const lineage = [];
+    const seen = new Set();
+    let current = pattern;
 
-function renderStructureSummary(rawPayload, summary, graph) {
-    structureSummary.innerHTML = '';
-
-    if (!graph) {
-        structureSummary.innerHTML = '<p class="empty-state">This source is a derived dataset export. Structural graph inspection is primarily for raw `user_settings` pattern graphs.</p>';
-        return;
+    while (current && !seen.has(current.id)) {
+        seen.add(current.id);
+        lineage.push({ id: current.id, name: current.name || current.id });
+        current = current.parentId ? graph.byId.get(current.parentId) : null;
     }
 
-    const leafCount = graph.patterns.filter(pattern => !Array.isArray(pattern.children) || pattern.children.length === 0).length;
-    const stats = [
-        { label: 'Song', value: rawPayload.title || 'Untitled' },
-        { label: 'Patterns', value: graph.patterns.length },
-        { label: 'Roots', value: graph.roots.length },
-        { label: 'Leaves', value: leafCount },
-        { label: 'Variations', value: summary.relationshipTypeCounts?.variation || 0 },
-        { label: 'Repetitions', value: summary.relationshipTypeCounts?.repetition || 0 },
-    ];
+    return lineage.reverse();
+}
 
+function buildStructureStats(exportPayload, graph, summary) {
+    const globalContext = exportPayload?.globalContext || {};
+    const modeBits = [globalContext.root, globalContext.scale].filter(Boolean).join(' ');
+
+    return [
+        { label: 'Song', value: exportPayload?.title || 'Untitled' },
+        { label: 'Source', value: exportPayload?.source?.path || 'unknown' },
+        { label: 'Patterns', value: formatCount(summary?.patternCount ?? graph.patterns.length) },
+        { label: 'Relationships', value: formatCount(summary?.relationshipCount ?? 0) },
+        { label: 'Collections', value: formatCount(summary?.collectionCount ?? 0) },
+        { label: 'Root Patterns', value: formatCount(summary?.rootPatternCount ?? graph.roots.length) },
+        { label: 'Leaf Patterns', value: formatCount(summary?.leafPatternCount ?? 0) },
+        { label: 'Global Context', value: modeBits || 'none' },
+        { label: 'BPM', value: globalContext.bpm ?? 'unknown' },
+        { label: 'Issues', value: formatCount(summary?.issueCount ?? 0) },
+    ];
+}
+
+function renderStructureSummary(exportPayload, graph, summary) {
+    clearNode(structureSummary);
+
+    const stats = buildStructureStats(exportPayload, graph, summary);
     stats.forEach(stat => {
         const card = document.createElement('article');
         card.className = 'mini-stat';
-        card.innerHTML = `<span>${stat.label}</span><strong>${stat.value}</strong>`;
+
+        const label = document.createElement('span');
+        label.textContent = stat.label;
+        const value = document.createElement('strong');
+        value.textContent = String(stat.value);
+
+        card.appendChild(label);
+        card.appendChild(value);
         structureSummary.appendChild(card);
     });
 }
 
 function renderPatternDetail(graph) {
     if (!graph || !state.selectedPatternId || !graph.byId.has(state.selectedPatternId)) {
-        patternDetail.textContent = 'Select a pattern to inspect its containment path, lineage, and raw fields.';
+        patternDetail.textContent = 'Select a pattern to inspect its exported structure and lineage.';
         return;
     }
 
     const pattern = graph.byId.get(state.selectedPatternId);
     const parent = pattern.parentId ? graph.byId.get(pattern.parentId) : null;
-    const childIds = Array.isArray(pattern.children) ? pattern.children : [];
-    const children = childIds.map(id => graph.byId.get(id)).filter(Boolean);
-    const siblings = graph.patterns.filter(candidate => candidate.parentId === pattern.parentId && candidate.id !== pattern.id);
-    const variantParent = pattern.variantOf ? graph.byId.get(pattern.variantOf) : null;
+    const children = (Array.isArray(pattern.children) ? pattern.children : [])
+        .map(childId => graph.byId.get(childId))
+        .filter(Boolean)
+        .map(child => ({ id: child.id, name: child.name || child.id }));
+    const siblings = graph.patterns
+        .filter(candidate => candidate.parentId === pattern.parentId && candidate.id !== pattern.id)
+        .map(candidate => ({ id: candidate.id, name: candidate.name || candidate.id }));
 
-    const payload = {
+    const variantOf = pattern.variantOf
+        ? (graph.byId.get(pattern.variantOf)
+            ? {
+                id: graph.byId.get(pattern.variantOf).id,
+                name: graph.byId.get(pattern.variantOf).name || graph.byId.get(pattern.variantOf).id,
+            }
+            : {
+                id: pattern.variantOf,
+                name: pattern.variantOfName || pattern.variantOf,
+            })
+        : null;
+
+    const detail = {
         id: pattern.id,
         name: pattern.name,
-        relationTags: relationTagsForPattern(pattern),
-        parent: parent ? { id: parent.id, name: parent.name } : null,
-        variantOf: variantParent ? { id: variantParent.id, name: variantParent.name } : (pattern.variantOf ? { id: pattern.variantOf, name: pattern.variantOfName } : null),
-        children: children.map(child => ({ id: child.id, name: child.name })),
-        siblings: siblings.map(sibling => ({ id: sibling.id, name: sibling.name })),
-        instruments: pattern.instruments || [],
+        normalizedName: pattern.normalizedName,
+        depth: pattern.depth,
+        relationTags: pattern.relationTags || [],
+        lineage: buildLineage(pattern, graph),
+        parent: parent ? { id: parent.id, name: parent.name || parent.id } : null,
+        children,
+        siblings,
+        variantOf,
         range: pattern.range || null,
+        instruments: pattern.instruments || [],
+        instrumentCount: pattern.instrumentCount ?? 0,
         mode: pattern.mode || null,
-        rawFlags: {
-            isVariation: Boolean(pattern.isVariation),
-            isRhythmicVariation: Boolean(pattern.isRhythmicVariation),
-            isRepetition: Boolean(pattern.isRepetition),
-            isSimplification: Boolean(pattern.isSimplification),
-        },
-        raw: pattern,
+        flags: pattern.flags || {},
+        sourceRef: pattern.sourceRef || null,
+        raw: pattern.raw || null,
     };
 
-    patternDetail.textContent = JSON.stringify(payload, null, 2);
+    patternDetail.textContent = JSON.stringify(detail, null, 2);
 }
 
-function renderPatternList(graph) {
-    patternList.innerHTML = '';
+function renderCollectionDetail(exportPayload) {
+    const collections = Array.isArray(exportPayload?.collectionCandidates)
+        ? exportPayload.collectionCandidates
+        : [];
 
-    if (!graph) {
-        patternBrowserMeta.textContent = 'No raw pattern graph is available for this source.';
-        patternList.innerHTML = '<li class="empty-state">Dataset exports are derived artifacts. Select a raw settings source to inspect containment and lineage.</li>';
+    if (!collections.length) {
+        collectionBrowserMeta.textContent = 'No collection candidates were exported for this song.';
+        collectionDetail.textContent = 'No collection candidates were exported for this song.';
         return;
     }
 
-    patternBrowserMeta.textContent = `${graph.patterns.length} patterns loaded from the raw authored graph.`;
+    const selectedPatternId = state.selectedPatternId;
+    const relatedCollections = selectedPatternId
+        ? collections.filter(collection =>
+            collection.sourcePatternId === selectedPatternId ||
+            collection.parentPatternId === selectedPatternId ||
+            (Array.isArray(collection.memberPatternIds) && collection.memberPatternIds.includes(selectedPatternId)))
+        : [];
+
+    const visibleCollections = relatedCollections.length ? relatedCollections : collections.slice(0, 12);
+    collectionBrowserMeta.textContent = `${collections.length} collection candidates exported. Showing ${visibleCollections.length}${relatedCollections.length ? ' related to the selected pattern' : ''}.`;
+
+    const detail = {
+        selectedPatternId: selectedPatternId || null,
+        visibleCollections,
+    };
+
+    collectionDetail.textContent = JSON.stringify(detail, null, 2);
+}
+
+function renderPatternList(graph, exportPayload) {
+    clearNode(patternList);
+
+    if (!graph || !graph.patterns.length) {
+        patternBrowserMeta.textContent = 'No exported patterns loaded.';
+        const empty = document.createElement('li');
+        empty.className = 'empty-state';
+        empty.textContent = 'This export does not contain any patterns.';
+        patternList.appendChild(empty);
+        renderCollectionDetail(exportPayload);
+        renderPatternDetail(graph);
+        return;
+    }
+
+    patternBrowserMeta.textContent = `${graph.patterns.length} exported patterns loaded from the dedicated heuristic export.`;
 
     graph.flattened.forEach(entry => {
-        const { pattern, depth, patternId } = entry;
-        const li = document.createElement('li');
-        li.className = 'pattern-item';
-        if (state.selectedPatternId === patternId) {
-            li.classList.add('active');
+        const item = document.createElement('li');
+        item.className = 'pattern-item';
+        if (entry.patternId === state.selectedPatternId) {
+            item.classList.add('active');
         }
+        item.style.marginLeft = `${entry.depth * 18}px`;
 
-        const relationBits = relationTagsForPattern(pattern).map(tag => `<span>${tag}</span>`).join('');
-        li.style.marginLeft = `${depth * 18}px`;
-        li.innerHTML = `
-            <div class="pattern-item-title">
-                <span class="pattern-depth" style="opacity:${Math.max(0.35, 1 - depth * 0.08)}"></span>
-                <span>${pattern.name || pattern.id}</span>
-            </div>
-            <div class="pattern-item-meta">
-                <span>${formatRange(pattern.range)}</span>
-                ${relationBits}
-            </div>
-        `;
-        li.addEventListener('click', () => {
-            state.selectedPatternId = patternId;
-            renderPatternList(graph);
-            renderPatternDetail(graph);
+        const titleRow = document.createElement('div');
+        titleRow.className = 'pattern-item-title';
+        const dot = document.createElement('span');
+        dot.className = 'pattern-depth';
+        dot.style.opacity = `${Math.max(0.35, 1 - entry.depth * 0.08)}`;
+        const title = document.createElement('span');
+        title.textContent = entry.pattern.name || entry.pattern.id;
+        titleRow.appendChild(dot);
+        titleRow.appendChild(title);
+
+        const metaRow = document.createElement('div');
+        metaRow.className = 'pattern-item-meta';
+        const range = document.createElement('span');
+        range.textContent = formatRange(entry.pattern.range);
+        metaRow.appendChild(range);
+
+        (entry.pattern.relationTags || []).forEach(tag => {
+            const badge = document.createElement('span');
+            badge.textContent = tag;
+            metaRow.appendChild(badge);
         });
-        patternList.appendChild(li);
+
+        item.appendChild(titleRow);
+        item.appendChild(metaRow);
+        item.addEventListener('click', () => {
+            state.selectedPatternId = entry.patternId;
+            renderPatternList(graph, exportPayload);
+            renderPatternDetail(graph);
+            renderCollectionDetail(exportPayload);
+        });
+
+        patternList.appendChild(item);
     });
 }
 
-function renderStructureForPayload(item, payload) {
-    const summary = payload.summary || {};
-    const rawPayload = payload.rawPayload || {};
-
-    if (item.kind !== 'settings') {
-        structureTag.textContent = 'Derived export';
-        structureMeta.textContent = 'This source is a derived dataset export. It can help validate artifacts, but it is not the primary structure model for this phase.';
-        state.selectedPatternId = null;
-        renderStructureSummary(rawPayload, summary, null);
-        renderPatternList(null);
-        renderPatternDetail(null);
-        return;
-    }
-
-    const graph = buildPatternGraph(rawPayload);
-    const defaultPattern = graph.byId.has('root') ? 'root' : graph.flattened[0]?.patternId || null;
-    state.selectedPatternId = graph.byId.has(state.selectedPatternId) ? state.selectedPatternId : defaultPattern;
-
-    structureTag.textContent = 'Raw source graph';
-    structureMeta.textContent = `${item.path} is being treated as the primary structural source. Parent-child containment and variation/repetition lineage shown here should drive normalization design.`;
-    renderStructureSummary(rawPayload, summary, graph);
-    renderPatternList(graph);
-    renderPatternDetail(graph);
-}
-
-function ensureAbcBlock(text) {
-    if (typeof text !== 'string' || !text.trim()) {
-        return '';
-    }
-    const trimmed = text.trim();
-    if (trimmed.includes('<abc>')) {
-        return trimmed;
-    }
-    return `<abc>\n${trimmed}\n</abc>`;
-}
-
-function clearViewer(message, tag = 'No render source') {
-    viewerTag.textContent = tag;
-    viewerMeta.textContent = message;
-    loadingIndicator.style.display = 'block';
-    loadingIndicator.textContent = 'Viewer ready.';
-    viewerPlaceholder.style.display = 'block';
-    viewerPlaceholder.textContent = message;
-    analysisContentNode.style.display = 'none';
-    analysisContentNode.innerHTML = '';
-    window.analysisContent = '';
-}
-
-function buildAnalysisContent(rawPayload) {
-    if (!rawPayload || typeof rawPayload !== 'object') {
-        return '';
-    }
-
-    const blocks = [];
-    const inputBlock = ensureAbcBlock(rawPayload.input);
-    const outputBlock = ensureAbcBlock(rawPayload.output);
-
-    if (inputBlock) {
-        blocks.push(`Input:\n\n${inputBlock}\n`);
-    }
-    if (outputBlock) {
-        blocks.push(`Output:\n\n${outputBlock}\n`);
-    }
-
-    return blocks.join('\n');
-}
-
-function renderViewerForPayload(item, payload) {
-    if (item.kind !== 'dataset') {
-        clearViewer('This source is a saved pattern graph. Playback is secondary here and is intentionally demoted until we add direct pattern-to-ABC extraction from raw structure.', 'Settings graph');
-        return;
-    }
-
-    const abcSource = buildAnalysisContent(payload.rawPayload);
-    if (!abcSource) {
-        clearViewer('This dataset item does not include ABC input/output blocks, so there is nothing to render yet.', 'Dataset without ABC');
-        return;
-    }
-
-    viewerTag.textContent = 'Dataset ABC ready';
-    viewerMeta.textContent = `${item.path} rendered from stored ABC blocks. Use the per-block play buttons to hear the pattern material.`;
-    loadingIndicator.style.display = 'none';
-    viewerPlaceholder.style.display = 'none';
-    analysisContentNode.style.display = 'block';
-    analysisContentNode.innerHTML = '';
-    window.analysisContent = abcSource;
-
-    if (typeof processAndRenderAnalysis === 'function') {
-        processAndRenderAnalysis();
-    } else {
-        clearViewer('Viewer scripts are not available. The ABC playback stack did not initialize correctly on this page.', 'Viewer unavailable');
-    }
-}
-
-function renderCountList(elementId, data, fallbackText) {
-    const element = document.getElementById(elementId);
-    const entries = Object.entries(data || {});
-    element.innerHTML = '';
-
-    if (!entries.length) {
-        element.innerHTML = `<li class="empty-state">${fallbackText}</li>`;
-        return;
-    }
-
-    entries.slice(0, 12).forEach(([label, count]) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<span>${label}</span><span>${count}</span>`;
-        element.appendChild(li);
-    });
-}
-
-function renderLabelVariants(groups) {
-    const container = document.getElementById('label-variants');
-    container.innerHTML = '';
-
-    if (!groups || !groups.length) {
-        container.innerHTML = '<p class="empty-state">No label variants detected in the current sample.</p>';
-        return;
-    }
-
-    groups.slice(0, 12).forEach(group => {
-        const pill = document.createElement('article');
-        pill.className = 'pill';
-        pill.innerHTML = `
-            <strong>${group.normalized}</strong>
-            <span>${group.variants.join(', ')}</span>
-        `;
-        container.appendChild(pill);
-    });
-}
-
-function renderIssues(issues) {
-    const issueList = document.getElementById('issue-list');
-    issueList.innerHTML = '';
-
-    if (!issues || !issues.length) {
-        issueList.innerHTML = '<li class="empty-state">No malformed files were found in the scanned audit snapshot.</li>';
-        return;
-    }
-
-    issues.slice(0, 20).forEach(issue => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <span>${issue.kind}: ${issue.path}</span>
-            <span>${issue.message}</span>
-        `;
-        issueList.appendChild(li);
-    });
+function setSummaryCards(snapshot) {
+    document.getElementById('song-count').textContent = formatCount(snapshot?.summaryCards?.songCount ?? 0);
+    document.getElementById('export-pattern-count').textContent = formatCount(snapshot?.summaryCards?.patternCount ?? 0);
+    document.getElementById('relationship-count').textContent = formatCount(snapshot?.summaryCards?.relationshipCount ?? 0);
+    document.getElementById('collection-count').textContent = formatCount(snapshot?.summaryCards?.collectionCount ?? 0);
 }
 
 function renderSourceList() {
-    const query = sourceFilter.value.trim().toLowerCase();
-    const selectedKind = kindFilter.value;
+    clearNode(sourceList);
 
-    const filtered = state.items.filter(item => {
-        if (selectedKind !== 'all' && item.kind !== selectedKind) {
-            return false;
-        }
+    const query = sourceFilter.value.trim().toLowerCase();
+    const items = state.items.filter(item => {
         if (!query) {
             return true;
         }
+
         const haystack = [
             item.label,
+            item.songId,
             item.path,
-            item.song,
-            item.category,
-            item.function,
+            item.sourcePath,
         ].join(' ').toLowerCase();
+
         return haystack.includes(query);
     });
 
-    sourceList.innerHTML = '';
-
-    if (!filtered.length) {
-        sourceList.innerHTML = '<li class="empty-state">No sources match the current filter.</li>';
+    if (!items.length) {
+        const empty = document.createElement('li');
+        empty.className = 'empty-state';
+        empty.textContent = 'No exported songs match the current filter.';
+        sourceList.appendChild(empty);
         return;
     }
 
-    filtered.forEach(item => {
-        const key = `${item.kind}:${item.path}`;
-        const li = document.createElement('li');
-        li.className = 'source-item';
-        if (state.selectedKey === key) {
-            li.classList.add('active');
+    items.forEach(item => {
+        const entry = document.createElement('li');
+        entry.className = 'source-item';
+        if (item.path === state.selectedPath) {
+            entry.classList.add('active');
         }
 
-        const meta = [];
-        meta.push(item.kind);
-        if (item.category) {
-            meta.push(item.category);
-        }
-        if (item.patternCount) {
-            meta.push(`${item.patternCount} patterns`);
-        }
-        if (item.function) {
-            meta.push(item.function);
-        }
+        const title = document.createElement('h3');
+        title.textContent = item.label || item.songId || item.path;
+        entry.appendChild(title);
 
-        li.innerHTML = `
-            <h3>${item.label}</h3>
-            <p>${item.path}</p>
-            <div class="source-meta">${meta.map(value => `<span>${value}</span>`).join('')}</div>
-        `;
-        li.addEventListener('click', () => loadDetail(item));
-        sourceList.appendChild(li);
+        const subtitle = document.createElement('p');
+        subtitle.textContent = `${item.path} <- ${item.sourcePath || 'user_settings'}`;
+        entry.appendChild(subtitle);
+
+        const meta = document.createElement('div');
+        meta.className = 'source-meta';
+        [
+            `${formatCount(item.patternCount)} patterns`,
+            `${formatCount(item.relationshipCount)} relationships`,
+            `${formatCount(item.collectionCount)} collections`,
+        ].forEach(text => {
+            const badge = document.createElement('span');
+            badge.textContent = text;
+            meta.appendChild(badge);
+        });
+        entry.appendChild(meta);
+
+        entry.addEventListener('click', () => {
+            loadDetail(item);
+        });
+
+        sourceList.appendChild(entry);
     });
 }
 
+function renderEmptyDetail(message) {
+    detailTitle.textContent = 'Select an exported song';
+    detailTag.textContent = 'No export selected';
+    detailMeta.textContent = message;
+    structureTag.textContent = 'No structure selected';
+    structureMeta.textContent = 'This panel reflects the dedicated heuristic export once a song is selected.';
+    clearNode(structureSummary);
+    patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
+    clearNode(patternList);
+    patternDetail.textContent = 'Select a pattern to inspect its exported structure and lineage.';
+    collectionBrowserMeta.textContent = 'No exported collections loaded.';
+    collectionDetail.textContent = 'Collection candidates will appear here once an export is selected.';
+    detailSummary.textContent = 'Awaiting selection.';
+    detailRaw.textContent = 'Awaiting selection.';
+}
+
+function renderExportDetail(item, payload) {
+    const exportPayload = payload?.rawPayload || {};
+    const graph = buildPatternGraph(exportPayload);
+
+    const defaultPatternId = graph.byId.has(state.selectedPatternId)
+        ? state.selectedPatternId
+        : (graph.byId.has('root') ? 'root' : (graph.flattened[0]?.patternId || null));
+    state.selectedPatternId = defaultPatternId;
+
+    detailTitle.textContent = exportPayload.title || item.label || item.songId || 'Untitled';
+    detailTag.textContent = 'heuristic export';
+    detailMeta.textContent = `${item.path} from ${exportPayload?.source?.path || item.sourcePath || 'user_settings'}`;
+
+    structureTag.textContent = 'dedicated structural export';
+    structureMeta.textContent = 'This export is the raw structural corpus for the heuristic North Star. It preserves standalone patterns, parent-child containment, collection candidates, repetitions, variations, and provenance.';
+
+    detailSummary.textContent = JSON.stringify(payload.summary || {}, null, 2);
+    detailRaw.textContent = JSON.stringify(exportPayload, null, 2);
+
+    renderStructureSummary(exportPayload, graph, payload.summary || {});
+    renderPatternList(graph, exportPayload);
+    renderPatternDetail(graph);
+    renderCollectionDetail(exportPayload);
+}
+
 async function loadDetail(item) {
-    state.selectedKey = `${item.kind}:${item.path}`;
+    state.selectedPath = item.path;
     renderSourceList();
 
-    detailTitle.textContent = item.label;
-    detailTag.textContent = item.kind === 'settings' ? 'raw source' : 'derived export';
-    detailMeta.textContent = item.path;
-    detailSummary.textContent = 'Loading parsed summary...';
-    detailRaw.textContent = 'Loading raw JSON...';
+    detailTitle.textContent = item.label || item.songId || item.path;
+    detailTag.textContent = 'heuristic export';
+    detailMeta.textContent = `Loading ${item.path}...`;
+    detailSummary.textContent = 'Loading export summary...';
+    detailRaw.textContent = 'Loading export JSON...';
 
-    const params = new URLSearchParams({ kind: item.kind, path: item.path });
-    const response = await fetch(`/api/heuristic-audit/source?${params.toString()}`);
-    if (!response.ok) {
-        detailSummary.textContent = `Failed to load source detail (${response.status}).`;
+    try {
+        const params = new URLSearchParams({ path: item.path });
+        const response = await fetch(`/api/heuristic-export/source?${params.toString()}`);
+        if (!response.ok) {
+            throw new Error(`detail request failed with ${response.status}`);
+        }
+
+        const payload = await response.json();
+        renderExportDetail(item, payload);
+    } catch (error) {
+        detailMeta.textContent = `Failed to load ${item.path}.`;
+        detailSummary.textContent = String(error);
         detailRaw.textContent = '';
-        return;
+        structureTag.textContent = 'Load failed';
+        structureMeta.textContent = 'The dedicated export could not be loaded.';
+        clearNode(structureSummary);
+        patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
+        clearNode(patternList);
+        patternDetail.textContent = 'Failed to load pattern detail.';
+        collectionBrowserMeta.textContent = 'No exported collections loaded.';
+        collectionDetail.textContent = 'Failed to load collection detail.';
     }
-
-    const payload = await response.json();
-    detailSummary.textContent = JSON.stringify(payload.summary, null, 2);
-    detailRaw.textContent = JSON.stringify(payload.rawPayload, null, 2);
-    renderStructureForPayload(item, payload);
-    renderViewerForPayload(item, payload);
 }
 
 async function loadSnapshot() {
-    snapshotMeta.textContent = 'Loading audit snapshot...';
-    const response = await fetch('/api/heuristic-audit');
-    if (!response.ok) {
-        snapshotMeta.textContent = `Failed to load audit snapshot (${response.status}).`;
-        sourceList.innerHTML = '<li class="empty-state">Audit data is unavailable.</li>';
-        return;
-    }
+    snapshotMeta.textContent = 'Rebuilding heuristic export...';
+    refreshButton.disabled = true;
 
-    state.snapshot = await response.json();
-    state.items = state.snapshot.items || [];
+    try {
+        const response = await fetch('/api/heuristic-export');
+        if (!response.ok) {
+            throw new Error(`snapshot request failed with ${response.status}`);
+        }
 
-    document.getElementById('settings-count').textContent = state.snapshot.summaryCards.settingsFileCount ?? 0;
-    document.getElementById('dataset-count').textContent = state.snapshot.summaryCards.datasetFileCount ?? 0;
-    document.getElementById('pattern-count').textContent = state.snapshot.summaryCards.patternCount ?? 0;
-    document.getElementById('issue-count').textContent = state.snapshot.summaryCards.issueCount ?? 0;
+        const snapshot = await response.json();
+        state.snapshot = snapshot;
+        state.items = Array.isArray(snapshot.items) ? snapshot.items : [];
 
-    renderCountList('relationship-fields', state.snapshot.settings.relationshipFieldCounts, 'No relationship fields detected.');
-    renderCountList('relationship-types', state.snapshot.settings.relationshipTypeCounts, 'No relationship tags detected.');
-    renderCountList('dataset-categories', state.snapshot.dataset.categoryCounts, 'No dataset categories detected.');
-    renderLabelVariants(state.snapshot.settings.labelVariantGroups);
-    renderIssues(state.snapshot.issues);
+        setSummaryCards(snapshot);
+        renderCountList('relationship-types', snapshot.relationshipTypeCounts, 'No relationship types were exported.');
+        renderCountList('collection-types', snapshot.collectionTypeCounts, 'No collection types were exported.');
+        renderLabelVariants(snapshot.labelVariantGroups);
+        renderIssues(snapshot.issues);
 
-    snapshotMeta.textContent = `Snapshot generated ${state.snapshot.generatedAt} and written to ${state.snapshot.snapshotPath}`;
-    renderSourceList();
-    clearViewer('Select a dataset export to render its pattern notation and playback controls.');
+        snapshotMeta.textContent = `Export generated ${snapshot.generatedAt} at ${snapshot.exportPath}`;
+        renderSourceList();
 
-    const firstPreferred = state.items.find(item => item.kind === 'settings') || state.items.find(item => item.kind === 'dataset');
-    if (firstPreferred) {
-        loadDetail(firstPreferred);
+        if (!state.items.length) {
+            renderEmptyDetail('No heuristic exports were generated.');
+            return;
+        }
+
+        const selectedItem = state.items.find(item => item.path === state.selectedPath) || state.items[0];
+        await loadDetail(selectedItem);
+    } catch (error) {
+        snapshotMeta.textContent = `Failed to rebuild heuristic export. ${String(error)}`;
+        sourceList.innerHTML = '<li class="empty-state">Heuristic export data is unavailable.</li>';
+        renderEmptyDetail('Heuristic export data is unavailable.');
+    } finally {
+        refreshButton.disabled = false;
     }
 }
 
 sourceFilter.addEventListener('input', renderSourceList);
-kindFilter.addEventListener('change', renderSourceList);
+refreshButton.addEventListener('click', () => {
+    loadSnapshot();
+});
 
+renderEmptyDetail('Choose an exported song to inspect the dedicated heuristic structure export.');
 loadSnapshot();

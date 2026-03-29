@@ -14,6 +14,7 @@ import os, json, re, uuid, tempfile, subprocess
 from pathlib import Path
 import miditoolkit
 from heuristic_audit import build_heuristic_audit_snapshot, build_heuristic_audit_source_detail
+from heuristic_export import build_heuristic_export_snapshot, build_heuristic_export_source_detail
 
 RENDER_ROOT   = Path('renders').resolve()
 SOUNDFONT_SF2 = Path('assets/FluidR3_GM.sf2')   # adjust to taste
@@ -46,6 +47,8 @@ from pathlib import Path
 DATA_ROOT = Path('training_data').resolve()      # â‘  make it absolute
 ROADMAP_PATH = Path('roadmap.json').resolve()
 HEURISTIC_AUDIT_PATH = Path('heuristic_generation_source_audit.json').resolve()
+HEURISTIC_EXPORT_ROOT = Path('heuristic_exports').resolve()
+HEURISTIC_EXPORT_INDEX_PATH = (HEURISTIC_EXPORT_ROOT / 'index.json').resolve()
 
 
 # --- General MIDI Instrument Map (Program Change to Name) ---
@@ -568,6 +571,26 @@ def heuristic_audit_source():
         detail = build_heuristic_audit_source_detail(kind, rel_path, Path(SET_DIR), DATA_ROOT)
     except (FileNotFoundError, ValueError):
         abort(404)
+    return jsonify(detail)
+
+
+@app.get('/api/heuristic-export')
+def heuristic_export_data():
+    snapshot = build_heuristic_export_snapshot(Path(SET_DIR), HEURISTIC_EXPORT_ROOT, HEURISTIC_EXPORT_INDEX_PATH)
+    return jsonify(snapshot)
+
+
+@app.get('/api/heuristic-export/source')
+def heuristic_export_source():
+    rel_path = request.args.get('path', '').strip()
+    if not rel_path:
+        abort(400)
+
+    try:
+        detail = build_heuristic_export_source_detail(rel_path, HEURISTIC_EXPORT_ROOT)
+    except (FileNotFoundError, ValueError):
+        abort(404)
+
     return jsonify(detail)
 
 @app.route('/upload', methods=['POST'])

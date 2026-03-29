@@ -1,0 +1,1901 @@
+{
+  "exportVersion": 1,
+  "songId": "mmx_string_chameleon",
+  "title": "MMX String Chameleon",
+  "source": {
+    "type": "user_settings",
+    "path": "MMX_Sting_Chameleon.mid.json"
+  },
+  "globalContext": {
+    "root": 11,
+    "scale": "minor",
+    "copyMode": "start",
+    "snapMode": "bar",
+    "harmony": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "bpm": null
+  },
+  "patterns": [
+    {
+      "id": "root",
+      "name": "Whole song",
+      "normalizedName": "whole song",
+      "parentId": null,
+      "children": [
+        "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb"
+      ],
+      "depth": 0,
+      "range": {
+        "start": 0,
+        "end": 9216,
+        "low": 0,
+        "high": 127
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "instrumentCount": 8,
+      "mode": null,
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "root"
+      },
+      "raw": {
+        "id": "root",
+        "name": "Whole song",
+        "parentId": null,
+        "range": {
+          "start": 0,
+          "end": 9216,
+          "low": 0,
+          "high": 127
+        },
+        "noteRefs": [],
+        "children": [
+          "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+          "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+          "36c5678d-3029-45fe-9cab-72fff8dc83af",
+          "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "id": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "name": "Part A (Anthem)",
+      "normalizedName": "part a anthem",
+      "parentId": "root",
+      "children": [
+        "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+        "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+        "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+        "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+        "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+        "aade08fa-fab9-405b-ad7b-fa371a990c10"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 0,
+        "end": 3070,
+        "low": 31,
+        "high": 78
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "instrumentCount": 6,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94"
+      },
+      "raw": {
+        "id": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "name": "Part A (Anthem)",
+        "parentId": "root",
+        "range": {
+          "start": 0,
+          "end": 3070,
+          "low": 31,
+          "high": 78
+        },
+        "mode": "start",
+        "children": [
+          "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+          "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+          "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+          "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+          "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+          "aade08fa-fab9-405b-ad7b-fa371a990c10"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "id": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "name": "Part A (Anthem)'",
+      "normalizedName": "part a anthem",
+      "parentId": "root",
+      "children": [
+        "9f36ff43-b802-47cf-be79-61f1f01f418f",
+        "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523",
+        "789159d5-6c45-41da-95ed-b2964ea19e54",
+        "d4b7f6ff-6060-4874-a793-6aca6a5f9352",
+        "9f21e591-413d-45c2-b3df-96ae2e00a13e"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 3072,
+        "end": 6142,
+        "low": 31,
+        "high": 81
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "instrumentCount": 5,
+      "mode": "start",
+      "variantOf": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "variantOfName": "Part A (Anthem)",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1"
+      },
+      "raw": {
+        "id": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "name": "Part A (Anthem)'",
+        "parentId": "root",
+        "range": {
+          "start": 3072,
+          "end": 6142,
+          "low": 31,
+          "high": 81
+        },
+        "mode": "start",
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "isVariation": true,
+        "variantOf": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "variantOfName": "Part A (Anthem)",
+        "children": [
+          "9f36ff43-b802-47cf-be79-61f1f01f418f",
+          "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523",
+          "789159d5-6c45-41da-95ed-b2964ea19e54",
+          "d4b7f6ff-6060-4874-a793-6aca6a5f9352",
+          "9f21e591-413d-45c2-b3df-96ae2e00a13e"
+        ]
+      }
+    },
+    {
+      "id": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "name": "Part B (Build)",
+      "normalizedName": "part b build",
+      "parentId": "root",
+      "children": [
+        "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63",
+        "36673cd5-c645-491b-b96a-1a4f170c8a0f",
+        "5ca5e712-f21d-4522-907b-8ffd3e4ce458",
+        "4ab97326-1198-4eca-a474-bc276cbed18c",
+        "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7",
+        "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 6144,
+        "end": 8446,
+        "low": 35,
+        "high": 105
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "instrumentCount": 6,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb"
+      },
+      "raw": {
+        "id": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "name": "Part B (Build)",
+        "parentId": "root",
+        "range": {
+          "start": 6144,
+          "end": 8446,
+          "low": 35,
+          "high": 105
+        },
+        "mode": "start",
+        "children": [
+          "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63",
+          "36673cd5-c645-491b-b96a-1a4f170c8a0f",
+          "5ca5e712-f21d-4522-907b-8ffd3e4ce458",
+          "4ab97326-1198-4eca-a474-bc276cbed18c",
+          "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7",
+          "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ]
+      }
+    },
+    {
+      "id": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "name": "Part D (Descent)",
+      "normalizedName": "part d descent",
+      "parentId": "root",
+      "children": [
+        "87919d37-e850-4f31-9280-93d56da5e388",
+        "489d6c78-6221-480b-914b-ee0237488a64",
+        "ce91e00d-83ce-4b66-a0ce-eca63862388e",
+        "2e6c6898-798f-4629-b9e8-b624cd437913",
+        "97bdc179-e8e1-407e-8c43-4a271fad264a",
+        "5a2ad172-1059-452d-a424-85a10e5e12a8",
+        "3eb1e88c-479b-430e-8389-c5f4df258046"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 8448,
+        "end": 9214,
+        "low": 1,
+        "high": 90
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "instrumentCount": 7,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "36c5678d-3029-45fe-9cab-72fff8dc83af"
+      },
+      "raw": {
+        "id": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "name": "Part D (Descent)",
+        "parentId": "root",
+        "range": {
+          "start": 8448,
+          "end": 9214,
+          "low": 1,
+          "high": 90
+        },
+        "mode": "start",
+        "children": [
+          "87919d37-e850-4f31-9280-93d56da5e388",
+          "489d6c78-6221-480b-914b-ee0237488a64",
+          "ce91e00d-83ce-4b66-a0ce-eca63862388e",
+          "2e6c6898-798f-4629-b9e8-b624cd437913",
+          "97bdc179-e8e1-407e-8c43-4a271fad264a",
+          "5a2ad172-1059-452d-a424-85a10e5e12a8",
+          "3eb1e88c-479b-430e-8389-c5f4df258046"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "id": "97bdc179-e8e1-407e-8c43-4a271fad264a",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8448,
+        "end": 9211,
+        "low": 61,
+        "high": 64
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "97bdc179-e8e1-407e-8c43-4a271fad264a"
+      },
+      "raw": {
+        "id": "97bdc179-e8e1-407e-8c43-4a271fad264a",
+        "name": "Distortion Guitar",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8448,
+          "end": 9211,
+          "low": 61,
+          "high": 64
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "9f21e591-413d-45c2-b3df-96ae2e00a13e",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3072,
+        "end": 6139,
+        "low": 52,
+        "high": 74
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+      "variantOfName": "Distortion Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "9f21e591-413d-45c2-b3df-96ae2e00a13e"
+      },
+      "raw": {
+        "id": "9f21e591-413d-45c2-b3df-96ae2e00a13e",
+        "name": "Distortion Guitar",
+        "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "range": {
+          "start": 3072,
+          "end": 6139,
+          "low": 52,
+          "high": 74
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+        "variantOfName": "Distortion Guitar"
+      }
+    },
+    {
+      "id": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 3067,
+        "low": 54,
+        "high": 66
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77"
+      },
+      "raw": {
+        "id": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+        "name": "Distortion Guitar",
+        "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "range": {
+          "start": 0,
+          "end": 3067,
+          "low": 54,
+          "high": 66
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6144,
+        "end": 8443,
+        "low": 55,
+        "high": 71
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7"
+      },
+      "raw": {
+        "id": "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7",
+        "name": "Distortion Guitar",
+        "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "range": {
+          "start": 6144,
+          "end": 8443,
+          "low": 55,
+          "high": 71
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6144,
+        "end": 8435,
+        "low": 35,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63"
+      },
+      "raw": {
+        "id": "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63",
+        "name": "Drums",
+        "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "range": {
+          "start": 6144,
+          "end": 8435,
+          "low": 35,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "87919d37-e850-4f31-9280-93d56da5e388",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8448,
+        "end": 8843,
+        "low": 35,
+        "high": 53
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "87919d37-e850-4f31-9280-93d56da5e388"
+      },
+      "raw": {
+        "id": "87919d37-e850-4f31-9280-93d56da5e388",
+        "name": "Drums",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8448,
+          "end": 8843,
+          "low": 35,
+          "high": 53
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 3059,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "8b6d6c13-2a38-4743-b2d8-16633d85fbba"
+      },
+      "raw": {
+        "id": "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+        "name": "Drums",
+        "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "range": {
+          "start": 0,
+          "end": 3059,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "9f36ff43-b802-47cf-be79-61f1f01f418f",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3072,
+        "end": 6131,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+      "variantOfName": "Drums",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "9f36ff43-b802-47cf-be79-61f1f01f418f"
+      },
+      "raw": {
+        "id": "9f36ff43-b802-47cf-be79-61f1f01f418f",
+        "name": "Drums",
+        "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "range": {
+          "start": 3072,
+          "end": 6131,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+        "variantOfName": "Drums"
+      }
+    },
+    {
+      "id": "aade08fa-fab9-405b-ad7b-fa371a990c10",
+      "name": "Orchestra Hit",
+      "normalizedName": "orchestra hit",
+      "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 23,
+        "low": 59,
+        "high": 78
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "aade08fa-fab9-405b-ad7b-fa371a990c10"
+      },
+      "raw": {
+        "id": "aade08fa-fab9-405b-ad7b-fa371a990c10",
+        "name": "Orchestra Hit",
+        "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "range": {
+          "start": 0,
+          "end": 23,
+          "low": 59,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "2e6c6898-798f-4629-b9e8-b624cd437913",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8448,
+        "end": 9211,
+        "low": 73,
+        "high": 78
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "2e6c6898-798f-4629-b9e8-b624cd437913"
+      },
+      "raw": {
+        "id": "2e6c6898-798f-4629-b9e8-b624cd437913",
+        "name": "Overdriven Guitar",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8448,
+          "end": 9211,
+          "low": 73,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "4ab97326-1198-4eca-a474-bc276cbed18c",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6144,
+        "end": 8443,
+        "low": 69,
+        "high": 83
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "4ab97326-1198-4eca-a474-bc276cbed18c"
+      },
+      "raw": {
+        "id": "4ab97326-1198-4eca-a474-bc276cbed18c",
+        "name": "Overdriven Guitar",
+        "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "range": {
+          "start": 6144,
+          "end": 8443,
+          "low": 69,
+          "high": 83
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 3067,
+        "low": 64,
+        "high": 78
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b"
+      },
+      "raw": {
+        "id": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+        "name": "Overdriven Guitar",
+        "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "range": {
+          "start": 0,
+          "end": 3067,
+          "low": 64,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "d4b7f6ff-6060-4874-a793-6aca6a5f9352",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3072,
+        "end": 6139,
+        "low": 57,
+        "high": 81
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+      "variantOfName": "Overdriven Guitar",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "d4b7f6ff-6060-4874-a793-6aca6a5f9352"
+      },
+      "raw": {
+        "id": "d4b7f6ff-6060-4874-a793-6aca6a5f9352",
+        "name": "Overdriven Guitar",
+        "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "range": {
+          "start": 3072,
+          "end": 6139,
+          "low": 57,
+          "high": 81
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+        "variantOfName": "Overdriven Guitar"
+      }
+    },
+    {
+      "id": "3eb1e88c-479b-430e-8389-c5f4df258046",
+      "name": "Reverse Cymbal",
+      "normalizedName": "reverse cymbal",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8928,
+        "end": 9047,
+        "low": 1,
+        "high": 37
+      },
+      "instruments": [
+        7
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "3eb1e88c-479b-430e-8389-c5f4df258046"
+      },
+      "raw": {
+        "id": "3eb1e88c-479b-430e-8389-c5f4df258046",
+        "name": "Reverse Cymbal",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8928,
+          "end": 9047,
+          "low": 1,
+          "high": 37
+        },
+        "mode": "start",
+        "instruments": [
+          7
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "36673cd5-c645-491b-b96a-1a4f170c8a0f",
+      "name": "Synth Bass 2",
+      "normalizedName": "synth bass 2",
+      "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6144,
+        "end": 8827,
+        "low": 37,
+        "high": 50
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "36673cd5-c645-491b-b96a-1a4f170c8a0f"
+      },
+      "raw": {
+        "id": "36673cd5-c645-491b-b96a-1a4f170c8a0f",
+        "name": "Synth Bass 2",
+        "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "range": {
+          "start": 6144,
+          "end": 8827,
+          "low": 37,
+          "high": 50
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "489d6c78-6221-480b-914b-ee0237488a64",
+      "name": "Synth Bass 2",
+      "normalizedName": "synth bass 2",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8832,
+        "end": 9211,
+        "low": 42,
+        "high": 49
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "489d6c78-6221-480b-914b-ee0237488a64"
+      },
+      "raw": {
+        "id": "489d6c78-6221-480b-914b-ee0237488a64",
+        "name": "Synth Bass 2",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8832,
+          "end": 9211,
+          "low": 42,
+          "high": 49
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+      "name": "Synth Bass 2",
+      "normalizedName": "synth bass 2",
+      "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 3067,
+        "low": 33,
+        "high": 53
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f"
+      },
+      "raw": {
+        "id": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+        "name": "Synth Bass 2",
+        "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "range": {
+          "start": 0,
+          "end": 3067,
+          "low": 33,
+          "high": 53
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523",
+      "name": "Synth Bass 2",
+      "normalizedName": "synth bass 2",
+      "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3072,
+        "end": 6139,
+        "low": 33,
+        "high": 53
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+      "variantOfName": "Synth Bass 2",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523"
+      },
+      "raw": {
+        "id": "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523",
+        "name": "Synth Bass 2",
+        "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "range": {
+          "start": 3072,
+          "end": 6139,
+          "low": 33,
+          "high": 53
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+        "variantOfName": "Synth Bass 2"
+      }
+    },
+    {
+      "id": "5ca5e712-f21d-4522-907b-8ffd3e4ce458",
+      "name": "Synth Brass 1",
+      "normalizedName": "synth brass 1",
+      "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6144,
+        "end": 8443,
+        "low": 52,
+        "high": 105
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "5ca5e712-f21d-4522-907b-8ffd3e4ce458"
+      },
+      "raw": {
+        "id": "5ca5e712-f21d-4522-907b-8ffd3e4ce458",
+        "name": "Synth Brass 1",
+        "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "range": {
+          "start": 6144,
+          "end": 8443,
+          "low": 52,
+          "high": 105
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "789159d5-6c45-41da-95ed-b2964ea19e54",
+      "name": "Synth Brass 1",
+      "normalizedName": "synth brass 1",
+      "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 3072,
+        "end": 6139,
+        "low": 47,
+        "high": 78
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+      "variantOfName": "Synth Brass 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "789159d5-6c45-41da-95ed-b2964ea19e54"
+      },
+      "raw": {
+        "id": "789159d5-6c45-41da-95ed-b2964ea19e54",
+        "name": "Synth Brass 1",
+        "parentId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "range": {
+          "start": 3072,
+          "end": 6139,
+          "low": 47,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": [],
+        "isVariation": true,
+        "variantOf": "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+        "variantOfName": "Synth Brass 1"
+      }
+    },
+    {
+      "id": "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+      "name": "Synth Brass 1",
+      "normalizedName": "synth brass 1",
+      "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 3067,
+        "low": 47,
+        "high": 78
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "a2031a67-7f2d-4570-b99c-3948ca8ccde2"
+      },
+      "raw": {
+        "id": "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+        "name": "Synth Brass 1",
+        "parentId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "range": {
+          "start": 0,
+          "end": 3067,
+          "low": 47,
+          "high": 78
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "ce91e00d-83ce-4b66-a0ce-eca63862388e",
+      "name": "Synth Brass 1",
+      "normalizedName": "synth brass 1",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8496,
+        "end": 9211,
+        "low": 61,
+        "high": 90
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "ce91e00d-83ce-4b66-a0ce-eca63862388e"
+      },
+      "raw": {
+        "id": "ce91e00d-83ce-4b66-a0ce-eca63862388e",
+        "name": "Synth Brass 1",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8496,
+          "end": 9211,
+          "low": 61,
+          "high": 90
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "5a2ad172-1059-452d-a424-85a10e5e12a8",
+      "name": "Synth Drum",
+      "normalizedName": "synth drum",
+      "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8544,
+        "end": 9215,
+        "low": 69,
+        "high": 79
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "5a2ad172-1059-452d-a424-85a10e5e12a8"
+      },
+      "raw": {
+        "id": "5a2ad172-1059-452d-a424-85a10e5e12a8",
+        "name": "Synth Drum",
+        "parentId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "range": {
+          "start": 8544,
+          "end": 9215,
+          "low": 69,
+          "high": 79
+        },
+        "mode": "start",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4",
+      "name": "Synth Drum",
+      "normalizedName": "synth drum",
+      "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6240,
+        "end": 8375,
+        "low": 69,
+        "high": 74
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Sting_Chameleon.mid.json",
+        "patternId": "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4"
+      },
+      "raw": {
+        "id": "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4",
+        "name": "Synth Drum",
+        "parentId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+        "range": {
+          "start": 6240,
+          "end": 8375,
+          "low": 69,
+          "high": 74
+        },
+        "mode": "start",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "28fbbfea-7fdf-4b16-9c65-5807c34eab94"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "0a1be727-137d-48ae-ba89-39aebe0f6bd1"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "36c5678d-3029-45fe-9cab-72fff8dc83af"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb"
+    },
+    {
+      "type": "parent_child",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "8b6d6c13-2a38-4743-b2d8-16633d85fbba"
+    },
+    {
+      "type": "parent_child",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f"
+    },
+    {
+      "type": "parent_child",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "a2031a67-7f2d-4570-b99c-3948ca8ccde2"
+    },
+    {
+      "type": "parent_child",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b"
+    },
+    {
+      "type": "parent_child",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77"
+    },
+    {
+      "type": "parent_child",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "aade08fa-fab9-405b-ad7b-fa371a990c10"
+    },
+    {
+      "type": "parent_child",
+      "from": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "to": "9f36ff43-b802-47cf-be79-61f1f01f418f"
+    },
+    {
+      "type": "parent_child",
+      "from": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "to": "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523"
+    },
+    {
+      "type": "parent_child",
+      "from": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "to": "789159d5-6c45-41da-95ed-b2964ea19e54"
+    },
+    {
+      "type": "parent_child",
+      "from": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "to": "d4b7f6ff-6060-4874-a793-6aca6a5f9352"
+    },
+    {
+      "type": "parent_child",
+      "from": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "to": "9f21e591-413d-45c2-b3df-96ae2e00a13e"
+    },
+    {
+      "type": "variation",
+      "from": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "to": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "label": "Part A (Anthem)"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "87919d37-e850-4f31-9280-93d56da5e388"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "489d6c78-6221-480b-914b-ee0237488a64"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "ce91e00d-83ce-4b66-a0ce-eca63862388e"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "2e6c6898-798f-4629-b9e8-b624cd437913"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "97bdc179-e8e1-407e-8c43-4a271fad264a"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "5a2ad172-1059-452d-a424-85a10e5e12a8"
+    },
+    {
+      "type": "parent_child",
+      "from": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "to": "3eb1e88c-479b-430e-8389-c5f4df258046"
+    },
+    {
+      "type": "parent_child",
+      "from": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "to": "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63"
+    },
+    {
+      "type": "parent_child",
+      "from": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "to": "36673cd5-c645-491b-b96a-1a4f170c8a0f"
+    },
+    {
+      "type": "parent_child",
+      "from": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "to": "5ca5e712-f21d-4522-907b-8ffd3e4ce458"
+    },
+    {
+      "type": "parent_child",
+      "from": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "to": "4ab97326-1198-4eca-a474-bc276cbed18c"
+    },
+    {
+      "type": "parent_child",
+      "from": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "to": "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7"
+    },
+    {
+      "type": "parent_child",
+      "from": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "to": "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4"
+    },
+    {
+      "type": "variation",
+      "from": "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+      "to": "9f36ff43-b802-47cf-be79-61f1f01f418f",
+      "label": "Drums"
+    },
+    {
+      "type": "variation",
+      "from": "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+      "to": "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523",
+      "label": "Synth Bass 2"
+    },
+    {
+      "type": "variation",
+      "from": "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+      "to": "789159d5-6c45-41da-95ed-b2964ea19e54",
+      "label": "Synth Brass 1"
+    },
+    {
+      "type": "variation",
+      "from": "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+      "to": "d4b7f6ff-6060-4874-a793-6aca6a5f9352",
+      "label": "Overdriven Guitar"
+    },
+    {
+      "type": "variation",
+      "from": "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+      "to": "9f21e591-413d-45c2-b3df-96ae2e00a13e",
+      "label": "Distortion Guitar"
+    }
+  ],
+  "collectionCandidates": [
+    {
+      "id": "collection:root",
+      "name": "Whole song",
+      "sourcePatternId": "root",
+      "parentPatternId": null,
+      "memberPatternIds": [
+        "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+        "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+        "36c5678d-3029-45fe-9cab-72fff8dc83af",
+        "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb"
+      ],
+      "collectionType": "root_collection"
+    },
+    {
+      "id": "collection:28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "name": "Part A (Anthem)",
+      "sourcePatternId": "28fbbfea-7fdf-4b16-9c65-5807c34eab94",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "8b6d6c13-2a38-4743-b2d8-16633d85fbba",
+        "bb0fe4c0-cb25-4f39-8337-8e2f12f6f54f",
+        "a2031a67-7f2d-4570-b99c-3948ca8ccde2",
+        "bbc74c58-52c9-4098-9c9d-27fbdced3c7b",
+        "e89d04b8-99b1-4eb8-b13c-2ca8f6945c77",
+        "aade08fa-fab9-405b-ad7b-fa371a990c10"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "name": "Part A (Anthem)'",
+      "sourcePatternId": "0a1be727-137d-48ae-ba89-39aebe0f6bd1",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "9f36ff43-b802-47cf-be79-61f1f01f418f",
+        "e630bf8e-ca44-44e4-a45b-0ab5d2d0b523",
+        "789159d5-6c45-41da-95ed-b2964ea19e54",
+        "d4b7f6ff-6060-4874-a793-6aca6a5f9352",
+        "9f21e591-413d-45c2-b3df-96ae2e00a13e"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "name": "Part D (Descent)",
+      "sourcePatternId": "36c5678d-3029-45fe-9cab-72fff8dc83af",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "87919d37-e850-4f31-9280-93d56da5e388",
+        "489d6c78-6221-480b-914b-ee0237488a64",
+        "ce91e00d-83ce-4b66-a0ce-eca63862388e",
+        "2e6c6898-798f-4629-b9e8-b624cd437913",
+        "97bdc179-e8e1-407e-8c43-4a271fad264a",
+        "5a2ad172-1059-452d-a424-85a10e5e12a8",
+        "3eb1e88c-479b-430e-8389-c5f4df258046"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "name": "Part B (Build)",
+      "sourcePatternId": "6cf2677d-2cae-4a87-a3dc-3fa7f8ba72cb",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "2bb4f56a-1693-45c1-a8d8-f9f943c7aa63",
+        "36673cd5-c645-491b-b96a-1a4f170c8a0f",
+        "5ca5e712-f21d-4522-907b-8ffd3e4ce458",
+        "4ab97326-1198-4eca-a474-bc276cbed18c",
+        "e9aa4a11-af3a-4b11-863d-86e7ee5e8ba7",
+        "60fe5ec1-8fd3-406c-8c81-c67038a4c5d4"
+      ],
+      "collectionType": "top_level_section"
+    }
+  ],
+  "summary": {
+    "patternCount": 29,
+    "relationshipCount": 34,
+    "collectionCount": 5,
+    "rootPatternCount": 1,
+    "leafPatternCount": 24,
+    "relationshipTypeCounts": {
+      "variation": 6
+    },
+    "collectionTypeCounts": {
+      "top_level_section": 4,
+      "root_collection": 1
+    },
+    "labelVariantGroups": [
+      {
+        "normalized": "part a anthem",
+        "variants": [
+          "Part A (Anthem)",
+          "Part A (Anthem)'"
+        ],
+        "variantCount": 2
+      }
+    ],
+    "issueCount": 0
+  },
+  "issues": []
+}

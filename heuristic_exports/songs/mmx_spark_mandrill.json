@@ -1,0 +1,2134 @@
+{
+  "exportVersion": 1,
+  "songId": "mmx_spark_mandrill",
+  "title": "MMX Spark Mandrill",
+  "source": {
+    "type": "user_settings",
+    "path": "MMX_Spark_Mandrill.mid.json"
+  },
+  "globalContext": {
+    "root": 3,
+    "scale": "minor",
+    "copyMode": "range",
+    "snapMode": "bar",
+    "harmony": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "bpm": null
+  },
+  "patterns": [
+    {
+      "id": "root",
+      "name": "Whole song",
+      "normalizedName": "whole song",
+      "parentId": null,
+      "children": [
+        "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "130d283d-576b-4d74-bbec-ba1d08dbf437",
+        "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57"
+      ],
+      "depth": 0,
+      "range": {
+        "start": 0,
+        "end": 13436,
+        "low": 0,
+        "high": 127
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": null,
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "root"
+      },
+      "raw": {
+        "id": "root",
+        "name": "Whole song",
+        "parentId": null,
+        "range": {
+          "start": 0,
+          "end": 13436,
+          "low": 0,
+          "high": 127
+        },
+        "noteRefs": [],
+        "children": [
+          "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+          "3fac02c9-6718-4e19-8fd7-3962a429c385",
+          "130d283d-576b-4d74-bbec-ba1d08dbf437",
+          "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+          "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "name": "Drop In",
+      "normalizedName": "drop in",
+      "parentId": "root",
+      "children": [
+        "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d",
+        "50f2b224-4a10-406e-886c-ec9d10c10c79",
+        "87d40024-e406-4bd1-9146-b7628f8ab982",
+        "fc70a885-b749-4633-92df-9c29a82193aa",
+        "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 0,
+        "end": 382,
+        "low": 31,
+        "high": 78
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        6
+      ],
+      "instrumentCount": 5,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f"
+      },
+      "raw": {
+        "id": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "name": "Drop In",
+        "parentId": "root",
+        "range": {
+          "start": 0,
+          "end": 382,
+          "low": 31,
+          "high": 78
+        },
+        "mode": "range",
+        "children": [
+          "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d",
+          "50f2b224-4a10-406e-886c-ec9d10c10c79",
+          "87d40024-e406-4bd1-9146-b7628f8ab982",
+          "fc70a885-b749-4633-92df-9c29a82193aa",
+          "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          6
+        ]
+      }
+    },
+    {
+      "id": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "name": "Part A (Anthem)",
+      "normalizedName": "part a anthem",
+      "parentId": "root",
+      "children": [
+        "fb8f4c1e-47f3-45e4-a754-3eea13ac4316",
+        "253394a4-f9bf-4753-a9c6-7819f1addcd2",
+        "41b80074-7289-4cba-8afc-2f591c91445f",
+        "a90d1ced-4164-4a5b-a534-9b7173d09ac0",
+        "bfde0fcd-d205-41c9-8452-d7ed9c571555",
+        "f628a057-23c7-4ab1-ad9a-8f44a8d94b73"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 384,
+        "end": 6526,
+        "low": 31,
+        "high": 85
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "instrumentCount": 6,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57"
+      },
+      "raw": {
+        "id": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "name": "Part A (Anthem)",
+        "parentId": "root",
+        "range": {
+          "start": 384,
+          "end": 6526,
+          "low": 31,
+          "high": 85
+        },
+        "mode": "range",
+        "children": [
+          "fb8f4c1e-47f3-45e4-a754-3eea13ac4316",
+          "253394a4-f9bf-4753-a9c6-7819f1addcd2",
+          "41b80074-7289-4cba-8afc-2f591c91445f",
+          "a90d1ced-4164-4a5b-a534-9b7173d09ac0",
+          "bfde0fcd-d205-41c9-8452-d7ed9c571555",
+          "f628a057-23c7-4ab1-ad9a-8f44a8d94b73"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6
+        ]
+      }
+    },
+    {
+      "id": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "name": "Part B (Build)",
+      "normalizedName": "part b build",
+      "parentId": "root",
+      "children": [
+        "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b",
+        "c04d4eac-be14-4ab6-8efc-b86e01feea39",
+        "c44ee318-0689-453b-9600-a3cfb6edef94",
+        "99976074-fdb3-494f-9e7a-eb82efd9e3ae",
+        "4c3f42a9-e5bd-4203-b27f-50f7900ffab5",
+        "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0",
+        "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 6528,
+        "end": 9598,
+        "low": 31,
+        "high": 87
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2"
+      },
+      "raw": {
+        "id": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "name": "Part B (Build)",
+        "parentId": "root",
+        "range": {
+          "start": 6528,
+          "end": 9598,
+          "low": 31,
+          "high": 87
+        },
+        "mode": "range",
+        "children": [
+          "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b",
+          "c04d4eac-be14-4ab6-8efc-b86e01feea39",
+          "c44ee318-0689-453b-9600-a3cfb6edef94",
+          "99976074-fdb3-494f-9e7a-eb82efd9e3ae",
+          "4c3f42a9-e5bd-4203-b27f-50f7900ffab5",
+          "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0",
+          "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "name": "Part C (Climax Release)",
+      "normalizedName": "part c climax release",
+      "parentId": "root",
+      "children": [
+        "e036805e-5184-467b-a13b-41ef222830fa",
+        "2bf03372-8777-4ef2-80bf-413248512574",
+        "0da255f1-d04b-4801-bd24-d9bf6bb83f16",
+        "78c43203-3683-4455-abfa-ce294204821b",
+        "99b53a5e-a273-48f2-8e74-548b7dbb1b08",
+        "f48825a2-e772-475e-9aa0-aeff06dbd32a",
+        "47663707-537c-47ad-ae87-9530e8802047"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 9600,
+        "end": 12670,
+        "low": 31,
+        "high": 90
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "3fac02c9-6718-4e19-8fd7-3962a429c385"
+      },
+      "raw": {
+        "id": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "name": "Part C (Climax Release)",
+        "parentId": "root",
+        "range": {
+          "start": 9600,
+          "end": 12670,
+          "low": 31,
+          "high": 90
+        },
+        "mode": "range",
+        "children": [
+          "e036805e-5184-467b-a13b-41ef222830fa",
+          "2bf03372-8777-4ef2-80bf-413248512574",
+          "0da255f1-d04b-4801-bd24-d9bf6bb83f16",
+          "78c43203-3683-4455-abfa-ce294204821b",
+          "99b53a5e-a273-48f2-8e74-548b7dbb1b08",
+          "f48825a2-e772-475e-9aa0-aeff06dbd32a",
+          "47663707-537c-47ad-ae87-9530e8802047"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "name": "Part D (Descent)",
+      "normalizedName": "part d descent",
+      "parentId": "root",
+      "children": [
+        "d070a11a-7dae-4703-965a-14005f94fdee",
+        "43965e75-8de9-4909-bee8-ac20d28260b4",
+        "2bc66149-5209-48c3-9485-49217ce3a57b"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 12672,
+        "end": 13822,
+        "low": 31,
+        "high": 74
+      },
+      "instruments": [
+        0,
+        2,
+        6
+      ],
+      "instrumentCount": 3,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "130d283d-576b-4d74-bbec-ba1d08dbf437"
+      },
+      "raw": {
+        "id": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+        "name": "Part D (Descent)",
+        "parentId": "root",
+        "range": {
+          "start": 12672,
+          "end": 13822,
+          "low": 31,
+          "high": 74
+        },
+        "mode": "range",
+        "children": [
+          "d070a11a-7dae-4703-965a-14005f94fdee",
+          "43965e75-8de9-4909-bee8-ac20d28260b4",
+          "2bc66149-5209-48c3-9485-49217ce3a57b"
+        ],
+        "instruments": [
+          0,
+          2,
+          6
+        ]
+      }
+    },
+    {
+      "id": "0da255f1-d04b-4801-bd24-d9bf6bb83f16",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9696,
+        "end": 12671,
+        "low": 73,
+        "high": 90
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "0da255f1-d04b-4801-bd24-d9bf6bb83f16"
+      },
+      "raw": {
+        "id": "0da255f1-d04b-4801-bd24-d9bf6bb83f16",
+        "name": "Distortion Guitar",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 9696,
+          "end": 12671,
+          "low": 73,
+          "high": 90
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "41b80074-7289-4cba-8afc-2f591c91445f",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 336,
+        "end": 6527,
+        "low": 63,
+        "high": 82
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "41b80074-7289-4cba-8afc-2f591c91445f"
+      },
+      "raw": {
+        "id": "41b80074-7289-4cba-8afc-2f591c91445f",
+        "name": "Distortion Guitar",
+        "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "range": {
+          "start": 336,
+          "end": 6527,
+          "low": 63,
+          "high": 82
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "43965e75-8de9-4909-bee8-ac20d28260b4",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 13344,
+        "end": 13435,
+        "low": 70,
+        "high": 74
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "43965e75-8de9-4909-bee8-ac20d28260b4"
+      },
+      "raw": {
+        "id": "43965e75-8de9-4909-bee8-ac20d28260b4",
+        "name": "Distortion Guitar",
+        "parentId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+        "range": {
+          "start": 13344,
+          "end": 13435,
+          "low": 70,
+          "high": 74
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "87d40024-e406-4bd1-9146-b7628f8ab982",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 48,
+        "end": 767,
+        "low": 73,
+        "high": 78
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "87d40024-e406-4bd1-9146-b7628f8ab982"
+      },
+      "raw": {
+        "id": "87d40024-e406-4bd1-9146-b7628f8ab982",
+        "name": "Distortion Guitar",
+        "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "range": {
+          "start": 48,
+          "end": 767,
+          "low": 73,
+          "high": 78
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c44ee318-0689-453b-9600-a3cfb6edef94",
+      "name": "Distortion Guitar",
+      "normalizedName": "distortion guitar",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6576,
+        "end": 9599,
+        "low": 66,
+        "high": 86
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "c44ee318-0689-453b-9600-a3cfb6edef94"
+      },
+      "raw": {
+        "id": "c44ee318-0689-453b-9600-a3cfb6edef94",
+        "name": "Distortion Guitar",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 6576,
+          "end": 9599,
+          "low": 66,
+          "high": 86
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6528,
+        "end": 9587,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b"
+      },
+      "raw": {
+        "id": "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b",
+        "name": "Drums",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 6528,
+          "end": 9587,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "d070a11a-7dae-4703-965a-14005f94fdee",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 12672,
+        "end": 13427,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "d070a11a-7dae-4703-965a-14005f94fdee"
+      },
+      "raw": {
+        "id": "d070a11a-7dae-4703-965a-14005f94fdee",
+        "name": "Drums",
+        "parentId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+        "range": {
+          "start": 12672,
+          "end": 13427,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 48,
+        "end": 347,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d"
+      },
+      "raw": {
+        "id": "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d",
+        "name": "Drums",
+        "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "range": {
+          "start": 48,
+          "end": 347,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e036805e-5184-467b-a13b-41ef222830fa",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12659,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "e036805e-5184-467b-a13b-41ef222830fa"
+      },
+      "raw": {
+        "id": "e036805e-5184-467b-a13b-41ef222830fa",
+        "name": "Drums",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 9600,
+          "end": 12659,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "fb8f4c1e-47f3-45e4-a754-3eea13ac4316",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 384,
+        "end": 6443,
+        "low": 31,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "fb8f4c1e-47f3-45e4-a754-3eea13ac4316"
+      },
+      "raw": {
+        "id": "fb8f4c1e-47f3-45e4-a754-3eea13ac4316",
+        "name": "Drums",
+        "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "range": {
+          "start": 384,
+          "end": 6443,
+          "low": 31,
+          "high": 57
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0",
+      "name": "Lead 2 (sawtooth)",
+      "normalizedName": "lead 2 sawtooth",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6576,
+        "end": 7675,
+        "low": 66,
+        "high": 77
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0"
+      },
+      "raw": {
+        "id": "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0",
+        "name": "Lead 2 (sawtooth)",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 6576,
+          "end": 7675,
+          "low": 66,
+          "high": 77
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "f48825a2-e772-475e-9aa0-aeff06dbd32a",
+      "name": "Lead 2 (sawtooth)",
+      "normalizedName": "lead 2 sawtooth",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9696,
+        "end": 12671,
+        "low": 70,
+        "high": 90
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "f48825a2-e772-475e-9aa0-aeff06dbd32a"
+      },
+      "raw": {
+        "id": "f48825a2-e772-475e-9aa0-aeff06dbd32a",
+        "name": "Lead 2 (sawtooth)",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 9696,
+          "end": 12671,
+          "low": 70,
+          "high": 90
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "2bc66149-5209-48c3-9485-49217ce3a57b",
+      "name": "Melodic Tom",
+      "normalizedName": "melodic tom",
+      "parentId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 13056,
+        "end": 13335,
+        "low": 45,
+        "high": 74
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "2bc66149-5209-48c3-9485-49217ce3a57b"
+      },
+      "raw": {
+        "id": "2bc66149-5209-48c3-9485-49217ce3a57b",
+        "name": "Melodic Tom",
+        "parentId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+        "range": {
+          "start": 13056,
+          "end": 13335,
+          "low": 45,
+          "high": 74
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce",
+      "name": "Melodic Tom",
+      "normalizedName": "melodic tom",
+      "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 192,
+        "end": 335,
+        "low": 44,
+        "high": 64
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce"
+      },
+      "raw": {
+        "id": "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce",
+        "name": "Melodic Tom",
+        "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "range": {
+          "start": 192,
+          "end": 335,
+          "low": 44,
+          "high": 64
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "47663707-537c-47ad-ae87-9530e8802047",
+      "name": "Melodic Tom",
+      "normalizedName": "melodic tom",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 11952,
+        "end": 12047,
+        "low": 52,
+        "high": 64
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "47663707-537c-47ad-ae87-9530e8802047"
+      },
+      "raw": {
+        "id": "47663707-537c-47ad-ae87-9530e8802047",
+        "name": "Melodic Tom",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 11952,
+          "end": 12047,
+          "low": 52,
+          "high": 64
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424",
+      "name": "Melodic Tom",
+      "normalizedName": "melodic tom",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 7920,
+        "end": 8063,
+        "low": 44,
+        "high": 64
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424"
+      },
+      "raw": {
+        "id": "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424",
+        "name": "Melodic Tom",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 7920,
+          "end": 8063,
+          "low": 44,
+          "high": 64
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "f628a057-23c7-4ab1-ad9a-8f44a8d94b73",
+      "name": "Melodic Tom",
+      "normalizedName": "melodic tom",
+      "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1728,
+        "end": 6527,
+        "low": 35,
+        "high": 64
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "f628a057-23c7-4ab1-ad9a-8f44a8d94b73"
+      },
+      "raw": {
+        "id": "f628a057-23c7-4ab1-ad9a-8f44a8d94b73",
+        "name": "Melodic Tom",
+        "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "range": {
+          "start": 1728,
+          "end": 6527,
+          "low": 35,
+          "high": 64
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "78c43203-3683-4455-abfa-ce294204821b",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12671,
+        "low": 46,
+        "high": 61
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "78c43203-3683-4455-abfa-ce294204821b"
+      },
+      "raw": {
+        "id": "78c43203-3683-4455-abfa-ce294204821b",
+        "name": "Overdriven Guitar",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 9600,
+          "end": 12671,
+          "low": 46,
+          "high": 61
+        },
+        "mode": "range",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "99976074-fdb3-494f-9e7a-eb82efd9e3ae",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6480,
+        "end": 9599,
+        "low": 46,
+        "high": 63
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "99976074-fdb3-494f-9e7a-eb82efd9e3ae"
+      },
+      "raw": {
+        "id": "99976074-fdb3-494f-9e7a-eb82efd9e3ae",
+        "name": "Overdriven Guitar",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 6480,
+          "end": 9599,
+          "low": 46,
+          "high": 63
+        },
+        "mode": "range",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "a90d1ced-4164-4a5b-a534-9b7173d09ac0",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 336,
+        "end": 6551,
+        "low": 46,
+        "high": 58
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "a90d1ced-4164-4a5b-a534-9b7173d09ac0"
+      },
+      "raw": {
+        "id": "a90d1ced-4164-4a5b-a534-9b7173d09ac0",
+        "name": "Overdriven Guitar",
+        "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "range": {
+          "start": 336,
+          "end": 6551,
+          "low": 46,
+          "high": 58
+        },
+        "mode": "range",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "fc70a885-b749-4633-92df-9c29a82193aa",
+      "name": "Overdriven Guitar",
+      "normalizedName": "overdriven guitar",
+      "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 48,
+        "end": 427,
+        "low": 49,
+        "high": 61
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "fc70a885-b749-4633-92df-9c29a82193aa"
+      },
+      "raw": {
+        "id": "fc70a885-b749-4633-92df-9c29a82193aa",
+        "name": "Overdriven Guitar",
+        "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "range": {
+          "start": 48,
+          "end": 427,
+          "low": 49,
+          "high": 61
+        },
+        "mode": "range",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "4c3f42a9-e5bd-4203-b27f-50f7900ffab5",
+      "name": "Pad 3 (polysynth)",
+      "normalizedName": "pad 3 polysynth",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6528,
+        "end": 9599,
+        "low": 62,
+        "high": 87
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "4c3f42a9-e5bd-4203-b27f-50f7900ffab5"
+      },
+      "raw": {
+        "id": "4c3f42a9-e5bd-4203-b27f-50f7900ffab5",
+        "name": "Pad 3 (polysynth)",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 6528,
+          "end": 9599,
+          "low": 62,
+          "high": 87
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "99b53a5e-a273-48f2-8e74-548b7dbb1b08",
+      "name": "Pad 3 (polysynth)",
+      "normalizedName": "pad 3 polysynth",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12671,
+        "low": 56,
+        "high": 78
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "99b53a5e-a273-48f2-8e74-548b7dbb1b08"
+      },
+      "raw": {
+        "id": "99b53a5e-a273-48f2-8e74-548b7dbb1b08",
+        "name": "Pad 3 (polysynth)",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 9600,
+          "end": 12671,
+          "low": 56,
+          "high": 78
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "bfde0fcd-d205-41c9-8452-d7ed9c571555",
+      "name": "Pad 3 (polysynth)",
+      "normalizedName": "pad 3 polysynth",
+      "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 336,
+        "end": 6523,
+        "low": 51,
+        "high": 85
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "bfde0fcd-d205-41c9-8452-d7ed9c571555"
+      },
+      "raw": {
+        "id": "bfde0fcd-d205-41c9-8452-d7ed9c571555",
+        "name": "Pad 3 (polysynth)",
+        "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "range": {
+          "start": 336,
+          "end": 6523,
+          "low": 51,
+          "high": 85
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "253394a4-f9bf-4753-a9c6-7819f1addcd2",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 336,
+        "end": 6519,
+        "low": 35,
+        "high": 53
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "253394a4-f9bf-4753-a9c6-7819f1addcd2"
+      },
+      "raw": {
+        "id": "253394a4-f9bf-4753-a9c6-7819f1addcd2",
+        "name": "Slap Bass 1",
+        "parentId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+        "range": {
+          "start": 336,
+          "end": 6519,
+          "low": 35,
+          "high": 53
+        },
+        "mode": "range",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "2bf03372-8777-4ef2-80bf-413248512574",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12671,
+        "low": 34,
+        "high": 51
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "2bf03372-8777-4ef2-80bf-413248512574"
+      },
+      "raw": {
+        "id": "2bf03372-8777-4ef2-80bf-413248512574",
+        "name": "Slap Bass 1",
+        "parentId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "range": {
+          "start": 9600,
+          "end": 12671,
+          "low": 34,
+          "high": 51
+        },
+        "mode": "range",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "50f2b224-4a10-406e-886c-ec9d10c10c79",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 48,
+        "end": 427,
+        "low": 37,
+        "high": 44
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "50f2b224-4a10-406e-886c-ec9d10c10c79"
+      },
+      "raw": {
+        "id": "50f2b224-4a10-406e-886c-ec9d10c10c79",
+        "name": "Slap Bass 1",
+        "parentId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "range": {
+          "start": 48,
+          "end": 427,
+          "low": 37,
+          "high": 44
+        },
+        "mode": "range",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c04d4eac-be14-4ab6-8efc-b86e01feea39",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 6528,
+        "end": 9591,
+        "low": 34,
+        "high": 55
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Spark_Mandrill.mid.json",
+        "patternId": "c04d4eac-be14-4ab6-8efc-b86e01feea39"
+      },
+      "raw": {
+        "id": "c04d4eac-be14-4ab6-8efc-b86e01feea39",
+        "name": "Slap Bass 1",
+        "parentId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "range": {
+          "start": 6528,
+          "end": 9591,
+          "low": 34,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "3fac02c9-6718-4e19-8fd7-3962a429c385"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "130d283d-576b-4d74-bbec-ba1d08dbf437"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "c04d4eac-be14-4ab6-8efc-b86e01feea39"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "c44ee318-0689-453b-9600-a3cfb6edef94"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "99976074-fdb3-494f-9e7a-eb82efd9e3ae"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "4c3f42a9-e5bd-4203-b27f-50f7900ffab5"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0"
+    },
+    {
+      "type": "parent_child",
+      "from": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "to": "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "e036805e-5184-467b-a13b-41ef222830fa"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "2bf03372-8777-4ef2-80bf-413248512574"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "0da255f1-d04b-4801-bd24-d9bf6bb83f16"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "78c43203-3683-4455-abfa-ce294204821b"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "99b53a5e-a273-48f2-8e74-548b7dbb1b08"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "f48825a2-e772-475e-9aa0-aeff06dbd32a"
+    },
+    {
+      "type": "parent_child",
+      "from": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "to": "47663707-537c-47ad-ae87-9530e8802047"
+    },
+    {
+      "type": "parent_child",
+      "from": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "to": "d070a11a-7dae-4703-965a-14005f94fdee"
+    },
+    {
+      "type": "parent_child",
+      "from": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "to": "43965e75-8de9-4909-bee8-ac20d28260b4"
+    },
+    {
+      "type": "parent_child",
+      "from": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "to": "2bc66149-5209-48c3-9485-49217ce3a57b"
+    },
+    {
+      "type": "parent_child",
+      "from": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "to": "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d"
+    },
+    {
+      "type": "parent_child",
+      "from": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "to": "50f2b224-4a10-406e-886c-ec9d10c10c79"
+    },
+    {
+      "type": "parent_child",
+      "from": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "to": "87d40024-e406-4bd1-9146-b7628f8ab982"
+    },
+    {
+      "type": "parent_child",
+      "from": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "to": "fc70a885-b749-4633-92df-9c29a82193aa"
+    },
+    {
+      "type": "parent_child",
+      "from": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "to": "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce"
+    },
+    {
+      "type": "parent_child",
+      "from": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "to": "fb8f4c1e-47f3-45e4-a754-3eea13ac4316"
+    },
+    {
+      "type": "parent_child",
+      "from": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "to": "253394a4-f9bf-4753-a9c6-7819f1addcd2"
+    },
+    {
+      "type": "parent_child",
+      "from": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "to": "41b80074-7289-4cba-8afc-2f591c91445f"
+    },
+    {
+      "type": "parent_child",
+      "from": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "to": "a90d1ced-4164-4a5b-a534-9b7173d09ac0"
+    },
+    {
+      "type": "parent_child",
+      "from": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "to": "bfde0fcd-d205-41c9-8452-d7ed9c571555"
+    },
+    {
+      "type": "parent_child",
+      "from": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "to": "f628a057-23c7-4ab1-ad9a-8f44a8d94b73"
+    }
+  ],
+  "collectionCandidates": [
+    {
+      "id": "collection:root",
+      "name": "Whole song",
+      "sourcePatternId": "root",
+      "parentPatternId": null,
+      "memberPatternIds": [
+        "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+        "3fac02c9-6718-4e19-8fd7-3962a429c385",
+        "130d283d-576b-4d74-bbec-ba1d08dbf437",
+        "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+        "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57"
+      ],
+      "collectionType": "root_collection"
+    },
+    {
+      "id": "collection:4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "name": "Part B (Build)",
+      "sourcePatternId": "4bb54b94-3ca2-474c-84cc-8c5dfd3e1dc2",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "c0ed45e1-50af-4dad-9ec2-4f21e02ee80b",
+        "c04d4eac-be14-4ab6-8efc-b86e01feea39",
+        "c44ee318-0689-453b-9600-a3cfb6edef94",
+        "99976074-fdb3-494f-9e7a-eb82efd9e3ae",
+        "4c3f42a9-e5bd-4203-b27f-50f7900ffab5",
+        "c422dcdd-6c4b-4ce8-ab62-46ddffe114d0",
+        "e2b60df9-9d09-47b2-b4ac-f1f51fbdc424"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "name": "Part C (Climax Release)",
+      "sourcePatternId": "3fac02c9-6718-4e19-8fd7-3962a429c385",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "e036805e-5184-467b-a13b-41ef222830fa",
+        "2bf03372-8777-4ef2-80bf-413248512574",
+        "0da255f1-d04b-4801-bd24-d9bf6bb83f16",
+        "78c43203-3683-4455-abfa-ce294204821b",
+        "99b53a5e-a273-48f2-8e74-548b7dbb1b08",
+        "f48825a2-e772-475e-9aa0-aeff06dbd32a",
+        "47663707-537c-47ad-ae87-9530e8802047"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "name": "Part D (Descent)",
+      "sourcePatternId": "130d283d-576b-4d74-bbec-ba1d08dbf437",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "d070a11a-7dae-4703-965a-14005f94fdee",
+        "43965e75-8de9-4909-bee8-ac20d28260b4",
+        "2bc66149-5209-48c3-9485-49217ce3a57b"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "name": "Drop In",
+      "sourcePatternId": "6ae6ff3a-528b-4b19-b04e-f97044e7fa5f",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "da591946-fd7c-4f1b-a690-bfd3ffbe9d8d",
+        "50f2b224-4a10-406e-886c-ec9d10c10c79",
+        "87d40024-e406-4bd1-9146-b7628f8ab982",
+        "fc70a885-b749-4633-92df-9c29a82193aa",
+        "3d093cc4-0f3c-49c2-9f8d-f5554aa293ce"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "name": "Part A (Anthem)",
+      "sourcePatternId": "13c34a6c-4e3d-4ab0-8f98-fb0d2b288d57",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "fb8f4c1e-47f3-45e4-a754-3eea13ac4316",
+        "253394a4-f9bf-4753-a9c6-7819f1addcd2",
+        "41b80074-7289-4cba-8afc-2f591c91445f",
+        "a90d1ced-4164-4a5b-a534-9b7173d09ac0",
+        "bfde0fcd-d205-41c9-8452-d7ed9c571555",
+        "f628a057-23c7-4ab1-ad9a-8f44a8d94b73"
+      ],
+      "collectionType": "top_level_section"
+    }
+  ],
+  "summary": {
+    "patternCount": 34,
+    "relationshipCount": 33,
+    "collectionCount": 6,
+    "rootPatternCount": 1,
+    "leafPatternCount": 28,
+    "relationshipTypeCounts": {},
+    "collectionTypeCounts": {
+      "top_level_section": 5,
+      "root_collection": 1
+    },
+    "labelVariantGroups": [],
+    "issueCount": 0
+  },
+  "issues": []
+}

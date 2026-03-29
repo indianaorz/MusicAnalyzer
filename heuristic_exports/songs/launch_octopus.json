@@ -1,0 +1,1951 @@
+{
+  "exportVersion": 1,
+  "songId": "launch_octopus",
+  "title": "Launch Octopus",
+  "source": {
+    "type": "user_settings",
+    "path": "MMX_Launch_Octopus.mid.json"
+  },
+  "globalContext": {
+    "root": 10,
+    "scale": "minor",
+    "copyMode": "start",
+    "snapMode": "bar",
+    "harmony": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "bpm": null
+  },
+  "patterns": [
+    {
+      "id": "root",
+      "name": "Whole song",
+      "normalizedName": "whole song",
+      "parentId": null,
+      "children": [
+        "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "549810a9-d203-4837-a827-a1d288ac22c5"
+      ],
+      "depth": 0,
+      "range": {
+        "start": 0,
+        "end": 12670,
+        "low": 0,
+        "high": 127
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "instrumentCount": 6,
+      "mode": null,
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "root"
+      },
+      "raw": {
+        "id": "root",
+        "name": "Whole song",
+        "parentId": null,
+        "range": {
+          "start": 0,
+          "end": 12670,
+          "low": 0,
+          "high": 127
+        },
+        "noteRefs": [],
+        "children": [
+          "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+          "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+          "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+          "7621a6c0-777c-4781-81b3-58e12b6564aa",
+          "549810a9-d203-4837-a827-a1d288ac22c5"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "id": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "name": "Climax Descent",
+      "normalizedName": "climax descent",
+      "parentId": "root",
+      "children": [
+        "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+        "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+        "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+        "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+        "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+        "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 9600,
+        "end": 12670,
+        "low": 25,
+        "high": 94
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "instrumentCount": 6,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "549810a9-d203-4837-a827-a1d288ac22c5"
+      },
+      "raw": {
+        "id": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "name": "Climax Descent",
+        "parentId": "root",
+        "range": {
+          "start": 9600,
+          "end": 12670,
+          "low": 25,
+          "high": 94
+        },
+        "mode": "start",
+        "children": [
+          "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+          "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+          "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+          "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+          "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+          "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "id": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "name": "Drop In",
+      "normalizedName": "drop in",
+      "parentId": "root",
+      "children": [
+        "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+        "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+        "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 0,
+        "end": 1534,
+        "low": 29,
+        "high": 70
+      },
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "instrumentCount": 3,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce"
+      },
+      "raw": {
+        "id": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "name": "Drop In",
+        "parentId": "root",
+        "range": {
+          "start": 0,
+          "end": 1534,
+          "low": 29,
+          "high": 70
+        },
+        "mode": "start",
+        "children": [
+          "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+          "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+          "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+        ],
+        "instruments": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "id": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "name": "Part A (Anthem)",
+      "normalizedName": "part a anthem",
+      "parentId": "root",
+      "children": [
+        "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+        "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+        "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+        "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+        "e16609e9-bde1-4728-9113-7145ee2f0be2",
+        "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 1536,
+        "end": 5374,
+        "low": 25,
+        "high": 94
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "instrumentCount": 6,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "385e5ff3-ae1e-4c2c-8783-ec529597173a"
+      },
+      "raw": {
+        "id": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "name": "Part A (Anthem)",
+        "parentId": "root",
+        "range": {
+          "start": 1536,
+          "end": 5374,
+          "low": 25,
+          "high": 94
+        },
+        "mode": "start",
+        "children": [
+          "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+          "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+          "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+          "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+          "e16609e9-bde1-4728-9113-7145ee2f0be2",
+          "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "id": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "name": "Part B",
+      "normalizedName": "part b",
+      "parentId": "root",
+      "children": [
+        "f354c20c-9a46-42cd-a8f9-001a5e355847",
+        "af6c68ed-c5ca-43db-8800-0135364afa8d",
+        "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+        "5760eace-7060-491e-a128-042dc7d3b2e9",
+        "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 5376,
+        "end": 8062,
+        "low": 27,
+        "high": 92
+      },
+      "instruments": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "instrumentCount": 5,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133"
+      },
+      "raw": {
+        "id": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "name": "Part B",
+        "parentId": "root",
+        "range": {
+          "start": 5376,
+          "end": 8062,
+          "low": 27,
+          "high": 92
+        },
+        "mode": "start",
+        "children": [
+          "f354c20c-9a46-42cd-a8f9-001a5e355847",
+          "af6c68ed-c5ca-43db-8800-0135364afa8d",
+          "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+          "5760eace-7060-491e-a128-042dc7d3b2e9",
+          "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+        ],
+        "instruments": [
+          0,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "id": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "name": "Transition Build",
+      "normalizedName": "transition build",
+      "parentId": "root",
+      "children": [
+        "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+        "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+        "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+        "5bca1610-5234-4b81-9496-252a8c0f60a6",
+        "eabd918f-0dde-496b-a872-46b7ecbe0405"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 8064,
+        "end": 9598,
+        "low": 29,
+        "high": 89
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        5
+      ],
+      "instrumentCount": 5,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "7621a6c0-777c-4781-81b3-58e12b6564aa"
+      },
+      "raw": {
+        "id": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "name": "Transition Build",
+        "parentId": "root",
+        "range": {
+          "start": 8064,
+          "end": 9598,
+          "low": 29,
+          "high": 89
+        },
+        "mode": "start",
+        "children": [
+          "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+          "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+          "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+          "5bca1610-5234-4b81-9496-252a8c0f60a6",
+          "eabd918f-0dde-496b-a872-46b7ecbe0405"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "id": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5400,
+        "end": 7893,
+        "low": 70,
+        "high": 85
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      },
+      "raw": {
+        "id": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+        "name": "Brass Section",
+        "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "range": {
+          "start": 5400,
+          "end": 7893,
+          "low": 70,
+          "high": 85
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1536,
+        "end": 5373,
+        "low": 60,
+        "high": 82
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "1bc438a9-17b0-4d94-821a-b6e71646b7ae"
+      },
+      "raw": {
+        "id": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+        "name": "Brass Section",
+        "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "range": {
+          "start": 1536,
+          "end": 5373,
+          "low": 60,
+          "high": 82
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1560,
+        "end": 5397,
+        "low": 60,
+        "high": 82
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      },
+      "raw": {
+        "id": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+        "name": "Brass Section",
+        "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "range": {
+          "start": 1560,
+          "end": 5397,
+          "low": 60,
+          "high": 82
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9696,
+        "end": 12525,
+        "low": 70,
+        "high": 89
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "526a0b32-72d6-48b6-8fed-77e8685f3aee"
+      },
+      "raw": {
+        "id": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+        "name": "Brass Section",
+        "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "range": {
+          "start": 9696,
+          "end": 12525,
+          "low": 70,
+          "high": 89
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "5bca1610-5234-4b81-9496-252a8c0f60a6",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8064,
+        "end": 9597,
+        "low": 70,
+        "high": 89
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "5bca1610-5234-4b81-9496-252a8c0f60a6"
+      },
+      "raw": {
+        "id": "5bca1610-5234-4b81-9496-252a8c0f60a6",
+        "name": "Brass Section",
+        "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "range": {
+          "start": 8064,
+          "end": 9597,
+          "low": 70,
+          "high": 89
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9720,
+        "end": 12549,
+        "low": 70,
+        "high": 89
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      },
+      "raw": {
+        "id": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
+        "name": "Brass Section",
+        "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "range": {
+          "start": 9720,
+          "end": 12549,
+          "low": 70,
+          "high": 89
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5376,
+        "end": 7869,
+        "low": 70,
+        "high": 85
+      },
+      "instruments": [
+        3
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "dbd32b2d-5550-4870-9cd6-41123d5a0d73"
+      },
+      "raw": {
+        "id": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+        "name": "Brass Section",
+        "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "range": {
+          "start": 5376,
+          "end": 7869,
+          "low": 70,
+          "high": 85
+        },
+        "mode": "start",
+        "instruments": [
+          3
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "eabd918f-0dde-496b-a872-46b7ecbe0405",
+      "name": "Brass Section",
+      "normalizedName": "brass section",
+      "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8088,
+        "end": 9621,
+        "low": 70,
+        "high": 89
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "eabd918f-0dde-496b-a872-46b7ecbe0405"
+      },
+      "raw": {
+        "id": "eabd918f-0dde-496b-a872-46b7ecbe0405",
+        "name": "Brass Section",
+        "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "range": {
+          "start": 8088,
+          "end": 9621,
+          "low": 70,
+          "high": 89
+        },
+        "mode": "start",
+        "instruments": [
+          5
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8064,
+        "end": 9597,
+        "low": 36,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "1f6cd02e-b949-43d3-9c97-cb85b53db510"
+      },
+      "raw": {
+        "id": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+        "name": "Drums",
+        "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "range": {
+          "start": 8064,
+          "end": 9597,
+          "low": 36,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1533,
+        "low": 36,
+        "high": 55
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83"
+      },
+      "raw": {
+        "id": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+        "name": "Drums",
+        "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "range": {
+          "start": 0,
+          "end": 1533,
+          "low": 36,
+          "high": 55
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1536,
+        "end": 5373,
+        "low": 36,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "d3250b58-9a65-4439-8efd-fd83af91eaf6"
+      },
+      "raw": {
+        "id": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+        "name": "Drums",
+        "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "range": {
+          "start": 1536,
+          "end": 5373,
+          "low": 36,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12669,
+        "low": 36,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "e8e46f70-17cd-4eae-ac32-c4c222c873c9"
+      },
+      "raw": {
+        "id": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+        "name": "Drums",
+        "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "range": {
+          "start": 9600,
+          "end": 12669,
+          "low": 36,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "f354c20c-9a46-42cd-a8f9-001a5e355847",
+      "name": "Drums",
+      "normalizedName": "drums",
+      "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5376,
+        "end": 8061,
+        "low": 36,
+        "high": 57
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "f354c20c-9a46-42cd-a8f9-001a5e355847"
+      },
+      "raw": {
+        "id": "f354c20c-9a46-42cd-a8f9-001a5e355847",
+        "name": "Drums",
+        "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "range": {
+          "start": 5376,
+          "end": 8061,
+          "low": 36,
+          "high": 57
+        },
+        "mode": "start",
+        "instruments": [
+          0
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+      "name": "Orchestra Hit",
+      "normalizedName": "orchestra hit",
+      "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12477,
+        "low": 68,
+        "high": 77
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "100e7f19-23d1-4a8b-87ad-b906a683d5fd"
+      },
+      "raw": {
+        "id": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+        "name": "Orchestra Hit",
+        "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "range": {
+          "start": 9600,
+          "end": 12477,
+          "low": 68,
+          "high": 77
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+      "name": "Orchestra Hit",
+      "normalizedName": "orchestra hit",
+      "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1536,
+        "end": 4413,
+        "low": 68,
+        "high": 77
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "90fad2ed-19b4-44a2-b32d-9b4461f73891"
+      },
+      "raw": {
+        "id": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+        "name": "Orchestra Hit",
+        "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "range": {
+          "start": 1536,
+          "end": 4413,
+          "low": 68,
+          "high": 77
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+      "name": "Orchestra Hit",
+      "normalizedName": "orchestra hit",
+      "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8064,
+        "end": 8349,
+        "low": 70,
+        "high": 70
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce"
+      },
+      "raw": {
+        "id": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+        "name": "Orchestra Hit",
+        "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "range": {
+          "start": 8064,
+          "end": 8349,
+          "low": 70,
+          "high": 70
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+      "name": "Orchestra Hit",
+      "normalizedName": "orchestra hit",
+      "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 285,
+        "low": 70,
+        "high": 70
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a"
+      },
+      "raw": {
+        "id": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+        "name": "Orchestra Hit",
+        "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "range": {
+          "start": 0,
+          "end": 285,
+          "low": 70,
+          "high": 70
+        },
+        "mode": "start",
+        "instruments": [
+          1
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9600,
+        "end": 12669,
+        "low": 25,
+        "high": 46
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "1aed107f-8430-4693-8b3b-ef41a1e6d224"
+      },
+      "raw": {
+        "id": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+        "name": "Slap Bass 1",
+        "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "range": {
+          "start": 9600,
+          "end": 12669,
+          "low": 25,
+          "high": 46
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 8064,
+        "end": 9429,
+        "low": 29,
+        "high": 39
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67"
+      },
+      "raw": {
+        "id": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+        "name": "Slap Bass 1",
+        "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "range": {
+          "start": 8064,
+          "end": 9429,
+          "low": 29,
+          "high": 39
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "af6c68ed-c5ca-43db-8800-0135364afa8d",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5376,
+        "end": 8061,
+        "low": 27,
+        "high": 44
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "af6c68ed-c5ca-43db-8800-0135364afa8d"
+      },
+      "raw": {
+        "id": "af6c68ed-c5ca-43db-8800-0135364afa8d",
+        "name": "Slap Bass 1",
+        "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "range": {
+          "start": 5376,
+          "end": 8061,
+          "low": 27,
+          "high": 44
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1536,
+        "end": 5325,
+        "low": 25,
+        "high": 46
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "bb7db745-74f6-411d-896e-a8cd70d67ddd"
+      },
+      "raw": {
+        "id": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+        "name": "Slap Bass 1",
+        "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "range": {
+          "start": 1536,
+          "end": 5325,
+          "low": 25,
+          "high": 46
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+      "name": "Slap Bass 1",
+      "normalizedName": "slap bass 1",
+      "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 0,
+        "end": 1365,
+        "low": 29,
+        "high": 39
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      },
+      "raw": {
+        "id": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+        "name": "Slap Bass 1",
+        "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "range": {
+          "start": 0,
+          "end": 1365,
+          "low": 29,
+          "high": 39
+        },
+        "mode": "start",
+        "instruments": [
+          2
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "5760eace-7060-491e-a128-042dc7d3b2e9",
+      "name": "Vibraphone",
+      "normalizedName": "vibraphone",
+      "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 5376,
+        "end": 8061,
+        "low": 77,
+        "high": 92
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "5760eace-7060-491e-a128-042dc7d3b2e9"
+      },
+      "raw": {
+        "id": "5760eace-7060-491e-a128-042dc7d3b2e9",
+        "name": "Vibraphone",
+        "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "range": {
+          "start": 5376,
+          "end": 8061,
+          "low": 77,
+          "high": 92
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+      "name": "Vibraphone",
+      "normalizedName": "vibraphone",
+      "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 9696,
+        "end": 12669,
+        "low": 80,
+        "high": 94
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "c69156c3-6a80-4a28-8b98-0e0fe59e9813"
+      },
+      "raw": {
+        "id": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+        "name": "Vibraphone",
+        "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "range": {
+          "start": 9696,
+          "end": 12669,
+          "low": 80,
+          "high": 94
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    },
+    {
+      "id": "e16609e9-bde1-4728-9113-7145ee2f0be2",
+      "name": "Vibraphone",
+      "normalizedName": "vibraphone",
+      "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 1632,
+        "end": 5373,
+        "low": 80,
+        "high": 94
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "start",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "e16609e9-bde1-4728-9113-7145ee2f0be2"
+      },
+      "raw": {
+        "id": "e16609e9-bde1-4728-9113-7145ee2f0be2",
+        "name": "Vibraphone",
+        "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "range": {
+          "start": 1632,
+          "end": 5373,
+          "low": 80,
+          "high": 94
+        },
+        "mode": "start",
+        "instruments": [
+          4
+        ],
+        "children": []
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "385e5ff3-ae1e-4c2c-8783-ec529597173a"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "7621a6c0-777c-4781-81b3-58e12b6564aa"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "549810a9-d203-4837-a827-a1d288ac22c5"
+    },
+    {
+      "type": "parent_child",
+      "from": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "to": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83"
+    },
+    {
+      "type": "parent_child",
+      "from": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "to": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a"
+    },
+    {
+      "type": "parent_child",
+      "from": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "to": "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+    },
+    {
+      "type": "parent_child",
+      "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "to": "d3250b58-9a65-4439-8efd-fd83af91eaf6"
+    },
+    {
+      "type": "parent_child",
+      "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "to": "90fad2ed-19b4-44a2-b32d-9b4461f73891"
+    },
+    {
+      "type": "parent_child",
+      "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "to": "bb7db745-74f6-411d-896e-a8cd70d67ddd"
+    },
+    {
+      "type": "parent_child",
+      "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "to": "1bc438a9-17b0-4d94-821a-b6e71646b7ae"
+    },
+    {
+      "type": "parent_child",
+      "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "to": "e16609e9-bde1-4728-9113-7145ee2f0be2"
+    },
+    {
+      "type": "parent_child",
+      "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "to": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+    },
+    {
+      "type": "parent_child",
+      "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "to": "f354c20c-9a46-42cd-a8f9-001a5e355847"
+    },
+    {
+      "type": "parent_child",
+      "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "to": "af6c68ed-c5ca-43db-8800-0135364afa8d"
+    },
+    {
+      "type": "parent_child",
+      "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "to": "dbd32b2d-5550-4870-9cd6-41123d5a0d73"
+    },
+    {
+      "type": "parent_child",
+      "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "to": "5760eace-7060-491e-a128-042dc7d3b2e9"
+    },
+    {
+      "type": "parent_child",
+      "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "to": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+    },
+    {
+      "type": "parent_child",
+      "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "to": "1f6cd02e-b949-43d3-9c97-cb85b53db510"
+    },
+    {
+      "type": "parent_child",
+      "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "to": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce"
+    },
+    {
+      "type": "parent_child",
+      "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "to": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67"
+    },
+    {
+      "type": "parent_child",
+      "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "to": "5bca1610-5234-4b81-9496-252a8c0f60a6"
+    },
+    {
+      "type": "parent_child",
+      "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "to": "eabd918f-0dde-496b-a872-46b7ecbe0405"
+    },
+    {
+      "type": "parent_child",
+      "from": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "to": "e8e46f70-17cd-4eae-ac32-c4c222c873c9"
+    },
+    {
+      "type": "parent_child",
+      "from": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "to": "100e7f19-23d1-4a8b-87ad-b906a683d5fd"
+    },
+    {
+      "type": "parent_child",
+      "from": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "to": "1aed107f-8430-4693-8b3b-ef41a1e6d224"
+    },
+    {
+      "type": "parent_child",
+      "from": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "to": "526a0b32-72d6-48b6-8fed-77e8685f3aee"
+    },
+    {
+      "type": "parent_child",
+      "from": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "to": "c69156c3-6a80-4a28-8b98-0e0fe59e9813"
+    },
+    {
+      "type": "parent_child",
+      "from": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "to": "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+    }
+  ],
+  "collectionCandidates": [
+    {
+      "id": "collection:root",
+      "name": "Whole song",
+      "sourcePatternId": "root",
+      "parentPatternId": null,
+      "memberPatternIds": [
+        "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "549810a9-d203-4837-a827-a1d288ac22c5"
+      ],
+      "collectionType": "root_collection"
+    },
+    {
+      "id": "collection:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "name": "Drop In",
+      "sourcePatternId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+        "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+        "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "name": "Part A (Anthem)",
+      "sourcePatternId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+        "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+        "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+        "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+        "e16609e9-bde1-4728-9113-7145ee2f0be2",
+        "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "name": "Part B",
+      "sourcePatternId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "f354c20c-9a46-42cd-a8f9-001a5e355847",
+        "af6c68ed-c5ca-43db-8800-0135364afa8d",
+        "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+        "5760eace-7060-491e-a128-042dc7d3b2e9",
+        "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "name": "Transition Build",
+      "sourcePatternId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+        "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+        "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+        "5bca1610-5234-4b81-9496-252a8c0f60a6",
+        "eabd918f-0dde-496b-a872-46b7ecbe0405"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:549810a9-d203-4837-a827-a1d288ac22c5",
+      "name": "Climax Descent",
+      "sourcePatternId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+        "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+        "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+        "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+        "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+        "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      ],
+      "collectionType": "top_level_section"
+    }
+  ],
+  "summary": {
+    "patternCount": 31,
+    "relationshipCount": 30,
+    "collectionCount": 6,
+    "rootPatternCount": 1,
+    "leafPatternCount": 25,
+    "relationshipTypeCounts": {},
+    "collectionTypeCounts": {
+      "top_level_section": 5,
+      "root_collection": 1
+    },
+    "labelVariantGroups": [],
+    "issueCount": 0
+  },
+  "issues": []
+}

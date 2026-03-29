@@ -1,0 +1,297 @@
+{
+  "generatedAt": "2026-03-29T14:32:03.775738+00:00",
+  "exportPath": "C:\\Users\\leeor\\FFCO\\MusicAnalyzerDAW\\heuristic_exports\\index.json",
+  "summaryCards": {
+    "songCount": 11,
+    "patternCount": 834,
+    "relationshipCount": 1246,
+    "collectionCount": 177
+  },
+  "relationshipTypeCounts": {
+    "repetition": 234,
+    "variation": 189,
+    "rhythmic_variation": 31,
+    "simplification": 6
+  },
+  "collectionTypeCounts": {
+    "pattern_group": 124,
+    "top_level_section": 43,
+    "root_collection": 10
+  },
+  "labelVariantGroups": [
+    {
+      "normalized": "arp",
+      "variants": [
+        "arp",
+        "arp'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "arpeggio",
+      "variants": [
+        "arpeggio",
+        "arpeggio''''"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "bass prog",
+      "variants": [
+        "Bass Prog",
+        "Bass Prog'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "bass progression",
+      "variants": [
+        "Bass Progression",
+        "Bass Progression'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "call",
+      "variants": [
+        "Call",
+        "Call'",
+        "Call''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "chord prog",
+      "variants": [
+        "Chord Prog",
+        "Chord Prog'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "chord progression",
+      "variants": [
+        "Chord Progression",
+        "Chord Progression'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "drum kick",
+      "variants": [
+        "Drum Kick",
+        "Drum Kick'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "fill",
+      "variants": [
+        "Fill",
+        "fill"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "hats",
+      "variants": [
+        "Hats",
+        "Hats'",
+        "Hats''",
+        "hats",
+        "hats'",
+        "hats''"
+      ],
+      "variantCount": 6
+    },
+    {
+      "normalized": "lead",
+      "variants": [
+        "Lead",
+        "Lead'",
+        "Lead''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "pattern 1",
+      "variants": [
+        "Pattern 1",
+        "Pattern 1'",
+        "Pattern 1''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "prog",
+      "variants": [
+        "Prog",
+        "Prog'",
+        "Prog''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "theme",
+      "variants": [
+        "Theme",
+        "Theme'",
+        "Theme''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "theme 1",
+      "variants": [
+        "Theme 1",
+        "Theme 1'",
+        "Theme 1''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "cymbal 1",
+      "variants": [
+        "Cymbal 1",
+        "Cymbal 1'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "drum 1",
+      "variants": [
+        "Drum 1",
+        "Drum 1'",
+        "Drum 1''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "drums loop b",
+      "variants": [
+        "Drums Loop B",
+        "Drums Loop B'",
+        "Drums Loop B''"
+      ],
+      "variantCount": 3
+    },
+    {
+      "normalized": "fill",
+      "variants": [
+        "Fill",
+        "Fill'"
+      ],
+      "variantCount": 2
+    },
+    {
+      "normalized": "main",
+      "variants": [
+        "Main",
+        "Main'"
+      ],
+      "variantCount": 2
+    }
+  ],
+  "issues": [],
+  "items": [
+    {
+      "songId": "built-in_method_title_of_str_object_at_0x000001ed65db1c30",
+      "label": "<built-in method title of str object at 0x000001ED65DB1C30>",
+      "path": "songs/built-in_method_title_of_str_object_at_0x000001ed65db1c30.json",
+      "sourcePath": "MMX2_Flame_Stag.mid.json",
+      "patternCount": 1,
+      "relationshipCount": 0,
+      "collectionCount": 0
+    },
+    {
+      "songId": "launch_octopus",
+      "label": "Launch Octopus",
+      "path": "songs/launch_octopus.json",
+      "sourcePath": "MMX_Launch_Octopus.mid.json",
+      "patternCount": 31,
+      "relationshipCount": 30,
+      "collectionCount": 6
+    },
+    {
+      "songId": "mmx_armored_armadillo_stage",
+      "label": "MMX Armored Armadillo Stage",
+      "path": "songs/mmx_armored_armadillo_stage.json",
+      "sourcePath": "armored_armadillo_adjusted.mid.json",
+      "patternCount": 148,
+      "relationshipCount": 230,
+      "collectionCount": 28
+    },
+    {
+      "songId": "mmx_boomer_kuwanger_stage",
+      "label": "MMX Boomer Kuwanger Stage",
+      "path": "songs/mmx_boomer_kuwanger_stage.json",
+      "sourcePath": "MMX_Boomer_Kuwanger.mid.json",
+      "patternCount": 199,
+      "relationshipCount": 341,
+      "collectionCount": 43
+    },
+    {
+      "songId": "mmx_chill_penguin",
+      "label": "MMX Chill Penguin",
+      "path": "songs/mmx_chill_penguin.json",
+      "sourcePath": "MMX_Chill_Penguin.mid.json",
+      "patternCount": 51,
+      "relationshipCount": 52,
+      "collectionCount": 7
+    },
+    {
+      "songId": "mmx_flame_mammoth_stage",
+      "label": "MMX Flame Mammoth Stage",
+      "path": "songs/mmx_flame_mammoth_stage.json",
+      "sourcePath": "flamemammothaligned.mid.json",
+      "patternCount": 93,
+      "relationshipCount": 135,
+      "collectionCount": 25
+    },
+    {
+      "songId": "mmx_introduction_stage",
+      "label": "MMX Introduction Stage",
+      "path": "songs/mmx_introduction_stage.json",
+      "sourcePath": "IntroductionStage.mid.json",
+      "patternCount": 85,
+      "relationshipCount": 123,
+      "collectionCount": 24
+    },
+    {
+      "songId": "mmx_spark_mandrill",
+      "label": "MMX Spark Mandrill",
+      "path": "songs/mmx_spark_mandrill.json",
+      "sourcePath": "MMX_Spark_Mandrill.mid.json",
+      "patternCount": 34,
+      "relationshipCount": 33,
+      "collectionCount": 6
+    },
+    {
+      "songId": "mmx_storm_eagle",
+      "label": "MMX Storm Eagle",
+      "path": "songs/mmx_storm_eagle.json",
+      "sourcePath": "MMX_Storm_Eagle.mid.json",
+      "patternCount": 134,
+      "relationshipCount": 226,
+      "collectionCount": 28
+    },
+    {
+      "songId": "mmx_string_chameleon",
+      "label": "MMX String Chameleon",
+      "path": "songs/mmx_string_chameleon.json",
+      "sourcePath": "MMX_Sting_Chameleon.mid.json",
+      "patternCount": 29,
+      "relationshipCount": 34,
+      "collectionCount": 5
+    },
+    {
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "label": "SNES_MMX_Boss_Chosen_V1.mid",
+      "path": "songs/snes_mmx_boss_chosen_v1mid.json",
+      "sourcePath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+      "patternCount": 29,
+      "relationshipCount": 42,
+      "collectionCount": 5
+    }
+  ]
+}

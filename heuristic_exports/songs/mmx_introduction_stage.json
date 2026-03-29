@@ -1,0 +1,5767 @@
+{
+  "exportVersion": 1,
+  "songId": "mmx_introduction_stage",
+  "title": "MMX Introduction Stage",
+  "source": {
+    "type": "user_settings",
+    "path": "IntroductionStage.mid.json"
+  },
+  "globalContext": {
+    "root": 0,
+    "scale": "minor",
+    "copyMode": "range",
+    "snapMode": "none",
+    "harmony": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    "bpm": null
+  },
+  "patterns": [
+    {
+      "id": "root",
+      "name": "Whole song",
+      "normalizedName": "whole song",
+      "parentId": null,
+      "children": [
+        "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+        "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+      ],
+      "depth": 0,
+      "range": {
+        "start": 0,
+        "end": 49920,
+        "low": 0,
+        "high": 127
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": null,
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "root"
+      },
+      "raw": {
+        "id": "root",
+        "name": "Whole song",
+        "parentId": null,
+        "range": {
+          "start": 0,
+          "end": 49920,
+          "low": 0,
+          "high": 127
+        },
+        "noteRefs": [],
+        "children": [
+          "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+          "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+          "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+          "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+      "name": "DropIn",
+      "normalizedName": "dropin",
+      "parentId": "root",
+      "children": [],
+      "depth": 1,
+      "range": {
+        "start": 0,
+        "end": 768,
+        "low": 34,
+        "high": 52
+      },
+      "instruments": [
+        0,
+        1,
+        4,
+        5
+      ],
+      "instrumentCount": 4,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b"
+      },
+      "raw": {
+        "id": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+        "name": "DropIn",
+        "parentId": "root",
+        "range": {
+          "start": 0,
+          "end": 768,
+          "low": 34,
+          "high": 52
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          0,
+          1,
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "id": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "name": "Part A",
+      "normalizedName": "part a",
+      "parentId": "root",
+      "children": [
+        "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+        "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+        "f35097fb-de4a-49a9-bbcd-667f49c9be34"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 768,
+        "end": 13056,
+        "low": 32,
+        "high": 84
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8"
+      },
+      "raw": {
+        "id": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "name": "Part A",
+        "parentId": "root",
+        "range": {
+          "start": 768,
+          "end": 13056,
+          "low": 32,
+          "high": 84
+        },
+        "mode": "range",
+        "children": [
+          "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+          "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+          "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+          "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+          "f35097fb-de4a-49a9-bbcd-667f49c9be34"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "name": "Part B",
+      "normalizedName": "part b",
+      "parentId": "root",
+      "children": [
+        "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+        "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "9653b387-46c0-495c-92c7-69a4c35bd732",
+        "616e84aa-5d68-49f4-a94f-26ccc414a801",
+        "40816ac6-5792-47d6-a9b0-3d8f4822958c"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 13056,
+        "end": 19200,
+        "low": 29,
+        "high": 87
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "9d22a10f-3c85-41ff-a208-5e1c467e1590"
+      },
+      "raw": {
+        "id": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "name": "Part B",
+        "parentId": "root",
+        "range": {
+          "start": 13056,
+          "end": 19200,
+          "low": 29,
+          "high": 87
+        },
+        "mode": "range",
+        "children": [
+          "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+          "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+          "9653b387-46c0-495c-92c7-69a4c35bd732",
+          "616e84aa-5d68-49f4-a94f-26ccc414a801",
+          "40816ac6-5792-47d6-a9b0-3d8f4822958c"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "name": "Part C",
+      "normalizedName": "part c",
+      "parentId": "root",
+      "children": [
+        "19fd4927-95ed-4927-85a8-1f8cff967de6",
+        "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+        "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+        "f7e0ec37-6bc7-435c-852a-ae532b70a559"
+      ],
+      "depth": 1,
+      "range": {
+        "start": 19200,
+        "end": 25344,
+        "low": 29,
+        "high": 91
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "instrumentCount": 7,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+      },
+      "raw": {
+        "id": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+        "name": "Part C",
+        "parentId": "root",
+        "range": {
+          "start": 19200,
+          "end": 25344,
+          "low": 29,
+          "high": 91
+        },
+        "mode": "range",
+        "children": [
+          "19fd4927-95ed-4927-85a8-1f8cff967de6",
+          "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+          "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+          "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+          "f7e0ec37-6bc7-435c-852a-ae532b70a559"
+        ],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "id": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "name": "Bass A",
+      "normalizedName": "bass a",
+      "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "children": [
+        "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "d4226606-70ef-44c2-ae84-0d7e288be967"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 576,
+        "end": 13056,
+        "low": 32,
+        "high": 44
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "15b9be77-fd59-4556-80e6-2b4bb1103b11"
+      },
+      "raw": {
+        "id": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+        "name": "Bass A",
+        "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "range": {
+          "start": 576,
+          "end": 13056,
+          "low": 32,
+          "high": 44
+        },
+        "mode": "range",
+        "children": [
+          "19161f35-5f2e-4204-9065-01454f58b6ed",
+          "d4226606-70ef-44c2-ae84-0d7e288be967"
+        ],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "name": "Bass B",
+      "normalizedName": "bass b",
+      "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "children": [
+        "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "9d659273-1d4d-42ba-a445-20c28f29165e",
+        "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+        "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+        "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+        "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+        "d610dafe-c577-4bea-b893-86b53308e41b",
+        "6de60819-02ec-449a-9a03-a58b389a327a"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 13056,
+        "end": 19200,
+        "low": 29,
+        "high": 43
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "f8909404-a4a7-4368-82b5-7cf77cde3e63"
+      },
+      "raw": {
+        "id": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "name": "Bass B",
+        "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "range": {
+          "start": 13056,
+          "end": 19200,
+          "low": 29,
+          "high": 43
+        },
+        "mode": "range",
+        "children": [
+          "b1d280eb-c657-49bb-809e-30c3a29a4952",
+          "9d659273-1d4d-42ba-a445-20c28f29165e",
+          "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+          "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+          "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+          "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+          "d610dafe-c577-4bea-b893-86b53308e41b",
+          "6de60819-02ec-449a-9a03-a58b389a327a"
+        ],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+      "name": "Bass C",
+      "normalizedName": "bass c",
+      "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 19200,
+        "end": 25344,
+        "low": 29,
+        "high": 43
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda"
+      },
+      "raw": {
+        "id": "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+        "name": "Bass C",
+        "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+        "range": {
+          "start": 19200,
+          "end": 25344,
+          "low": 29,
+          "high": 43
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "name": "Brass A",
+      "normalizedName": "brass a",
+      "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "children": [
+        "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "918e00a0-ef71-4ed7-9eea-7043eea2a6af"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 768,
+        "end": 11520,
+        "low": 43,
+        "high": 55
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "f35097fb-de4a-49a9-bbcd-667f49c9be34"
+      },
+      "raw": {
+        "id": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+        "name": "Brass A",
+        "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "range": {
+          "start": 768,
+          "end": 11520,
+          "low": 43,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+          "918e00a0-ef71-4ed7-9eea-7043eea2a6af"
+        ],
+        "instruments": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "616e84aa-5d68-49f4-a94f-26ccc414a801",
+      "name": "Brass B",
+      "normalizedName": "brass b",
+      "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 13248,
+        "end": 19200,
+        "low": 48,
+        "high": 63
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "616e84aa-5d68-49f4-a94f-26ccc414a801"
+      },
+      "raw": {
+        "id": "616e84aa-5d68-49f4-a94f-26ccc414a801",
+        "name": "Brass B",
+        "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "range": {
+          "start": 13248,
+          "end": 19200,
+          "low": 48,
+          "high": 63
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "name": "Brass C",
+      "normalizedName": "brass c",
+      "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "children": [
+        "970f15da-38bd-4e0f-919b-37e5b7f81b3a",
+        "770e169a-9272-490a-89cc-660e0f8791ac",
+        "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+        "0f2bdece-ce72-4a85-ab03-d838dbc146ef"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 19200,
+        "end": 25344,
+        "low": 43,
+        "high": 56
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b"
+      },
+      "raw": {
+        "id": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "name": "Brass C",
+        "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+        "range": {
+          "start": 19200,
+          "end": 25344,
+          "low": 43,
+          "high": 56
+        },
+        "mode": "range",
+        "children": [
+          "970f15da-38bd-4e0f-919b-37e5b7f81b3a",
+          "770e169a-9272-490a-89cc-660e0f8791ac",
+          "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+          "0f2bdece-ce72-4a85-ab03-d838dbc146ef"
+        ],
+        "instruments": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "name": "Drum A",
+      "normalizedName": "drum a",
+      "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "children": [
+        "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+        "76d9c555-1f84-4a8e-a045-71c3d8ddea69"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 768,
+        "end": 6912,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a"
+      },
+      "raw": {
+        "id": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "name": "Drum A",
+        "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "range": {
+          "start": 768,
+          "end": 6912,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "af9e4edf-92c8-4752-8154-af4414389b0a",
+          "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+          "76d9c555-1f84-4a8e-a045-71c3d8ddea69"
+        ],
+        "instruments": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "name": "Drums B",
+      "normalizedName": "drums b",
+      "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "children": [
+        "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "02703064-6331-4a64-a38d-2c5891d4f46c"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 13056,
+        "end": 19200,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8"
+      },
+      "raw": {
+        "id": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+        "name": "Drums B",
+        "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "range": {
+          "start": 13056,
+          "end": 19200,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "075caaee-e426-4bed-b900-9bdd7ba42f58",
+          "02703064-6331-4a64-a38d-2c5891d4f46c"
+        ],
+        "instruments": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "name": "Drums C",
+      "normalizedName": "drums c",
+      "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "children": [
+        "e0dc1c00-5542-491f-95d4-82610f779567",
+        "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 19200,
+        "end": 25344,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "19fd4927-95ed-4927-85a8-1f8cff967de6"
+      },
+      "raw": {
+        "id": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+        "name": "Drums C",
+        "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+        "range": {
+          "start": 19200,
+          "end": 25344,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "e0dc1c00-5542-491f-95d4-82610f779567",
+          "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d"
+        ],
+        "instruments": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "name": "Lead A",
+      "normalizedName": "lead a",
+      "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "children": [
+        "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+        "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+        "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3",
+        "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+        "a9fe95f4-5726-4d80-bd46-1abd17a16523",
+        "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+        "43273d21-6776-4fa7-a001-a281649ebd97"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 768,
+        "end": 13824,
+        "low": 67,
+        "high": 87
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f"
+      },
+      "raw": {
+        "id": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "name": "Lead A",
+        "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "range": {
+          "start": 768,
+          "end": 13824,
+          "low": 67,
+          "high": 87
+        },
+        "mode": "range",
+        "children": [
+          "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+          "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+          "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3",
+          "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+          "a9fe95f4-5726-4d80-bd46-1abd17a16523",
+          "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+          "43273d21-6776-4fa7-a001-a281649ebd97"
+        ],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "40816ac6-5792-47d6-a9b0-3d8f4822958c",
+      "name": "Lead B",
+      "normalizedName": "lead b",
+      "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "children": [],
+      "depth": 2,
+      "range": {
+        "start": 13056,
+        "end": 19392,
+        "low": 65,
+        "high": 87
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "40816ac6-5792-47d6-a9b0-3d8f4822958c"
+      },
+      "raw": {
+        "id": "40816ac6-5792-47d6-a9b0-3d8f4822958c",
+        "name": "Lead B",
+        "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "range": {
+          "start": 13056,
+          "end": 19392,
+          "low": 65,
+          "high": 87
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "name": "Lead C",
+      "normalizedName": "lead c",
+      "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "children": [
+        "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+        "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+        "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+        "eff33b29-bd3b-4e3c-961f-38306fc35045",
+        "2cce2a71-c488-45e7-9bb2-3f0280033e3d",
+        "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c",
+        "ab3af3c4-3784-4f6c-af50-14250a0137d4"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 19200,
+        "end": 25344,
+        "low": 67,
+        "high": 91
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "f7e0ec37-6bc7-435c-852a-ae532b70a559"
+      },
+      "raw": {
+        "id": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "name": "Lead C",
+        "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+        "range": {
+          "start": 19200,
+          "end": 25344,
+          "low": 67,
+          "high": 91
+        },
+        "mode": "range",
+        "children": [
+          "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+          "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+          "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+          "eff33b29-bd3b-4e3c-961f-38306fc35045",
+          "2cce2a71-c488-45e7-9bb2-3f0280033e3d",
+          "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c",
+          "ab3af3c4-3784-4f6c-af50-14250a0137d4"
+        ],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "name": "Strings A",
+      "normalizedName": "strings a",
+      "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "children": [
+        "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+        "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 1152,
+        "end": 12864,
+        "low": 70,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70"
+      },
+      "raw": {
+        "id": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+        "name": "Strings A",
+        "parentId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "range": {
+          "start": 1152,
+          "end": 12864,
+          "low": 70,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [
+          "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+          "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69"
+        ],
+        "instruments": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "name": "Strings B",
+      "normalizedName": "strings b",
+      "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "children": [
+        "01d108ef-0635-472d-b782-2f440ba9c1c0",
+        "6d846a23-68aa-4c00-9e74-0c5e749eab02"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 13248,
+        "end": 19008,
+        "low": 68,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "9653b387-46c0-495c-92c7-69a4c35bd732"
+      },
+      "raw": {
+        "id": "9653b387-46c0-495c-92c7-69a4c35bd732",
+        "name": "Strings B",
+        "parentId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "range": {
+          "start": 13248,
+          "end": 19008,
+          "low": 68,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [
+          "01d108ef-0635-472d-b782-2f440ba9c1c0",
+          "6d846a23-68aa-4c00-9e74-0c5e749eab02"
+        ],
+        "instruments": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "name": "Strings C",
+      "normalizedName": "strings c",
+      "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "children": [
+        "631eaa2e-621f-4d52-894b-27e35240826e",
+        "5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
+      ],
+      "depth": 2,
+      "range": {
+        "start": 19200,
+        "end": 25344,
+        "low": 70,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a"
+      },
+      "raw": {
+        "id": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+        "name": "Strings C",
+        "parentId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+        "range": {
+          "start": 19200,
+          "end": 25344,
+          "low": 70,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [
+          "631eaa2e-621f-4d52-894b-27e35240826e",
+          "5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
+        ],
+        "instruments": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "name": "Bass Motif 1",
+      "normalizedName": "bass motif 1",
+      "parentId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "children": [
+        "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+        "50b94953-3d9a-460b-a3a4-269a5f7b3bd2",
+        "f1315601-dc11-4915-9191-17968efa009a",
+        "68f9ec8e-0056-4396-acf5-f794c91ebf23"
+      ],
+      "depth": 3,
+      "range": {
+        "start": 768,
+        "end": 6912,
+        "low": 32,
+        "high": 44
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "19161f35-5f2e-4204-9065-01454f58b6ed"
+      },
+      "raw": {
+        "id": "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "name": "Bass Motif 1",
+        "parentId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+        "range": {
+          "start": 768,
+          "end": 6912,
+          "low": 32,
+          "high": 44
+        },
+        "mode": "range",
+        "children": [
+          "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+          "50b94953-3d9a-460b-a3a4-269a5f7b3bd2",
+          "f1315601-dc11-4915-9191-17968efa009a",
+          "68f9ec8e-0056-4396-acf5-f794c91ebf23"
+        ],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "d4226606-70ef-44c2-ae84-0d7e288be967",
+      "name": "Bass Motif 1",
+      "normalizedName": "bass motif 1",
+      "parentId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 6912,
+        "end": 13056,
+        "low": 32,
+        "high": 44
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "variantOfName": "Bass Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "d4226606-70ef-44c2-ae84-0d7e288be967"
+      },
+      "raw": {
+        "id": "d4226606-70ef-44c2-ae84-0d7e288be967",
+        "name": "Bass Motif 1",
+        "parentId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+        "range": {
+          "start": 6912,
+          "end": 13056,
+          "low": 32,
+          "high": 44
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isRepetition": true,
+        "variantOf": "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "variantOfName": "Bass Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "970f15da-38bd-4e0f-919b-37e5b7f81b3a",
+      "name": "Brass Fill",
+      "normalizedName": "brass fill",
+      "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 23808,
+        "end": 25344,
+        "low": 43,
+        "high": 56
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "970f15da-38bd-4e0f-919b-37e5b7f81b3a"
+      },
+      "raw": {
+        "id": "970f15da-38bd-4e0f-919b-37e5b7f81b3a",
+        "name": "Brass Fill",
+        "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "range": {
+          "start": 23808,
+          "end": 25344,
+          "low": 43,
+          "high": 56
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "name": "Brass Theme 1",
+      "normalizedName": "brass theme 1",
+      "parentId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "children": [
+        "45044758-36d7-4377-8735-adc6f90efc7d",
+        "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+        "6982d5fc-9257-4775-82fe-b9648a7a12db",
+        "6d9a6944-3fd0-4ec1-a3f4-c0544308a180"
+      ],
+      "depth": 3,
+      "range": {
+        "start": 768,
+        "end": 6912,
+        "low": 43,
+        "high": 55
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127"
+      },
+      "raw": {
+        "id": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "name": "Brass Theme 1",
+        "parentId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+        "range": {
+          "start": 768,
+          "end": 6912,
+          "low": 43,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "45044758-36d7-4377-8735-adc6f90efc7d",
+          "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+          "6982d5fc-9257-4775-82fe-b9648a7a12db",
+          "6d9a6944-3fd0-4ec1-a3f4-c0544308a180"
+        ],
+        "instruments": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "918e00a0-ef71-4ed7-9eea-7043eea2a6af",
+      "name": "Brass Theme 1",
+      "normalizedName": "brass theme 1",
+      "parentId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 6912,
+        "end": 13056,
+        "low": 43,
+        "high": 55
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "variantOfName": "Brass Theme 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "918e00a0-ef71-4ed7-9eea-7043eea2a6af"
+      },
+      "raw": {
+        "id": "918e00a0-ef71-4ed7-9eea-7043eea2a6af",
+        "name": "Brass Theme 1",
+        "parentId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+        "range": {
+          "start": 6912,
+          "end": 13056,
+          "low": 43,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isRepetition": true,
+        "variantOf": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "variantOfName": "Brass Theme 1",
+        "children": []
+      }
+    },
+    {
+      "id": "76d9c555-1f84-4a8e-a045-71c3d8ddea69",
+      "name": "Drum 1",
+      "normalizedName": "drum 1",
+      "parentId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 3840,
+        "end": 5376,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "variantOfName": "Drum 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "76d9c555-1f84-4a8e-a045-71c3d8ddea69"
+      },
+      "raw": {
+        "id": "76d9c555-1f84-4a8e-a045-71c3d8ddea69",
+        "name": "Drum 1",
+        "parentId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "range": {
+          "start": 3840,
+          "end": 5376,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "isRepetition": true,
+        "variantOf": "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "variantOfName": "Drum 1",
+        "children": []
+      }
+    },
+    {
+      "id": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "name": "Drum 1",
+      "normalizedName": "drum 1",
+      "parentId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "children": [
+        "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
+      ],
+      "depth": 3,
+      "range": {
+        "start": 768,
+        "end": 2304,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "af9e4edf-92c8-4752-8154-af4414389b0a"
+      },
+      "raw": {
+        "id": "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "name": "Drum 1",
+        "parentId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "range": {
+          "start": 768,
+          "end": 2304,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "children": [
+          "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
+        ],
+        "instruments": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+      "name": "Drum 1",
+      "normalizedName": "drum 1",
+      "parentId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 2304,
+        "end": 3840,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "variantOfName": "Drum 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "cfb835e4-5ea1-40f2-96b3-66d53a529837"
+      },
+      "raw": {
+        "id": "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+        "name": "Drum 1",
+        "parentId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "range": {
+          "start": 2304,
+          "end": 3840,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "isRepetition": true,
+        "variantOf": "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "variantOfName": "Drum 1",
+        "children": []
+      }
+    },
+    {
+      "id": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "name": "Lead Theme A",
+      "normalizedName": "lead theme a",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [
+        "1f43ff61-62d4-4ace-bc19-4bc585e898a2"
+      ],
+      "depth": 3,
+      "range": {
+        "start": 768,
+        "end": 6912,
+        "low": 67,
+        "high": 80
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672"
+      },
+      "raw": {
+        "id": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+        "name": "Lead Theme A",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 768,
+          "end": 6912,
+          "low": 67,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [
+          "1f43ff61-62d4-4ace-bc19-4bc585e898a2"
+        ],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 13248,
+        "end": 15936,
+        "low": 68,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "01d108ef-0635-472d-b782-2f440ba9c1c0"
+      },
+      "raw": {
+        "id": "01d108ef-0635-472d-b782-2f440ba9c1c0",
+        "name": "Motif 1",
+        "parentId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+        "range": {
+          "start": 13248,
+          "end": 15936,
+          "low": 68,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "02703064-6331-4a64-a38d-2c5891d4f46c",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 16128,
+        "end": 19200,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "02703064-6331-4a64-a38d-2c5891d4f46c"
+      },
+      "raw": {
+        "id": "02703064-6331-4a64-a38d-2c5891d4f46c",
+        "name": "Motif 1",
+        "parentId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+        "range": {
+          "start": 16128,
+          "end": 19200,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          0,
+          1
+        ],
+        "isRepetition": true,
+        "variantOf": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "children": [
+        "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "359b7bd0-bce3-4b03-a040-f46af53c876d",
+        "4054e163-e134-484d-b313-c056969968b4",
+        "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+        "1c22f027-75b5-4d46-a442-2bcbf4735263"
+      ],
+      "depth": 3,
+      "range": {
+        "start": 13056,
+        "end": 16128,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "075caaee-e426-4bed-b900-9bdd7ba42f58"
+      },
+      "raw": {
+        "id": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "name": "Motif 1",
+        "parentId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+        "range": {
+          "start": 13056,
+          "end": 16128,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+          "359b7bd0-bce3-4b03-a040-f46af53c876d",
+          "4054e163-e134-484d-b313-c056969968b4",
+          "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+          "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+          "1c22f027-75b5-4d46-a442-2bcbf4735263"
+        ],
+        "instruments": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 768,
+        "end": 3072,
+        "low": 70,
+        "high": 75
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "15940941-3c07-4877-b2fe-03a15e4c6ba7"
+      },
+      "raw": {
+        "id": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+        "name": "Motif 1",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 768,
+          "end": 3072,
+          "low": 70,
+          "high": 75
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 22272,
+        "end": 25344,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d"
+      },
+      "raw": {
+        "id": "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d",
+        "name": "Motif 1",
+        "parentId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+        "range": {
+          "start": 22272,
+          "end": 25344,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          0,
+          1
+        ],
+        "isRepetition": true,
+        "variantOf": "e0dc1c00-5542-491f-95d4-82610f779567",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 6912,
+        "end": 9216,
+        "low": 70,
+        "high": 75
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3"
+      },
+      "raw": {
+        "id": "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3",
+        "name": "Motif 1",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 6912,
+          "end": 9216,
+          "low": 70,
+          "high": 75
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "isRepetition": true,
+        "variantOf": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "631eaa2e-621f-4d52-894b-27e35240826e",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 19200,
+        "end": 22272,
+        "low": 71,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "631eaa2e-621f-4d52-894b-27e35240826e"
+      },
+      "raw": {
+        "id": "631eaa2e-621f-4d52-894b-27e35240826e",
+        "name": "Motif 1",
+        "parentId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+        "range": {
+          "start": 19200,
+          "end": 22272,
+          "low": 71,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "9d659273-1d4d-42ba-a445-20c28f29165e",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 16128,
+        "end": 16896,
+        "low": 32,
+        "high": 32
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "9d659273-1d4d-42ba-a445-20c28f29165e"
+      },
+      "raw": {
+        "id": "9d659273-1d4d-42ba-a445-20c28f29165e",
+        "name": "Motif 1",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 16128,
+          "end": 16896,
+          "low": 32,
+          "high": 32
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isRepetition": true,
+        "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 13056,
+        "end": 13824,
+        "low": 32,
+        "high": 32
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "b1d280eb-c657-49bb-809e-30c3a29a4952"
+      },
+      "raw": {
+        "id": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "name": "Motif 1",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 13056,
+          "end": 13824,
+          "low": 32,
+          "high": 32
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 19200,
+        "end": 19968,
+        "low": 72,
+        "high": 75
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d"
+      },
+      "raw": {
+        "id": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+        "name": "Motif 1",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 19200,
+          "end": 19968,
+          "low": 72,
+          "high": 75
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "children": [
+        "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+        "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+        "c5b29900-0e0f-4d72-8fb2-a66758bfc047"
+      ],
+      "depth": 3,
+      "range": {
+        "start": 19200,
+        "end": 22272,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "e0dc1c00-5542-491f-95d4-82610f779567"
+      },
+      "raw": {
+        "id": "e0dc1c00-5542-491f-95d4-82610f779567",
+        "name": "Motif 1",
+        "parentId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+        "range": {
+          "start": 19200,
+          "end": 22272,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+          "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+          "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+          "c5b29900-0e0f-4d72-8fb2-a66758bfc047"
+        ],
+        "instruments": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "5c74f82f-4e73-458a-b2e2-a8a9cfa07933",
+      "name": "Motif 1'",
+      "normalizedName": "motif 1",
+      "parentId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 22272,
+        "end": 25344,
+        "low": 70,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "631eaa2e-621f-4d52-894b-27e35240826e",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "rhythmic_variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
+      },
+      "raw": {
+        "id": "5c74f82f-4e73-458a-b2e2-a8a9cfa07933",
+        "name": "Motif 1'",
+        "parentId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+        "range": {
+          "start": 22272,
+          "end": 25344,
+          "low": 70,
+          "high": 80
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "variantOf": "631eaa2e-621f-4d52-894b-27e35240826e",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+      "name": "Motif 1'",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 15360,
+        "end": 16128,
+        "low": 31,
+        "high": 31
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+      "variantOfName": "Motif 1'",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "6bf2bcc8-0b44-46a7-a396-ea6f2f389362"
+      },
+      "raw": {
+        "id": "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+        "name": "Motif 1'",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 15360,
+          "end": 16128,
+          "low": 31,
+          "high": 31
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isRepetition": true,
+        "variantOf": "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+        "variantOfName": "Motif 1'",
+        "children": []
+      }
+    },
+    {
+      "id": "6d846a23-68aa-4c00-9e74-0c5e749eab02",
+      "name": "Motif 1'",
+      "normalizedName": "motif 1",
+      "parentId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 16128,
+        "end": 18816,
+        "low": 70,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "rhythmic_variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "6d846a23-68aa-4c00-9e74-0c5e749eab02"
+      },
+      "raw": {
+        "id": "6d846a23-68aa-4c00-9e74-0c5e749eab02",
+        "name": "Motif 1'",
+        "parentId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+        "range": {
+          "start": 16128,
+          "end": 18816,
+          "low": 70,
+          "high": 80
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "variantOf": "01d108ef-0635-472d-b782-2f440ba9c1c0",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "770e169a-9272-490a-89cc-660e0f8791ac",
+      "name": "Motif 1'",
+      "normalizedName": "motif 1",
+      "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 19200,
+        "end": 20736,
+        "low": 43,
+        "high": 56
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "770e169a-9272-490a-89cc-660e0f8791ac"
+      },
+      "raw": {
+        "id": "770e169a-9272-490a-89cc-660e0f8791ac",
+        "name": "Motif 1'",
+        "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "range": {
+          "start": 19200,
+          "end": 20736,
+          "low": 43,
+          "high": 56
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isVariation": true,
+        "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+      "name": "Motif 1'",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 13824,
+        "end": 14592,
+        "low": 31,
+        "high": 31
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "7c370ec9-1e14-495d-a5d4-3f42c8498801"
+      },
+      "raw": {
+        "id": "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+        "name": "Motif 1'",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 13824,
+          "end": 14592,
+          "low": 31,
+          "high": 31
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isVariation": true,
+        "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+      "name": "Motif 1'",
+      "normalizedName": "motif 1",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 23040,
+        "end": 23808,
+        "low": 74,
+        "high": 77
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "e395e80d-5d10-408e-ac88-38b6e61ef5ef"
+      },
+      "raw": {
+        "id": "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+        "name": "Motif 1'",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 23040,
+          "end": 23808,
+          "low": 74,
+          "high": 77
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "isVariation": true,
+        "variantOf": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+      "name": "Motif 1''",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 14592,
+        "end": 15360,
+        "low": 29,
+        "high": 29
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a"
+      },
+      "raw": {
+        "id": "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+        "name": "Motif 1''",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 14592,
+          "end": 15360,
+          "low": 29,
+          "high": 29
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isVariation": true,
+        "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "2cce2a71-c488-45e7-9bb2-3f0280033e3d",
+      "name": "Motif 1''",
+      "normalizedName": "motif 1",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 22272,
+        "end": 23040,
+        "low": 72,
+        "high": 79
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "2cce2a71-c488-45e7-9bb2-3f0280033e3d"
+      },
+      "raw": {
+        "id": "2cce2a71-c488-45e7-9bb2-3f0280033e3d",
+        "name": "Motif 1''",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 22272,
+          "end": 23040,
+          "low": 72,
+          "high": 79
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "isVariation": true,
+        "variantOf": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+      "name": "Motif 1''",
+      "normalizedName": "motif 1",
+      "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 20736,
+        "end": 22272,
+        "low": 43,
+        "high": 53
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "770e169a-9272-490a-89cc-660e0f8791ac",
+      "variantOfName": "Motif 1'",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "fde3741f-3122-4c1f-bee5-248ba62a87f1"
+      },
+      "raw": {
+        "id": "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+        "name": "Motif 1''",
+        "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "range": {
+          "start": 20736,
+          "end": 22272,
+          "low": 43,
+          "high": 53
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isVariation": true,
+        "variantOf": "770e169a-9272-490a-89cc-660e0f8791ac",
+        "variantOfName": "Motif 1'",
+        "children": []
+      }
+    },
+    {
+      "id": "0f2bdece-ce72-4a85-ab03-d838dbc146ef",
+      "name": "Motif 1'''",
+      "normalizedName": "motif 1",
+      "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 22272,
+        "end": 23808,
+        "low": 43,
+        "high": 56
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "770e169a-9272-490a-89cc-660e0f8791ac",
+      "variantOfName": "Motif 1'",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "0f2bdece-ce72-4a85-ab03-d838dbc146ef"
+      },
+      "raw": {
+        "id": "0f2bdece-ce72-4a85-ab03-d838dbc146ef",
+        "name": "Motif 1'''",
+        "parentId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "range": {
+          "start": 22272,
+          "end": 23808,
+          "low": 43,
+          "high": 56
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isVariation": true,
+        "variantOf": "770e169a-9272-490a-89cc-660e0f8791ac",
+        "variantOfName": "Motif 1'",
+        "children": []
+      }
+    },
+    {
+      "id": "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+      "name": "Motif 1'''",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 16896,
+        "end": 17664,
+        "low": 36,
+        "high": 36
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "50112e15-96bb-4ebd-ad3d-f853d82ab673"
+      },
+      "raw": {
+        "id": "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+        "name": "Motif 1'''",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 16896,
+          "end": 17664,
+          "low": 36,
+          "high": 36
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isVariation": true,
+        "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "d610dafe-c577-4bea-b893-86b53308e41b",
+      "name": "Motif 1''''",
+      "normalizedName": "motif 1",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 17664,
+        "end": 18432,
+        "low": 41,
+        "high": 41
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "d610dafe-c577-4bea-b893-86b53308e41b"
+      },
+      "raw": {
+        "id": "d610dafe-c577-4bea-b893-86b53308e41b",
+        "name": "Motif 1''''",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 17664,
+          "end": 18432,
+          "low": 41,
+          "high": 41
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isVariation": true,
+        "variantOf": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "name": "Motif 2",
+      "normalizedName": "motif 2",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 19968,
+        "end": 20736,
+        "low": 68,
+        "high": 79
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "25d6faba-4ba4-4cba-a33a-dd23df571a3f"
+      },
+      "raw": {
+        "id": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+        "name": "Motif 2",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 19968,
+          "end": 20736,
+          "low": 68,
+          "high": 79
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "6de60819-02ec-449a-9a03-a58b389a327a",
+      "name": "Motif 2",
+      "normalizedName": "motif 2",
+      "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 18432,
+        "end": 19200,
+        "low": 38,
+        "high": 43
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "6de60819-02ec-449a-9a03-a58b389a327a"
+      },
+      "raw": {
+        "id": "6de60819-02ec-449a-9a03-a58b389a327a",
+        "name": "Motif 2",
+        "parentId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "range": {
+          "start": 18432,
+          "end": 19200,
+          "low": 38,
+          "high": 43
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "name": "Motif 2",
+      "normalizedName": "motif 2",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 3072,
+        "end": 3840,
+        "low": 70,
+        "high": 79
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f"
+      },
+      "raw": {
+        "id": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+        "name": "Motif 2",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 3072,
+          "end": 3840,
+          "low": 70,
+          "high": 79
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "a9fe95f4-5726-4d80-bd46-1abd17a16523",
+      "name": "Motif 2'",
+      "normalizedName": "motif 2",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 9312,
+        "end": 10080,
+        "low": 72,
+        "high": 78
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "variantOfName": "Motif 2",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "rhythmic_variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "a9fe95f4-5726-4d80-bd46-1abd17a16523"
+      },
+      "raw": {
+        "id": "a9fe95f4-5726-4d80-bd46-1abd17a16523",
+        "name": "Motif 2'",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 9312,
+          "end": 10080,
+          "low": 72,
+          "high": 78
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "variantOf": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+        "variantOfName": "Motif 2",
+        "children": []
+      }
+    },
+    {
+      "id": "eff33b29-bd3b-4e3c-961f-38306fc35045",
+      "name": "Motif 2'",
+      "normalizedName": "motif 2",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 20736,
+        "end": 21504,
+        "low": 77,
+        "high": 87
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "variantOfName": "Motif 2",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "eff33b29-bd3b-4e3c-961f-38306fc35045"
+      },
+      "raw": {
+        "id": "eff33b29-bd3b-4e3c-961f-38306fc35045",
+        "name": "Motif 2'",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 20736,
+          "end": 21504,
+          "low": 77,
+          "high": 87
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "isVariation": true,
+        "variantOf": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+        "variantOfName": "Motif 2",
+        "children": []
+      }
+    },
+    {
+      "id": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "name": "Motif 3",
+      "normalizedName": "motif 3",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 5376,
+        "end": 6528,
+        "low": 67,
+        "high": 77
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6"
+      },
+      "raw": {
+        "id": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+        "name": "Motif 3",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 5376,
+          "end": 6528,
+          "low": 67,
+          "high": 77
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "43273d21-6776-4fa7-a001-a281649ebd97",
+      "name": "Motif 3'",
+      "normalizedName": "motif 3",
+      "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 11520,
+        "end": 12672,
+        "low": 74,
+        "high": 79
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "variantOfName": "Motif 3",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "rhythmic_variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "43273d21-6776-4fa7-a001-a281649ebd97"
+      },
+      "raw": {
+        "id": "43273d21-6776-4fa7-a001-a281649ebd97",
+        "name": "Motif 3'",
+        "parentId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "range": {
+          "start": 11520,
+          "end": 12672,
+          "low": 74,
+          "high": 79
+        },
+        "mode": "range",
+        "instruments": [
+          2
+        ],
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "variantOf": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+        "variantOfName": "Motif 3",
+        "children": []
+      }
+    },
+    {
+      "id": "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c",
+      "name": "Motif Climax",
+      "normalizedName": "motif climax",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 21504,
+        "end": 22272,
+        "low": 67,
+        "high": 91
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c"
+      },
+      "raw": {
+        "id": "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c",
+        "name": "Motif Climax",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 21504,
+          "end": 22272,
+          "low": 67,
+          "high": 91
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "ab3af3c4-3784-4f6c-af50-14250a0137d4",
+      "name": "resolution",
+      "normalizedName": "resolution",
+      "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 23808,
+        "end": 25344,
+        "low": 67,
+        "high": 79
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "ab3af3c4-3784-4f6c-af50-14250a0137d4"
+      },
+      "raw": {
+        "id": "ab3af3c4-3784-4f6c-af50-14250a0137d4",
+        "name": "resolution",
+        "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+        "range": {
+          "start": 23808,
+          "end": 25344,
+          "low": 67,
+          "high": 79
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69",
+      "name": "Strings Motif 1",
+      "normalizedName": "strings motif 1",
+      "parentId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 7488,
+        "end": 12672,
+        "low": 70,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "variantOfName": "Strings Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69"
+      },
+      "raw": {
+        "id": "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69",
+        "name": "Strings Motif 1",
+        "parentId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+        "range": {
+          "start": 7488,
+          "end": 12672,
+          "low": 70,
+          "high": 80
+        },
+        "mode": "range",
+        "instruments": [
+          6
+        ],
+        "isRepetition": true,
+        "variantOf": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+        "variantOfName": "Strings Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "name": "Strings Motif 1",
+      "normalizedName": "strings motif 1",
+      "parentId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "children": [],
+      "depth": 3,
+      "range": {
+        "start": 1344,
+        "end": 6528,
+        "low": 70,
+        "high": 80
+      },
+      "instruments": [
+        6
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a"
+      },
+      "raw": {
+        "id": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+        "name": "Strings Motif 1",
+        "parentId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+        "range": {
+          "start": 1344,
+          "end": 6528,
+          "low": 70,
+          "high": 80
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "1c22f027-75b5-4d46-a442-2bcbf4735263",
+      "name": "Cymbals B",
+      "normalizedName": "cymbals b",
+      "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 15360,
+        "end": 16128,
+        "low": 42,
+        "high": 55
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "variantOfName": "Cymbals B",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "1c22f027-75b5-4d46-a442-2bcbf4735263"
+      },
+      "raw": {
+        "id": "1c22f027-75b5-4d46-a442-2bcbf4735263",
+        "name": "Cymbals B",
+        "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "range": {
+          "start": 15360,
+          "end": 16128,
+          "low": 42,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          1
+        ],
+        "isRepetition": true,
+        "variantOf": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "variantOfName": "Cymbals B",
+        "children": []
+      }
+    },
+    {
+      "id": "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+      "name": "Cymbals B",
+      "normalizedName": "cymbals b",
+      "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 14592,
+        "end": 15360,
+        "low": 42,
+        "high": 55
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "variantOfName": "Cymbals B",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "9b686b9b-03ad-4460-bf72-6ea18d7cfc70"
+      },
+      "raw": {
+        "id": "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+        "name": "Cymbals B",
+        "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "range": {
+          "start": 14592,
+          "end": 15360,
+          "low": 42,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          1
+        ],
+        "isRepetition": true,
+        "variantOf": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "variantOfName": "Cymbals B",
+        "children": []
+      }
+    },
+    {
+      "id": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "name": "Cymbals B",
+      "normalizedName": "cymbals b",
+      "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "children": [
+        "901e5328-f32f-441e-9297-6a2fed80f332"
+      ],
+      "depth": 4,
+      "range": {
+        "start": 13824,
+        "end": 14592,
+        "low": 42,
+        "high": 55
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "variantOfName": "Cymbals B",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "ee23ad84-154e-4f12-87a4-821e6c3f6945"
+      },
+      "raw": {
+        "id": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "name": "Cymbals B",
+        "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "range": {
+          "start": 13824,
+          "end": 14592,
+          "low": 42,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [
+          "901e5328-f32f-441e-9297-6a2fed80f332"
+        ],
+        "instruments": [
+          1
+        ],
+        "isVariation": true,
+        "variantOf": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "variantOfName": "Cymbals B"
+      }
+    },
+    {
+      "id": "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478",
+      "name": "Drum 1'",
+      "normalizedName": "drum 1",
+      "parentId": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 5376,
+        "end": 6912,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "variantOfName": "Drum 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
+      },
+      "raw": {
+        "id": "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478",
+        "name": "Drum 1'",
+        "parentId": "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "range": {
+          "start": 5376,
+          "end": 6912,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          0
+        ],
+        "isVariation": true,
+        "variantOf": "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "variantOfName": "Drum 1"
+      }
+    },
+    {
+      "id": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "name": "Drum Loop C",
+      "normalizedName": "drum loop c",
+      "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 19200,
+        "end": 19968,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "1617a05f-fcb5-4850-b0b1-7c079671aa5c"
+      },
+      "raw": {
+        "id": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "name": "Drum Loop C",
+        "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+        "range": {
+          "start": 19200,
+          "end": 19968,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+      "name": "Drum Loop C",
+      "normalizedName": "drum loop c",
+      "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 19968,
+        "end": 20736,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "variantOfName": "Drum Loop C",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "952a0f09-2ed0-4d20-be58-dfb8229a7a12"
+      },
+      "raw": {
+        "id": "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+        "name": "Drum Loop C",
+        "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+        "range": {
+          "start": 19968,
+          "end": 20736,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          0,
+          1
+        ],
+        "isRepetition": true,
+        "variantOf": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "variantOfName": "Drum Loop C",
+        "children": []
+      }
+    },
+    {
+      "id": "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+      "name": "Drum Loop C",
+      "normalizedName": "drum loop c",
+      "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 20736,
+        "end": 21504,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "variantOfName": "Drum Loop C",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "e1880151-f0fd-423c-8431-a9cb5cc5b5a3"
+      },
+      "raw": {
+        "id": "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+        "name": "Drum Loop C",
+        "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+        "range": {
+          "start": 20736,
+          "end": 21504,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          0,
+          1
+        ],
+        "isRepetition": true,
+        "variantOf": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "variantOfName": "Drum Loop C",
+        "children": []
+      }
+    },
+    {
+      "id": "c5b29900-0e0f-4d72-8fb2-a66758bfc047",
+      "name": "Drum Loop C'",
+      "normalizedName": "drum loop c",
+      "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 21504,
+        "end": 22272,
+        "low": 35,
+        "high": 55
+      },
+      "instruments": [
+        0,
+        1
+      ],
+      "instrumentCount": 2,
+      "mode": "range",
+      "variantOf": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "variantOfName": "Drum Loop C",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "c5b29900-0e0f-4d72-8fb2-a66758bfc047"
+      },
+      "raw": {
+        "id": "c5b29900-0e0f-4d72-8fb2-a66758bfc047",
+        "name": "Drum Loop C'",
+        "parentId": "e0dc1c00-5542-491f-95d4-82610f779567",
+        "range": {
+          "start": 21504,
+          "end": 22272,
+          "low": 35,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          0,
+          1
+        ],
+        "isVariation": true,
+        "variantOf": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "variantOfName": "Drum Loop C",
+        "children": []
+      }
+    },
+    {
+      "id": "68f9ec8e-0056-4396-acf5-f794c91ebf23",
+      "name": "Ending Pattern",
+      "normalizedName": "ending pattern",
+      "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 5376,
+        "end": 6912,
+        "low": 34,
+        "high": 38
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "68f9ec8e-0056-4396-acf5-f794c91ebf23"
+      },
+      "raw": {
+        "id": "68f9ec8e-0056-4396-acf5-f794c91ebf23",
+        "name": "Ending Pattern",
+        "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "range": {
+          "start": 5376,
+          "end": 6912,
+          "low": 34,
+          "high": 38
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "359b7bd0-bce3-4b03-a040-f46af53c876d",
+      "name": "KickSnare B",
+      "normalizedName": "kicksnare b",
+      "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 13824,
+        "end": 14592,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "variantOfName": "KickSnare B",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "359b7bd0-bce3-4b03-a040-f46af53c876d"
+      },
+      "raw": {
+        "id": "359b7bd0-bce3-4b03-a040-f46af53c876d",
+        "name": "KickSnare B",
+        "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "range": {
+          "start": 13824,
+          "end": 14592,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "isRepetition": true,
+        "variantOf": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "variantOfName": "KickSnare B",
+        "children": []
+      }
+    },
+    {
+      "id": "4054e163-e134-484d-b313-c056969968b4",
+      "name": "KickSnare B",
+      "normalizedName": "kicksnare b",
+      "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 14592,
+        "end": 15360,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "variantOfName": "KickSnare B",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "4054e163-e134-484d-b313-c056969968b4"
+      },
+      "raw": {
+        "id": "4054e163-e134-484d-b313-c056969968b4",
+        "name": "KickSnare B",
+        "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "range": {
+          "start": 14592,
+          "end": 15360,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "instruments": [
+          0
+        ],
+        "isRepetition": true,
+        "variantOf": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "variantOfName": "KickSnare B",
+        "children": []
+      }
+    },
+    {
+      "id": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "name": "KickSnare B",
+      "normalizedName": "kicksnare b",
+      "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "children": [
+        "d7884af1-6e19-45d5-aec4-366809195ac6"
+      ],
+      "depth": 4,
+      "range": {
+        "start": 13056,
+        "end": 13824,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "container"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "8c685a93-e510-4a4e-95e4-ed88d50585c9"
+      },
+      "raw": {
+        "id": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "name": "KickSnare B",
+        "parentId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "range": {
+          "start": 13056,
+          "end": 13824,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "children": [
+          "d7884af1-6e19-45d5-aec4-366809195ac6"
+        ],
+        "instruments": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "1f43ff61-62d4-4ace-bc19-4bc585e898a2",
+      "name": "Lead Theme A'",
+      "normalizedName": "lead theme a",
+      "parentId": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 6912,
+        "end": 13054,
+        "low": 70,
+        "high": 84
+      },
+      "instruments": [
+        2
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "variantOfName": "Lead Theme A",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "1f43ff61-62d4-4ace-bc19-4bc585e898a2"
+      },
+      "raw": {
+        "id": "1f43ff61-62d4-4ace-bc19-4bc585e898a2",
+        "name": "Lead Theme A'",
+        "parentId": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+        "range": {
+          "start": 6912,
+          "end": 13054,
+          "low": 70,
+          "high": 84
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          2
+        ],
+        "isVariation": true,
+        "variantOf": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+        "variantOfName": "Lead Theme A"
+      }
+    },
+    {
+      "id": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 768,
+        "end": 2304,
+        "low": 43,
+        "high": 55
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "45044758-36d7-4377-8735-adc6f90efc7d"
+      },
+      "raw": {
+        "id": "45044758-36d7-4377-8735-adc6f90efc7d",
+        "name": "Motif 1",
+        "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "range": {
+          "start": 768,
+          "end": 2304,
+          "low": 43,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+      "name": "Motif 1",
+      "normalizedName": "motif 1",
+      "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 2304,
+        "end": 3840,
+        "low": 43,
+        "high": 55
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e"
+      },
+      "raw": {
+        "id": "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+        "name": "Motif 1",
+        "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "range": {
+          "start": 2304,
+          "end": 3840,
+          "low": 43,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isRepetition": true,
+        "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "6982d5fc-9257-4775-82fe-b9648a7a12db",
+      "name": "Motif 1''",
+      "normalizedName": "motif 1",
+      "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 3840,
+        "end": 5376,
+        "low": 44,
+        "high": 51
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "rhythmic_variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "6982d5fc-9257-4775-82fe-b9648a7a12db"
+      },
+      "raw": {
+        "id": "6982d5fc-9257-4775-82fe-b9648a7a12db",
+        "name": "Motif 1''",
+        "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "range": {
+          "start": 3840,
+          "end": 5376,
+          "low": 44,
+          "high": 51
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "6d9a6944-3fd0-4ec1-a3f4-c0544308a180",
+      "name": "Motif 1'''",
+      "normalizedName": "motif 1",
+      "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 5376,
+        "end": 6912,
+        "low": 46,
+        "high": 55
+      },
+      "instruments": [
+        5
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "variantOfName": "Motif 1",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "rhythmic_variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "6d9a6944-3fd0-4ec1-a3f4-c0544308a180"
+      },
+      "raw": {
+        "id": "6d9a6944-3fd0-4ec1-a3f4-c0544308a180",
+        "name": "Motif 1'''",
+        "parentId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "range": {
+          "start": 5376,
+          "end": 6912,
+          "low": 46,
+          "high": 55
+        },
+        "mode": "range",
+        "instruments": [
+          5
+        ],
+        "isVariation": true,
+        "isRhythmicVariation": true,
+        "variantOf": "45044758-36d7-4377-8735-adc6f90efc7d",
+        "variantOfName": "Motif 1",
+        "children": []
+      }
+    },
+    {
+      "id": "50b94953-3d9a-460b-a3a4-269a5f7b3bd2",
+      "name": "Pattern 1",
+      "normalizedName": "pattern 1",
+      "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 2304,
+        "end": 3840,
+        "low": 36,
+        "high": 43
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "variantOfName": "Pattern 1",
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": true,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "repetition",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "50b94953-3d9a-460b-a3a4-269a5f7b3bd2"
+      },
+      "raw": {
+        "id": "50b94953-3d9a-460b-a3a4-269a5f7b3bd2",
+        "name": "Pattern 1",
+        "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "range": {
+          "start": 2304,
+          "end": 3840,
+          "low": 36,
+          "high": 43
+        },
+        "mode": "range",
+        "instruments": [
+          4
+        ],
+        "isRepetition": true,
+        "variantOf": "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+        "variantOfName": "Pattern 1",
+        "children": []
+      }
+    },
+    {
+      "id": "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "name": "Pattern 1",
+      "normalizedName": "pattern 1",
+      "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 768,
+        "end": 2304,
+        "low": 36,
+        "high": 43
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "a8119fa7-745e-490a-8aeb-0a1f32bf9595"
+      },
+      "raw": {
+        "id": "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+        "name": "Pattern 1",
+        "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "range": {
+          "start": 768,
+          "end": 2304,
+          "low": 36,
+          "high": 43
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "f1315601-dc11-4915-9191-17968efa009a",
+      "name": "Pattern 2",
+      "normalizedName": "pattern 2",
+      "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "children": [],
+      "depth": 4,
+      "range": {
+        "start": 3840,
+        "end": 5376,
+        "low": 32,
+        "high": 44
+      },
+      "instruments": [
+        4
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "f1315601-dc11-4915-9191-17968efa009a"
+      },
+      "raw": {
+        "id": "f1315601-dc11-4915-9191-17968efa009a",
+        "name": "Pattern 2",
+        "parentId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "range": {
+          "start": 3840,
+          "end": 5376,
+          "low": 32,
+          "high": 44
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "901e5328-f32f-441e-9297-6a2fed80f332",
+      "name": "Cymbals B Start",
+      "normalizedName": "cymbals b start",
+      "parentId": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "children": [],
+      "depth": 5,
+      "range": {
+        "start": 13056,
+        "end": 13824,
+        "low": 42,
+        "high": 55
+      },
+      "instruments": [
+        1
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "901e5328-f32f-441e-9297-6a2fed80f332"
+      },
+      "raw": {
+        "id": "901e5328-f32f-441e-9297-6a2fed80f332",
+        "name": "Cymbals B Start",
+        "parentId": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "range": {
+          "start": 13056,
+          "end": 13824,
+          "low": 42,
+          "high": 55
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "d7884af1-6e19-45d5-aec4-366809195ac6",
+      "name": "KickSnare Fill",
+      "normalizedName": "kicksnare fill",
+      "parentId": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "children": [],
+      "depth": 5,
+      "range": {
+        "start": 15360,
+        "end": 16128,
+        "low": 35,
+        "high": 40
+      },
+      "instruments": [
+        0
+      ],
+      "instrumentCount": 1,
+      "mode": "range",
+      "variantOf": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "variantOfName": "KickSnare B",
+      "flags": {
+        "isVariation": true,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "variation",
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "IntroductionStage.mid.json",
+        "patternId": "d7884af1-6e19-45d5-aec4-366809195ac6"
+      },
+      "raw": {
+        "id": "d7884af1-6e19-45d5-aec4-366809195ac6",
+        "name": "KickSnare Fill",
+        "parentId": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "range": {
+          "start": 15360,
+          "end": 16128,
+          "low": 35,
+          "high": 40
+        },
+        "mode": "range",
+        "children": [],
+        "instruments": [
+          0
+        ],
+        "isVariation": true,
+        "variantOf": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "variantOfName": "KickSnare B"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "2dabf9c6-f478-4247-ad88-0f01888f97d8"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "9d22a10f-3c85-41ff-a208-5e1c467e1590"
+    },
+    {
+      "type": "parent_child",
+      "from": "root",
+      "to": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+    },
+    {
+      "type": "parent_child",
+      "from": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "to": "a99cbfa5-945a-4947-8bc4-b3ac5791225a"
+    },
+    {
+      "type": "parent_child",
+      "from": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "to": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f"
+    },
+    {
+      "type": "parent_child",
+      "from": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "to": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70"
+    },
+    {
+      "type": "parent_child",
+      "from": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "to": "15b9be77-fd59-4556-80e6-2b4bb1103b11"
+    },
+    {
+      "type": "parent_child",
+      "from": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "to": "f35097fb-de4a-49a9-bbcd-667f49c9be34"
+    },
+    {
+      "type": "parent_child",
+      "from": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "to": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8"
+    },
+    {
+      "type": "parent_child",
+      "from": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "to": "f8909404-a4a7-4368-82b5-7cf77cde3e63"
+    },
+    {
+      "type": "parent_child",
+      "from": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "to": "9653b387-46c0-495c-92c7-69a4c35bd732"
+    },
+    {
+      "type": "parent_child",
+      "from": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "to": "616e84aa-5d68-49f4-a94f-26ccc414a801"
+    },
+    {
+      "type": "parent_child",
+      "from": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "to": "40816ac6-5792-47d6-a9b0-3d8f4822958c"
+    },
+    {
+      "type": "parent_child",
+      "from": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "to": "19fd4927-95ed-4927-85a8-1f8cff967de6"
+    },
+    {
+      "type": "parent_child",
+      "from": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "to": "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda"
+    },
+    {
+      "type": "parent_child",
+      "from": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "to": "83569cf9-3f90-4f12-a64d-d0d23cc3422b"
+    },
+    {
+      "type": "parent_child",
+      "from": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "to": "ed7dbe8e-d607-44d8-b566-3ed55870e78a"
+    },
+    {
+      "type": "parent_child",
+      "from": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "to": "f7e0ec37-6bc7-435c-852a-ae532b70a559"
+    },
+    {
+      "type": "parent_child",
+      "from": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "to": "af9e4edf-92c8-4752-8154-af4414389b0a"
+    },
+    {
+      "type": "parent_child",
+      "from": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "to": "cfb835e4-5ea1-40f2-96b3-66d53a529837"
+    },
+    {
+      "type": "parent_child",
+      "from": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "to": "76d9c555-1f84-4a8e-a045-71c3d8ddea69"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "15940941-3c07-4877-b2fe-03a15e4c6ba7"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "a9fe95f4-5726-4d80-bd46-1abd17a16523"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6"
+    },
+    {
+      "type": "parent_child",
+      "from": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "to": "43273d21-6776-4fa7-a001-a281649ebd97"
+    },
+    {
+      "type": "parent_child",
+      "from": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "to": "1f43ff61-62d4-4ace-bc19-4bc585e898a2"
+    },
+    {
+      "type": "variation",
+      "from": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "to": "1f43ff61-62d4-4ace-bc19-4bc585e898a2",
+      "label": "Lead Theme A"
+    },
+    {
+      "type": "repetition",
+      "from": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "to": "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3",
+      "label": "Motif 1"
+    },
+    {
+      "type": "rhythmic_variation",
+      "from": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "to": "a9fe95f4-5726-4d80-bd46-1abd17a16523",
+      "label": "Motif 2"
+    },
+    {
+      "type": "rhythmic_variation",
+      "from": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "to": "43273d21-6776-4fa7-a001-a281649ebd97",
+      "label": "Motif 3"
+    },
+    {
+      "type": "parent_child",
+      "from": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "to": "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
+    },
+    {
+      "type": "repetition",
+      "from": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "to": "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+      "label": "Drum 1"
+    },
+    {
+      "type": "repetition",
+      "from": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "to": "76d9c555-1f84-4a8e-a045-71c3d8ddea69",
+      "label": "Drum 1"
+    },
+    {
+      "type": "variation",
+      "from": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "to": "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478",
+      "label": "Drum 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "to": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a"
+    },
+    {
+      "type": "parent_child",
+      "from": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "to": "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69"
+    },
+    {
+      "type": "repetition",
+      "from": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "to": "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69",
+      "label": "Strings Motif 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "to": "19161f35-5f2e-4204-9065-01454f58b6ed"
+    },
+    {
+      "type": "parent_child",
+      "from": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "to": "d4226606-70ef-44c2-ae84-0d7e288be967"
+    },
+    {
+      "type": "parent_child",
+      "from": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "to": "a8119fa7-745e-490a-8aeb-0a1f32bf9595"
+    },
+    {
+      "type": "parent_child",
+      "from": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "to": "50b94953-3d9a-460b-a3a4-269a5f7b3bd2"
+    },
+    {
+      "type": "parent_child",
+      "from": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "to": "f1315601-dc11-4915-9191-17968efa009a"
+    },
+    {
+      "type": "parent_child",
+      "from": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "to": "68f9ec8e-0056-4396-acf5-f794c91ebf23"
+    },
+    {
+      "type": "repetition",
+      "from": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "to": "d4226606-70ef-44c2-ae84-0d7e288be967",
+      "label": "Bass Motif 1"
+    },
+    {
+      "type": "repetition",
+      "from": "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "to": "50b94953-3d9a-460b-a3a4-269a5f7b3bd2",
+      "label": "Pattern 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "to": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127"
+    },
+    {
+      "type": "parent_child",
+      "from": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "to": "918e00a0-ef71-4ed7-9eea-7043eea2a6af"
+    },
+    {
+      "type": "parent_child",
+      "from": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "to": "45044758-36d7-4377-8735-adc6f90efc7d"
+    },
+    {
+      "type": "parent_child",
+      "from": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "to": "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e"
+    },
+    {
+      "type": "parent_child",
+      "from": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "to": "6982d5fc-9257-4775-82fe-b9648a7a12db"
+    },
+    {
+      "type": "parent_child",
+      "from": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "to": "6d9a6944-3fd0-4ec1-a3f4-c0544308a180"
+    },
+    {
+      "type": "repetition",
+      "from": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "to": "918e00a0-ef71-4ed7-9eea-7043eea2a6af",
+      "label": "Brass Theme 1"
+    },
+    {
+      "type": "repetition",
+      "from": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "to": "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+      "label": "Motif 1"
+    },
+    {
+      "type": "rhythmic_variation",
+      "from": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "to": "6982d5fc-9257-4775-82fe-b9648a7a12db",
+      "label": "Motif 1"
+    },
+    {
+      "type": "rhythmic_variation",
+      "from": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "to": "6d9a6944-3fd0-4ec1-a3f4-c0544308a180",
+      "label": "Motif 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "to": "075caaee-e426-4bed-b900-9bdd7ba42f58"
+    },
+    {
+      "type": "parent_child",
+      "from": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "to": "02703064-6331-4a64-a38d-2c5891d4f46c"
+    },
+    {
+      "type": "parent_child",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "8c685a93-e510-4a4e-95e4-ed88d50585c9"
+    },
+    {
+      "type": "parent_child",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "359b7bd0-bce3-4b03-a040-f46af53c876d"
+    },
+    {
+      "type": "parent_child",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "4054e163-e134-484d-b313-c056969968b4"
+    },
+    {
+      "type": "parent_child",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "ee23ad84-154e-4f12-87a4-821e6c3f6945"
+    },
+    {
+      "type": "parent_child",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "9b686b9b-03ad-4460-bf72-6ea18d7cfc70"
+    },
+    {
+      "type": "parent_child",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "1c22f027-75b5-4d46-a442-2bcbf4735263"
+    },
+    {
+      "type": "repetition",
+      "from": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "to": "02703064-6331-4a64-a38d-2c5891d4f46c",
+      "label": "Motif 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "to": "d7884af1-6e19-45d5-aec4-366809195ac6"
+    },
+    {
+      "type": "repetition",
+      "from": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "to": "359b7bd0-bce3-4b03-a040-f46af53c876d",
+      "label": "KickSnare B"
+    },
+    {
+      "type": "repetition",
+      "from": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "to": "4054e163-e134-484d-b313-c056969968b4",
+      "label": "KickSnare B"
+    },
+    {
+      "type": "variation",
+      "from": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "to": "d7884af1-6e19-45d5-aec4-366809195ac6",
+      "label": "KickSnare B"
+    },
+    {
+      "type": "parent_child",
+      "from": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "to": "901e5328-f32f-441e-9297-6a2fed80f332"
+    },
+    {
+      "type": "variation",
+      "from": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "to": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "label": "Cymbals B"
+    },
+    {
+      "type": "repetition",
+      "from": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "to": "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+      "label": "Cymbals B"
+    },
+    {
+      "type": "repetition",
+      "from": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "to": "1c22f027-75b5-4d46-a442-2bcbf4735263",
+      "label": "Cymbals B"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "b1d280eb-c657-49bb-809e-30c3a29a4952"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "9d659273-1d4d-42ba-a445-20c28f29165e"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "7c370ec9-1e14-495d-a5d4-3f42c8498801"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "6bf2bcc8-0b44-46a7-a396-ea6f2f389362"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "50112e15-96bb-4ebd-ad3d-f853d82ab673"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "d610dafe-c577-4bea-b893-86b53308e41b"
+    },
+    {
+      "type": "parent_child",
+      "from": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "to": "6de60819-02ec-449a-9a03-a58b389a327a"
+    },
+    {
+      "type": "repetition",
+      "from": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "to": "9d659273-1d4d-42ba-a445-20c28f29165e",
+      "label": "Motif 1"
+    },
+    {
+      "type": "variation",
+      "from": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "to": "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+      "label": "Motif 1"
+    },
+    {
+      "type": "repetition",
+      "from": "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+      "to": "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+      "label": "Motif 1'"
+    },
+    {
+      "type": "variation",
+      "from": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "to": "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+      "label": "Motif 1"
+    },
+    {
+      "type": "variation",
+      "from": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "to": "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+      "label": "Motif 1"
+    },
+    {
+      "type": "variation",
+      "from": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "to": "d610dafe-c577-4bea-b893-86b53308e41b",
+      "label": "Motif 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "to": "01d108ef-0635-472d-b782-2f440ba9c1c0"
+    },
+    {
+      "type": "parent_child",
+      "from": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "to": "6d846a23-68aa-4c00-9e74-0c5e749eab02"
+    },
+    {
+      "type": "rhythmic_variation",
+      "from": "01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "to": "6d846a23-68aa-4c00-9e74-0c5e749eab02",
+      "label": "Motif 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "to": "e0dc1c00-5542-491f-95d4-82610f779567"
+    },
+    {
+      "type": "parent_child",
+      "from": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "to": "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d"
+    },
+    {
+      "type": "parent_child",
+      "from": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "to": "1617a05f-fcb5-4850-b0b1-7c079671aa5c"
+    },
+    {
+      "type": "parent_child",
+      "from": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "to": "952a0f09-2ed0-4d20-be58-dfb8229a7a12"
+    },
+    {
+      "type": "parent_child",
+      "from": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "to": "e1880151-f0fd-423c-8431-a9cb5cc5b5a3"
+    },
+    {
+      "type": "parent_child",
+      "from": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "to": "c5b29900-0e0f-4d72-8fb2-a66758bfc047"
+    },
+    {
+      "type": "repetition",
+      "from": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "to": "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d",
+      "label": "Motif 1"
+    },
+    {
+      "type": "repetition",
+      "from": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "to": "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+      "label": "Drum Loop C"
+    },
+    {
+      "type": "repetition",
+      "from": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "to": "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+      "label": "Drum Loop C"
+    },
+    {
+      "type": "variation",
+      "from": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "to": "c5b29900-0e0f-4d72-8fb2-a66758bfc047",
+      "label": "Drum Loop C"
+    },
+    {
+      "type": "parent_child",
+      "from": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "to": "970f15da-38bd-4e0f-919b-37e5b7f81b3a"
+    },
+    {
+      "type": "parent_child",
+      "from": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "to": "770e169a-9272-490a-89cc-660e0f8791ac"
+    },
+    {
+      "type": "parent_child",
+      "from": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "to": "fde3741f-3122-4c1f-bee5-248ba62a87f1"
+    },
+    {
+      "type": "parent_child",
+      "from": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "to": "0f2bdece-ce72-4a85-ab03-d838dbc146ef"
+    },
+    {
+      "type": "variation",
+      "from": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "to": "770e169a-9272-490a-89cc-660e0f8791ac",
+      "label": "Motif 1"
+    },
+    {
+      "type": "variation",
+      "from": "770e169a-9272-490a-89cc-660e0f8791ac",
+      "to": "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+      "label": "Motif 1'"
+    },
+    {
+      "type": "variation",
+      "from": "770e169a-9272-490a-89cc-660e0f8791ac",
+      "to": "0f2bdece-ce72-4a85-ab03-d838dbc146ef",
+      "label": "Motif 1'"
+    },
+    {
+      "type": "parent_child",
+      "from": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "to": "631eaa2e-621f-4d52-894b-27e35240826e"
+    },
+    {
+      "type": "parent_child",
+      "from": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "to": "5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
+    },
+    {
+      "type": "rhythmic_variation",
+      "from": "631eaa2e-621f-4d52-894b-27e35240826e",
+      "to": "5c74f82f-4e73-458a-b2e2-a8a9cfa07933",
+      "label": "Motif 1"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "e395e80d-5d10-408e-ac88-38b6e61ef5ef"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "25d6faba-4ba4-4cba-a33a-dd23df571a3f"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "eff33b29-bd3b-4e3c-961f-38306fc35045"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "2cce2a71-c488-45e7-9bb2-3f0280033e3d"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c"
+    },
+    {
+      "type": "parent_child",
+      "from": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "to": "ab3af3c4-3784-4f6c-af50-14250a0137d4"
+    },
+    {
+      "type": "variation",
+      "from": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "to": "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+      "label": "Motif 1"
+    },
+    {
+      "type": "variation",
+      "from": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "to": "eff33b29-bd3b-4e3c-961f-38306fc35045",
+      "label": "Motif 2"
+    },
+    {
+      "type": "variation",
+      "from": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "to": "2cce2a71-c488-45e7-9bb2-3f0280033e3d",
+      "label": "Motif 1"
+    }
+  ],
+  "collectionCandidates": [
+    {
+      "id": "collection:root",
+      "name": "Whole song",
+      "sourcePatternId": "root",
+      "parentPatternId": null,
+      "memberPatternIds": [
+        "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+        "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+        "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+        "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+      ],
+      "collectionType": "root_collection"
+    },
+    {
+      "id": "collection:2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "name": "Part A",
+      "sourcePatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+        "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+        "f35097fb-de4a-49a9-bbcd-667f49c9be34"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "name": "Part B",
+      "sourcePatternId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+        "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "9653b387-46c0-495c-92c7-69a4c35bd732",
+        "616e84aa-5d68-49f4-a94f-26ccc414a801",
+        "40816ac6-5792-47d6-a9b0-3d8f4822958c"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "name": "Part C",
+      "sourcePatternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "parentPatternId": "root",
+      "memberPatternIds": [
+        "19fd4927-95ed-4927-85a8-1f8cff967de6",
+        "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+        "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+        "f7e0ec37-6bc7-435c-852a-ae532b70a559"
+      ],
+      "collectionType": "top_level_section"
+    },
+    {
+      "id": "collection:a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "name": "Drum A",
+      "sourcePatternId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "parentPatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "memberPatternIds": [
+        "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+        "76d9c555-1f84-4a8e-a045-71c3d8ddea69"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "name": "Lead A",
+      "sourcePatternId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "parentPatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "memberPatternIds": [
+        "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+        "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+        "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3",
+        "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+        "a9fe95f4-5726-4d80-bd46-1abd17a16523",
+        "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+        "43273d21-6776-4fa7-a001-a281649ebd97"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "name": "Lead Theme A",
+      "sourcePatternId": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "parentPatternId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "memberPatternIds": [
+        "1f43ff61-62d4-4ace-bc19-4bc585e898a2"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "name": "Drum 1",
+      "sourcePatternId": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "parentPatternId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "memberPatternIds": [
+        "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "name": "Strings A",
+      "sourcePatternId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "parentPatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "memberPatternIds": [
+        "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+        "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "name": "Bass A",
+      "sourcePatternId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "parentPatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "memberPatternIds": [
+        "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "d4226606-70ef-44c2-ae84-0d7e288be967"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:19161f35-5f2e-4204-9065-01454f58b6ed",
+      "name": "Bass Motif 1",
+      "sourcePatternId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "parentPatternId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "memberPatternIds": [
+        "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+        "50b94953-3d9a-460b-a3a4-269a5f7b3bd2",
+        "f1315601-dc11-4915-9191-17968efa009a",
+        "68f9ec8e-0056-4396-acf5-f794c91ebf23"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "name": "Brass A",
+      "sourcePatternId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "parentPatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "memberPatternIds": [
+        "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "918e00a0-ef71-4ed7-9eea-7043eea2a6af"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "name": "Brass Theme 1",
+      "sourcePatternId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "parentPatternId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "memberPatternIds": [
+        "45044758-36d7-4377-8735-adc6f90efc7d",
+        "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+        "6982d5fc-9257-4775-82fe-b9648a7a12db",
+        "6d9a6944-3fd0-4ec1-a3f4-c0544308a180"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "name": "Drums B",
+      "sourcePatternId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "parentPatternId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "memberPatternIds": [
+        "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "02703064-6331-4a64-a38d-2c5891d4f46c"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "name": "Motif 1",
+      "sourcePatternId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "parentPatternId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "memberPatternIds": [
+        "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "359b7bd0-bce3-4b03-a040-f46af53c876d",
+        "4054e163-e134-484d-b313-c056969968b4",
+        "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+        "1c22f027-75b5-4d46-a442-2bcbf4735263"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "name": "KickSnare B",
+      "sourcePatternId": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "parentPatternId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "memberPatternIds": [
+        "d7884af1-6e19-45d5-aec4-366809195ac6"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "name": "Cymbals B",
+      "sourcePatternId": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "parentPatternId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "memberPatternIds": [
+        "901e5328-f32f-441e-9297-6a2fed80f332"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "name": "Bass B",
+      "sourcePatternId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "parentPatternId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "memberPatternIds": [
+        "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "9d659273-1d4d-42ba-a445-20c28f29165e",
+        "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+        "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+        "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+        "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+        "d610dafe-c577-4bea-b893-86b53308e41b",
+        "6de60819-02ec-449a-9a03-a58b389a327a"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:9653b387-46c0-495c-92c7-69a4c35bd732",
+      "name": "Strings B",
+      "sourcePatternId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "parentPatternId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "memberPatternIds": [
+        "01d108ef-0635-472d-b782-2f440ba9c1c0",
+        "6d846a23-68aa-4c00-9e74-0c5e749eab02"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "name": "Drums C",
+      "sourcePatternId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "parentPatternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "memberPatternIds": [
+        "e0dc1c00-5542-491f-95d4-82610f779567",
+        "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:e0dc1c00-5542-491f-95d4-82610f779567",
+      "name": "Motif 1",
+      "sourcePatternId": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "parentPatternId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "memberPatternIds": [
+        "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+        "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+        "c5b29900-0e0f-4d72-8fb2-a66758bfc047"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "name": "Brass C",
+      "sourcePatternId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "parentPatternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "memberPatternIds": [
+        "970f15da-38bd-4e0f-919b-37e5b7f81b3a",
+        "770e169a-9272-490a-89cc-660e0f8791ac",
+        "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+        "0f2bdece-ce72-4a85-ab03-d838dbc146ef"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "name": "Strings C",
+      "sourcePatternId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "parentPatternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "memberPatternIds": [
+        "631eaa2e-621f-4d52-894b-27e35240826e",
+        "5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
+      ],
+      "collectionType": "pattern_group"
+    },
+    {
+      "id": "collection:f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "name": "Lead C",
+      "sourcePatternId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "parentPatternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "memberPatternIds": [
+        "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+        "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+        "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+        "eff33b29-bd3b-4e3c-961f-38306fc35045",
+        "2cce2a71-c488-45e7-9bb2-3f0280033e3d",
+        "fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c",
+        "ab3af3c4-3784-4f6c-af50-14250a0137d4"
+      ],
+      "collectionType": "pattern_group"
+    }
+  ],
+  "summary": {
+    "patternCount": 85,
+    "relationshipCount": 123,
+    "collectionCount": 24,
+    "rootPatternCount": 1,
+    "leafPatternCount": 61,
+    "relationshipTypeCounts": {
+      "variation": 21,
+      "repetition": 18,
+      "rhythmic_variation": 6
+    },
+    "collectionTypeCounts": {
+      "pattern_group": 20,
+      "top_level_section": 3,
+      "root_collection": 1
+    },
+    "labelVariantGroups": [
+      {
+        "normalized": "drum 1",
+        "variants": [
+          "Drum 1",
+          "Drum 1'"
+        ],
+        "variantCount": 2
+      },
+      {
+        "normalized": "drum loop c",
+        "variants": [
+          "Drum Loop C",
+          "Drum Loop C'"
+        ],
+        "variantCount": 2
+      },
+      {
+        "normalized": "lead theme a",
+        "variants": [
+          "Lead Theme A",
+          "Lead Theme A'"
+        ],
+        "variantCount": 2
+      },
+      {
+        "normalized": "motif 1",
+        "variants": [
+          "Motif 1",
+          "Motif 1'",
+          "Motif 1''",
+          "Motif 1'''",
+          "Motif 1''''"
+        ],
+        "variantCount": 5
+      },
+      {
+        "normalized": "motif 2",
+        "variants": [
+          "Motif 2",
+          "Motif 2'"
+        ],
+        "variantCount": 2
+      },
+      {
+        "normalized": "motif 3",
+        "variants": [
+          "Motif 3",
+          "Motif 3'"
+        ],
+        "variantCount": 2
+      }
+    ],
+    "issueCount": 0
+  },
+  "issues": []
+}

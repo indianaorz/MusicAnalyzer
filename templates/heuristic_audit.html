@@ -4,42 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heuristic Audit</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Heuristic Structure Export</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v2">
 </head>
 
 <body>
     <header class="audit-hero">
         <div>
-            <p class="eyebrow">Phase 1 Validation</p>
-            <h1>Heuristic Source Audit</h1>
-            <p class="hero-copy">Inspect current pattern graphs and exported dataset files before normalization. This view is intended to validate the parser, relationship fields, and schema drift directly from the UI.</p>
+            <p class="eyebrow">Phase 1 Export</p>
+            <h1>Heuristic Structure Export</h1>
+            <p class="hero-copy">This page is backed by a dedicated heuristic export built from <code>user_settings/</code> only. It exists to inspect raw structural corpus data for the heuristic North Star, not Epicify-style training examples.</p>
         </div>
         <nav class="hero-actions">
             <a href="{{ url_for('index') }}">Dashboard</a>
-            <a href="{{ url_for('browse') }}">Dataset Browser</a>
             <a href="{{ url_for('library') }}">Classic Library</a>
         </nav>
     </header>
 
     <main class="audit-shell">
-        <section class="summary-grid" id="summary-cards">
+        <section class="summary-grid">
             <article class="summary-card">
-                <span>Settings Files</span>
-                <strong id="settings-count">-</strong>
+                <span>Exported Songs</span>
+                <strong id="song-count">-</strong>
             </article>
             <article class="summary-card">
-                <span>Dataset Files</span>
-                <strong id="dataset-count">-</strong>
+                <span>Exported Patterns</span>
+                <strong id="export-pattern-count">-</strong>
             </article>
             <article class="summary-card">
-                <span>Patterns Found</span>
-                <strong id="pattern-count">-</strong>
+                <span>Relationships</span>
+                <strong id="relationship-count">-</strong>
             </article>
-            <article class="summary-card warning">
-                <span>Issues</span>
-                <strong id="issue-count">-</strong>
+            <article class="summary-card">
+                <span>Collection Candidates</span>
+                <strong id="collection-count">-</strong>
             </article>
         </section>
 
@@ -47,16 +45,7 @@
             <article class="panel">
                 <div class="panel-head">
                     <div>
-                        <p class="eyebrow">Settings Shape</p>
-                        <h2>Relationship Fields</h2>
-                    </div>
-                </div>
-                <ul class="stat-list" id="relationship-fields"></ul>
-            </article>
-            <article class="panel">
-                <div class="panel-head">
-                    <div>
-                        <p class="eyebrow">Settings Shape</p>
+                        <p class="eyebrow">Export Summary</p>
                         <h2>Relationship Types</h2>
                     </div>
                 </div>
@@ -65,11 +54,11 @@
             <article class="panel">
                 <div class="panel-head">
                     <div>
-                        <p class="eyebrow">Dataset Shape</p>
-                        <h2>Categories</h2>
+                        <p class="eyebrow">Export Summary</p>
+                        <h2>Collection Types</h2>
                     </div>
                 </div>
-                <ul class="stat-list" id="dataset-categories"></ul>
+                <ul class="stat-list" id="collection-types"></ul>
             </article>
             <article class="panel">
                 <div class="panel-head">
@@ -80,110 +69,108 @@
                 </div>
                 <div class="pill-list" id="label-variants"></div>
             </article>
+            <article class="panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="eyebrow">Export State</p>
+                        <h2>Snapshot</h2>
+                    </div>
+                    <button id="refresh-export" class="refresh-button" type="button">Rebuild Export</button>
+                </div>
+                <p class="muted" id="snapshot-meta">Loading export snapshot...</p>
+            </article>
         </section>
 
         <section class="audit-grid">
             <section class="panel source-panel">
                 <div class="panel-head">
                     <div>
-                        <p class="eyebrow">Source Inspector</p>
-                        <h2>Files</h2>
+                        <p class="eyebrow">Exported Songs</p>
+                        <h2>Song Files</h2>
                     </div>
                     <div class="controls">
-                        <select id="kind-filter">
-                            <option value="all">All sources</option>
-                            <option value="settings">Settings only</option>
-                            <option value="dataset">Dataset only</option>
-                        </select>
-                        <input id="source-filter" type="search" placeholder="Filter by song, path, label...">
+                        <input id="source-filter" type="search" placeholder="Filter by song or source file...">
                     </div>
                 </div>
-                <p class="muted" id="snapshot-meta">Loading audit snapshot...</p>
                 <ul class="source-list" id="source-list"></ul>
             </section>
 
             <section class="panel detail-panel">
                 <div class="panel-head">
                     <div>
-                        <p class="eyebrow">Detail View</p>
-                        <h2 id="detail-title">Select a source item</h2>
+                        <p class="eyebrow">Export Detail</p>
+                        <h2 id="detail-title">Select an exported song</h2>
                     </div>
-                    <span class="detail-tag" id="detail-tag">No selection</span>
+                    <span class="detail-tag" id="detail-tag">No export selected</span>
                 </div>
-                <p class="muted" id="detail-meta">Choose a settings graph or dataset export from the list to inspect its parsed summary and raw JSON.</p>
+                <p class="muted" id="detail-meta">Choose an exported song to inspect the dedicated heuristic structure export.</p>
+
                 <section class="structure-section">
-                    <div class="panel-head viewer-head">
+                    <div class="panel-head">
                         <div>
                             <p class="eyebrow">Primary Inspection</p>
-                            <h3>Raw Structure</h3>
+                            <h3>Structure Summary</h3>
                         </div>
                         <span class="detail-tag" id="structure-tag">No structure selected</span>
                     </div>
-                    <p class="muted" id="structure-meta">For this phase, the main object under review is the authored pattern graph, not the rendered example artifact.</p>
+                    <p class="muted" id="structure-meta">This panel reflects the dedicated heuristic export and should preserve standalone patterns, parent-child containment, collections, repetitions, and variations.</p>
                     <div class="structure-grid">
                         <article class="detail-card">
-                            <h3>Structure Summary</h3>
+                            <h3>Export Summary</h3>
                             <div class="mini-stats" id="structure-summary"></div>
                         </article>
                         <article class="detail-card">
                             <h3>Pattern Inspector</h3>
-                            <pre id="pattern-detail">Select a raw settings source to inspect pattern containment, lineage, and pattern-level metadata.</pre>
+                            <pre id="pattern-detail">Select a pattern to inspect its exported structure and lineage.</pre>
                         </article>
                     </div>
-                    <div class="detail-card pattern-browser">
-                        <div class="panel-head compact">
-                            <div>
-                                <h3>Pattern Graph</h3>
-                                <p class="muted" id="pattern-browser-meta">No pattern graph loaded.</p>
+                    <div class="structure-grid secondary-grid">
+                        <article class="detail-card pattern-browser">
+                            <div class="panel-head compact">
+                                <div>
+                                    <h3>Patterns</h3>
+                                    <p class="muted" id="pattern-browser-meta">No exported pattern graph loaded.</p>
+                                </div>
                             </div>
-                        </div>
-                        <ul id="pattern-list" class="pattern-list"></ul>
+                            <ul id="pattern-list" class="pattern-list"></ul>
+                        </article>
+                        <article class="detail-card pattern-browser">
+                            <div class="panel-head compact">
+                                <div>
+                                    <h3>Collection Candidates</h3>
+                                    <p class="muted" id="collection-browser-meta">No exported collections loaded.</p>
+                                </div>
+                            </div>
+                            <pre id="collection-detail">Collection candidates will appear here once an export is selected.</pre>
+                        </article>
                     </div>
                 </section>
+
                 <div class="detail-columns">
                     <article class="detail-card">
-                        <h3>Parsed Summary</h3>
+                        <h3>Export Summary JSON</h3>
                         <pre id="detail-summary">Awaiting selection.</pre>
                     </article>
                     <article class="detail-card">
-                        <h3>Raw JSON</h3>
+                        <h3>Full Export JSON</h3>
                         <pre id="detail-raw">Awaiting selection.</pre>
                     </article>
                 </div>
-                <section class="viewer-section">
-                    <div class="panel-head viewer-head">
-                        <div>
-                            <p class="eyebrow">Secondary Validation</p>
-                            <h3>Playback And Visual Render</h3>
-                        </div>
-                        <span class="detail-tag" id="viewer-tag">No render source</span>
-                    </div>
-                    <p class="muted" id="viewer-meta">This is a secondary artifact preview. It is useful for validation when a source already contains ABC, but it is not the primary source model for normalization.</p>
-                    <main id="viewer" class="audit-viewer">
-                        <div id="loading-indicator" class="loading-indicator">Viewer ready.</div>
-                        <div id="analysis-content" style="display:none;"></div>
-                        <p class="placeholder" id="viewer-placeholder">Select a dataset export to render its pattern notation and playback controls.</p>
-                    </main>
-                </section>
             </section>
         </section>
 
         <section class="panel">
             <div class="panel-head">
                 <div>
-                    <p class="eyebrow">Warnings</p>
-                    <h2>Issues</h2>
+                    <p class="eyebrow">Issues</p>
+                    <h2>Export Warnings</h2>
                 </div>
             </div>
             <ul class="issue-list" id="issue-list"></ul>
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/abcjs-plugin-min.jsl') }}"></script>
-    <script src="{{ url_for('static', filename='js/gm-mapping.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/static-pianoroll.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v2"></script>
 </body>
 
 </html>
