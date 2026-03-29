@@ -4,6 +4,7 @@ const state = {
     selectedPath: null,
     selectedPatternId: null,
     selectedExport: null,
+    currentGraph: null,
 };
 
 const sourceList = document.getElementById('source-list');
@@ -71,6 +72,45 @@ function createEmptyState(text, tagName = 'p') {
 
 function clearNode(node) {
     node.innerHTML = '';
+}
+
+function scrollSelectedPatternIntoView() {
+    const selectedItem = patternList.querySelector('.pattern-item.active');
+    if (selectedItem) {
+        selectedItem.scrollIntoView({ block: 'nearest' });
+    }
+}
+
+function selectPattern(patternId, options = {}) {
+    if (!state.currentGraph || !state.currentGraph.byId.has(patternId)) {
+        return;
+    }
+
+    state.selectedPatternId = patternId;
+    renderPatternList(state.currentGraph, state.selectedExport || {});
+    renderPatternInspector(state.currentGraph);
+    renderCollectionDetail(state.selectedExport || {}, state.currentGraph);
+    renderRelationshipDetail(state.selectedExport || {}, state.currentGraph);
+
+    if (options.scroll !== false) {
+        scrollSelectedPatternIntoView();
+    }
+}
+
+function createJumpButton(label, patternId, options = {}) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `jump-button${options.compact ? ' jump-button-compact' : ''}`;
+    button.textContent = label;
+    button.disabled = !state.currentGraph || !state.currentGraph.byId.has(patternId);
+
+    if (!button.disabled) {
+        button.addEventListener('click', () => {
+            selectPattern(patternId);
+        });
+    }
+
+    return button;
 }
 
 function appendBadge(container, text, tone = '') {
@@ -311,7 +351,12 @@ function renderLineage(pattern, graph) {
     lineage.forEach((entry, index) => {
         const item = document.createElement('li');
         item.className = 'detail-list-item';
-        item.innerHTML = `<strong>${index + 1}.</strong> <span>${entry.name}</span> <code>${entry.id}</code>`;
+        const prefix = document.createElement('strong');
+        prefix.textContent = `${index + 1}.`;
+        const button = createJumpButton(`${entry.name} (${entry.id})`, entry.id);
+
+        item.appendChild(prefix);
+        item.appendChild(button);
         patternLineage.appendChild(item);
     });
 }
@@ -326,19 +371,63 @@ function renderConnections(pattern, graph) {
     const siblings = graph.patterns.filter(candidate => candidate.parentId === pattern.parentId && candidate.id !== pattern.id);
     const variantParent = pattern.variantOf ? graph.byId.get(pattern.variantOf) : null;
 
-    const rows = [];
-    rows.push(`Parent: ${parent ? `${parent.name || parent.id} (${parent.id})` : 'none'}`);
-    rows.push(`Children: ${children.length ? children.map(child => `${child.name || child.id} (${child.id})`).join(', ') : 'none'}`);
-    rows.push(`Siblings: ${siblings.length ? siblings.map(sibling => `${sibling.name || sibling.id} (${sibling.id})`).join(', ') : 'none'}`);
-    rows.push(`Variant Of: ${variantParent ? `${variantParent.name || variantParent.id} (${variantParent.id})` : (pattern.variantOf ? `${pattern.variantOfName || pattern.variantOf} (${pattern.variantOf})` : 'none')}`);
-    rows.push(`Relation Tags: ${(pattern.relationTags || []).length ? pattern.relationTags.join(', ') : 'none'}`);
+    const rows = [
+        {
+            label: 'Parent',
+            items: parent ? [{ id: parent.id, label: `${parent.name || parent.id} (${parent.id})` }] : [],
+            fallback: 'none',
+        },
+        {
+            label: 'Children',
+            items: children.map(child => ({ id: child.id, label: `${child.name || child.id} (${child.id})` })),
+            fallback: 'none',
+        },
+        {
+            label: 'Siblings',
+            items: siblings.map(sibling => ({ id: sibling.id, label: `${sibling.name || sibling.id} (${sibling.id})` })),
+            fallback: 'none',
+        },
+        {
+            label: 'Variant Of',
+            items: variantParent ? [{ id: variantParent.id, label: `${variantParent.name || variantParent.id} (${variantParent.id})` }] : [],
+            fallback: pattern.variantOf ? `${pattern.variantOfName || pattern.variantOf} (${pattern.variantOf})` : 'none',
+        },
+    ];
 
-    rows.forEach(text => {
+    rows.forEach(row => {
         const item = document.createElement('li');
         item.className = 'detail-list-item';
-        item.textContent = text;
+        const label = document.createElement('strong');
+        label.textContent = `${row.label}:`;
+        item.appendChild(label);
+
+        if (row.items.length) {
+            const chipRow = document.createElement('div');
+            chipRow.className = 'jump-row';
+            row.items.forEach(entry => {
+                chipRow.appendChild(createJumpButton(entry.label, entry.id, { compact: true }));
+            });
+            item.appendChild(chipRow);
+        } else {
+            const fallback = document.createElement('span');
+            fallback.className = 'connection-fallback';
+            fallback.textContent = row.fallback;
+            item.appendChild(fallback);
+        }
+
         patternConnections.appendChild(item);
     });
+
+    const tagsItem = document.createElement('li');
+    tagsItem.className = 'detail-list-item';
+    const tagsLabel = document.createElement('strong');
+    tagsLabel.textContent = 'Relation Tags:';
+    const tagsValue = document.createElement('span');
+    tagsValue.className = 'connection-fallback';
+    tagsValue.textContent = (pattern.relationTags || []).length ? pattern.relationTags.join(', ') : 'none';
+    tagsItem.appendChild(tagsLabel);
+    tagsItem.appendChild(tagsValue);
+    patternConnections.appendChild(tagsItem);
 }
 
 function renderPatternWarnings(pattern, graph) {
@@ -426,22 +515,40 @@ function renderCollectionDetail(exportPayload, graph) {
         meta.className = 'collection-meta';
         const sourcePattern = graph.byId.get(collection.sourcePatternId);
         const parentPattern = collection.parentPatternId ? graph.byId.get(collection.parentPatternId) : null;
-        meta.textContent = `Source: ${sourcePattern ? `${sourcePattern.name || sourcePattern.id} (${sourcePattern.id})` : collection.sourcePatternId || 'unknown'} | Parent: ${parentPattern ? `${parentPattern.name || parentPattern.id} (${parentPattern.id})` : (collection.parentPatternId || 'none')}`;
+        meta.textContent = `Source and parent links are navigable below.`;
+
+        const anchors = document.createElement('div');
+        anchors.className = 'jump-row';
+        if (sourcePattern) {
+            anchors.appendChild(createJumpButton(`Source: ${sourcePattern.name || sourcePattern.id} (${sourcePattern.id})`, sourcePattern.id, { compact: true }));
+        }
+        if (parentPattern) {
+            anchors.appendChild(createJumpButton(`Parent: ${parentPattern.name || parentPattern.id} (${parentPattern.id})`, parentPattern.id, { compact: true }));
+        } else if (collection.parentPatternId) {
+            appendBadge(anchors, `Parent: ${collection.parentPatternId}`);
+        }
 
         const members = document.createElement('div');
-        members.className = 'badge-list';
+        members.className = 'jump-row';
         const memberIds = Array.isArray(collection.memberPatternIds) ? collection.memberPatternIds : [];
         if (!memberIds.length) {
             appendBadge(members, 'No members');
         } else {
             memberIds.forEach(memberId => {
                 const member = graph.byId.get(memberId);
-                appendBadge(members, member ? `${member.name || member.id} (${member.id})` : memberId);
+                if (member) {
+                    members.appendChild(createJumpButton(`${member.name || member.id} (${member.id})`, member.id, { compact: true }));
+                } else {
+                    appendBadge(members, memberId);
+                }
             });
         }
 
         card.appendChild(heading);
         card.appendChild(meta);
+        if (anchors.childNodes.length) {
+            card.appendChild(anchors);
+        }
         card.appendChild(members);
         collectionDetail.appendChild(card);
     });
@@ -480,10 +587,28 @@ function renderRelationshipDetail(exportPayload, graph) {
         summary.className = 'relationship-row';
         const left = document.createElement('strong');
         left.textContent = relationship.type || 'relationship';
-        const right = document.createElement('span');
-        right.textContent = `${fromPattern ? `${fromPattern.name || fromPattern.id} (${fromPattern.id})` : relationship.from} -> ${toPattern ? `${toPattern.name || toPattern.id} (${toPattern.id})` : relationship.to}`;
+        const nav = document.createElement('div');
+        nav.className = 'relationship-nav';
+
+        if (fromPattern) {
+            nav.appendChild(createJumpButton(`${fromPattern.name || fromPattern.id} (${fromPattern.id})`, fromPattern.id, { compact: true }));
+        } else {
+            appendBadge(nav, relationship.from || 'unknown');
+        }
+
+        const arrow = document.createElement('span');
+        arrow.className = 'relationship-arrow';
+        arrow.textContent = '->';
+        nav.appendChild(arrow);
+
+        if (toPattern) {
+            nav.appendChild(createJumpButton(`${toPattern.name || toPattern.id} (${toPattern.id})`, toPattern.id, { compact: true }));
+        } else {
+            appendBadge(nav, relationship.to || 'unknown');
+        }
+
         summary.appendChild(left);
-        summary.appendChild(right);
+        summary.appendChild(nav);
 
         item.appendChild(summary);
         if (relationship.label) {
@@ -543,11 +668,7 @@ function renderPatternList(graph, exportPayload) {
         item.appendChild(titleRow);
         item.appendChild(metaRow);
         item.addEventListener('click', () => {
-            state.selectedPatternId = entry.patternId;
-            renderPatternList(graph, exportPayload);
-            renderPatternInspector(graph);
-            renderCollectionDetail(exportPayload, graph);
-            renderRelationshipDetail(exportPayload, graph);
+            selectPattern(entry.patternId, { scroll: false });
         });
 
         patternList.appendChild(item);
@@ -613,6 +734,8 @@ function renderSourceList() {
 }
 
 function renderEmptyDetail(message) {
+    state.currentGraph = null;
+    state.selectedExport = null;
     detailTitle.textContent = 'Select an exported song';
     detailTag.textContent = 'No export selected';
     detailMeta.textContent = message;
@@ -636,6 +759,7 @@ function renderExportDetail(item, payload) {
     const exportPayload = payload?.rawPayload || {};
     const graph = buildPatternGraph(exportPayload);
     state.selectedExport = exportPayload;
+    state.currentGraph = graph;
 
     const defaultPatternId = graph.byId.has(state.selectedPatternId)
         ? state.selectedPatternId
@@ -654,10 +778,7 @@ function renderExportDetail(item, payload) {
     detailRaw.textContent = JSON.stringify(exportPayload, null, 2);
 
     renderStructureSummary(exportPayload, graph, payload.summary || {}, item);
-    renderPatternList(graph, exportPayload);
-    renderPatternInspector(graph);
-    renderCollectionDetail(exportPayload, graph);
-    renderRelationshipDetail(exportPayload, graph);
+    selectPattern(state.selectedPatternId, { scroll: false });
 }
 
 async function loadDetail(item) {
@@ -685,6 +806,7 @@ async function loadDetail(item) {
         detailRaw.textContent = '';
         structureTag.textContent = 'Load failed';
         structureMeta.textContent = 'The dedicated export could not be loaded.';
+        state.currentGraph = null;
         clearNode(structureSummary);
         clearNode(patternList);
         patternBrowserMeta.textContent = 'No exported pattern graph loaded.';

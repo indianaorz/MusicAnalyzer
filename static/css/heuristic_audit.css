@@ -510,6 +510,8 @@ h1 {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(154, 176, 170, 0.12);
     line-height: 1.45;
+    display: grid;
+    gap: 8px;
 }
 
 .detail-list-item code {
@@ -524,6 +526,14 @@ h1 {
     gap: 8px;
 }
 
+.jump-row,
+.relationship-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
 .badge {
     display: inline-flex;
     align-items: center;
@@ -533,6 +543,34 @@ h1 {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(154, 176, 170, 0.18);
     color: var(--ink);
+}
+
+.jump-button {
+    appearance: none;
+    border: 1px solid rgba(214, 108, 63, 0.32);
+    background: rgba(214, 108, 63, 0.1);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 7px 11px;
+    font-size: 0.84rem;
+    line-height: 1.25;
+    transition: background-color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+
+.jump-button:hover:not(:disabled) {
+    background: rgba(214, 108, 63, 0.16);
+    border-color: rgba(214, 108, 63, 0.55);
+    transform: translateY(-1px);
+}
+
+.jump-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.jump-button-compact {
+    padding: 5px 9px;
+    font-size: 0.8rem;
 }
 
 .badge-good {
@@ -577,7 +615,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    align-items: baseline;
+    align-items: start;
+    flex-wrap: wrap;
 }
 
 .relationship-row strong {
@@ -587,16 +626,16 @@ h1 {
     letter-spacing: 0.08em;
 }
 
-.relationship-row span {
-    color: var(--ink);
-    text-align: right;
-    font-size: 0.9rem;
-}
-
 .relationship-subrow {
     margin-top: 8px;
     color: var(--muted);
     font-size: 0.85rem;
+}
+
+.relationship-arrow,
+.connection-fallback {
+    color: var(--muted);
+    font-size: 0.88rem;
 }
 
 .debug-panel {
