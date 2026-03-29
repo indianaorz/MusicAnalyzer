@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-29T14:32:03.775738+00:00",
+  "generatedAt": "2026-03-29T14:38:16.096744+00:00",
   "exportPath": "C:\\Users\\leeor\\FFCO\\MusicAnalyzerDAW\\heuristic_exports\\index.json",
   "summaryCards": {
     "songCount": 11,
@@ -195,15 +195,6 @@
   "issues": [],
   "items": [
     {
-      "songId": "built-in_method_title_of_str_object_at_0x000001ed65db1c30",
-      "label": "<built-in method title of str object at 0x000001ED65DB1C30>",
-      "path": "songs/built-in_method_title_of_str_object_at_0x000001ed65db1c30.json",
-      "sourcePath": "MMX2_Flame_Stag.mid.json",
-      "patternCount": 1,
-      "relationshipCount": 0,
-      "collectionCount": 0
-    },
-    {
       "songId": "launch_octopus",
       "label": "Launch Octopus",
       "path": "songs/launch_octopus.json",
@@ -283,6 +274,15 @@
       "patternCount": 29,
       "relationshipCount": 34,
       "collectionCount": 5
+    },
+    {
+      "songId": "mmx2_flame_stagmid",
+      "label": "MMX2_Flame_Stag.mid",
+      "path": "songs/mmx2_flame_stagmid.json",
+      "sourcePath": "MMX2_Flame_Stag.mid.json",
+      "patternCount": 1,
+      "relationshipCount": 0,
+      "collectionCount": 0
     },
     {
       "songId": "snes_mmx_boss_chosen_v1mid",

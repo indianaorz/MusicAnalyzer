@@ -3,6 +3,7 @@ const state = {
     items: [],
     selectedPath: null,
     selectedPatternId: null,
+    selectedExport: null,
 };
 
 const sourceList = document.getElementById('source-list');
@@ -16,9 +17,14 @@ const structureMeta = document.getElementById('structure-meta');
 const structureSummary = document.getElementById('structure-summary');
 const patternBrowserMeta = document.getElementById('pattern-browser-meta');
 const patternList = document.getElementById('pattern-list');
-const patternDetail = document.getElementById('pattern-detail');
+const patternOverview = document.getElementById('pattern-overview');
+const patternLineage = document.getElementById('pattern-lineage');
+const patternConnections = document.getElementById('pattern-connections');
+const patternWarnings = document.getElementById('pattern-warnings');
 const collectionBrowserMeta = document.getElementById('collection-browser-meta');
 const collectionDetail = document.getElementById('collection-detail');
+const relationshipBrowserMeta = document.getElementById('relationship-browser-meta');
+const relationshipDetail = document.getElementById('relationship-detail');
 const detailSummary = document.getElementById('detail-summary');
 const detailRaw = document.getElementById('detail-raw');
 const refreshButton = document.getElementById('refresh-export');
@@ -27,9 +33,23 @@ function formatCount(value) {
     return Number.isFinite(Number(value)) ? Number(value).toLocaleString() : '0';
 }
 
+function fallbackSongTitle(exportPayload, item) {
+    const rawTitle = exportPayload?.title;
+    if (typeof rawTitle === 'string' && rawTitle.trim() && !rawTitle.startsWith('<built-in method title of str object at 0x')) {
+        return rawTitle.trim();
+    }
+    if (typeof item?.label === 'string' && item.label.trim()) {
+        return item.label.trim();
+    }
+    if (typeof exportPayload?.source?.path === 'string' && exportPayload.source.path.trim()) {
+        return exportPayload.source.path.replace(/\.json$/i, '');
+    }
+    return item?.songId || 'Untitled';
+}
+
 function formatRange(range) {
     if (!range || typeof range !== 'object') {
-        return 'no range';
+        return 'No range';
     }
 
     const parts = [];
@@ -39,14 +59,25 @@ function formatRange(range) {
     if (range.low !== undefined || range.high !== undefined) {
         parts.push(`pitches ${range.low ?? '?'}..${range.high ?? '?'}`);
     }
-    return parts.length ? parts.join(', ') : 'range present';
+    return parts.length ? parts.join(', ') : 'Range present';
 }
 
-function clearNode(node, fallbackText = '') {
+function createEmptyState(text, tagName = 'p') {
+    const element = document.createElement(tagName);
+    element.className = 'empty-state';
+    element.textContent = text;
+    return element;
+}
+
+function clearNode(node) {
     node.innerHTML = '';
-    if (fallbackText) {
-        node.textContent = fallbackText;
-    }
+}
+
+function appendBadge(container, text, tone = '') {
+    const badge = document.createElement('span');
+    badge.className = `badge${tone ? ` ${tone}` : ''}`;
+    badge.textContent = text;
+    container.appendChild(badge);
 }
 
 function renderCountList(elementId, counts, fallbackText) {
@@ -55,10 +86,7 @@ function renderCountList(elementId, counts, fallbackText) {
 
     const entries = Object.entries(counts || {});
     if (!entries.length) {
-        const empty = document.createElement('li');
-        empty.className = 'empty-state';
-        empty.textContent = fallbackText;
-        element.appendChild(empty);
+        element.appendChild(createEmptyState(fallbackText, 'li'));
         return;
     }
 
@@ -79,10 +107,7 @@ function renderLabelVariants(groups) {
     clearNode(container);
 
     if (!Array.isArray(groups) || !groups.length) {
-        const empty = document.createElement('p');
-        empty.className = 'empty-state';
-        empty.textContent = 'No label variants detected in the current export.';
-        container.appendChild(empty);
+        container.appendChild(createEmptyState('No label variants detected in the current export.'));
         return;
     }
 
@@ -107,10 +132,7 @@ function renderIssues(issues) {
     clearNode(issueList);
 
     if (!Array.isArray(issues) || !issues.length) {
-        const empty = document.createElement('li');
-        empty.className = 'empty-state';
-        empty.textContent = 'No export warnings were produced.';
-        issueList.appendChild(empty);
+        issueList.appendChild(createEmptyState('No export warnings were produced.', 'li'));
         return;
     }
 
@@ -133,10 +155,14 @@ function buildPatternGraph(exportPayload) {
 
     const byId = new Map();
     const childrenById = new Map();
+    const normalizedCounts = new Map();
 
     patterns.forEach(pattern => {
         byId.set(pattern.id, pattern);
         childrenById.set(pattern.id, []);
+        if (pattern.normalizedName) {
+            normalizedCounts.set(pattern.normalizedName, (normalizedCounts.get(pattern.normalizedName) || 0) + 1);
+        }
     });
 
     patterns.forEach(pattern => {
@@ -157,6 +183,7 @@ function buildPatternGraph(exportPayload) {
         if (!byId.has(patternId) || seen.has(patternId)) {
             return;
         }
+
         seen.add(patternId);
         const pattern = byId.get(patternId);
         flattened.push({ patternId, depth, pattern });
@@ -177,7 +204,7 @@ function buildPatternGraph(exportPayload) {
         }
     });
 
-    return { patterns, byId, childrenById, roots, flattened };
+    return { patterns, byId, childrenById, roots, flattened, normalizedCounts };
 }
 
 function buildLineage(pattern, graph) {
@@ -194,12 +221,34 @@ function buildLineage(pattern, graph) {
     return lineage.reverse();
 }
 
-function buildStructureStats(exportPayload, graph, summary) {
+function getPatternWarnings(pattern, graph) {
+    const warnings = [];
+
+    if (pattern.parentId && !graph.byId.has(pattern.parentId)) {
+        warnings.push('Missing parent reference');
+    }
+    if (pattern.variantOf && !graph.byId.has(pattern.variantOf)) {
+        warnings.push('Dangling variant reference');
+    }
+    if (!pattern.range || typeof pattern.range !== 'object') {
+        warnings.push('Missing range');
+    }
+    if (!Array.isArray(pattern.instruments) || !pattern.instruments.length) {
+        warnings.push('No instruments attached');
+    }
+    if (pattern.normalizedName && (graph.normalizedCounts.get(pattern.normalizedName) || 0) > 1) {
+        warnings.push(`Duplicate normalized label: ${pattern.normalizedName}`);
+    }
+
+    return warnings;
+}
+
+function buildStructureStats(exportPayload, graph, summary, item) {
     const globalContext = exportPayload?.globalContext || {};
-    const modeBits = [globalContext.root, globalContext.scale].filter(Boolean).join(' ');
+    const modeBits = [globalContext.root, globalContext.scale].filter(value => value !== null && value !== undefined && value !== '').join(' ');
 
     return [
-        { label: 'Song', value: exportPayload?.title || 'Untitled' },
+        { label: 'Song', value: fallbackSongTitle(exportPayload, item) },
         { label: 'Source', value: exportPayload?.source?.path || 'unknown' },
         { label: 'Patterns', value: formatCount(summary?.patternCount ?? graph.patterns.length) },
         { label: 'Relationships', value: formatCount(summary?.relationshipCount ?? 0) },
@@ -212,11 +261,10 @@ function buildStructureStats(exportPayload, graph, summary) {
     ];
 }
 
-function renderStructureSummary(exportPayload, graph, summary) {
+function renderStructureSummary(exportPayload, graph, summary, item) {
     clearNode(structureSummary);
 
-    const stats = buildStructureStats(exportPayload, graph, summary);
-    stats.forEach(stat => {
+    buildStructureStats(exportPayload, graph, summary, item).forEach(stat => {
         const card = document.createElement('article');
         card.className = 'mini-stat';
 
@@ -231,85 +279,221 @@ function renderStructureSummary(exportPayload, graph, summary) {
     });
 }
 
-function renderPatternDetail(graph) {
+function renderPropertyGrid(properties) {
+    clearNode(patternOverview);
+
+    properties.forEach(property => {
+        const card = document.createElement('article');
+        card.className = 'property-card';
+
+        const label = document.createElement('span');
+        label.className = 'property-label';
+        label.textContent = property.label;
+        const value = document.createElement('strong');
+        value.className = 'property-value';
+        value.textContent = property.value;
+
+        card.appendChild(label);
+        card.appendChild(value);
+        patternOverview.appendChild(card);
+    });
+}
+
+function renderLineage(pattern, graph) {
+    clearNode(patternLineage);
+
+    const lineage = buildLineage(pattern, graph);
+    if (!lineage.length) {
+        patternLineage.appendChild(createEmptyState('No containment path found.', 'li'));
+        return;
+    }
+
+    lineage.forEach((entry, index) => {
+        const item = document.createElement('li');
+        item.className = 'detail-list-item';
+        item.innerHTML = `<strong>${index + 1}.</strong> <span>${entry.name}</span> <code>${entry.id}</code>`;
+        patternLineage.appendChild(item);
+    });
+}
+
+function renderConnections(pattern, graph) {
+    clearNode(patternConnections);
+
+    const parent = pattern.parentId ? graph.byId.get(pattern.parentId) : null;
+    const children = (Array.isArray(pattern.children) ? pattern.children : [])
+        .map(childId => graph.byId.get(childId))
+        .filter(Boolean);
+    const siblings = graph.patterns.filter(candidate => candidate.parentId === pattern.parentId && candidate.id !== pattern.id);
+    const variantParent = pattern.variantOf ? graph.byId.get(pattern.variantOf) : null;
+
+    const rows = [];
+    rows.push(`Parent: ${parent ? `${parent.name || parent.id} (${parent.id})` : 'none'}`);
+    rows.push(`Children: ${children.length ? children.map(child => `${child.name || child.id} (${child.id})`).join(', ') : 'none'}`);
+    rows.push(`Siblings: ${siblings.length ? siblings.map(sibling => `${sibling.name || sibling.id} (${sibling.id})`).join(', ') : 'none'}`);
+    rows.push(`Variant Of: ${variantParent ? `${variantParent.name || variantParent.id} (${variantParent.id})` : (pattern.variantOf ? `${pattern.variantOfName || pattern.variantOf} (${pattern.variantOf})` : 'none')}`);
+    rows.push(`Relation Tags: ${(pattern.relationTags || []).length ? pattern.relationTags.join(', ') : 'none'}`);
+
+    rows.forEach(text => {
+        const item = document.createElement('li');
+        item.className = 'detail-list-item';
+        item.textContent = text;
+        patternConnections.appendChild(item);
+    });
+}
+
+function renderPatternWarnings(pattern, graph) {
+    clearNode(patternWarnings);
+
+    const warnings = getPatternWarnings(pattern, graph);
+    if (!warnings.length) {
+        appendBadge(patternWarnings, 'No structural warnings', 'badge-good');
+        return;
+    }
+
+    warnings.forEach(warning => appendBadge(patternWarnings, warning, 'badge-warn'));
+}
+
+function renderPatternInspector(graph) {
     if (!graph || !state.selectedPatternId || !graph.byId.has(state.selectedPatternId)) {
-        patternDetail.textContent = 'Select a pattern to inspect its exported structure and lineage.';
+        renderPropertyGrid([
+            { label: 'Pattern', value: 'Select a pattern' },
+            { label: 'Status', value: 'No pattern selected' },
+        ]);
+        clearNode(patternLineage);
+        patternLineage.appendChild(createEmptyState('Select a pattern to inspect its containment path.', 'li'));
+        clearNode(patternConnections);
+        patternConnections.appendChild(createEmptyState('Select a pattern to inspect its structural links.', 'li'));
+        clearNode(patternWarnings);
+        appendBadge(patternWarnings, 'No pattern selected');
         return;
     }
 
     const pattern = graph.byId.get(state.selectedPatternId);
-    const parent = pattern.parentId ? graph.byId.get(pattern.parentId) : null;
-    const children = (Array.isArray(pattern.children) ? pattern.children : [])
-        .map(childId => graph.byId.get(childId))
-        .filter(Boolean)
-        .map(child => ({ id: child.id, name: child.name || child.id }));
-    const siblings = graph.patterns
-        .filter(candidate => candidate.parentId === pattern.parentId && candidate.id !== pattern.id)
-        .map(candidate => ({ id: candidate.id, name: candidate.name || candidate.id }));
+    const warnings = getPatternWarnings(pattern, graph);
 
-    const variantOf = pattern.variantOf
-        ? (graph.byId.get(pattern.variantOf)
-            ? {
-                id: graph.byId.get(pattern.variantOf).id,
-                name: graph.byId.get(pattern.variantOf).name || graph.byId.get(pattern.variantOf).id,
-            }
-            : {
-                id: pattern.variantOf,
-                name: pattern.variantOfName || pattern.variantOf,
-            })
-        : null;
+    renderPropertyGrid([
+        { label: 'Name', value: pattern.name || pattern.id },
+        { label: 'Pattern ID', value: pattern.id },
+        { label: 'Normalized Name', value: pattern.normalizedName || 'none' },
+        { label: 'Depth', value: String(pattern.depth ?? 0) },
+        { label: 'Range', value: formatRange(pattern.range) },
+        { label: 'Instruments', value: `${formatCount(pattern.instrumentCount ?? (pattern.instruments || []).length)} assigned` },
+        { label: 'Mode', value: pattern.mode || 'none' },
+        { label: 'Warnings', value: warnings.length ? String(warnings.length) : 'none' },
+    ]);
 
-    const detail = {
-        id: pattern.id,
-        name: pattern.name,
-        normalizedName: pattern.normalizedName,
-        depth: pattern.depth,
-        relationTags: pattern.relationTags || [],
-        lineage: buildLineage(pattern, graph),
-        parent: parent ? { id: parent.id, name: parent.name || parent.id } : null,
-        children,
-        siblings,
-        variantOf,
-        range: pattern.range || null,
-        instruments: pattern.instruments || [],
-        instrumentCount: pattern.instrumentCount ?? 0,
-        mode: pattern.mode || null,
-        flags: pattern.flags || {},
-        sourceRef: pattern.sourceRef || null,
-        raw: pattern.raw || null,
-    };
-
-    patternDetail.textContent = JSON.stringify(detail, null, 2);
+    renderLineage(pattern, graph);
+    renderConnections(pattern, graph);
+    renderPatternWarnings(pattern, graph);
 }
 
-function renderCollectionDetail(exportPayload) {
-    const collections = Array.isArray(exportPayload?.collectionCandidates)
-        ? exportPayload.collectionCandidates
-        : [];
+function renderCollectionDetail(exportPayload, graph) {
+    const collections = Array.isArray(exportPayload?.collectionCandidates) ? exportPayload.collectionCandidates : [];
+    clearNode(collectionDetail);
 
     if (!collections.length) {
         collectionBrowserMeta.textContent = 'No collection candidates were exported for this song.';
-        collectionDetail.textContent = 'No collection candidates were exported for this song.';
+        collectionDetail.appendChild(createEmptyState('No collection candidates were exported for this song.'));
         return;
     }
 
     const selectedPatternId = state.selectedPatternId;
-    const relatedCollections = selectedPatternId
+    const visibleCollections = selectedPatternId
         ? collections.filter(collection =>
             collection.sourcePatternId === selectedPatternId ||
             collection.parentPatternId === selectedPatternId ||
             (Array.isArray(collection.memberPatternIds) && collection.memberPatternIds.includes(selectedPatternId)))
-        : [];
+        : collections;
 
-    const visibleCollections = relatedCollections.length ? relatedCollections : collections.slice(0, 12);
-    collectionBrowserMeta.textContent = `${collections.length} collection candidates exported. Showing ${visibleCollections.length}${relatedCollections.length ? ' related to the selected pattern' : ''}.`;
+    const displayCollections = visibleCollections.length ? visibleCollections : collections.slice(0, 10);
+    collectionBrowserMeta.textContent = `${collections.length} collection candidates exported. Showing ${displayCollections.length}${visibleCollections.length ? ' related to the selected pattern' : ''}.`;
 
-    const detail = {
-        selectedPatternId: selectedPatternId || null,
-        visibleCollections,
-    };
+    displayCollections.forEach(collection => {
+        const card = document.createElement('article');
+        card.className = 'collection-card';
 
-    collectionDetail.textContent = JSON.stringify(detail, null, 2);
+        const heading = document.createElement('div');
+        heading.className = 'collection-card-head';
+        const title = document.createElement('strong');
+        title.textContent = collection.name || collection.id;
+        const type = document.createElement('span');
+        type.className = 'badge';
+        type.textContent = collection.collectionType || 'collection';
+        heading.appendChild(title);
+        heading.appendChild(type);
+
+        const meta = document.createElement('p');
+        meta.className = 'collection-meta';
+        const sourcePattern = graph.byId.get(collection.sourcePatternId);
+        const parentPattern = collection.parentPatternId ? graph.byId.get(collection.parentPatternId) : null;
+        meta.textContent = `Source: ${sourcePattern ? `${sourcePattern.name || sourcePattern.id} (${sourcePattern.id})` : collection.sourcePatternId || 'unknown'} | Parent: ${parentPattern ? `${parentPattern.name || parentPattern.id} (${parentPattern.id})` : (collection.parentPatternId || 'none')}`;
+
+        const members = document.createElement('div');
+        members.className = 'badge-list';
+        const memberIds = Array.isArray(collection.memberPatternIds) ? collection.memberPatternIds : [];
+        if (!memberIds.length) {
+            appendBadge(members, 'No members');
+        } else {
+            memberIds.forEach(memberId => {
+                const member = graph.byId.get(memberId);
+                appendBadge(members, member ? `${member.name || member.id} (${member.id})` : memberId);
+            });
+        }
+
+        card.appendChild(heading);
+        card.appendChild(meta);
+        card.appendChild(members);
+        collectionDetail.appendChild(card);
+    });
+}
+
+function renderRelationshipDetail(exportPayload, graph) {
+    clearNode(relationshipDetail);
+
+    const relationships = Array.isArray(exportPayload?.relationships) ? exportPayload.relationships : [];
+    if (!relationships.length) {
+        relationshipBrowserMeta.textContent = 'No relationships were exported for this song.';
+        relationshipDetail.appendChild(createEmptyState('No relationships were exported for this song.', 'li'));
+        return;
+    }
+
+    const selectedPatternId = state.selectedPatternId;
+    const related = selectedPatternId
+        ? relationships.filter(relationship => relationship.from === selectedPatternId || relationship.to === selectedPatternId)
+        : relationships.slice(0, 12);
+
+    if (!related.length) {
+        relationshipBrowserMeta.textContent = 'No relationships touch the selected pattern.';
+        relationshipDetail.appendChild(createEmptyState('The selected pattern has no explicit exported relationships.', 'li'));
+        return;
+    }
+
+    relationshipBrowserMeta.textContent = `${relationships.length} relationships exported. Showing ${related.length}${selectedPatternId ? ' linked to the selected pattern' : ''}.`;
+
+    related.forEach(relationship => {
+        const fromPattern = graph.byId.get(relationship.from);
+        const toPattern = graph.byId.get(relationship.to);
+        const item = document.createElement('li');
+        item.className = 'detail-list-item';
+
+        const summary = document.createElement('div');
+        summary.className = 'relationship-row';
+        const left = document.createElement('strong');
+        left.textContent = relationship.type || 'relationship';
+        const right = document.createElement('span');
+        right.textContent = `${fromPattern ? `${fromPattern.name || fromPattern.id} (${fromPattern.id})` : relationship.from} -> ${toPattern ? `${toPattern.name || toPattern.id} (${toPattern.id})` : relationship.to}`;
+        summary.appendChild(left);
+        summary.appendChild(right);
+
+        item.appendChild(summary);
+        if (relationship.label) {
+            const label = document.createElement('div');
+            label.className = 'relationship-subrow';
+            label.textContent = `Label: ${relationship.label}`;
+            item.appendChild(label);
+        }
+        relationshipDetail.appendChild(item);
+    });
 }
 
 function renderPatternList(graph, exportPayload) {
@@ -317,12 +501,10 @@ function renderPatternList(graph, exportPayload) {
 
     if (!graph || !graph.patterns.length) {
         patternBrowserMeta.textContent = 'No exported patterns loaded.';
-        const empty = document.createElement('li');
-        empty.className = 'empty-state';
-        empty.textContent = 'This export does not contain any patterns.';
-        patternList.appendChild(empty);
-        renderCollectionDetail(exportPayload);
-        renderPatternDetail(graph);
+        patternList.appendChild(createEmptyState('This export does not contain any patterns.', 'li'));
+        renderCollectionDetail(exportPayload, graph);
+        renderRelationshipDetail(exportPayload, graph);
+        renderPatternInspector(graph);
         return;
     }
 
@@ -363,8 +545,9 @@ function renderPatternList(graph, exportPayload) {
         item.addEventListener('click', () => {
             state.selectedPatternId = entry.patternId;
             renderPatternList(graph, exportPayload);
-            renderPatternDetail(graph);
-            renderCollectionDetail(exportPayload);
+            renderPatternInspector(graph);
+            renderCollectionDetail(exportPayload, graph);
+            renderRelationshipDetail(exportPayload, graph);
         });
 
         patternList.appendChild(item);
@@ -387,21 +570,12 @@ function renderSourceList() {
             return true;
         }
 
-        const haystack = [
-            item.label,
-            item.songId,
-            item.path,
-            item.sourcePath,
-        ].join(' ').toLowerCase();
-
+        const haystack = [item.label, item.songId, item.path, item.sourcePath].join(' ').toLowerCase();
         return haystack.includes(query);
     });
 
     if (!items.length) {
-        const empty = document.createElement('li');
-        empty.className = 'empty-state';
-        empty.textContent = 'No exported songs match the current filter.';
-        sourceList.appendChild(empty);
+        sourceList.appendChild(createEmptyState('No exported songs match the current filter.', 'li'));
         return;
     }
 
@@ -433,10 +607,7 @@ function renderSourceList() {
         });
         entry.appendChild(meta);
 
-        entry.addEventListener('click', () => {
-            loadDetail(item);
-        });
-
+        entry.addEventListener('click', () => loadDetail(item));
         sourceList.appendChild(entry);
     });
 }
@@ -448,11 +619,15 @@ function renderEmptyDetail(message) {
     structureTag.textContent = 'No structure selected';
     structureMeta.textContent = 'This panel reflects the dedicated heuristic export once a song is selected.';
     clearNode(structureSummary);
-    patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
     clearNode(patternList);
-    patternDetail.textContent = 'Select a pattern to inspect its exported structure and lineage.';
+    patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
+    renderPatternInspector(null);
+    clearNode(collectionDetail);
+    collectionDetail.appendChild(createEmptyState('Collection candidates will appear here once an export is selected.'));
     collectionBrowserMeta.textContent = 'No exported collections loaded.';
-    collectionDetail.textContent = 'Collection candidates will appear here once an export is selected.';
+    clearNode(relationshipDetail);
+    relationshipDetail.appendChild(createEmptyState('Select a pattern to inspect incoming and outgoing structural links.', 'li'));
+    relationshipBrowserMeta.textContent = 'Select a pattern to inspect incoming and outgoing structural links.';
     detailSummary.textContent = 'Awaiting selection.';
     detailRaw.textContent = 'Awaiting selection.';
 }
@@ -460,13 +635,15 @@ function renderEmptyDetail(message) {
 function renderExportDetail(item, payload) {
     const exportPayload = payload?.rawPayload || {};
     const graph = buildPatternGraph(exportPayload);
+    state.selectedExport = exportPayload;
 
     const defaultPatternId = graph.byId.has(state.selectedPatternId)
         ? state.selectedPatternId
         : (graph.byId.has('root') ? 'root' : (graph.flattened[0]?.patternId || null));
     state.selectedPatternId = defaultPatternId;
 
-    detailTitle.textContent = exportPayload.title || item.label || item.songId || 'Untitled';
+    const songTitle = fallbackSongTitle(exportPayload, item);
+    detailTitle.textContent = songTitle;
     detailTag.textContent = 'heuristic export';
     detailMeta.textContent = `${item.path} from ${exportPayload?.source?.path || item.sourcePath || 'user_settings'}`;
 
@@ -476,10 +653,11 @@ function renderExportDetail(item, payload) {
     detailSummary.textContent = JSON.stringify(payload.summary || {}, null, 2);
     detailRaw.textContent = JSON.stringify(exportPayload, null, 2);
 
-    renderStructureSummary(exportPayload, graph, payload.summary || {});
+    renderStructureSummary(exportPayload, graph, payload.summary || {}, item);
     renderPatternList(graph, exportPayload);
-    renderPatternDetail(graph);
-    renderCollectionDetail(exportPayload);
+    renderPatternInspector(graph);
+    renderCollectionDetail(exportPayload, graph);
+    renderRelationshipDetail(exportPayload, graph);
 }
 
 async function loadDetail(item) {
@@ -508,11 +686,15 @@ async function loadDetail(item) {
         structureTag.textContent = 'Load failed';
         structureMeta.textContent = 'The dedicated export could not be loaded.';
         clearNode(structureSummary);
-        patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
         clearNode(patternList);
-        patternDetail.textContent = 'Failed to load pattern detail.';
+        patternBrowserMeta.textContent = 'No exported pattern graph loaded.';
+        renderPatternInspector(null);
+        clearNode(collectionDetail);
+        collectionDetail.appendChild(createEmptyState('Failed to load collection detail.'));
         collectionBrowserMeta.textContent = 'No exported collections loaded.';
-        collectionDetail.textContent = 'Failed to load collection detail.';
+        clearNode(relationshipDetail);
+        relationshipDetail.appendChild(createEmptyState('Failed to load relationship detail.', 'li'));
+        relationshipBrowserMeta.textContent = 'The selected export could not be loaded.';
     }
 }
 
@@ -548,7 +730,8 @@ async function loadSnapshot() {
         await loadDetail(selectedItem);
     } catch (error) {
         snapshotMeta.textContent = `Failed to rebuild heuristic export. ${String(error)}`;
-        sourceList.innerHTML = '<li class="empty-state">Heuristic export data is unavailable.</li>';
+        clearNode(sourceList);
+        sourceList.appendChild(createEmptyState('Heuristic export data is unavailable.', 'li'));
         renderEmptyDetail('Heuristic export data is unavailable.');
     } finally {
         refreshButton.disabled = false;

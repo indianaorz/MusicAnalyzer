@@ -32,6 +32,20 @@ def _normalized_label(label: object) -> str:
     return re.sub(r'[^a-z0-9]+', ' ', label.lower()).strip()
 
 
+def _coerce_title(value: object, fallback: str) -> str:
+    if not isinstance(value, str):
+        return fallback
+
+    cleaned = value.strip()
+    if not cleaned:
+        return fallback
+
+    if cleaned.startswith('<built-in method title of str object at 0x'):
+        return fallback
+
+    return cleaned
+
+
 def _relation_tags(pattern: dict[str, object]) -> list[str]:
     tags: list[str] = []
     if pattern.get('isVariation'):
@@ -76,7 +90,7 @@ def build_heuristic_song_export(settings_path: Path) -> dict[str, object]:
     if not isinstance(payload, dict):
         raise ValueError(f'Invalid settings payload: {settings_path}')
 
-    title = payload.get('title') or settings_path.stem
+    title = _coerce_title(payload.get('title'), settings_path.stem)
     song_id = _slugify(str(title))
     raw_patterns = payload.get('patterns', [])
     if not isinstance(raw_patterns, list):

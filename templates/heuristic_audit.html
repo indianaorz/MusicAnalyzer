@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heuristic Structure Export</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v3">
 </head>
 
 <body>
@@ -121,7 +121,24 @@
                         </article>
                         <article class="detail-card">
                             <h3>Pattern Inspector</h3>
-                            <pre id="pattern-detail">Select a pattern to inspect its exported structure and lineage.</pre>
+                            <div class="inspector-stack">
+                                <div id="pattern-overview" class="property-grid"></div>
+
+                                <section class="inspector-section">
+                                    <h4>Containment Path</h4>
+                                    <ul id="pattern-lineage" class="detail-list"></ul>
+                                </section>
+
+                                <section class="inspector-section">
+                                    <h4>Connections</h4>
+                                    <ul id="pattern-connections" class="detail-list"></ul>
+                                </section>
+
+                                <section class="inspector-section">
+                                    <h4>Warnings</h4>
+                                    <div id="pattern-warnings" class="badge-list"></div>
+                                </section>
+                            </div>
                         </article>
                     </div>
                     <div class="structure-grid secondary-grid">
@@ -141,19 +158,35 @@
                                     <p class="muted" id="collection-browser-meta">No exported collections loaded.</p>
                                 </div>
                             </div>
-                            <pre id="collection-detail">Collection candidates will appear here once an export is selected.</pre>
+                            <div id="collection-detail" class="collection-stack">
+                                <p class="empty-state">Collection candidates will appear here once an export is selected.</p>
+                            </div>
                         </article>
                     </div>
                 </section>
 
                 <div class="detail-columns">
                     <article class="detail-card">
-                        <h3>Export Summary JSON</h3>
-                        <pre id="detail-summary">Awaiting selection.</pre>
+                        <div class="panel-head compact">
+                            <div>
+                                <h3>Relationship Browser</h3>
+                                <p class="muted" id="relationship-browser-meta">Select a pattern to inspect incoming and outgoing structural links.</p>
+                            </div>
+                        </div>
+                        <ul id="relationship-detail" class="detail-list"></ul>
                     </article>
                     <article class="detail-card">
-                        <h3>Full Export JSON</h3>
-                        <pre id="detail-raw">Awaiting selection.</pre>
+                        <h3>Debug Payload</h3>
+                        <div class="debug-stack">
+                            <details class="debug-panel">
+                                <summary>Export Summary JSON</summary>
+                                <pre id="detail-summary">Awaiting selection.</pre>
+                            </details>
+                            <details class="debug-panel">
+                                <summary>Full Export JSON</summary>
+                                <pre id="detail-raw">Awaiting selection.</pre>
+                            </details>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -170,7 +203,7 @@
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v2"></script>
+    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v3"></script>
 </body>
 
 </html>

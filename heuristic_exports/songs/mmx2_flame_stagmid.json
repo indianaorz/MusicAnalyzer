@@ -1,0 +1,100 @@
+{
+  "exportVersion": 1,
+  "songId": "mmx2_flame_stagmid",
+  "title": "MMX2_Flame_Stag.mid",
+  "source": {
+    "type": "user_settings",
+    "path": "MMX2_Flame_Stag.mid.json"
+  },
+  "globalContext": {
+    "root": 6,
+    "scale": "minor",
+    "copyMode": "range",
+    "snapMode": "division",
+    "harmony": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "bpm": null
+  },
+  "patterns": [
+    {
+      "id": "root",
+      "name": "Whole song",
+      "normalizedName": "whole song",
+      "parentId": null,
+      "children": [],
+      "depth": 0,
+      "range": {
+        "start": 0,
+        "end": 5952,
+        "low": 0,
+        "high": 127
+      },
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "instrumentCount": 6,
+      "mode": null,
+      "variantOf": null,
+      "variantOfName": null,
+      "flags": {
+        "isVariation": false,
+        "isRhythmicVariation": false,
+        "isRepetition": false,
+        "isSimplification": false
+      },
+      "relationTags": [
+        "leaf"
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX2_Flame_Stag.mid.json",
+        "patternId": "root"
+      },
+      "raw": {
+        "id": "root",
+        "name": "Whole song",
+        "parentId": null,
+        "range": {
+          "start": 0,
+          "end": 5952,
+          "low": 0,
+          "high": 127
+        },
+        "noteRefs": [],
+        "children": [],
+        "instruments": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    }
+  ],
+  "relationships": [],
+  "collectionCandidates": [],
+  "summary": {
+    "patternCount": 1,
+    "relationshipCount": 0,
+    "collectionCount": 0,
+    "rootPatternCount": 1,
+    "leafPatternCount": 1,
+    "relationshipTypeCounts": {},
+    "collectionTypeCounts": {},
+    "labelVariantGroups": [],
+    "issueCount": 0
+  },
+  "issues": []
+}
