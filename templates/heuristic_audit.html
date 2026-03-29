@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heuristic Structure Export</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v5">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/heuristic_audit.css') }}?v=heuristic-export-v6">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                 <strong id="song-count">-</strong>
             </article>
             <article class="summary-card">
-                <span>Exported Patterns</span>
+                <span>Pattern Instances</span>
                 <strong id="export-pattern-count">-</strong>
             </article>
             <article class="summary-card">
@@ -138,6 +138,16 @@
                                     <h4>Warnings</h4>
                                     <div id="pattern-warnings" class="badge-list"></div>
                                 </section>
+
+                                <section class="inspector-section">
+                                    <h4>Selected Instance</h4>
+                                    <div id="instance-overview" class="property-grid"></div>
+                                </section>
+
+                                <section class="inspector-section">
+                                    <h4>Song Plan Path</h4>
+                                    <ul id="instance-lineage" class="detail-list"></ul>
+                                </section>
                             </div>
                         </article>
                     </div>
@@ -145,12 +155,12 @@
                         <article class="detail-card structure-map-card">
                             <div class="panel-head compact">
                                 <div>
-                                    <h3>Structure Map</h3>
-                                    <p class="muted" id="structure-map-meta">No whole-song structure map loaded.</p>
+                                    <h3>Song Plan</h3>
+                                    <p class="muted" id="structure-map-meta">No whole-song instance plan loaded.</p>
                                 </div>
                             </div>
                             <div id="structure-map" class="structure-map">
-                                <p class="empty-state">Select an exported song to view its grouped structure.</p>
+                                <p class="empty-state">Select an exported song to view its recursive instance plan.</p>
                             </div>
                         </article>
                     </div>
@@ -216,7 +226,7 @@
         </section>
     </main>
 
-    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v5"></script>
+    <script src="{{ url_for('static', filename='js/heuristic_audit.js') }}?v=heuristic-export-v6"></script>
 </body>
 
 </html>

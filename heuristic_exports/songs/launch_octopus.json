@@ -1,5 +1,6 @@
 {
-  "exportVersion": 1,
+  "exportVersion": 2,
+  "schemaVersion": "heuristic-song-export/v2",
   "songId": "launch_octopus",
   "title": "Launch Octopus",
   "source": {
@@ -21,13 +22,60 @@
     ],
     "bpm": null
   },
+  "songPlan": {
+    "rootInstanceIds": [
+      "instance:root"
+    ],
+    "traversalOrderInstanceIds": [
+      "instance:root",
+      "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "instance:b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+      "instance:ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+      "instance:e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+      "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "instance:d3250b58-9a65-4439-8efd-fd83af91eaf6",
+      "instance:90fad2ed-19b4-44a2-b32d-9b4461f73891",
+      "instance:bb7db745-74f6-411d-896e-a8cd70d67ddd",
+      "instance:1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+      "instance:e16609e9-bde1-4728-9113-7145ee2f0be2",
+      "instance:2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+      "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "instance:f354c20c-9a46-42cd-a8f9-001a5e355847",
+      "instance:af6c68ed-c5ca-43db-8800-0135364afa8d",
+      "instance:dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+      "instance:5760eace-7060-491e-a128-042dc7d3b2e9",
+      "instance:03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+      "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "instance:1f6cd02e-b949-43d3-9c97-cb85b53db510",
+      "instance:a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+      "instance:acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+      "instance:5bca1610-5234-4b81-9496-252a8c0f60a6",
+      "instance:eabd918f-0dde-496b-a872-46b7ecbe0405",
+      "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "instance:e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+      "instance:100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+      "instance:1aed107f-8430-4693-8b3b-ef41a1e6d224",
+      "instance:526a0b32-72d6-48b6-8fed-77e8685f3aee",
+      "instance:c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+      "instance:d94953d7-7b88-4d2e-a64d-f439f77993fc"
+    ],
+    "decompositionStrategy": "ordered_child_instances"
+  },
   "patterns": [
     {
       "id": "root",
       "name": "Whole song",
       "normalizedName": "whole song",
+      "canonicalId": "root",
       "parentId": null,
       "children": [
+        "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "549810a9-d203-4837-a827-a1d288ac22c5"
+      ],
+      "orderedChildPatternIds": [
         "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
         "385e5ff3-ae1e-4c2c-8783-ec529597173a",
         "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
@@ -62,6 +110,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:root"
+      ],
+      "sourceOrder": 0,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "root"
@@ -98,8 +151,17 @@
       "id": "549810a9-d203-4837-a827-a1d288ac22c5",
       "name": "Climax Descent",
       "normalizedName": "climax descent",
+      "canonicalId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "parentId": "root",
       "children": [
+        "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+        "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+        "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+        "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+        "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+        "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      ],
+      "orderedChildPatternIds": [
         "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
         "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
         "1aed107f-8430-4693-8b3b-ef41a1e6d224",
@@ -135,6 +197,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:549810a9-d203-4837-a827-a1d288ac22c5"
+      ],
+      "sourceOrder": 5,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "549810a9-d203-4837-a827-a1d288ac22c5"
@@ -172,8 +239,14 @@
       "id": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
       "name": "Drop In",
       "normalizedName": "drop in",
+      "canonicalId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
       "parentId": "root",
       "children": [
+        "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+        "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+        "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      ],
+      "orderedChildPatternIds": [
         "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
         "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
         "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
@@ -203,6 +276,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce"
+      ],
+      "sourceOrder": 1,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce"
@@ -234,8 +312,17 @@
       "id": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "name": "Part A (Anthem)",
       "normalizedName": "part a anthem",
+      "canonicalId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "parentId": "root",
       "children": [
+        "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+        "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+        "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+        "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+        "e16609e9-bde1-4728-9113-7145ee2f0be2",
+        "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      ],
+      "orderedChildPatternIds": [
         "d3250b58-9a65-4439-8efd-fd83af91eaf6",
         "90fad2ed-19b4-44a2-b32d-9b4461f73891",
         "bb7db745-74f6-411d-896e-a8cd70d67ddd",
@@ -271,6 +358,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a"
+      ],
+      "sourceOrder": 2,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "385e5ff3-ae1e-4c2c-8783-ec529597173a"
@@ -308,8 +400,16 @@
       "id": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "name": "Part B",
       "normalizedName": "part b",
+      "canonicalId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "parentId": "root",
       "children": [
+        "f354c20c-9a46-42cd-a8f9-001a5e355847",
+        "af6c68ed-c5ca-43db-8800-0135364afa8d",
+        "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+        "5760eace-7060-491e-a128-042dc7d3b2e9",
+        "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      ],
+      "orderedChildPatternIds": [
         "f354c20c-9a46-42cd-a8f9-001a5e355847",
         "af6c68ed-c5ca-43db-8800-0135364afa8d",
         "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
@@ -343,6 +443,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133"
+      ],
+      "sourceOrder": 3,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133"
@@ -378,8 +483,16 @@
       "id": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "name": "Transition Build",
       "normalizedName": "transition build",
+      "canonicalId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "parentId": "root",
       "children": [
+        "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+        "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+        "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+        "5bca1610-5234-4b81-9496-252a8c0f60a6",
+        "eabd918f-0dde-496b-a872-46b7ecbe0405"
+      ],
+      "orderedChildPatternIds": [
         "1f6cd02e-b949-43d3-9c97-cb85b53db510",
         "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
         "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
@@ -413,6 +526,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:7621a6c0-777c-4781-81b3-58e12b6564aa"
+      ],
+      "sourceOrder": 4,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "7621a6c0-777c-4781-81b3-58e12b6564aa"
@@ -448,8 +566,10 @@
       "id": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
       "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5400,
@@ -473,6 +593,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      ],
+      "sourceOrder": 19,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
@@ -498,8 +623,10 @@
       "id": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
       "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1536,
@@ -523,6 +650,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1bc438a9-17b0-4d94-821a-b6e71646b7ae"
+      ],
+      "sourceOrder": 12,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "1bc438a9-17b0-4d94-821a-b6e71646b7ae"
@@ -548,8 +680,10 @@
       "id": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
       "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1560,
@@ -573,6 +707,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      ],
+      "sourceOrder": 14,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
@@ -598,8 +737,10 @@
       "id": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
       "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9696,
@@ -623,6 +764,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:526a0b32-72d6-48b6-8fed-77e8685f3aee"
+      ],
+      "sourceOrder": 28,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "526a0b32-72d6-48b6-8fed-77e8685f3aee"
@@ -648,8 +794,10 @@
       "id": "5bca1610-5234-4b81-9496-252a8c0f60a6",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "5bca1610-5234-4b81-9496-252a8c0f60a6",
       "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 8064,
@@ -673,6 +821,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:5bca1610-5234-4b81-9496-252a8c0f60a6"
+      ],
+      "sourceOrder": 23,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "5bca1610-5234-4b81-9496-252a8c0f60a6"
@@ -698,8 +851,10 @@
       "id": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
       "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9720,
@@ -723,6 +878,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      ],
+      "sourceOrder": 30,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "d94953d7-7b88-4d2e-a64d-f439f77993fc"
@@ -748,8 +908,10 @@
       "id": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
       "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5376,
@@ -773,6 +935,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:dbd32b2d-5550-4870-9cd6-41123d5a0d73"
+      ],
+      "sourceOrder": 17,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "dbd32b2d-5550-4870-9cd6-41123d5a0d73"
@@ -798,8 +965,10 @@
       "id": "eabd918f-0dde-496b-a872-46b7ecbe0405",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "eabd918f-0dde-496b-a872-46b7ecbe0405",
       "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 8088,
@@ -823,6 +992,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:eabd918f-0dde-496b-a872-46b7ecbe0405"
+      ],
+      "sourceOrder": 24,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "eabd918f-0dde-496b-a872-46b7ecbe0405"
@@ -848,8 +1022,10 @@
       "id": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
       "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 8064,
@@ -873,6 +1049,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1f6cd02e-b949-43d3-9c97-cb85b53db510"
+      ],
+      "sourceOrder": 20,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "1f6cd02e-b949-43d3-9c97-cb85b53db510"
@@ -898,8 +1079,10 @@
       "id": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
       "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -923,6 +1106,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:b3335ee1-a4ef-42c2-9af8-dd8df387cf83"
+      ],
+      "sourceOrder": 6,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83"
@@ -948,8 +1136,10 @@
       "id": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
       "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1536,
@@ -973,6 +1163,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:d3250b58-9a65-4439-8efd-fd83af91eaf6"
+      ],
+      "sourceOrder": 9,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "d3250b58-9a65-4439-8efd-fd83af91eaf6"
@@ -998,8 +1193,10 @@
       "id": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
       "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1023,6 +1220,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:e8e46f70-17cd-4eae-ac32-c4c222c873c9"
+      ],
+      "sourceOrder": 25,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "e8e46f70-17cd-4eae-ac32-c4c222c873c9"
@@ -1048,8 +1250,10 @@
       "id": "f354c20c-9a46-42cd-a8f9-001a5e355847",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "f354c20c-9a46-42cd-a8f9-001a5e355847",
       "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5376,
@@ -1073,6 +1277,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:f354c20c-9a46-42cd-a8f9-001a5e355847"
+      ],
+      "sourceOrder": 15,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "f354c20c-9a46-42cd-a8f9-001a5e355847"
@@ -1098,8 +1307,10 @@
       "id": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
       "name": "Orchestra Hit",
       "normalizedName": "orchestra hit",
+      "canonicalId": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
       "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1123,6 +1334,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:100e7f19-23d1-4a8b-87ad-b906a683d5fd"
+      ],
+      "sourceOrder": 26,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "100e7f19-23d1-4a8b-87ad-b906a683d5fd"
@@ -1148,8 +1364,10 @@
       "id": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
       "name": "Orchestra Hit",
       "normalizedName": "orchestra hit",
+      "canonicalId": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
       "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1536,
@@ -1173,6 +1391,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:90fad2ed-19b4-44a2-b32d-9b4461f73891"
+      ],
+      "sourceOrder": 10,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "90fad2ed-19b4-44a2-b32d-9b4461f73891"
@@ -1198,8 +1421,10 @@
       "id": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
       "name": "Orchestra Hit",
       "normalizedName": "orchestra hit",
+      "canonicalId": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
       "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 8064,
@@ -1223,6 +1448,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce"
+      ],
+      "sourceOrder": 21,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce"
@@ -1248,8 +1478,10 @@
       "id": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
       "name": "Orchestra Hit",
       "normalizedName": "orchestra hit",
+      "canonicalId": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
       "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -1273,6 +1505,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a"
+      ],
+      "sourceOrder": 7,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a"
@@ -1298,8 +1535,10 @@
       "id": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
       "name": "Slap Bass 1",
       "normalizedName": "slap bass 1",
+      "canonicalId": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
       "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1323,6 +1562,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1aed107f-8430-4693-8b3b-ef41a1e6d224"
+      ],
+      "sourceOrder": 27,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "1aed107f-8430-4693-8b3b-ef41a1e6d224"
@@ -1348,8 +1592,10 @@
       "id": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
       "name": "Slap Bass 1",
       "normalizedName": "slap bass 1",
+      "canonicalId": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
       "parentId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 8064,
@@ -1373,6 +1619,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:acfa2bfa-d8c5-4fdb-af50-d008d0566f67"
+      ],
+      "sourceOrder": 22,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67"
@@ -1398,8 +1649,10 @@
       "id": "af6c68ed-c5ca-43db-8800-0135364afa8d",
       "name": "Slap Bass 1",
       "normalizedName": "slap bass 1",
+      "canonicalId": "af6c68ed-c5ca-43db-8800-0135364afa8d",
       "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5376,
@@ -1423,6 +1676,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:af6c68ed-c5ca-43db-8800-0135364afa8d"
+      ],
+      "sourceOrder": 16,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "af6c68ed-c5ca-43db-8800-0135364afa8d"
@@ -1448,8 +1706,10 @@
       "id": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
       "name": "Slap Bass 1",
       "normalizedName": "slap bass 1",
+      "canonicalId": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
       "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1536,
@@ -1473,6 +1733,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:bb7db745-74f6-411d-896e-a8cd70d67ddd"
+      ],
+      "sourceOrder": 11,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "bb7db745-74f6-411d-896e-a8cd70d67ddd"
@@ -1498,8 +1763,10 @@
       "id": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
       "name": "Slap Bass 1",
       "normalizedName": "slap bass 1",
+      "canonicalId": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
       "parentId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -1523,6 +1790,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      ],
+      "sourceOrder": 8,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
@@ -1548,8 +1820,10 @@
       "id": "5760eace-7060-491e-a128-042dc7d3b2e9",
       "name": "Vibraphone",
       "normalizedName": "vibraphone",
+      "canonicalId": "5760eace-7060-491e-a128-042dc7d3b2e9",
       "parentId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5376,
@@ -1573,6 +1847,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:5760eace-7060-491e-a128-042dc7d3b2e9"
+      ],
+      "sourceOrder": 18,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "5760eace-7060-491e-a128-042dc7d3b2e9"
@@ -1598,8 +1877,10 @@
       "id": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
       "name": "Vibraphone",
       "normalizedName": "vibraphone",
+      "canonicalId": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
       "parentId": "549810a9-d203-4837-a827-a1d288ac22c5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9696,
@@ -1623,6 +1904,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:c69156c3-6a80-4a28-8b98-0e0fe59e9813"
+      ],
+      "sourceOrder": 29,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "c69156c3-6a80-4a28-8b98-0e0fe59e9813"
@@ -1648,8 +1934,10 @@
       "id": "e16609e9-bde1-4728-9113-7145ee2f0be2",
       "name": "Vibraphone",
       "normalizedName": "vibraphone",
+      "canonicalId": "e16609e9-bde1-4728-9113-7145ee2f0be2",
       "parentId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1632,
@@ -1673,6 +1961,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:e16609e9-bde1-4728-9113-7145ee2f0be2"
+      ],
+      "sourceOrder": 13,
       "sourceRef": {
         "settingsPath": "MMX_Launch_Octopus.mid.json",
         "patternId": "e16609e9-bde1-4728-9113-7145ee2f0be2"
@@ -1695,156 +1988,1265 @@
       }
     }
   ],
+  "patternInstances": [
+    {
+      "id": "instance:root",
+      "songId": "launch_octopus",
+      "sourcePatternId": "root",
+      "canonicalPatternId": "root",
+      "parentInstanceId": null,
+      "childInstanceIds": [
+        "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "instance:549810a9-d203-4837-a827-a1d288ac22c5"
+      ],
+      "orderIndex": 0,
+      "orderPath": [
+        0
+      ],
+      "depth": 0,
+      "instanceType": "song_root",
+      "materialRole": "song_root",
+      "range": {
+        "start": 0,
+        "end": 12670,
+        "low": 0,
+        "high": 127
+      },
+      "mode": null,
+      "instrumentCount": 6,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "root",
+        "instanceId": "instance:root"
+      }
+    },
+    {
+      "id": "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "songId": "launch_octopus",
+      "sourcePatternId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "canonicalPatternId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+        "instance:ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+        "instance:e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      ],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        0
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1534,
+        "low": 29,
+        "high": 70
+      },
+      "mode": "start",
+      "instrumentCount": 3,
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+        "instanceId": "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce"
+      }
+    },
+    {
+      "id": "instance:b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+      "songId": "launch_octopus",
+      "sourcePatternId": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+      "canonicalPatternId": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+      "parentInstanceId": "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        0,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1533,
+        "low": 36,
+        "high": 55
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+        "instanceId": "instance:b3335ee1-a4ef-42c2-9af8-dd8df387cf83"
+      }
+    },
+    {
+      "id": "instance:ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+      "songId": "launch_octopus",
+      "sourcePatternId": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+      "canonicalPatternId": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+      "parentInstanceId": "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        0,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 285,
+        "low": 70,
+        "high": 70
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+        "instanceId": "instance:ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a"
+      }
+    },
+    {
+      "id": "instance:e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+      "songId": "launch_octopus",
+      "sourcePatternId": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+      "canonicalPatternId": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+      "parentInstanceId": "instance:a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        0,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1365,
+        "low": 29,
+        "high": 39
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+        "instanceId": "instance:e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      }
+    },
+    {
+      "id": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "songId": "launch_octopus",
+      "sourcePatternId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "canonicalPatternId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:d3250b58-9a65-4439-8efd-fd83af91eaf6",
+        "instance:90fad2ed-19b4-44a2-b32d-9b4461f73891",
+        "instance:bb7db745-74f6-411d-896e-a8cd70d67ddd",
+        "instance:1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+        "instance:e16609e9-bde1-4728-9113-7145ee2f0be2",
+        "instance:2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      ],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        1
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1536,
+        "end": 5374,
+        "low": 25,
+        "high": 94
+      },
+      "mode": "start",
+      "instrumentCount": 6,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+        "instanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a"
+      }
+    },
+    {
+      "id": "instance:d3250b58-9a65-4439-8efd-fd83af91eaf6",
+      "songId": "launch_octopus",
+      "sourcePatternId": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+      "canonicalPatternId": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+      "parentInstanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        1,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1536,
+        "end": 5373,
+        "low": 36,
+        "high": 57
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+        "instanceId": "instance:d3250b58-9a65-4439-8efd-fd83af91eaf6"
+      }
+    },
+    {
+      "id": "instance:90fad2ed-19b4-44a2-b32d-9b4461f73891",
+      "songId": "launch_octopus",
+      "sourcePatternId": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+      "canonicalPatternId": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+      "parentInstanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        1,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1536,
+        "end": 4413,
+        "low": 68,
+        "high": 77
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+        "instanceId": "instance:90fad2ed-19b4-44a2-b32d-9b4461f73891"
+      }
+    },
+    {
+      "id": "instance:bb7db745-74f6-411d-896e-a8cd70d67ddd",
+      "songId": "launch_octopus",
+      "sourcePatternId": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+      "canonicalPatternId": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+      "parentInstanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        1,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1536,
+        "end": 5325,
+        "low": 25,
+        "high": 46
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+        "instanceId": "instance:bb7db745-74f6-411d-896e-a8cd70d67ddd"
+      }
+    },
+    {
+      "id": "instance:1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+      "songId": "launch_octopus",
+      "sourcePatternId": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+      "canonicalPatternId": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+      "parentInstanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        1,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1536,
+        "end": 5373,
+        "low": 60,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+        "instanceId": "instance:1bc438a9-17b0-4d94-821a-b6e71646b7ae"
+      }
+    },
+    {
+      "id": "instance:e16609e9-bde1-4728-9113-7145ee2f0be2",
+      "songId": "launch_octopus",
+      "sourcePatternId": "e16609e9-bde1-4728-9113-7145ee2f0be2",
+      "canonicalPatternId": "e16609e9-bde1-4728-9113-7145ee2f0be2",
+      "parentInstanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        1,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1632,
+        "end": 5373,
+        "low": 80,
+        "high": 94
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "e16609e9-bde1-4728-9113-7145ee2f0be2",
+        "instanceId": "instance:e16609e9-bde1-4728-9113-7145ee2f0be2"
+      }
+    },
+    {
+      "id": "instance:2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+      "songId": "launch_octopus",
+      "sourcePatternId": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+      "canonicalPatternId": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+      "parentInstanceId": "instance:385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        1,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 1560,
+        "end": 5397,
+        "low": 60,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+        "instanceId": "instance:2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      }
+    },
+    {
+      "id": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "songId": "launch_octopus",
+      "sourcePatternId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "canonicalPatternId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:f354c20c-9a46-42cd-a8f9-001a5e355847",
+        "instance:af6c68ed-c5ca-43db-8800-0135364afa8d",
+        "instance:dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+        "instance:5760eace-7060-491e-a128-042dc7d3b2e9",
+        "instance:03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      ],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        2
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5376,
+        "end": 8062,
+        "low": 27,
+        "high": 92
+      },
+      "mode": "start",
+      "instrumentCount": 5,
+      "instruments": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+        "instanceId": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133"
+      }
+    },
+    {
+      "id": "instance:f354c20c-9a46-42cd-a8f9-001a5e355847",
+      "songId": "launch_octopus",
+      "sourcePatternId": "f354c20c-9a46-42cd-a8f9-001a5e355847",
+      "canonicalPatternId": "f354c20c-9a46-42cd-a8f9-001a5e355847",
+      "parentInstanceId": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        2,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5376,
+        "end": 8061,
+        "low": 36,
+        "high": 57
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "f354c20c-9a46-42cd-a8f9-001a5e355847",
+        "instanceId": "instance:f354c20c-9a46-42cd-a8f9-001a5e355847"
+      }
+    },
+    {
+      "id": "instance:af6c68ed-c5ca-43db-8800-0135364afa8d",
+      "songId": "launch_octopus",
+      "sourcePatternId": "af6c68ed-c5ca-43db-8800-0135364afa8d",
+      "canonicalPatternId": "af6c68ed-c5ca-43db-8800-0135364afa8d",
+      "parentInstanceId": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        2,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5376,
+        "end": 8061,
+        "low": 27,
+        "high": 44
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "af6c68ed-c5ca-43db-8800-0135364afa8d",
+        "instanceId": "instance:af6c68ed-c5ca-43db-8800-0135364afa8d"
+      }
+    },
+    {
+      "id": "instance:dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+      "songId": "launch_octopus",
+      "sourcePatternId": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+      "canonicalPatternId": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+      "parentInstanceId": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        2,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5376,
+        "end": 7869,
+        "low": 70,
+        "high": 85
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+        "instanceId": "instance:dbd32b2d-5550-4870-9cd6-41123d5a0d73"
+      }
+    },
+    {
+      "id": "instance:5760eace-7060-491e-a128-042dc7d3b2e9",
+      "songId": "launch_octopus",
+      "sourcePatternId": "5760eace-7060-491e-a128-042dc7d3b2e9",
+      "canonicalPatternId": "5760eace-7060-491e-a128-042dc7d3b2e9",
+      "parentInstanceId": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        2,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5376,
+        "end": 8061,
+        "low": 77,
+        "high": 92
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "5760eace-7060-491e-a128-042dc7d3b2e9",
+        "instanceId": "instance:5760eace-7060-491e-a128-042dc7d3b2e9"
+      }
+    },
+    {
+      "id": "instance:03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+      "songId": "launch_octopus",
+      "sourcePatternId": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+      "canonicalPatternId": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+      "parentInstanceId": "instance:d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        2,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5400,
+        "end": 7893,
+        "low": 70,
+        "high": 85
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+        "instanceId": "instance:03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      }
+    },
+    {
+      "id": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "songId": "launch_octopus",
+      "sourcePatternId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "canonicalPatternId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:1f6cd02e-b949-43d3-9c97-cb85b53db510",
+        "instance:a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+        "instance:acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+        "instance:5bca1610-5234-4b81-9496-252a8c0f60a6",
+        "instance:eabd918f-0dde-496b-a872-46b7ecbe0405"
+      ],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 8064,
+        "end": 9598,
+        "low": 29,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 5,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+        "instanceId": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa"
+      }
+    },
+    {
+      "id": "instance:1f6cd02e-b949-43d3-9c97-cb85b53db510",
+      "songId": "launch_octopus",
+      "sourcePatternId": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+      "canonicalPatternId": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+      "parentInstanceId": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        3,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 8064,
+        "end": 9597,
+        "low": 36,
+        "high": 57
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+        "instanceId": "instance:1f6cd02e-b949-43d3-9c97-cb85b53db510"
+      }
+    },
+    {
+      "id": "instance:a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+      "songId": "launch_octopus",
+      "sourcePatternId": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+      "canonicalPatternId": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+      "parentInstanceId": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        3,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 8064,
+        "end": 8349,
+        "low": 70,
+        "high": 70
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+        "instanceId": "instance:a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce"
+      }
+    },
+    {
+      "id": "instance:acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+      "songId": "launch_octopus",
+      "sourcePatternId": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+      "canonicalPatternId": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+      "parentInstanceId": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        3,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 8064,
+        "end": 9429,
+        "low": 29,
+        "high": 39
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+        "instanceId": "instance:acfa2bfa-d8c5-4fdb-af50-d008d0566f67"
+      }
+    },
+    {
+      "id": "instance:5bca1610-5234-4b81-9496-252a8c0f60a6",
+      "songId": "launch_octopus",
+      "sourcePatternId": "5bca1610-5234-4b81-9496-252a8c0f60a6",
+      "canonicalPatternId": "5bca1610-5234-4b81-9496-252a8c0f60a6",
+      "parentInstanceId": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 8064,
+        "end": 9597,
+        "low": 70,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "5bca1610-5234-4b81-9496-252a8c0f60a6",
+        "instanceId": "instance:5bca1610-5234-4b81-9496-252a8c0f60a6"
+      }
+    },
+    {
+      "id": "instance:eabd918f-0dde-496b-a872-46b7ecbe0405",
+      "songId": "launch_octopus",
+      "sourcePatternId": "eabd918f-0dde-496b-a872-46b7ecbe0405",
+      "canonicalPatternId": "eabd918f-0dde-496b-a872-46b7ecbe0405",
+      "parentInstanceId": "instance:7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        3,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 8088,
+        "end": 9621,
+        "low": 70,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "eabd918f-0dde-496b-a872-46b7ecbe0405",
+        "instanceId": "instance:eabd918f-0dde-496b-a872-46b7ecbe0405"
+      }
+    },
+    {
+      "id": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "songId": "launch_octopus",
+      "sourcePatternId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "canonicalPatternId": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+        "instance:100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+        "instance:1aed107f-8430-4693-8b3b-ef41a1e6d224",
+        "instance:526a0b32-72d6-48b6-8fed-77e8685f3aee",
+        "instance:c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+        "instance:d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      ],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        4
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 12670,
+        "low": 25,
+        "high": 94
+      },
+      "mode": "start",
+      "instrumentCount": 6,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "549810a9-d203-4837-a827-a1d288ac22c5",
+        "instanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5"
+      }
+    },
+    {
+      "id": "instance:e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+      "songId": "launch_octopus",
+      "sourcePatternId": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+      "canonicalPatternId": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+      "parentInstanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        4,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 12669,
+        "low": 36,
+        "high": 57
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+        "instanceId": "instance:e8e46f70-17cd-4eae-ac32-c4c222c873c9"
+      }
+    },
+    {
+      "id": "instance:100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+      "songId": "launch_octopus",
+      "sourcePatternId": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+      "canonicalPatternId": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+      "parentInstanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        4,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 12477,
+        "low": 68,
+        "high": 77
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+        "instanceId": "instance:100e7f19-23d1-4a8b-87ad-b906a683d5fd"
+      }
+    },
+    {
+      "id": "instance:1aed107f-8430-4693-8b3b-ef41a1e6d224",
+      "songId": "launch_octopus",
+      "sourcePatternId": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+      "canonicalPatternId": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+      "parentInstanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        4,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 12669,
+        "low": 25,
+        "high": 46
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+        "instanceId": "instance:1aed107f-8430-4693-8b3b-ef41a1e6d224"
+      }
+    },
+    {
+      "id": "instance:526a0b32-72d6-48b6-8fed-77e8685f3aee",
+      "songId": "launch_octopus",
+      "sourcePatternId": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+      "canonicalPatternId": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+      "parentInstanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        4,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9696,
+        "end": 12525,
+        "low": 70,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+        "instanceId": "instance:526a0b32-72d6-48b6-8fed-77e8685f3aee"
+      }
+    },
+    {
+      "id": "instance:c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+      "songId": "launch_octopus",
+      "sourcePatternId": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+      "canonicalPatternId": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+      "parentInstanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        4,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9696,
+        "end": 12669,
+        "low": 80,
+        "high": 94
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+        "instanceId": "instance:c69156c3-6a80-4a28-8b98-0e0fe59e9813"
+      }
+    },
+    {
+      "id": "instance:d94953d7-7b88-4d2e-a64d-f439f77993fc",
+      "songId": "launch_octopus",
+      "sourcePatternId": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
+      "canonicalPatternId": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
+      "parentInstanceId": "instance:549810a9-d203-4837-a827-a1d288ac22c5",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        4,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9720,
+        "end": 12549,
+        "low": 70,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Launch_Octopus.mid.json",
+        "patternId": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
+        "instanceId": "instance:d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      }
+    }
+  ],
   "relationships": [
     {
       "type": "parent_child",
       "from": "root",
-      "to": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce"
+      "to": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "385e5ff3-ae1e-4c2c-8783-ec529597173a"
+      "to": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133"
+      "to": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "7621a6c0-777c-4781-81b3-58e12b6564aa"
+      "to": "7621a6c0-777c-4781-81b3-58e12b6564aa",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "549810a9-d203-4837-a827-a1d288ac22c5"
+      "to": "549810a9-d203-4837-a827-a1d288ac22c5",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
-      "to": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83"
+      "to": "b3335ee1-a4ef-42c2-9af8-dd8df387cf83",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
-      "to": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a"
+      "to": "ebefc46c-1bb3-470e-8aa9-fd7e6c150e8a",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "a9f3145a-0d1e-483a-8c90-f17c7ff66cce",
-      "to": "e9ed95a2-8a84-45c3-945a-68d8999a4aab"
+      "to": "e9ed95a2-8a84-45c3-945a-68d8999a4aab",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
-      "to": "d3250b58-9a65-4439-8efd-fd83af91eaf6"
+      "to": "d3250b58-9a65-4439-8efd-fd83af91eaf6",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
-      "to": "90fad2ed-19b4-44a2-b32d-9b4461f73891"
+      "to": "90fad2ed-19b4-44a2-b32d-9b4461f73891",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
-      "to": "bb7db745-74f6-411d-896e-a8cd70d67ddd"
+      "to": "bb7db745-74f6-411d-896e-a8cd70d67ddd",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
-      "to": "1bc438a9-17b0-4d94-821a-b6e71646b7ae"
+      "to": "1bc438a9-17b0-4d94-821a-b6e71646b7ae",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
-      "to": "e16609e9-bde1-4728-9113-7145ee2f0be2"
+      "to": "e16609e9-bde1-4728-9113-7145ee2f0be2",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "385e5ff3-ae1e-4c2c-8783-ec529597173a",
-      "to": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef"
+      "to": "2f7fb167-7d6c-42f4-94c3-ec3a978a11ef",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
-      "to": "f354c20c-9a46-42cd-a8f9-001a5e355847"
+      "to": "f354c20c-9a46-42cd-a8f9-001a5e355847",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
-      "to": "af6c68ed-c5ca-43db-8800-0135364afa8d"
+      "to": "af6c68ed-c5ca-43db-8800-0135364afa8d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
-      "to": "dbd32b2d-5550-4870-9cd6-41123d5a0d73"
+      "to": "dbd32b2d-5550-4870-9cd6-41123d5a0d73",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
-      "to": "5760eace-7060-491e-a128-042dc7d3b2e9"
+      "to": "5760eace-7060-491e-a128-042dc7d3b2e9",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d10c9bcc-c260-4c2d-8a0e-eb3312c5a133",
-      "to": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa"
+      "to": "03a5b913-b7a1-4f09-9864-43ac3e6ad5fa",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
-      "to": "1f6cd02e-b949-43d3-9c97-cb85b53db510"
+      "to": "1f6cd02e-b949-43d3-9c97-cb85b53db510",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
-      "to": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce"
+      "to": "a16a4cd9-0b9a-4ee3-89bf-d6d4fb47dfce",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
-      "to": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67"
+      "to": "acfa2bfa-d8c5-4fdb-af50-d008d0566f67",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
-      "to": "5bca1610-5234-4b81-9496-252a8c0f60a6"
+      "to": "5bca1610-5234-4b81-9496-252a8c0f60a6",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7621a6c0-777c-4781-81b3-58e12b6564aa",
-      "to": "eabd918f-0dde-496b-a872-46b7ecbe0405"
+      "to": "eabd918f-0dde-496b-a872-46b7ecbe0405",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "549810a9-d203-4837-a827-a1d288ac22c5",
-      "to": "e8e46f70-17cd-4eae-ac32-c4c222c873c9"
+      "to": "e8e46f70-17cd-4eae-ac32-c4c222c873c9",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "549810a9-d203-4837-a827-a1d288ac22c5",
-      "to": "100e7f19-23d1-4a8b-87ad-b906a683d5fd"
+      "to": "100e7f19-23d1-4a8b-87ad-b906a683d5fd",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "549810a9-d203-4837-a827-a1d288ac22c5",
-      "to": "1aed107f-8430-4693-8b3b-ef41a1e6d224"
+      "to": "1aed107f-8430-4693-8b3b-ef41a1e6d224",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "549810a9-d203-4837-a827-a1d288ac22c5",
-      "to": "526a0b32-72d6-48b6-8fed-77e8685f3aee"
+      "to": "526a0b32-72d6-48b6-8fed-77e8685f3aee",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "549810a9-d203-4837-a827-a1d288ac22c5",
-      "to": "c69156c3-6a80-4a28-8b98-0e0fe59e9813"
+      "to": "c69156c3-6a80-4a28-8b98-0e0fe59e9813",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "549810a9-d203-4837-a827-a1d288ac22c5",
-      "to": "d94953d7-7b88-4d2e-a64d-f439f77993fc"
+      "to": "d94953d7-7b88-4d2e-a64d-f439f77993fc",
+      "scope": "pattern"
     }
   ],
   "collectionCandidates": [
@@ -1935,14 +3337,20 @@
   ],
   "summary": {
     "patternCount": 31,
+    "patternInstanceCount": 31,
     "relationshipCount": 30,
     "collectionCount": 6,
     "rootPatternCount": 1,
+    "rootInstanceCount": 1,
     "leafPatternCount": 25,
     "relationshipTypeCounts": {},
     "collectionTypeCounts": {
       "top_level_section": 5,
       "root_collection": 1
+    },
+    "materialRoleCounts": {
+      "new_material": 30,
+      "song_root": 1
     },
     "labelVariantGroups": [],
     "issueCount": 0

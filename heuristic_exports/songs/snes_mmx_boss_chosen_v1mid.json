@@ -1,5 +1,6 @@
 {
-  "exportVersion": 1,
+  "exportVersion": 2,
+  "schemaVersion": "heuristic-song-export/v2",
   "songId": "snes_mmx_boss_chosen_v1mid",
   "title": "SNES_MMX_Boss_Chosen_V1.mid",
   "source": {
@@ -23,13 +24,57 @@
     ],
     "bpm": null
   },
+  "songPlan": {
+    "rootInstanceIds": [
+      "instance:root"
+    ],
+    "traversalOrderInstanceIds": [
+      "instance:root",
+      "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "instance:42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "instance:775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "instance:c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "instance:0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "instance:9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "instance:51dc36a4-c352-4741-b30d-5cae30522abc",
+      "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "instance:d7c7b23b-9e03-46da-b450-abb320bf25ac",
+      "instance:f4221ded-7cf2-4440-8caa-114c044a1302",
+      "instance:0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+      "instance:a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+      "instance:a4185cdd-426d-44ef-a701-b64427391e85",
+      "instance:a6e5bb4d-1862-40f6-b60f-e931869958ea",
+      "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "instance:9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+      "instance:e92d218b-2b0d-4219-b8e9-892ec931f88d",
+      "instance:58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "instance:2a423d23-5185-4ce4-a906-3d265df96697",
+      "instance:4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "instance:13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "instance:13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+      "instance:0859a85d-940f-43d8-9a42-8a3e13837fdd",
+      "instance:c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "instance:4e9b1d32-f469-4131-a862-27445623c936",
+      "instance:4cb45cba-8218-4934-8a6b-add88a8ce909",
+      "instance:22839f98-485b-42fa-9c13-0413574dfb12"
+    ],
+    "decompositionStrategy": "ordered_child_instances"
+  },
   "patterns": [
     {
       "id": "root",
       "name": "Whole song",
       "normalizedName": "whole song",
+      "canonicalId": "root",
       "parentId": null,
       "children": [
+        "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      ],
+      "orderedChildPatternIds": [
         "6d236dea-bd5c-40ed-8fec-ef43df68357d",
         "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
         "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
@@ -54,6 +99,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:root"
+      ],
+      "sourceOrder": 0,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "root"
@@ -79,8 +129,17 @@
       "id": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "name": "Finale",
       "normalizedName": "finale",
+      "canonicalId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "parentId": "root",
       "children": [
+        "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+        "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+        "c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "4e9b1d32-f469-4131-a862-27445623c936",
+        "4cb45cba-8218-4934-8a6b-add88a8ce909",
+        "22839f98-485b-42fa-9c13-0413574dfb12"
+      ],
+      "orderedChildPatternIds": [
         "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
         "0859a85d-940f-43d8-9a42-8a3e13837fdd",
         "c7420e5d-2637-419c-9207-8f4cdc44d497",
@@ -117,6 +176,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      ],
+      "sourceOrder": 4,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
@@ -155,8 +219,17 @@
       "id": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "name": "Intro",
       "normalizedName": "intro",
+      "canonicalId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "parentId": "root",
       "children": [
+        "42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "51dc36a4-c352-4741-b30d-5cae30522abc"
+      ],
+      "orderedChildPatternIds": [
         "42435239-a2ca-4887-861d-2ae7a449fd3e",
         "775ab9a9-2952-4333-965e-c2d75ff26fd7",
         "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
@@ -194,6 +267,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d"
+      ],
+      "sourceOrder": 1,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d"
@@ -233,8 +311,17 @@
       "id": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "name": "Intro'",
       "normalizedName": "intro",
+      "canonicalId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "parentId": "root",
       "children": [
+        "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+        "f4221ded-7cf2-4440-8caa-114c044a1302",
+        "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+        "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+        "a4185cdd-426d-44ef-a701-b64427391e85",
+        "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      ],
+      "orderedChildPatternIds": [
         "d7c7b23b-9e03-46da-b450-abb320bf25ac",
         "f4221ded-7cf2-4440-8caa-114c044a1302",
         "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
@@ -273,6 +360,11 @@
         "variation",
         "container"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c"
+      ],
+      "sourceOrder": 2,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c"
@@ -315,8 +407,17 @@
       "id": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "name": "Step Transition",
       "normalizedName": "step transition",
+      "canonicalId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "parentId": "root",
       "children": [
+        "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+        "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+        "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "2a423d23-5185-4ce4-a906-3d265df96697",
+        "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      ],
+      "orderedChildPatternIds": [
         "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
         "e92d218b-2b0d-4219-b8e9-892ec931f88d",
         "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
@@ -354,6 +455,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4"
+      ],
+      "sourceOrder": 3,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4"
@@ -393,8 +499,10 @@
       "id": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
       "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5760,
@@ -418,6 +526,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:0859a85d-940f-43d8-9a42-8a3e13837fdd"
+      ],
+      "sourceOrder": 24,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "0859a85d-940f-43d8-9a42-8a3e13837fdd"
@@ -443,8 +556,10 @@
       "id": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
       "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -469,6 +584,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      ],
+      "sourceOrder": 22,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "13346e2a-c9f2-4ca0-9582-06bc2038946e"
@@ -497,8 +617,10 @@
       "id": "22839f98-485b-42fa-9c13-0413574dfb12",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
       "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5760,
@@ -523,6 +645,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:22839f98-485b-42fa-9c13-0413574dfb12"
+      ],
+      "sourceOrder": 28,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "22839f98-485b-42fa-9c13-0413574dfb12"
@@ -551,8 +678,10 @@
       "id": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
       "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -577,6 +706,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:4aee72b0-6342-4667-9ac7-802aaf5b964c"
+      ],
+      "sourceOrder": 21,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "4aee72b0-6342-4667-9ac7-802aaf5b964c"
@@ -605,8 +739,10 @@
       "id": "4cb45cba-8218-4934-8a6b-add88a8ce909",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
       "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5760,
@@ -631,6 +767,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:4cb45cba-8218-4934-8a6b-add88a8ce909"
+      ],
+      "sourceOrder": 27,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "4cb45cba-8218-4934-8a6b-add88a8ce909"
@@ -659,8 +800,10 @@
       "id": "51dc36a4-c352-4741-b30d-5cae30522abc",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -685,6 +828,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:51dc36a4-c352-4741-b30d-5cae30522abc"
+      ],
+      "sourceOrder": 10,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "51dc36a4-c352-4741-b30d-5cae30522abc"
@@ -713,8 +861,10 @@
       "id": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
       "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -738,6 +888,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:775ab9a9-2952-4333-965e-c2d75ff26fd7"
+      ],
+      "sourceOrder": 6,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "775ab9a9-2952-4333-965e-c2d75ff26fd7"
@@ -763,8 +918,10 @@
       "id": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -789,6 +946,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d"
+      ],
+      "sourceOrder": 9,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d"
@@ -817,8 +979,10 @@
       "id": "a4185cdd-426d-44ef-a701-b64427391e85",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1920,
@@ -843,6 +1007,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:a4185cdd-426d-44ef-a701-b64427391e85"
+      ],
+      "sourceOrder": 15,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "a4185cdd-426d-44ef-a701-b64427391e85"
@@ -871,8 +1040,10 @@
       "id": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1920,
@@ -897,6 +1068,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      ],
+      "sourceOrder": 16,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "a6e5bb4d-1862-40f6-b60f-e931869958ea"
@@ -925,8 +1101,10 @@
       "id": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
       "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -951,6 +1129,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:e92d218b-2b0d-4219-b8e9-892ec931f88d"
+      ],
+      "sourceOrder": 18,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "e92d218b-2b0d-4219-b8e9-892ec931f88d"
@@ -979,8 +1162,10 @@
       "id": "f4221ded-7cf2-4440-8caa-114c044a1302",
       "name": "Brass Section",
       "normalizedName": "brass section",
+      "canonicalId": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
       "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1920,
@@ -1005,6 +1190,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:f4221ded-7cf2-4440-8caa-114c044a1302"
+      ],
+      "sourceOrder": 12,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "f4221ded-7cf2-4440-8caa-114c044a1302"
@@ -1033,8 +1223,10 @@
       "id": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
       "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5760,
@@ -1059,6 +1251,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:13055f67-2aec-4595-b2ad-2f86c66d7cc3"
+      ],
+      "sourceOrder": 23,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "13055f67-2aec-4595-b2ad-2f86c66d7cc3"
@@ -1085,8 +1282,10 @@
       "id": "42435239-a2ca-4887-861d-2ae7a449fd3e",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "42435239-a2ca-4887-861d-2ae7a449fd3e",
       "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -1112,6 +1311,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:42435239-a2ca-4887-861d-2ae7a449fd3e"
+      ],
+      "sourceOrder": 5,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "42435239-a2ca-4887-861d-2ae7a449fd3e"
@@ -1139,8 +1343,10 @@
       "id": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
       "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -1166,6 +1372,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:9dd1dc1d-d8eb-4f77-9f3f-574875917e41"
+      ],
+      "sourceOrder": 17,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41"
@@ -1193,8 +1404,10 @@
       "id": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "42435239-a2ca-4887-861d-2ae7a449fd3e",
       "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1920,
@@ -1221,6 +1434,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:d7c7b23b-9e03-46da-b450-abb320bf25ac"
+      ],
+      "sourceOrder": 11,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "d7c7b23b-9e03-46da-b450-abb320bf25ac"
@@ -1251,8 +1469,10 @@
       "id": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
       "name": "Overdriven Guitar",
       "normalizedName": "overdriven guitar",
+      "canonicalId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1920,
@@ -1277,6 +1497,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:0cc28844-16dd-4415-9cb5-7cfe52bc29ac"
+      ],
+      "sourceOrder": 13,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac"
@@ -1305,8 +1530,10 @@
       "id": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
       "name": "Overdriven Guitar",
       "normalizedName": "overdriven guitar",
+      "canonicalId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
       "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -1330,6 +1557,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd"
+      ],
+      "sourceOrder": 19,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd"
@@ -1355,8 +1587,10 @@
       "id": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "name": "Overdriven Guitar",
       "normalizedName": "overdriven guitar",
+      "canonicalId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -1380,6 +1614,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:c0f9306f-d104-47cf-8c05-bf7526fe1e7d"
+      ],
+      "sourceOrder": 7,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d"
@@ -1405,8 +1644,10 @@
       "id": "c7420e5d-2637-419c-9207-8f4cdc44d497",
       "name": "Overdriven Guitar",
       "normalizedName": "overdriven guitar",
+      "canonicalId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
       "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5760,
@@ -1430,6 +1671,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:c7420e5d-2637-419c-9207-8f4cdc44d497"
+      ],
+      "sourceOrder": 25,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "c7420e5d-2637-419c-9207-8f4cdc44d497"
@@ -1455,8 +1701,10 @@
       "id": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
       "name": "Slap Bass 2",
       "normalizedName": "slap bass 2",
+      "canonicalId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
       "parentId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -1480,6 +1728,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71"
+      ],
+      "sourceOrder": 8,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71"
@@ -1505,8 +1758,10 @@
       "id": "2a423d23-5185-4ce4-a906-3d265df96697",
       "name": "Slap Bass 2",
       "normalizedName": "slap bass 2",
+      "canonicalId": "2a423d23-5185-4ce4-a906-3d265df96697",
       "parentId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -1530,6 +1785,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:2a423d23-5185-4ce4-a906-3d265df96697"
+      ],
+      "sourceOrder": 20,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "2a423d23-5185-4ce4-a906-3d265df96697"
@@ -1555,8 +1815,10 @@
       "id": "4e9b1d32-f469-4131-a862-27445623c936",
       "name": "Slap Bass 2",
       "normalizedName": "slap bass 2",
+      "canonicalId": "4e9b1d32-f469-4131-a862-27445623c936",
       "parentId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 5760,
@@ -1580,6 +1842,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:4e9b1d32-f469-4131-a862-27445623c936"
+      ],
+      "sourceOrder": 26,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "4e9b1d32-f469-4131-a862-27445623c936"
@@ -1605,8 +1872,10 @@
       "id": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
       "name": "Slap Bass 2",
       "normalizedName": "slap bass 2",
+      "canonicalId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
       "parentId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 1920,
@@ -1631,6 +1900,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:a9dd729e-4ce5-470a-85c7-d7098dde1f4f"
+      ],
+      "sourceOrder": 14,
       "sourceRef": {
         "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
         "patternId": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f"
@@ -1656,230 +1930,1288 @@
       }
     }
   ],
+  "patternInstances": [
+    {
+      "id": "instance:root",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "root",
+      "canonicalPatternId": "root",
+      "parentInstanceId": null,
+      "childInstanceIds": [
+        "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      ],
+      "orderIndex": 0,
+      "orderPath": [
+        0
+      ],
+      "depth": 0,
+      "instanceType": "song_root",
+      "materialRole": "song_root",
+      "range": {
+        "start": 0,
+        "end": null
+      },
+      "mode": null,
+      "instrumentCount": 0,
+      "instruments": [],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "root",
+        "instanceId": "instance:root"
+      }
+    },
+    {
+      "id": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "canonicalPatternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "instance:775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "instance:c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "instance:0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "instance:9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "instance:51dc36a4-c352-4741-b30d-5cae30522abc"
+      ],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        0
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1918,
+        "low": 35,
+        "high": 72
+      },
+      "mode": "start",
+      "instrumentCount": 8,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+        "instanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d"
+      }
+    },
+    {
+      "id": "instance:42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "canonicalPatternId": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "parentInstanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        0,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1916,
+        "low": 36,
+        "high": 49
+      },
+      "mode": "start",
+      "instrumentCount": 3,
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+        "instanceId": "instance:42435239-a2ca-4887-861d-2ae7a449fd3e"
+      }
+    },
+    {
+      "id": "instance:775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "canonicalPatternId": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "parentInstanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        0,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 54,
+        "high": 55
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+        "instanceId": "instance:775ab9a9-2952-4333-965e-c2d75ff26fd7"
+      }
+    },
+    {
+      "id": "instance:c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "canonicalPatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "parentInstanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        0,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 70,
+        "high": 72
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+        "instanceId": "instance:c0f9306f-d104-47cf-8c05-bf7526fe1e7d"
+      }
+    },
+    {
+      "id": "instance:0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "canonicalPatternId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "parentInstanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        0,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 35,
+        "high": 36
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+        "instanceId": "instance:0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71"
+      }
+    },
+    {
+      "id": "instance:9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "canonicalPatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "parentInstanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        0,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 0,
+        "end": 1800,
+        "low": 62,
+        "high": 63
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+        "instanceId": "instance:9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d"
+      }
+    },
+    {
+      "id": "instance:51dc36a4-c352-4741-b30d-5cae30522abc",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "51dc36a4-c352-4741-b30d-5cae30522abc",
+      "canonicalPatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "parentInstanceId": "instance:6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        0,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 0,
+        "end": 1920,
+        "low": 58,
+        "high": 60
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "51dc36a4-c352-4741-b30d-5cae30522abc",
+        "instanceId": "instance:51dc36a4-c352-4741-b30d-5cae30522abc"
+      }
+    },
+    {
+      "id": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "canonicalPatternId": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:d7c7b23b-9e03-46da-b450-abb320bf25ac",
+        "instance:f4221ded-7cf2-4440-8caa-114c044a1302",
+        "instance:0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+        "instance:a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+        "instance:a4185cdd-426d-44ef-a701-b64427391e85",
+        "instance:a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      ],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        1
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3838,
+        "low": 33,
+        "high": 74
+      },
+      "mode": "start",
+      "instrumentCount": 8,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+        "instanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c"
+      }
+    },
+    {
+      "id": "instance:d7c7b23b-9e03-46da-b450-abb320bf25ac",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+      "canonicalPatternId": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "parentInstanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        1,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3716,
+        "low": 36,
+        "high": 49
+      },
+      "mode": "start",
+      "instrumentCount": 3,
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+        "instanceId": "instance:d7c7b23b-9e03-46da-b450-abb320bf25ac"
+      }
+    },
+    {
+      "id": "instance:f4221ded-7cf2-4440-8caa-114c044a1302",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "f4221ded-7cf2-4440-8caa-114c044a1302",
+      "canonicalPatternId": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "parentInstanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        1,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 52,
+        "high": 53
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "f4221ded-7cf2-4440-8caa-114c044a1302",
+        "instanceId": "instance:f4221ded-7cf2-4440-8caa-114c044a1302"
+      }
+    },
+    {
+      "id": "instance:0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+      "canonicalPatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "parentInstanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        1,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 72,
+        "high": 74
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+        "instanceId": "instance:0cc28844-16dd-4415-9cb5-7cfe52bc29ac"
+      }
+    },
+    {
+      "id": "instance:a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+      "canonicalPatternId": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "parentInstanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        1,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 33,
+        "high": 46
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+        "instanceId": "instance:a9dd729e-4ce5-470a-85c7-d7098dde1f4f"
+      }
+    },
+    {
+      "id": "instance:a4185cdd-426d-44ef-a701-b64427391e85",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "a4185cdd-426d-44ef-a701-b64427391e85",
+      "canonicalPatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "parentInstanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        1,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3720,
+        "low": 63,
+        "high": 65
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "a4185cdd-426d-44ef-a701-b64427391e85",
+        "instanceId": "instance:a4185cdd-426d-44ef-a701-b64427391e85"
+      }
+    },
+    {
+      "id": "instance:a6e5bb4d-1862-40f6-b60f-e931869958ea",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
+      "canonicalPatternId": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "parentInstanceId": "instance:d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        1,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 1920,
+        "end": 3840,
+        "low": 60,
+        "high": 62
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
+        "instanceId": "instance:a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      }
+    },
+    {
+      "id": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "canonicalPatternId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+        "instance:e92d218b-2b0d-4219-b8e9-892ec931f88d",
+        "instance:58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "instance:2a423d23-5185-4ce4-a906-3d265df96697",
+        "instance:4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "instance:13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      ],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        2
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 5758,
+        "low": 30,
+        "high": 78
+      },
+      "mode": "start",
+      "instrumentCount": 8,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+        "instanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4"
+      }
+    },
+    {
+      "id": "instance:9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+      "canonicalPatternId": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+      "parentInstanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        2,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 5876,
+        "low": 36,
+        "high": 49
+      },
+      "mode": "start",
+      "instrumentCount": 3,
+      "instruments": [
+        0,
+        1,
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+        "instanceId": "instance:9dd1dc1d-d8eb-4f77-9f3f-574875917e41"
+      }
+    },
+    {
+      "id": "instance:e92d218b-2b0d-4219-b8e9-892ec931f88d",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+      "canonicalPatternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "parentInstanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        2,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 3840,
+        "end": 5280,
+        "low": 51,
+        "high": 54
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+        "instanceId": "instance:e92d218b-2b0d-4219-b8e9-892ec931f88d"
+      }
+    },
+    {
+      "id": "instance:58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "canonicalPatternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "parentInstanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        2,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "canonical_reuse",
+      "range": {
+        "start": 3840,
+        "end": 5276,
+        "low": 75,
+        "high": 78
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+        "instanceId": "instance:58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd"
+      }
+    },
+    {
+      "id": "instance:2a423d23-5185-4ce4-a906-3d265df96697",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "2a423d23-5185-4ce4-a906-3d265df96697",
+      "canonicalPatternId": "2a423d23-5185-4ce4-a906-3d265df96697",
+      "parentInstanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        2,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 5280,
+        "low": 30,
+        "high": 45
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "2a423d23-5185-4ce4-a906-3d265df96697",
+        "instanceId": "instance:2a423d23-5185-4ce4-a906-3d265df96697"
+      }
+    },
+    {
+      "id": "instance:4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "canonicalPatternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "parentInstanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        2,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 3840,
+        "end": 5276,
+        "low": 66,
+        "high": 69
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+        "instanceId": "instance:4aee72b0-6342-4667-9ac7-802aaf5b964c"
+      }
+    },
+    {
+      "id": "instance:13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "canonicalPatternId": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "parentInstanceId": "instance:5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        2,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 3840,
+        "end": 5276,
+        "low": 75,
+        "high": 78
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+        "instanceId": "instance:13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      }
+    },
+    {
+      "id": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "canonicalPatternId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+        "instance:0859a85d-940f-43d8-9a42-8a3e13837fdd",
+        "instance:c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "instance:4e9b1d32-f469-4131-a862-27445623c936",
+        "instance:4cb45cba-8218-4934-8a6b-add88a8ce909",
+        "instance:22839f98-485b-42fa-9c13-0413574dfb12"
+      ],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5760,
+        "end": 9598,
+        "low": 30,
+        "high": 79
+      },
+      "mode": "start",
+      "instrumentCount": 7,
+      "instruments": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+        "instanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      }
+    },
+    {
+      "id": "instance:13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+      "canonicalPatternId": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+      "parentInstanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        3,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5760,
+        "end": 8636,
+        "low": 36,
+        "high": 49
+      },
+      "mode": "start",
+      "instrumentCount": 2,
+      "instruments": [
+        0,
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+        "instanceId": "instance:13055f67-2aec-4595-b2ad-2f86c66d7cc3"
+      }
+    },
+    {
+      "id": "instance:0859a85d-940f-43d8-9a42-8a3e13837fdd",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+      "canonicalPatternId": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+      "parentInstanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        3,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5760,
+        "end": 7680,
+        "low": 50,
+        "high": 50
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+        "instanceId": "instance:0859a85d-940f-43d8-9a42-8a3e13837fdd"
+      }
+    },
+    {
+      "id": "instance:c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "canonicalPatternId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "parentInstanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        3,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5760,
+        "end": 7920,
+        "low": 75,
+        "high": 79
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+        "instanceId": "instance:c7420e5d-2637-419c-9207-8f4cdc44d497"
+      }
+    },
+    {
+      "id": "instance:4e9b1d32-f469-4131-a862-27445623c936",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "4e9b1d32-f469-4131-a862-27445623c936",
+      "canonicalPatternId": "4e9b1d32-f469-4131-a862-27445623c936",
+      "parentInstanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 5760,
+        "end": 8400,
+        "low": 30,
+        "high": 31
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "4e9b1d32-f469-4131-a862-27445623c936",
+        "instanceId": "instance:4e9b1d32-f469-4131-a862-27445623c936"
+      }
+    },
+    {
+      "id": "instance:4cb45cba-8218-4934-8a6b-add88a8ce909",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "4cb45cba-8218-4934-8a6b-add88a8ce909",
+      "canonicalPatternId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "parentInstanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        3,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 5760,
+        "end": 8036,
+        "low": 67,
+        "high": 71
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "4cb45cba-8218-4934-8a6b-add88a8ce909",
+        "instanceId": "instance:4cb45cba-8218-4934-8a6b-add88a8ce909"
+      }
+    },
+    {
+      "id": "instance:22839f98-485b-42fa-9c13-0413574dfb12",
+      "songId": "snes_mmx_boss_chosen_v1mid",
+      "sourcePatternId": "22839f98-485b-42fa-9c13-0413574dfb12",
+      "canonicalPatternId": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "parentInstanceId": "instance:bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        3,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 5760,
+        "end": 8036,
+        "low": 75,
+        "high": 79
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "SNES_MMX_Boss_Chosen_V1.mid.json",
+        "patternId": "22839f98-485b-42fa-9c13-0413574dfb12",
+        "instanceId": "instance:22839f98-485b-42fa-9c13-0413574dfb12"
+      }
+    }
+  ],
   "relationships": [
     {
       "type": "parent_child",
       "from": "root",
-      "to": "6d236dea-bd5c-40ed-8fec-ef43df68357d"
+      "to": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c"
+      "to": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "5113c05a-2092-4703-b9ad-1ffb690cfdd4"
+      "to": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f"
+      "to": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
-      "to": "42435239-a2ca-4887-861d-2ae7a449fd3e"
+      "to": "42435239-a2ca-4887-861d-2ae7a449fd3e",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
-      "to": "775ab9a9-2952-4333-965e-c2d75ff26fd7"
+      "to": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
-      "to": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d"
+      "to": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
-      "to": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71"
+      "to": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
-      "to": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d"
+      "to": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
-      "to": "51dc36a4-c352-4741-b30d-5cae30522abc"
+      "to": "51dc36a4-c352-4741-b30d-5cae30522abc",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "to": "d7c7b23b-9e03-46da-b450-abb320bf25ac"
+      "to": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "to": "f4221ded-7cf2-4440-8caa-114c044a1302"
+      "to": "f4221ded-7cf2-4440-8caa-114c044a1302",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "to": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac"
+      "to": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "to": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f"
+      "to": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "to": "a4185cdd-426d-44ef-a701-b64427391e85"
+      "to": "a4185cdd-426d-44ef-a701-b64427391e85",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "to": "a6e5bb4d-1862-40f6-b60f-e931869958ea"
+      "to": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "6d236dea-bd5c-40ed-8fec-ef43df68357d",
       "to": "d3052a7a-3f45-4bbe-8dca-44c1dc81273c",
-      "label": "Intro"
+      "label": "Intro",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
-      "to": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41"
+      "to": "9dd1dc1d-d8eb-4f77-9f3f-574875917e41",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
-      "to": "e92d218b-2b0d-4219-b8e9-892ec931f88d"
+      "to": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
-      "to": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd"
+      "to": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
-      "to": "2a423d23-5185-4ce4-a906-3d265df96697"
+      "to": "2a423d23-5185-4ce4-a906-3d265df96697",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
-      "to": "4aee72b0-6342-4667-9ac7-802aaf5b964c"
+      "to": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "5113c05a-2092-4703-b9ad-1ffb690cfdd4",
-      "to": "13346e2a-c9f2-4ca0-9582-06bc2038946e"
+      "to": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
-      "to": "13055f67-2aec-4595-b2ad-2f86c66d7cc3"
+      "to": "13055f67-2aec-4595-b2ad-2f86c66d7cc3",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
-      "to": "0859a85d-940f-43d8-9a42-8a3e13837fdd"
+      "to": "0859a85d-940f-43d8-9a42-8a3e13837fdd",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
-      "to": "c7420e5d-2637-419c-9207-8f4cdc44d497"
+      "to": "c7420e5d-2637-419c-9207-8f4cdc44d497",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
-      "to": "4e9b1d32-f469-4131-a862-27445623c936"
+      "to": "4e9b1d32-f469-4131-a862-27445623c936",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
-      "to": "4cb45cba-8218-4934-8a6b-add88a8ce909"
+      "to": "4cb45cba-8218-4934-8a6b-add88a8ce909",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "bcd6dba0-a05b-4f7f-aa0f-3e895089ab3f",
-      "to": "22839f98-485b-42fa-9c13-0413574dfb12"
+      "to": "22839f98-485b-42fa-9c13-0413574dfb12",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "to": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
-      "label": "Overdriven Guitar"
+      "label": "Overdriven Guitar",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "to": "51dc36a4-c352-4741-b30d-5cae30522abc",
-      "label": "Overdriven Guitar"
+      "label": "Overdriven Guitar",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "42435239-a2ca-4887-861d-2ae7a449fd3e",
       "to": "d7c7b23b-9e03-46da-b450-abb320bf25ac",
-      "label": "Drums"
+      "label": "Drums",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "775ab9a9-2952-4333-965e-c2d75ff26fd7",
       "to": "f4221ded-7cf2-4440-8caa-114c044a1302",
-      "label": "Brass Section"
+      "label": "Brass Section",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "c0f9306f-d104-47cf-8c05-bf7526fe1e7d",
       "to": "0cc28844-16dd-4415-9cb5-7cfe52bc29ac",
-      "label": "Overdriven Guitar"
+      "label": "Overdriven Guitar",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "0c29c644-2eeb-4bc3-8ab8-e1aaf48cec71",
       "to": "a9dd729e-4ce5-470a-85c7-d7098dde1f4f",
-      "label": "Slap Bass 2"
+      "label": "Slap Bass 2",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "9e9b3aad-9e78-4cad-9b8d-d550cc9fbf9d",
       "to": "a4185cdd-426d-44ef-a701-b64427391e85",
-      "label": "Brass Section"
+      "label": "Brass Section",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "51dc36a4-c352-4741-b30d-5cae30522abc",
       "to": "a6e5bb4d-1862-40f6-b60f-e931869958ea",
-      "label": "Brass Section"
+      "label": "Brass Section",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
       "to": "e92d218b-2b0d-4219-b8e9-892ec931f88d",
-      "label": "Brass Section"
+      "label": "Brass Section",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
       "to": "4aee72b0-6342-4667-9ac7-802aaf5b964c",
-      "label": "Brass Section"
+      "label": "Brass Section",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "58ae7bf2-f78e-4a13-8dc3-0e7e20f1eefd",
       "to": "13346e2a-c9f2-4ca0-9582-06bc2038946e",
-      "label": "Overdriven Guitar"
+      "label": "Overdriven Guitar",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "22839f98-485b-42fa-9c13-0413574dfb12",
       "to": "4cb45cba-8218-4934-8a6b-add88a8ce909",
-      "label": "Brass Section"
+      "label": "Brass Section",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "c7420e5d-2637-419c-9207-8f4cdc44d497",
       "to": "22839f98-485b-42fa-9c13-0413574dfb12",
-      "label": "Overdriven Guitar"
+      "label": "Overdriven Guitar",
+      "scope": "pattern"
     }
   ],
   "collectionCandidates": [
@@ -1959,9 +3291,11 @@
   ],
   "summary": {
     "patternCount": 29,
+    "patternInstanceCount": 29,
     "relationshipCount": 42,
     "collectionCount": 5,
     "rootPatternCount": 1,
+    "rootInstanceCount": 1,
     "leafPatternCount": 24,
     "relationshipTypeCounts": {
       "variation": 14
@@ -1969,6 +3303,12 @@
     "collectionTypeCounts": {
       "top_level_section": 4,
       "root_collection": 1
+    },
+    "materialRoleCounts": {
+      "variation": 14,
+      "new_material": 13,
+      "song_root": 1,
+      "canonical_reuse": 1
     },
     "labelVariantGroups": [
       {

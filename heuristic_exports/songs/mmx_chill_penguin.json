@@ -1,5 +1,6 @@
 {
-  "exportVersion": 1,
+  "exportVersion": 2,
+  "schemaVersion": "heuristic-song-export/v2",
   "songId": "mmx_chill_penguin",
   "title": "MMX Chill Penguin",
   "source": {
@@ -26,13 +27,80 @@
     ],
     "bpm": null
   },
+  "songPlan": {
+    "rootInstanceIds": [
+      "instance:root"
+    ],
+    "traversalOrderInstanceIds": [
+      "instance:root",
+      "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "instance:aada8394-c958-4618-9144-b903591cadef",
+      "instance:7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
+      "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "instance:22135d5a-ade1-4121-aa04-2019285cae17",
+      "instance:0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+      "instance:eb5ea183-7eed-404d-bb16-577da23b68fb",
+      "instance:01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+      "instance:f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+      "instance:47dfd58a-7b73-4c1e-af71-298c8be00d42",
+      "instance:831b421a-54c2-4729-90a1-52af3d2607d5",
+      "instance:d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+      "instance:95829cf6-3e45-47ac-8b66-e59f9a35c594",
+      "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "instance:eff59a55-51e2-4b3e-b862-cd4b08171e40",
+      "instance:e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+      "instance:1d36131e-29be-437a-97bb-098181ec89ff",
+      "instance:6c672a71-316f-401a-9d3d-04cbbf1049a0",
+      "instance:a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+      "instance:81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+      "instance:08db50f0-c4bf-4586-94cb-b2571e30738a",
+      "instance:ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+      "instance:41ca54db-bbac-4fe9-91f8-22208370a5a6",
+      "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "instance:83cebcee-587f-4af2-9fac-b678cb7e994c",
+      "instance:7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+      "instance:240d4f77-8136-4f9c-974a-236a70cd3093",
+      "instance:1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+      "instance:ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+      "instance:6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+      "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "instance:1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+      "instance:8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+      "instance:d046c452-38c1-49c2-a9fd-51d407c5a576",
+      "instance:46742395-909b-4f6b-ba9c-e55c559c62c1",
+      "instance:06b5a296-5de9-4f8c-84af-a535645fc799",
+      "instance:89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+      "instance:913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
+      "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "instance:bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+      "instance:20159131-4b71-4d17-8791-116fdc751b0c",
+      "instance:8376190b-adf0-44df-8f6e-91ef2e0c2496",
+      "instance:9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+      "instance:2616e3bc-5b06-4381-b713-1d12753a7ed0",
+      "instance:31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+      "instance:e005902d-487d-41ae-b83a-cbd008d549b2",
+      "instance:1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+      "instance:9181723a-06f1-401b-940f-dd849a4b60f7",
+      "instance:533c3385-fe49-4c1a-b155-5bf677594b13",
+      "instance:69de5f71-1a65-4dbf-bdc5-0b35c4199907"
+    ],
+    "decompositionStrategy": "ordered_child_instances"
+  },
   "patterns": [
     {
       "id": "root",
       "name": "Whole song",
       "normalizedName": "whole song",
+      "canonicalId": "root",
       "parentId": null,
       "children": [
+        "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+        "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+        "0cbdb791-a3d7-4802-9742-00b561d1b123",
+        "6516d775-c8da-4555-9f0f-19dd58e7a993",
+        "86c4f937-1133-42d4-9b3b-20d9f3148321"
+      ],
+      "orderedChildPatternIds": [
         "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
         "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
         "0cbdb791-a3d7-4802-9742-00b561d1b123",
@@ -72,6 +140,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:root"
+      ],
+      "sourceOrder": 0,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "root"
@@ -113,8 +186,13 @@
       "id": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
       "name": "Drop In",
       "normalizedName": "drop in",
+      "canonicalId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
       "parentId": "root",
       "children": [
+        "aada8394-c958-4618-9144-b903591cadef",
+        "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
+      ],
+      "orderedChildPatternIds": [
         "aada8394-c958-4618-9144-b903591cadef",
         "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
       ],
@@ -142,6 +220,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d"
+      ],
+      "sourceOrder": 1,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d"
@@ -171,8 +254,20 @@
       "id": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "name": "Part A (Snowflakes Atmosphere)",
       "normalizedName": "part a snowflakes atmosphere",
+      "canonicalId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "parentId": "root",
       "children": [
+        "22135d5a-ade1-4121-aa04-2019285cae17",
+        "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+        "eb5ea183-7eed-404d-bb16-577da23b68fb",
+        "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+        "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+        "47dfd58a-7b73-4c1e-af71-298c8be00d42",
+        "831b421a-54c2-4729-90a1-52af3d2607d5",
+        "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+        "95829cf6-3e45-47ac-8b66-e59f9a35c594"
+      ],
+      "orderedChildPatternIds": [
         "22135d5a-ade1-4121-aa04-2019285cae17",
         "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
         "eb5ea183-7eed-404d-bb16-577da23b68fb",
@@ -214,6 +309,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb"
+      ],
+      "sourceOrder": 2,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb"
@@ -257,8 +357,20 @@
       "id": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "name": "Part B (Transistion)",
       "normalizedName": "part b transistion",
+      "canonicalId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "parentId": "root",
       "children": [
+        "eff59a55-51e2-4b3e-b862-cd4b08171e40",
+        "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+        "1d36131e-29be-437a-97bb-098181ec89ff",
+        "6c672a71-316f-401a-9d3d-04cbbf1049a0",
+        "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+        "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+        "08db50f0-c4bf-4586-94cb-b2571e30738a",
+        "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+        "41ca54db-bbac-4fe9-91f8-22208370a5a6"
+      ],
+      "orderedChildPatternIds": [
         "eff59a55-51e2-4b3e-b862-cd4b08171e40",
         "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
         "1d36131e-29be-437a-97bb-098181ec89ff",
@@ -300,6 +412,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:0cbdb791-a3d7-4802-9742-00b561d1b123"
+      ],
+      "sourceOrder": 3,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "0cbdb791-a3d7-4802-9742-00b561d1b123"
@@ -343,8 +460,21 @@
       "id": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "name": "Part C (Main)",
       "normalizedName": "part c main",
+      "canonicalId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "parentId": "root",
       "children": [
+        "83cebcee-587f-4af2-9fac-b678cb7e994c",
+        "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+        "240d4f77-8136-4f9c-974a-236a70cd3093",
+        "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+        "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+        "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+        "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+        "06b5a296-5de9-4f8c-84af-a535645fc799",
+        "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+        "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7"
+      ],
+      "orderedChildPatternIds": [
         "83cebcee-587f-4af2-9fac-b678cb7e994c",
         "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
         "240d4f77-8136-4f9c-974a-236a70cd3093",
@@ -389,6 +519,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:6516d775-c8da-4555-9f0f-19dd58e7a993"
+      ],
+      "sourceOrder": 4,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "6516d775-c8da-4555-9f0f-19dd58e7a993"
@@ -435,8 +570,22 @@
       "id": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "name": "Part D (Return)",
       "normalizedName": "part d return",
+      "canonicalId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "parentId": "root",
       "children": [
+        "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+        "20159131-4b71-4d17-8791-116fdc751b0c",
+        "8376190b-adf0-44df-8f6e-91ef2e0c2496",
+        "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+        "2616e3bc-5b06-4381-b713-1d12753a7ed0",
+        "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+        "e005902d-487d-41ae-b83a-cbd008d549b2",
+        "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+        "9181723a-06f1-401b-940f-dd849a4b60f7",
+        "533c3385-fe49-4c1a-b155-5bf677594b13",
+        "69de5f71-1a65-4dbf-bdc5-0b35c4199907"
+      ],
+      "orderedChildPatternIds": [
         "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
         "20159131-4b71-4d17-8791-116fdc751b0c",
         "8376190b-adf0-44df-8f6e-91ef2e0c2496",
@@ -482,6 +631,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:86c4f937-1133-42d4-9b3b-20d9f3148321"
+      ],
+      "sourceOrder": 5,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "86c4f937-1133-42d4-9b3b-20d9f3148321"
@@ -529,8 +683,10 @@
       "id": "22135d5a-ade1-4121-aa04-2019285cae17",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "22135d5a-ade1-4121-aa04-2019285cae17",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -554,6 +710,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:22135d5a-ade1-4121-aa04-2019285cae17"
+      ],
+      "sourceOrder": 8,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "22135d5a-ade1-4121-aa04-2019285cae17"
@@ -579,8 +740,10 @@
       "id": "83cebcee-587f-4af2-9fac-b678cb7e994c",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "83cebcee-587f-4af2-9fac-b678cb7e994c",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -604,6 +767,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:83cebcee-587f-4af2-9fac-b678cb7e994c"
+      ],
+      "sourceOrder": 26,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "83cebcee-587f-4af2-9fac-b678cb7e994c"
@@ -629,8 +797,10 @@
       "id": "aada8394-c958-4618-9144-b903591cadef",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "aada8394-c958-4618-9144-b903591cadef",
       "parentId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 672,
@@ -654,6 +824,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:aada8394-c958-4618-9144-b903591cadef"
+      ],
+      "sourceOrder": 6,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "aada8394-c958-4618-9144-b903591cadef"
@@ -679,8 +854,10 @@
       "id": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -704,6 +881,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:bb217a75-6e9e-44d4-8746-d9e11f7dc9ca"
+      ],
+      "sourceOrder": 36,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca"
@@ -729,8 +911,10 @@
       "id": "eff59a55-51e2-4b3e-b862-cd4b08171e40",
       "name": "Drums",
       "normalizedName": "drums",
+      "canonicalId": "eff59a55-51e2-4b3e-b862-cd4b08171e40",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2304,
@@ -754,6 +938,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:eff59a55-51e2-4b3e-b862-cd4b08171e40"
+      ],
+      "sourceOrder": 17,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "eff59a55-51e2-4b3e-b862-cd4b08171e40"
@@ -779,8 +968,10 @@
       "id": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
       "name": "Lead 2 (sawtooth)",
       "normalizedName": "lead 2 sawtooth",
+      "canonicalId": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9612,
@@ -804,6 +995,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1c879aa3-de4b-4f6c-8641-5ad8044caa1d"
+      ],
+      "sourceOrder": 43,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d"
@@ -829,8 +1025,15 @@
       "id": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
       "name": "Lead 2 (sawtooth)",
       "normalizedName": "lead 2 sawtooth",
+      "canonicalId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [
+        "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+        "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+        "d046c452-38c1-49c2-a9fd-51d407c5a576",
+        "46742395-909b-4f6b-ba9c-e55c559c62c1"
+      ],
+      "orderedChildPatternIds": [
         "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
         "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
         "d046c452-38c1-49c2-a9fd-51d407c5a576",
@@ -859,6 +1062,11 @@
       "relationTags": [
         "container"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5"
+      ],
+      "sourceOrder": 32,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5"
@@ -889,8 +1097,10 @@
       "id": "e005902d-487d-41ae-b83a-cbd008d549b2",
       "name": "Lead 2 (sawtooth)",
       "normalizedName": "lead 2 sawtooth",
+      "canonicalId": "e005902d-487d-41ae-b83a-cbd008d549b2",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -914,6 +1124,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:e005902d-487d-41ae-b83a-cbd008d549b2"
+      ],
+      "sourceOrder": 42,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "e005902d-487d-41ae-b83a-cbd008d549b2"
@@ -939,8 +1154,10 @@
       "id": "533c3385-fe49-4c1a-b155-5bf677594b13",
       "name": "Melodic Tom",
       "normalizedName": "melodic tom",
+      "canonicalId": "533c3385-fe49-4c1a-b155-5bf677594b13",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 10992,
@@ -964,6 +1181,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:533c3385-fe49-4c1a-b155-5bf677594b13"
+      ],
+      "sourceOrder": 45,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "533c3385-fe49-4c1a-b155-5bf677594b13"
@@ -989,8 +1211,10 @@
       "id": "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
       "name": "Melodic Tom",
       "normalizedName": "melodic tom",
+      "canonicalId": "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9384,
@@ -1014,6 +1238,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:89f1cfd2-5822-4d92-ad29-81d61cd969c9"
+      ],
+      "sourceOrder": 34,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "89f1cfd2-5822-4d92-ad29-81d61cd969c9"
@@ -1039,8 +1268,10 @@
       "id": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
       "name": "Melodic Tom",
       "normalizedName": "melodic tom",
+      "canonicalId": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2064,
@@ -1064,6 +1295,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:d1ecc7a5-bad0-406e-8e08-1d2549770bc6"
+      ],
+      "sourceOrder": 15,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6"
@@ -1089,8 +1325,10 @@
       "id": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
       "name": "Melodic Tom",
       "normalizedName": "melodic tom",
+      "canonicalId": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3600,
@@ -1114,6 +1352,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:ef792d8d-06f8-4f77-89e3-4b1cb02b90ab"
+      ],
+      "sourceOrder": 24,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab"
@@ -1139,8 +1382,10 @@
       "id": "1d36131e-29be-437a-97bb-098181ec89ff",
       "name": "Percussive Organ",
       "normalizedName": "percussive organ",
+      "canonicalId": "1d36131e-29be-437a-97bb-098181ec89ff",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3576,
@@ -1164,6 +1409,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1d36131e-29be-437a-97bb-098181ec89ff"
+      ],
+      "sourceOrder": 19,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "1d36131e-29be-437a-97bb-098181ec89ff"
@@ -1189,8 +1439,10 @@
       "id": "240d4f77-8136-4f9c-974a-236a70cd3093",
       "name": "Percussive Organ",
       "normalizedName": "percussive organ",
+      "canonicalId": "240d4f77-8136-4f9c-974a-236a70cd3093",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 4944,
@@ -1214,6 +1466,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:240d4f77-8136-4f9c-974a-236a70cd3093"
+      ],
+      "sourceOrder": 28,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "240d4f77-8136-4f9c-974a-236a70cd3093"
@@ -1239,8 +1496,10 @@
       "id": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
       "name": "Percussive Organ",
       "normalizedName": "percussive organ",
+      "canonicalId": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
       "parentId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 0,
@@ -1264,6 +1523,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
+      ],
+      "sourceOrder": 7,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
@@ -1289,8 +1553,10 @@
       "id": "8376190b-adf0-44df-8f6e-91ef2e0c2496",
       "name": "Percussive Organ",
       "normalizedName": "percussive organ",
+      "canonicalId": "8376190b-adf0-44df-8f6e-91ef2e0c2496",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1314,6 +1580,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:8376190b-adf0-44df-8f6e-91ef2e0c2496"
+      ],
+      "sourceOrder": 38,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "8376190b-adf0-44df-8f6e-91ef2e0c2496"
@@ -1339,8 +1610,10 @@
       "id": "eb5ea183-7eed-404d-bb16-577da23b68fb",
       "name": "Percussive Organ",
       "normalizedName": "percussive organ",
+      "canonicalId": "eb5ea183-7eed-404d-bb16-577da23b68fb",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -1364,6 +1637,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:eb5ea183-7eed-404d-bb16-577da23b68fb"
+      ],
+      "sourceOrder": 10,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "eb5ea183-7eed-404d-bb16-577da23b68fb"
@@ -1389,8 +1667,10 @@
       "id": "41ca54db-bbac-4fe9-91f8-22208370a5a6",
       "name": "Reverse Cymbal",
       "normalizedName": "reverse cymbal",
+      "canonicalId": "41ca54db-bbac-4fe9-91f8-22208370a5a6",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3456,
@@ -1414,6 +1694,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:41ca54db-bbac-4fe9-91f8-22208370a5a6"
+      ],
+      "sourceOrder": 25,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "41ca54db-bbac-4fe9-91f8-22208370a5a6"
@@ -1439,8 +1724,10 @@
       "id": "69de5f71-1a65-4dbf-bdc5-0b35c4199907",
       "name": "Reverse Cymbal",
       "normalizedName": "reverse cymbal",
+      "canonicalId": "69de5f71-1a65-4dbf-bdc5-0b35c4199907",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1464,6 +1751,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:69de5f71-1a65-4dbf-bdc5-0b35c4199907"
+      ],
+      "sourceOrder": 46,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "69de5f71-1a65-4dbf-bdc5-0b35c4199907"
@@ -1489,8 +1781,10 @@
       "id": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
       "name": "Reverse Cymbal",
       "normalizedName": "reverse cymbal",
+      "canonicalId": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -1514,6 +1808,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7"
+      ],
+      "sourceOrder": 35,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7"
@@ -1539,8 +1838,10 @@
       "id": "95829cf6-3e45-47ac-8b66-e59f9a35c594",
       "name": "Reverse Cymbal",
       "normalizedName": "reverse cymbal",
+      "canonicalId": "95829cf6-3e45-47ac-8b66-e59f9a35c594",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 864,
@@ -1564,6 +1865,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:95829cf6-3e45-47ac-8b66-e59f9a35c594"
+      ],
+      "sourceOrder": 16,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "95829cf6-3e45-47ac-8b66-e59f9a35c594"
@@ -1589,8 +1895,10 @@
       "id": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
       "name": "Synth Bass 2",
       "normalizedName": "synth bass 2",
+      "canonicalId": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -1614,6 +1922,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:0b04a09a-896e-4dc8-8e2e-c0fa469ac925"
+      ],
+      "sourceOrder": 9,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925"
@@ -1639,8 +1952,10 @@
       "id": "20159131-4b71-4d17-8791-116fdc751b0c",
       "name": "Synth Bass 2",
       "normalizedName": "synth bass 2",
+      "canonicalId": "20159131-4b71-4d17-8791-116fdc751b0c",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1664,6 +1979,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:20159131-4b71-4d17-8791-116fdc751b0c"
+      ],
+      "sourceOrder": 37,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "20159131-4b71-4d17-8791-116fdc751b0c"
@@ -1689,8 +2009,10 @@
       "id": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
       "name": "Synth Bass 2",
       "normalizedName": "synth bass 2",
+      "canonicalId": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -1714,6 +2036,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:7a8ec604-d4bd-4704-bfd6-6bf15ca2283a"
+      ],
+      "sourceOrder": 27,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a"
@@ -1739,8 +2066,10 @@
       "id": "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
       "name": "Synth Bass 2",
       "normalizedName": "synth bass 2",
+      "canonicalId": "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2304,
@@ -1764,6 +2093,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:e44dbc9d-a7b7-42b5-99d6-e171373576b5"
+      ],
+      "sourceOrder": 18,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "e44dbc9d-a7b7-42b5-99d6-e171373576b5"
@@ -1789,8 +2123,10 @@
       "id": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -1814,6 +2150,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:01a40e72-9cef-49c8-a6d2-9c2e86a33c75"
+      ],
+      "sourceOrder": 11,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75"
@@ -1839,8 +2180,10 @@
       "id": "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 4176,
@@ -1864,6 +2207,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1fbb0a49-203c-45e2-900d-3fa68a0c822a"
+      ],
+      "sourceOrder": 29,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "1fbb0a49-203c-45e2-900d-3fa68a0c822a"
@@ -1889,8 +2237,10 @@
       "id": "2616e3bc-5b06-4381-b713-1d12753a7ed0",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "2616e3bc-5b06-4381-b713-1d12753a7ed0",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1914,6 +2264,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:2616e3bc-5b06-4381-b713-1d12753a7ed0"
+      ],
+      "sourceOrder": 40,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "2616e3bc-5b06-4381-b713-1d12753a7ed0"
@@ -1939,8 +2294,10 @@
       "id": "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -1964,6 +2321,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:31cde0e4-fcd7-48b3-b947-c840ec0ba746"
+      ],
+      "sourceOrder": 41,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "31cde0e4-fcd7-48b3-b947-c840ec0ba746"
@@ -1989,8 +2351,10 @@
       "id": "47dfd58a-7b73-4c1e-af71-298c8be00d42",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "47dfd58a-7b73-4c1e-af71-298c8be00d42",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -2014,6 +2378,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:47dfd58a-7b73-4c1e-af71-298c8be00d42"
+      ],
+      "sourceOrder": 13,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "47dfd58a-7b73-4c1e-af71-298c8be00d42"
@@ -2039,8 +2408,10 @@
       "id": "6c672a71-316f-401a-9d3d-04cbbf1049a0",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "6c672a71-316f-401a-9d3d-04cbbf1049a0",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2304,
@@ -2064,6 +2435,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:6c672a71-316f-401a-9d3d-04cbbf1049a0"
+      ],
+      "sourceOrder": 20,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "6c672a71-316f-401a-9d3d-04cbbf1049a0"
@@ -2089,8 +2465,10 @@
       "id": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 4176,
@@ -2114,6 +2492,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:6fd5c53e-a831-4e0c-88b0-498381a5a5e7"
+      ],
+      "sourceOrder": 31,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7"
@@ -2139,8 +2522,10 @@
       "id": "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2304,
@@ -2164,6 +2549,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:81e5713a-0c8f-489f-a5fd-09bf55b389fb"
+      ],
+      "sourceOrder": 22,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "81e5713a-0c8f-489f-a5fd-09bf55b389fb"
@@ -2189,8 +2579,10 @@
       "id": "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -2214,6 +2606,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:9787f20e-6c49-45f1-ab9d-033c1a2d8591"
+      ],
+      "sourceOrder": 39,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "9787f20e-6c49-45f1-ab9d-033c1a2d8591"
@@ -2239,8 +2636,10 @@
       "id": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2304,
@@ -2264,6 +2663,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:a5f40e39-73fb-4b64-8fe4-c364f6d6da29"
+      ],
+      "sourceOrder": 21,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29"
@@ -2289,8 +2693,10 @@
       "id": "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 4176,
@@ -2314,6 +2720,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:ca3db22b-0f54-4205-a4f5-cf708abcaf61"
+      ],
+      "sourceOrder": 30,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "ca3db22b-0f54-4205-a4f5-cf708abcaf61"
@@ -2339,8 +2750,10 @@
       "id": "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
       "name": "Synth Brass 2",
       "normalizedName": "synth brass 2",
+      "canonicalId": "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -2364,6 +2777,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:f7a63a82-aaa1-42a8-845f-c9df23068bf3"
+      ],
+      "sourceOrder": 12,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "f7a63a82-aaa1-42a8-845f-c9df23068bf3"
@@ -2389,8 +2807,10 @@
       "id": "06b5a296-5de9-4f8c-84af-a535645fc799",
       "name": "Synth Strings 1",
       "normalizedName": "synth strings 1",
+      "canonicalId": "06b5a296-5de9-4f8c-84af-a535645fc799",
       "parentId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 3840,
@@ -2414,6 +2834,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:06b5a296-5de9-4f8c-84af-a535645fc799"
+      ],
+      "sourceOrder": 33,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "06b5a296-5de9-4f8c-84af-a535645fc799"
@@ -2439,8 +2864,10 @@
       "id": "08db50f0-c4bf-4586-94cb-b2571e30738a",
       "name": "Synth Strings 1",
       "normalizedName": "synth strings 1",
+      "canonicalId": "08db50f0-c4bf-4586-94cb-b2571e30738a",
       "parentId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 2304,
@@ -2464,6 +2891,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:08db50f0-c4bf-4586-94cb-b2571e30738a"
+      ],
+      "sourceOrder": 23,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "08db50f0-c4bf-4586-94cb-b2571e30738a"
@@ -2489,8 +2921,10 @@
       "id": "831b421a-54c2-4729-90a1-52af3d2607d5",
       "name": "Synth Strings 1",
       "normalizedName": "synth strings 1",
+      "canonicalId": "831b421a-54c2-4729-90a1-52af3d2607d5",
       "parentId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 768,
@@ -2514,6 +2948,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:831b421a-54c2-4729-90a1-52af3d2607d5"
+      ],
+      "sourceOrder": 14,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "831b421a-54c2-4729-90a1-52af3d2607d5"
@@ -2539,8 +2978,10 @@
       "id": "9181723a-06f1-401b-940f-dd849a4b60f7",
       "name": "Synth Strings 1",
       "normalizedName": "synth strings 1",
+      "canonicalId": "9181723a-06f1-401b-940f-dd849a4b60f7",
       "parentId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 2,
       "range": {
         "start": 9600,
@@ -2564,6 +3005,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:9181723a-06f1-401b-940f-dd849a4b60f7"
+      ],
+      "sourceOrder": 44,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "9181723a-06f1-401b-940f-dd849a4b60f7"
@@ -2589,8 +3035,10 @@
       "id": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
       "name": "Motif 1",
       "normalizedName": "motif 1",
+      "canonicalId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
       "parentId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 3,
       "range": {
         "start": 3840,
@@ -2614,6 +3062,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:1a9e5c73-b8c6-4d26-ad17-a5774af87c45"
+      ],
+      "sourceOrder": 47,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45"
@@ -2639,8 +3092,10 @@
       "id": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
       "name": "Motif 1'",
       "normalizedName": "motif 1",
+      "canonicalId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
       "parentId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 3,
       "range": {
         "start": 5376,
@@ -2666,6 +3121,11 @@
         "rhythmic_variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:8fd4aafb-f5b0-459d-a267-4f8a573ee8e1"
+      ],
+      "sourceOrder": 48,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1"
@@ -2695,8 +3155,10 @@
       "id": "d046c452-38c1-49c2-a9fd-51d407c5a576",
       "name": "Motif 2",
       "normalizedName": "motif 2",
+      "canonicalId": "d046c452-38c1-49c2-a9fd-51d407c5a576",
       "parentId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 3,
       "range": {
         "start": 6912,
@@ -2720,6 +3182,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:d046c452-38c1-49c2-a9fd-51d407c5a576"
+      ],
+      "sourceOrder": 49,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "d046c452-38c1-49c2-a9fd-51d407c5a576"
@@ -2745,8 +3212,10 @@
       "id": "46742395-909b-4f6b-ba9c-e55c559c62c1",
       "name": "Motif 2'",
       "normalizedName": "motif 2",
+      "canonicalId": "d046c452-38c1-49c2-a9fd-51d407c5a576",
       "parentId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 3,
       "range": {
         "start": 8448,
@@ -2771,6 +3240,11 @@
         "variation",
         "leaf"
       ],
+      "patternRole": "derived_pattern",
+      "instanceIds": [
+        "instance:46742395-909b-4f6b-ba9c-e55c559c62c1"
+      ],
+      "sourceOrder": 50,
       "sourceRef": {
         "settingsPath": "MMX_Chill_Penguin.mid.json",
         "patternId": "46742395-909b-4f6b-ba9c-e55c559c62c1"
@@ -2796,268 +3270,2106 @@
       }
     }
   ],
+  "patternInstances": [
+    {
+      "id": "instance:root",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "root",
+      "canonicalPatternId": "root",
+      "parentInstanceId": null,
+      "childInstanceIds": [
+        "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+        "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+        "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+        "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+        "instance:86c4f937-1133-42d4-9b3b-20d9f3148321"
+      ],
+      "orderIndex": 0,
+      "orderPath": [
+        0
+      ],
+      "depth": 0,
+      "instanceType": "song_root",
+      "materialRole": "song_root",
+      "range": {
+        "start": 0,
+        "end": 11132,
+        "low": 0,
+        "high": 127
+      },
+      "mode": null,
+      "instrumentCount": 11,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "root",
+        "instanceId": "instance:root"
+      }
+    },
+    {
+      "id": "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "canonicalPatternId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:aada8394-c958-4618-9144-b903591cadef",
+        "instance:7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
+      ],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        0
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 766,
+        "low": 33,
+        "high": 108
+      },
+      "mode": "start",
+      "instrumentCount": 2,
+      "instruments": [
+        0,
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+        "instanceId": "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d"
+      }
+    },
+    {
+      "id": "instance:aada8394-c958-4618-9144-b903591cadef",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "aada8394-c958-4618-9144-b903591cadef",
+      "canonicalPatternId": "aada8394-c958-4618-9144-b903591cadef",
+      "parentInstanceId": "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        0,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 672,
+        "end": 755,
+        "low": 33,
+        "high": 40
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "aada8394-c958-4618-9144-b903591cadef",
+        "instanceId": "instance:aada8394-c958-4618-9144-b903591cadef"
+      }
+    },
+    {
+      "id": "instance:7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
+      "canonicalPatternId": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
+      "parentInstanceId": "instance:1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        0,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 0,
+        "end": 763,
+        "low": 84,
+        "high": 108
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
+        "instanceId": "instance:7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
+      }
+    },
+    {
+      "id": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "canonicalPatternId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:22135d5a-ade1-4121-aa04-2019285cae17",
+        "instance:0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+        "instance:eb5ea183-7eed-404d-bb16-577da23b68fb",
+        "instance:01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+        "instance:f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+        "instance:47dfd58a-7b73-4c1e-af71-298c8be00d42",
+        "instance:831b421a-54c2-4729-90a1-52af3d2607d5",
+        "instance:d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+        "instance:95829cf6-3e45-47ac-8b66-e59f9a35c594"
+      ],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        1
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2302,
+        "low": 33,
+        "high": 108
+      },
+      "mode": "start",
+      "instrumentCount": 9,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+        "instanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb"
+      }
+    },
+    {
+      "id": "instance:22135d5a-ade1-4121-aa04-2019285cae17",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "22135d5a-ade1-4121-aa04-2019285cae17",
+      "canonicalPatternId": "22135d5a-ade1-4121-aa04-2019285cae17",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        1,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2291,
+        "low": 33,
+        "high": 52
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "22135d5a-ade1-4121-aa04-2019285cae17",
+        "instanceId": "instance:22135d5a-ade1-4121-aa04-2019285cae17"
+      }
+    },
+    {
+      "id": "instance:0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+      "canonicalPatternId": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        1,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2299,
+        "low": 36,
+        "high": 48
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+        "instanceId": "instance:0b04a09a-896e-4dc8-8e2e-c0fa469ac925"
+      }
+    },
+    {
+      "id": "instance:eb5ea183-7eed-404d-bb16-577da23b68fb",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "eb5ea183-7eed-404d-bb16-577da23b68fb",
+      "canonicalPatternId": "eb5ea183-7eed-404d-bb16-577da23b68fb",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        1,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2299,
+        "low": 84,
+        "high": 108
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "eb5ea183-7eed-404d-bb16-577da23b68fb",
+        "instanceId": "instance:eb5ea183-7eed-404d-bb16-577da23b68fb"
+      }
+    },
+    {
+      "id": "instance:01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+      "canonicalPatternId": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        1,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2299,
+        "low": 60,
+        "high": 63
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+        "instanceId": "instance:01a40e72-9cef-49c8-a6d2-9c2e86a33c75"
+      }
+    },
+    {
+      "id": "instance:f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+      "canonicalPatternId": "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        1,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2299,
+        "low": 60,
+        "high": 67
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+        "instanceId": "instance:f7a63a82-aaa1-42a8-845f-c9df23068bf3"
+      }
+    },
+    {
+      "id": "instance:47dfd58a-7b73-4c1e-af71-298c8be00d42",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "47dfd58a-7b73-4c1e-af71-298c8be00d42",
+      "canonicalPatternId": "47dfd58a-7b73-4c1e-af71-298c8be00d42",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        1,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2299,
+        "low": 67,
+        "high": 70
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "47dfd58a-7b73-4c1e-af71-298c8be00d42",
+        "instanceId": "instance:47dfd58a-7b73-4c1e-af71-298c8be00d42"
+      }
+    },
+    {
+      "id": "instance:831b421a-54c2-4729-90a1-52af3d2607d5",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "831b421a-54c2-4729-90a1-52af3d2607d5",
+      "canonicalPatternId": "831b421a-54c2-4729-90a1-52af3d2607d5",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 6,
+      "orderPath": [
+        0,
+        1,
+        6
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 768,
+        "end": 2303,
+        "low": 67,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        8
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "831b421a-54c2-4729-90a1-52af3d2607d5",
+        "instanceId": "instance:831b421a-54c2-4729-90a1-52af3d2607d5"
+      }
+    },
+    {
+      "id": "instance:d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+      "canonicalPatternId": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 7,
+      "orderPath": [
+        0,
+        1,
+        7
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2064,
+        "end": 2231,
+        "low": 45,
+        "high": 65
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        9
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+        "instanceId": "instance:d1ecc7a5-bad0-406e-8e08-1d2549770bc6"
+      }
+    },
+    {
+      "id": "instance:95829cf6-3e45-47ac-8b66-e59f9a35c594",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "95829cf6-3e45-47ac-8b66-e59f9a35c594",
+      "canonicalPatternId": "95829cf6-3e45-47ac-8b66-e59f9a35c594",
+      "parentInstanceId": "instance:7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "childInstanceIds": [],
+      "orderIndex": 8,
+      "orderPath": [
+        0,
+        1,
+        8
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 864,
+        "end": 1643,
+        "low": 76,
+        "high": 76
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "95829cf6-3e45-47ac-8b66-e59f9a35c594",
+        "instanceId": "instance:95829cf6-3e45-47ac-8b66-e59f9a35c594"
+      }
+    },
+    {
+      "id": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "canonicalPatternId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:eff59a55-51e2-4b3e-b862-cd4b08171e40",
+        "instance:e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+        "instance:1d36131e-29be-437a-97bb-098181ec89ff",
+        "instance:6c672a71-316f-401a-9d3d-04cbbf1049a0",
+        "instance:a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+        "instance:81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+        "instance:08db50f0-c4bf-4586-94cb-b2571e30738a",
+        "instance:ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+        "instance:41ca54db-bbac-4fe9-91f8-22208370a5a6"
+      ],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        2
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3838,
+        "low": 32,
+        "high": 110
+      },
+      "mode": "start",
+      "instrumentCount": 9,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "0cbdb791-a3d7-4802-9742-00b561d1b123",
+        "instanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123"
+      }
+    },
+    {
+      "id": "instance:eff59a55-51e2-4b3e-b862-cd4b08171e40",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "eff59a55-51e2-4b3e-b862-cd4b08171e40",
+      "canonicalPatternId": "eff59a55-51e2-4b3e-b862-cd4b08171e40",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        2,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3827,
+        "low": 33,
+        "high": 52
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "eff59a55-51e2-4b3e-b862-cd4b08171e40",
+        "instanceId": "instance:eff59a55-51e2-4b3e-b862-cd4b08171e40"
+      }
+    },
+    {
+      "id": "instance:e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+      "canonicalPatternId": "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        2,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3835,
+        "low": 32,
+        "high": 41
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+        "instanceId": "instance:e44dbc9d-a7b7-42b5-99d6-e171373576b5"
+      }
+    },
+    {
+      "id": "instance:1d36131e-29be-437a-97bb-098181ec89ff",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "1d36131e-29be-437a-97bb-098181ec89ff",
+      "canonicalPatternId": "1d36131e-29be-437a-97bb-098181ec89ff",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        2,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3576,
+        "end": 3835,
+        "low": 77,
+        "high": 110
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "1d36131e-29be-437a-97bb-098181ec89ff",
+        "instanceId": "instance:1d36131e-29be-437a-97bb-098181ec89ff"
+      }
+    },
+    {
+      "id": "instance:6c672a71-316f-401a-9d3d-04cbbf1049a0",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "6c672a71-316f-401a-9d3d-04cbbf1049a0",
+      "canonicalPatternId": "6c672a71-316f-401a-9d3d-04cbbf1049a0",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        2,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3787,
+        "low": 69,
+        "high": 75
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "6c672a71-316f-401a-9d3d-04cbbf1049a0",
+        "instanceId": "instance:6c672a71-316f-401a-9d3d-04cbbf1049a0"
+      }
+    },
+    {
+      "id": "instance:a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+      "canonicalPatternId": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        2,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3787,
+        "low": 68,
+        "high": 79
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+        "instanceId": "instance:a5f40e39-73fb-4b64-8fe4-c364f6d6da29"
+      }
+    },
+    {
+      "id": "instance:81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+      "canonicalPatternId": "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        2,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3787,
+        "low": 75,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+        "instanceId": "instance:81e5713a-0c8f-489f-a5fd-09bf55b389fb"
+      }
+    },
+    {
+      "id": "instance:08db50f0-c4bf-4586-94cb-b2571e30738a",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "08db50f0-c4bf-4586-94cb-b2571e30738a",
+      "canonicalPatternId": "08db50f0-c4bf-4586-94cb-b2571e30738a",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 6,
+      "orderPath": [
+        0,
+        2,
+        6
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 2304,
+        "end": 3839,
+        "low": 62,
+        "high": 86
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        8
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "08db50f0-c4bf-4586-94cb-b2571e30738a",
+        "instanceId": "instance:08db50f0-c4bf-4586-94cb-b2571e30738a"
+      }
+    },
+    {
+      "id": "instance:ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+      "canonicalPatternId": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 7,
+      "orderPath": [
+        0,
+        2,
+        7
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3600,
+        "end": 3767,
+        "low": 45,
+        "high": 65
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        9
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+        "instanceId": "instance:ef792d8d-06f8-4f77-89e3-4b1cb02b90ab"
+      }
+    },
+    {
+      "id": "instance:41ca54db-bbac-4fe9-91f8-22208370a5a6",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "41ca54db-bbac-4fe9-91f8-22208370a5a6",
+      "canonicalPatternId": "41ca54db-bbac-4fe9-91f8-22208370a5a6",
+      "parentInstanceId": "instance:0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "childInstanceIds": [],
+      "orderIndex": 8,
+      "orderPath": [
+        0,
+        2,
+        8
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3456,
+        "end": 3467,
+        "low": 49,
+        "high": 50
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "41ca54db-bbac-4fe9-91f8-22208370a5a6",
+        "instanceId": "instance:41ca54db-bbac-4fe9-91f8-22208370a5a6"
+      }
+    },
+    {
+      "id": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "canonicalPatternId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:83cebcee-587f-4af2-9fac-b678cb7e994c",
+        "instance:7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+        "instance:240d4f77-8136-4f9c-974a-236a70cd3093",
+        "instance:1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+        "instance:ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+        "instance:6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+        "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+        "instance:06b5a296-5de9-4f8c-84af-a535645fc799",
+        "instance:89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+        "instance:913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7"
+      ],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 9598,
+        "low": 32,
+        "high": 101
+      },
+      "mode": "start",
+      "instrumentCount": 11,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "6516d775-c8da-4555-9f0f-19dd58e7a993",
+        "instanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993"
+      }
+    },
+    {
+      "id": "instance:83cebcee-587f-4af2-9fac-b678cb7e994c",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "83cebcee-587f-4af2-9fac-b678cb7e994c",
+      "canonicalPatternId": "83cebcee-587f-4af2-9fac-b678cb7e994c",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        3,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 9563,
+        "low": 33,
+        "high": 83
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "83cebcee-587f-4af2-9fac-b678cb7e994c",
+        "instanceId": "instance:83cebcee-587f-4af2-9fac-b678cb7e994c"
+      }
+    },
+    {
+      "id": "instance:7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+      "canonicalPatternId": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        3,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 9595,
+        "low": 32,
+        "high": 44
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+        "instanceId": "instance:7a8ec604-d4bd-4704-bfd6-6bf15ca2283a"
+      }
+    },
+    {
+      "id": "instance:240d4f77-8136-4f9c-974a-236a70cd3093",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "240d4f77-8136-4f9c-974a-236a70cd3093",
+      "canonicalPatternId": "240d4f77-8136-4f9c-974a-236a70cd3093",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        3,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 4944,
+        "end": 5279,
+        "low": 94,
+        "high": 101
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "240d4f77-8136-4f9c-974a-236a70cd3093",
+        "instanceId": "instance:240d4f77-8136-4f9c-974a-236a70cd3093"
+      }
+    },
+    {
+      "id": "instance:1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+      "canonicalPatternId": "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 4176,
+        "end": 9575,
+        "low": 74,
+        "high": 83
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+        "instanceId": "instance:1fbb0a49-203c-45e2-900d-3fa68a0c822a"
+      }
+    },
+    {
+      "id": "instance:ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+      "canonicalPatternId": "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        3,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 4176,
+        "end": 9575,
+        "low": 70,
+        "high": 79
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+        "instanceId": "instance:ca3db22b-0f54-4205-a4f5-cf708abcaf61"
+      }
+    },
+    {
+      "id": "instance:6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+      "canonicalPatternId": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        3,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 4176,
+        "end": 9575,
+        "low": 65,
+        "high": 75
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+        "instanceId": "instance:6fd5c53e-a831-4e0c-88b0-498381a5a5e7"
+      }
+    },
+    {
+      "id": "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "canonicalPatternId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [
+        "instance:1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+        "instance:8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+        "instance:d046c452-38c1-49c2-a9fd-51d407c5a576",
+        "instance:46742395-909b-4f6b-ba9c-e55c559c62c1"
+      ],
+      "orderIndex": 6,
+      "orderPath": [
+        0,
+        3,
+        6
+      ],
+      "depth": 2,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 9595,
+        "low": 70,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+        "instanceId": "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5"
+      }
+    },
+    {
+      "id": "instance:1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+      "canonicalPatternId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+      "parentInstanceId": "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        3,
+        6,
+        0
+      ],
+      "depth": 3,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 4990,
+        "low": 70,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+        "instanceId": "instance:1a9e5c73-b8c6-4d26-ad17-a5774af87c45"
+      }
+    },
+    {
+      "id": "instance:8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+      "canonicalPatternId": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+      "parentInstanceId": "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        3,
+        6,
+        1
+      ],
+      "depth": 3,
+      "instanceType": "leaf",
+      "materialRole": "rhythmic_variation",
+      "range": {
+        "start": 5376,
+        "end": 6526,
+        "low": 72,
+        "high": 89
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+        "instanceId": "instance:8fd4aafb-f5b0-459d-a267-4f8a573ee8e1"
+      }
+    },
+    {
+      "id": "instance:d046c452-38c1-49c2-a9fd-51d407c5a576",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "d046c452-38c1-49c2-a9fd-51d407c5a576",
+      "canonicalPatternId": "d046c452-38c1-49c2-a9fd-51d407c5a576",
+      "parentInstanceId": "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        3,
+        6,
+        2
+      ],
+      "depth": 3,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 6912,
+        "end": 8446,
+        "low": 70,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "d046c452-38c1-49c2-a9fd-51d407c5a576",
+        "instanceId": "instance:d046c452-38c1-49c2-a9fd-51d407c5a576"
+      }
+    },
+    {
+      "id": "instance:46742395-909b-4f6b-ba9c-e55c559c62c1",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "46742395-909b-4f6b-ba9c-e55c559c62c1",
+      "canonicalPatternId": "d046c452-38c1-49c2-a9fd-51d407c5a576",
+      "parentInstanceId": "instance:4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        3,
+        6,
+        3
+      ],
+      "depth": 3,
+      "instanceType": "leaf",
+      "materialRole": "variation",
+      "range": {
+        "start": 8448,
+        "end": 9598,
+        "low": 71,
+        "high": 82
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "46742395-909b-4f6b-ba9c-e55c559c62c1",
+        "instanceId": "instance:46742395-909b-4f6b-ba9c-e55c559c62c1"
+      }
+    },
+    {
+      "id": "instance:06b5a296-5de9-4f8c-84af-a535645fc799",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "06b5a296-5de9-4f8c-84af-a535645fc799",
+      "canonicalPatternId": "06b5a296-5de9-4f8c-84af-a535645fc799",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 7,
+      "orderPath": [
+        0,
+        3,
+        7
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 9595,
+        "low": 70,
+        "high": 79
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        8
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "06b5a296-5de9-4f8c-84af-a535645fc799",
+        "instanceId": "instance:06b5a296-5de9-4f8c-84af-a535645fc799"
+      }
+    },
+    {
+      "id": "instance:89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+      "canonicalPatternId": "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 8,
+      "orderPath": [
+        0,
+        3,
+        8
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9384,
+        "end": 9527,
+        "low": 45,
+        "high": 65
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        9
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+        "instanceId": "instance:89f1cfd2-5822-4d92-ad29-81d61cd969c9"
+      }
+    },
+    {
+      "id": "instance:913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
+      "canonicalPatternId": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
+      "parentInstanceId": "instance:6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "childInstanceIds": [],
+      "orderIndex": 9,
+      "orderPath": [
+        0,
+        3,
+        9
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 3840,
+        "end": 8461,
+        "low": 60,
+        "high": 60
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
+        "instanceId": "instance:913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7"
+      }
+    },
+    {
+      "id": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "canonicalPatternId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "parentInstanceId": "instance:root",
+      "childInstanceIds": [
+        "instance:bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+        "instance:20159131-4b71-4d17-8791-116fdc751b0c",
+        "instance:8376190b-adf0-44df-8f6e-91ef2e0c2496",
+        "instance:9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+        "instance:2616e3bc-5b06-4381-b713-1d12753a7ed0",
+        "instance:31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+        "instance:e005902d-487d-41ae-b83a-cbd008d549b2",
+        "instance:1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+        "instance:9181723a-06f1-401b-940f-dd849a4b60f7",
+        "instance:533c3385-fe49-4c1a-b155-5bf677594b13",
+        "instance:69de5f71-1a65-4dbf-bdc5-0b35c4199907"
+      ],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        4
+      ],
+      "depth": 1,
+      "instanceType": "container",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 11134,
+        "low": 33,
+        "high": 108
+      },
+      "mode": "start",
+      "instrumentCount": 11,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "86c4f937-1133-42d4-9b3b-20d9f3148321",
+        "instanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321"
+      }
+    },
+    {
+      "id": "instance:bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+      "canonicalPatternId": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0,
+        4,
+        0
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 11123,
+        "low": 33,
+        "high": 83
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        0
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+        "instanceId": "instance:bb217a75-6e9e-44d4-8746-d9e11f7dc9ca"
+      }
+    },
+    {
+      "id": "instance:20159131-4b71-4d17-8791-116fdc751b0c",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "20159131-4b71-4d17-8791-116fdc751b0c",
+      "canonicalPatternId": "20159131-4b71-4d17-8791-116fdc751b0c",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 1,
+      "orderPath": [
+        0,
+        4,
+        1
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 11131,
+        "low": 36,
+        "high": 48
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        1
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "20159131-4b71-4d17-8791-116fdc751b0c",
+        "instanceId": "instance:20159131-4b71-4d17-8791-116fdc751b0c"
+      }
+    },
+    {
+      "id": "instance:8376190b-adf0-44df-8f6e-91ef2e0c2496",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "8376190b-adf0-44df-8f6e-91ef2e0c2496",
+      "canonicalPatternId": "8376190b-adf0-44df-8f6e-91ef2e0c2496",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 2,
+      "orderPath": [
+        0,
+        4,
+        2
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 11131,
+        "low": 84,
+        "high": 108
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        2
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "8376190b-adf0-44df-8f6e-91ef2e0c2496",
+        "instanceId": "instance:8376190b-adf0-44df-8f6e-91ef2e0c2496"
+      }
+    },
+    {
+      "id": "instance:9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+      "canonicalPatternId": "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 3,
+      "orderPath": [
+        0,
+        4,
+        3
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 10367,
+        "low": 75,
+        "high": 75
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        3
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+        "instanceId": "instance:9787f20e-6c49-45f1-ab9d-033c1a2d8591"
+      }
+    },
+    {
+      "id": "instance:2616e3bc-5b06-4381-b713-1d12753a7ed0",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "2616e3bc-5b06-4381-b713-1d12753a7ed0",
+      "canonicalPatternId": "2616e3bc-5b06-4381-b713-1d12753a7ed0",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 4,
+      "orderPath": [
+        0,
+        4,
+        4
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 10367,
+        "low": 72,
+        "high": 72
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        4
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "2616e3bc-5b06-4381-b713-1d12753a7ed0",
+        "instanceId": "instance:2616e3bc-5b06-4381-b713-1d12753a7ed0"
+      }
+    },
+    {
+      "id": "instance:31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+      "canonicalPatternId": "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 5,
+      "orderPath": [
+        0,
+        4,
+        5
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 10367,
+        "low": 67,
+        "high": 67
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+        "instanceId": "instance:31cde0e4-fcd7-48b3-b947-c840ec0ba746"
+      }
+    },
+    {
+      "id": "instance:e005902d-487d-41ae-b83a-cbd008d549b2",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "e005902d-487d-41ae-b83a-cbd008d549b2",
+      "canonicalPatternId": "e005902d-487d-41ae-b83a-cbd008d549b2",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 6,
+      "orderPath": [
+        0,
+        4,
+        6
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 10367,
+        "low": 72,
+        "high": 72
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        6
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "e005902d-487d-41ae-b83a-cbd008d549b2",
+        "instanceId": "instance:e005902d-487d-41ae-b83a-cbd008d549b2"
+      }
+    },
+    {
+      "id": "instance:1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+      "canonicalPatternId": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 7,
+      "orderPath": [
+        0,
+        4,
+        7
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9612,
+        "end": 10427,
+        "low": 71,
+        "high": 72
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        7
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+        "instanceId": "instance:1c879aa3-de4b-4f6c-8641-5ad8044caa1d"
+      }
+    },
+    {
+      "id": "instance:9181723a-06f1-401b-940f-dd849a4b60f7",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "9181723a-06f1-401b-940f-dd849a4b60f7",
+      "canonicalPatternId": "9181723a-06f1-401b-940f-dd849a4b60f7",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 8,
+      "orderPath": [
+        0,
+        4,
+        8
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 9695,
+        "low": 67,
+        "high": 75
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        8
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "9181723a-06f1-401b-940f-dd849a4b60f7",
+        "instanceId": "instance:9181723a-06f1-401b-940f-dd849a4b60f7"
+      }
+    },
+    {
+      "id": "instance:533c3385-fe49-4c1a-b155-5bf677594b13",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "533c3385-fe49-4c1a-b155-5bf677594b13",
+      "canonicalPatternId": "533c3385-fe49-4c1a-b155-5bf677594b13",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 9,
+      "orderPath": [
+        0,
+        4,
+        9
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 10992,
+        "end": 11087,
+        "low": 43,
+        "high": 54
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        9
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "533c3385-fe49-4c1a-b155-5bf677594b13",
+        "instanceId": "instance:533c3385-fe49-4c1a-b155-5bf677594b13"
+      }
+    },
+    {
+      "id": "instance:69de5f71-1a65-4dbf-bdc5-0b35c4199907",
+      "songId": "mmx_chill_penguin",
+      "sourcePatternId": "69de5f71-1a65-4dbf-bdc5-0b35c4199907",
+      "canonicalPatternId": "69de5f71-1a65-4dbf-bdc5-0b35c4199907",
+      "parentInstanceId": "instance:86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "childInstanceIds": [],
+      "orderIndex": 10,
+      "orderPath": [
+        0,
+        4,
+        10
+      ],
+      "depth": 2,
+      "instanceType": "leaf",
+      "materialRole": "new_material",
+      "range": {
+        "start": 9600,
+        "end": 10669,
+        "low": 46,
+        "high": 66
+      },
+      "mode": "start",
+      "instrumentCount": 1,
+      "instruments": [
+        10
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX_Chill_Penguin.mid.json",
+        "patternId": "69de5f71-1a65-4dbf-bdc5-0b35c4199907",
+        "instanceId": "instance:69de5f71-1a65-4dbf-bdc5-0b35c4199907"
+      }
+    }
+  ],
   "relationships": [
     {
       "type": "parent_child",
       "from": "root",
-      "to": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d"
+      "to": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb"
+      "to": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "0cbdb791-a3d7-4802-9742-00b561d1b123"
+      "to": "0cbdb791-a3d7-4802-9742-00b561d1b123",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "6516d775-c8da-4555-9f0f-19dd58e7a993"
+      "to": "6516d775-c8da-4555-9f0f-19dd58e7a993",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "root",
-      "to": "86c4f937-1133-42d4-9b3b-20d9f3148321"
+      "to": "86c4f937-1133-42d4-9b3b-20d9f3148321",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
-      "to": "aada8394-c958-4618-9144-b903591cadef"
+      "to": "aada8394-c958-4618-9144-b903591cadef",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "1a06f142-9c15-43d8-8fb1-2a8c31b8da7d",
-      "to": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43"
+      "to": "7d0b67f3-1f26-46a6-a72f-eaa19ee41d43",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "22135d5a-ade1-4121-aa04-2019285cae17"
+      "to": "22135d5a-ade1-4121-aa04-2019285cae17",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925"
+      "to": "0b04a09a-896e-4dc8-8e2e-c0fa469ac925",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "eb5ea183-7eed-404d-bb16-577da23b68fb"
+      "to": "eb5ea183-7eed-404d-bb16-577da23b68fb",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75"
+      "to": "01a40e72-9cef-49c8-a6d2-9c2e86a33c75",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "f7a63a82-aaa1-42a8-845f-c9df23068bf3"
+      "to": "f7a63a82-aaa1-42a8-845f-c9df23068bf3",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "47dfd58a-7b73-4c1e-af71-298c8be00d42"
+      "to": "47dfd58a-7b73-4c1e-af71-298c8be00d42",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "831b421a-54c2-4729-90a1-52af3d2607d5"
+      "to": "831b421a-54c2-4729-90a1-52af3d2607d5",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6"
+      "to": "d1ecc7a5-bad0-406e-8e08-1d2549770bc6",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "7f6061b2-ef30-41a1-bc48-4f448f9d92cb",
-      "to": "95829cf6-3e45-47ac-8b66-e59f9a35c594"
+      "to": "95829cf6-3e45-47ac-8b66-e59f9a35c594",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "eff59a55-51e2-4b3e-b862-cd4b08171e40"
+      "to": "eff59a55-51e2-4b3e-b862-cd4b08171e40",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "e44dbc9d-a7b7-42b5-99d6-e171373576b5"
+      "to": "e44dbc9d-a7b7-42b5-99d6-e171373576b5",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "1d36131e-29be-437a-97bb-098181ec89ff"
+      "to": "1d36131e-29be-437a-97bb-098181ec89ff",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "6c672a71-316f-401a-9d3d-04cbbf1049a0"
+      "to": "6c672a71-316f-401a-9d3d-04cbbf1049a0",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29"
+      "to": "a5f40e39-73fb-4b64-8fe4-c364f6d6da29",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "81e5713a-0c8f-489f-a5fd-09bf55b389fb"
+      "to": "81e5713a-0c8f-489f-a5fd-09bf55b389fb",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "08db50f0-c4bf-4586-94cb-b2571e30738a"
+      "to": "08db50f0-c4bf-4586-94cb-b2571e30738a",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab"
+      "to": "ef792d8d-06f8-4f77-89e3-4b1cb02b90ab",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "0cbdb791-a3d7-4802-9742-00b561d1b123",
-      "to": "41ca54db-bbac-4fe9-91f8-22208370a5a6"
+      "to": "41ca54db-bbac-4fe9-91f8-22208370a5a6",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "83cebcee-587f-4af2-9fac-b678cb7e994c"
+      "to": "83cebcee-587f-4af2-9fac-b678cb7e994c",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a"
+      "to": "7a8ec604-d4bd-4704-bfd6-6bf15ca2283a",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "240d4f77-8136-4f9c-974a-236a70cd3093"
+      "to": "240d4f77-8136-4f9c-974a-236a70cd3093",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "1fbb0a49-203c-45e2-900d-3fa68a0c822a"
+      "to": "1fbb0a49-203c-45e2-900d-3fa68a0c822a",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "ca3db22b-0f54-4205-a4f5-cf708abcaf61"
+      "to": "ca3db22b-0f54-4205-a4f5-cf708abcaf61",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7"
+      "to": "6fd5c53e-a831-4e0c-88b0-498381a5a5e7",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5"
+      "to": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "06b5a296-5de9-4f8c-84af-a535645fc799"
+      "to": "06b5a296-5de9-4f8c-84af-a535645fc799",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "89f1cfd2-5822-4d92-ad29-81d61cd969c9"
+      "to": "89f1cfd2-5822-4d92-ad29-81d61cd969c9",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "6516d775-c8da-4555-9f0f-19dd58e7a993",
-      "to": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7"
+      "to": "913fb7db-5ac9-4f2e-8bcc-caa06eb4d7d7",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca"
+      "to": "bb217a75-6e9e-44d4-8746-d9e11f7dc9ca",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "20159131-4b71-4d17-8791-116fdc751b0c"
+      "to": "20159131-4b71-4d17-8791-116fdc751b0c",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "8376190b-adf0-44df-8f6e-91ef2e0c2496"
+      "to": "8376190b-adf0-44df-8f6e-91ef2e0c2496",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "9787f20e-6c49-45f1-ab9d-033c1a2d8591"
+      "to": "9787f20e-6c49-45f1-ab9d-033c1a2d8591",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "2616e3bc-5b06-4381-b713-1d12753a7ed0"
+      "to": "2616e3bc-5b06-4381-b713-1d12753a7ed0",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "31cde0e4-fcd7-48b3-b947-c840ec0ba746"
+      "to": "31cde0e4-fcd7-48b3-b947-c840ec0ba746",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "e005902d-487d-41ae-b83a-cbd008d549b2"
+      "to": "e005902d-487d-41ae-b83a-cbd008d549b2",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d"
+      "to": "1c879aa3-de4b-4f6c-8641-5ad8044caa1d",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "9181723a-06f1-401b-940f-dd849a4b60f7"
+      "to": "9181723a-06f1-401b-940f-dd849a4b60f7",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "533c3385-fe49-4c1a-b155-5bf677594b13"
+      "to": "533c3385-fe49-4c1a-b155-5bf677594b13",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "86c4f937-1133-42d4-9b3b-20d9f3148321",
-      "to": "69de5f71-1a65-4dbf-bdc5-0b35c4199907"
+      "to": "69de5f71-1a65-4dbf-bdc5-0b35c4199907",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
-      "to": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45"
+      "to": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
-      "to": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1"
+      "to": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
-      "to": "d046c452-38c1-49c2-a9fd-51d407c5a576"
+      "to": "d046c452-38c1-49c2-a9fd-51d407c5a576",
+      "scope": "pattern"
     },
     {
       "type": "parent_child",
       "from": "4ef6332c-ffba-4615-ade0-b2c4c77c2db5",
-      "to": "46742395-909b-4f6b-ba9c-e55c559c62c1"
+      "to": "46742395-909b-4f6b-ba9c-e55c559c62c1",
+      "scope": "pattern"
     },
     {
       "type": "rhythmic_variation",
       "from": "1a9e5c73-b8c6-4d26-ad17-a5774af87c45",
       "to": "8fd4aafb-f5b0-459d-a267-4f8a573ee8e1",
-      "label": "Motif 1"
+      "label": "Motif 1",
+      "scope": "pattern"
     },
     {
       "type": "variation",
       "from": "d046c452-38c1-49c2-a9fd-51d407c5a576",
       "to": "46742395-909b-4f6b-ba9c-e55c559c62c1",
-      "label": "Motif 2"
+      "label": "Motif 2",
+      "scope": "pattern"
     }
   ],
   "collectionCandidates": [
@@ -3177,9 +5489,11 @@
   ],
   "summary": {
     "patternCount": 51,
+    "patternInstanceCount": 51,
     "relationshipCount": 52,
     "collectionCount": 7,
     "rootPatternCount": 1,
+    "rootInstanceCount": 1,
     "leafPatternCount": 44,
     "relationshipTypeCounts": {
       "variation": 2,
@@ -3189,6 +5503,12 @@
       "top_level_section": 5,
       "root_collection": 1,
       "pattern_group": 1
+    },
+    "materialRoleCounts": {
+      "new_material": 48,
+      "song_root": 1,
+      "rhythmic_variation": 1,
+      "variation": 1
     },
     "labelVariantGroups": [
       {

@@ -1,9 +1,11 @@
 {
-  "generatedAt": "2026-03-29T14:42:58.829992+00:00",
+  "generatedAt": "2026-03-29T15:40:45.039189+00:00",
   "exportPath": "C:\\Users\\leeor\\FFCO\\MusicAnalyzerDAW\\heuristic_exports\\index.json",
+  "schemaVersion": "heuristic-song-export/v2",
   "summaryCards": {
     "songCount": 11,
     "patternCount": 834,
+    "patternInstanceCount": 834,
     "relationshipCount": 1246,
     "collectionCount": 177
   },
@@ -17,6 +19,15 @@
     "pattern_group": 124,
     "top_level_section": 43,
     "root_collection": 10
+  },
+  "materialRoleCounts": {
+    "new_material": 388,
+    "repetition": 233,
+    "variation": 159,
+    "rhythmic_variation": 31,
+    "song_root": 11,
+    "simplification": 6,
+    "canonical_reuse": 6
   },
   "labelVariantGroups": [
     {
@@ -193,6 +204,12 @@
     }
   ],
   "issues": [],
+  "workedExample": {
+    "path": "examples/representative_song.json",
+    "songId": "mmx_boomer_kuwanger_stage",
+    "title": "MMX Boomer Kuwanger Stage",
+    "patternInstanceCount": 199
+  },
   "items": [
     {
       "songId": "launch_octopus",
@@ -200,6 +217,7 @@
       "path": "songs/launch_octopus.json",
       "sourcePath": "MMX_Launch_Octopus.mid.json",
       "patternCount": 31,
+      "patternInstanceCount": 31,
       "relationshipCount": 30,
       "collectionCount": 6
     },
@@ -209,6 +227,7 @@
       "path": "songs/mmx_armored_armadillo_stage.json",
       "sourcePath": "armored_armadillo_adjusted.mid.json",
       "patternCount": 148,
+      "patternInstanceCount": 148,
       "relationshipCount": 230,
       "collectionCount": 28
     },
@@ -218,6 +237,7 @@
       "path": "songs/mmx_boomer_kuwanger_stage.json",
       "sourcePath": "MMX_Boomer_Kuwanger.mid.json",
       "patternCount": 199,
+      "patternInstanceCount": 199,
       "relationshipCount": 341,
       "collectionCount": 43
     },
@@ -227,6 +247,7 @@
       "path": "songs/mmx_chill_penguin.json",
       "sourcePath": "MMX_Chill_Penguin.mid.json",
       "patternCount": 51,
+      "patternInstanceCount": 51,
       "relationshipCount": 52,
       "collectionCount": 7
     },
@@ -236,6 +257,7 @@
       "path": "songs/mmx_flame_mammoth_stage.json",
       "sourcePath": "flamemammothaligned.mid.json",
       "patternCount": 93,
+      "patternInstanceCount": 93,
       "relationshipCount": 135,
       "collectionCount": 25
     },
@@ -245,6 +267,7 @@
       "path": "songs/mmx_introduction_stage.json",
       "sourcePath": "IntroductionStage.mid.json",
       "patternCount": 85,
+      "patternInstanceCount": 85,
       "relationshipCount": 123,
       "collectionCount": 24
     },
@@ -254,6 +277,7 @@
       "path": "songs/mmx_spark_mandrill.json",
       "sourcePath": "MMX_Spark_Mandrill.mid.json",
       "patternCount": 34,
+      "patternInstanceCount": 34,
       "relationshipCount": 33,
       "collectionCount": 6
     },
@@ -263,6 +287,7 @@
       "path": "songs/mmx_storm_eagle.json",
       "sourcePath": "MMX_Storm_Eagle.mid.json",
       "patternCount": 134,
+      "patternInstanceCount": 134,
       "relationshipCount": 226,
       "collectionCount": 28
     },
@@ -272,6 +297,7 @@
       "path": "songs/mmx_string_chameleon.json",
       "sourcePath": "MMX_Sting_Chameleon.mid.json",
       "patternCount": 29,
+      "patternInstanceCount": 29,
       "relationshipCount": 34,
       "collectionCount": 5
     },
@@ -281,6 +307,7 @@
       "path": "songs/mmx2_flame_stagmid.json",
       "sourcePath": "MMX2_Flame_Stag.mid.json",
       "patternCount": 1,
+      "patternInstanceCount": 1,
       "relationshipCount": 0,
       "collectionCount": 0
     },
@@ -290,6 +317,7 @@
       "path": "songs/snes_mmx_boss_chosen_v1mid.json",
       "sourcePath": "SNES_MMX_Boss_Chosen_V1.mid.json",
       "patternCount": 29,
+      "patternInstanceCount": 29,
       "relationshipCount": 42,
       "collectionCount": 5
     }

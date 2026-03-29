@@ -1,5 +1,6 @@
 {
-  "exportVersion": 1,
+  "exportVersion": 2,
+  "schemaVersion": "heuristic-song-export/v2",
   "songId": "mmx2_flame_stagmid",
   "title": "MMX2_Flame_Stag.mid",
   "source": {
@@ -21,13 +22,24 @@
     ],
     "bpm": null
   },
+  "songPlan": {
+    "rootInstanceIds": [
+      "instance:root"
+    ],
+    "traversalOrderInstanceIds": [
+      "instance:root"
+    ],
+    "decompositionStrategy": "ordered_child_instances"
+  },
   "patterns": [
     {
       "id": "root",
       "name": "Whole song",
       "normalizedName": "whole song",
+      "canonicalId": "root",
       "parentId": null,
       "children": [],
+      "orderedChildPatternIds": [],
       "depth": 0,
       "range": {
         "start": 0,
@@ -56,6 +68,11 @@
       "relationTags": [
         "leaf"
       ],
+      "patternRole": "canonical_seed",
+      "instanceIds": [
+        "instance:root"
+      ],
+      "sourceOrder": 0,
       "sourceRef": {
         "settingsPath": "MMX2_Flame_Stag.mid.json",
         "patternId": "root"
@@ -83,16 +100,59 @@
       }
     }
   ],
+  "patternInstances": [
+    {
+      "id": "instance:root",
+      "songId": "mmx2_flame_stagmid",
+      "sourcePatternId": "root",
+      "canonicalPatternId": "root",
+      "parentInstanceId": null,
+      "childInstanceIds": [],
+      "orderIndex": 0,
+      "orderPath": [
+        0
+      ],
+      "depth": 0,
+      "instanceType": "song_root",
+      "materialRole": "song_root",
+      "range": {
+        "start": 0,
+        "end": 5952,
+        "low": 0,
+        "high": 127
+      },
+      "mode": null,
+      "instrumentCount": 6,
+      "instruments": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "sourceRef": {
+        "settingsPath": "MMX2_Flame_Stag.mid.json",
+        "patternId": "root",
+        "instanceId": "instance:root"
+      }
+    }
+  ],
   "relationships": [],
   "collectionCandidates": [],
   "summary": {
     "patternCount": 1,
+    "patternInstanceCount": 1,
     "relationshipCount": 0,
     "collectionCount": 0,
     "rootPatternCount": 1,
+    "rootInstanceCount": 1,
     "leafPatternCount": 1,
     "relationshipTypeCounts": {},
     "collectionTypeCounts": {},
+    "materialRoleCounts": {
+      "song_root": 1
+    },
     "labelVariantGroups": [],
     "issueCount": 0
   },
