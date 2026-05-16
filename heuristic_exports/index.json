@@ -1,19 +1,21 @@
 {
-  "generatedAt": "2026-03-29T15:40:45.039189+00:00",
+  "generatedAt": "2026-03-29T18:31:30.931561+00:00",
   "exportPath": "C:\\Users\\leeor\\FFCO\\MusicAnalyzerDAW\\heuristic_exports\\index.json",
-  "schemaVersion": "heuristic-song-export/v2",
+  "schemaVersion": "heuristic-song-export/v3",
   "summaryCards": {
     "songCount": 11,
     "patternCount": 834,
     "patternInstanceCount": 834,
-    "relationshipCount": 1246,
+    "relationshipCount": 1274,
     "collectionCount": 177
   },
   "relationshipTypeCounts": {
-    "repetition": 234,
-    "variation": 189,
+    "parent_child": 823,
+    "repetition": 233,
+    "variation": 159,
     "rhythmic_variation": 31,
-    "simplification": 6
+    "section_family": 21,
+    "call_response": 7
   },
   "collectionTypeCounts": {
     "pattern_group": 124,
@@ -21,13 +23,51 @@
     "root_collection": 10
   },
   "materialRoleCounts": {
-    "new_material": 388,
+    "new_material": 301,
     "repetition": 233,
     "variation": 159,
+    "canonical_reuse": 93,
     "rhythmic_variation": 31,
     "song_root": 11,
-    "simplification": 6,
-    "canonical_reuse": 6
+    "simplification": 6
+  },
+  "primitiveTypeCounts": {
+    "leaf_pattern": 656,
+    "subsection_container": 124,
+    "section_container": 43,
+    "complete_song": 11
+  },
+  "sectionPurposeCounts": {
+    "main_theme": 11,
+    "intro": 9,
+    "build_up": 4,
+    "break_down": 3,
+    "climax": 2,
+    "return": 1
+  },
+  "subsectionFunctionCounts": {
+    "loop": 171,
+    "motif_variation": 124,
+    "motif_seed": 52,
+    "fill": 37,
+    "call": 12,
+    "response": 5
+  },
+  "loopPolicyCounts": {
+    "play_once": 645,
+    "loop": 187,
+    "loop_with_fill": 2
+  },
+  "containerKindCounts": {
+    "orchestration_layer": 77,
+    "structural": 54,
+    "mixed": 47
+  },
+  "sectionFamilyModeCounts": {
+    "new": 23,
+    "skeleton_reuse_with_modification": 14,
+    "skeleton_reuse": 5,
+    "direct_variation": 2
   },
   "labelVariantGroups": [
     {
@@ -218,7 +258,7 @@
       "sourcePath": "MMX_Launch_Octopus.mid.json",
       "patternCount": 31,
       "patternInstanceCount": 31,
-      "relationshipCount": 30,
+      "relationshipCount": 34,
       "collectionCount": 6
     },
     {
@@ -228,7 +268,7 @@
       "sourcePath": "armored_armadillo_adjusted.mid.json",
       "patternCount": 148,
       "patternInstanceCount": 148,
-      "relationshipCount": 230,
+      "relationshipCount": 231,
       "collectionCount": 28
     },
     {
@@ -238,7 +278,7 @@
       "sourcePath": "MMX_Boomer_Kuwanger.mid.json",
       "patternCount": 199,
       "patternInstanceCount": 199,
-      "relationshipCount": 341,
+      "relationshipCount": 348,
       "collectionCount": 43
     },
     {
@@ -248,7 +288,7 @@
       "sourcePath": "MMX_Chill_Penguin.mid.json",
       "patternCount": 51,
       "patternInstanceCount": 51,
-      "relationshipCount": 52,
+      "relationshipCount": 55,
       "collectionCount": 7
     },
     {
@@ -278,7 +318,7 @@
       "sourcePath": "MMX_Spark_Mandrill.mid.json",
       "patternCount": 34,
       "patternInstanceCount": 34,
-      "relationshipCount": 33,
+      "relationshipCount": 36,
       "collectionCount": 6
     },
     {
@@ -288,7 +328,7 @@
       "sourcePath": "MMX_Storm_Eagle.mid.json",
       "patternCount": 134,
       "patternInstanceCount": 134,
-      "relationshipCount": 226,
+      "relationshipCount": 230,
       "collectionCount": 28
     },
     {
@@ -298,7 +338,7 @@
       "sourcePath": "MMX_Sting_Chameleon.mid.json",
       "patternCount": 29,
       "patternInstanceCount": 29,
-      "relationshipCount": 34,
+      "relationshipCount": 37,
       "collectionCount": 5
     },
     {
@@ -318,7 +358,7 @@
       "sourcePath": "SNES_MMX_Boss_Chosen_V1.mid.json",
       "patternCount": 29,
       "patternInstanceCount": 29,
-      "relationshipCount": 42,
+      "relationshipCount": 45,
       "collectionCount": 5
     }
   ]

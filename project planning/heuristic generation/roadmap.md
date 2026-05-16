@@ -8,6 +8,19 @@ The target is not an Epicify-style example browser. The target is a structure-aw
 
 At the whole-song level, the target is a recursive structural plan: a `whole song` node should be decomposable into ordered child structure, and each child should be interpretable as new material, repetition, variation, canonical reuse, or another container that must be decomposed further.
 
+That is still not enough on its own. The project also needs to identify:
+
+- what primitives the songs are actually composed from
+- what hypothetical generation pipeline would be required to transform a single `complete song` node into a final song-shaped structure
+
+The current corpus analysis now makes one additional requirement explicit:
+
+- the pipeline must model how sections divide into subsection skeletons and how variation families are distributed inside those subsection skeletons
+
+The song-specific analysis notes now add another requirement:
+
+- the pipeline must capture author-facing composition concepts such as `Song > Ideas > Patterns`, section purpose, loop vs fill, call vs response, motif seed vs variation, and raw section asset manifests
+
 ## NIMBLE Anchor
 
 ### North Star
@@ -70,6 +83,15 @@ More specifically, the future generator should be able to start from a `whole so
 - which child is a repetition or variation of something earlier
 - which child is a container that needs another decomposition pass
 
+And at a planning level, the system should also be able to answer:
+
+- what primitive type each node represents
+- what function caused that node to appear during generation
+- what ordered function chain would recreate the labeled shape from a single root node
+- whether a section introduces, reuses, or varies a subsection skeleton
+- what section purpose a node serves
+- whether a subsection is functioning as a loop, fill, call, response, motif seed, or motif variation
+
 ## Current Baseline In Repo
 
 The repo already has useful starting points:
@@ -120,6 +142,8 @@ Without that layer, it is hard to answer questions like:
 - Which changes are rhythmic, melodic, harmonic, textural, or structural?
 - Which larger patterns can be decomposed into smaller reusable units?
 - Which transformations are common enough to become generation heuristics?
+- What are the primitive building blocks that recur across songs?
+- What generation pipeline is implied by the labeled graph when starting from `complete song`?
 
 ## Primary Deliverables
 
@@ -142,6 +166,10 @@ A feature extraction and comparison layer that explains what is musically perfor
 ### 5. Heuristic Extraction Layer
 
 A first-pass rule system that identifies common transforms and candidate sub-pattern decompositions for later generation work.
+
+### 6. Primitive And Pipeline Model
+
+A planning and analysis layer that identifies the primitive node families in the corpus and the hypothetical function pipeline required to grow a song from `complete song` into final resolved structure.
 
 ## Proposed Normalized Data Model
 
@@ -280,6 +308,74 @@ For percussion-heavy or tonally ambiguous patterns:
 - `source_ref`
   - pointer back to original file, song, export category, pattern id, and notes region
 
+### Primitive families to model explicitly
+
+The normalized contract should be able to support classification into primitive families such as:
+
+- structural primitives
+  - `complete_song`
+  - `section_container`
+  - `section_purpose`
+  - `phrase_container`
+  - `leaf_pattern`
+- lineage primitives
+  - `new_material`
+  - `canonical_reuse`
+  - `repetition`
+  - `variation`
+  - `rhythmic_variation`
+  - `simplification`
+- grouping primitives
+  - `collection`
+  - `ordered_sequence`
+  - `sibling_group`
+  - `call_response_group`
+- musical-role primitives
+  - `lead`
+  - `bass`
+  - `support`
+  - `pad`
+  - `percussion`
+  - `accent`
+- transformation primitives
+  - `transpose`
+  - `ornament`
+  - `densify`
+  - `simplify`
+  - `extend`
+  - `contract`
+  - `re-orchestrate`
+  - `register_shift`
+
+### Composition-facing metadata to model explicitly
+
+The normalized contract should also support author-facing pipeline concepts surfaced by the analysis notes:
+
+- `sectionPurpose`
+  - `intro`
+  - `main_theme`
+  - `build_up`
+  - `break_down`
+  - `climax`
+  - `return`
+- `subsectionFunction`
+  - `loop`
+  - `fill`
+  - `call`
+  - `response`
+  - `motif_seed`
+  - `motif_variation`
+- `loopPolicy`
+  - `play_once`
+  - `loop`
+  - `loop_with_fill`
+- `assetManifest`
+  - section-level inventory of required roles, patterns, and supporting assets
+- `reductionLineage`
+  - section
+  - instrument slice
+  - motif slice
+
 ### Whole-song decomposition requirements
 
 The normalized contract must support recursive generation-oriented decomposition:
@@ -294,6 +390,14 @@ The normalized contract must support recursive generation-oriented decomposition
   - another container to recurse into
 - decomposition order must be explicit, not inferred from display order
 - instance-level provenance must remain traceable to source labels
+- primitive classification must be representable at node or edge level
+- generation-stage function tags must be representable once they are inferred
+- section containers and subsection skeletons must be distinguishable
+- the contract must be able to represent whether variation occurs at section level, subsection level, or leaf level
+- the contract must be able to represent section purpose
+- the contract must be able to represent loop vs fill and call vs response
+- the contract must be able to represent reduction lineage from full section to motif slice
+- the contract must be able to represent a section asset manifest
 
 ### Recommended normalized fields
 
@@ -353,6 +457,8 @@ What is not yet sufficient for the North Star:
 - the normalized schema is not yet locked
 - canonical patterns and pattern instances are not yet formalized separately
 - ordered whole-song decomposition is not yet explicit in the export contract
+- primitive families are not yet formalized
+- the hypothetical generation pipeline is not yet represented
 - generator-facing heuristic functions cannot be trusted until those pieces exist
 
 This means the current browser work should be treated as a validation surface, not as the final generation-ready representation.
@@ -441,6 +547,14 @@ Create a versioned contract that supports browsing, analysis, and future generat
 - define how collections differ from individual patterns
 - define ordered decomposition rules for container patterns and whole-song nodes
 - define how a child instance signals canonical reuse vs repetition vs variation vs new material
+- define first-pass primitive families and where they live in the schema
+- define where future generation-function tags would attach
+- define section purpose tags
+- define loop / fill semantics
+- define call / response grouping semantics
+- define motif seed / motif variation semantics
+- define section asset manifest semantics
+- define reduction lineage semantics
 
 ### Outputs
 
@@ -448,12 +562,15 @@ Create a versioned contract that supports browsing, analysis, and future generat
 - example normalized records
 - normalization rules document
 - one worked example of recursive song decomposition
+- one first-pass primitive taxonomy
 
 ### Exit criteria
 
 - same source material always normalizes to the same IDs
 - schema can represent parent-child pattern graphs and variation chains
 - schema can represent a whole song as an ordered recursive plan
+- schema can express primitive type without flattening structural meaning
+- schema can express section purpose and subsection function cleanly
 
 ### Checkpoint
 
@@ -464,6 +581,7 @@ Create a versioned contract that supports browsing, analysis, and future generat
   - one collection
   - one relationship edge
   - one whole-song container broken into ordered child instances
+  - one primitive classification pass over that same example
 
 ### UI validation
 
@@ -486,6 +604,9 @@ Run through all already-labeled files and generate normalized outputs in one rep
 - normalize names, lineage, and source references
 - emit canonical patterns separately from pattern instances
 - emit ordered child-instance decomposition for container nodes
+- emit first-pass primitive classifications where defensible
+- emit section purpose, loop/fill, and call/response tags where defensible
+- emit section asset manifests and reduction lineage when supported by source
 - emit normalized records to a dedicated output tree
 - generate index files for fast browsing
 - log skipped, broken, or ambiguous records
@@ -523,6 +644,7 @@ Run through all already-labeled files and generate normalized outputs in one rep
   - normalized patterns created
   - pattern instances created
   - relationships created
+  - primitive classifications assigned
   - warnings and skipped records
 
 ### UI validation
@@ -550,6 +672,9 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
 - show lineage graph or breadcrumb chain
 - support side-by-side comparison of canonical vs variation
 - support jumping from collection to member patterns and back
+- show section purpose and subsection function
+- show section asset manifest
+- show reduction lineage from section to instrument slice to motif slice
 
 ### Key UX views
 
@@ -560,6 +685,7 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
 - all relationships for selected node
 - source-to-normalized provenance view
 - recursive song-plan view
+- composition-pipeline view
 
 ### Outputs
 
@@ -591,6 +717,9 @@ Provide a dedicated browser for normalized patterns, collections, and variation 
   - relationship type
   - collection membership
   - source provenance
+  - section purpose
+  - subsection function
+  - loop policy
 
 If any of those are hard to verify visually, the page is not ready.
 
@@ -650,7 +779,70 @@ Quantify what is musically performed between pattern A and variation B.
 
 This gives us a direct sanity check against what we hear and see in the notation.
 
-## Phase 6: Heuristic Mining For Generation
+## Phase 6: Primitive And Pipeline Experiment
+
+### Goal
+
+Use the full sufficiently labeled corpus to test a hypothetical generation pipeline that starts from a single `complete song` node and asks what ordered functions must fire to recreate the labeled song shape.
+
+### Tasks
+
+- define a first-pass primitive taxonomy from the current corpus
+- map exported nodes and edges onto those primitive families
+- propose a hypothetical generation pipeline from root node to final structure
+- run that pipeline conceptually against every sufficiently labeled song
+- record which steps appear universal and which are optional or song-specific
+- identify where the current corpus is still too weak to support a function with confidence
+
+### Hypothetical function families
+
+- instantiate `complete_song`
+- decompose root into ordered containers
+- assign section purpose
+- recurse into containers
+- split subsection into loop and fill when present
+- derive call / response grouping when present
+- choose new material vs reuse vs variation
+- instantiate canonical material
+- extract motif seed from subsection family
+- apply transform to prior material
+- resolve collection membership or sibling grouping
+- assign orchestration roles
+- build section asset manifest
+- preserve reduction lineage
+- resolve leaf-level musical material
+- assemble the final ordered song graph
+
+### Outputs
+
+- primitive taxonomy note
+- generation pipeline note
+- cross-song experiment summary
+- list of universal vs conditional functions
+
+### Exit criteria
+
+- every sufficiently labeled song can be described as a path from `complete song` to resolved song shape
+- the project has a first-pass answer for what primitives recur across songs
+- the project has a defensible hypothetical generation pipeline to refine later
+
+### Checkpoint
+
+- run the conceptual pipeline across the full useful corpus
+- verify where the pipeline works cleanly
+- mark where the pipeline breaks because semantics are still unresolved
+
+### UI validation
+
+- add a view that can show:
+  - selected song
+  - primitive tags on nodes
+  - hypothetical generation stages or function tags
+  - unresolved steps called out explicitly
+
+This ensures the pipeline experiment stays inspectable and does not drift into abstract theory only.
+
+## Phase 7: Heuristic Mining For Generation
 
 ### Goal
 
@@ -714,7 +906,8 @@ This keeps the generation layer grounded in inspectable musical evidence.
 4. expose normalized index and detail APIs
 5. build the normalized library page
 6. add comparison and transform analysis
-7. mine heuristics only after the lineage and diff data is trustworthy
+7. run the primitive and pipeline experiment across the useful corpus
+8. mine heuristics only after the lineage, primitive model, and diff data are trustworthy
 
 ## Suggested MVP Scope
 
@@ -725,6 +918,7 @@ The first shippable version of this feature should do only the following:
 - show provenance from normalized item back to source file
 - show whole-song decomposition as ordered child instances
 - show a basic transform summary for canonical-to-variation edges
+- show the first-pass primitive classification and hypothetical generation pipeline for review
 
 Anything beyond that should be treated as phase-two work:
 
@@ -748,6 +942,9 @@ Anything beyond that should be treated as phase-two work:
 - should collections be explicit authored entities or inferred from lineage?
 - should canonical IDs be hash-based, label-based, or assigned during export?
 - how much derived analysis should be stored versus computed on demand?
+- should primitive tags be stored in export output or only derived in analysis layers?
+- how granular should the hypothetical generation functions be before they become noise?
+- how much of the author-facing analysis language should be standardized into schema versus preserved as notes?
 
 ## Acceptance Criteria For The Full Feature
 
@@ -756,6 +953,8 @@ Anything beyond that should be treated as phase-two work:
 - every variation can be traced to a canonical parent
 - the library page can browse canonical patterns, collections, and relationships
 - the system can describe the musical differences between canonical and derived patterns
+- the system can describe the primitive building blocks and hypothetical function chain required to grow a song from `complete song`
+- the system can describe section purpose, loop/fill behavior, call/response behavior, and reduction lineage where available
 - the resulting dataset is structured enough to support future complete-song generation work
 
 ## Validation Workflow
@@ -783,6 +982,7 @@ Every phase should end with both a data checkpoint and a UI checkpoint.
 - checkpoint after full export
 - checkpoint after first normalized browser view
 - checkpoint after first musical diff view
+- checkpoint after primitive and pipeline experiment
 - checkpoint after first heuristic catalog
 
 ## First Step To Start
@@ -838,3 +1038,10 @@ That immediate next step should answer:
 - how a `whole song` node exposes ordered children
 - how a child instance is typed as new, repeated, varied, simplified, or recursive
 - which currently labeled relationships are already strong enough to support first-pass heuristic functions
+
+Immediately after that, the next research pass should answer:
+
+- what primitives recur across the labeled songs
+- what hypothetical ordered function pipeline would transform `complete song` into the final labeled graph for each song
+- how subsection skeletons persist or vary across sibling sections
+- how authored analysis concepts like section purpose, loop/fill, call/response, motif seeds, and asset manifests map into the normalized contract

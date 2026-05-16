@@ -1,6 +1,6 @@
 {
-  "exportVersion": 2,
-  "schemaVersion": "heuristic-song-export/v2",
+  "exportVersion": 3,
+  "schemaVersion": "heuristic-song-export/v3",
   "songId": "mmx2_flame_stagmid",
   "title": "MMX2_Flame_Stag.mid",
   "source": {
@@ -29,7 +29,9 @@
     "traversalOrderInstanceIds": [
       "instance:root"
     ],
-    "decompositionStrategy": "ordered_child_instances"
+    "decompositionStrategy": "ordered_child_instances",
+    "rootPatternId": "root",
+    "sectionPatternIds": []
   },
   "patterns": [
     {
@@ -67,6 +69,22 @@
       },
       "relationTags": [
         "leaf"
+      ],
+      "primitiveType": "complete_song",
+      "sectionId": null,
+      "sectionFamilyId": null,
+      "sectionFamilyMode": null,
+      "sectionPurpose": null,
+      "sectionSkeletonId": null,
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -115,6 +133,22 @@
       "depth": 0,
       "instanceType": "song_root",
       "materialRole": "song_root",
+      "primitiveType": "complete_song",
+      "sectionId": null,
+      "sectionFamilyId": null,
+      "sectionFamilyMode": null,
+      "sectionPurpose": null,
+      "sectionSkeletonId": null,
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song"
+      ],
       "range": {
         "start": 0,
         "end": 5952,
@@ -140,11 +174,19 @@
   ],
   "relationships": [],
   "collectionCandidates": [],
+  "sectionFamilies": [],
+  "variationFamilies": [],
+  "callResponseGroups": [],
+  "sectionAssetManifests": [],
   "summary": {
     "patternCount": 1,
     "patternInstanceCount": 1,
     "relationshipCount": 0,
     "collectionCount": 0,
+    "sectionFamilyCount": 0,
+    "variationFamilyCount": 0,
+    "callResponseGroupCount": 0,
+    "sectionAssetManifestCount": 0,
     "rootPatternCount": 1,
     "rootInstanceCount": 1,
     "leafPatternCount": 1,
@@ -153,6 +195,18 @@
     "materialRoleCounts": {
       "song_root": 1
     },
+    "primitiveTypeCounts": {
+      "complete_song": 1
+    },
+    "sectionPurposeCounts": {},
+    "subsectionFunctionCounts": {},
+    "loopPolicyCounts": {
+      "play_once": 1
+    },
+    "containerKindCounts": {
+      "structural": 1
+    },
+    "sectionFamilyModeCounts": {},
     "labelVariantGroups": [],
     "issueCount": 0
   },

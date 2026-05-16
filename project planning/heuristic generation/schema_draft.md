@@ -12,6 +12,10 @@ The key shift is:
 
 This is the first schema step intended to bridge labeled song structure toward full-song heuristic generation.
 
+Current schema version:
+
+- `heuristic-song-export/v3`
+
 ## Core Objects
 
 ### `song`
@@ -44,6 +48,7 @@ Important fields:
 - `name`
 - `normalizedName`
 - `canonicalId`
+- `primitiveType`
 - `parentId`
 - `children`
 - `orderedChildPatternIds`
@@ -56,6 +61,19 @@ Important fields:
 - `variantOfName`
 - `flags`
 - `relationTags`
+- `sectionId`
+- `sectionFamilyId`
+- `sectionFamilyMode`
+- `sectionPurpose`
+- `sectionSkeletonId`
+- `subsectionRootId`
+- `subsectionSkeletonId`
+- `subsectionFunction`
+- `loopPolicy`
+- `containerKind`
+- `variationFamilyId`
+- `callResponseGroupId`
+- `reductionLineage`
 - `patternRole`
 - `instanceIds`
 - `sourceOrder`
@@ -83,6 +101,20 @@ Important fields:
 - `depth`
 - `instanceType`
 - `materialRole`
+- `primitiveType`
+- `sectionId`
+- `sectionFamilyId`
+- `sectionFamilyMode`
+- `sectionPurpose`
+- `sectionSkeletonId`
+- `subsectionRootId`
+- `subsectionSkeletonId`
+- `subsectionFunction`
+- `loopPolicy`
+- `containerKind`
+- `variationFamilyId`
+- `callResponseGroupId`
+- `reductionLineage`
 - `range`
 - `mode`
 - `instrumentCount`
@@ -126,6 +158,79 @@ Meaning:
 - child order is preserved from authored `children` arrays when present
 - inferred parent-child links fill gaps only when necessary
 
+Additional `songPlan` fields now included:
+
+- `rootPatternId`
+- `sectionPatternIds`
+
+These fields expose the current first-pass whole-song decomposition into section-level containers.
+
+## Generation-Pipeline Overlay
+
+The exporter now emits first-pass planning fields intended to bridge the hand-authored analysis model into executable heuristics.
+
+### `primitiveType`
+
+Current values:
+
+- `complete_song`
+- `section_container`
+- `subsection_container`
+- `leaf_pattern`
+
+### `sectionPurpose`
+
+Current first-pass values:
+
+- `intro`
+- `main_theme`
+- `build_up`
+- `break_down`
+- `climax`
+- `return`
+
+These are name-derived heuristics and should be treated as advisory, not authoritative.
+
+### `subsectionFunction`
+
+Current first-pass values:
+
+- `loop`
+- `fill`
+- `call`
+- `response`
+- `motif_seed`
+- `motif_variation`
+
+### `loopPolicy`
+
+Current values:
+
+- `play_once`
+- `loop`
+- `loop_with_fill`
+
+### `containerKind`
+
+Current values:
+
+- `structural`
+- `mixed`
+- `orchestration_layer`
+
+### Families and Grouping
+
+The exporter now emits these top-level family/group records:
+
+- `sectionFamilies`
+- `variationFamilies`
+- `callResponseGroups`
+- `sectionAssetManifests`
+
+These are the first-pass bridge from labeled graph structure into a generation pipeline like:
+
+`complete_song -> ordered sections -> subsection skeletons -> variation families -> leaves`
+
 ## Generation-Relevant Semantics
 
 This draft is intended to support these questions:
@@ -135,6 +240,9 @@ This draft is intended to support these questions:
 3. Which child reuses an earlier canonical pattern?
 4. Which child is a variation or simplification of earlier material?
 5. Which child is another container that requires recursive decomposition?
+6. Which section belongs to a reusable section family?
+7. Which subsection acts like a loop, fill, call, response, or motif seed?
+8. What asset inventory is implied by a section container?
 
 ## Current Heuristic Families Supported By This Draft
 
@@ -143,6 +251,11 @@ This draft is intended to support these questions:
 - `restate_canonical(pattern_id)`
 - `vary_pattern(pattern_id, variation_type)`
 - `recurse_song_plan(instance_id)`
+- `choose_section_family(previous_sections, local_context)`
+- `instantiate_subsection_skeleton(section_id, skeleton_id)`
+- `resolve_loop_policy(pattern_or_instance)`
+- `build_section_asset_manifest(section_id)`
+- `bind_call_response_group(group_id)`
 
 ## Worked Example
 

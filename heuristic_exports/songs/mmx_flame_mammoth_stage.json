@@ -1,6 +1,6 @@
 {
-  "exportVersion": 2,
-  "schemaVersion": "heuristic-song-export/v2",
+  "exportVersion": 3,
+  "schemaVersion": "heuristic-song-export/v3",
   "songId": "mmx_flame_mammoth_stage",
   "title": "MMX Flame Mammoth Stage",
   "source": {
@@ -121,7 +121,14 @@
       "instance:764854bf-efa8-4ca2-9c29-874bce163d6f",
       "instance:40eb74b7-f97d-4aa4-9935-0b16e1b4cb13"
     ],
-    "decompositionStrategy": "ordered_child_instances"
+    "decompositionStrategy": "ordered_child_instances",
+    "rootPatternId": "root",
+    "sectionPatternIds": [
+      "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "09cfd3dd-74ce-4555-a017-4461df673259"
+    ]
   },
   "patterns": [
     {
@@ -169,6 +176,22 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "complete_song",
+      "sectionId": null,
+      "sectionFamilyId": null,
+      "sectionFamilyMode": null,
+      "sectionPurpose": null,
+      "sectionSkeletonId": null,
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -249,6 +272,23 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "section_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -334,6 +374,23 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "section_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:7c2ad5bf-5de0-4529-a885-79759b1218b8"
@@ -412,6 +469,23 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "section_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -492,6 +566,23 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "section_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:09cfd3dd-74ce-4555-a017-4461df673259"
@@ -568,6 +659,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:cbb161e6-7d8f-4f51-b71f-79d1957bbd54"
@@ -639,6 +749,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -713,6 +842,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -789,6 +937,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:ed4c1a64-b788-487a-848d-e4bd43d04bf3"
@@ -862,6 +1029,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:289c6d37-79e0-4a74-a5a0-176f424c46b3"
@@ -933,6 +1119,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -1006,6 +1211,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:e560185b-c9b2-4d7d-bc71-db2b6a914e0f"
@@ -1078,6 +1302,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -1159,6 +1402,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -1246,6 +1508,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:b2025b20-ebba-4d8e-9baa-5e7d4c17697c"
@@ -1322,6 +1603,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:9fe4de33-4b72-4f37-af2e-0d051b42d492"
@@ -1390,6 +1690,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:cb4e69b1-c82a-487a-b558-46b783cbd324"
@@ -1454,6 +1773,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "40991064-2919-4762-ad1c-4939b8490006",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:40991064-2919-4762-ad1c-4939b8490006"
@@ -1512,6 +1850,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "0b3db728-81cd-46c9-8697-9577c31b86a8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -1579,6 +1937,25 @@
         "variation",
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:4c9f8d0d-e245-4005-875a-5858c305ca80"
@@ -1642,6 +2019,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "99aee976-347e-4d00-a4b4-e1c0c09879ba",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:99aee976-347e-4d00-a4b4-e1c0c09879ba"
@@ -1701,6 +2098,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -1763,6 +2180,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:e5763d9f-a962-44e5-9ee0-afbbf7eefc50"
@@ -1819,6 +2256,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -1880,6 +2337,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -1946,6 +2423,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:90f6df58-7a66-49f4-a558-d77e36e81264",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:90f6df58-7a66-49f4-a558-d77e36e81264"
@@ -2004,6 +2500,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:90f6df58-7a66-49f4-a558-d77e36e81264",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2066,6 +2582,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:38315a17-bab3-4a57-821b-44c13f8eacff"
@@ -2122,6 +2658,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2183,6 +2739,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2247,6 +2823,26 @@
         "rhythmic_variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:c98a74b5-5093-453c-8d9a-f352a4c93fdb"
@@ -2308,6 +2904,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:08fda414-bb49-4df6-900c-76fe300aba04",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:08fda414-bb49-4df6-900c-76fe300aba04"
@@ -2363,6 +2979,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:28dc55d0-8612-4aab-92d6-8e0916483d8f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -2422,6 +3058,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:f0c3a5eb-4c03-4aef-b192-1a8e10a02d18"
@@ -2478,6 +3134,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:28dc55d0-8612-4aab-92d6-8e0916483d8f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2541,6 +3217,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:56dc41b3-0cfe-4bc1-b61b-00945dbfaa53"
@@ -2600,6 +3296,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:08fda414-bb49-4df6-900c-76fe300aba04",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2662,6 +3378,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:00f70143-5406-498d-8963-ee0861ba7c8e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:00f70143-5406-498d-8963-ee0861ba7c8e"
@@ -2718,6 +3454,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:00f70143-5406-498d-8963-ee0861ba7c8e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2791,6 +3547,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:5f8a2836-59e0-45fd-9ded-72e55582e386",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:5f8a2836-59e0-45fd-9ded-72e55582e386"
@@ -2854,6 +3629,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:6ac94dd2-8b0f-41c1-8db2-cc11dc65de81"
@@ -2910,6 +3705,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2972,6 +3787,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:5f8a2836-59e0-45fd-9ded-72e55582e386",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3037,6 +3872,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:10b655a4-65c6-4c58-973a-55532b0347c5"
@@ -3100,6 +3955,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:5d62cb32-cbc5-4067-a934-8ca8dc7e61fc"
@@ -3161,6 +4036,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3239,6 +4134,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "loop_with_fill",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:b2c957eb-7b47-491c-b8ce-b0b2546f352b"
@@ -3305,6 +4219,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:be6ecc98-fea4-487f-9738-3e582616f42e"
@@ -3364,6 +4298,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3426,6 +4380,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:d0891223-4856-42ee-99dc-0e424e613036"
@@ -3481,6 +4455,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -3539,6 +4533,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3603,6 +4617,26 @@
         "rhythmic_variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:26719075-fa3f-49ee-a77e-0e5cf16175a7"
@@ -3663,6 +4697,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3726,6 +4780,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:734b6fe8-498e-47b3-a682-397da281a3eb"
@@ -3786,6 +4860,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:d84b20d7-78a4-460b-ac15-6613130882ec"
@@ -3842,6 +4936,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3905,6 +5019,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:cddcf938-5798-4c40-8945-66c47875e7f2"
@@ -3964,6 +5098,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4026,6 +5180,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:93729753-af5a-475c-ab50-6e4ef63997dd",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:93729753-af5a-475c-ab50-6e4ef63997dd"
@@ -4082,6 +5256,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:93729753-af5a-475c-ab50-6e4ef63997dd",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4144,6 +5338,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:7ed5a488-986e-4439-bb17-616696df8ff3",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:7ed5a488-986e-4439-bb17-616696df8ff3"
@@ -4200,6 +5414,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:7ed5a488-986e-4439-bb17-616696df8ff3",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4262,6 +5496,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:2acafdef-94f3-43cd-bd9a-8a7703c5773d"
@@ -4317,6 +5571,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -4376,6 +5650,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:cbcc7b5e-e299-4122-a379-baf3d6728e12"
@@ -4432,6 +5726,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -4496,6 +5810,25 @@
       "relationTags": [
         "simplification",
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "40991064-2919-4762-ad1c-4939b8490006",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -4612,6 +5945,25 @@
         "simplification",
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:a99840c5-f74f-4f8c-beb4-f86741c1fc36"
@@ -4724,6 +6076,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:5e7363da-a6d8-4113-b12c-971566ff3295"
@@ -4784,6 +6156,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:87ecdf02-4ba5-4da1-95b9-66cd3138086d"
@@ -4840,6 +6232,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4903,6 +6315,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:771c8ebc-cd76-4a2d-9a49-bfc7802bb73f"
@@ -4962,6 +6394,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5025,6 +6477,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:24e1cde4-55b4-456b-b9c4-1f9ac4e1f561"
@@ -5084,6 +6556,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5147,6 +6639,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:68d16a4c-c37b-456c-ac23-2a68b3dffaba"
@@ -5206,6 +6718,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5269,6 +6801,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:0bd9ef8b-cc25-4b87-be8c-e8d3dc1644d2"
@@ -5329,6 +6881,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:e479f07d-e702-4b85-a416-3d5555ddda3c"
@@ -5384,6 +6956,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -5443,6 +7035,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:43274686-bbcb-4088-b53e-e70d8e17c01f"
@@ -5498,6 +7110,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -5556,6 +7188,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5619,6 +7271,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:b72f7c93-7304-4fb4-88cf-7a5f88eeada9"
@@ -5679,6 +7351,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:6d4b3666-3826-45f2-83c5-59ef0e9e059c"
@@ -5735,6 +7427,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5798,6 +7510,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:a421e4af-0141-4619-9037-08ae35539d7e"
@@ -5858,6 +7590,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:bc916a64-dc04-4dc0-a0d5-e8f179bc384f"
@@ -5914,6 +7666,26 @@
       },
       "relationTags": [
         "simplification",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "40991064-2919-4762-ad1c-4939b8490006",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -6018,6 +7790,26 @@
         "simplification",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:88fe8e7b-f56c-4467-bcb6-d2b0a4e83ef2"
@@ -6110,6 +7902,25 @@
       "relationTags": [
         "simplification",
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -6209,6 +8020,26 @@
         "simplification",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:d118c250-7b53-465f-a84d-d0518b58b0ab"
@@ -6280,6 +8111,22 @@
       "depth": 0,
       "instanceType": "song_root",
       "materialRole": "song_root",
+      "primitiveType": "complete_song",
+      "sectionId": null,
+      "sectionFamilyId": null,
+      "sectionFamilyMode": null,
+      "sectionPurpose": null,
+      "sectionSkeletonId": null,
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song"
+      ],
       "range": {
         "start": 0,
         "end": 15360,
@@ -6322,6 +8169,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 160.64989529787016,
         "end": 1909.5967683750634,
@@ -6360,6 +8224,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "40991064-2919-4762-ad1c-4939b8490006",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 384,
         "end": 766,
@@ -6396,6 +8279,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "simplification",
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "40991064-2919-4762-ad1c-4939b8490006",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 384,
         "end": 1008,
@@ -6431,6 +8333,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "simplification",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "40991064-2919-4762-ad1c-4939b8490006",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 384,
         "end": 1008,
@@ -6464,6 +8386,26 @@
       "depth": 2,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "0b3db728-81cd-46c9-8697-9577c31b86a8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1152,
         "end": 1534,
@@ -6499,6 +8441,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "variation",
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 384,
         "end": 766,
@@ -6535,6 +8496,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "simplification",
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 384,
         "end": 1008,
@@ -6572,6 +8552,25 @@
       "depth": 4,
       "instanceType": "container",
       "materialRole": "simplification",
+      "primitiveType": "subsection_container",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 384,
         "end": 1056,
@@ -6608,6 +8607,26 @@
       "depth": 5,
       "instanceType": "leaf",
       "materialRole": "simplification",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "4c9f8d0d-e245-4005-875a-5858c305ca80",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 384,
         "end": 1056,
@@ -6641,6 +8660,26 @@
       "depth": 2,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionRootId": "99aee976-347e-4d00-a4b4-e1c0c09879ba",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1152,
         "end": 1534,
@@ -6679,6 +8718,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 1920,
         "end": 4990,
@@ -6721,6 +8777,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1920,
         "end": 4990,
@@ -6755,6 +8830,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1920,
         "end": 2686,
@@ -6789,6 +8884,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3456,
         "end": 4222,
@@ -6823,6 +8938,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2688,
         "end": 3454,
@@ -6857,6 +8992,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4224,
         "end": 4990,
@@ -6895,6 +9050,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1920,
         "end": 4990,
@@ -6929,6 +9103,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1920,
         "end": 2686,
@@ -6963,6 +9157,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2688,
         "end": 3454,
@@ -6997,6 +9211,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3456,
         "end": 4222,
@@ -7031,6 +9265,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4224,
         "end": 4990,
@@ -7067,6 +9321,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1920,
         "end": 4990,
@@ -7103,6 +9376,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:90f6df58-7a66-49f4-a558-d77e36e81264",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1920,
         "end": 3454,
@@ -7138,6 +9430,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "simplification",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1920,
         "end": 3456,
@@ -7172,6 +9484,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cb4e69b1-c82a-487a-b558-46b783cbd324",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:90f6df58-7a66-49f4-a558-d77e36e81264",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3456,
         "end": 4990,
@@ -7210,6 +9542,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1920,
         "end": 4990,
@@ -7244,6 +9595,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1920,
         "end": 2302,
@@ -7278,6 +9649,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2688,
         "end": 3454,
@@ -7312,6 +9703,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3456,
         "end": 3838,
@@ -7346,6 +9757,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4224,
         "end": 4990,
@@ -7384,6 +9815,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1920,
         "end": 4990,
@@ -7418,6 +9868,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:93729753-af5a-475c-ab50-6e4ef63997dd",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1920,
         "end": 2686,
@@ -7452,6 +9922,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:93729753-af5a-475c-ab50-6e4ef63997dd",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3456,
         "end": 4222,
@@ -7486,6 +9976,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:7ed5a488-986e-4439-bb17-616696df8ff3",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2688,
         "end": 3454,
@@ -7520,6 +10030,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:2",
+      "subsectionRootId": "289c6d37-79e0-4a74-a5a0-176f424c46b3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:7ed5a488-986e-4439-bb17-616696df8ff3",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4224,
         "end": 4990,
@@ -7556,6 +10086,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 4992,
         "end": 11134,
@@ -7598,6 +10145,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 4992,
         "end": 11134,
@@ -7640,6 +10206,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "loop_with_fill",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 4992,
         "end": 6526,
@@ -7676,6 +10261,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4992,
         "end": 5374,
@@ -7711,6 +10316,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 5376,
         "end": 5758,
@@ -7746,6 +10371,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 5760,
         "end": 6142,
@@ -7781,6 +10426,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6144,
         "end": 6526,
@@ -7816,6 +10481,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4992,
         "end": 6142,
@@ -7851,6 +10536,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6144,
         "end": 6526,
@@ -7885,6 +10590,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6528,
         "end": 8062,
@@ -7920,6 +10645,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 8064,
         "end": 9598,
@@ -7955,6 +10700,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 9600,
         "end": 11134,
@@ -7994,6 +10759,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 4992,
         "end": 11134,
@@ -8028,6 +10812,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4992,
         "end": 6142,
@@ -8062,6 +10866,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6528,
         "end": 7678,
@@ -8096,6 +10920,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 8064,
         "end": 9214,
@@ -8130,6 +10974,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "78920473-6078-413f-923f-701671bd276f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 9600,
         "end": 10750,
@@ -8172,6 +11036,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 4992,
         "end": 11134,
@@ -8206,6 +11089,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 4992,
         "end": 6142,
@@ -8240,6 +11143,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6528,
         "end": 7678,
@@ -8274,6 +11197,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 8064,
         "end": 9214,
@@ -8308,6 +11251,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 9600,
         "end": 10750,
@@ -8342,6 +11305,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6144,
         "end": 6526,
@@ -8376,6 +11359,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 7680,
         "end": 8062,
@@ -8410,6 +11413,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 9216,
         "end": 9598,
@@ -8444,6 +11467,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:3",
+      "subsectionRootId": "4e341a66-40c2-44b1-b39c-15f9d73c7516",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:8",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 10752,
         "end": 11134,
@@ -8481,6 +11524,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 11136,
         "end": 15358,
@@ -8522,6 +11582,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 11136,
         "end": 15358,
@@ -8562,6 +11641,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:5f8a2836-59e0-45fd-9ded-72e55582e386",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 11136,
         "end": 12670,
@@ -8598,6 +11696,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11136,
         "end": 11518,
@@ -8633,6 +11751,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11520,
         "end": 11902,
@@ -8668,6 +11806,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11904,
         "end": 12286,
@@ -8703,6 +11861,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 12288,
         "end": 12670,
@@ -8737,6 +11915,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:5f8a2836-59e0-45fd-9ded-72e55582e386",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 12672,
         "end": 14206,
@@ -8772,6 +11970,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:9",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14208,
         "end": 15358,
@@ -8816,6 +12034,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 11136,
         "end": 14974,
@@ -8850,6 +12087,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11136,
         "end": 11518,
@@ -8884,6 +12141,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 12672,
         "end": 13054,
@@ -8918,6 +12195,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11520,
         "end": 11902,
@@ -8952,6 +12249,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13056,
         "end": 13438,
@@ -8986,6 +12303,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11904,
         "end": 12286,
@@ -9020,6 +12357,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 12288,
         "end": 12670,
@@ -9054,6 +12411,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13440,
         "end": 13822,
@@ -9088,6 +12465,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13824,
         "end": 14206,
@@ -9122,6 +12519,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14208,
         "end": 14590,
@@ -9161,6 +12578,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 11136,
         "end": 15358,
@@ -9195,6 +12631,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:08fda414-bb49-4df6-900c-76fe300aba04",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11904,
         "end": 12670,
@@ -9229,6 +12685,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:08fda414-bb49-4df6-900c-76fe300aba04",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13440,
         "end": 14206,
@@ -9263,6 +12739,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:00f70143-5406-498d-8963-ee0861ba7c8e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11136,
         "end": 11902,
@@ -9297,6 +12793,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:00f70143-5406-498d-8963-ee0861ba7c8e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 12672,
         "end": 13438,
@@ -9331,6 +12847,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14208,
         "end": 15358,
@@ -9370,6 +12906,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 11136,
         "end": 15358,
@@ -9404,6 +12959,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:28dc55d0-8612-4aab-92d6-8e0916483d8f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11904,
         "end": 12670,
@@ -9438,6 +13013,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:28dc55d0-8612-4aab-92d6-8e0916483d8f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13440,
         "end": 14206,
@@ -9472,6 +13067,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11136,
         "end": 11902,
@@ -9506,6 +13121,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_flame_mammoth_stage:6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 12672,
         "end": 13438,
@@ -9540,6 +13175,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionFamilyId": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_flame_mammoth_stage:4",
+      "subsectionRootId": "ed4c1a64-b788-487a-848d-e4bd43d04bf3",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_flame_mammoth_stage:11",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14208,
         "end": 15358,
@@ -10732,18 +14387,373 @@
       "collectionType": "pattern_group"
     }
   ],
+  "sectionFamilies": [
+    {
+      "id": "section-family:mmx_flame_mammoth_stage:1",
+      "sectionPatternIds": [
+        "5b5c5674-9a1d-498b-8f0d-c637a8e4132c"
+      ],
+      "sectionNames": [
+        "DropIn"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_flame_mammoth_stage:1"
+      ]
+    },
+    {
+      "id": "section-family:mmx_flame_mammoth_stage:2",
+      "sectionPatternIds": [
+        "7c2ad5bf-5de0-4529-a885-79759b1218b8"
+      ],
+      "sectionNames": [
+        "Part A"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_flame_mammoth_stage:2"
+      ]
+    },
+    {
+      "id": "section-family:mmx_flame_mammoth_stage:3",
+      "sectionPatternIds": [
+        "cf2bf14c-6f2d-474d-86c0-6021c51bfe47"
+      ],
+      "sectionNames": [
+        "Part B"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_flame_mammoth_stage:3"
+      ]
+    },
+    {
+      "id": "section-family:mmx_flame_mammoth_stage:4",
+      "sectionPatternIds": [
+        "09cfd3dd-74ce-4555-a017-4461df673259"
+      ],
+      "sectionNames": [
+        "Part C"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_flame_mammoth_stage:4"
+      ]
+    }
+  ],
+  "variationFamilies": [
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:38315a17-bab3-4a57-821b-44c13f8eacff",
+      "rootPatternId": "38315a17-bab3-4a57-821b-44c13f8eacff",
+      "memberPatternIds": [
+        "38315a17-bab3-4a57-821b-44c13f8eacff",
+        "99b3ec2c-06cf-478f-9ff8-f67e00c1272d",
+        "c98a74b5-5093-453c-8d9a-f352a4c93fdb",
+        "2b425cfe-0f17-4830-8aef-ede4c7281624"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "rootPatternId": "e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+      "memberPatternIds": [
+        "e5763d9f-a962-44e5-9ee0-afbbf7eefc50",
+        "b0f9a7a9-90a0-4080-8428-1d3aaaf7e3b9",
+        "f010b3bf-0389-46c0-a002-93e445820a59",
+        "6d25f940-582c-462f-a357-e5e365089f63"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:90f6df58-7a66-49f4-a558-d77e36e81264",
+      "rootPatternId": "90f6df58-7a66-49f4-a558-d77e36e81264",
+      "memberPatternIds": [
+        "90f6df58-7a66-49f4-a558-d77e36e81264",
+        "a3e8d4d8-d265-40a6-b504-e7aa807395c7"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:40991064-2919-4762-ad1c-4939b8490006",
+      "rootPatternId": "40991064-2919-4762-ad1c-4939b8490006",
+      "memberPatternIds": [
+        "40991064-2919-4762-ad1c-4939b8490006",
+        "0b3db728-81cd-46c9-8697-9577c31b86a8",
+        "4c9f8d0d-e245-4005-875a-5858c305ca80",
+        "99aee976-347e-4d00-a4b4-e1c0c09879ba",
+        "2c62f639-c89c-47c6-9ce5-953ee93e4291",
+        "0e41e011-fba1-4404-a837-6090faa55d38",
+        "68d16a4c-c37b-456c-ac23-2a68b3dffaba",
+        "0bd9ef8b-cc25-4b87-be8c-e8d3dc1644d2"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:93729753-af5a-475c-ab50-6e4ef63997dd",
+      "rootPatternId": "93729753-af5a-475c-ab50-6e4ef63997dd",
+      "memberPatternIds": [
+        "93729753-af5a-475c-ab50-6e4ef63997dd",
+        "eb23e3ec-2867-42ad-8a91-ce4547761aa4"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:7ed5a488-986e-4439-bb17-616696df8ff3",
+      "rootPatternId": "7ed5a488-986e-4439-bb17-616696df8ff3",
+      "memberPatternIds": [
+        "7ed5a488-986e-4439-bb17-616696df8ff3",
+        "7fe424af-f8f1-4330-a963-3b382ebb012f"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "rootPatternId": "b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+      "memberPatternIds": [
+        "b2c957eb-7b47-491c-b8ce-b0b2546f352b",
+        "9667ff0d-eab6-48f0-8786-4e5257410f61",
+        "5d62cb32-cbc5-4067-a934-8ca8dc7e61fc",
+        "10b655a4-65c6-4c58-973a-55532b0347c5"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "rootPatternId": "16fabf5f-de74-46e0-b162-05f8bb25086b",
+      "memberPatternIds": [
+        "16fabf5f-de74-46e0-b162-05f8bb25086b",
+        "635f202c-7f4b-4fc6-b45b-f4fe0e9ee3f5",
+        "b72f7c93-7304-4fb4-88cf-7a5f88eeada9"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:d0891223-4856-42ee-99dc-0e424e613036",
+      "rootPatternId": "d0891223-4856-42ee-99dc-0e424e613036",
+      "memberPatternIds": [
+        "d0891223-4856-42ee-99dc-0e424e613036",
+        "e2f03214-7f0a-4fe0-a30d-66345b1b732c",
+        "c5805594-3c63-4e04-af1c-04869f18a6f5",
+        "be6ecc98-fea4-487f-9738-3e582616f42e"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:db2417c2-6708-464d-9629-f8cc7174da8c",
+      "rootPatternId": "db2417c2-6708-464d-9629-f8cc7174da8c",
+      "memberPatternIds": [
+        "db2417c2-6708-464d-9629-f8cc7174da8c",
+        "26719075-fa3f-49ee-a77e-0e5cf16175a7",
+        "945f3e58-6abb-44f6-a9ea-4a0ee1cee047",
+        "734b6fe8-498e-47b3-a682-397da281a3eb"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:d84b20d7-78a4-460b-ac15-6613130882ec",
+      "rootPatternId": "d84b20d7-78a4-460b-ac15-6613130882ec",
+      "memberPatternIds": [
+        "d84b20d7-78a4-460b-ac15-6613130882ec",
+        "c9de6853-a68a-4fcc-a962-82aa304046b8",
+        "c26ff89a-59cf-43ba-a722-2c7c3d061068",
+        "cddcf938-5798-4c40-8945-66c47875e7f2"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:5f8a2836-59e0-45fd-9ded-72e55582e386",
+      "rootPatternId": "5f8a2836-59e0-45fd-9ded-72e55582e386",
+      "memberPatternIds": [
+        "5f8a2836-59e0-45fd-9ded-72e55582e386",
+        "e496986f-825a-4766-84ef-d7f069f5c034"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "rootPatternId": "bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+      "memberPatternIds": [
+        "bc916a64-dc04-4dc0-a0d5-e8f179bc384f",
+        "36f68d7a-6462-4f05-9a93-299c6aad5bdb",
+        "a421e4af-0141-4619-9037-08ae35539d7e"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "rootPatternId": "87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+      "memberPatternIds": [
+        "87ecdf02-4ba5-4da1-95b9-66cd3138086d",
+        "5e7363da-a6d8-4113-b12c-971566ff3295",
+        "522273f1-4f59-4cf3-a09d-7fe54b4c3dbe",
+        "771c8ebc-cd76-4a2d-9a49-bfc7802bb73f",
+        "139fc64c-8996-4ec8-96f7-f59e9fbf862b",
+        "24e1cde4-55b4-456b-b9c4-1f9ac4e1f561"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+      "rootPatternId": "f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+      "memberPatternIds": [
+        "f0c3a5eb-4c03-4aef-b192-1a8e10a02d18",
+        "56dc41b3-0cfe-4bc1-b61b-00945dbfaa53"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:08fda414-bb49-4df6-900c-76fe300aba04",
+      "rootPatternId": "08fda414-bb49-4df6-900c-76fe300aba04",
+      "memberPatternIds": [
+        "08fda414-bb49-4df6-900c-76fe300aba04",
+        "637362b6-6598-43c8-b0f1-a8757e5df30a"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:00f70143-5406-498d-8963-ee0861ba7c8e",
+      "rootPatternId": "00f70143-5406-498d-8963-ee0861ba7c8e",
+      "memberPatternIds": [
+        "00f70143-5406-498d-8963-ee0861ba7c8e",
+        "31704b54-0a48-4efd-8621-9402df165c0f"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:28dc55d0-8612-4aab-92d6-8e0916483d8f",
+      "rootPatternId": "28dc55d0-8612-4aab-92d6-8e0916483d8f",
+      "memberPatternIds": [
+        "28dc55d0-8612-4aab-92d6-8e0916483d8f",
+        "4049ec07-26a8-4424-8711-19f63c3aba9e"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_flame_mammoth_stage:6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+      "rootPatternId": "6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+      "memberPatternIds": [
+        "6ac94dd2-8b0f-41c1-8db2-cc11dc65de81",
+        "764854bf-efa8-4ca2-9c29-874bce163d6f"
+      ]
+    }
+  ],
+  "callResponseGroups": [],
+  "sectionAssetManifests": [
+    {
+      "sectionPatternId": "5b5c5674-9a1d-498b-8f0d-c637a8e4132c",
+      "sectionName": "DropIn",
+      "sectionPurpose": "intro",
+      "assetCount": 4,
+      "assetPatternIds": [
+        "40991064-2919-4762-ad1c-4939b8490006",
+        "0b3db728-81cd-46c9-8697-9577c31b86a8",
+        "4c9f8d0d-e245-4005-875a-5858c305ca80",
+        "99aee976-347e-4d00-a4b4-e1c0c09879ba"
+      ],
+      "assetLabels": [
+        "Theme A",
+        "Theme A'",
+        "Theme A''",
+        "Theme A''"
+      ],
+      "assetNormalizedLabels": [
+        "theme a",
+        "theme a",
+        "theme a",
+        "theme a"
+      ],
+      "loopAssetCount": 0,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 4
+    },
+    {
+      "sectionPatternId": "7c2ad5bf-5de0-4529-a885-79759b1218b8",
+      "sectionName": "Part A",
+      "sectionPurpose": "main_theme",
+      "assetCount": 5,
+      "assetPatternIds": [
+        "e560185b-c9b2-4d7d-bc71-db2b6a914e0f",
+        "7da7b282-aaf6-4969-a1dc-c5f592b5b7d9",
+        "cb4e69b1-c82a-487a-b558-46b783cbd324",
+        "cbb161e6-7d8f-4f51-b71f-79d1957bbd54",
+        "289c6d37-79e0-4a74-a5a0-176f424c46b3"
+      ],
+      "assetLabels": [
+        "Drum A",
+        "Cymbal A",
+        "String A",
+        "Back Guitar A",
+        "Bass A"
+      ],
+      "assetNormalizedLabels": [
+        "drum a",
+        "cymbal a",
+        "string a",
+        "back guitar a",
+        "bass a"
+      ],
+      "loopAssetCount": 5,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    },
+    {
+      "sectionPatternId": "cf2bf14c-6f2d-474d-86c0-6021c51bfe47",
+      "sectionName": "Part B",
+      "sectionPurpose": null,
+      "assetCount": 3,
+      "assetPatternIds": [
+        "672faa2c-f06e-4932-b33f-daafac4ba0e9",
+        "78920473-6078-413f-923f-701671bd276f",
+        "4e341a66-40c2-44b1-b39c-15f9d73c7516"
+      ],
+      "assetLabels": [
+        "Drums B",
+        "Back Guitar B",
+        "Lead B"
+      ],
+      "assetNormalizedLabels": [
+        "drums b",
+        "back guitar b",
+        "lead b"
+      ],
+      "loopAssetCount": 2,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    },
+    {
+      "sectionPatternId": "09cfd3dd-74ce-4555-a017-4461df673259",
+      "sectionName": "Part C",
+      "sectionPurpose": null,
+      "assetCount": 4,
+      "assetPatternIds": [
+        "9fe4de33-4b72-4f37-af2e-0d051b42d492",
+        "b2025b20-ebba-4d8e-9baa-5e7d4c17697c",
+        "798679b2-f239-40dd-ade6-d9a2cbf9c06d",
+        "ed4c1a64-b788-487a-848d-e4bd43d04bf3"
+      ],
+      "assetLabels": [
+        "Percussion",
+        "Lead C",
+        "Back Guitar C",
+        "Bass"
+      ],
+      "assetNormalizedLabels": [
+        "percussion",
+        "lead c",
+        "back guitar c",
+        "bass"
+      ],
+      "loopAssetCount": 3,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    }
+  ],
   "summary": {
     "patternCount": 93,
     "patternInstanceCount": 93,
     "relationshipCount": 135,
     "collectionCount": 25,
+    "sectionFamilyCount": 4,
+    "variationFamilyCount": 19,
+    "callResponseGroupCount": 0,
+    "sectionAssetManifestCount": 4,
     "rootPatternCount": 1,
     "rootInstanceCount": 1,
     "leafPatternCount": 68,
     "relationshipTypeCounts": {
-      "variation": 23,
+      "parent_child": 92,
+      "variation": 21,
       "repetition": 20,
-      "simplification": 6,
       "rhythmic_variation": 2
     },
     "collectionTypeCounts": {
@@ -10758,6 +14768,35 @@
       "simplification": 6,
       "rhythmic_variation": 2,
       "song_root": 1
+    },
+    "primitiveTypeCounts": {
+      "leaf_pattern": 68,
+      "subsection_container": 20,
+      "section_container": 4,
+      "complete_song": 1
+    },
+    "sectionPurposeCounts": {
+      "intro": 1,
+      "main_theme": 1
+    },
+    "subsectionFunctionCounts": {
+      "motif_variation": 34,
+      "motif_seed": 15,
+      "loop": 14,
+      "fill": 9
+    },
+    "loopPolicyCounts": {
+      "play_once": 75,
+      "loop": 17,
+      "loop_with_fill": 1
+    },
+    "containerKindCounts": {
+      "orchestration_layer": 11,
+      "mixed": 9,
+      "structural": 5
+    },
+    "sectionFamilyModeCounts": {
+      "new": 4
     },
     "labelVariantGroups": [
       {

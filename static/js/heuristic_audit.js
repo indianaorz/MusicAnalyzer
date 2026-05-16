@@ -93,6 +93,8 @@ function renderStructureSummary(item,summary){
     ['Instances',fmtCount(summary?.patternInstanceCount||0)],
     ['Relationships',fmtCount(summary?.relationshipCount||0)],
     ['Collections',fmtCount(summary?.collectionCount||0)],
+    ['Section Families',fmtCount(summary?.sectionFamilyCount||0)],
+    ['Variation Families',fmtCount(summary?.variationFamilyCount||0)],
     ['Root Instances',fmtCount(summary?.rootInstanceCount||0)],
     ['Global Context',[g.root,g.scale].filter(v=>v!==null&&v!==undefined&&v!=='').join(' ')||'none'],
     ['BPM',g.bpm??'unknown'],
@@ -110,7 +112,10 @@ function renderPatternInspector(){
   const p=state.currentGraph.byId.get(state.selectedPatternId);
   renderProps(els.patternOverview,[
     ['Name',p.name||p.id],['Pattern ID',p.id],['Canonical ID',p.canonicalId||p.id],['Normalized Name',p.normalizedName||'none'],
-    ['Depth',p.depth??0],['Range',fmtRange(p.range)],['Instruments',`${fmtCount(p.instrumentCount??(p.instruments||[]).length)} assigned`],['Mode',p.mode||'none']
+    ['Primitive Type',p.primitiveType||'unknown'],['Depth',p.depth??0],['Range',fmtRange(p.range)],['Instruments',`${fmtCount(p.instrumentCount??(p.instruments||[]).length)} assigned`],['Mode',p.mode||'none'],
+    ['Section Purpose',p.sectionPurpose||'none'],['Subsection Function',p.subsectionFunction||'none'],['Loop Policy',p.loopPolicy||'none'],['Container Kind',p.containerKind||'none'],
+    ['Section Family',p.sectionFamilyId||'none'],['Section Family Mode',p.sectionFamilyMode||'none'],['Section Skeleton',p.sectionSkeletonId||'none'],['Subsection Skeleton',p.subsectionSkeletonId||'none'],
+    ['Variation Family',p.variationFamilyId||'none'],['Call/Response Group',p.callResponseGroupId||'none'],['Reduction Lineage',Array.isArray(p.reductionLineage)?p.reductionLineage.join(' -> '):'none']
   ]);
   clear(els.patternLineage);
   const lineage=[];let cur=p;const seen=new Set();
@@ -134,7 +139,10 @@ function renderInstanceInspector(){
   const i=state.currentInstanceGraph.byId.get(state.selectedInstanceId);
   renderProps(els.instanceOverview,[
     ['Instance ID',i.id],['Source Pattern',i.sourcePatternId||'none'],['Canonical Pattern',i.canonicalPatternId||'none'],['Material Role',i.materialRole||'unknown'],
-    ['Instance Type',i.instanceType||'unknown'],['Order Path',Array.isArray(i.orderPath)?i.orderPath.join('.'):'none'],['Depth',i.depth??0],['Children',fmtCount((i.childInstanceIds||[]).length)]
+    ['Instance Type',i.instanceType||'unknown'],['Primitive Type',i.primitiveType||'unknown'],['Order Path',Array.isArray(i.orderPath)?i.orderPath.join('.'):'none'],['Depth',i.depth??0],['Children',fmtCount((i.childInstanceIds||[]).length)],
+    ['Section Purpose',i.sectionPurpose||'none'],['Subsection Function',i.subsectionFunction||'none'],['Loop Policy',i.loopPolicy||'none'],['Container Kind',i.containerKind||'none'],
+    ['Section Family',i.sectionFamilyId||'none'],['Section Family Mode',i.sectionFamilyMode||'none'],['Section Skeleton',i.sectionSkeletonId||'none'],['Subsection Skeleton',i.subsectionSkeletonId||'none'],
+    ['Variation Family',i.variationFamilyId||'none'],['Call/Response Group',i.callResponseGroupId||'none'],['Reduction Lineage',Array.isArray(i.reductionLineage)?i.reductionLineage.join(' -> '):'none']
   ]);
   clear(els.instanceLineage);
   const lineage=[];let cur=i;const seen=new Set();
@@ -147,7 +155,7 @@ function songPlanNode(id,depth=0){
   const wrap=document.createElement('article');wrap.className='map-node';wrap.style.setProperty('--map-depth',String(depth));
   const row=document.createElement('div');row.className='map-node-row';if(id===state.selectedInstanceId)row.classList.add('active');
   const main=document.createElement('div');main.className='map-node-main';main.appendChild(btn(`${i.id} [${i.materialRole||'unknown'}]`,id,'instance',true));
-  const meta=document.createElement('div');meta.className='map-node-meta';addBadge(meta,i.sourcePatternId||'no pattern');addBadge(meta,fmtRange(i.range));addBadge(meta,i.instanceType||'unknown');
+  const meta=document.createElement('div');meta.className='map-node-meta';addBadge(meta,i.sourcePatternId||'no pattern');addBadge(meta,fmtRange(i.range));addBadge(meta,i.instanceType||'unknown');if(i.sectionPurpose)addBadge(meta,i.sectionPurpose);if(i.subsectionFunction)addBadge(meta,i.subsectionFunction);
   row.append(main,meta);wrap.appendChild(row);
   const children=state.currentInstanceGraph.childrenById.get(id)||[];
   if(children.length){const list=document.createElement('div');list.className='map-children';children.forEach(cid=>list.appendChild(songPlanNode(cid,depth+1)));wrap.appendChild(list);}

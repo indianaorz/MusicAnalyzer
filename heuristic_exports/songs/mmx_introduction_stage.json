@@ -1,6 +1,6 @@
 {
-  "exportVersion": 2,
-  "schemaVersion": "heuristic-song-export/v2",
+  "exportVersion": 3,
+  "schemaVersion": "heuristic-song-export/v3",
   "songId": "mmx_introduction_stage",
   "title": "MMX Introduction Stage",
   "source": {
@@ -114,7 +114,14 @@
       "instance:fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c",
       "instance:ab3af3c4-3784-4f6c-af50-14250a0137d4"
     ],
-    "decompositionStrategy": "ordered_child_instances"
+    "decompositionStrategy": "ordered_child_instances",
+    "rootPatternId": "root",
+    "sectionPatternIds": [
+      "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+      "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+    ]
   },
   "patterns": [
     {
@@ -163,6 +170,22 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "complete_song",
+      "sectionId": null,
+      "sectionFamilyId": null,
+      "sectionFamilyMode": null,
+      "sectionPurpose": null,
+      "sectionSkeletonId": null,
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -233,6 +256,24 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:1",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -312,6 +353,23 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "section_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -400,6 +458,23 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "section_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:9d22a10f-3c85-41ff-a208-5e1c467e1590"
@@ -487,6 +562,23 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "section_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
@@ -561,6 +653,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -640,6 +751,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:f8909404-a4a7-4368-82b5-7cf77cde3e63"
@@ -706,6 +836,25 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:5dfc42dd-2bc8-4acd-8e14-1892c9b2abda"
@@ -769,6 +918,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:f35097fb-de4a-49a9-bbcd-667f49c9be34"
@@ -827,6 +995,25 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "616e84aa-5d68-49f4-a94f-26ccc414a801",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -895,6 +1082,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -967,6 +1173,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:a99cbfa5-945a-4947-8bc4-b3ac5791225a"
@@ -1036,6 +1261,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:0b7e4ff8-dd3a-491f-ad7e-751a39f505b8"
@@ -1103,6 +1347,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -1181,6 +1444,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:e87aa273-d901-4cf9-8a1c-07a0e58cc74f"
@@ -1244,6 +1526,25 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "40816ac6-5792-47d6-a9b0-3d8f4822958c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -1319,6 +1620,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:f7e0ec37-6bc7-435c-852a-ae532b70a559"
@@ -1390,6 +1710,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:3",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:c4ab2675-ed1c-4f80-b8e8-d20f01640a70"
@@ -1456,6 +1795,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:9653b387-46c0-495c-92c7-69a4c35bd732"
@@ -1521,6 +1879,25 @@
       },
       "relationTags": [
         "container"
+      ],
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
       ],
       "patternRole": "canonical_seed",
       "instanceIds": [
@@ -1592,6 +1969,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:19161f35-5f2e-4204-9065-01454f58b6ed",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:19161f35-5f2e-4204-9065-01454f58b6ed"
@@ -1655,6 +2051,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:19161f35-5f2e-4204-9065-01454f58b6ed",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:d4226606-70ef-44c2-ae84-0d7e288be967"
@@ -1713,6 +2129,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -1782,6 +2218,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:89f7e2fa-43e7-436d-bd1f-c85fd9bee127"
@@ -1845,6 +2300,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:918e00a0-ef71-4ed7-9eea-7043eea2a6af"
@@ -1904,6 +2379,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -1970,6 +2465,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:af9e4edf-92c8-4752-8154-af4414389b0a"
@@ -2028,6 +2542,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2094,6 +2628,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:fb4d36a4-cdc7-4e22-a1eb-cb136d989672"
@@ -2153,6 +2706,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:01d108ef-0635-472d-b782-2f440ba9c1c0"
@@ -2210,6 +2783,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2288,6 +2881,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:075caaee-e426-4bed-b900-9bdd7ba42f58"
@@ -2353,6 +2965,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:15940941-3c07-4877-b2fe-03a15e4c6ba7"
@@ -2410,6 +3042,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e0dc1c00-5542-491f-95d4-82610f779567",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2474,6 +3126,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:3f2a75ea-8a54-4b7a-a99a-9421d656f3b3"
@@ -2507,7 +3179,7 @@
       "id": "631eaa2e-621f-4d52-894b-27e35240826e",
       "name": "Motif 1",
       "normalizedName": "motif 1",
-      "canonicalId": "631eaa2e-621f-4d52-894b-27e35240826e",
+      "canonicalId": "01d108ef-0635-472d-b782-2f440ba9c1c0",
       "parentId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
       "children": [],
       "orderedChildPatternIds": [],
@@ -2534,7 +3206,27 @@
       "relationTags": [
         "leaf"
       ],
-      "patternRole": "canonical_seed",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:631eaa2e-621f-4d52-894b-27e35240826e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
+      "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:631eaa2e-621f-4d52-894b-27e35240826e"
       ],
@@ -2590,6 +3282,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2652,6 +3364,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:b1d280eb-c657-49bb-809e-30c3a29a4952"
@@ -2682,7 +3414,7 @@
       "id": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
       "name": "Motif 1",
       "normalizedName": "motif 1",
-      "canonicalId": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "canonicalId": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
       "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
       "children": [],
       "orderedChildPatternIds": [],
@@ -2709,7 +3441,27 @@
       "relationTags": [
         "leaf"
       ],
-      "patternRole": "canonical_seed",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
+      "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:d4e2f742-bd85-4c8d-8994-1ce37b39b73d"
       ],
@@ -2777,6 +3529,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e0dc1c00-5542-491f-95d4-82610f779567",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:e0dc1c00-5542-491f-95d4-82610f779567"
@@ -2842,6 +3613,26 @@
         "rhythmic_variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:631eaa2e-621f-4d52-894b-27e35240826e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
@@ -2902,6 +3693,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -2966,6 +3777,26 @@
         "rhythmic_variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:6d846a23-68aa-4c00-9e74-0c5e749eab02"
@@ -3026,6 +3857,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3089,6 +3940,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:7c370ec9-1e14-495d-a5d4-3f42c8498801"
@@ -3148,6 +4019,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3211,6 +4102,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a"
@@ -3270,6 +4181,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3333,6 +4264,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:fde3741f-3122-4c1f-bee5-248ba62a87f1"
@@ -3392,6 +4343,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3455,6 +4426,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:50112e15-96bb-4ebd-ad3d-f853d82ab673"
@@ -3516,6 +4507,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:d610dafe-c577-4bea-b893-86b53308e41b"
@@ -3549,7 +4560,7 @@
       "id": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
       "name": "Motif 2",
       "normalizedName": "motif 2",
-      "canonicalId": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "canonicalId": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
       "parentId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
       "children": [],
       "orderedChildPatternIds": [],
@@ -3576,7 +4587,27 @@
       "relationTags": [
         "leaf"
       ],
-      "patternRole": "canonical_seed",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
+      "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:25d6faba-4ba4-4cba-a33a-dd23df571a3f"
       ],
@@ -3631,6 +4662,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -3690,6 +4741,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:e9176425-ee4e-40a8-9b0b-c8cd24c05a6f"
@@ -3747,6 +4818,26 @@
       "relationTags": [
         "variation",
         "rhythmic_variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3811,6 +4902,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:eff33b29-bd3b-4e3c-961f-38306fc35045"
@@ -3871,6 +4982,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:daf97c2d-7a82-4772-9c04-5b8bc2683fe6"
@@ -3928,6 +5059,26 @@
       "relationTags": [
         "variation",
         "rhythmic_variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -3991,6 +5142,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:fe2f5587-4fb4-4cb4-a431-8b128cc0ea9c"
@@ -4046,6 +5217,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -4104,6 +5295,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:3",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4166,6 +5377,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:3",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:a544a7d6-a928-4996-9e96-9f01ccd8dd0a"
@@ -4222,6 +5453,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4283,6 +5534,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4350,6 +5621,25 @@
         "variation",
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:ee23ad84-154e-4f12-87a4-821e6c3f6945"
@@ -4413,6 +5703,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
@@ -4474,6 +5784,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:1617a05f-fcb5-4850-b0b1-7c079671aa5c"
@@ -4532,6 +5862,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4597,6 +5947,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:e1880151-f0fd-423c-8431-a9cb5cc5b5a3"
@@ -4660,6 +6030,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:c5b29900-0e0f-4d72-8fb2-a66758bfc047"
@@ -4721,6 +6111,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:68f9ec8e-0056-4396-acf5-f794c91ebf23"
@@ -4777,6 +6187,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4838,6 +6268,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -4904,6 +6354,25 @@
       "relationTags": [
         "container"
       ],
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:8c685a93-e510-4a4e-95e4-ed88d50585c9"
@@ -4962,6 +6431,26 @@
       },
       "relationTags": [
         "variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5024,6 +6513,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:45044758-36d7-4377-8735-adc6f90efc7d"
@@ -5080,6 +6589,26 @@
       },
       "relationTags": [
         "repetition",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5142,6 +6671,26 @@
       "relationTags": [
         "variation",
         "rhythmic_variation",
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "derived_pattern",
@@ -5207,6 +6756,26 @@
         "rhythmic_variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:6d9a6944-3fd0-4ec1-a3f4-c0544308a180"
@@ -5269,6 +6838,26 @@
         "repetition",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:50b94953-3d9a-460b-a3a4-269a5f7b3bd2"
@@ -5329,6 +6918,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:a8119fa7-745e-490a-8aeb-0a1f32bf9595"
@@ -5386,6 +6995,26 @@
       "relationTags": [
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "canonical_seed",
       "instanceIds": [
         "instance:f1315601-dc11-4915-9191-17968efa009a"
@@ -5441,6 +7070,26 @@
         "isSimplification": false
       },
       "relationTags": [
+        "leaf"
+      ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
         "leaf"
       ],
       "patternRole": "canonical_seed",
@@ -5501,6 +7150,26 @@
         "variation",
         "leaf"
       ],
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "patternRole": "derived_pattern",
       "instanceIds": [
         "instance:d7884af1-6e19-45d5-aec4-366809195ac6"
@@ -5551,6 +7220,22 @@
       "depth": 0,
       "instanceType": "song_root",
       "materialRole": "song_root",
+      "primitiveType": "complete_song",
+      "sectionId": null,
+      "sectionFamilyId": null,
+      "sectionFamilyMode": null,
+      "sectionPurpose": null,
+      "sectionSkeletonId": null,
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song"
+      ],
       "range": {
         "start": 0,
         "end": 49920,
@@ -5589,6 +7274,24 @@
       "depth": 1,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:1",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:1",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "leaf"
+      ],
       "range": {
         "start": 0,
         "end": 768,
@@ -5630,6 +7333,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 768,
         "end": 13056,
@@ -5673,6 +7393,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 768,
         "end": 6912,
@@ -5710,6 +7449,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 768,
         "end": 2304,
@@ -5745,6 +7503,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 5376,
         "end": 6912,
@@ -5779,6 +7557,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2304,
         "end": 3840,
@@ -5813,6 +7611,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:1",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3840,
         "end": 5376,
@@ -5854,6 +7672,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 768,
         "end": 13824,
@@ -5890,6 +7727,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 768,
         "end": 6912,
@@ -5925,6 +7781,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6912,
         "end": 13054,
@@ -5959,6 +7835,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 768,
         "end": 3072,
@@ -5993,6 +7889,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6912,
         "end": 9216,
@@ -6027,6 +7943,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3072,
         "end": 3840,
@@ -6061,6 +7997,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 9312,
         "end": 10080,
@@ -6095,6 +8051,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 5376,
         "end": 6528,
@@ -6129,6 +8105,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:2",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 11520,
         "end": 12672,
@@ -6165,6 +8161,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:3",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 1152,
         "end": 12864,
@@ -6199,6 +8214,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:3",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 1344,
         "end": 6528,
@@ -6233,6 +8268,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:3",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 7488,
         "end": 12672,
@@ -6269,6 +8324,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 576,
         "end": 13056,
@@ -6308,6 +8382,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:19161f35-5f2e-4204-9065-01454f58b6ed",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 768,
         "end": 6912,
@@ -6343,6 +8436,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 768,
         "end": 2304,
@@ -6378,6 +8491,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2304,
         "end": 3840,
@@ -6413,6 +8546,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3840,
         "end": 5376,
@@ -6448,6 +8601,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 5376,
         "end": 6912,
@@ -6482,6 +8655,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:4",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:19161f35-5f2e-4204-9065-01454f58b6ed",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6912,
         "end": 13056,
@@ -6518,6 +8711,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 768,
         "end": 11520,
@@ -6557,6 +8769,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 768,
         "end": 6912,
@@ -6592,6 +8823,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 768,
         "end": 2304,
@@ -6627,6 +8878,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 2304,
         "end": 3840,
@@ -6662,6 +8933,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 3840,
         "end": 5376,
@@ -6697,6 +8988,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 5376,
         "end": 6912,
@@ -6731,6 +9042,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:2",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:2",
+      "subsectionRootId": "f35097fb-de4a-49a9-bbcd-667f49c9be34",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:5",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 6912,
         "end": 13056,
@@ -6769,6 +9100,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 13056,
         "end": 19200,
@@ -6811,6 +9159,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 13056,
         "end": 19200,
@@ -6853,6 +9220,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 13056,
         "end": 16128,
@@ -6891,6 +9277,25 @@
       "depth": 4,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 13056,
         "end": 13824,
@@ -6927,6 +9332,26 @@
       "depth": 5,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 15360,
         "end": 16128,
@@ -6962,6 +9387,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13824,
         "end": 14592,
@@ -6997,6 +9442,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14592,
         "end": 15360,
@@ -7034,6 +9499,25 @@
       "depth": 4,
       "instanceType": "container",
       "materialRole": "variation",
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 13824,
         "end": 14592,
@@ -7070,6 +9554,26 @@
       "depth": 5,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13056,
         "end": 13824,
@@ -7105,6 +9609,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14592,
         "end": 15360,
@@ -7140,6 +9664,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 15360,
         "end": 16128,
@@ -7174,6 +9718,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 16128,
         "end": 19200,
@@ -7217,6 +9781,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 13056,
         "end": 19200,
@@ -7251,6 +9834,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13056,
         "end": 13824,
@@ -7285,6 +9888,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 16128,
         "end": 16896,
@@ -7319,6 +9942,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13824,
         "end": 14592,
@@ -7353,6 +9996,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 15360,
         "end": 16128,
@@ -7387,6 +10050,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 14592,
         "end": 15360,
@@ -7421,6 +10104,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 16896,
         "end": 17664,
@@ -7455,6 +10158,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 17664,
         "end": 18432,
@@ -7489,6 +10212,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:7",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 18432,
         "end": 19200,
@@ -7525,6 +10268,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 13248,
         "end": 19008,
@@ -7559,6 +10321,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 13248,
         "end": 15936,
@@ -7593,6 +10375,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "9653b387-46c0-495c-92c7-69a4c35bd732",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 16128,
         "end": 18816,
@@ -7626,6 +10428,25 @@
       "depth": 2,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "616e84aa-5d68-49f4-a94f-26ccc414a801",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "leaf"
+      ],
       "range": {
         "start": 13248,
         "end": 19200,
@@ -7659,6 +10480,25 @@
       "depth": 2,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:3",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:3",
+      "subsectionRootId": "40816ac6-5792-47d6-a9b0-3d8f4822958c",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "leaf"
+      ],
       "range": {
         "start": 13056,
         "end": 19392,
@@ -7697,6 +10537,23 @@
       "depth": 1,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "section_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": null,
+      "subsectionSkeletonId": null,
+      "subsectionFunction": null,
+      "loopPolicy": "loop",
+      "containerKind": "structural",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section"
+      ],
       "range": {
         "start": 19200,
         "end": 25344,
@@ -7739,6 +10596,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 19200,
         "end": 25344,
@@ -7779,6 +10655,25 @@
       "depth": 3,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e0dc1c00-5542-491f-95d4-82610f779567",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 19200,
         "end": 22272,
@@ -7815,6 +10710,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 19200,
         "end": 19968,
@@ -7851,6 +10766,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 19968,
         "end": 20736,
@@ -7887,6 +10822,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 20736,
         "end": 21504,
@@ -7923,6 +10878,26 @@
       "depth": 4,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 21504,
         "end": 22272,
@@ -7958,6 +10933,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "repetition",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "19fd4927-95ed-4927-85a8-1f8cff967de6",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:e0dc1c00-5542-491f-95d4-82610f779567",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 22272,
         "end": 25344,
@@ -7992,6 +10987,25 @@
       "depth": 2,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:8",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "leaf"
+      ],
       "range": {
         "start": 19200,
         "end": 25344,
@@ -8030,6 +11044,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 19200,
         "end": 25344,
@@ -8064,6 +11097,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "fill",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 23808,
         "end": 25344,
@@ -8098,6 +11151,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 19200,
         "end": 20736,
@@ -8132,6 +11205,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 20736,
         "end": 22272,
@@ -8166,6 +11259,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:9",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 22272,
         "end": 23808,
@@ -8202,6 +11315,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "loop",
+      "loopPolicy": "loop",
+      "containerKind": "orchestration_layer",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "instrument_slice"
+      ],
       "range": {
         "start": 19200,
         "end": 25344,
@@ -8223,7 +11355,7 @@
       "id": "instance:631eaa2e-621f-4d52-894b-27e35240826e",
       "songId": "mmx_introduction_stage",
       "sourcePatternId": "631eaa2e-621f-4d52-894b-27e35240826e",
-      "canonicalPatternId": "631eaa2e-621f-4d52-894b-27e35240826e",
+      "canonicalPatternId": "01d108ef-0635-472d-b782-2f440ba9c1c0",
       "parentInstanceId": "instance:ed7dbe8e-d607-44d8-b566-3ed55870e78a",
       "childInstanceIds": [],
       "orderIndex": 0,
@@ -8235,7 +11367,27 @@
       ],
       "depth": 3,
       "instanceType": "leaf",
-      "materialRole": "new_material",
+      "materialRole": "canonical_reuse",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:631eaa2e-621f-4d52-894b-27e35240826e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 19200,
         "end": 22272,
@@ -8270,6 +11422,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "rhythmic_variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:6",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:631eaa2e-621f-4d52-894b-27e35240826e",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 22272,
         "end": 25344,
@@ -8311,6 +11483,25 @@
       "depth": 2,
       "instanceType": "container",
       "materialRole": "new_material",
+      "primitiveType": "subsection_container",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": "mixed",
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice"
+      ],
       "range": {
         "start": 19200,
         "end": 25344,
@@ -8332,7 +11523,7 @@
       "id": "instance:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
       "songId": "mmx_introduction_stage",
       "sourcePatternId": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
-      "canonicalPatternId": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "canonicalPatternId": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
       "parentInstanceId": "instance:f7e0ec37-6bc7-435c-852a-ae532b70a559",
       "childInstanceIds": [],
       "orderIndex": 0,
@@ -8344,7 +11535,27 @@
       ],
       "depth": 3,
       "instanceType": "leaf",
-      "materialRole": "new_material",
+      "materialRole": "canonical_reuse",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 19200,
         "end": 19968,
@@ -8379,6 +11590,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 23040,
         "end": 23808,
@@ -8400,7 +11631,7 @@
       "id": "instance:25d6faba-4ba4-4cba-a33a-dd23df571a3f",
       "songId": "mmx_introduction_stage",
       "sourcePatternId": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
-      "canonicalPatternId": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "canonicalPatternId": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
       "parentInstanceId": "instance:f7e0ec37-6bc7-435c-852a-ae532b70a559",
       "childInstanceIds": [],
       "orderIndex": 2,
@@ -8412,7 +11643,27 @@
       ],
       "depth": 3,
       "instanceType": "leaf",
-      "materialRole": "new_material",
+      "materialRole": "canonical_reuse",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 19968,
         "end": 20736,
@@ -8447,6 +11698,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 20736,
         "end": 21504,
@@ -8481,6 +11752,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "variation",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_variation",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 22272,
         "end": 23040,
@@ -8515,6 +11806,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": "motif_seed",
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 21504,
         "end": 22272,
@@ -8549,6 +11860,26 @@
       "depth": 3,
       "instanceType": "leaf",
       "materialRole": "new_material",
+      "primitiveType": "leaf_pattern",
+      "sectionId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionFamilyId": "section-family:mmx_introduction_stage:4",
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonId": "section-skeleton:mmx_introduction_stage:4",
+      "subsectionRootId": "f7e0ec37-6bc7-435c-852a-ae532b70a559",
+      "subsectionSkeletonId": "subsection-skeleton:mmx_introduction_stage:10",
+      "subsectionFunction": null,
+      "loopPolicy": "play_once",
+      "containerKind": null,
+      "variationFamilyId": null,
+      "callResponseGroupId": null,
+      "reductionLineage": [
+        "song",
+        "section",
+        "subsection",
+        "motif_slice",
+        "leaf"
+      ],
       "range": {
         "start": 23808,
         "end": 25344,
@@ -9648,17 +12979,369 @@
       "collectionType": "pattern_group"
     }
   ],
+  "sectionFamilies": [
+    {
+      "id": "section-family:mmx_introduction_stage:1",
+      "sectionPatternIds": [
+        "4e6792ef-41e2-4d03-9a29-063cc4b07b9b"
+      ],
+      "sectionNames": [
+        "DropIn"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "intro",
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_introduction_stage:1"
+      ]
+    },
+    {
+      "id": "section-family:mmx_introduction_stage:2",
+      "sectionPatternIds": [
+        "2dabf9c6-f478-4247-ad88-0f01888f97d8"
+      ],
+      "sectionNames": [
+        "Part A"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": "main_theme",
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_introduction_stage:2"
+      ]
+    },
+    {
+      "id": "section-family:mmx_introduction_stage:3",
+      "sectionPatternIds": [
+        "9d22a10f-3c85-41ff-a208-5e1c467e1590"
+      ],
+      "sectionNames": [
+        "Part B"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_introduction_stage:3"
+      ]
+    },
+    {
+      "id": "section-family:mmx_introduction_stage:4",
+      "sectionPatternIds": [
+        "aa2c1495-0bad-4cea-8eb7-50f9cff69adf"
+      ],
+      "sectionNames": [
+        "Part C"
+      ],
+      "sectionFamilyMode": "new",
+      "sectionPurpose": null,
+      "sectionSkeletonIds": [
+        "section-skeleton:mmx_introduction_stage:4"
+      ]
+    }
+  ],
+  "variationFamilies": [
+    {
+      "id": "variation-family:mmx_introduction_stage:fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "rootPatternId": "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+      "memberPatternIds": [
+        "fb4d36a4-cdc7-4e22-a1eb-cb136d989672",
+        "1f43ff61-62d4-4ace-bc19-4bc585e898a2"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "rootPatternId": "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+      "memberPatternIds": [
+        "15940941-3c07-4877-b2fe-03a15e4c6ba7",
+        "3f2a75ea-8a54-4b7a-a99a-9421d656f3b3"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "rootPatternId": "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+      "memberPatternIds": [
+        "e9176425-ee4e-40a8-9b0b-c8cd24c05a6f",
+        "a9fe95f4-5726-4d80-bd46-1abd17a16523"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "rootPatternId": "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+      "memberPatternIds": [
+        "daf97c2d-7a82-4772-9c04-5b8bc2683fe6",
+        "43273d21-6776-4fa7-a001-a281649ebd97"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:af9e4edf-92c8-4752-8154-af4414389b0a",
+      "rootPatternId": "af9e4edf-92c8-4752-8154-af4414389b0a",
+      "memberPatternIds": [
+        "af9e4edf-92c8-4752-8154-af4414389b0a",
+        "cfb835e4-5ea1-40f2-96b3-66d53a529837",
+        "76d9c555-1f84-4a8e-a045-71c3d8ddea69",
+        "9dfd6de3-95cb-4ca4-9a30-26ee9dbcd478"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "rootPatternId": "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+      "memberPatternIds": [
+        "a544a7d6-a928-4996-9e96-9f01ccd8dd0a",
+        "7ea01fd9-ab6c-41e6-a1c8-95d50e728e69"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:19161f35-5f2e-4204-9065-01454f58b6ed",
+      "rootPatternId": "19161f35-5f2e-4204-9065-01454f58b6ed",
+      "memberPatternIds": [
+        "19161f35-5f2e-4204-9065-01454f58b6ed",
+        "d4226606-70ef-44c2-ae84-0d7e288be967"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "rootPatternId": "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+      "memberPatternIds": [
+        "a8119fa7-745e-490a-8aeb-0a1f32bf9595",
+        "50b94953-3d9a-460b-a3a4-269a5f7b3bd2"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "rootPatternId": "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+      "memberPatternIds": [
+        "89f7e2fa-43e7-436d-bd1f-c85fd9bee127",
+        "918e00a0-ef71-4ed7-9eea-7043eea2a6af"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:45044758-36d7-4377-8735-adc6f90efc7d",
+      "rootPatternId": "45044758-36d7-4377-8735-adc6f90efc7d",
+      "memberPatternIds": [
+        "45044758-36d7-4377-8735-adc6f90efc7d",
+        "879bcbe6-cbb0-4b9b-975e-55bacf5cfa7e",
+        "6982d5fc-9257-4775-82fe-b9648a7a12db",
+        "6d9a6944-3fd0-4ec1-a3f4-c0544308a180",
+        "770e169a-9272-490a-89cc-660e0f8791ac",
+        "fde3741f-3122-4c1f-bee5-248ba62a87f1",
+        "0f2bdece-ce72-4a85-ab03-d838dbc146ef"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "rootPatternId": "075caaee-e426-4bed-b900-9bdd7ba42f58",
+      "memberPatternIds": [
+        "075caaee-e426-4bed-b900-9bdd7ba42f58",
+        "02703064-6331-4a64-a38d-2c5891d4f46c"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "rootPatternId": "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+      "memberPatternIds": [
+        "8c685a93-e510-4a4e-95e4-ed88d50585c9",
+        "359b7bd0-bce3-4b03-a040-f46af53c876d",
+        "4054e163-e134-484d-b313-c056969968b4",
+        "d7884af1-6e19-45d5-aec4-366809195ac6"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "rootPatternId": "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+      "memberPatternIds": [
+        "ee23ad84-154e-4f12-87a4-821e6c3f6945",
+        "9b686b9b-03ad-4460-bf72-6ea18d7cfc70",
+        "1c22f027-75b5-4d46-a442-2bcbf4735263"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "rootPatternId": "b1d280eb-c657-49bb-809e-30c3a29a4952",
+      "memberPatternIds": [
+        "b1d280eb-c657-49bb-809e-30c3a29a4952",
+        "9d659273-1d4d-42ba-a445-20c28f29165e",
+        "7c370ec9-1e14-495d-a5d4-3f42c8498801",
+        "6bf2bcc8-0b44-46a7-a396-ea6f2f389362",
+        "1a0aa8bf-3a8f-4d86-b4e4-a818a35cbd2a",
+        "50112e15-96bb-4ebd-ad3d-f853d82ab673",
+        "d610dafe-c577-4bea-b893-86b53308e41b"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "rootPatternId": "01d108ef-0635-472d-b782-2f440ba9c1c0",
+      "memberPatternIds": [
+        "01d108ef-0635-472d-b782-2f440ba9c1c0",
+        "6d846a23-68aa-4c00-9e74-0c5e749eab02"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:e0dc1c00-5542-491f-95d4-82610f779567",
+      "rootPatternId": "e0dc1c00-5542-491f-95d4-82610f779567",
+      "memberPatternIds": [
+        "e0dc1c00-5542-491f-95d4-82610f779567",
+        "3c6c6a00-5e2b-4019-8ae8-b3fab14eca2d"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "rootPatternId": "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+      "memberPatternIds": [
+        "1617a05f-fcb5-4850-b0b1-7c079671aa5c",
+        "952a0f09-2ed0-4d20-be58-dfb8229a7a12",
+        "e1880151-f0fd-423c-8431-a9cb5cc5b5a3",
+        "c5b29900-0e0f-4d72-8fb2-a66758bfc047"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:631eaa2e-621f-4d52-894b-27e35240826e",
+      "rootPatternId": "631eaa2e-621f-4d52-894b-27e35240826e",
+      "memberPatternIds": [
+        "631eaa2e-621f-4d52-894b-27e35240826e",
+        "5c74f82f-4e73-458a-b2e2-a8a9cfa07933"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "rootPatternId": "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+      "memberPatternIds": [
+        "d4e2f742-bd85-4c8d-8994-1ce37b39b73d",
+        "e395e80d-5d10-408e-ac88-38b6e61ef5ef",
+        "2cce2a71-c488-45e7-9bb2-3f0280033e3d"
+      ]
+    },
+    {
+      "id": "variation-family:mmx_introduction_stage:25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "rootPatternId": "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+      "memberPatternIds": [
+        "25d6faba-4ba4-4cba-a33a-dd23df571a3f",
+        "eff33b29-bd3b-4e3c-961f-38306fc35045"
+      ]
+    }
+  ],
+  "callResponseGroups": [],
+  "sectionAssetManifests": [
+    {
+      "sectionPatternId": "4e6792ef-41e2-4d03-9a29-063cc4b07b9b",
+      "sectionName": "DropIn",
+      "sectionPurpose": "intro",
+      "assetCount": 0,
+      "assetPatternIds": [],
+      "assetLabels": [],
+      "assetNormalizedLabels": [],
+      "loopAssetCount": 0,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    },
+    {
+      "sectionPatternId": "2dabf9c6-f478-4247-ad88-0f01888f97d8",
+      "sectionName": "Part A",
+      "sectionPurpose": "main_theme",
+      "assetCount": 5,
+      "assetPatternIds": [
+        "a99cbfa5-945a-4947-8bc4-b3ac5791225a",
+        "e87aa273-d901-4cf9-8a1c-07a0e58cc74f",
+        "c4ab2675-ed1c-4f80-b8e8-d20f01640a70",
+        "15b9be77-fd59-4556-80e6-2b4bb1103b11",
+        "f35097fb-de4a-49a9-bbcd-667f49c9be34"
+      ],
+      "assetLabels": [
+        "Drum A",
+        "Lead A",
+        "Strings A",
+        "Bass A",
+        "Brass A"
+      ],
+      "assetNormalizedLabels": [
+        "drum a",
+        "lead a",
+        "strings a",
+        "bass a",
+        "brass a"
+      ],
+      "loopAssetCount": 4,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    },
+    {
+      "sectionPatternId": "9d22a10f-3c85-41ff-a208-5e1c467e1590",
+      "sectionName": "Part B",
+      "sectionPurpose": null,
+      "assetCount": 5,
+      "assetPatternIds": [
+        "0b7e4ff8-dd3a-491f-ad7e-751a39f505b8",
+        "f8909404-a4a7-4368-82b5-7cf77cde3e63",
+        "9653b387-46c0-495c-92c7-69a4c35bd732",
+        "616e84aa-5d68-49f4-a94f-26ccc414a801",
+        "40816ac6-5792-47d6-a9b0-3d8f4822958c"
+      ],
+      "assetLabels": [
+        "Drums B",
+        "Bass B",
+        "Strings B",
+        "Brass B",
+        "Lead B"
+      ],
+      "assetNormalizedLabels": [
+        "drums b",
+        "bass b",
+        "strings b",
+        "brass b",
+        "lead b"
+      ],
+      "loopAssetCount": 3,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    },
+    {
+      "sectionPatternId": "aa2c1495-0bad-4cea-8eb7-50f9cff69adf",
+      "sectionName": "Part C",
+      "sectionPurpose": null,
+      "assetCount": 5,
+      "assetPatternIds": [
+        "19fd4927-95ed-4927-85a8-1f8cff967de6",
+        "5dfc42dd-2bc8-4acd-8e14-1892c9b2abda",
+        "83569cf9-3f90-4f12-a64d-d0d23cc3422b",
+        "ed7dbe8e-d607-44d8-b566-3ed55870e78a",
+        "f7e0ec37-6bc7-435c-852a-ae532b70a559"
+      ],
+      "assetLabels": [
+        "Drums C",
+        "Bass C",
+        "Brass C",
+        "Strings C",
+        "Lead C"
+      ],
+      "assetNormalizedLabels": [
+        "drums c",
+        "bass c",
+        "brass c",
+        "strings c",
+        "lead c"
+      ],
+      "loopAssetCount": 3,
+      "fillAssetCount": 0,
+      "callResponseAssetCount": 0,
+      "motifAssetCount": 0
+    }
+  ],
   "summary": {
     "patternCount": 85,
     "patternInstanceCount": 85,
     "relationshipCount": 123,
     "collectionCount": 24,
+    "sectionFamilyCount": 4,
+    "variationFamilyCount": 20,
+    "callResponseGroupCount": 0,
+    "sectionAssetManifestCount": 4,
     "rootPatternCount": 1,
     "rootInstanceCount": 1,
     "leafPatternCount": 61,
     "relationshipTypeCounts": {
-      "variation": 21,
+      "parent_child": 84,
       "repetition": 18,
+      "variation": 15,
       "rhythmic_variation": 6
     },
     "collectionTypeCounts": {
@@ -9667,11 +13350,40 @@
       "root_collection": 1
     },
     "materialRoleCounts": {
-      "new_material": 45,
+      "new_material": 42,
       "repetition": 18,
       "variation": 15,
       "rhythmic_variation": 6,
+      "canonical_reuse": 3,
       "song_root": 1
+    },
+    "primitiveTypeCounts": {
+      "leaf_pattern": 61,
+      "subsection_container": 20,
+      "section_container": 3,
+      "complete_song": 1
+    },
+    "sectionPurposeCounts": {
+      "intro": 1,
+      "main_theme": 1
+    },
+    "subsectionFunctionCounts": {
+      "motif_variation": 27,
+      "motif_seed": 20,
+      "loop": 16,
+      "fill": 2
+    },
+    "loopPolicyCounts": {
+      "play_once": 66,
+      "loop": 19
+    },
+    "containerKindCounts": {
+      "orchestration_layer": 12,
+      "mixed": 8,
+      "structural": 4
+    },
+    "sectionFamilyModeCounts": {
+      "new": 4
     },
     "labelVariantGroups": [
       {
